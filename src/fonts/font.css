@@ -1,0 +1,57 @@
+/** 국문 폰트 - U+AC00-D7A3 **/
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-weight: 200;
+  src: url('./AppleSDGothicNeoUL.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-weight: 400;
+  src: url('./AppleSDGothicNeoR.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-weight: 600;
+  src: url('./AppleSDGothicNeoSB.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-weight: 700;
+  src: url('./AppleSDGothicNeoB.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+
+/** 영문 - U+0041-005A, U+0061-007A **/
+@font-face {
+  font-family: 'SF-Pro';
+  font-weight: 200;
+  src: url('./SF-Pro.ttf') format('truetype');
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+@font-face {
+  font-family: 'SF-Pro';
+  font-weight: 400;
+  src: url('./SF-Pro.ttf') format('truetype');
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+@font-face {
+  font-family: 'SF-Pro';
+  font-weight: 600;
+  src: url('./SF-Pro.ttf') format('truetype');
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+@font-face {
+  font-family: 'SF-Pro';
+  font-weight: 700;
+  src: url('./SF-Pro.ttf') format('truetype');
+  unicode-range: U+0041-005A, U+0061-007A;
+}
