@@ -1,9 +1,9 @@
 import axios from 'axios';
-import SERVER_ID from '@/constants/api';
+import SERVER_URL from '@/constants/api';
 import getCookie from '@/utils/token';
 
 const client = axios.create({
-  baseURL: SERVER_ID,
+  baseURL: SERVER_URL,
   withCredentials: true,
   headers: {
     'content-type': 'application/json',

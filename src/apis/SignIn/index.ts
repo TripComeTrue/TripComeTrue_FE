@@ -3,7 +3,9 @@ import { SignInType } from './signInType';
 
 const SIGNIN_API = {
   userSignIn: (userData: SignInType) => {
-    client.post('api/sign-in', userData);
+    const res = client.post('auth/signin', userData);
+
+    return res;
   },
 };
 

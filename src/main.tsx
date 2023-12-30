@@ -9,8 +9,13 @@ import theme from '@/styles/theme';
 import App from './App';
 import '@/styles/fonts/font.css';
 import '@/styles/index.css';
+import worker from './mocks/browser';
 
 const queryClient = new QueryClient();
+
+if (process.env.NODE_ENV === 'development') {
+  worker.start();
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>

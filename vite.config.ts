@@ -8,25 +8,25 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    VitePWA({
-      registerType: 'autoUpdate',
-      devOptions: {
-        enabled: true,
-      },
-      manifest: {
-        icons: [
-          {
-            src: 'icon-192.png',
-            type: 'image/png',
-            sizes: '192x192',
-          },
-          {
-            src: 'icon-512.png',
-            type: 'image/png',
-            sizes: '512x512',
-          },
-        ],
-      },
-    }),
+    // VitePWA({
+    //   registerType: 'autoUpdate',
+    //   devOptions: {
+    //     enabled: true,
+    //   },
+    //   manifest: {
+    //     icons: [
+    //       {
+    //         src: 'logo192.png',
+    //         type: 'image/png',
+    //         sizes: '192x192',
+    //       },
+    //       {
+    //         src: 'logo512.png',
+    //         type: 'image/png',
+    //         sizes: '512x512',
+    //       },
+    //     ],
+    //   },
+    // }),
   ],
 });
