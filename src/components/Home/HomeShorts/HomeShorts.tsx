@@ -1,6 +1,3 @@
-import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import theme from '@/styles/theme';
 import 'swiper/swiper-bundle.css';
 import { useState } from 'react';
 import starIcon from '/starIcon.svg';
@@ -11,111 +8,19 @@ import overseas1 from '/overseas1.jpg';
 import overseas2 from '/overseas2.jpg';
 import overseas3 from '/overseas3.jpg';
 import bookmarkIcon from '/bookmarkPress.svg';
-
-interface LabelProps {
-  checked: boolean;
-}
-
-type Slide = {
-  img: string;
-  title: string;
-  bookmark: number;
-};
-
-type SlideShorts = {
-  [key: string]: Slide[];
-};
-
-const ShortsWrap = styled.div`
-  margin-top: 4rem;
-`;
-
-const ShortsTitle = styled.div`
-  margin-left: 7rem;
-  position: relative;
-  font-size: 1.9rem;
-  font-weight: ${theme.fontWeights.bold};
-
-  img {
-    width: 2rem;
-    position: absolute;
-    left: -3rem;
-    top: 0.2em;
-  }
-`;
-
-const ShortsRadio = styled.div`
-  margin: 1.5rem 4rem 0;
-`;
-
-const Label = styled.label<LabelProps>`
-  margin-right: 0.8rem;
-  padding: 0.2rem 1.3rem;
-  font-size: ${theme.fontSizes.lg};
-  font-weight: ${theme.fontWeights.bold};
-  background-color: ${(props) =>
-    props.checked ? theme.brand.primary : 'transparent'};
-  border: 0.06rem solid ${theme.brand.primary};
-  border-radius: 1rem;
-`;
-
-const SwiperWrap = styled(Swiper)`
-  padding: 1.5rem 4rem 0;
-`;
-
-const SwiperSlideWrap = styled(SwiperSlide)``;
-
-// 이게 콘텐츠
-const SliderContent = styled.div`
-  position: relative;
-  height: 35rem;
-
-  border-radius: 1rem;
-`;
-
-const SliderBackground = styled.div`
-  height: 100%;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 1rem;
-  }
-`;
-
-const Bookmark = styled.div`
-  margin-left: 3.3rem;
-  position: absolute;
-  top: 1rem;
-
-  font-size: ${theme.fontSizes.md};
-  color: ${theme.brand.white};
-
-  img {
-    position: absolute;
-    left: -2.1rem;
-    width: 1.7rem;
-  }
-`;
-
-const ShortTitle = styled.div`
-  padding-left: 1rem;
-  position: absolute;
-  bottom: 0;
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  width: 100%;
-  height: 4rem;
-
-  border-radius: 0 0 1rem 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: ${theme.brand.white};
-`;
+import { Slide, SlideShorts } from './HomeShorts.types';
+import {
+  Bookmark,
+  Label,
+  ShortTitle,
+  ShortsRadio,
+  ShortsTitle,
+  ShortsWrap,
+  SliderBackground,
+  SliderContent,
+  SwiperSlideWrap,
+  SwiperWrap,
+} from './HomeShrots.styles';
 
 const HomeShorts = () => {
   const [selected, setSelected] = useState('전체');
