@@ -1,4 +1,4 @@
-import { SignInBtns, SignInFooter, SignInTitle } from '@/components/auth';
+import { SignInBtns, SignInLogo, SignInTitle } from '@/components/auth';
 import Container from '@/components/common/Container';
 
 function SignIn() {
@@ -6,7 +6,7 @@ function SignIn() {
     <Container>
       <SignInTitle />
       <SignInBtns />
-      <SignInFooter />
+      <SignInLogo />
     </Container>
   );
 }

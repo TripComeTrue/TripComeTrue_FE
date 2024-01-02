@@ -1,3 +1,3 @@
 export interface SignInBtnIconProps {
-  icon: 'google' | 'naver' | 'kakao';
+  icon: 'google' | 'naver' | 'kakao' | 'yanolja';
 }

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { SignInBtnIconProps } from './SignInBtns.type';
 
 export const SignInBtnsWrap = styled.div`
-  margin-top: 6.25rem;
+  margin: 6.25rem 0;
 `;
 
-const SignInBtn = styled.button`
+export const SignInBtn = styled.button`
   display: block;
   height: 2.5rem;
   border-radius: 2.5rem;
@@ -54,17 +54,19 @@ export const SignInBtnIcon = styled.span<SignInBtnIconProps>`
   display: inline-block;
   vertical-align: -4px;
   margin-right: 10px;
-  background-image: url('images/social-logo-sprite.png');
-  background-size: 300%;
+  background-image: url('/images/social-logo-sprite.png');
+  background-size: 400%;
   background-repeat: no-repeat;
   background-position: ${(props) => {
     switch (props.icon) {
       case 'google':
-        return 'left center';
+        return '0 50%';
       case 'naver':
-        return 'center center';
+        return '33.3333% 50%';
       case 'kakao':
-        return 'right center';
+        return '66.6666% 50%';
+      case 'yanolja':
+        return '100% 50%';
       default:
         return '0 0';
     }
