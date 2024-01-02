@@ -92,4 +92,9 @@ export const ShortTitle = styled.div`
   border-radius: 0 0 1rem 1rem;
   background-color: rgba(0, 0, 0, 0.5);
   color: ${theme.brand.white};
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
