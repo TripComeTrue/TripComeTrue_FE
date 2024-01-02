@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 
 export const HomeSearchWrap = styled.div`
-  margin-top: 2rem;
-  /* 이 부분 헤더 생기면 수정 예정 */
-  margin: 4rem;
+  margin: 2rem 4rem 0;
 `;
 
 export const LogoImg = styled.div`
