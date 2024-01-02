@@ -26,5 +26,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'import/extensions': 'off',
     'no-param-reassign': 'off',
+    'react/function-component-definition': 'off',
+    'arrow-body-style': 'off',
   },
 };
