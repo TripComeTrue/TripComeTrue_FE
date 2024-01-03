@@ -27,6 +27,7 @@ declare module 'styled-components' {
       lg: string;
       xl: string;
       xxl: string;
+      xxxl: string;
     };
     fontWeights: {
       light: number;
