@@ -17,3 +17,8 @@ export const Field = styled.input`
   border: 0;
   border-bottom: 1px solid ${(props) => props.theme.brand.primary};
 `;
+export const ErrorMsg = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.xs};
+  color: ${(props) => props.theme.semantic.negative};
+  margin-top: 8px;
+`;

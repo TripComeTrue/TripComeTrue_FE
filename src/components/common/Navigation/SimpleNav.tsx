@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './SimpleNav.styles';
 
-function SimpleNav({ children }: { children: ReactNode }) {
+function SimpleNav({ children }: { children?: ReactNode }) {
   const navigate = useNavigate();
   const onClickBackBtn = () => {
     navigate(-1);
@@ -20,5 +20,9 @@ function SimpleNav({ children }: { children: ReactNode }) {
     </S.NavWrap>
   );
 }
+
+SimpleNav.defaultProps = {
+  children: '',
+};
 
 export default SimpleNav;

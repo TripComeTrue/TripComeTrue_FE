@@ -1,30 +1,31 @@
-/* eslint-disable no-console */
 import { useForm } from 'react-hook-form';
 import { SignInBtnIcon } from '../SignInBtns/SignInBtns.styles';
-import * as S from './SignInEmailForm.styles';
-import { LoginFormData } from './SignEmailForm.types';
+import { SignInBtnYanolja } from '../SignInEmailForm/SignInEmailForm.styles';
+import SignUpFormWrap from './SignUpForm.styles';
+import { SignUpFormData } from './SignUpForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
 
-function SignInEmailForm() {
+function SignUpForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
+  } = useForm<SignUpFormData>({
     mode: 'onChange',
   });
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-    <S.SignInFormWrap onSubmit={onSubmit}>
+    <SignUpFormWrap onSubmit={onSubmit}>
       <EmailInput register={register} errors={errors} />
       <PasswordInput register={register} name="password" errors={errors} />
-      <S.SignInBtnYanolja type="submit">
+      <PasswordInput register={register} name="password2" errors={errors} />
+      <SignInBtnYanolja type="submit">
         <SignInBtnIcon icon="yanolja" />
-        야놀자 통합 로그인
-      </S.SignInBtnYanolja>
-    </S.SignInFormWrap>
+        야놀자 통합 회원가입 완료
+      </SignInBtnYanolja>
+    </SignUpFormWrap>
   );
 }
 
-export default SignInEmailForm;
+export default SignUpForm;

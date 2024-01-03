@@ -2,10 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
-import SignIn from './pages/Auth/SignIn';
-import SignInEmail from './pages/Auth/SignInEmail';
-import SignUpAgree from './pages/Auth/SignUpAgree';
-import SignUp from './pages/Auth/SignUp';
+import {
+  FindEmail,
+  FindPw,
+  SignIn,
+  SignInEmail,
+  SignUp,
+  SignUpAgree,
+} from './pages/Auth';
 
 function App() {
   return (
@@ -15,6 +19,8 @@ function App() {
         <Route path="/auth/signin-email" element={<SignInEmail />} />
         <Route path="/auth/agree" element={<SignUpAgree />} />
         <Route path="/auth/signup" element={<SignUp />} />
+        <Route path="/auth/findemail" element={<FindEmail />} />
+        <Route path="/auth/findpw" element={<FindPw />} />
       </Route>
     </Routes>
   );
