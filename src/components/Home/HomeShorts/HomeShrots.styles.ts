@@ -33,13 +33,15 @@ export const Label = styled.label<LabelProps>`
   background-color: ${(props) =>
     props.checked ? theme.brand.primary : 'transparent'};
   border: ${(props) =>
-    props.checked ? 'none' : `0.1rem solid ${theme.brand.gray}`};
+    props.checked
+      ? `0.1rem solid ${theme.brand.primary}`
+      : `0.1rem solid ${theme.brand.gray}`};
 
   border-radius: 1rem;
 `;
 
 export const SwiperWrap = styled(Swiper)`
-  padding: 1.1rem 1rem 0;
+  padding: 1.1rem 1rem 1.6rem;
 `;
 
 export const SwiperSlideWrap = styled(SwiperSlide)``;

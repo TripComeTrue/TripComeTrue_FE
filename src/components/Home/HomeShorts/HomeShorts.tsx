@@ -72,9 +72,9 @@ const HomeShorts = () => {
           />
           전체
         </Label>
-        <Label htmlFor="domestic" checked={selected === '국내'}>
+        <Label htmlFor="domesticShorts" checked={selected === '국내'}>
           <input
-            id="domestic"
+            id="domesticShorts"
             type="radio"
             value="국내"
             checked={selected === '국내'}
@@ -83,9 +83,9 @@ const HomeShorts = () => {
           />
           국내
         </Label>
-        <Label htmlFor="overseas" checked={selected === '해외'}>
+        <Label htmlFor="overseasShorts" checked={selected === '해외'}>
           <input
-            id="overseas"
+            id="overseasShorts"
             type="radio"
             value="해외"
             checked={selected === '해외'}
