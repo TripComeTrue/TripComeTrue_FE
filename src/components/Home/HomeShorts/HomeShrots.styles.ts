@@ -4,40 +4,42 @@ import { LabelProps } from './HomeShorts.types';
 import theme from '@/styles/theme';
 
 export const ShortsWrap = styled.div`
-  margin-top: 4rem;
+  margin-top: 2.5rem;
 `;
 
 export const ShortsTitle = styled.div`
-  margin-left: 7rem;
+  margin-left: 2.8rem;
   position: relative;
-  font-size: 1.9rem;
+  font-size: ${theme.fontSizes.lg};
   font-weight: ${theme.fontWeights.bold};
 
   img {
-    width: 2rem;
+    width: 1.5rem;
     position: absolute;
-    left: -3rem;
-    top: 0.2em;
+    left: -1.9rem;
+    top: 0.1rem;
   }
 `;
 
 export const ShortsRadio = styled.div`
-  margin: 1.5rem 4rem 0;
+  margin: 0.8rem 1rem 0;
 `;
 
 export const Label = styled.label<LabelProps>`
-  margin-right: 0.8rem;
-  padding: 0.2rem 1.3rem;
-  font-size: ${theme.fontSizes.lg};
+  margin-right: 0.5rem;
+  padding: 0.3rem 1.1rem;
+  font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.bold};
   background-color: ${(props) =>
     props.checked ? theme.brand.primary : 'transparent'};
-  border: 0.06rem solid ${theme.brand.primary};
+  border: ${(props) =>
+    props.checked ? 'none' : `0.1rem solid ${theme.brand.gray}`};
+
   border-radius: 1rem;
 `;
 
 export const SwiperWrap = styled(Swiper)`
-  padding: 1.5rem 4rem 0;
+  padding: 1.1rem 1rem 0;
 `;
 
 export const SwiperSlideWrap = styled(SwiperSlide)``;
@@ -45,9 +47,9 @@ export const SwiperSlideWrap = styled(SwiperSlide)``;
 // 이게 콘텐츠
 export const SliderContent = styled.div`
   position: relative;
-  height: 35rem;
+  aspect-ratio: 9/16;
 
-  border-radius: 1rem;
+  border-radius: 10px;
 `;
 
 export const SliderBackground = styled.div`
@@ -58,27 +60,29 @@ export const SliderBackground = styled.div`
     height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 1rem;
+    border-radius: 10px;
+    aspect-ratio: 9/16;
   }
 `;
 
 export const Bookmark = styled.div`
-  margin-left: 3.3rem;
+  margin-left: 1.8rem;
   position: absolute;
-  top: 1rem;
+  top: 0.5rem;
 
-  font-size: ${theme.fontSizes.md};
+  font-size: 10px;
+  font-weight: ${theme.fontWeights.semiBold};
   color: ${theme.brand.white};
 
   img {
     position: absolute;
-    left: -2.1rem;
-    width: 1.7rem;
+    left: -1.3rem;
+    width: 16px;
   }
 `;
 
 export const ShortTitle = styled.div`
-  padding-left: 1rem;
+  padding-left: 0.7rem;
   position: absolute;
   bottom: 0;
 
@@ -87,10 +91,12 @@ export const ShortTitle = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 4rem;
+  height: 2rem;
 
+  font-size: 10px;
+  font-weight: ${theme.fontWeights.bold};
   border-radius: 0 0 1rem 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   color: ${theme.brand.white};
 
   &:hover {

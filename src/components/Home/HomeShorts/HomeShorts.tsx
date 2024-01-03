@@ -97,7 +97,7 @@ const HomeShorts = () => {
       </ShortsRadio>
 
       <SwiperWrap
-        spaceBetween={18}
+        spaceBetween={8}
         slidesPerView={2.1}
         direction="horizontal"
         pagination={{ clickable: true }}
