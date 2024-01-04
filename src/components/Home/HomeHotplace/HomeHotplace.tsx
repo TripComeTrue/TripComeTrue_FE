@@ -11,6 +11,7 @@ import busanImg from '/busan.jpeg';
 import jejuRImg from '/jeju.jpeg';
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import bookmarkPress from '/bookmarkPress.svg';
 
 interface SlideHotItem {
   title: string;
@@ -60,7 +61,7 @@ const PlaceWrap = styled.div`
   margin: 0.7rem 1rem 0;
 `;
 
-export const Label = styled.label<LabelProps>`
+const Label = styled.label<LabelProps>`
   margin-right: 0.5rem;
   padding: 0.35rem 1rem;
   font-size: ${theme.fontSizes.sm};
@@ -69,6 +70,8 @@ export const Label = styled.label<LabelProps>`
     props.checked ? theme.brand.primary : theme.brand.white};
   border-radius: 1rem;
 `;
+
+const HotplaceCityWrap = styled.div``;
 
 const HomeHotplace = () => {
   const [selectedOption, setSelectedOption] = useState({
@@ -292,7 +295,16 @@ const HomeHotplace = () => {
         {selectedValue === 'hot1' || selectedValue === 'hot2'
           ? filteredSlides.map((item: SlideHotItem) => (
               <SwiperSlide key={item.title}>
-                <div>{item.title}</div>
+                <HotplaceCityWrap>
+                  <div>
+                    <img src={bookmarkPress} alt="bookmarkPress" />
+                    {item.bookmark}
+                  </div>
+                  <div>
+                    <div>{item.title}</div>
+                    <div>{item.subtitle}</div>
+                  </div>
+                </HotplaceCityWrap>
               </SwiperSlide>
             ))
           : selectedValue === 'hot3' || selectedValue === 'hot4'

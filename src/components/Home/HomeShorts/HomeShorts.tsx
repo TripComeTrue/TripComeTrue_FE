@@ -9,18 +9,7 @@ import overseas2 from '/overseas2.jpg';
 import overseas3 from '/overseas3.jpg';
 import bookmarkIcon from '/bookmarkPress.svg';
 import { Slide, SlideShorts } from './HomeShorts.types';
-import {
-  Bookmark,
-  Label,
-  ShortTitle,
-  ShortsRadio,
-  ShortsTitle,
-  ShortsWrap,
-  SliderBackground,
-  SliderContent,
-  SwiperSlideWrap,
-  SwiperWrap,
-} from './HomeShrots.styles';
+import * as Styled from './HomeShrots.styles';
 
 const HomeShorts = () => {
   const [selected, setSelected] = useState('전체');
@@ -54,14 +43,14 @@ const HomeShorts = () => {
   const filteredSlides = slideShorts[selected];
 
   return (
-    <ShortsWrap>
-      <ShortsTitle>
+    <Styled.ShortsWrap>
+      <Styled.ShortsTitle>
         <img src={starIcon} alt="icon" />
         지금 이 순간, 트립컴트루
-      </ShortsTitle>
+      </Styled.ShortsTitle>
 
-      <ShortsRadio>
-        <Label htmlFor="all" checked={selected === '전체'}>
+      <Styled.ShortsRadio>
+        <Styled.Label htmlFor="all" checked={selected === '전체'}>
           <input
             id="all"
             type="radio"
@@ -71,8 +60,8 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           전체
-        </Label>
-        <Label htmlFor="domesticShorts" checked={selected === '국내'}>
+        </Styled.Label>
+        <Styled.Label htmlFor="domesticShorts" checked={selected === '국내'}>
           <input
             id="domesticShorts"
             type="radio"
@@ -82,8 +71,8 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           국내
-        </Label>
-        <Label htmlFor="overseasShorts" checked={selected === '해외'}>
+        </Styled.Label>
+        <Styled.Label htmlFor="overseasShorts" checked={selected === '해외'}>
           <input
             id="overseasShorts"
             type="radio"
@@ -93,31 +82,31 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           해외
-        </Label>
-      </ShortsRadio>
+        </Styled.Label>
+      </Styled.ShortsRadio>
 
-      <SwiperWrap
+      <Styled.SwiperWrap
         spaceBetween={8}
         slidesPerView={2.1}
         direction="horizontal"
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {filteredSlides.map((slide: Slide) => (
-          <SwiperSlideWrap key={slide.img}>
-            <SliderContent>
-              <SliderBackground>
+          <Styled.SwiperSlideWrap key={slide.img}>
+            <Styled.SliderContent>
+              <Styled.SliderBackground>
                 <img src={slide.img} alt={slide.img} />
-              </SliderBackground>
-              <Bookmark>
+              </Styled.SliderBackground>
+              <Styled.Bookmark>
                 <img src={bookmarkIcon} alt="bookmark" />
                 {slide.bookmark}
-              </Bookmark>
-              <ShortTitle>{slide.title}</ShortTitle>
-            </SliderContent>
-          </SwiperSlideWrap>
+              </Styled.Bookmark>
+              <Styled.ShortTitle>{slide.title}</Styled.ShortTitle>
+            </Styled.SliderContent>
+          </Styled.SwiperSlideWrap>
         ))}
-      </SwiperWrap>
-    </ShortsWrap>
+      </Styled.SwiperWrap>
+    </Styled.ShortsWrap>
   );
 };
 

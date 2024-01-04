@@ -1,19 +1,5 @@
-import HomeSearch from './HomeSearch/HomeSearch';
-import HomeShorts from './HomeShorts/HomeShorts';
-import HomeHotplace from './HomeHotplace/HomeHotplace';
-// import HomeCreator from './HomeCreator/HomeCreator';
-// import HomeMD from './HomeMD/HomeMD';
-
-const HomeComponent = () => {
-  return (
-    <div>
-      <HomeSearch />
-      <HomeShorts />
-      <HomeHotplace />
-      {/* <HomeCreator />
-      <HomeMD /> */}
-    </div>
-  );
-};
-
-export default HomeComponent;
+export { default as HomeSearch } from './HomeSearch/HomeSearch';
+export { default as HomeShorts } from './HomeShorts/HomeShorts';
+export { default as HomeHotplace } from './HomeHotplace/HomeHotplace';
+export { default as HomeCreator } from './HomeCreator/HomeCreator';
+export { default as HomeMD } from './HomeMD/HomeMD';

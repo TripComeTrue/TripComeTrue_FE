@@ -16,7 +16,7 @@ export const LogoImg = styled.div`
 
 export const WelcomeMessage = styled.div`
   margin-top: 1.3rem;
-  font-size: ${theme.fontSizes.xl};
+  font-size: ${theme.fontSizes.xxl};
 
   span {
     font-weight: ${theme.fontWeights.bold};

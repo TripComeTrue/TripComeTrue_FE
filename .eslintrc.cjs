@@ -32,5 +32,11 @@ module.exports = {
 
     'react-hooks/exhaustive-deps': 'off',
     'no-nested-ternary': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        some: ['nesting', 'id'],
+      },
+    ],
   },
 };
