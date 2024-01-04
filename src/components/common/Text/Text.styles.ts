@@ -16,9 +16,9 @@ const textColor = {
 };
 
 export const Text = styled.span<{
-  fontSize?: string;
-  fontWeight?: number;
-  color?: 'white' | 'black' | 'gray' | 'primary';
+  fontSize: string;
+  fontWeight: number;
+  color: 'white' | 'black' | 'gray' | 'primary';
 }>`
   font-size: ${({ fontSize }) => fontSize};
   font-weight: ${({ fontWeight }) => fontWeight};
