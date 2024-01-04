@@ -1,9 +1,8 @@
 import styled from 'styled-components';
+import { fontXL } from '@/styles/common';
 
 export const SignInTitleH2 = styled.h2`
-  font-size: 1.88rem;
-  line-height: 1.2667;
-  font-weight: lighter;
+  ${fontXL}
 `;
 
 export const SignInTitleH1 = styled.h1`
