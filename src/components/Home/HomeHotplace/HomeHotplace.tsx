@@ -5,6 +5,7 @@ import 'swiper/swiper-bundle.css';
 import bangkokImg from '/bangkok.png';
 import tokyoImg from '/tokyo.png';
 import jejuImg from '/domestic1.jpg';
+import namyangjuImg from '/domestic3.jpg';
 import osakaImg from '/osaka.png';
 import danagImg from '/danag.png';
 import busanImg from '/busan.jpeg';
@@ -34,8 +35,8 @@ interface LabelProps {
 }
 
 const HotplaceWrap = styled.div`
-  background-color: ${theme.brand.black};
-  margin-bottom: 5rem;
+  background-color: #1e1e1e;
+  padding-bottom: 2rem;
 `;
 
 const HotplaceTitle = styled.div`
@@ -71,7 +72,77 @@ const Label = styled.label<LabelProps>`
   border-radius: 1rem;
 `;
 
-const HotplaceCityWrap = styled.div``;
+const SliderWrap = styled(Swiper)`
+  margin: 1rem 1rem 0;
+`;
+
+const HotplaceCityWrap = styled.div`
+  position: relative;
+
+  background: transparent;
+
+  aspect-ratio: 1;
+`;
+
+const HotplaceCityImg = styled.div`
+  position: relative;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    aspect-ratio: 1;
+  }
+`;
+
+const Gradient = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+`;
+
+const HotplaceCityBookmark = styled.div`
+  position: absolute;
+  top: 0.7rem;
+  left: 1.8rem;
+  font-size: ${theme.fontSizes.xs};
+  color: ${theme.brand.white};
+
+  img {
+    position: absolute;
+    top: 0.1rem;
+    left: -1.2rem;
+    width: 1.1rem;
+  }
+`;
+
+const HotplaceCityTag = styled.div`
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  text-align: center;
+  color: ${theme.brand.white};
+`;
+
+const HotplaceCityTitle = styled.div`
+  font-size: ${theme.fontSizes.sm};
+  font-weight: ${theme.fontWeights.semiBold};
+  line-height: 0.7;
+`;
+
+const HotplaceCitySubtitle = styled.div`
+  font-family: 'Mundial-Demibold', 'SF-Pro', sans-serif;
+  font-size: ${theme.fontSizes.xxl};
+  font-weight: ${theme.fontWeights.bold};
+  text-transform: uppercase;
+`;
 
 const HomeHotplace = () => {
   const [selectedOption, setSelectedOption] = useState({
@@ -129,7 +200,7 @@ const HomeHotplace = () => {
         title: '남양주',
         subtitle: 'Namyangju',
         bookmark: 213,
-        img: jejuImg,
+        img: namyangjuImg,
         rate: 0,
         username: '',
         nights: '',
@@ -282,9 +353,9 @@ const HomeHotplace = () => {
         </Label>
       </PlaceWrap>
 
-      <Swiper
+      <SliderWrap
         spaceBetween={8}
-        slidesPerView={1.7}
+        slidesPerView={1.63}
         direction="horizontal"
         pagination={{ clickable: true }}
         scrollbar={{
@@ -296,14 +367,18 @@ const HomeHotplace = () => {
           ? filteredSlides.map((item: SlideHotItem) => (
               <SwiperSlide key={item.title}>
                 <HotplaceCityWrap>
-                  <div>
+                  <HotplaceCityImg>
+                    <img src={item.img} alt="img" />
+                    <Gradient> </Gradient>
+                  </HotplaceCityImg>
+                  <HotplaceCityBookmark>
                     <img src={bookmarkPress} alt="bookmarkPress" />
                     {item.bookmark}
-                  </div>
-                  <div>
-                    <div>{item.title}</div>
-                    <div>{item.subtitle}</div>
-                  </div>
+                  </HotplaceCityBookmark>
+                  <HotplaceCityTag>
+                    <HotplaceCityTitle>{item.title}</HotplaceCityTitle>
+                    <HotplaceCitySubtitle>{item.subtitle}</HotplaceCitySubtitle>
+                  </HotplaceCityTag>
                 </HotplaceCityWrap>
               </SwiperSlide>
             ))
@@ -314,7 +389,7 @@ const HomeHotplace = () => {
                 </SwiperSlide>
               ))
             : null}
-      </Swiper>
+      </SliderWrap>
     </HotplaceWrap>
   );
 };
