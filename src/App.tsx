@@ -18,11 +18,13 @@ function App() {
     <Routes>
       <Route element={<DashBoard />}>
         <Route index element={<SignIn />} />
-        <Route path="/auth/signin-email" element={<SignInEmail />} />
-        <Route path="/auth/agree" element={<SignUpAgree />} />
-        <Route path="/auth/signup" element={<SignUp />} />
-        <Route path="/auth/findemail" element={<FindEmail />} />
-        <Route path="/auth/findpw" element={<FindPw />} />
+        <Route path="/auth/*">
+          <Route path="signin-email" element={<SignInEmail />} />
+          <Route path="agree" element={<SignUpAgree />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="findemail" element={<FindEmail />} />
+          <Route path="findpw" element={<FindPw />} />
+        </Route>
         <Route path="home" element={<Home />} />
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
