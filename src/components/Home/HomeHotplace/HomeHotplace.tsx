@@ -5,6 +5,7 @@ import starIcon from '/starIcon.svg';
 import bookmarkPress from '/bookmarkPress.svg';
 import starFillIcon from '/starFill.svg';
 import storeIcon from '/store.svg';
+import { IoIosArrowForward } from 'react-icons/io';
 import * as Styled from './HomeHotplace.styles';
 
 // 임시 이미지
@@ -160,151 +161,159 @@ const HomeHotplace = () => {
   const filteredSlides = slideHots[selectedValue];
 
   return (
-    <Styled.HotplaceWrap>
-      <Styled.HotplaceTitle>
-        <img src={starIcon} alt="icon" />
-        지금 뜨는 핫플레이스 TOP5
-      </Styled.HotplaceTitle>
+    <>
+      <Styled.HotplaceWrap>
+        <Styled.HotplaceTitle>
+          <img src={starIcon} alt="icon" />
+          지금 뜨는 핫플레이스 TOP5
+        </Styled.HotplaceTitle>
 
-      <Styled.PopularWrap>
-        <Styled.Label
-          htmlFor="city"
-          checked={selectedOption.cityCategory === '인기도시'}>
-          <input
-            id="city"
-            type="radio"
-            name="cityCategory"
-            value="인기도시"
-            checked={selectedOption.cityCategory === '인기도시'}
-            onChange={() => handleOptionChange('cityCategory', '인기도시')}
-            style={{ display: 'none' }}
-          />
-          인기 도시
-        </Styled.Label>
-        <Styled.Label
-          htmlFor="review"
-          checked={selectedOption.cityCategory === '인기여행후기'}>
-          <input
-            id="review"
-            type="radio"
-            name="cityCategory"
-            value="인기여행후기"
-            checked={selectedOption.cityCategory === '인기여행후기'}
-            onChange={() => handleOptionChange('cityCategory', '인기여행후기')}
-            style={{ display: 'none' }}
-          />
-          인기 여행 후기
-        </Styled.Label>
-      </Styled.PopularWrap>
+        <Styled.PopularWrap>
+          <Styled.Label
+            htmlFor="city"
+            checked={selectedOption.cityCategory === '인기도시'}>
+            <input
+              id="city"
+              type="radio"
+              name="cityCategory"
+              value="인기도시"
+              checked={selectedOption.cityCategory === '인기도시'}
+              onChange={() => handleOptionChange('cityCategory', '인기도시')}
+              style={{ display: 'none' }}
+            />
+            인기 도시
+          </Styled.Label>
+          <Styled.Label
+            htmlFor="review"
+            checked={selectedOption.cityCategory === '인기여행후기'}>
+            <input
+              id="review"
+              type="radio"
+              name="cityCategory"
+              value="인기여행후기"
+              checked={selectedOption.cityCategory === '인기여행후기'}
+              onChange={() =>
+                handleOptionChange('cityCategory', '인기여행후기')
+              }
+              style={{ display: 'none' }}
+            />
+            인기 여행 후기
+          </Styled.Label>
+        </Styled.PopularWrap>
 
-      <Styled.PlaceWrap>
-        <Styled.Label
-          htmlFor="domesticHot"
-          checked={selectedOption.locationCategory === '국내'}>
-          <input
-            id="domesticHot"
-            type="radio"
-            name="locationCategory"
-            value="국내"
-            checked={selectedOption.locationCategory === '국내'}
-            onChange={() => handleOptionChange('locationCategory', '국내')}
-            style={{ display: 'none' }}
-          />
-          국내
-        </Styled.Label>
-        <Styled.Label
-          htmlFor="overseasHot"
-          checked={selectedOption.locationCategory === '해외'}>
-          <input
-            id="overseasHot"
-            type="radio"
-            name="locationCategory"
-            value="해외"
-            checked={selectedOption.locationCategory === '해외'}
-            onChange={() => handleOptionChange('locationCategory', '해외')}
-            style={{ display: 'none' }}
-          />
-          해외
-        </Styled.Label>
-      </Styled.PlaceWrap>
+        <Styled.PlaceWrap>
+          <Styled.Label
+            htmlFor="domesticHot"
+            checked={selectedOption.locationCategory === '국내'}>
+            <input
+              id="domesticHot"
+              type="radio"
+              name="locationCategory"
+              value="국내"
+              checked={selectedOption.locationCategory === '국내'}
+              onChange={() => handleOptionChange('locationCategory', '국내')}
+              style={{ display: 'none' }}
+            />
+            국내
+          </Styled.Label>
+          <Styled.Label
+            htmlFor="overseasHot"
+            checked={selectedOption.locationCategory === '해외'}>
+            <input
+              id="overseasHot"
+              type="radio"
+              name="locationCategory"
+              value="해외"
+              checked={selectedOption.locationCategory === '해외'}
+              onChange={() => handleOptionChange('locationCategory', '해외')}
+              style={{ display: 'none' }}
+            />
+            해외
+          </Styled.Label>
+        </Styled.PlaceWrap>
 
-      <Styled.SliderWrap
-        spaceBetween={8}
-        slidesPerView={1.63}
-        direction="horizontal"
-        pagination={{ clickable: true }}
-        scrollbar={{
-          draggable: true,
-          el: '.swiper-scrollbar',
-          hide: false,
-        }}>
-        {selectedValue === 'hot1' || selectedValue === 'hot2'
-          ? filteredSlides.map((item: SlideHotItem) => (
-              <SwiperSlide key={item.title}>
-                <Styled.HotplaceCityWrap>
-                  <Styled.HotplaceCityImg>
-                    <img src={item.img} alt="img" />
-                    <Styled.Gradient> </Styled.Gradient>
-                  </Styled.HotplaceCityImg>
-                  <Styled.HotplaceCityBookmark>
-                    <img src={bookmarkPress} alt="bookmarkPress" />
-                    {item.bookmark}
-                  </Styled.HotplaceCityBookmark>
-                  <Styled.HotplaceCityTag>
-                    <Styled.HotplaceCityTitle>
-                      {item.title}
-                    </Styled.HotplaceCityTitle>
-                    <Styled.HotplaceCitySubtitle>
-                      {item.subtitle}
-                    </Styled.HotplaceCitySubtitle>
-                  </Styled.HotplaceCityTag>
-                </Styled.HotplaceCityWrap>
-              </SwiperSlide>
-            ))
-          : selectedValue === 'hot3' || selectedValue === 'hot4'
+        <Styled.SliderWrap
+          spaceBetween={8}
+          slidesPerView={1.63}
+          direction="horizontal"
+          pagination={{ clickable: true }}
+          scrollbar={{
+            draggable: true,
+            el: '.swiper-scrollbar',
+            hide: false,
+          }}>
+          {selectedValue === 'hot1' || selectedValue === 'hot2'
             ? filteredSlides.map((item: SlideHotItem) => (
                 <SwiperSlide key={item.title}>
-                  <Styled.HotplaceReviewWrap>
-                    <Styled.HotplaceImg>
+                  <Styled.HotplaceCityWrap>
+                    <Styled.HotplaceCityImg>
                       <img src={item.img} alt="img" />
-                      <Styled.GradientReview> </Styled.GradientReview>
-                    </Styled.HotplaceImg>
-                    <Styled.HotplaceBookmark>
+                      <Styled.Gradient> </Styled.Gradient>
+                    </Styled.HotplaceCityImg>
+                    <Styled.HotplaceCityBookmark>
                       <img src={bookmarkPress} alt="bookmarkPress" />
                       {item.bookmark}
-                    </Styled.HotplaceBookmark>
-
-                    <Styled.HotplaceSpot>
-                      <p>
-                        <img src={storeIcon} alt="icon" />
+                    </Styled.HotplaceCityBookmark>
+                    <Styled.HotplaceCityTag>
+                      <Styled.HotplaceCityTitle>
+                        {item.title}
+                      </Styled.HotplaceCityTitle>
+                      <Styled.HotplaceCitySubtitle>
                         {item.subtitle}
-                      </p>
-                      <div>{item.title}</div>
-                    </Styled.HotplaceSpot>
-
-                    <Styled.HotplaceDesWrap>
-                      <Styled.DesNightPlace>
-                        <div>
-                          {item.nights} ・ {item.title}
-                        </div>
-                        <p>{item.postTitle}</p>
-                      </Styled.DesNightPlace>
-
-                      <Styled.DesRate>
-                        <img src={starFillIcon} alt="bookmark" />
-                        {item.rate}
-                      </Styled.DesRate>
-                      <Styled.UserInfo>
-                        <img src={item.userphoto} alt="user" />
-                        {item.username}
-                      </Styled.UserInfo>
-                    </Styled.HotplaceDesWrap>
-                  </Styled.HotplaceReviewWrap>
+                      </Styled.HotplaceCitySubtitle>
+                    </Styled.HotplaceCityTag>
+                  </Styled.HotplaceCityWrap>
                 </SwiperSlide>
               ))
-            : null}
-      </Styled.SliderWrap>
-    </Styled.HotplaceWrap>
+            : selectedValue === 'hot3' || selectedValue === 'hot4'
+              ? filteredSlides.map((item: SlideHotItem) => (
+                  <SwiperSlide key={item.title}>
+                    <Styled.HotplaceReviewWrap>
+                      <Styled.HotplaceImg>
+                        <img src={item.img} alt="img" />
+                        <Styled.GradientReview> </Styled.GradientReview>
+                      </Styled.HotplaceImg>
+                      <Styled.HotplaceBookmark>
+                        <img src={bookmarkPress} alt="bookmarkPress" />
+                        {item.bookmark}
+                      </Styled.HotplaceBookmark>
+
+                      <Styled.HotplaceSpot>
+                        <p>
+                          <img src={storeIcon} alt="icon" />
+                          {item.subtitle}
+                        </p>
+                        <div>{item.title}</div>
+                      </Styled.HotplaceSpot>
+
+                      <Styled.HotplaceDesWrap>
+                        <Styled.DesNightPlace>
+                          <div>
+                            {item.nights} ・ {item.title}
+                          </div>
+                          <p>{item.postTitle}</p>
+                        </Styled.DesNightPlace>
+
+                        <Styled.DesRate>
+                          <img src={starFillIcon} alt="bookmark" />
+                          {item.rate}
+                        </Styled.DesRate>
+                        <Styled.UserInfo>
+                          <img src={item.userphoto} alt="user" />
+                          {item.username}
+                        </Styled.UserInfo>
+                      </Styled.HotplaceDesWrap>
+                    </Styled.HotplaceReviewWrap>
+                  </SwiperSlide>
+                ))
+              : null}
+        </Styled.SliderWrap>
+      </Styled.HotplaceWrap>
+      <Styled.GoAllCity>
+        <div>전체 도시 보러가기</div>
+        <IoIosArrowForward style={{ fontSize: 25 }} />
+      </Styled.GoAllCity>
+    </>
   );
 };
 

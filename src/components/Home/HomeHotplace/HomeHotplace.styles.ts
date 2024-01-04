@@ -257,3 +257,19 @@ export const UserInfo = styled.div`
     aspect-ratio: 1;
   }
 `;
+
+export const GoAllCity = styled.div`
+  padding: 2rem 1.4rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: ${theme.fontSizes.lg};
+  font-weight: ${theme.fontWeights.bold};
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
