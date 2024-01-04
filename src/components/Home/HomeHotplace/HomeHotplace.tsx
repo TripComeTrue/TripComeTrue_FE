@@ -13,6 +13,8 @@ import jejuRImg from '/jeju.jpeg';
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 import bookmarkPress from '/bookmarkPress.svg';
+import starFillIcon from '/starFill.svg';
+import storeIcon from '/store.svg';
 
 interface SlideHotItem {
   title: string;
@@ -36,47 +38,49 @@ interface LabelProps {
 
 const HotplaceWrap = styled.div`
   background-color: #1e1e1e;
-  padding-bottom: 2rem;
 `;
 
 const HotplaceTitle = styled.div`
   position: relative;
-  padding: 1.5rem 1rem 0;
+  padding: 32px 16px 0;
   color: ${theme.brand.white};
   font-size: ${theme.fontSizes.lg};
   font-weight: ${theme.fontWeights.bold};
-  margin-left: 1.8rem;
+  margin-left: 28.8px;
 
   img {
     position: absolute;
     top: 48%;
-    margin-left: -1.7rem;
+    margin-left: -27.2px;
   }
 `;
 
 const PopularWrap = styled.div`
-  margin: 1rem 1rem 0;
+  margin: 12.8px 16px 0;
 `;
 
 const PlaceWrap = styled.div`
-  margin: 0.7rem 1rem 0;
+  margin: 9.6px 16px 0;
 `;
 
 const Label = styled.label<LabelProps>`
-  margin-right: 0.5rem;
-  padding: 0.35rem 1rem;
-  font-size: ${theme.fontSizes.sm};
+  margin-right: 6.4px;
+  padding: 4.8px 14.4px;
+  font-size: ${theme.fontSizes.xs};
   font-weight: ${theme.fontWeights.bold};
   background-color: ${(props) =>
     props.checked ? theme.brand.primary : theme.brand.white};
-  border-radius: 1rem;
+  border-radius: 16px;
 `;
 
 const SliderWrap = styled(Swiper)`
-  margin: 1rem 1rem 0;
+  margin: 16px 16px 0;
 `;
 
+// 인기 여행 도시 부분
 const HotplaceCityWrap = styled.div`
+  margin-bottom: 7px;
+
   position: relative;
 
   background: transparent;
@@ -93,7 +97,7 @@ const HotplaceCityImg = styled.div`
     height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     aspect-ratio: 1;
   }
 `;
@@ -108,22 +112,22 @@ const Gradient = styled.div`
 
 const HotplaceCityBookmark = styled.div`
   position: absolute;
-  top: 0.7rem;
-  left: 1.8rem;
+  top: 11.2px;
+  left: 28.8px;
   font-size: ${theme.fontSizes.xs};
   color: ${theme.brand.white};
 
   img {
     position: absolute;
-    top: 0.1rem;
-    left: -1.2rem;
-    width: 1.1rem;
+    top: 1.6px;
+    left: -19.2px;
+    width: 17.6px;
   }
 `;
 
 const HotplaceCityTag = styled.div`
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 8px;
   left: 50%;
   transform: translate(-50%, 0);
 
@@ -144,6 +148,149 @@ const HotplaceCitySubtitle = styled.div`
   text-transform: uppercase;
 `;
 
+// 인기 여행 후기 부분
+const HotplaceReviewWrap = styled.div``;
+
+const HotplaceImg = styled.div`
+  position: relative;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.625rem;
+    aspect-ratio: 1;
+  }
+`;
+
+const GradientReview = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+  border-radius: 10px;
+`;
+
+const HotplaceBookmark = styled.div`
+  position: absolute;
+  top: 11.2px;
+  left: 28.8px;
+  font-size: ${theme.fontSizes.xs};
+  color: ${theme.brand.white};
+
+  img {
+    position: absolute;
+    top: 1.6px;
+    left: -19.2px;
+    width: 17.6px;
+  }
+`;
+
+const HotplaceSpot = styled.div`
+  position: absolute;
+  top: 9.6px;
+  right: 12.8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  color: ${theme.brand.white};
+
+  p {
+    display: flex;
+
+    font-size: ${theme.fontSizes.lg};
+    font-weight: ${theme.fontWeights.semiBold};
+    text-transform: uppercase;
+
+    img {
+      position: absolute;
+      left: -21.6px;
+      top: 2.4px;
+      margin-right: 3.2px;
+      width: 19.2px;
+    }
+  }
+
+  div {
+    line-height: 1.2;
+    font-size: ${theme.fontSizes.sm};
+    font-weight: ${theme.fontWeights.semiBold};
+  }
+`;
+
+const HotplaceDesWrap = styled.div`
+  background-color: ${theme.brand.white};
+  position: absolute;
+  bottom: 8px;
+
+  padding: 9.6px;
+  width: 100%;
+  height: 3.3rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
+`;
+
+const DesNightPlace = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  div {
+    color: #626262;
+    font-size: 0.625rem;
+    font-weight: ${theme.fontWeights.bold};
+  }
+
+  p {
+    font-size: ${theme.fontSizes.xs};
+    font-weight: ${theme.fontWeights.bold};
+  }
+`;
+
+const DesRate = styled.div`
+  position: relative;
+  font-size: ${theme.fontSizes.lg};
+  font-weight: ${theme.fontWeights.bold};
+
+  img {
+    position: absolute;
+    left: -25.6px;
+
+    width: 22.4px;
+  }
+`;
+
+const UserInfo = styled.div`
+  position: absolute;
+  top: -1.3rem;
+  left: 0;
+  padding: 0.2rem 0.7rem 0.15rem 0.3rem;
+
+  display: flex;
+
+  font-size: 10px;
+  font-weight: ${theme.fontWeights.bold};
+  color: ${theme.brand.white};
+  background-color: ${theme.brand.black};
+  border-radius: 0 4px 0 0;
+
+  img {
+    margin-right: 0.2rem;
+    width: 0.9rem;
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+`;
+
+// 여기서부터 함수임
 const HomeHotplace = () => {
   const [selectedOption, setSelectedOption] = useState({
     cityCategory: '인기도시',
@@ -212,7 +359,7 @@ const HomeHotplace = () => {
       {
         title: '방콕',
         subtitle: 'Bangkok',
-        bookmark: 123,
+        bookmark: 173,
         img: bangkokImg,
         rate: 0,
         username: '',
@@ -266,7 +413,7 @@ const HomeHotplace = () => {
         username: '맥주덕후',
         nights: '2박 3일',
         userphoto: osakaImg,
-        postTitle: '나만의 오사카 프라이빗 코스',
+        postTitle: '나만의 프라이빗 코스',
       },
       {
         title: '다낭',
@@ -277,7 +424,7 @@ const HomeHotplace = () => {
         username: '여우처럼살고파',
         nights: '3박 4일',
         userphoto: danagImg,
-        postTitle: '아무도 안 알려주는 현지 꿀팁',
+        postTitle: '현지 꿀팁',
       },
     ],
   };
@@ -385,7 +532,42 @@ const HomeHotplace = () => {
           : selectedValue === 'hot3' || selectedValue === 'hot4'
             ? filteredSlides.map((item: SlideHotItem) => (
                 <SwiperSlide key={item.title}>
-                  <div>{item.title}</div>
+                  <HotplaceReviewWrap>
+                    <HotplaceImg>
+                      <img src={item.img} alt="img" />
+                      <GradientReview> </GradientReview>
+                    </HotplaceImg>
+                    <HotplaceBookmark>
+                      <img src={bookmarkPress} alt="bookmarkPress" />
+                      {item.bookmark}
+                    </HotplaceBookmark>
+
+                    <HotplaceSpot>
+                      <p>
+                        <img src={storeIcon} alt="icon" />
+                        {item.subtitle}
+                      </p>
+                      <div>{item.title}</div>
+                    </HotplaceSpot>
+
+                    <HotplaceDesWrap>
+                      <DesNightPlace>
+                        <div>
+                          {item.nights} ・ {item.title}
+                        </div>
+                        <p>{item.postTitle}</p>
+                      </DesNightPlace>
+
+                      <DesRate>
+                        <img src={starFillIcon} alt="bookmark" />
+                        {item.rate}
+                      </DesRate>
+                      <UserInfo>
+                        <img src={item.userphoto} alt="user" />
+                        {item.username}
+                      </UserInfo>
+                    </HotplaceDesWrap>
+                  </HotplaceReviewWrap>
                 </SwiperSlide>
               ))
             : null}
