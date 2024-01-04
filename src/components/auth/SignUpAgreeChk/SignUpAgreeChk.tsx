@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from './SignUpAgreeChk.styles';
+import * as Styled from './SignUpAgreeChk.styles';
 import SignUpAgreeChkBox from './SignUpAgreeChkBox';
 import { Agreements, POLICY_AGREE } from './SignUpAgreeChk.types';
 
@@ -53,7 +53,7 @@ function SignUpAgreeChk() {
   };
 
   return (
-    <S.SignUpAgreeWrap>
+    <Styled.SignUpAgreeWrap>
       <SignUpAgreeChkBox
         text="서비스 이용 약관을 모두 확인했어요"
         name="chkall"
@@ -70,8 +70,10 @@ function SignUpAgreeChk() {
           checked={agreements[agreement].checked}
         />
       ))}
-      <S.SignUpAgreeConfirm onClick={onClickConfirm}>다음</S.SignUpAgreeConfirm>
-    </S.SignUpAgreeWrap>
+      <Styled.SignUpAgreeConfirm onClick={onClickConfirm}>
+        다음
+      </Styled.SignUpAgreeConfirm>
+    </Styled.SignUpAgreeWrap>
   );
 }
 

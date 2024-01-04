@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import * as S from './EmailInput.styles';
+import * as Styled from './EmailInput.styles';
 import { EmailInputProps } from './EmailInput.types';
 import { ErrorMsg, Label, TextFieldWrap } from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
@@ -8,7 +8,7 @@ function EmailInput({ register, errors }: EmailInputProps<SignUpFormData>) {
   return (
     <TextFieldWrap>
       <Label htmlFor="email">아이디</Label>
-      <S.EmailField
+      <Styled.EmailField
         type="email"
         id="email"
         {...register('email', {

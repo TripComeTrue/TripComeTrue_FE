@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from './SimpleNav.styles';
+import * as Styled from './SimpleNav.styles';
 
 function SimpleNav({ children }: { children?: ReactNode }) {
   const navigate = useNavigate();
@@ -9,15 +9,15 @@ function SimpleNav({ children }: { children?: ReactNode }) {
   };
 
   return (
-    <S.NavWrap>
-      <S.NavInner>
-        <S.NavBackBtn onClick={onClickBackBtn}>
+    <Styled.NavWrap>
+      <Styled.NavInner>
+        <Styled.NavBackBtn onClick={onClickBackBtn}>
           <img src="/images/back-arrow.svg" alt="뒤로가기" />
-        </S.NavBackBtn>
-        <S.NavTitle>{children}</S.NavTitle>
-        <S.NavRightBtns />
-      </S.NavInner>
-    </S.NavWrap>
+        </Styled.NavBackBtn>
+        <Styled.NavTitle>{children}</Styled.NavTitle>
+        <Styled.NavRightBtns />
+      </Styled.NavInner>
+    </Styled.NavWrap>
   );
 }
 

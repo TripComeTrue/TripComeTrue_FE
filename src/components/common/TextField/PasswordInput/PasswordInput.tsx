@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import * as S from './PasswordInput.styles';
+import * as Styled from './PasswordInput.styles';
 import { PasswordInputProps } from './PasswordInput.types';
 import { ErrorMsg, Label, TextFieldWrap } from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
@@ -37,7 +37,7 @@ function PasswordInput({
       <Label htmlFor={name}>
         {name === 'password' ? '비밀번호' : '비밀번호 확인'}
       </Label>
-      <S.PasswordField
+      <Styled.PasswordField
         type="password"
         id={name}
         {...register(

@@ -1,4 +1,4 @@
-import * as S from './SignUpAgreeChk.styles';
+import * as Styled from './SignUpAgreeChk.styles';
 import { SignUpAgreeChkboxProps } from './SignUpAgreeChkBox.types';
 
 function SignUpAgreeChkBox({
@@ -9,10 +9,10 @@ function SignUpAgreeChkBox({
   checked,
 }: SignUpAgreeChkboxProps) {
   return (
-    <S.SignUpAgreeItem>
-      <S.SignUpAgreeLabel inputname={name}>
+    <Styled.SignUpAgreeItem>
+      <Styled.SignUpAgreeLabel inputname={name}>
         {text}
-        <S.SignUpAgreeInput
+        <Styled.SignUpAgreeInput
           type="checkbox"
           name={name}
           id={name}
@@ -20,9 +20,11 @@ function SignUpAgreeChkBox({
           checked={checked}
         />
         <span className="chkmark" />
-      </S.SignUpAgreeLabel>
-      {viewPolicy && <S.SignUpAgreeViewBtn>약관 보기</S.SignUpAgreeViewBtn>}
-    </S.SignUpAgreeItem>
+      </Styled.SignUpAgreeLabel>
+      {viewPolicy && (
+        <Styled.SignUpAgreeViewBtn>약관 보기</Styled.SignUpAgreeViewBtn>
+      )}
+    </Styled.SignUpAgreeItem>
   );
 }
 
