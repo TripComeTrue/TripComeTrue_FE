@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
-import starIcon from '/starIcon.svg';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import starIcon from '/starIcon.svg';
+import bookmarkPress from '/bookmarkPress.svg';
+import starFillIcon from '/starFill.svg';
+import storeIcon from '/store.svg';
+import * as Styled from './HomeHotplace.styles';
+
+// 임시 이미지
 import bangkokImg from '/bangkok.png';
 import tokyoImg from '/tokyo.png';
 import jejuImg from '/domestic1.jpg';
@@ -10,285 +16,7 @@ import osakaImg from '/osaka.png';
 import danagImg from '/danag.png';
 import busanImg from '/busan.jpeg';
 import jejuRImg from '/jeju.jpeg';
-import styled from 'styled-components';
-import theme from '@/styles/theme';
-import bookmarkPress from '/bookmarkPress.svg';
-import starFillIcon from '/starFill.svg';
-import storeIcon from '/store.svg';
-
-interface SlideHotItem {
-  title: string;
-  bookmark: number;
-  subtitle: string;
-  img: string;
-  rate: number;
-  username: string;
-  userphoto: string;
-  nights: string;
-  postTitle: string;
-}
-
-interface SlideHots {
-  [key: string]: SlideHotItem[];
-}
-
-interface LabelProps {
-  checked: boolean;
-}
-
-const HotplaceWrap = styled.div`
-  background-color: #1e1e1e;
-`;
-
-const HotplaceTitle = styled.div`
-  position: relative;
-  padding: 32px 16px 0;
-  color: ${theme.brand.white};
-  font-size: ${theme.fontSizes.lg};
-  font-weight: ${theme.fontWeights.bold};
-  margin-left: 28.8px;
-
-  img {
-    position: absolute;
-    top: 48%;
-    margin-left: -27.2px;
-  }
-`;
-
-const PopularWrap = styled.div`
-  margin: 12.8px 16px 0;
-`;
-
-const PlaceWrap = styled.div`
-  margin: 9.6px 16px 0;
-`;
-
-const Label = styled.label<LabelProps>`
-  margin-right: 6.4px;
-  padding: 4.8px 14.4px;
-  font-size: ${theme.fontSizes.xs};
-  font-weight: ${theme.fontWeights.bold};
-  background-color: ${(props) =>
-    props.checked ? theme.brand.primary : theme.brand.white};
-  border-radius: 16px;
-`;
-
-const SliderWrap = styled(Swiper)`
-  margin: 16px 16px 0;
-`;
-
-// 인기 여행 도시 부분
-const HotplaceCityWrap = styled.div`
-  margin-bottom: 7px;
-
-  position: relative;
-
-  background: transparent;
-
-  aspect-ratio: 1;
-`;
-
-const HotplaceCityImg = styled.div`
-  position: relative;
-  height: 100%;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 0.625rem;
-    aspect-ratio: 1;
-  }
-`;
-
-const Gradient = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
-`;
-
-const HotplaceCityBookmark = styled.div`
-  position: absolute;
-  top: 11.2px;
-  left: 28.8px;
-  font-size: ${theme.fontSizes.xs};
-  color: ${theme.brand.white};
-
-  img {
-    position: absolute;
-    top: 1.6px;
-    left: -19.2px;
-    width: 17.6px;
-  }
-`;
-
-const HotplaceCityTag = styled.div`
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translate(-50%, 0);
-
-  text-align: center;
-  color: ${theme.brand.white};
-`;
-
-const HotplaceCityTitle = styled.div`
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.semiBold};
-  line-height: 0.7;
-`;
-
-const HotplaceCitySubtitle = styled.div`
-  font-family: 'Mundial-Demibold', 'SF-Pro', sans-serif;
-  font-size: ${theme.fontSizes.xxl};
-  font-weight: ${theme.fontWeights.bold};
-  text-transform: uppercase;
-`;
-
-// 인기 여행 후기 부분
-const HotplaceReviewWrap = styled.div``;
-
-const HotplaceImg = styled.div`
-  position: relative;
-  height: 100%;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 0.625rem;
-    aspect-ratio: 1;
-  }
-`;
-
-const GradientReview = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
-  border-radius: 10px;
-`;
-
-const HotplaceBookmark = styled.div`
-  position: absolute;
-  top: 11.2px;
-  left: 28.8px;
-  font-size: ${theme.fontSizes.xs};
-  color: ${theme.brand.white};
-
-  img {
-    position: absolute;
-    top: 1.6px;
-    left: -19.2px;
-    width: 17.6px;
-  }
-`;
-
-const HotplaceSpot = styled.div`
-  position: absolute;
-  top: 9.6px;
-  right: 12.8px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  color: ${theme.brand.white};
-
-  p {
-    display: flex;
-
-    font-size: ${theme.fontSizes.lg};
-    font-weight: ${theme.fontWeights.semiBold};
-    text-transform: uppercase;
-
-    img {
-      position: absolute;
-      left: -21.6px;
-      top: 2.4px;
-      margin-right: 3.2px;
-      width: 19.2px;
-    }
-  }
-
-  div {
-    line-height: 1.2;
-    font-size: ${theme.fontSizes.sm};
-    font-weight: ${theme.fontWeights.semiBold};
-  }
-`;
-
-const HotplaceDesWrap = styled.div`
-  background-color: ${theme.brand.white};
-  position: absolute;
-  bottom: 8px;
-
-  padding: 9.6px;
-  width: 100%;
-  height: 3.3rem;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  border-radius: 0 0 10px 10px;
-`;
-
-const DesNightPlace = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  div {
-    color: #626262;
-    font-size: 0.625rem;
-    font-weight: ${theme.fontWeights.bold};
-  }
-
-  p {
-    font-size: ${theme.fontSizes.xs};
-    font-weight: ${theme.fontWeights.bold};
-  }
-`;
-
-const DesRate = styled.div`
-  position: relative;
-  font-size: ${theme.fontSizes.lg};
-  font-weight: ${theme.fontWeights.bold};
-
-  img {
-    position: absolute;
-    left: -25.6px;
-
-    width: 22.4px;
-  }
-`;
-
-const UserInfo = styled.div`
-  position: absolute;
-  top: -1.3rem;
-  left: 0;
-  padding: 0.2rem 0.7rem 0.15rem 0.3rem;
-
-  display: flex;
-
-  font-size: 10px;
-  font-weight: ${theme.fontWeights.bold};
-  color: ${theme.brand.white};
-  background-color: ${theme.brand.black};
-  border-radius: 0 4px 0 0;
-
-  img {
-    margin-right: 0.2rem;
-    width: 0.9rem;
-    border-radius: 50%;
-    aspect-ratio: 1;
-  }
-`;
+import { SlideHotItem, SlideHots } from './HomeHotplace.types';
 
 // 여기서부터 함수임
 const HomeHotplace = () => {
@@ -432,14 +160,14 @@ const HomeHotplace = () => {
   const filteredSlides = slideHots[selectedValue];
 
   return (
-    <HotplaceWrap>
-      <HotplaceTitle>
+    <Styled.HotplaceWrap>
+      <Styled.HotplaceTitle>
         <img src={starIcon} alt="icon" />
         지금 뜨는 핫플레이스 TOP5
-      </HotplaceTitle>
+      </Styled.HotplaceTitle>
 
-      <PopularWrap>
-        <Label
+      <Styled.PopularWrap>
+        <Styled.Label
           htmlFor="city"
           checked={selectedOption.cityCategory === '인기도시'}>
           <input
@@ -452,8 +180,8 @@ const HomeHotplace = () => {
             style={{ display: 'none' }}
           />
           인기 도시
-        </Label>
-        <Label
+        </Styled.Label>
+        <Styled.Label
           htmlFor="review"
           checked={selectedOption.cityCategory === '인기여행후기'}>
           <input
@@ -466,11 +194,11 @@ const HomeHotplace = () => {
             style={{ display: 'none' }}
           />
           인기 여행 후기
-        </Label>
-      </PopularWrap>
+        </Styled.Label>
+      </Styled.PopularWrap>
 
-      <PlaceWrap>
-        <Label
+      <Styled.PlaceWrap>
+        <Styled.Label
           htmlFor="domesticHot"
           checked={selectedOption.locationCategory === '국내'}>
           <input
@@ -483,8 +211,8 @@ const HomeHotplace = () => {
             style={{ display: 'none' }}
           />
           국내
-        </Label>
-        <Label
+        </Styled.Label>
+        <Styled.Label
           htmlFor="overseasHot"
           checked={selectedOption.locationCategory === '해외'}>
           <input
@@ -497,10 +225,10 @@ const HomeHotplace = () => {
             style={{ display: 'none' }}
           />
           해외
-        </Label>
-      </PlaceWrap>
+        </Styled.Label>
+      </Styled.PlaceWrap>
 
-      <SliderWrap
+      <Styled.SliderWrap
         spaceBetween={8}
         slidesPerView={1.63}
         direction="horizontal"
@@ -513,66 +241,70 @@ const HomeHotplace = () => {
         {selectedValue === 'hot1' || selectedValue === 'hot2'
           ? filteredSlides.map((item: SlideHotItem) => (
               <SwiperSlide key={item.title}>
-                <HotplaceCityWrap>
-                  <HotplaceCityImg>
+                <Styled.HotplaceCityWrap>
+                  <Styled.HotplaceCityImg>
                     <img src={item.img} alt="img" />
-                    <Gradient> </Gradient>
-                  </HotplaceCityImg>
-                  <HotplaceCityBookmark>
+                    <Styled.Gradient> </Styled.Gradient>
+                  </Styled.HotplaceCityImg>
+                  <Styled.HotplaceCityBookmark>
                     <img src={bookmarkPress} alt="bookmarkPress" />
                     {item.bookmark}
-                  </HotplaceCityBookmark>
-                  <HotplaceCityTag>
-                    <HotplaceCityTitle>{item.title}</HotplaceCityTitle>
-                    <HotplaceCitySubtitle>{item.subtitle}</HotplaceCitySubtitle>
-                  </HotplaceCityTag>
-                </HotplaceCityWrap>
+                  </Styled.HotplaceCityBookmark>
+                  <Styled.HotplaceCityTag>
+                    <Styled.HotplaceCityTitle>
+                      {item.title}
+                    </Styled.HotplaceCityTitle>
+                    <Styled.HotplaceCitySubtitle>
+                      {item.subtitle}
+                    </Styled.HotplaceCitySubtitle>
+                  </Styled.HotplaceCityTag>
+                </Styled.HotplaceCityWrap>
               </SwiperSlide>
             ))
           : selectedValue === 'hot3' || selectedValue === 'hot4'
             ? filteredSlides.map((item: SlideHotItem) => (
                 <SwiperSlide key={item.title}>
-                  <HotplaceReviewWrap>
-                    <HotplaceImg>
+                  <Styled.HotplaceReviewWrap>
+                    <Styled.HotplaceImg>
                       <img src={item.img} alt="img" />
-                      <GradientReview> </GradientReview>
-                    </HotplaceImg>
-                    <HotplaceBookmark>
+                      <Styled.GradientReview> </Styled.GradientReview>
+                    </Styled.HotplaceImg>
+                    <Styled.HotplaceBookmark>
                       <img src={bookmarkPress} alt="bookmarkPress" />
                       {item.bookmark}
-                    </HotplaceBookmark>
+                    </Styled.HotplaceBookmark>
 
-                    <HotplaceSpot>
+                    <Styled.HotplaceSpot>
                       <p>
                         <img src={storeIcon} alt="icon" />
                         {item.subtitle}
                       </p>
                       <div>{item.title}</div>
-                    </HotplaceSpot>
+                    </Styled.HotplaceSpot>
 
-                    <HotplaceDesWrap>
-                      <DesNightPlace>
+                    <Styled.HotplaceDesWrap>
+                      <Styled.DesNightPlace>
                         <div>
                           {item.nights} ・ {item.title}
                         </div>
                         <p>{item.postTitle}</p>
-                      </DesNightPlace>
+                      </Styled.DesNightPlace>
 
-                      <DesRate>
+                      <Styled.DesRate>
                         <img src={starFillIcon} alt="bookmark" />
                         {item.rate}
-                      </DesRate>
-                      <UserInfo>
+                      </Styled.DesRate>
+                      <Styled.UserInfo>
                         <img src={item.userphoto} alt="user" />
                         {item.username}
-                      </UserInfo>
-                    </HotplaceDesWrap>
-                  </HotplaceReviewWrap>
+                      </Styled.UserInfo>
+                    </Styled.HotplaceDesWrap>
+                  </Styled.HotplaceReviewWrap>
                 </SwiperSlide>
               ))
             : null}
-      </SliderWrap>
-    </HotplaceWrap>
+      </Styled.SliderWrap>
+    </Styled.HotplaceWrap>
   );
 };
 
