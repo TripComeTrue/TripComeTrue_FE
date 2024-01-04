@@ -47,4 +47,5 @@ export const inner = css`
   padding-left: 20px;
   padding-right: 20px;
   box-sizing: border-box;
+  margin: 0 auto;
 `;
