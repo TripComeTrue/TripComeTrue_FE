@@ -28,6 +28,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/function-component-definition': 'off',
     'arrow-body-style': 'off',
+    'import/no-absolute-path': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {
