@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import DashBoard from '@/components/layout';
-import Main from '@/pages/Main/Main';
+// import Main from '@/pages/Main/Main';
 import Home from './pages/Main/Home';
 import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
 import {
@@ -30,7 +30,6 @@ function App() {
           <Route path="detail/:id" element={<TripDetail />} />
           <Route path="plan" element={<TripPlan />} />
         </Route>
-
       </Route>
     </Routes>
   );
