@@ -49,12 +49,16 @@ const getBgColor = (theme: DefaultTheme, variant?: string) => {
       return theme.brand.primary;
     case 'gray':
       return theme.brand.lightGray;
+    case 'primary-border':
+      return theme.brand.white;
+    case 'gray-border':
+      return theme.brand.white;
     case 'text':
       return theme.brand.white;
     default:
       break;
   }
-  return 'transparent';
+  return theme.brand.white;
 };
 
 const gethoverBgColor = (variant?: string) => {
