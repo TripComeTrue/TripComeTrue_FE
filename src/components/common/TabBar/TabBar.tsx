@@ -3,7 +3,7 @@ import * as Styled from './TabBar.styles';
 
 const navItems = [
   { to: 'home', text: '홈 피드' },
-  { to: 'feed', text: '상세 피드' },
+  { to: 'trip', text: '상세 피드' },
   { to: 'mypage', text: '마이페이지' },
 ];
 
