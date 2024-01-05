@@ -12,6 +12,7 @@ import {
   SignUp,
   SignUpAgree,
 } from './pages/Auth';
+import { TripMap } from './pages/DetailFeed';
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
           <Route path="list" element={<TripList />} />
           <Route path="detail/:id" element={<TripDetail />} />
           <Route path="plan" element={<TripPlan />} />
+        </Route>
+        <Route path="/detailfeed/*">
+          <Route path="map" element={<TripMap />} />
         </Route>
       </Route>
     </Routes>
