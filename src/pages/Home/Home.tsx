@@ -1,4 +1,9 @@
-import { HomeHotplace, HomeSearch, HomeShorts } from '@/components/Home';
+import {
+  HomeCreator,
+  HomeHotplace,
+  HomeSearch,
+  HomeShorts,
+} from '@/components/Home';
 
 const Home = () => {
   return (
@@ -6,8 +11,8 @@ const Home = () => {
       <HomeSearch />
       <HomeShorts />
       <HomeHotplace />
-      {/* <HomeCreator />
-      <HomeMD /> */}
+      <HomeCreator />
+      {/* <HomeMD /> */}
     </div>
   );
 };
