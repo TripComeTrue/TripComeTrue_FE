@@ -1,24 +1,8 @@
-import styled from 'styled-components';
 import HomeCreatorPost from './HomeCreatorPost';
 import starIcon from '/starIcon.svg';
 import exampleImg from '/osaka.png';
-import theme from '@/styles/theme';
 import { CreatorData, HotCreatorDataTypes } from './HomeCreator.types';
-
-const HotCreatorTitle = styled.div`
-  position: relative;
-  padding: 0.8rem 1rem 0;
-  color: ${theme.brand.black};
-  font-size: ${theme.fontSizes.lg};
-  font-weight: ${theme.fontWeights.bold};
-  margin-left: 28.8px;
-
-  img {
-    position: absolute;
-    top: 35%;
-    margin-left: -27.2px;
-  }
-`;
+import * as Styled from './HomeCreator.styles';
 
 const HomeCreator = () => {
   const HotCreatorDatas: HotCreatorDataTypes = {
@@ -182,10 +166,10 @@ const HomeCreator = () => {
 
   return (
     <>
-      <HotCreatorTitle>
+      <Styled.HotCreatorTitle>
         <img src={starIcon} alt="icon" />
         HOT 여행 크리에이터
-      </HotCreatorTitle>
+      </Styled.HotCreatorTitle>
 
       {selectedCreators.map((creator: CreatorData) => (
         <HomeCreatorPost key={creator.username} creator={creator} />
