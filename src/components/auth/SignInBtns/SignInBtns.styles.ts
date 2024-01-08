@@ -54,8 +54,18 @@ export const SignInBtnIcon = styled.span<SignInBtnIconProps>`
   display: inline-block;
   vertical-align: -4px;
   margin-right: 10px;
-  background-image: url('/images/social-logo-sprite.png');
-  background-size: 400%;
+  background-image: ${({ icon }) => {
+    switch (icon) {
+      case 'yanolja':
+        return 'url(/images/yanolja_white.svg)';
+      case 'yanolja_b':
+        return 'url(/images/yanolja_black.svg)';
+      default:
+        return 'url(/images/social-logo-sprite.png)';
+    }
+  }};
+  background-size: ${({ icon }) =>
+    icon === 'yanolja' || icon === 'yanolja_b' ? '100%' : '400%'};
   background-repeat: no-repeat;
   background-position: ${(props) => {
     switch (props.icon) {
@@ -65,8 +75,6 @@ export const SignInBtnIcon = styled.span<SignInBtnIconProps>`
         return '33.3333% 50%';
       case 'kakao':
         return '66.6666% 50%';
-      case 'yanolja':
-        return '100% 50%';
       default:
         return '0 0';
     }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as Styled from './SignUpAgreeChk.styles';
 import SignUpAgreeChkBox from './SignUpAgreeChkBox';
 import { Agreements, POLICY_AGREE } from './SignUpAgreeChk.types';
+import { Button } from '@/components/common';
 
 function SignUpAgreeChk() {
   const navigate = useNavigate();
@@ -70,9 +71,9 @@ function SignUpAgreeChk() {
           checked={agreements[agreement].checked}
         />
       ))}
-      <Styled.SignUpAgreeConfirm onClick={onClickConfirm}>
+      <Button size="lg" variants="primary" onClick={onClickConfirm}>
         다음
-      </Styled.SignUpAgreeConfirm>
+      </Button>
     </Styled.SignUpAgreeWrap>
   );
 }

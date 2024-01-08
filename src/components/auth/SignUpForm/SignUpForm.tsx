@@ -10,7 +10,7 @@ import { Button } from '@/components/common';
 
 function SignUpForm() {
   const [isPassPage, setIsPassPage] = useState(false);
-
+  const [isOk, setIsOk] = useState(false);
   const {
     register,
     handleSubmit,
@@ -42,6 +42,28 @@ function SignUpForm() {
       clearErrors('password2');
     }
   }, [passWatch, pass2Watch, setError, clearErrors]);
+
+  useEffect(() => {
+    if (
+      email &&
+      passWatch &&
+      pass2Watch &&
+      !errors.email &&
+      !errors.password &&
+      !errors.password2
+    ) {
+      setIsOk(true);
+    } else {
+      setIsOk(false);
+    }
+  }, [
+    email,
+    errors.email,
+    errors.password,
+    errors.password2,
+    pass2Watch,
+    passWatch,
+  ]);
 
   return (
     <SignUpFormWrap onSubmit={onSubmit}>
@@ -78,8 +100,8 @@ function SignUpForm() {
         </>
       )}
       {isPassPage && (
-        <SignInBtnYanolja type="submit">
-          <SignInBtnIcon icon="yanolja" />
+        <SignInBtnYanolja type="submit" disabled={!isOk}>
+          <SignInBtnIcon icon={isOk ? 'yanolja' : 'yanolja_b'} />
           야놀자 통합 회원가입 완료
         </SignInBtnYanolja>
       )}
