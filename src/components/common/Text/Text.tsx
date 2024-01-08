@@ -1,3 +1,4 @@
+import pxToRem from '@/utils/pxToRem';
 import * as Styled from './Text.styles';
 import TextProps from './Text.types';
 
@@ -16,7 +17,7 @@ const Text = ({
   color = 'black',
   tag,
 }: TextProps) => {
-  const stringifiedSize = `${fontSize / 16}rem`;
+  const stringifiedSize = pxToRem(fontSize);
   return (
     <Styled.Text
       as={tag}

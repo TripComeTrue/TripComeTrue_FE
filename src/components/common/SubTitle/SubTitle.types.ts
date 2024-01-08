@@ -5,8 +5,8 @@ interface SubTitleProps {
   onClickButton?: () => void;
   icon?: string;
   variant?: 'more';
-  mt?: number;
-  mb?: number;
+  margin?: string;
+  fontSize?: number;
 }
 
 export default SubTitleProps;

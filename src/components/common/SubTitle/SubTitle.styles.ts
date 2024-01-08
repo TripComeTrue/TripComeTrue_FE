@@ -2,16 +2,13 @@ import styled from 'styled-components';
 import { alignCenter } from '@/styles/common';
 
 export const Container = styled.div<{
-  $mt: string;
-  $mb: string;
+  $margin: string;
 }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  margin: 0 1.25rem;
-  margin-top: ${({ $mt }) => $mt};
-  margin-bottom: ${({ $mb }) => $mb};
+  margin: ${({ $margin }) => $margin};
 `;
 
 export const SubTitleContainer = styled.div`
