@@ -1,5 +1,7 @@
+import TripPlanDate from '@/components/Trip/TripPlan/TripPlanDate/TripPlanDate';
+
 const TripPlan = () => {
-  return <div>TripPlan</div>;
+  return <TripPlanDate />;
 };
 
 export default TripPlan;
