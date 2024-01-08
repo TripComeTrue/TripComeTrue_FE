@@ -155,3 +155,10 @@ a {
   background-color: #f8fafc;
   color: #444;
 }
+
+@font-face {
+  font-family: 'Mundial-Demibold';
+  src: url('/src/styles/fonts/Mundial-Demibold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

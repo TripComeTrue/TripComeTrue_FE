@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
-import Home from './pages/Main/Home';
+
 import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
 import {
   FindEmail,
@@ -12,6 +12,7 @@ import {
   SignUp,
   SignUpAgree,
 } from './pages/Auth';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
