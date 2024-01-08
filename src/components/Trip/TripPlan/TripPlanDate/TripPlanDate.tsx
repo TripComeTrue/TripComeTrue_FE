@@ -6,7 +6,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../TripPlanDate/DatePickerStyles.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
-import * as Styled from '../TripPlanDate/TripPlanDate.styles';
+import * as Styled from './TripPlanDate.styles';
+import { Button } from '../../../../components/common';
 
 interface DateProps {
   startDate: Date | null;
@@ -63,14 +64,12 @@ const TripPlanDate = () => {
         </DatePicker>
       </Styled.DateContainer>
       <Styled.ButtonContainer>
-        <Styled.Button
-          style={{ backgroundColor: 'white', border: '1px solid #D9D9D9' }}
-          onClick={goBack}>
+        <Button variants="gray-border" size="lg" rounded="sm" onClick={goBack}>
           취소
-        </Styled.Button>
-        <Styled.Button>
+        </Button>
+        <Button variants="gray" size="lg" rounded="sm">
           <Link to="/trip/country">다음</Link>
-        </Styled.Button>
+        </Button>
       </Styled.ButtonContainer>
     </Styled.Wrapper>
   );
