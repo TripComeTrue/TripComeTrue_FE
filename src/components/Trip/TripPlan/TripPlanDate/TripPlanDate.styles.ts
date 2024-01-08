@@ -1,4 +1,3 @@
-import theme from '@/styles/theme';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -12,9 +11,9 @@ export const Wrapper = styled.div`
 
   h1 {
     margin: 1rem 0;
-    color: ${theme.text.black};
-    font-size: ${theme.fontSizes.lg};
-    font-weight: ${theme.fontWeights.bold};
+    color: ${({ theme }) => theme.text.black};
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
   }
 `;
 
@@ -22,15 +21,7 @@ export const DateContainer = styled.div`
   z-index: 0;
 
   .react-datepicker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-
-    width: 320px;
-    padding: 0.5rem;
-
-    font-size: ${theme.fontSizes.md};
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
 
@@ -50,8 +41,8 @@ export const Button = styled.button`
   height: 3rem;
   border-radius: 0.5rem;
 
-  font-size: ${theme.fontSizes.md};
-  font-weight: ${theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 
   cursor: pointer;
 `;

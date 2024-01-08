@@ -14,7 +14,7 @@ interface DateProps {
 }
 
 const TripPlanDate = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [dateRange, setDateRange] = useState<DateProps>({
     startDate: new Date(),
     endDate: null,
