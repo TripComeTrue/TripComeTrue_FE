@@ -1,15 +1,15 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Styled from './SignUpAgreeChk.styles';
 import SignUpAgreeChkBox from './SignUpAgreeChkBox';
 import { Agreements, POLICY_AGREE } from './SignUpAgreeChk.types';
-import { Button } from '@/components/common';
 
 function SignUpAgreeChk() {
   const navigate = useNavigate();
   const chkAllAgreed = (data: Agreements) =>
     Object.values(data).every((agreement) => agreement.checked);
 
+  const [isOk, setIsOk] = useState(false);
   const [agreements, setAgreements] = useState(POLICY_AGREE);
   const [allAgreed, setAllAgreed] = useState(chkAllAgreed(agreements));
 
@@ -53,6 +53,18 @@ function SignUpAgreeChk() {
       navigate('/auth/signup');
   };
 
+  useEffect(() => {
+    if (
+      agreements.over14age.checked &&
+      agreements.policyAgree.checked &&
+      agreements.privacyAgree.checked
+    ) {
+      setIsOk(true);
+    } else {
+      setIsOk(false);
+    }
+  }, [agreements]);
+
   return (
     <Styled.SignUpAgreeWrap>
       <SignUpAgreeChkBox
@@ -71,9 +83,13 @@ function SignUpAgreeChk() {
           checked={agreements[agreement].checked}
         />
       ))}
-      <Button size="lg" variants="primary" onClick={onClickConfirm}>
+      <Styled.SignUpAgreeConfirm
+        size="lg"
+        variants="primary"
+        onClick={onClickConfirm}
+        disabled={!isOk}>
         다음
-      </Button>
+      </Styled.SignUpAgreeConfirm>
     </Styled.SignUpAgreeWrap>
   );
 }

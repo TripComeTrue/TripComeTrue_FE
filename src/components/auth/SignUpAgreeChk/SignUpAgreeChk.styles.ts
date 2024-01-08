@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SignInBtn } from '../SignInBtns/SignInBtns.styles';
+import { Button } from '@/components/common';
 
 export const SignUpAgreeWrap = styled.div`
   margin-top: 2rem;
@@ -73,14 +73,6 @@ export const SignUpAgreeViewBtn = styled.button`
   cursor: pointer;
 `;
 
-export const SignUpAgreeConfirm = styled(SignInBtn)`
+export const SignUpAgreeConfirm = styled(Button)`
   margin-top: 1.25rem;
-  background-color: ${(props) => props.theme.brand.primary};
-  &:hover {
-    background-color: #8ce200;
-  }
-  &:disabled {
-    background-color: ${(props) => props.theme.brand.gray};
-    color: ${(props) => props.theme.text.gray};
-  }
 `;

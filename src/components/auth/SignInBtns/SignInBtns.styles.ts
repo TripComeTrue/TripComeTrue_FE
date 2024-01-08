@@ -14,6 +14,8 @@ export const SignInBtn = styled.button`
   margin-bottom: 1rem;
   transition: background-color 0.3s;
   cursor: pointer;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: bold;
 `;
 export const SignInBtnGoogle = styled(SignInBtn)`
   background-color: transparent;
@@ -44,6 +46,8 @@ export const SignInBtnEmail = styled(Link)`
   background-color: transparent;
   transition: background-color 0.3s;
   color: ${(props) => props.theme.text.gray};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: bold;
   &:hover {
     background-color: ${(props) => props.theme.brand.lightGray};
   }
