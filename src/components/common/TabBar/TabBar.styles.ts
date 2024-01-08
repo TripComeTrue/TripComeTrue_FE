@@ -15,6 +15,7 @@ export const Tabbar = styled.nav<TabbarProps>`
   height: 100%;
   padding-bottom: 1.4375rem;
   background-color: ${(props) => props.theme.brand.white};
+  border: 1px solid ${(props) => props.theme.brand.lightGray};
   border-top-left-radius: 1.25rem;
   border-top-right-radius: 1.25rem;
 `;

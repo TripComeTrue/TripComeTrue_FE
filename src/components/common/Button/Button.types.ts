@@ -1,4 +1,5 @@
 export interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
-  variants?: 'primary' | 'black' | 'outlined' | 'text';
+  variants?: 'primary' | 'gray' | 'primary-border' | 'gray-border' | 'text';
+  rounded?: 'sm' | 'lg';
 }
