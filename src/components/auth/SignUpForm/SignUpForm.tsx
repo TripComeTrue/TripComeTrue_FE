@@ -24,7 +24,7 @@ function SignUpForm() {
   });
   const { email } = getValues();
   const passWatch = watch('password');
-  const pass2Watch = watch('password2');
+  const passChkWatch = watch('passwordCheck');
   const onClickNext = () => {
     if (email === '' || errors.email) return;
     setIsPassPage(true);
@@ -32,25 +32,25 @@ function SignUpForm() {
   const onSubmit = handleSubmit((data) => console.log(data));
 
   useEffect(() => {
-    if (passWatch !== pass2Watch && pass2Watch) {
-      setError('password2', {
+    if (passWatch !== passChkWatch && passChkWatch) {
+      setError('passwordCheck', {
         type: 'password-mismatch',
         message: '비밀번호가 일치하지 않습니다',
       });
     } else {
       // 비밀번호 일치시 오류 제거
-      clearErrors('password2');
+      clearErrors('passwordCheck');
     }
-  }, [passWatch, pass2Watch, setError, clearErrors]);
+  }, [passWatch, passChkWatch, setError, clearErrors]);
 
   useEffect(() => {
     if (
       email &&
       passWatch &&
-      pass2Watch &&
+      passChkWatch &&
       !errors.email &&
       !errors.password &&
-      !errors.password2
+      !errors.passwordCheck
     ) {
       setIsOk(true);
     } else {
@@ -60,8 +60,8 @@ function SignUpForm() {
     email,
     errors.email,
     errors.password,
-    errors.password2,
-    pass2Watch,
+    errors.passwordCheck,
+    passChkWatch,
     passWatch,
   ]);
 
@@ -93,7 +93,7 @@ function SignUpForm() {
           />
           <PasswordInput
             register={register}
-            name="password2"
+            name="passwordCheck"
             errors={errors}
             getValues={getValues}
           />

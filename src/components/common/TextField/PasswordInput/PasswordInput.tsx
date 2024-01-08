@@ -15,7 +15,7 @@ function PasswordInput({
   errors,
   getValues,
 }: PasswordInputProps<SignUpFormData>) {
-  const { password, password2 } = getValues();
+  const { password, passwordCheck } = getValues();
   const passwordValiation = {
     required: '비밀번호를 입력해주세요',
     pattern: {
@@ -56,13 +56,13 @@ function PasswordInput({
       {name === 'password' && password && (
         <ValidateIcon $isvalid={`${Boolean(errors.password)}`} />
       )}
-      {name === 'password2' && password2 && (
-        <ValidateIcon $isvalid={`${Boolean(errors.password2)}`} />
+      {name === 'passwordCheck' && passwordCheck && (
+        <ValidateIcon $isvalid={`${Boolean(errors.passwordCheck)}`} />
       )}
       <ErrorMsg>
         {name === 'password'
           ? errors.password?.message
-          : errors.password2?.message}
+          : errors.passwordCheck?.message}
       </ErrorMsg>
     </TextFieldWrap>
   );

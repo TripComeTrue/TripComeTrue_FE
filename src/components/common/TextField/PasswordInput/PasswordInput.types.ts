@@ -11,7 +11,7 @@ export interface PasswordInputProps<
   T extends FieldValues | LoginFormData | SignUpFormData,
 > {
   register: UseFormRegister<T>;
-  name: 'email' | 'password' | 'password2';
+  name: 'email' | 'password' | 'passwordCheck';
   errors: FieldErrors<T>;
   getValues: UseFormGetValues<T>;
 }
