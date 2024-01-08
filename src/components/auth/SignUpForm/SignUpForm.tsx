@@ -47,7 +47,11 @@ function SignUpForm() {
     <SignUpFormWrap onSubmit={onSubmit}>
       {!isPassPage ? (
         <>
-          <EmailInput register={register} errors={errors} />
+          <EmailInput
+            register={register}
+            errors={errors}
+            getValues={getValues}
+          />
           <Button
             type="button"
             size="lg"
@@ -59,7 +63,12 @@ function SignUpForm() {
         </>
       ) : (
         <>
-          <PasswordInput register={register} name="password" errors={errors} />
+          <PasswordInput
+            register={register}
+            name="password"
+            errors={errors}
+            getValues={getValues}
+          />
           <PasswordInput
             register={register}
             name="password2"

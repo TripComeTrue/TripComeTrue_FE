@@ -13,5 +13,5 @@ export interface PasswordInputProps<
   register: UseFormRegister<T>;
   name: 'email' | 'password' | 'password2';
   errors: FieldErrors<T>;
-  getValues?: UseFormGetValues<T>;
+  getValues: UseFormGetValues<T>;
 }
