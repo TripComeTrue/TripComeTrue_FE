@@ -4,10 +4,10 @@ import ko from 'date-fns/locale/ko';
 import { differenceInDays } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../TripPlanDate/DatePickerStyles.css';
+import './DatePickerStyles.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import * as Styled from './TripPlanDate.styles';
-import { Button } from '../../../../components/common';
+import { Button } from '@/components/common';
 
 interface DateProps {
   startDate: Date | null;
@@ -41,11 +41,11 @@ const TripPlanDate = () => {
           selected={startDate}
           startDate={startDate}
           endDate={endDate}
-          selectsRange={true}
+          selectsRange
           minDate={new Date()}
           locale={ko}
           dateFormat="yyyy.MM.dd"
-          isClearable={true}
+          isClearable
           showPopperArrow={false}
           onChange={(date) =>
             setDateRange({
@@ -53,7 +53,7 @@ const TripPlanDate = () => {
               endDate: date[1] || null,
             })
           }
-          open={true}
+          open
           showMonthDropdown
           showYearDropdown
           showIcon
