@@ -19,6 +19,7 @@
     "@tanstack/react-query": "^5.15.0",
     "@tanstack/react-query-devtools": "^5.15.0",
     "axios": "^1.6.2",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
@@ -30,6 +31,7 @@
     "swiper": "^11.0.5"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.43",
     "@types/react-datepicker": "^4.19.5",

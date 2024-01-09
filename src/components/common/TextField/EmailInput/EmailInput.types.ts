@@ -13,4 +13,5 @@ export interface EmailInputProps<
   register: UseFormRegister<T>;
   errors: FieldErrors<T>;
   getValues: UseFormGetValues<T>;
+  allowCheckEmail?: boolean;
 }

@@ -73,6 +73,7 @@ function SignUpForm() {
             register={register}
             errors={errors}
             getValues={getValues}
+            allowCheckEmail
           />
           <Button
             type="button"
