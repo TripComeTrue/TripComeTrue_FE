@@ -1,14 +1,18 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { isAxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { SignInBtnIcon } from '../SignInBtns/SignInBtns.styles';
 import { SignInBtnYanolja } from '../SignInEmailForm/SignInEmailForm.styles';
 import SignUpFormWrap from './SignUpForm.styles';
-import { SignUpFormData } from './SignUpForm.types';
+import { SignUpFormData, SignUpFormProps } from './SignUpForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
 import { Button } from '@/components/common';
+import client from '@/apis';
 
-function SignUpForm() {
+function SignUpForm({ handleOpen, setErrorMsg }: SignUpFormProps) {
+  const navigate = useNavigate();
   const [isPassPage, setIsPassPage] = useState(false);
   const [isOk, setIsOk] = useState(false);
   const {
@@ -29,7 +33,23 @@ function SignUpForm() {
     if (email === '' || errors.email) return;
     setIsPassPage(true);
   };
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const res = await client.post('/v1/member/signup', {
+        email: data.email,
+        password: data.password,
+      });
+      const { email: userEmail, name } = res.data;
+      console.log(userEmail, name);
+      // TODO: 나중에 welcome 페이지로 변경 필요
+      navigate('/home');
+    } catch (error) {
+      if (isAxiosError(error)) {
+        setErrorMsg(error.response?.data.errorMessage);
+        handleOpen();
+      }
+    }
+  });
 
   useEffect(() => {
     if (passWatch !== passChkWatch && passChkWatch) {
