@@ -1,10 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as Styled from './EmailInput.styles';
 import { EmailInputProps } from './EmailInput.types';
-import { ErrorMsg, Label, TextFieldWrap } from '../TextField.styles';
+import {
+  ErrorMsg,
+  Label,
+  TextFieldWrap,
+  ValidateIcon,
+} from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
 
-function EmailInput({ register, errors }: EmailInputProps<SignUpFormData>) {
+function EmailInput({
+  register,
+  errors,
+  getValues,
+}: EmailInputProps<SignUpFormData>) {
+  const { email } = getValues();
   return (
     <TextFieldWrap>
       <Label htmlFor="email">아이디</Label>
@@ -19,7 +29,10 @@ function EmailInput({ register, errors }: EmailInputProps<SignUpFormData>) {
           },
         })}
         placeholder="이메일을 입력해주세요"
+        autoComplete="off"
+        $iserror={`${Boolean(errors.email)}`}
       />
+      {email && <ValidateIcon $isvalid={`${Boolean(errors.email)}`} />}
       <ErrorMsg>{errors.email?.message}</ErrorMsg>
     </TextFieldWrap>
   );

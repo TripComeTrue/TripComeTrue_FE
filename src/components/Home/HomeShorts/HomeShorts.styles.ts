@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { LabelProps } from './HomeShorts.types';
-import theme from '@/styles/theme';
+// import theme from '@/styles/theme';
 
 export const ShortsWrap = styled.div`
   margin-top: 2.5rem;
@@ -10,8 +10,8 @@ export const ShortsWrap = styled.div`
 export const ShortsTitle = styled.div`
   margin-left: 2.8rem;
   position: relative;
-  font-size: ${theme.fontSizes.lg};
-  font-weight: ${theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 
   img {
     width: 1.5rem;
@@ -28,14 +28,14 @@ export const ShortsRadio = styled.div`
 export const Label = styled.label<LabelProps>`
   margin-right: 0.5rem;
   padding: 0.3rem 1.1rem;
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   background-color: ${(props) =>
-    props.checked ? theme.brand.primary : 'transparent'};
+    props.checked ? ({ theme }) => theme.brand.primary : 'transparent'};
   border: ${(props) =>
     props.checked
-      ? `0.1rem solid ${theme.brand.primary}`
-      : `0.1rem solid ${theme.brand.gray}`};
+      ? `0.1rem solid ${props.theme.brand.primary}`
+      : `0.1rem solid ${props.theme.brand.gray}`};
 
   border-radius: 1rem;
 `;
@@ -73,8 +73,8 @@ export const Bookmark = styled.div`
   top: 0.5rem;
 
   font-size: 10px;
-  font-weight: ${theme.fontWeights.semiBold};
-  color: ${theme.brand.white};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.brand.white};
 
   img {
     position: absolute;
@@ -96,10 +96,10 @@ export const ShortTitle = styled.div`
   height: 2rem;
 
   font-size: 10px;
-  font-weight: ${theme.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   border-radius: 0 0 1rem 1rem;
   background-color: rgba(0, 0, 0, 0.4);
-  color: ${theme.brand.white};
+  color: ${({ theme }) => theme.brand.white};
 
   &:hover {
     text-decoration: underline;

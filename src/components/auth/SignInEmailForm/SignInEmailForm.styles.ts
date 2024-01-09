@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 import { SignInBtn } from '../SignInBtns/SignInBtns.styles';
 
@@ -7,6 +6,11 @@ export const SignInBtnYanolja = styled(SignInBtn)`
   color: ${(props) => props.theme.brand.white};
   &:hover {
     background: linear-gradient(90deg, #ed525d, #d11a56);
+  }
+  &:disabled {
+    cursor: auto;
+    background: ${({ theme }) => theme.brand.gray};
+    color: ${({ theme }) => theme.text.black};
   }
 `;
 

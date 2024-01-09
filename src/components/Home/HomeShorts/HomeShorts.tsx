@@ -9,7 +9,8 @@ import overseas2 from '/overseas2.jpg';
 import overseas3 from '/overseas3.jpg';
 import bookmarkIcon from '/bookmarkPress.svg';
 import { Slide, SlideShorts } from './HomeShorts.types';
-import * as Styled from './HomeShrots.styles';
+import * as Styled from './HomeShorts.styles';
+import { SubTitle } from '@/components/common';
 
 const HomeShorts = () => {
   const [selected, setSelected] = useState('전체');
@@ -44,10 +45,13 @@ const HomeShorts = () => {
 
   return (
     <Styled.ShortsWrap>
-      <Styled.ShortsTitle>
-        <img src={starIcon} alt="icon" />
-        지금 이 순간, 트립컴트루
-      </Styled.ShortsTitle>
+      <SubTitle
+        margin="1rem"
+        fontSize={20}
+        icon={starIcon}
+        variant={undefined}
+        onClickButton={undefined}
+      />
 
       <Styled.ShortsRadio>
         <Styled.Label htmlFor="all" checked={selected === '전체'}>

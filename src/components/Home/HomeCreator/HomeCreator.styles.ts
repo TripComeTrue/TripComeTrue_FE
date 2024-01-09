@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import theme from '@/styles/theme';
 
 export const HotCreatorTitle = styled.div`
   position: relative;
   padding: 0.8rem 1rem 0;
-  color: ${theme.brand.black};
-  font-size: ${theme.fontSizes.lg};
-  font-weight: ${theme.fontWeights.bold};
+  color: ${({ theme }) => theme.brand.black};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   margin-left: 28.8px;
 
   img {
     position: absolute;
     top: 35%;
-    margin-left: -27.2px;
+    margin-left: -1.7rem;
   }
 `;
 
@@ -49,10 +48,10 @@ export const UserImg = styled.div`
 
 export const UserInfo = styled.div`
   margin-left: 1rem;
-  font-size: ${theme.fontSizes.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
 
   p {
-    font-weight: ${theme.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
   }
 `;
 
@@ -63,7 +62,7 @@ export const PostBackground = styled.div`
   width: 100%;
   height: 6.5rem;
 
-  background-color: ${theme.brand.primary};
+  background-color: ${({ theme }) => theme.brand.primary};
 `;
 
 export const SwiperDiv = styled.div`
@@ -103,8 +102,8 @@ export const Bookmark = styled.div`
   display: flex;
   align-items: center;
   font-size: 10px;
-  font-weight: ${theme.fontWeights.bold};
-  color: ${theme.brand.white};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.brand.white};
 
   img {
     margin-right: 0.2rem;
@@ -116,7 +115,7 @@ export const Bookmark = styled.div`
 export const SliderTitle = styled.div`
   margin-top: -0.2rem;
   font-size: 10px;
-  font-weight: ${theme.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   padding-bottom: 1rem;
 
   &:hover {

@@ -4,15 +4,8 @@ import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
 import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
-import {
-  FindEmail,
-  FindPw,
-  SignIn,
-  SignInEmail,
-  SignUp,
-  SignUpAgree,
-} from './pages/Auth';
 import Home from './pages/Home/Home';
+import { SignIn, SignInEmail, SignUp, SignUpAgree } from './pages/Auth';
 
 function App() {
   return (
@@ -23,8 +16,8 @@ function App() {
           <Route path="signin-email" element={<SignInEmail />} />
           <Route path="agree" element={<SignUpAgree />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="findemail" element={<FindEmail />} />
-          <Route path="findpw" element={<FindPw />} />
+          {/* <Route path="findemail" element={<FindEmail />} />
+          <Route path="findpw" element={<FindPw />} /> */}
         </Route>
         <Route path="home" element={<Home />} />
         <Route path="/trip/*">
