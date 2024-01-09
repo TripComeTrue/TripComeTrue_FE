@@ -7,6 +7,11 @@ export const SignInBtnYanolja = styled(SignInBtn)`
   &:hover {
     background: linear-gradient(90deg, #ed525d, #d11a56);
   }
+  &:disabled {
+    cursor: auto;
+    background: ${({ theme }) => theme.brand.gray};
+    color: ${({ theme }) => theme.text.black};
+  }
 `;
 
 export const SignInFormWrap = styled.form`

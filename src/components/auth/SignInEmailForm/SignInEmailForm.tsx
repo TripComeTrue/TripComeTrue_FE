@@ -10,6 +10,7 @@ function SignInEmailForm() {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm<LoginFormData>({
     mode: 'onChange',
   });
@@ -17,8 +18,13 @@ function SignInEmailForm() {
 
   return (
     <Styled.SignInFormWrap onSubmit={onSubmit}>
-      <EmailInput register={register} errors={errors} />
-      <PasswordInput register={register} name="password" errors={errors} />
+      <EmailInput register={register} errors={errors} getValues={getValues} />
+      <PasswordInput
+        register={register}
+        name="password"
+        errors={errors}
+        getValues={getValues}
+      />
       <Styled.SignInBtnYanolja type="submit">
         <SignInBtnIcon icon="yanolja" />
         야놀자 통합 로그인
