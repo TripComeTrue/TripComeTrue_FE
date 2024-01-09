@@ -42,7 +42,7 @@ function SignUpForm({ handleOpen, setErrorMsg }: SignUpFormProps) {
       const { email: userEmail, name } = res.data;
       console.log(userEmail, name);
       // TODO: 나중에 welcome 페이지로 변경 필요
-      navigate('/home');
+      navigate('/auth/signin-email');
     } catch (error) {
       if (isAxiosError(error)) {
         setErrorMsg(error.response?.data.errorMessage);
