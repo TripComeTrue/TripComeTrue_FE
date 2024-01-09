@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface SubTitleProps {
-  children: ReactNode;
+  children?: ReactNode;
   onClickButton?: () => void;
   icon?: string;
   variant?: 'more';
