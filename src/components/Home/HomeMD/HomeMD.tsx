@@ -7,6 +7,7 @@ import franceImg from '/overseas3.jpg';
 import seoulImg from '/domestic3.jpg';
 import danagImg from '/danag.png';
 import { HomeMDData } from './HomeMD.types';
+import * as Styled from './HomeMD.styles';
 
 const HomeMD = () => {
   const HomeMDdata: HomeMDData = {
@@ -64,8 +65,8 @@ const HomeMD = () => {
   };
 
   return (
-    <>
-      <div>
+    <Styled.HomeMDComponent>
+      <Styled.HomeMDWrap>
         <SubTitle
           margin="1rem"
           fontSize={18}
@@ -75,8 +76,8 @@ const HomeMD = () => {
           낭만 있는 프랑스 겨울
         </SubTitle>
         <HomeMDChoice city={HomeMDdata.france} />
-      </div>
-      <div>
+      </Styled.HomeMDWrap>
+      <Styled.HomeMDWrap>
         <SubTitle
           margin="1rem"
           fontSize={18}
@@ -86,8 +87,8 @@ const HomeMD = () => {
           서울 이곳저곳 탐방하기
         </SubTitle>
         <HomeMDChoice city={HomeMDdata.seoul} />
-      </div>
-      <div>
+      </Styled.HomeMDWrap>
+      <Styled.HomeMDWrap>
         <SubTitle
           margin="1rem"
           fontSize={18}
@@ -97,8 +98,8 @@ const HomeMD = () => {
           추위를 피해 날아가는 철새처럼
         </SubTitle>
         <HomeMDChoice city={HomeMDdata.southEast} />
-      </div>
-    </>
+      </Styled.HomeMDWrap>
+    </Styled.HomeMDComponent>
   );
 };
 
