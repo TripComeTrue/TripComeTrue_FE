@@ -18,6 +18,8 @@ import danagImg from '/danag.png';
 import busanImg from '/busan.jpeg';
 import jejuRImg from '/jeju.jpeg';
 import { SlideHotItem, SlideHots } from './HomeHotplace.types';
+import { SubTitle, Text } from '@/components/common';
+// import { SubTitle } from '@/components/common';
 
 // 여기서부터 함수임
 const HomeHotplace = () => {
@@ -163,10 +165,16 @@ const HomeHotplace = () => {
   return (
     <>
       <Styled.HotplaceWrap>
-        <Styled.HotplaceTitle>
-          <img src={starIcon} alt="icon" />
-          지금 뜨는 핫플레이스 TOP5
-        </Styled.HotplaceTitle>
+        <SubTitle
+          margin="1rem"
+          fontSize={18}
+          icon={starIcon}
+          variant={undefined}
+          onClickButton={undefined}>
+          <Text fontSize={18} fontWeight={600} color="white">
+            지금 뜨는 핫플레이스 TOP5
+          </Text>
+        </SubTitle>
 
         <Styled.PopularWrap>
           <Styled.Label

@@ -2,7 +2,7 @@ import HomeCreatorPost from './HomeCreatorPost';
 import starIcon from '/starIcon.svg';
 import exampleImg from '/osaka.png';
 import { CreatorData, HotCreatorDataTypes } from './HomeCreator.types';
-import * as Styled from './HomeCreator.styles';
+import { SubTitle } from '@/components/common';
 
 const HomeCreator = () => {
   const HotCreatorDatas: HotCreatorDataTypes = {
@@ -166,10 +166,14 @@ const HomeCreator = () => {
 
   return (
     <>
-      <Styled.HotCreatorTitle>
-        <img src={starIcon} alt="icon" />
+      <SubTitle
+        margin="1rem"
+        fontSize={18}
+        icon={starIcon}
+        variant={undefined}
+        onClickButton={undefined}>
         HOT 여행 크리에이터
-      </Styled.HotCreatorTitle>
+      </SubTitle>
 
       {selectedCreators.map((creator: CreatorData) => (
         <HomeCreatorPost key={creator.username} creator={creator} />

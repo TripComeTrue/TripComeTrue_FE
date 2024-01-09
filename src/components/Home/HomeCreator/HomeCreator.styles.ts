@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-export const HotCreatorTitle = styled.div`
-  position: relative;
-  padding: 0.8rem 1rem 0;
-  color: ${({ theme }) => theme.brand.black};
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  margin-left: 28.8px;
+// export const HotCreatorTitle = styled.div`
+//   position: relative;
+//   padding: 0.8rem 1rem 0;
+//   color: ${({ theme }) => theme.brand.black};
+//   font-size: ${({ theme }) => theme.fontSizes.lg};
+//   font-weight: ${({ theme }) => theme.fontWeights.bold};
+//   margin-left: 28.8px;
 
-  img {
-    position: absolute;
-    top: 35%;
-    margin-left: -1.7rem;
-  }
-`;
+//   img {
+//     position: absolute;
+//     top: 35%;
+//     margin-left: -1.7rem;
+//   }
+// `;
 
 export const HotPostWrap = styled.div`
   margin-top: 1.8rem;

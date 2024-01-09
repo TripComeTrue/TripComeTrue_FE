@@ -47,11 +47,12 @@ const HomeShorts = () => {
     <Styled.ShortsWrap>
       <SubTitle
         margin="1rem"
-        fontSize={20}
+        fontSize={18}
         icon={starIcon}
         variant={undefined}
-        onClickButton={undefined}
-      />
+        onClickButton={undefined}>
+        지금 이 순간, 트립컴트루
+      </SubTitle>
 
       <Styled.ShortsRadio>
         <Styled.Label htmlFor="all" checked={selected === '전체'}>

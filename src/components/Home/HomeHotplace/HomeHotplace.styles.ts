@@ -1,26 +1,11 @@
 import { Swiper } from 'swiper/react';
 import styled from 'styled-components';
 import { LabelProps } from './HomeHotplace.types';
-// import theme from '@/styles/theme';
 
 export const HotplaceWrap = styled.div`
   background-color: #1e1e1e;
+  padding-top: 1rem;
   padding-bottom: 1.7rem;
-`;
-
-export const HotplaceTitle = styled.div`
-  position: relative;
-  padding: 2rem 1rem 0;
-  color: ${({ theme }) => theme.brand.white};
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  margin-left: 1.8rem;
-
-  img {
-    position: absolute;
-    top: 48%;
-    margin-left: -1.7rem;
-  }
 `;
 
 export const PopularWrap = styled.div`

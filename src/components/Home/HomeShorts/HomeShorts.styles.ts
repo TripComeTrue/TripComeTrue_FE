@@ -7,20 +7,6 @@ export const ShortsWrap = styled.div`
   margin-top: 2.5rem;
 `;
 
-export const ShortsTitle = styled.div`
-  margin-left: 2.8rem;
-  position: relative;
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-
-  img {
-    width: 1.5rem;
-    position: absolute;
-    left: -1.9rem;
-    top: 0.1rem;
-  }
-`;
-
 export const ShortsRadio = styled.div`
   margin: 0.8rem 1rem 0;
 `;
