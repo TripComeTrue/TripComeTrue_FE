@@ -7,6 +7,7 @@ import * as Styled from './SignInEmailForm.styles';
 import { LoginFormData, SignInEmailFormProps } from './SignEmailForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
 import client from '@/apis';
+import { setCookie } from '@/utils/cookie';
 
 function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
         email: data.email,
         password: data.password,
       });
-      const { email, name } = res.data;
-      console.log(email, name);
+      const { token } = res.data.data;
+      setCookie('accessToken', token, 3600);
       navigate('/home', { replace: true });
     } catch (error) {
       if (isAxiosError(error)) {
