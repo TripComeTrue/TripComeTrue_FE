@@ -7,6 +7,7 @@ function SignUpAgreeChkBox({
   viewPolicy,
   onChange,
   checked,
+  handleOpen,
 }: SignUpAgreeChkboxProps) {
   return (
     <Styled.SignUpAgreeItem>
@@ -22,7 +23,10 @@ function SignUpAgreeChkBox({
         <span className="chkmark" />
       </Styled.SignUpAgreeLabel>
       {viewPolicy && (
-        <Styled.SignUpAgreeViewBtn>약관 보기</Styled.SignUpAgreeViewBtn>
+        <Styled.SignUpAgreeViewBtn
+          onClick={() => handleOpen && handleOpen(name)}>
+          약관 보기
+        </Styled.SignUpAgreeViewBtn>
       )}
     </Styled.SignUpAgreeItem>
   );

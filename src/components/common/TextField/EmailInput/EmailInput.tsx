@@ -1,4 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { isAxiosError } from 'axios';
+import _ from 'lodash';
 import * as Styled from './EmailInput.styles';
 import { EmailInputProps } from './EmailInput.types';
 import {
@@ -8,26 +10,53 @@ import {
   ValidateIcon,
 } from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
+import client from '@/apis';
+// import throttle from '@/utils/throttle';
 
 function EmailInput({
   register,
   errors,
   getValues,
+  allowCheckEmail,
 }: EmailInputProps<SignUpFormData>) {
   const { email } = getValues();
+  const emailValidation = {
+    required: '이메일은 필수 입니다.',
+    pattern: {
+      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+      message: '올바른 이메일을 입력해주세요',
+    },
+  };
+  const emailDuplicatedValidation = {
+    ...emailValidation,
+    validate: {
+      chkDuplicated: _.throttle(async (v: string | undefined) => {
+        try {
+          const res = await client.get(
+            `v1/member/check-duplicated-email?email=${v}`,
+          );
+          const code = res.status;
+          if (code === 200) return true;
+        } catch (error) {
+          if (isAxiosError(error)) {
+            if (error.status === 400) return '이미 가입된 회원입니다.';
+          }
+        }
+        return '이미 가입된 회원입니다.';
+      }, 500),
+    },
+  };
+
   return (
     <TextFieldWrap>
       <Label htmlFor="email">아이디</Label>
       <Styled.EmailField
         type="email"
         id="email"
-        {...register('email', {
-          required: '이메일은 필수 입니다.',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-            message: '올바른 이메일을 입력해주세요',
-          },
-        })}
+        {...register(
+          'email',
+          allowCheckEmail ? emailDuplicatedValidation : emailValidation,
+        )}
         placeholder="이메일을 입력해주세요"
         autoComplete="off"
         $iserror={`${Boolean(errors.email)}`}

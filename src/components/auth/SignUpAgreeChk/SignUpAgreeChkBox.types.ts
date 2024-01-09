@@ -6,4 +6,5 @@ export interface SignUpAgreeChkboxProps {
   viewPolicy?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
+  handleOpen?: (name: string) => void;
 }
