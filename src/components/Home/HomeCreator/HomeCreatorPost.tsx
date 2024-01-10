@@ -1,6 +1,6 @@
 import { CreatorData } from './HomeCreator.types';
-import bookmarkIcon from '/bookmarkPress.svg';
 import * as Styled from './HomeCreator.styles';
+import Spots from '@/components/common/Spots/Spots';
 
 const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
   return (
@@ -18,7 +18,7 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
       <Styled.PostBackground> </Styled.PostBackground>
 
       <Styled.SwiperDiv>
-        <Styled.SwiperWrap
+        {/* <Styled.SwiperWrap
           spaceBetween={6}
           slidesPerView={2.8}
           direction="horizontal"
@@ -26,6 +26,7 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
           {creator.posts.map((item) => (
             <Styled.SwiperSlideWrap key={item.postImg}>
+
               <Styled.SliderImg>
                 <img src={item.postImg} alt="img" />
                 <Styled.Bookmark>
@@ -34,9 +35,12 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
                 </Styled.Bookmark>
               </Styled.SliderImg>
               <Styled.SliderTitle>{item.postTitle}</Styled.SliderTitle>
+              
             </Styled.SwiperSlideWrap>
           ))}
-        </Styled.SwiperWrap>
+        </Styled.SwiperWrap> */}
+
+        <Spots creator={creator.posts} slidesPerView={2.5} />
       </Styled.SwiperDiv>
     </Styled.HotPostWrap>
   );
