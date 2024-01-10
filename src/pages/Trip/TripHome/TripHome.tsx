@@ -1,5 +1,13 @@
+import { TripHomeBody, TripHomeHeader } from '@/components/Trip';
+import * as Styled from './TripHome.styles';
+
 const TripHome = () => {
-  return <div>TripHome</div>;
+  return (
+    <Styled.Container>
+      <TripHomeHeader />
+      <TripHomeBody />
+    </Styled.Container>
+  );
 };
 
 export default TripHome;
