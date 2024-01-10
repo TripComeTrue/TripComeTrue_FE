@@ -29,7 +29,7 @@ export const Label = styled.label<LabelProps>`
 `;
 
 export const SliderWrap = styled(Swiper)`
-  margin: 1rem 1rem 0;
+  padding: 1rem 1rem 0;
 `;
 
 // 인기 여행 도시 부분

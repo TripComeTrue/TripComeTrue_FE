@@ -9,12 +9,10 @@ export const HomeMDWrap = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const SwiperLeftWrap = styled.div`
-  margin: 0.5rem;
-`;
+export const SwiperLeftWrap = styled.div``;
 
 export const SwiperWrap = styled(Swiper)`
-  margin-left: 0.5rem;
+  padding: 0 1rem;
 `;
 
 export const SliderImg = styled.div`
