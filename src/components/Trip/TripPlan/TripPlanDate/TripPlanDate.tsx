@@ -7,7 +7,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './DatePickerStyles.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import * as Styled from './TripPlanDate.styles';
-import { Button } from '@/components/common';
+import { Button, SubTitle } from '@/components/common';
+import { TripPlanFooter } from '..';
 
 interface DateProps {
   startDate: Date | null;
@@ -34,44 +35,39 @@ const TripPlanDate = () => {
   };
 
   return (
-    <Styled.Wrapper>
-      <Styled.DateContainer>
-        <h1>여행 기간을 선택해 주세요.</h1>
-        <DatePicker
-          selected={startDate}
-          startDate={startDate}
-          endDate={endDate}
-          selectsRange
-          minDate={new Date()}
-          locale={ko}
-          dateFormat="yyyy.MM.dd"
-          isClearable
-          showPopperArrow={false}
-          onChange={(date) =>
-            setDateRange({
-              startDate: date[0] || null,
-              endDate: date[1] || null,
-            })
-          }
-          open
-          showMonthDropdown
-          showYearDropdown
-          showIcon
-          icon={<CalendarToday style={{ fill: '#ABABAB' }} />}>
-          <label className="react-datepicker-nightndays">
-            {getNightAndDays()}
-          </label>
-        </DatePicker>
-      </Styled.DateContainer>
-      <Styled.ButtonContainer>
-        <Button variants="gray-border" size="lg" rounded="sm" onClick={goBack}>
-          취소
-        </Button>
-        <Button variants="gray" size="lg" rounded="sm">
-          <Link to="/trip/country">다음</Link>
-        </Button>
-      </Styled.ButtonContainer>
-    </Styled.Wrapper>
+    <>
+      <Styled.Wrapper>
+        <Styled.DateContainer>
+          <SubTitle margin="0.8rem">여행 기간을 선택해 주세요.</SubTitle>
+          <DatePicker
+            selected={startDate}
+            startDate={startDate}
+            endDate={endDate}
+            selectsRange
+            minDate={new Date()}
+            locale={ko}
+            dateFormat="yyyy.MM.dd"
+            isClearable
+            showPopperArrow={false}
+            onChange={(date) =>
+              setDateRange({
+                startDate: date[0] || null,
+                endDate: date[1] || null,
+              })
+            }
+            open
+            showMonthDropdown
+            showYearDropdown
+            showIcon
+            icon={<CalendarToday style={{ fill: '#ABABAB' }} />}>
+            <label className="react-datepicker-nightndays">
+              {getNightAndDays()}
+            </label>
+          </DatePicker>
+        </Styled.DateContainer>
+      </Styled.Wrapper>
+      <TripPlanFooter />
+    </>
   );
 };
 

@@ -1,7 +1,15 @@
-import TripPlanDate from '@/components/Trip/TripPlan/TripPlanDate/TripPlanDate';
+import {
+  TripPlanDate,
+  TripPlanCountry,
+} from '../../../components/Trip/TripPlan';
 
 const TripPlan = () => {
-  return <TripPlanDate />;
+  return (
+    <>
+      <TripPlanDate />
+      <TripPlanCountry />
+    </>
+  );
 };
 
 export default TripPlan;
