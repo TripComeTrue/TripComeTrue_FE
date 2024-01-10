@@ -7,8 +7,7 @@ import domestic3 from '/domestic3.jpg';
 import overseas1 from '/overseas1.jpg';
 import overseas2 from '/overseas2.jpg';
 import overseas3 from '/overseas3.jpg';
-import bookmarkIcon from '/bookmarkPress.svg';
-import { Slide, SlideShorts } from './HomeShorts.types';
+import { SlideShorts } from './HomeShorts.types';
 import * as Styled from './HomeShorts.styles';
 import { SubTitle } from '@/components/common';
 import Shorts from '@/components/common/Shorts/Shorts';
@@ -107,9 +106,8 @@ const HomeShorts = () => {
           </Styled.SwiperSlideWrap>
         ))}
       </Styled.SwiperWrap> */}
-      <Styled.ShortsWrap>
-        <Shorts slides={filteredSlides} slidesPerView={3} />
-      </Styled.ShortsWrap>
+      {/* 쇼츠 공통 컴포넌트 사용법 */}
+      <Shorts slides={filteredSlides} slidesPerView={2.1} />
     </Styled.ShortsWrap>
   );
 };

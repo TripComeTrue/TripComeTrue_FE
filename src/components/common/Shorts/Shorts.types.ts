@@ -9,5 +9,6 @@ export interface SwiperProps {
 }
 
 export interface ShortsProps {
-  slidesPerView?: number;
+  slides: Slide[];
+  slidesPerView?: number | 'auto';
 }

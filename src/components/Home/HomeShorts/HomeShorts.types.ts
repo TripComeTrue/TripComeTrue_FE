@@ -11,3 +11,8 @@ export interface Slide {
 export interface SlideShorts {
   [key: string]: Slide[];
 }
+
+export interface ShortsProps {
+  slides: Slide[];
+  slidesPerView?: number | 'auto';
+}
