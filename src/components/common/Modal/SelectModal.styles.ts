@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button } from '@/components/common';
+import { maxWidth } from '@/styles/common';
 
 export const SelectModalWrap = styled.div`
   position: absolute;
@@ -9,16 +10,12 @@ export const SelectModalWrap = styled.div`
 `;
 
 export const SelectModalContent = styled.div`
-  width: 100%;
-  max-width: 22.5rem;
+  ${maxWidth};
   background-color: ${({ theme }) => theme.brand.white};
   margin: 0 auto;
   border-top-right-radius: 0.625rem;
   border-top-left-radius: 0.625rem;
   padding: 1.25rem;
-  @media screen and (max-width: 30rem) {
-    max-width: none;
-  }
 `;
 
 export const SelectModalContentWrap = styled.div`

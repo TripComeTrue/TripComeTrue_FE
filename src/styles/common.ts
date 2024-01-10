@@ -49,3 +49,12 @@ export const inner = css`
   box-sizing: border-box;
   margin: 0 auto;
 `;
+
+export const maxWidth = css`
+  width: 100%;
+  max-width: 22.5rem; /* 360px */
+  @media screen and (max-width: 30rem) {
+    /* max-width: 480px */
+    max-width: none;
+  }
+`;
