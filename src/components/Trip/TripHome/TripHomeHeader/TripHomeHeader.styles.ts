@@ -4,11 +4,11 @@ import { alignCenter } from '@/styles/common';
 export const Container = styled.div`
   ${alignCenter}
   flex-direction: column;
-  gap: 1.4375rem;
+  justify-content: space-between;
 
   width: 100%;
   height: 21.5rem;
-  padding: 1.5625rem 1.25rem 14.25rem;
+  padding: 3.4375rem 1.25rem 12.25rem;
 
   background-image: url('https://source.unsplash.com/random');
   background-size: cover;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { alignCenter } from '@/styles/common';
 
 export const Container = styled.div`
-  min-width: 8rem;
+  min-width: 9.5625rem;
 `;
 
 export const ImageContainer = styled.div`
