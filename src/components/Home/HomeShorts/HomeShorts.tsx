@@ -9,18 +9,8 @@ import overseas2 from '/overseas2.jpg';
 import overseas3 from '/overseas3.jpg';
 import bookmarkIcon from '/bookmarkPress.svg';
 import { Slide, SlideShorts } from './HomeShorts.types';
-import {
-  Bookmark,
-  Label,
-  ShortTitle,
-  ShortsRadio,
-  ShortsTitle,
-  ShortsWrap,
-  SliderBackground,
-  SliderContent,
-  SwiperSlideWrap,
-  SwiperWrap,
-} from './HomeShrots.styles';
+import * as Styled from './HomeShorts.styles';
+import { SubTitle } from '@/components/common';
 
 const HomeShorts = () => {
   const [selected, setSelected] = useState('전체');
@@ -54,14 +44,13 @@ const HomeShorts = () => {
   const filteredSlides = slideShorts[selected];
 
   return (
-    <ShortsWrap>
-      <ShortsTitle>
-        <img src={starIcon} alt="icon" />
+    <Styled.ShortsWrap>
+      <SubTitle margin="1rem" fontSize={18} icon={starIcon}>
         지금 이 순간, 트립컴트루
-      </ShortsTitle>
+      </SubTitle>
 
-      <ShortsRadio>
-        <Label htmlFor="all" checked={selected === '전체'}>
+      <Styled.ShortsRadio>
+        <Styled.Label htmlFor="all" checked={selected === '전체'}>
           <input
             id="all"
             type="radio"
@@ -71,10 +60,10 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           전체
-        </Label>
-        <Label htmlFor="domestic" checked={selected === '국내'}>
+        </Styled.Label>
+        <Styled.Label htmlFor="domesticShorts" checked={selected === '국내'}>
           <input
-            id="domestic"
+            id="domesticShorts"
             type="radio"
             value="국내"
             checked={selected === '국내'}
@@ -82,10 +71,10 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           국내
-        </Label>
-        <Label htmlFor="overseas" checked={selected === '해외'}>
+        </Styled.Label>
+        <Styled.Label htmlFor="overseasShorts" checked={selected === '해외'}>
           <input
-            id="overseas"
+            id="overseasShorts"
             type="radio"
             value="해외"
             checked={selected === '해외'}
@@ -93,31 +82,31 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           해외
-        </Label>
-      </ShortsRadio>
+        </Styled.Label>
+      </Styled.ShortsRadio>
 
-      <SwiperWrap
-        spaceBetween={18}
+      <Styled.SwiperWrap
+        spaceBetween={8}
         slidesPerView={2.1}
         direction="horizontal"
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {filteredSlides.map((slide: Slide) => (
-          <SwiperSlideWrap key={slide.img}>
-            <SliderContent>
-              <SliderBackground>
+          <Styled.SwiperSlideWrap key={slide.img}>
+            <Styled.SliderContent>
+              <Styled.SliderBackground>
                 <img src={slide.img} alt={slide.img} />
-              </SliderBackground>
-              <Bookmark>
+              </Styled.SliderBackground>
+              <Styled.Bookmark>
                 <img src={bookmarkIcon} alt="bookmark" />
                 {slide.bookmark}
-              </Bookmark>
-              <ShortTitle>{slide.title}</ShortTitle>
-            </SliderContent>
-          </SwiperSlideWrap>
+              </Styled.Bookmark>
+              <Styled.ShortTitle>{slide.title}</Styled.ShortTitle>
+            </Styled.SliderContent>
+          </Styled.SwiperSlideWrap>
         ))}
-      </SwiperWrap>
-    </ShortsWrap>
+      </Styled.SwiperWrap>
+    </Styled.ShortsWrap>
   );
 };
 

@@ -2,12 +2,12 @@ export interface LabelProps {
   checked: boolean;
 }
 
-export type Slide = {
+export interface Slide {
   img: string;
   title: string;
   bookmark: number;
-};
+}
 
-export type SlideShorts = {
+export interface SlideShorts {
   [key: string]: Slide[];
-};
+}

@@ -1,12 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { SignInBtnIconProps } from './SignInBtns.type';
 
-export const SignInBtnsWrap = styled.div`
-  margin: 6.25rem 0;
-`;
-
-export const SignInBtn = styled.button`
+export const BtnStyles = css`
   display: block;
   height: 2.5rem;
   border-radius: 2.5rem;
@@ -16,6 +12,16 @@ export const SignInBtn = styled.button`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: bold;
+  text-align: center;
+  padding: 0.5rem 0;
+`;
+
+export const SignInBtnsWrap = styled.div`
+  margin: 6.25rem 0;
+`;
+
+export const SignInBtn = styled(Link)`
+  ${BtnStyles};
 `;
 export const SignInBtnGoogle = styled(SignInBtn)`
   background-color: transparent;
