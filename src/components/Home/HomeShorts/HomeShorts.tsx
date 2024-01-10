@@ -11,6 +11,7 @@ import bookmarkIcon from '/bookmarkPress.svg';
 import { Slide, SlideShorts } from './HomeShorts.types';
 import * as Styled from './HomeShorts.styles';
 import { SubTitle } from '@/components/common';
+import Shorts from '@/components/common/Shorts/Shorts';
 
 const HomeShorts = () => {
   const [selected, setSelected] = useState('전체');
@@ -85,7 +86,7 @@ const HomeShorts = () => {
         </Styled.Label>
       </Styled.ShortsRadio>
 
-      <Styled.SwiperWrap
+      {/* <Styled.SwiperWrap
         spaceBetween={8}
         slidesPerView={2.1}
         direction="horizontal"
@@ -105,7 +106,10 @@ const HomeShorts = () => {
             </Styled.SliderContent>
           </Styled.SwiperSlideWrap>
         ))}
-      </Styled.SwiperWrap>
+      </Styled.SwiperWrap> */}
+      <Styled.ShortsWrap>
+        <Shorts slides={filteredSlides} slidesPerView={3} />
+      </Styled.ShortsWrap>
     </Styled.ShortsWrap>
   );
 };
