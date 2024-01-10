@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 interface AgreementsValues {
   text: string;
   checked: boolean;
@@ -35,3 +37,13 @@ export const POLICY_AGREE: Agreements = {
     viewPolicy: true,
   },
 };
+
+export interface SignUpAgreeChkProps {
+  agreements: Agreements;
+  setAgreements: React.Dispatch<React.SetStateAction<Agreements>>;
+  allAgreed: boolean;
+  setAllAgreed: (allAgreed: boolean) => void;
+  isOk: boolean;
+  handleAgreeChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleOpen: (name: string) => void;
+}

@@ -5,4 +5,9 @@ export { default as SignInEmailForm } from '@/components/auth/SignInEmailForm/Si
 export { default as SignInLinks } from '@/components/auth/SignInLinks/SignInLinks';
 export { default as SignUpAgreeTitle } from '@/components/auth/SignUpAgreeTitle/SignUpAgreeTitle';
 export { default as SignUpAgreeChk } from '@/components/auth/SignUpAgreeChk/SignUpAgreeChk';
+export { default as SignUpAgreeModal } from '@/components/auth/SignUpAgreeChk/SignUpAgreeModal';
+export { default as SignUpPolicyAgree } from '@/components/auth/SignUpPolicy/SignUpPolicyAgree';
+export { default as SignUpPrivacyAgree } from '@/components/auth/SignUpPolicy/SignUpPrivacyAgree';
+export { default as SignUpMarketingAgree } from '@/components/auth/SignUpPolicy/SignUpMarketingAgree';
+export { default as SignUpLocationAgree } from '@/components/auth/SignUpPolicy/SignUpLocationAgree';
 export { default as SignUpForm } from '@/components/auth/SignUpForm/SignUpForm';
