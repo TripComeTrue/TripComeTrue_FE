@@ -165,12 +165,7 @@ const HomeHotplace = () => {
   return (
     <>
       <Styled.HotplaceWrap>
-        <SubTitle
-          margin="1rem"
-          fontSize={18}
-          icon={starIcon}
-          variant={undefined}
-          onClickButton={undefined}>
+        <SubTitle margin="1rem" fontSize={18} icon={starIcon}>
           <Text fontSize={18} fontWeight={600} color="white">
             지금 뜨는 핫플레이스 TOP5
           </Text>

@@ -45,12 +45,7 @@ const HomeShorts = () => {
 
   return (
     <Styled.ShortsWrap>
-      <SubTitle
-        margin="1rem"
-        fontSize={18}
-        icon={starIcon}
-        variant={undefined}
-        onClickButton={undefined}>
+      <SubTitle margin="1rem" fontSize={18} icon={starIcon}>
         지금 이 순간, 트립컴트루
       </SubTitle>
 

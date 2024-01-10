@@ -22,7 +22,7 @@ const SubTitle = ({
   return (
     <Styled.Container $margin={margin}>
       <Styled.SubTitleContainer>
-        {icon && <img src={icon} alt="icon" />}
+        {icon && <img src={icon} alt="icon" style={{ maxWidth: 20 }} />}
         <Text tag="h2" fontSize={fontSize} fontWeight={700}>
           {children}
         </Text>
