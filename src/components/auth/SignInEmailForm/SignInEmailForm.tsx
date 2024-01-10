@@ -8,6 +8,7 @@ import { LoginFormData, SignInEmailFormProps } from './SignEmailForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
 import client from '@/apis';
 import { setCookie } from '@/utils/cookie';
+import MAX_AGE from '@/constants/maxAge';
 
 function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
         password: data.password,
       });
       const { token } = res.data.data;
-      setCookie('accessToken', token, 3600);
+      setCookie('accessToken', token, MAX_AGE);
       navigate('/home', { replace: true });
     } catch (error) {
       if (isAxiosError(error)) {
