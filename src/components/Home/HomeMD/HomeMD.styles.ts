@@ -30,9 +30,11 @@ export const Bookmark = styled.div`
   position: absolute;
   top: 0.4rem;
   left: 0.5rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 10px;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.brand.white};
@@ -48,9 +50,10 @@ export const Bookmark = styled.div`
 export const SliderTitle = styled.div`
   margin-top: -0.2rem;
   margin-left: 0.5rem;
+  padding-bottom: 1rem;
+
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  padding-bottom: 1rem;
 
   &:hover {
     text-decoration: underline;

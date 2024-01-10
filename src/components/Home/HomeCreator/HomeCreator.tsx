@@ -166,12 +166,7 @@ const HomeCreator = () => {
 
   return (
     <>
-      <SubTitle
-        margin="1rem"
-        fontSize={18}
-        icon={starIcon}
-        variant={undefined}
-        onClickButton={undefined}>
+      <SubTitle margin="1rem" fontSize={18} icon={starIcon}>
         HOT 여행 크리에이터
       </SubTitle>
 

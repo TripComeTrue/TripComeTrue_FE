@@ -67,12 +67,7 @@ const HomeMD = () => {
   return (
     <Styled.HomeMDComponent>
       <Styled.HomeMDWrap>
-        <SubTitle
-          margin="1rem"
-          fontSize={18}
-          icon={snowIcon}
-          variant={undefined}
-          onClickButton={undefined}>
+        <SubTitle margin="1rem" fontSize={18} icon={snowIcon}>
           낭만 있는 프랑스 겨울
         </SubTitle>
         <HomeMDChoice city={HomeMDdata.france} />
