@@ -14,3 +14,7 @@ export interface WorldData {
 export interface SelectButtonProps {
   isSelected: boolean;
 }
+
+export interface SelectedCountriesProps {
+  country: string[];
+}

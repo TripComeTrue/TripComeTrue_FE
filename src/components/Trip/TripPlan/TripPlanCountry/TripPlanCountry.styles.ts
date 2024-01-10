@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { SelectButtonProps } from './TripPlanCountry.types';
+import {
+  SelectButtonProps,
+  SelectedCountriesProps,
+} from './TripPlanCountry.types';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -73,4 +76,38 @@ export const CountryContainer = styled.div`
   }
 `;
 
-export const SelectedCountries = styled.div``;
+export const SelectedCountries = styled.div<SelectedCountriesProps>`
+  display: ${(props) => (props.country.length > 0 ? 'flex' : 'none')};
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: fixed;
+  bottom: 0;
+
+  gap: 1rem;
+  padding: 1rem;
+
+  width: 100%;
+  height: calc(100vh - 78%);
+  background-color: white;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    height: 3rem;
+    object-fit: cover;
+    white-space: nowrap;
+    padding: 1rem;
+    border-radius: 15rem;
+    background-color: #d9d9d9;
+  }
+`;
+
+export const RemoveButton = styled.button`
+  position: absolute;
+  right: 0.3rem;
+  top: 0;
+`;
