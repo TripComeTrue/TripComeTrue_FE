@@ -1,7 +1,7 @@
 import React from 'react';
 import { SpotsSwiperProps } from './Spots.types';
 import * as Styled from './Spots.style';
-import bookmarkIcon from '/bookmarkDefault.svg';
+import messageIcon from '/message.svg';
 import Bookmark from '../Bookmark/Bookmark';
 import pxToRem from '@/utils/pxToRem';
 
@@ -45,7 +45,7 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
               <Styled.SliderTitleSpace style={titleStyle}>
                 <Styled.SpaceTitle>{postTitle}</Styled.SpaceTitle>
                 <Styled.SpaceImg>
-                  <img src={bookmarkIcon} alt="img" />
+                  <img src={messageIcon} alt="img" />
                   {reviews}
                 </Styled.SpaceImg>
               </Styled.SliderTitleSpace>

@@ -21,7 +21,7 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
         <Spots
           creator={creator.posts}
           slidesPerView={2.5}
-          sort="left"
+          sort="center"
           fontSize={10}
         />
       </Styled.SwiperDiv>
