@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   position: relative;
 
-  height: 100vh;
+  height: calc(100vh - 72px);
   padding: 1.2rem;
 `;
 
@@ -19,7 +19,7 @@ export const EachDayContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0;
 `;
 
 export const EachDayInput = styled.input`

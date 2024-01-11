@@ -24,6 +24,8 @@ const TripPlanCity = () => {
           <Styled.EachDayInput
             type="text"
             placeholder="방문 지역을 선택해주세요"
+            // value={cityNames[i] || ''}
+            // onChange={e}
           />
         </Styled.EachDayContainer>,
       );
@@ -39,7 +41,12 @@ const TripPlanCity = () => {
           여행 기간 동안
           <br /> 방문할 지역을 선택해 주세요.
         </SubTitle>
-        <Styled.Container>{showInputPerDay()}</Styled.Container>
+        <Styled.Container>
+          <label htmlFor="eachday">
+            <input type="checkbox" /> 방문 지역 모두 동일
+            {showInputPerDay()}
+          </label>
+        </Styled.Container>
       </Styled.Wrapper>
       <TripPlanFooter />
     </>
