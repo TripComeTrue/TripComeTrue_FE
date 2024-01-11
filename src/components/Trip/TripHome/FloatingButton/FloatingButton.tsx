@@ -18,9 +18,9 @@ const FloatingButton = () => {
 
   return (
     <Styled.Container $isOn={isOn}>
-      <Styled.ButtonsContainer>
+      <Styled.ButtonsContainer ref={modalRef}>
         {isOn && (
-          <Styled.Menu ref={modalRef} $isOn={isOn}>
+          <Styled.Menu $isOn={isOn}>
             <Styled.WriteContainer>
               <Text color="white" fontWeight={700}>
                 여행 계획 짜기
