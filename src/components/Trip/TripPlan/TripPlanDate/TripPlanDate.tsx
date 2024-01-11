@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import ko from 'date-fns/locale/ko';
 import { differenceInDays } from 'date-fns';
 import DatePicker from 'react-datepicker';
@@ -7,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './DatePickerStyles.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import * as Styled from './TripPlanDate.styles';
-import { Button, SubTitle } from '@/components/common';
+import { SubTitle } from '@/components/common';
 import { TripPlanFooter } from '..';
 
 interface DateProps {
@@ -16,16 +15,12 @@ interface DateProps {
 }
 
 const TripPlanDate = () => {
-  const navigate = useNavigate();
   const [dateRange, setDateRange] = useState<DateProps>({
     startDate: new Date(),
     endDate: null,
   });
   const { startDate, endDate } = dateRange;
 
-  const goBack = () => {
-    navigate(-1);
-  };
   const getNightAndDays = () => {
     if (startDate && endDate) {
       const nights = differenceInDays(endDate, startDate);

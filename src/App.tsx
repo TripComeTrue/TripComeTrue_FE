@@ -6,6 +6,7 @@ import Home from './pages/Main/Home';
 import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
 import { SignIn, SignInEmail, SignUp, SignUpAgree } from './pages/Auth';
 import { TripPlanCountry } from './components/Trip/TripPlan';
+import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="detail/:id" element={<TripDetail />} />
           <Route path="plan" element={<TripPlan />} />
           <Route path="country" element={<TripPlanCountry />} />
+          <Route path="city" element={<TripPlanCity />} />
         </Route>
       </Route>
     </Routes>

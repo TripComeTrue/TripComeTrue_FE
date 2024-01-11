@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as Styled from '../TripPlanCountry/TripPlanCountry.styles';
 import { SubTitle } from '@/components/common';
 import { Continent } from './TripPlanCountry.types';
@@ -13,7 +13,6 @@ const TripPlanCountry = () => {
   const selectOverseas = (isOverseasValue: boolean) => {
     setIsOverseas(isOverseasValue);
     setContinent('전체');
-    // setCountry([]);
   };
 
   const selectContinent = (continentName: string) => {
@@ -21,7 +20,6 @@ const TripPlanCountry = () => {
       (conti) => conti.name === continentName,
     );
     setContinent(selectedContinent || '전체');
-    // setCountry('');
   };
 
   const selectCountry = (countryName: string) => {
@@ -46,10 +44,6 @@ const TripPlanCountry = () => {
     }
     return continent.subCategories;
   };
-
-  useEffect(() => {
-    console.log(country);
-  }, [country]);
 
   return (
     <>
