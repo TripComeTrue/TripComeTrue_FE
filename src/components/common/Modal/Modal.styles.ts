@@ -29,6 +29,13 @@ export const ModalIconWrap = styled.p<{ $type: string }>`
   }};
 `;
 
+export const ModalTitle = styled.h3`
+  text-align: center;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+`;
+
 export const ModalContentWrap = styled.div`
   margin-bottom: 1rem;
 `;
