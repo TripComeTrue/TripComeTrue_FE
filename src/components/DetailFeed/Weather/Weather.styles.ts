@@ -10,6 +10,7 @@ export const WeatherBox = styled.div`
   width: 20rem;
   height: 6rem;
 
+  margin-top: 1rem;
   padding: 1.375rem 1rem;
 
   ${justifyAround}

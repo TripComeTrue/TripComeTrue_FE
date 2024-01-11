@@ -11,7 +11,7 @@ const WEATEHR_DATA = [
 const Weather = () => {
   return (
     <Styled.WeatherWrapper>
-      <SubTitle margin="1rem">날씨</SubTitle>
+      <SubTitle>날씨</SubTitle>
       <Styled.WeatherBox>
         {WEATEHR_DATA.map((data) => (
           <Styled.WeatherItem key={data.id}>
