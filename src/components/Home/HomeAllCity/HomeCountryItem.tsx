@@ -9,6 +9,7 @@ function HomeCountryItem({ country }: HomeCountryItemProps) {
   const [height, setHeight] = useState(52);
 
   const onClickCountry = (countryName: string) => {
+    if (!country) return;
     setSelectedCountry(
       selectedCountry === countryName ? undefined : countryName,
     );
@@ -17,6 +18,7 @@ function HomeCountryItem({ country }: HomeCountryItemProps) {
     );
   };
 
+  if (!country) return null;
   return (
     <Styled.CountryItem key={country.name} $height={height}>
       <Styled.CountryItemButton
@@ -27,10 +29,7 @@ function HomeCountryItem({ country }: HomeCountryItemProps) {
           <SlArrowDown />
         </span>
       </Styled.CountryItemButton>
-      <HomeCities
-        cities={country.city}
-        isSelected={selectedCountry === country.name}
-      />
+      <HomeCities cities={country.city} />
     </Styled.CountryItem>
   );
 }
