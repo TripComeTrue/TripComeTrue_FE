@@ -6,6 +6,7 @@ import Bookmark from '../Bookmark/Bookmark';
 
 interface SpotsSwiperProps extends PostData {
   sort: 'left' | 'center';
+  fontSize: number;
 }
 
 const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
@@ -13,9 +14,12 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
   postImg,
   bookmark,
   sort,
+  fontSize,
 }) => {
   const TitleComponent =
     sort === 'left' ? Styled.SliderTitleSortLeft : Styled.SliderTitle;
+
+  const titleStyle = fontSize ? { fontSize: `${fontSize}px` } : {};
 
   return (
     <>
@@ -26,7 +30,7 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
         </Styled.Bookmark>
       </Styled.SliderImg>
 
-      <TitleComponent>{postTitle}</TitleComponent>
+      <TitleComponent style={titleStyle}>{postTitle}</TitleComponent>
     </>
   );
 };

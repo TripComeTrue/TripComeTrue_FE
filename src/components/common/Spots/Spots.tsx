@@ -6,6 +6,7 @@ const Spots: React.FC<SpotsProps & { sort?: 'left' | 'center' }> = ({
   creator,
   slidesPerView = 2.1,
   sort = 'center',
+  fontSize = 10,
 }) => (
   <Styled.SwiperWrap
     spaceBetween={8}
@@ -20,6 +21,7 @@ const Spots: React.FC<SpotsProps & { sort?: 'left' | 'center' }> = ({
           postTitle={item.postTitle}
           bookmark={item.bookmark}
           sort={sort}
+          fontSize={fontSize}
         />
       </Styled.SwiperSlideWrap>
     ))}

@@ -40,7 +40,12 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
           ))}
         </Styled.SwiperWrap> */}
 
-        <Spots creator={creator.posts} slidesPerView={2.5} sort="left" />
+        <Spots
+          creator={creator.posts}
+          slidesPerView={2.5}
+          sort="left"
+          fontSize={10}
+        />
       </Styled.SwiperDiv>
     </Styled.HotPostWrap>
   );

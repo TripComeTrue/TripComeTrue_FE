@@ -7,7 +7,7 @@ export interface PostData {
 export interface SpotsProps {
   creator: PostData[];
   slidesPerView?: number;
-  sort: string;
+  sort: 'left' | 'center';
   fontSize?: number;
 }
 
