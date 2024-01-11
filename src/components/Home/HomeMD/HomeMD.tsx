@@ -16,16 +16,19 @@ const HomeMD = () => {
         bookmark: 123,
         postTitle: '파리',
         postImg: franceImg,
+        reviews: 23,
       },
       {
         bookmark: 231,
         postTitle: '보르도',
         postImg: franceImg,
+        reviews: 23,
       },
       {
         bookmark: 421,
         postTitle: '니스',
         postImg: franceImg,
+        reviews: 23,
       },
     ],
     seoul: [

@@ -1,23 +1,19 @@
 import React from 'react';
-import { PostData } from './Spots.types';
+import { SpotsSwiperProps } from './Spots.types';
 import * as Styled from './Spots.style';
-// import bookmarkIcon from '/bookmarkPress.svg';
+import bookmarkIcon from '/bookmarkDefault.svg';
 import Bookmark from '../Bookmark/Bookmark';
-
-interface SpotsSwiperProps extends PostData {
-  sort: 'left' | 'center';
-  fontSize: number;
-}
 
 const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
   postTitle,
   postImg,
   bookmark,
+  reviews,
   sort,
   fontSize,
 }) => {
-  const TitleComponent =
-    sort === 'left' ? Styled.SliderTitleSortLeft : Styled.SliderTitle;
+  // const TitleComponent =
+  //   sort === 'left' ? Styled.SliderTitleSortLeft : Styled.SliderTitle;
 
   const titleStyle = fontSize ? { fontSize: `${fontSize}px` } : {};
 
@@ -30,7 +26,38 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
         </Styled.Bookmark>
       </Styled.SliderImg>
 
-      <TitleComponent style={titleStyle}>{postTitle}</TitleComponent>
+      {(() => {
+        switch (sort) {
+          case 'left':
+            return (
+              <Styled.SliderTitleSortLeft style={titleStyle}>
+                {postTitle}
+              </Styled.SliderTitleSortLeft>
+            );
+          case 'center':
+            return (
+              <Styled.SliderTitle style={titleStyle}>
+                {postTitle}
+              </Styled.SliderTitle>
+            );
+          case 'space':
+            return (
+              <Styled.SliderTitleSpace style={titleStyle}>
+                <Styled.SpaceTitle>{postTitle}</Styled.SpaceTitle>
+                <Styled.SpaceImg>
+                  <img src={bookmarkIcon} alt="img" />
+                  {reviews}
+                </Styled.SpaceImg>
+              </Styled.SliderTitleSpace>
+            );
+          default:
+            return (
+              <Styled.SliderTitle style={titleStyle}>
+                {postTitle}
+              </Styled.SliderTitle>
+            );
+        }
+      })()}
     </>
   );
 };

@@ -63,3 +63,36 @@ export const SliderTitleSortLeft = styled.div`
     cursor: pointer;
   }
 `;
+
+export const SliderTitleSpace = styled.div`
+  margin-top: -0.2rem;
+  font-size: 10px;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  padding: 0 0.7rem 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    width: 1rem;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
+export const SpaceTitle = styled.div``;
+
+export const SpaceImg = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: #626262;
+
+  img {
+    margin-right: 0.2rem;
+    width: 0.8rem;
+  }
+`;

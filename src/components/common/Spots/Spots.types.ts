@@ -2,13 +2,19 @@ export interface PostData {
   postImg: string;
   bookmark: number;
   postTitle: string;
+  reviews?: number;
 }
 
 export interface SpotsProps {
   creator: PostData[];
   slidesPerView?: number;
-  sort: 'left' | 'center';
+  sort: 'left' | 'center' | 'space';
   fontSize?: number;
+}
+
+export interface SpotsSwiperProps extends PostData {
+  sort: 'left' | 'center' | 'space';
+  fontSize: number;
 }
 
 export interface CreatorData {
