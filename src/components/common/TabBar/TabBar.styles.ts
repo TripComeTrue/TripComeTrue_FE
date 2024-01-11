@@ -8,7 +8,7 @@ export const TabbarWrap = styled.div`
   left: 0;
   right: 0;
   height: 5.0625rem;
-  z-index: 100;
+  z-index: 200;
 `;
 export const Tabbar = styled.nav<TabbarProps>`
   ${inner};
