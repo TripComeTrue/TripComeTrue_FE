@@ -10,7 +10,7 @@ interface HomeMDChoiceProps {
 const HomeMDChoice: React.FC<HomeMDChoiceProps> = ({ city }) => {
   return (
     <Styled.SwiperLeftWrap>
-      <Spots creator={city} slidesPerView={2.1} sort="space" fontSize={14} />
+      <Spots creator={city} slidesPerView={2.1} sort="left" fontSize={14} />
     </Styled.SwiperLeftWrap>
   );
 };

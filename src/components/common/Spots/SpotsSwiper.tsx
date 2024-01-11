@@ -12,9 +12,6 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
   sort,
   fontSize,
 }) => {
-  // const TitleComponent =
-  //   sort === 'left' ? Styled.SliderTitleSortLeft : Styled.SliderTitle;
-
   const titleStyle = fontSize ? { fontSize: `${fontSize}px` } : {};
 
   return (

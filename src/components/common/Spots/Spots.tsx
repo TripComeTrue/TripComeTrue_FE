@@ -10,6 +10,8 @@ import * as Styled from './Spots.style';
  * @param fontSize number: font Size를 지정할 수 있습니다.
  */
 
+// creator 배열에 리뷰 정보도 있으면 sort='space' 하시면 됩니다 ts파일 참고해주세요!
+
 const Spots: React.FC<SpotsProps & { sort?: 'left' | 'center' | 'space' }> = ({
   creator,
   slidesPerView = 2.1,
