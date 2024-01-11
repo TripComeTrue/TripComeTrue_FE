@@ -3,6 +3,7 @@ import { SpotsSwiperProps } from './Spots.types';
 import * as Styled from './Spots.style';
 import bookmarkIcon from '/bookmarkDefault.svg';
 import Bookmark from '../Bookmark/Bookmark';
+import pxToRem from '@/utils/pxToRem';
 
 const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
   postTitle,
@@ -12,7 +13,9 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
   sort,
   fontSize,
 }) => {
-  const titleStyle = fontSize ? { fontSize: `${fontSize}px` } : {};
+  const fontSizeRem = pxToRem(fontSize);
+
+  const titleStyle = fontSize ? { fontSize: fontSizeRem } : {};
 
   return (
     <>
