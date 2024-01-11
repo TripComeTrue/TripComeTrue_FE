@@ -2,7 +2,11 @@ import { PostData, SpotsProps } from './Spots.types';
 import SpotsSwiper from './SpotsSwiper';
 import * as Styled from './Spots.style';
 
-const Spots: React.FC<SpotsProps> = ({ creator, slidesPerView = 2.1 }) => (
+const Spots: React.FC<SpotsProps & { sort?: 'left' | 'center' }> = ({
+  creator,
+  slidesPerView = 2.1,
+  sort = 'center',
+}) => (
   <Styled.SwiperWrap
     spaceBetween={8}
     slidesPerView={slidesPerView}
@@ -15,6 +19,7 @@ const Spots: React.FC<SpotsProps> = ({ creator, slidesPerView = 2.1 }) => (
           postImg={item.postImg}
           postTitle={item.postTitle}
           bookmark={item.bookmark}
+          sort={sort}
         />
       </Styled.SwiperSlideWrap>
     ))}

@@ -7,12 +7,7 @@ export const SwiperWrap = styled(Swiper)`
   padding: 0 1rem;
 `;
 
-export const SwiperSlideWrap = styled(SwiperSlide)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+export const SwiperSlideWrap = styled(SwiperSlide)``;
 
 export const SliderImg = styled.div`
   position: relative;
@@ -33,15 +28,32 @@ export const Bookmark = styled.div`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.brand.white};
 
-  img {
-    margin-right: 0.2rem;
-
-    width: 1rem;
+  div {
+    svg {
+      font-size: ${({ theme }) => theme.fontSizes.lg};
+    }
+    span {
+      font-size: 10px;
+    }
   }
 `;
 
 export const SliderTitle = styled.div`
   margin-top: -0.2rem;
+  font-size: 10px;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  padding-bottom: 1rem;
+  text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
+export const SliderTitleSortLeft = styled.div`
+  margin-top: -0.2rem;
+  margin-left: 0.5rem;
   font-size: 10px;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   padding-bottom: 1rem;

@@ -1,20 +1,34 @@
 import React from 'react';
 import { PostData } from './Spots.types';
 import * as Styled from './Spots.style';
-import bookmarkIcon from '/bookmarkPress.svg';
+// import bookmarkIcon from '/bookmarkPress.svg';
+import Bookmark from '../Bookmark/Bookmark';
 
-const SpotsSwiper: React.FC<PostData> = ({ postTitle, postImg, bookmark }) => (
-  <>
-    <Styled.SliderImg>
-      <img src={postImg} alt="img" />
-      <Styled.Bookmark>
-        <img src={bookmarkIcon} alt="bookmarkIcon" />
-        {bookmark}
-      </Styled.Bookmark>
-    </Styled.SliderImg>
+interface SpotsSwiperProps extends PostData {
+  sort: 'left' | 'center';
+}
 
-    <Styled.SliderTitle>{postTitle}</Styled.SliderTitle>
-  </>
-);
+const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
+  postTitle,
+  postImg,
+  bookmark,
+  sort,
+}) => {
+  const TitleComponent =
+    sort === 'left' ? Styled.SliderTitleSortLeft : Styled.SliderTitle;
+
+  return (
+    <>
+      <Styled.SliderImg>
+        <img src={postImg} alt="img" />
+        <Styled.Bookmark>
+          <Bookmark count={bookmark} />
+        </Styled.Bookmark>
+      </Styled.SliderImg>
+
+      <TitleComponent>{postTitle}</TitleComponent>
+    </>
+  );
+};
 
 export default SpotsSwiper;

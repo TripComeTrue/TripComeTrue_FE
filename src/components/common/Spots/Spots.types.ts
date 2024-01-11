@@ -7,6 +7,8 @@ export interface PostData {
 export interface SpotsProps {
   creator: PostData[];
   slidesPerView?: number;
+  sort: string;
+  fontSize?: number;
 }
 
 export interface CreatorData {
