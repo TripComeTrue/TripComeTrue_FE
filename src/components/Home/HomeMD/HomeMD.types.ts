@@ -1,7 +1,7 @@
 export interface CityData {
   bookmark: number;
-  city: string;
-  cityImg: string;
+  postTitle: string;
+  postImg: string;
 }
 
 export interface HomeMDData {

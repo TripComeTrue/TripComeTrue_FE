@@ -14,52 +14,52 @@ const HomeMD = () => {
     france: [
       {
         bookmark: 123,
-        city: '파리',
-        cityImg: franceImg,
+        postTitle: '파리',
+        postImg: franceImg,
       },
       {
         bookmark: 231,
-        city: '보르도',
-        cityImg: franceImg,
+        postTitle: '보르도',
+        postImg: franceImg,
       },
       {
         bookmark: 421,
-        city: '니스',
-        cityImg: franceImg,
+        postTitle: '니스',
+        postImg: franceImg,
       },
     ],
     seoul: [
       {
         bookmark: 231,
-        city: '고궁 투어',
-        cityImg: seoulImg,
+        postTitle: '고궁 투어',
+        postImg: seoulImg,
       },
       {
         bookmark: 413,
-        city: '합당동 가봤어요',
-        cityImg: seoulImg,
+        postTitle: '합당동 가봤어요',
+        postImg: seoulImg,
       },
       {
         bookmark: 321,
-        city: '홍대',
-        cityImg: seoulImg,
+        postTitle: '홍대',
+        postImg: seoulImg,
       },
     ],
     southEast: [
       {
         bookmark: 231,
-        city: '방콕',
-        cityImg: danagImg,
+        postTitle: '방콕',
+        postImg: danagImg,
       },
       {
         bookmark: 231,
-        city: '호치민',
-        cityImg: danagImg,
+        postTitle: '호치민',
+        postImg: danagImg,
       },
       {
         bookmark: 231,
-        city: '다낭',
-        cityImg: danagImg,
+        postTitle: '다낭',
+        postImg: danagImg,
       },
     ],
   };

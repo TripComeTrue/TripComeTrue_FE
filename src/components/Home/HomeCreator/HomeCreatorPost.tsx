@@ -18,28 +18,6 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
       <Styled.PostBackground> </Styled.PostBackground>
 
       <Styled.SwiperDiv>
-        {/* <Styled.SwiperWrap
-          spaceBetween={6}
-          slidesPerView={2.8}
-          direction="horizontal"
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-          {creator.posts.map((item) => (
-            <Styled.SwiperSlideWrap key={item.postImg}>
-
-              <Styled.SliderImg>
-                <img src={item.postImg} alt="img" />
-                <Styled.Bookmark>
-                  <img src={bookmarkIcon} alt="bookmarkIcon" />
-                  {item.bookmark}
-                </Styled.Bookmark>
-              </Styled.SliderImg>
-              <Styled.SliderTitle>{item.postTitle}</Styled.SliderTitle>
-              
-            </Styled.SwiperSlideWrap>
-          ))}
-        </Styled.SwiperWrap> */}
-
         <Spots
           creator={creator.posts}
           slidesPerView={2.5}
