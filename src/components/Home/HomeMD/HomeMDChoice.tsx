@@ -1,30 +1,16 @@
-import { SwiperSlide } from 'swiper/react';
+// HomeMDChoice.tsx
 import { CityData } from './HomeMD.types';
-import bookmarkIcon from '/bookmarkPress.svg';
 import * as Styled from './HomeMD.styles';
+import Spots from '@/components/common/Spots/Spots';
 
-const HomeMDChoice = ({ city }: { city: CityData[] }) => {
+interface HomeMDChoiceProps {
+  city: CityData[];
+}
+
+const HomeMDChoice: React.FC<HomeMDChoiceProps> = ({ city }) => {
   return (
     <Styled.SwiperLeftWrap>
-      <Styled.SwiperWrap
-        spaceBetween={6}
-        slidesPerView={2.2}
-        direction="horizontal"
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {city.map((item) => (
-          <SwiperSlide key={item.city}>
-            <Styled.SliderImg>
-              <img src={item.cityImg} alt="img" />
-              <Styled.Bookmark>
-                <img src={bookmarkIcon} alt="bookmarkIcon" />
-                {item.bookmark}
-              </Styled.Bookmark>
-            </Styled.SliderImg>
-            <Styled.SliderTitle>{item.city}</Styled.SliderTitle>
-          </SwiperSlide>
-        ))}
-      </Styled.SwiperWrap>
+      <Spots creator={city} slidesPerView={2.1} sort="left" fontSize={14} />
     </Styled.SwiperLeftWrap>
   );
 };

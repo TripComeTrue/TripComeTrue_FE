@@ -29,7 +29,7 @@ export const Label = styled.label<LabelProps>`
 `;
 
 export const SliderWrap = styled(Swiper)`
-  margin: 1rem 1rem 0;
+  padding: 1rem 1rem 0;
 `;
 
 // 인기 여행 도시 부분
@@ -141,40 +141,6 @@ export const HotplaceBookmark = styled.div`
     top: 0.1rem;
     left: -1.2rem;
     width: 1.1rem;
-  }
-`;
-
-export const HotplaceSpot = styled.div`
-  position: absolute;
-  top: 0.6rem;
-  right: 0.8rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  color: ${({ theme }) => theme.brand.white};
-
-  p {
-    display: flex;
-
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-    text-transform: uppercase;
-
-    img {
-      position: absolute;
-      left: -1.35rem;
-      top: 0.15rem;
-      margin-right: 0.2rem;
-      width: 1.2rem;
-    }
-  }
-
-  div {
-    line-height: 1.2;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   }
 `;
 

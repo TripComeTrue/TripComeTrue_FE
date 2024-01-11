@@ -4,7 +4,6 @@ import 'swiper/swiper-bundle.css';
 import starIcon from '/starIcon.svg';
 import bookmarkPress from '/bookmarkPress.svg';
 import starFillIcon from '/starFill.svg';
-import storeIcon from '/store.svg';
 import { IoIosArrowForward } from 'react-icons/io';
 import * as Styled from './HomeHotplace.styles';
 
@@ -19,7 +18,6 @@ import busanImg from '/busan.jpeg';
 import jejuRImg from '/jeju.jpeg';
 import { SlideHotItem, SlideHots } from './HomeHotplace.types';
 import { SubTitle, Text } from '@/components/common';
-// import { SubTitle } from '@/components/common';
 
 // 여기서부터 함수임
 const HomeHotplace = () => {
@@ -280,14 +278,6 @@ const HomeHotplace = () => {
                         <img src={bookmarkPress} alt="bookmarkPress" />
                         {item.bookmark}
                       </Styled.HotplaceBookmark>
-
-                      <Styled.HotplaceSpot>
-                        <p>
-                          <img src={storeIcon} alt="icon" />
-                          {item.subtitle}
-                        </p>
-                        <div>{item.title}</div>
-                      </Styled.HotplaceSpot>
 
                       <Styled.HotplaceDesWrap>
                         <Styled.DesNightPlace>
