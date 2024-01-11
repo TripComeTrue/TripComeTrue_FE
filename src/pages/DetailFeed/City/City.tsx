@@ -1,4 +1,4 @@
-import { Information, Weather } from '@/components/DetailFeed';
+import { ExchangeRate, Information, Weather } from '@/components/DetailFeed';
 import * as styled from './City.styles';
 
 const City = () => {
@@ -6,6 +6,7 @@ const City = () => {
     <styled.CityWrap>
       <Weather />
       <Information />
+      <ExchangeRate />
     </styled.CityWrap>
   );
 };
