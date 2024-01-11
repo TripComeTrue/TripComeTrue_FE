@@ -144,40 +144,6 @@ export const HotplaceBookmark = styled.div`
   }
 `;
 
-export const HotplaceSpot = styled.div`
-  position: absolute;
-  top: 0.6rem;
-  right: 0.8rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  color: ${({ theme }) => theme.brand.white};
-
-  p {
-    display: flex;
-
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-    text-transform: uppercase;
-
-    img {
-      position: absolute;
-      left: -1.35rem;
-      top: 0.15rem;
-      margin-right: 0.2rem;
-      width: 1.2rem;
-    }
-  }
-
-  div {
-    line-height: 1.2;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  }
-`;
-
 export const HotplaceDesWrap = styled.div`
   background-color: ${({ theme }) => theme.brand.white};
   position: absolute;
