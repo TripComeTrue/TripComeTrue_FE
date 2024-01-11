@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import * as Styled from './HomeAllCity.styles';
 import { SimpleNav } from '@/components/common';
 import ALL_CITY from '@/constants/city';
+import HomeCountryItem from './HomeCountryItem';
 
 function HomeAllCity({ handleClose }: { handleClose: () => void }) {
   const [selectedContinent, setSelectedContinent] = useState<string>();
   const onClickContinent = (continent: string) => {
     setSelectedContinent(continent);
   };
-
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -16,6 +16,7 @@ function HomeAllCity({ handleClose }: { handleClose: () => void }) {
       document.body.style.overflow = '';
     };
   }, []);
+  const continents = Object.keys(ALL_CITY);
 
   return (
     <>
@@ -23,7 +24,7 @@ function HomeAllCity({ handleClose }: { handleClose: () => void }) {
       <Styled.AllCityWrap>
         <Styled.AllCityNav>
           <ul>
-            {Object.keys(ALL_CITY).map((continent) => (
+            {continents.map((continent) => (
               <Styled.ContinentItem
                 key={continent}
                 onClick={() => onClickContinent(continent)}
@@ -33,7 +34,15 @@ function HomeAllCity({ handleClose }: { handleClose: () => void }) {
             ))}
           </ul>
         </Styled.AllCityNav>
-        <Styled.AllCityContent>content</Styled.AllCityContent>
+        <Styled.AllCityContent>
+          {selectedContinent && (
+            <ul>
+              {ALL_CITY[selectedContinent].countries?.map((country) => (
+                <HomeCountryItem key={country.name} country={country} />
+              ))}
+            </ul>
+          )}
+        </Styled.AllCityContent>
       </Styled.AllCityWrap>
       <button type="button" onClick={handleClose}>
         닫기

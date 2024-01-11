@@ -1,13 +1,32 @@
-interface City {
-  [key: string]: CityInfo;
+interface CityList {
+  [key: string]: CityListInfo;
 }
-interface CityInfo {
+interface CityListInfo {
   name: string;
+  countries?: Country[];
+}
+export interface Country {
+  name: string;
+  city: City[];
+}
+export interface City {
+  name: string;
+  link: string;
 }
 
-const ALL_CITY: City = {
+const ALL_CITY: CityList = {
   europe: {
     name: '유럽',
+    countries: [
+      { name: '프랑스', city: [{ name: '파리', link: 'paris' }] },
+      {
+        name: '스페인',
+        city: [
+          { name: '마드리드', link: 'madrid' },
+          { name: '바르셀로나', link: 'barcelona' },
+        ],
+      },
+    ],
   },
   asia: {
     name: '아시아',

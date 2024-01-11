@@ -6,7 +6,6 @@ import DashBoard from '@/components/layout';
 import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
-import City from './pages/City';
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
           <Route path="findpw" element={<FindPw />} /> */}
         </Route>
         <Route path="home" element={<Home />} />
-        <Route path="city" element={<City />} />
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
