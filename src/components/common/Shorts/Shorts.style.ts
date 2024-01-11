@@ -29,19 +29,12 @@ export const SliderBackground = styled.div`
 `;
 
 export const Bookmark = styled.div`
-  margin-left: 1.8rem;
+  margin-left: 0.6rem;
   position: absolute;
   top: 0.5rem;
 
-  font-size: 10px;
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.brand.white};
-
-  img {
-    position: absolute;
-    left: -1.3rem;
-    width: 16px;
-  }
 `;
 
 export const ShortTitle = styled.div`
