@@ -58,8 +58,8 @@ export const SwiperDiv = styled.div`
 
 export const SwiperWrap = styled(Swiper)`
   margin-top: 0.6rem;
-  margin-left: 1rem;
   position: relative;
+  padding: 0 1rem;
 
   background-color: transparent;
 `;

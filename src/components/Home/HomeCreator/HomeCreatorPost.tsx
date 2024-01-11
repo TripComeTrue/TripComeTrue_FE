@@ -20,7 +20,7 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
       <Styled.SwiperDiv>
         <Styled.SwiperWrap
           spaceBetween={6}
-          slidesPerView={2.9}
+          slidesPerView={2.8}
           direction="horizontal"
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>

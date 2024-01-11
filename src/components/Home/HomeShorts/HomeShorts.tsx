@@ -7,10 +7,11 @@ import domestic3 from '/domestic3.jpg';
 import overseas1 from '/overseas1.jpg';
 import overseas2 from '/overseas2.jpg';
 import overseas3 from '/overseas3.jpg';
-import bookmarkIcon from '/bookmarkPress.svg';
-import { Slide, SlideShorts } from './HomeShorts.types';
+
 import * as Styled from './HomeShorts.styles';
 import { SubTitle } from '@/components/common';
+import Shorts from '@/components/common/Shorts/Shorts';
+import { SwiperProps } from '@/components/common/Shorts/Shorts.types';
 
 const HomeShorts = () => {
   const [selected, setSelected] = useState('전체');
@@ -19,8 +20,8 @@ const HomeShorts = () => {
     setSelected(value);
   };
 
-  // 임시 데이터
-  const slideShorts: SlideShorts = {
+  // 임시 데이터 -> 쇼츠 타입 설정 Short폴더의 타입 파일 보시면 있습니당(api는 고유 id 등이 추가될 예정)
+  const slideShorts: SwiperProps = {
     전체: [
       { img: domestic1, title: '해외같은 제주 풀빌라', bookmark: 234 },
       { img: overseas1, title: '스페인의 길거리', bookmark: 125 },
@@ -85,27 +86,8 @@ const HomeShorts = () => {
         </Styled.Label>
       </Styled.ShortsRadio>
 
-      <Styled.SwiperWrap
-        spaceBetween={8}
-        slidesPerView={2.1}
-        direction="horizontal"
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {filteredSlides.map((slide: Slide) => (
-          <Styled.SwiperSlideWrap key={slide.img}>
-            <Styled.SliderContent>
-              <Styled.SliderBackground>
-                <img src={slide.img} alt={slide.img} />
-              </Styled.SliderBackground>
-              <Styled.Bookmark>
-                <img src={bookmarkIcon} alt="bookmark" />
-                {slide.bookmark}
-              </Styled.Bookmark>
-              <Styled.ShortTitle>{slide.title}</Styled.ShortTitle>
-            </Styled.SliderContent>
-          </Styled.SwiperSlideWrap>
-        ))}
-      </Styled.SwiperWrap>
+      {/* 쇼츠 공통 컴포넌트 사용법 */}
+      <Shorts slides={filteredSlides} slidesPerView={2.1} />
     </Styled.ShortsWrap>
   );
 };
