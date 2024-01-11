@@ -1,5 +1,4 @@
-import bookMark from '/images/bookMark.svg';
-import { Text } from '@/components/common';
+import { Bookmark, Text } from '@/components/common';
 import * as Styled from './ShortCard.styles';
 
 const ShortCard = () => {
@@ -8,8 +7,7 @@ const ShortCard = () => {
       <Styled.ImageContainer>
         <Styled.Image src="https://source.unsplash.com/random" alt="Short" />
         <Styled.BookMarkContainer>
-          <img src={bookMark} alt="BookMarkIcon" />
-          <Text color="white">999+</Text>
+          <Bookmark count={999} />
         </Styled.BookMarkContainer>
         <Styled.Excerpt>
           <Text color="white" fontSize={10}>

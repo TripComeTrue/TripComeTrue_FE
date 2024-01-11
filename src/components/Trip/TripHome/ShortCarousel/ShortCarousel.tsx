@@ -6,7 +6,7 @@ import 'swiper/swiper-bundle.css';
 
 const ShortCarousel = () => {
   return (
-    <Styled.Container spaceBetween={10} slidesPerView={2.15}>
+    <Styled.Container spaceBetween={8} slidesPerView={2.3}>
       {new Array(5).fill(0).map((_, index) => (
         <Styled.Slide key={index}>
           <ShortCard />

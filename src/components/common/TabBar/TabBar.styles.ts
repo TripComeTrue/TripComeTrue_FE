@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 import { TabItemProps, TabbarProps } from './TabBar.types';
-import { inner, justifyAround } from '@/styles/common';
+import { inner, justifyAround, maxWidth } from '@/styles/common';
 
 export const TabbarWrap = styled.div`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
 
   height: 5.0625rem;
+  z-index: 200;
 `;
 export const Tabbar = styled.nav<TabbarProps>`
-  ${inner}
-  max-width: 768px;
+  ${inner};
+  ${maxWidth};
   height: 100%;
   padding-bottom: 1.4375rem;
   background-color: ${(props) => props.theme.brand.white};

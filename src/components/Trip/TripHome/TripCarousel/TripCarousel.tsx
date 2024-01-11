@@ -10,7 +10,7 @@ const TripCarousel = ({ size = 152 }: TripCarouselProps) => {
   const stringifiedSize = pxToRem(size);
 
   return (
-    <Styled.Container spaceBetween={10} slidesPerView={2.3}>
+    <Styled.Container spaceBetween={10} slidesPerView={1.8}>
       {new Array(5).fill(0).map((_, index) => (
         <Styled.Slide $size={stringifiedSize} key={index}>
           <TripCard size={size} />

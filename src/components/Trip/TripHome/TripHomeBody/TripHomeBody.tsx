@@ -14,7 +14,7 @@ const TripHomeBody = () => {
         <SubTitle margin="0 0 0.875rem" icon={starIcon}>
           인기 크리에이터 일정 따라가기!
         </SubTitle>
-        <TripCarousel />
+        <TripCarousel size={170} />
       </Styled.ContentsContainer>
       <Styled.ContentsContainer>
         <SubTitle margin="0 0 0.875rem" icon={starIcon}>
@@ -36,7 +36,7 @@ const TripHomeBody = () => {
           src="https://source.unsplash.com/random"
           alt="Thumbnail"
         />
-        <TripCarousel size={144} />
+        <TripCarousel size={170} />
       </Styled.ContentsContainer>
       <Styled.ContentsContainer>
         <SubTitle margin="0 1.25rem 0.875rem 0" icon={shower} variant="more">
@@ -46,7 +46,7 @@ const TripHomeBody = () => {
           src="https://source.unsplash.com/random"
           alt="Thumbnail"
         />
-        <TripCarousel size={144} />
+        <TripCarousel size={170} />
       </Styled.ContentsContainer>
     </Styled.Container>
   );

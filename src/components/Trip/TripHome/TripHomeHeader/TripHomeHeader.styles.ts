@@ -27,6 +27,7 @@ export const SearchButton = styled.button`
 
   border: 1px solid ${({ theme }) => theme.brand.white};
   border-radius: 1.875rem;
+  box-shadow: 3px 6px 6px 0px #69696940;
 
   width: 100%;
   padding: 0.5rem 1.25rem;

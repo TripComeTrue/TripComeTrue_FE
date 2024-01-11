@@ -2,15 +2,18 @@ import styled from 'styled-components';
 import { alignCenter } from '@/styles/common';
 
 export const Container = styled.div<{ $size: string }>`
+  margin-bottom: 0.5rem;
   min-width: ${({ $size }) => $size};
+  border-radius: 0.625rem;
+  box-shadow: 4px 2px 10px 3px rgba(242, 242, 242, 0.93);
+
+  overflow: hidden;
 `;
 
 export const ImageContainer = styled.div<{ $size: string }>`
   position: relative;
 
   height: ${({ $size }) => $size};
-  border-radius: 1rem;
-  overflow: hidden;
 `;
 
 export const Image = styled.img`
@@ -48,6 +51,9 @@ export const Creator = styled.div`
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  border-left: 1px solid rgba(242, 242, 242, 0.2);
+  padding: 0.5rem;
 `;
 
 export const Comment = styled.div`

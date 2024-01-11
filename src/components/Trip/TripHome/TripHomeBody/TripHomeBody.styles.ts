@@ -5,13 +5,10 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 2rem;
 
-  position: absolute;
-  top: 19.5rem;
-  z-index: 100;
-
   width: 100%;
   background-color: ${({ theme }) => theme.brand.white};
   padding: 1.625rem 0 0 1.25rem;
+  margin-top: -1.8125rem;
   border-radius: 1.25rem 1.25rem 0 0;
 `;
 
