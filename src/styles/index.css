@@ -94,6 +94,7 @@ button {
   font: inherit;
   vertical-align: baseline;
   background: none;
+  outline: none;
 }
 
 article,

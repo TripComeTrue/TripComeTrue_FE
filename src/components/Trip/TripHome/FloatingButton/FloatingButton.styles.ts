@@ -2,6 +2,8 @@ import styled, { css, keyframes } from 'styled-components';
 import { alignCenter } from '@/styles/common';
 
 export const Container = styled.div<{ $isOn: boolean }>`
+  transition: all ease-in-out 0.4s;
+
   ${({ $isOn }) =>
     $isOn &&
     css`
@@ -11,7 +13,6 @@ export const Container = styled.div<{ $isOn: boolean }>`
       left: 0;
       right: 0;
       z-index: 300;
-
       background-color: rgba(0, 0, 0, 0.7);
     `}
 `;

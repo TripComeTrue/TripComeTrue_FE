@@ -10,11 +10,15 @@ const FloatingButton = () => {
   const [isOn, setIsOn] = useState(false);
   const modalRef = useRef(null);
 
+  const onClickClose = (): void => {
+    setIsOn(false);
+  };
+
   const onClickToggle = (): void => {
     setIsOn((prev) => !prev);
   };
 
-  useClickOutside(modalRef, onClickToggle);
+  useClickOutside(modalRef, onClickClose);
 
   return (
     <Styled.Container $isOn={isOn}>

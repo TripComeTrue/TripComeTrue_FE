@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { TabItemProps, TabbarProps } from './TabBar.types';
+import { TabItemProps, TabBarProps } from './TabBar.types';
 import { inner, justifyAround, maxWidth } from '@/styles/common';
 
-export const TabbarWrap = styled.div`
+export const TabBarWrap = styled.div`
   position: sticky;
   bottom: 0;
   left: 0;
@@ -11,7 +11,7 @@ export const TabbarWrap = styled.div`
   height: 5.0625rem;
   z-index: 200;
 `;
-export const Tabbar = styled.nav<TabbarProps>`
+export const TabBar = styled.nav<TabBarProps>`
   ${inner};
   ${maxWidth};
   height: 100%;
@@ -30,9 +30,9 @@ export const TabItem = styled.li<TabItemProps>`
   width: 3.625rem;
   height: 3.625rem;
   background-image: ${(props) =>
-    props.isactive === 'true'
-      ? `url(/images/${props.itemName}_active.svg)`
-      : `url(/images/${props.itemName}.svg)`};
+    props.$isActive === 'true'
+      ? `url(/images/${props.$itemName}_active.svg)`
+      : `url(/images/${props.$itemName}.svg)`};
   background-position: 50% 50%;
   background-size: 1.875rem;
   background-repeat: no-repeat;

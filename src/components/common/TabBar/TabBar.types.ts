@@ -1,5 +1,5 @@
-export interface TabbarProps {}
+export interface TabBarProps {}
 export interface TabItemProps {
-  itemName: string;
-  isactive: string;
+  $itemName: string;
+  $isActive: string;
 }
