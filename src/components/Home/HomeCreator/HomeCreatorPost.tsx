@@ -1,23 +1,18 @@
 import { CreatorData } from './HomeCreator.types';
 import * as Styled from './HomeCreator.styles';
 import Spots from '@/components/common/Spots/Spots';
+import Creator from '@/components/common/Creator/Creator';
 
 const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
   return (
     <Styled.HotPostWrap>
-      <Styled.PostUserWrap>
-        <Styled.UserImg>
-          <img src={creator.userImg} alt="userImg" />
-        </Styled.UserImg>
-        <Styled.UserInfo>
-          <p>{creator.username}</p>
-          <div>{creator.userInfo}</div>
-        </Styled.UserInfo>
-      </Styled.PostUserWrap>
+      {/* Creator 공통 컴포넌트 사용 */}
+      <Creator creator={creator} starRate={2.1} />
 
       <Styled.PostBackground> </Styled.PostBackground>
 
       <Styled.SwiperDiv>
+        {/* Spot 공통 컴포넌트 사용 */}
         <Spots
           creator={creator.posts}
           slidesPerView={2.5}
