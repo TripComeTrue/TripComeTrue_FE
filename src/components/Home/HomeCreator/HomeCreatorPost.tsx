@@ -7,7 +7,7 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
   return (
     <Styled.HotPostWrap>
       {/* Creator 공통 컴포넌트 사용 */}
-      <Creator creator={creator} starRate={2.1} />
+      <Creator creator={creator} starRate={null} />
 
       <Styled.PostBackground> </Styled.PostBackground>
 

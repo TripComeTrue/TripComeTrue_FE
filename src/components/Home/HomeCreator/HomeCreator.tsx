@@ -13,7 +13,7 @@ const HomeCreator = () => {
         username: '맥주덕후',
         userInfo:
           '독일에서 교환학생하며 실감나는 유럽의 삶을 담고 있는 유럽의 맥주덕후입니다.',
-        rate: 3.8,
+
         posts: [
           {
             postImg: exampleImg,
@@ -49,7 +49,7 @@ const HomeCreator = () => {
         username: '바닷가재',
         userInfo:
           '임시데이터입니당.. 어떻게 바뀔진 모르겠지만 이렇게 데이터가 오겠죵',
-        rate: 2.5,
+
         posts: [
           {
             postImg: exampleImg,
@@ -85,7 +85,7 @@ const HomeCreator = () => {
         username: '목..서버 .. 옮겨야하는뎅ㅋ..',
         userInfo:
           '목서버 써보고 싶은데 일단 급해서 얼른 임시 데이터 만든건데오.. 옮기겠습니당..',
-        rate: 3.8,
+
         posts: [
           {
             postImg: exampleImg,
@@ -120,7 +120,7 @@ const HomeCreator = () => {
         userImg: exampleImg,
         username: 'api쨩',
         userInfo: '근데 검색 ui 끝내면 api 될 것 같다...!',
-        rate: 2.8,
+
         posts: [
           {
             postImg: exampleImg,
