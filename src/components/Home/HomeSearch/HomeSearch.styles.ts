@@ -36,7 +36,7 @@ export const SearchInput = styled.input`
 
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${(props) => props.theme.brand.white};
+  color: #0e0e0e;
   background-image: linear-gradient(
     90deg,
     ${(props) => props.theme.brand.primary} 20%,
@@ -47,7 +47,7 @@ export const SearchInput = styled.input`
   outline: none;
 
   &::placeholder {
-    color: ${(props) => props.theme.brand.white};
+    color: #0e0e0e;
   }
 
   &:focus {
@@ -61,6 +61,5 @@ export const SearchIcon = styled(IoIosSearch)`
   top: 50%;
   left: 1.3rem;
 
-  color: ${({ theme }) => theme.brand.white};
   font-size: 20px;
 `;

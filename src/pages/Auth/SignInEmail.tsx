@@ -3,7 +3,6 @@ import SimpleNav from '@/components/common/Navigation/SimpleNav';
 import Container from '@/components/common/Container';
 import { SignInEmailForm, SignInLinks, SignInLogo } from '@/components/auth';
 import { Modal, Text } from '@/components/common';
-import { ModalTitle } from '@/components/auth/SignInModal/SignInModal.styles';
 
 function SignInEmail() {
   const [open, setOpen] = useState(false);
@@ -22,8 +21,7 @@ function SignInEmail() {
         <SignInEmailForm handleOpen={handleOpen} />
         <SignInLinks />
       </Container>
-      <Modal type="error" open={open} onClose={handleClose}>
-        <ModalTitle id="modal-modal-title">로그인 실패</ModalTitle>
+      <Modal type="error" open={open} onClose={handleClose} title="로그인 실패">
         <Text fontSize={14} fontWeight={600} color="gray">
           이메일 혹은 비밀번호 오류로 <br />
           로그인에 실패하였습니다.

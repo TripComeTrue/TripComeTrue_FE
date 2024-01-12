@@ -1,8 +1,9 @@
 import HomeCreatorPost from './HomeCreatorPost';
 import starIcon from '/starIcon.svg';
 import exampleImg from '/osaka.png';
-import { CreatorData, HotCreatorDataTypes } from './HomeCreator.types';
+import { HotCreatorDataTypes } from './HomeCreator.types';
 import { SubTitle } from '@/components/common';
+import { CreatorData } from '../../common/Spots/Spots.types';
 
 const HomeCreator = () => {
   const HotCreatorDatas: HotCreatorDataTypes = {
