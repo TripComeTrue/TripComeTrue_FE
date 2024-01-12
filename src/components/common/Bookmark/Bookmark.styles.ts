@@ -4,7 +4,7 @@ const BookmarkWrap = styled.div`
   color: ${({ theme }) => theme.brand.white};
   svg {
     vertical-align: middle;
-    font-size: ${({ theme }) => theme.fontSizes.xl};
+    font-size: ${({ theme }) => theme.fontSizes.md};
     margin-right: 0.3125rem;
   }
   span {

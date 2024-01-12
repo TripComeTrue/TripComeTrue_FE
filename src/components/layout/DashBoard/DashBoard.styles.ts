@@ -5,8 +5,6 @@ const Container = styled.div`
   flex-direction: column;
 
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
 
   width: 360px;
   min-height: 100vh;
