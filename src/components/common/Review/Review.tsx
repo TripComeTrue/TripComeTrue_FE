@@ -4,8 +4,8 @@ import * as Styled from './Review.styles';
 import { ReviewProps, SlideHotItem } from './Review.types';
 
 /**
- * 쇼츠 공통 컴포넌트입니다.
- * @param slides 쇼츠에 들어가야하는 쇼츠 제목(string), 쇼츠 대표 이미지(string), 쇼츠 북마크(number) 등이 들어있는 배열입니다.
+ * 여행 후기 공통 컴포넌트입니다.
+ * @param slides 여행 후기 Wrap에 들어가야하는 제목(title), 대표 이미지(img), 북마크(number) 등이 들어있는 배열입니다. (Review.types.ts SlideHotItem참고)
  * @param slidesPerView 한 화면에 출력되는 slide 갯수
  */
 
