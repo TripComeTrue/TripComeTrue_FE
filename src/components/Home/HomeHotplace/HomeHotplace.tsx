@@ -18,6 +18,7 @@ import busanImg from '/busan.jpeg';
 import jejuRImg from '/jeju.jpeg';
 import { SlideHotItem, SlideHots } from './HomeHotplace.types';
 import { SubTitle, Text } from '@/components/common';
+import Review from '@/components/common/Review/Review';
 
 // 여기서부터 함수임
 const HomeHotplace = () => {
@@ -306,6 +307,8 @@ const HomeHotplace = () => {
         <div>전체 도시 보러가기</div>
         <IoIosArrowForward style={{ fontSize: 25 }} />
       </Styled.GoAllCity>
+
+      <Review slides={filteredSlides} slidesPerView={1.65} />
     </>
   );
 };
