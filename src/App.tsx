@@ -7,7 +7,6 @@ import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 
-
 function App() {
   return (
     <Routes>
