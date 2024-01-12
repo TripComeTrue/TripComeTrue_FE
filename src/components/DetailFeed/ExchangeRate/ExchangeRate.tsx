@@ -45,7 +45,7 @@ const ExchangeRate = () => {
       <Styled.ExchangeRateSource>
         <Text fontSize={10}>Powered By</Text>
         <Text fontSize={10} fontWeight={700}>
-          한국 수출입은행
+          한국수출입은행
         </Text>
       </Styled.ExchangeRateSource>
     </Styled.ExchangeRateWrapper>
