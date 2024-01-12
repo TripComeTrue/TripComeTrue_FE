@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { alignCenter } from '@/styles/common';
 
 export const InformationWrapper = styled.section`
   height: 11rem;
@@ -7,6 +8,7 @@ export const InformationWrapper = styled.section`
 export const InformationBox = styled.div`
   display: flex;
   gap: 0.5rem;
+
   margin-top: 1rem;
 `;
 
@@ -15,8 +17,7 @@ export const InformationItem = styled.div`
   height: 7.5rem;
   border-radius: 0.625rem;
 
-  display: flex;
-  align-items: center;
+  ${alignCenter}
   flex-direction: column;
   gap: 1.125rem;
 
@@ -37,10 +38,9 @@ export const InformationIconBox = styled.div`
   justify-content: center;
 `;
 
-export const InformationIcon = styled.div`
+export const InformationIcon = styled.img`
   width: 3rem;
   height: 3rem;
 
-  background-color: ${({ theme }) => theme.brand.black};
   border-radius: 50%;
 `;
