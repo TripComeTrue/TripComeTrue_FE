@@ -6,11 +6,11 @@ import _ from 'lodash';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePickerStyles.css';
-import * as Styled from './TripPlanDate.styles';
+import * as Styled from '../TripPlanCommon/TripPlanCommon.styles';
 import {
   TripPlanPrevButton,
   TripPlanNextButton,
-} from '../TripPlanButton/TripPlanButton';
+} from '../TripPlanCommon/TripPlanCommon';
 
 const TripPlanDate = () => {
   const [dateRange, setDateRange] = useState<TripDateProps>({
@@ -46,7 +46,7 @@ const TripPlanDate = () => {
     <>
       <Styled.Wrapper>
         <TripPlanPrevButton />
-        <Styled.DateContainer>
+        <Styled.Container>
           <Styled.Title>
             여행 기간을 <br />
             선택해 주세요
@@ -55,11 +55,11 @@ const TripPlanDate = () => {
             selected={startDate}
             startDate={startDate}
             endDate={endDate}
-            // minDate={null}
+            minDate={null}
+            disabledKeyboardNavigation
             selectsRange
             locale={ko}
             dateFormat="yyyy.MM.dd"
-            disabledKeyboardNavigation
             isClearable
             showPopperArrow={false}
             onChange={(date) =>
@@ -95,7 +95,10 @@ const TripPlanDate = () => {
                             changeYear(Number(value))
                           }>
                           {years.map((option: number) => (
-                            <option key={option} value={option}>
+                            <option
+                              className="year-dropdown"
+                              key={option}
+                              value={option}>
                               {option}
                             </option>
                           ))}
@@ -107,7 +110,10 @@ const TripPlanDate = () => {
                             changeMonth(months.indexOf(value))
                           }>
                           {months.map((option) => (
-                            <option key={option} value={option}>
+                            <option
+                              className="month-dropdown"
+                              key={option}
+                              value={option}>
                               {option}
                             </option>
                           ))}
@@ -134,7 +140,7 @@ const TripPlanDate = () => {
               {getNightAndDays()}
             </label>
           </DatePicker>
-        </Styled.DateContainer>
+        </Styled.Container>
         <TripPlanNextButton />
       </Styled.Wrapper>
     </>

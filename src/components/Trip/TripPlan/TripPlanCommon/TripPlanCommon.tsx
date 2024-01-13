@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { SlArrowLeft } from 'react-icons/sl';
-import * as Styled from './TripPlanButton.styles';
+import * as Styled from './TripPlanCommon.styles';
 import { Button } from '@/components/common';
 
 export const TripPlanPrevButton = () => {

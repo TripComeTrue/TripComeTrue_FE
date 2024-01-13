@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Styled from '../TripPlanCountry/TripPlanCountry.styles';
-import { SubTitle } from '@/components/common';
 import { Continent } from './TripPlanCountry.types';
 import { worldData } from './constants/CountryData';
 import {
   TripPlanPrevButton,
   TripPlanNextButton,
-} from '../TripPlanButton/TripPlanButton';
+} from '../TripPlanCommon/TripPlanCommon';
 
 const TripPlanCountry = () => {
   const [isOverseas, setIsOverseas] = useState<boolean>(true);
@@ -19,10 +18,7 @@ const TripPlanCountry = () => {
   };
 
   const selectContinent = (continentName: string) => {
-    const selectedContinent = worldData[isOverseas ? '해외' : '국내'].find(
-      (conti) => conti.name === continentName,
-    );
-    setContinent(selectedContinent || '전체');
+    setContinent(continentName || '전체');
   };
 
   const selectCountry = (countryName: string) => {
@@ -42,21 +38,29 @@ const TripPlanCountry = () => {
   };
 
   const getCountries = () => {
-    if (typeof continent === 'string') {
+    if (continent === '전체') {
       return worldData[isOverseas ? '해외' : '국내'][0].subCategories;
     }
-    return continent.subCategories;
+    const selectedContinent = worldData[isOverseas ? '해외' : '국내'].find(
+      (conti) => conti.name === continent,
+    );
+    return selectedContinent ? selectedContinent.subCategories : [];
   };
+
+  useEffect(() => {
+    console.log('Current continent:', continent);
+  }, [continent]);
 
   return (
     <>
-      <TripPlanPrevButton />
       <Styled.Wrapper>
-        <SubTitle fontSize={20} margin="0.2rem">
-          여행 기간 동안
-          <br /> 어느 국가를 다녀오셨나요?
-        </SubTitle>
+        <TripPlanPrevButton />
         <Styled.Container>
+          <Styled.Title>
+            여행 기간 동안
+            <br /> 어느 국가를 다녀왔나요?
+          </Styled.Title>
+
           <Styled.OverseasDomesticContainer>
             <Styled.SelectButton
               className="overseas"
@@ -71,38 +75,58 @@ const TripPlanCountry = () => {
               국내
             </Styled.SelectButton>
           </Styled.OverseasDomesticContainer>
-          <Styled.ContinentContainer>
-            {worldData[isOverseas ? '해외' : '국내'].map((item) => (
-              <button
-                key={item.name}
-                onClick={() => selectContinent(item.name)}>
-                {item.name}
-              </button>
-            ))}
-          </Styled.ContinentContainer>
-          <Styled.CountryContainer>
-            {getCountries().map((country) => (
-              <button
-                key={country.name}
-                onClick={() => selectCountry(country.name)}>
-                {country.name}
-              </button>
-            ))}
-          </Styled.CountryContainer>
-        </Styled.Container>
-      </Styled.Wrapper>
-      <Styled.SelectedCountries country={country}>
-        {country.map((selectedCountry, index) => (
-          <div key={index}>
-            {selectedCountry}
-            <Styled.RemoveButton onClick={() => removeCountry(selectedCountry)}>
-              x
-            </Styled.RemoveButton>
-          </div>
-        ))}
-      </Styled.SelectedCountries>
 
-      <TripPlanNextButton />
+          <Styled.ContinentSwiper
+            spaceBetween={5}
+            slidesPerView={4.7}
+            direction="horizontal"
+            scrollbar={{
+              draggable: true,
+              el: '.swiper-scrollbar',
+              hide: false,
+            }}>
+            {worldData[isOverseas ? '해외' : '국내'].map((item) => (
+              <Styled.ContinentWrapper key={item.name}>
+                <button
+                  className={`continent ${
+                    continent === item.name ? 'selected' : ''
+                  }`}
+                  onClick={() => selectContinent(item.name)}>
+                  {item.name}
+                </button>
+              </Styled.ContinentWrapper>
+            ))}
+          </Styled.ContinentSwiper>
+
+          <Styled.CountryWrapper>
+            {getCountries().map((country) => (
+              <Styled.CountryContainer key={country.name}>
+                <button onClick={() => selectCountry(country.name)}>
+                  <img src={country.img} />
+                  <span className="country-ko">
+                    {country.name}
+                    <br />
+                    <span className="country-eng"> {country.eng}</span>
+                  </span>
+                </button>
+              </Styled.CountryContainer>
+            ))}
+          </Styled.CountryWrapper>
+        </Styled.Container>
+
+        <Styled.SelectedCountries country={country}>
+          {country.map((selectedCountry, index) => (
+            <div key={index}>
+              {selectedCountry}
+              <Styled.RemoveButton
+                onClick={() => removeCountry(selectedCountry)}>
+                x
+              </Styled.RemoveButton>
+            </div>
+          ))}
+        </Styled.SelectedCountries>
+        <TripPlanNextButton />
+      </Styled.Wrapper>
     </>
   );
 };

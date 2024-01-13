@@ -4,7 +4,7 @@ import { SubTitle } from '@/components/common';
 import {
   TripPlanPrevButton,
   TripPlanNextButton,
-} from '../TripPlanButton/TripPlanButton';
+} from '../TripPlanCommon/TripPlanCommon';
 import React, { useState } from 'react';
 const TripPlanCity = () => {
   const [cityNames, setCityNames] = useState<string[]>([]);

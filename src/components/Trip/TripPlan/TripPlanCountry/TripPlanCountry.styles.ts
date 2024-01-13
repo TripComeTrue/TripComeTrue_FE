@@ -3,18 +3,28 @@ import {
   SelectButtonProps,
   SelectedCountriesProps,
 } from './TripPlanCountry.types';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
 
-  height: 100vh;
-  padding: 1.2rem;
+  padding: 0.2rem 1.2rem;
+`;
+
+export const Title = styled.div`
+  padding: 0;
+  margin-bottom: 1rem;
+
+  font-size: 1.9rem;
+  font-weight: ${({ theme }) => theme.fontWeights.light};
+  line-height: 2.5rem;
 `;
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
 `;
 
@@ -24,39 +34,66 @@ export const OverseasDomesticContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding: 0.5rem 0;
+  padding: 0;
   margin-bottom: 0.5rem;
-  border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
 `;
 
 export const SelectButton = styled.button<SelectButtonProps>`
   position: relative;
+  padding: 0.35rem;
   flex-grow: 1;
+  font-weight: 700;
+  color: ${(props) => (props.isSelected ? '#373737' : '#626262')};
 
   &::after {
     display: ${(props) => (props.isSelected ? 'block' : 'none')};
     content: '';
     position: absolute;
-    top: 1.95rem;
+    top: 2.13rem;
     left: 0;
     width: 100%;
-    height: 1.8px;
+    height: 0.125rem;
     background-color: #b4f34c;
     opacity: 1;
   }
 `;
 
-export const ContinentContainer = styled.div`
+export const ContinentSwiper = styled(Swiper)`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  width: 100%;
 
-  gap: 1rem;
-  overflow-x: scroll;
+  .continent {
+    display: flex;
+    justify-content: center;
+
+    width: 3.8rem;
+    padding: 0.125rem 0.9375rem;
+
+    margin: 0;
+
+    cursor: pointer;
+
+    border: 1px solid #d6d6d6;
+    border-radius: 10rem;
+
+    white-space: nowrap;
+    text-align: center;
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    color: ${({ theme }) => theme.text.gray};
+  }
+
+  .continent.selected {
+    border: 1px solid #b4f34c;
+    background-color: ${({ theme }) => theme.brand.primary};
+    color: ${({ theme }) => theme.text.black};
+  }
 `;
 
-export const CountryContainer = styled.div`
+export const ContinentWrapper = styled(SwiperSlide)``;
+
+export const CountryWrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -65,14 +102,45 @@ export const CountryContainer = styled.div`
 
   margin-top: 1rem;
   gap: 0.8rem;
+`;
 
+export const CountryContainer = styled.div`
   button {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 
-    border: 1px solid #d9d9d9;
+    border: 2px solid white;
+    border-radius: 0.625rem;
+    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+
+    &:hover {
+      border: 2px solid #b4f34c;
+    }
+  }
+
+  img {
+    width: 9.5rem;
+    height: 6.5rem;
+  }
+
+  .country-ko,
+  .country-en {
+    position: absolute;
+    bottom: 0.5rem;
+
+    line-height: 1.1rem;
+    color: ${({ theme }) => theme.brand.white};
+  }
+
+  .country-ko {
+    font-size: 0.7rem;
+  }
+
+  .country-eng {
+    font-size: 0.9rem;
   }
 `;
 

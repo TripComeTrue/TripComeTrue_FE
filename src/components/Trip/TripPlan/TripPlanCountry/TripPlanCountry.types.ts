@@ -1,5 +1,7 @@
 export interface Country {
   name: string;
+  eng: string;
+  img?: string;
 }
 export interface Continent {
   name: string;
