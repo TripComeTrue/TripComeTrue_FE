@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import * as Styled from './TripHomeBody.styles';
 import { SubTitle } from '@/components/common';
 import starIcon from '/starIcon.svg';
@@ -8,6 +9,12 @@ import TripCarousel from '../TripCarousel/TripCarousel';
 import ShortCarousel from '../ShortCarousel/ShortCarousel';
 
 const TripHomeBody = () => {
+  const navigate = useNavigate();
+
+  const onClickMoveToList = (): void => {
+    navigate('/trip/list');
+  };
+
   return (
     <Styled.Container>
       <Styled.ContentsContainer>
@@ -29,7 +36,11 @@ const TripHomeBody = () => {
         <CreatorCarousel />
       </Styled.ContentsContainer>
       <Styled.ContentsContainer>
-        <SubTitle margin="0 1.25rem 0.875rem 0" icon={dollar} variant="more">
+        <SubTitle
+          margin="0 1.25rem 0.875rem 0"
+          icon={dollar}
+          variant="more"
+          onClickButton={onClickMoveToList}>
           100만원으로 다녀온 인생 여행
         </SubTitle>
         <Styled.Thumbnail
@@ -39,7 +50,11 @@ const TripHomeBody = () => {
         <TripCarousel size={170} />
       </Styled.ContentsContainer>
       <Styled.ContentsContainer>
-        <SubTitle margin="0 1.25rem 0.875rem 0" icon={shower} variant="more">
+        <SubTitle
+          margin="0 1.25rem 0.875rem 0"
+          icon={shower}
+          variant="more"
+          onClickButton={onClickMoveToList}>
           국내 스파&풀빌라 여행 일정 모음
         </SubTitle>
         <Styled.Thumbnail

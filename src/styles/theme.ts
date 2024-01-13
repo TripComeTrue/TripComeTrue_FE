@@ -10,7 +10,7 @@ const theme: DefaultTheme = {
     white: '#FFFFFF',
   },
   text: {
-    black: '#0E0E0E',
+    black: '#373737',
     gray: '#626262',
   },
   semantic: {
