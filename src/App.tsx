@@ -5,7 +5,7 @@ import DashBoard from '@/components/layout';
 import Home from './pages/Main/Home';
 import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
 import { SignIn, SignInEmail, SignUp, SignUpAgree } from './pages/Auth';
-import { TripPlanCountry } from './components/Trip/TripPlan';
+import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
 import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:id" element={<TripDetail />} />
-          <Route path="plan" element={<TripPlan />} />
+          <Route path="plan" element={<TripPlanDate />} />
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
         </Route>

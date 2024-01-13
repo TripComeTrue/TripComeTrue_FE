@@ -1,12 +1,33 @@
 import { add, differenceInCalendarDays } from 'date-fns';
 import * as Styled from './TripPlanCity.styles';
 import { SubTitle } from '@/components/common';
-import { TripPlanFooter } from '..';
+import {
+  TripPlanPrevButton,
+  TripPlanNextButton,
+} from '../TripPlanButton/TripPlanButton';
+import React, { useState } from 'react';
 const TripPlanCity = () => {
+  const [cityNames, setCityNames] = useState<string[]>([]);
+  const [isAllCitySame, setIsAllCitySame] = useState(false);
+
   const startDate = new Date(2024, 0, 11);
   const endDate = new Date(2024, 0, 15);
 
   const totalTripDays = differenceInCalendarDays(endDate, startDate);
+
+  const handleCheckAllSameCity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAllCitySame(e.target.checked);
+    if (e.target.checked) {
+      const firstDayCity = cityNames[0] || '';
+      setCityNames(Array(totalTripDays + 1).fill(firstDayCity));
+    }
+  };
+
+  const handleChangeCityName = (city: string, index: number) => {
+    const newCityNames = [...cityNames];
+    newCityNames[index] = city;
+    setCityNames(newCityNames);
+  };
 
   const showInputPerDay = () => {
     const totalInputs = [];
@@ -24,8 +45,9 @@ const TripPlanCity = () => {
           <Styled.EachDayInput
             type="text"
             placeholder="방문 지역을 선택해주세요"
-            // value={cityNames[i] || ''}
-            // onChange={e}
+            value={cityNames[i] || ''}
+            onChange={(e) => handleChangeCityName(e.target.value, i)}
+            disabled={isAllCitySame}
           />
         </Styled.EachDayContainer>,
       );
@@ -36,19 +58,25 @@ const TripPlanCity = () => {
 
   return (
     <>
+      <TripPlanPrevButton />
       <Styled.Wrapper>
-        <SubTitle margin="0.8rem">
+        <SubTitle fontSize={20} margin="0.2rem">
           여행 기간 동안
           <br /> 방문할 지역을 선택해 주세요.
         </SubTitle>
         <Styled.Container>
           <label htmlFor="eachday">
-            <input type="checkbox" /> 방문 지역 모두 동일
+            <input
+              type="checkbox"
+              checked={isAllCitySame}
+              onChange={handleCheckAllSameCity}
+            />{' '}
+            <span>방문 지역 모두 동일</span>
             {showInputPerDay()}
           </label>
         </Styled.Container>
       </Styled.Wrapper>
-      <TripPlanFooter />
+      <TripPlanNextButton />
     </>
   );
 };

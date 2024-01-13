@@ -3,7 +3,10 @@ import * as Styled from '../TripPlanCountry/TripPlanCountry.styles';
 import { SubTitle } from '@/components/common';
 import { Continent } from './TripPlanCountry.types';
 import { worldData } from './constants/CountryData';
-import { TripPlanFooter } from '..';
+import {
+  TripPlanPrevButton,
+  TripPlanNextButton,
+} from '../TripPlanButton/TripPlanButton';
 
 const TripPlanCountry = () => {
   const [isOverseas, setIsOverseas] = useState<boolean>(true);
@@ -47,8 +50,9 @@ const TripPlanCountry = () => {
 
   return (
     <>
+      <TripPlanPrevButton />
       <Styled.Wrapper>
-        <SubTitle margin="0.8rem">
+        <SubTitle fontSize={20} margin="0.2rem">
           여행 기간 동안
           <br /> 어느 국가를 다녀오셨나요?
         </SubTitle>
@@ -98,7 +102,7 @@ const TripPlanCountry = () => {
         ))}
       </Styled.SelectedCountries>
 
-      <TripPlanFooter />
+      <TripPlanNextButton />
     </>
   );
 };

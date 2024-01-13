@@ -12,6 +12,11 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
   flex: 1;
+  margin-top: 0.7rem;
+
+  span {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
 `;
 
 export const EachDayContainer = styled.div`
