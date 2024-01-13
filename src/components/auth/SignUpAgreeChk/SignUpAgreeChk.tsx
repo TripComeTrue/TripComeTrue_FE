@@ -1,33 +1,19 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Styled from './SignUpAgreeChk.styles';
 import SignUpAgreeChkBox from './SignUpAgreeChkBox';
-import { Agreements, POLICY_AGREE } from './SignUpAgreeChk.types';
+import { SignUpAgreeChkProps } from './SignUpAgreeChk.types';
 
-function SignUpAgreeChk() {
+function SignUpAgreeChk({
+  agreements,
+  setAgreements,
+  allAgreed,
+  setAllAgreed,
+  isOk,
+  handleAgreeChange,
+  handleOpen,
+}: SignUpAgreeChkProps) {
   const navigate = useNavigate();
-  const chkAllAgreed = (data: Agreements) =>
-    Object.values(data).every((agreement) => agreement.checked);
-
-  const [agreements, setAgreements] = useState(POLICY_AGREE);
-  const [allAgreed, setAllAgreed] = useState(chkAllAgreed(agreements));
-
-  // 개별 이용약관 동의 상태 업데이트
-  const handleAgreeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    const newAgreements = {
-      ...agreements,
-      [name]: {
-        text: agreements[name].text,
-        checked,
-        viewPolicy: agreements[name].viewPolicy,
-      },
-    };
-    setAgreements(newAgreements);
-
-    // 개별 항목의 동의 여부를 확인하여 전체 동의 체크박스 업데이트
-    setAllAgreed(chkAllAgreed(newAgreements));
-  };
 
   // 모든 이용약관 동의 상태 업데이트
   const handleAllAgreeChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +29,6 @@ function SignUpAgreeChk() {
   };
 
   const onClickConfirm = () => {
-    // TODO: 약관 동의 안하면 안넘어가게 로직 구현 필요
     if (
       agreements.over14age.checked &&
       agreements.policyAgree.checked &&
@@ -68,9 +53,14 @@ function SignUpAgreeChk() {
           viewPolicy={agreements[agreement].viewPolicy}
           onChange={handleAgreeChange}
           checked={agreements[agreement].checked}
+          handleOpen={handleOpen}
         />
       ))}
-      <Styled.SignUpAgreeConfirm onClick={onClickConfirm}>
+      <Styled.SignUpAgreeConfirm
+        size="lg"
+        variants="primary"
+        onClick={onClickConfirm}
+        disabled={!isOk}>
         다음
       </Styled.SignUpAgreeConfirm>
     </Styled.SignUpAgreeWrap>

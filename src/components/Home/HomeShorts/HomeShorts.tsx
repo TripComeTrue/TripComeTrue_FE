@@ -7,20 +7,11 @@ import domestic3 from '/domestic3.jpg';
 import overseas1 from '/overseas1.jpg';
 import overseas2 from '/overseas2.jpg';
 import overseas3 from '/overseas3.jpg';
-import bookmarkIcon from '/bookmarkPress.svg';
-import { Slide, SlideShorts } from './HomeShorts.types';
-import {
-  Bookmark,
-  Label,
-  ShortTitle,
-  ShortsRadio,
-  ShortsTitle,
-  ShortsWrap,
-  SliderBackground,
-  SliderContent,
-  SwiperSlideWrap,
-  SwiperWrap,
-} from './HomeShrots.styles';
+
+import * as Styled from './HomeShorts.styles';
+import { SubTitle } from '@/components/common';
+import Shorts from '@/components/common/Shorts/Shorts';
+import { SwiperProps } from '@/components/common/Shorts/Shorts.types';
 
 const HomeShorts = () => {
   const [selected, setSelected] = useState('전체');
@@ -29,8 +20,8 @@ const HomeShorts = () => {
     setSelected(value);
   };
 
-  // 임시 데이터
-  const slideShorts: SlideShorts = {
+  // 임시 데이터 -> 쇼츠 타입 설정 Short폴더의 타입 파일 보시면 있습니당(api는 고유 id 등이 추가될 예정)
+  const slideShorts: SwiperProps = {
     전체: [
       { img: domestic1, title: '해외같은 제주 풀빌라', bookmark: 234 },
       { img: overseas1, title: '스페인의 길거리', bookmark: 125 },
@@ -54,14 +45,13 @@ const HomeShorts = () => {
   const filteredSlides = slideShorts[selected];
 
   return (
-    <ShortsWrap>
-      <ShortsTitle>
-        <img src={starIcon} alt="icon" />
+    <Styled.ShortsWrap>
+      <SubTitle margin="1rem" fontSize={18} icon={starIcon}>
         지금 이 순간, 트립컴트루
-      </ShortsTitle>
+      </SubTitle>
 
-      <ShortsRadio>
-        <Label htmlFor="all" checked={selected === '전체'}>
+      <Styled.ShortsRadio>
+        <Styled.Label htmlFor="all" checked={selected === '전체'}>
           <input
             id="all"
             type="radio"
@@ -71,10 +61,10 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           전체
-        </Label>
-        <Label htmlFor="domestic" checked={selected === '국내'}>
+        </Styled.Label>
+        <Styled.Label htmlFor="domesticShorts" checked={selected === '국내'}>
           <input
-            id="domestic"
+            id="domesticShorts"
             type="radio"
             value="국내"
             checked={selected === '국내'}
@@ -82,10 +72,10 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           국내
-        </Label>
-        <Label htmlFor="overseas" checked={selected === '해외'}>
+        </Styled.Label>
+        <Styled.Label htmlFor="overseasShorts" checked={selected === '해외'}>
           <input
-            id="overseas"
+            id="overseasShorts"
             type="radio"
             value="해외"
             checked={selected === '해외'}
@@ -93,31 +83,12 @@ const HomeShorts = () => {
             style={{ display: 'none' }}
           />
           해외
-        </Label>
-      </ShortsRadio>
+        </Styled.Label>
+      </Styled.ShortsRadio>
 
-      <SwiperWrap
-        spaceBetween={18}
-        slidesPerView={2.1}
-        direction="horizontal"
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {filteredSlides.map((slide: Slide) => (
-          <SwiperSlideWrap key={slide.img}>
-            <SliderContent>
-              <SliderBackground>
-                <img src={slide.img} alt={slide.img} />
-              </SliderBackground>
-              <Bookmark>
-                <img src={bookmarkIcon} alt="bookmark" />
-                {slide.bookmark}
-              </Bookmark>
-              <ShortTitle>{slide.title}</ShortTitle>
-            </SliderContent>
-          </SwiperSlideWrap>
-        ))}
-      </SwiperWrap>
-    </ShortsWrap>
+      {/* 쇼츠 공통 컴포넌트 사용법 */}
+      <Shorts slides={filteredSlides} slidesPerView={2.1} />
+    </Styled.ShortsWrap>
   );
 };
 

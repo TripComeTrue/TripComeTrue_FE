@@ -11,20 +11,20 @@ function TabBar() {
   const { pathname } = useLocation();
 
   return (
-    <Styled.TabbarWrap>
-      <Styled.Tabbar>
+    <Styled.TabBarWrap>
+      <Styled.TabBar>
         <Styled.TabItems>
           {navItems.map((item) => (
             <Styled.TabItem
               key={item.to}
-              itemName={item.to}
-              isactive={`${pathname.startsWith(`/${item.to}`)}`}>
+              $itemName={item.to}
+              $isActive={`${pathname.startsWith(`/${item.to}`)}`}>
               <Link to={`/${item.to}`}>{item.text}</Link>
             </Styled.TabItem>
           ))}
         </Styled.TabItems>
-      </Styled.Tabbar>
-    </Styled.TabbarWrap>
+      </Styled.TabBar>
+    </Styled.TabBarWrap>
   );
 }
 

@@ -1,5 +1,10 @@
 export interface SignUpFormData {
   email?: string;
   password?: string;
-  password2?: string;
+  passwordCheck?: string;
+}
+
+export interface SignUpFormProps {
+  handleOpen: () => void;
+  setErrorMsg: (value: string) => void;
 }
