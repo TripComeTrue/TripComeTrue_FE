@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  max-width: 768px;
   padding: 1.25rem;
 `;
 

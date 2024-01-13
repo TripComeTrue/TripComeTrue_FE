@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
 import { getYear, getMonth, differenceInDays } from 'date-fns';
-import DatePicker from 'react-datepicker';
+import _ from 'lodash';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePickerStyles.css';
@@ -10,13 +11,14 @@ import {
   TripPlanPrevButton,
   TripPlanNextButton,
 } from '../TripPlanButton/TripPlanButton';
+
 const TripPlanDate = () => {
   const [dateRange, setDateRange] = useState<TripDateProps>({
     startDate: new Date(),
     endDate: null,
   });
   const { startDate, endDate } = dateRange;
-  const years = _.range(2000, getYear(new Date()) + 1, 1);
+  const years = _.range(2010, getYear(new Date()) + 10);
   const months = [
     '1',
     '2',
@@ -53,10 +55,11 @@ const TripPlanDate = () => {
             selected={startDate}
             startDate={startDate}
             endDate={endDate}
+            // minDate={null}
             selectsRange
-            minDate={new Date()}
             locale={ko}
             dateFormat="yyyy.MM.dd"
+            disabledKeyboardNavigation
             isClearable
             showPopperArrow={false}
             onChange={(date) =>
@@ -84,29 +87,32 @@ const TripPlanDate = () => {
                   }}>
                   <div>
                     <div className="header">
-                      {getYear(date)} .{months[getMonth(date)]}
-                      <select
-                        value={getYear(date)}
-                        onChange={({ target: { value } }) =>
-                          changeYear(Number(value))
-                        }>
-                        {years.map((option: number) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                      {/* <select
-                        value={months[getMonth(date)]}
-                        onChange={({ target: { value } }) =>
-                          changeMonth(months.indexOf(value))
-                        }>
-                        {months.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select> */}
+                      <div className="year-and-month">
+                        <select
+                          className="select-year"
+                          value={getYear(date)}
+                          onChange={({ target: { value } }) =>
+                            changeYear(Number(value))
+                          }>
+                          {years.map((option: number) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          className="select-month"
+                          value={months[getMonth(date)]}
+                          onChange={({ target: { value } }) =>
+                            changeMonth(months.indexOf(value))
+                          }>
+                          {months.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                       <div className="arrowButton">
                         <button
                           onClick={decreaseMonth}

@@ -15,11 +15,9 @@ export const PrevButton = styled.div`
 export const NextButton = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   position: fixed;
 
-  width: 100%;
+  width: 20rem;
   padding: 1rem 0;
   bottom: 0;
   gap: 0.5rem;

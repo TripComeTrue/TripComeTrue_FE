@@ -21,11 +21,8 @@
     "@tanstack/react-query-devtools": "^5.15.0",
     "@use-gesture/react": "^10",
     "axios": "^1.6.2",
-<<<<<<< HEAD
     "date-fns": "^3.2.0",
-=======
     "lodash": "^4.17.21",
->>>>>>> c3c0082152b3e5c2ec90e97de19d4d027a99272e
     "react": "^18.2.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
