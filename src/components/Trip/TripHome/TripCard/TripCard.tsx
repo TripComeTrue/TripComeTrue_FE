@@ -1,6 +1,6 @@
 import { Avatar, Bookmark, Text } from '@/components/common';
 import * as Styled from './TripCard.styles';
-import mark from '/images/mark.svg';
+import MarkIcon from '/images/mark.svg';
 import comment from '/images/comment.svg';
 import pxToRem from '@/utils/pxToRem';
 import { TripCardProps } from './TripCard.types';
@@ -23,7 +23,7 @@ const TripCard = ({ size = 152 }: TripCardProps) => {
           <Text fontSize={10} color="white">
             류스나
           </Text>
-          <img src={mark} alt="markIcon" />
+          <img src={MarkIcon} alt="mark icon" />
         </Styled.Creator>
       </Styled.ImageContainer>
       <Styled.InfoContainer>
