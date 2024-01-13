@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { maxWidth } from '@/styles/common';
 
 export const NavWrap = styled.div`
   position: sticky;
@@ -9,8 +10,7 @@ export const NavWrap = styled.div`
 `;
 
 export const NavInner = styled.div`
-  width: 100%;
-  max-width: 768px;
+  ${maxWidth};
   margin: 0 auto;
   height: 100%;
   background-color: ${(props) => props.theme.brand.white};

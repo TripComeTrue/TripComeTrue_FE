@@ -43,7 +43,7 @@ function EmailInput({
           }
         }
         return '이미 가입된 회원입니다.';
-      }, 500),
+      }, 100),
     },
   };
 
