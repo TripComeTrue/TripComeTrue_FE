@@ -4,9 +4,16 @@ import { SlArrowDown } from 'react-icons/sl';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Button } from '@/components/common';
 import image from '../../../TripPlan/TripPlanCountry/constants/france.png';
+import { SelectedCitiesProps } from './CityListModal.types';
 
-const CityListModal = () => {
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+const CityListModal: React.FC<SelectedCitiesProps> = ({
+  selectedCities,
+  onCitySelection,
+  onCloseModal,
+}: SelectedCitiesProps) => {
+  const [selectedCitiesInModal, setSelectedCitiesInModal] = useState<string[]>(
+    [],
+  );
   const selectedCountries = [
     {
       name: '프랑스',
@@ -38,7 +45,7 @@ const CityListModal = () => {
       ?.cities || [];
 
   const selectCity = (cityName: string) => {
-    setSelectedCities((prevCities) => {
+    setSelectedCitiesInModal((prevCities) => {
       const isAlreadySelected = prevCities.includes(cityName);
       if (isAlreadySelected) {
         return prevCities.filter((city) => city !== cityName);
@@ -49,8 +56,8 @@ const CityListModal = () => {
   };
 
   useEffect(() => {
-    console.log(selectedCities);
-  }, [selectedCities]);
+    onCitySelection(selectedCitiesInModal);
+  }, [selectedCitiesInModal, onCitySelection]);
 
   return (
     <Styled.Wrapper>
@@ -86,7 +93,14 @@ const CityListModal = () => {
       <Styled.FinalSelectionButton>
         {' '}
         {selectedCities.length > 0 ? (
-          <Button variants="primary" size="lg" rounded="sm">
+          <Button
+            variants="primary"
+            size="lg"
+            rounded="sm"
+            onClick={() => {
+              onCitySelection(selectedCitiesInModal);
+              onCloseModal();
+            }}>
             {selectedCities.length === 1
               ? `${selectedCities[0]} 지역 선택 완료`
               : `${selectedCities[0]} 외 ${

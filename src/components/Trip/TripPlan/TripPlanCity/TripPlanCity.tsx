@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import { add, differenceInCalendarDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -17,11 +17,19 @@ const TripPlanCity = () => {
   const [isCityModalOpen, setIsCityModalOpen] = useState({
     isPaneOpenLeft: false,
   });
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
 
   const startDate = new Date(2024, 0, 11);
   const endDate = new Date(2024, 0, 14);
-
   const totalTripDays = differenceInCalendarDays(endDate, startDate);
+
+  const closeCityListModal = () => {
+    setIsCityModalOpen({ isPaneOpenLeft: false });
+  };
+
+  const handleCityModalSelection = (cities: string[]) => {
+    setSelectedCities(cities);
+  };
 
   const handleCheckAllSameCity = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsAllCitySame(e.target.checked);
@@ -32,10 +40,19 @@ const TripPlanCity = () => {
   };
 
   const handleChangeCityName = (city: string, index: number) => {
-    const newCityNames = [...cityNames];
+    const newCityNames = [...city];
     newCityNames[index] = city;
     setCityNames(newCityNames);
   };
+
+  useEffect(() => {
+    if (selectedCities.length > 0) {
+      const updatedCityNames = selectedCities.map((city, index) =>
+        index <= totalTripDays ? city : '',
+      );
+      setCityNames(updatedCityNames);
+    }
+  }, [selectedCities, totalTripDays]);
 
   const showInputPerDay = () => {
     const totalInputs = [];
@@ -63,14 +80,17 @@ const TripPlanCity = () => {
           </Styled.EachDayInputWrapper>
           <Styled.SlidingPane
             className="citymodal"
-            // hideHeader
             closeIcon={<SlArrowLeft fontSize="15" />}
             isOpen={isCityModalOpen.isPaneOpenLeft}
             onRequestClose={() => {
               setIsCityModalOpen({ isPaneOpenLeft: false });
             }}
             width="22.5rem">
-            <CityListModal />
+            <CityListModal
+              selectedCities={selectedCities}
+              onCitySelection={handleCityModalSelection}
+              onCloseModal={closeCityListModal}
+            />
           </Styled.SlidingPane>
         </Styled.EachDayContainer>,
       );
