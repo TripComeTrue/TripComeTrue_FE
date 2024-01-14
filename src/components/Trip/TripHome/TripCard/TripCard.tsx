@@ -28,7 +28,7 @@ const TripCard = ({ size = 152 }: TripCardProps) => {
       </Styled.ImageContainer>
       <Styled.InfoContainer>
         <Text fontSize={10} color="gray">
-          5박 7일・ 스위스 외 3곳
+          5박 7일 ・ 스위스 외 3곳
         </Text>
         <Text fontSize={12} fontWeight={700}>
           너는 돈만 준비해. 계획은...

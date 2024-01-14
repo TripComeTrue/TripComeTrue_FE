@@ -5,11 +5,13 @@ import Introduction from '@/components/Trip/TripDetail/Introduction/Introduction
 
 const TripDetail = () => {
   return (
-    <Styled.Container>
+    <div>
       <SimpleNav>여행후기</SimpleNav>
-      <MainCarousel />
-      <Introduction />
-    </Styled.Container>
+      <Styled.Container>
+        <MainCarousel />
+        <Introduction />
+      </Styled.Container>
+    </div>
   );
 };
 

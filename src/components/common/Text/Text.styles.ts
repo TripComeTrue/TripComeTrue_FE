@@ -13,12 +13,15 @@ const textColor = {
   primary: css`
     color: ${({ theme }) => theme.brand.primary};
   `,
+  tag: css`
+    color: ${({ theme }) => theme.brand.tag};
+  `,
 };
 
 export const Text = styled.span<{
   $fontSize: string;
   $fontWeight: number;
-  $color: 'white' | 'black' | 'gray' | 'primary';
+  $color: 'white' | 'black' | 'gray' | 'primary' | 'tag';
 }>`
   font-size: ${({ $fontSize }) => $fontSize};
   font-weight: ${({ $fontWeight }) => $fontWeight};
