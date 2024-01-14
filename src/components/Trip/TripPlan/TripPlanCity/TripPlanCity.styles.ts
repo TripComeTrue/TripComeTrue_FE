@@ -1,3 +1,4 @@
+import ReactSlidingPane from 'react-sliding-pane';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -53,6 +54,24 @@ export const EachDayInputWrapper = styled.div`
 
     width: 1.2rem;
     height: 1.2rem;
+  }
+`;
+
+export const SlidingPane = styled(ReactSlidingPane)`
+  .slide-pane__header {
+    height: 3.5rem;
+
+    background-color: white;
+    border: 0;
+
+    svg {
+      width: 0.9375rem;
+      height: 0.9375rem;
+    }
+  }
+
+  .slide-pane__close {
+    margin: 0;
   }
 `;
 

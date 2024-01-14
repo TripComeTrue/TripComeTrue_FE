@@ -1,5 +1,13 @@
+import * as Styled from '../../TripPlanCommon/TripPlanCommon.styles';
+
 const CityListModal = () => {
-  return <div>CityListModal</div>;
+  return (
+    <Styled.Wrapper>
+      <Styled.Container>
+        <select></select>
+      </Styled.Container>
+    </Styled.Wrapper>
+  );
 };
 
 export default CityListModal;

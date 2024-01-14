@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
 import { add, differenceInCalendarDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';
 import Checkbox from '@mui/material/Checkbox';
+import { SlArrowLeft } from 'react-icons/sl';
 import * as Styled from './TripPlanCity.styles';
 import { SubTitle } from '@/components/common';
 import {
   TripPlanPrevButton,
   TripPlanNextButton,
 } from '../TripPlanCommon/TripPlanCommon';
+import CityListModal from './CityListModal/CityListModal';
 const TripPlanCity = () => {
   const [cityNames, setCityNames] = useState<string[]>([]);
   const [isAllCitySame, setIsAllCitySame] = useState(false);
+  const [isCityModalOpen, setIsCityModalOpen] = useState({
+    isPaneOpenLeft: false,
+  });
 
   const startDate = new Date(2024, 0, 11);
   const endDate = new Date(2024, 0, 14);
@@ -52,8 +59,20 @@ const TripPlanCity = () => {
               value={cityNames[i] || ''}
               onChange={(e) => handleChangeCityName(e.target.value, i)}
               disabled={isAllCitySame}
+              onClick={() => setIsCityModalOpen({ isPaneOpenLeft: true })}
             />
           </Styled.EachDayInputWrapper>
+          <Styled.SlidingPane
+            className="citymodal"
+            // hideHeader
+            closeIcon={<SlArrowLeft fontSize="15" />}
+            isOpen={isCityModalOpen.isPaneOpenLeft}
+            onRequestClose={() => {
+              setIsCityModalOpen({ isPaneOpenLeft: false });
+            }}
+            width="22.5rem">
+            <CityListModal />
+          </Styled.SlidingPane>
         </Styled.EachDayContainer>,
       );
     }
