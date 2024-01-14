@@ -21,7 +21,7 @@ export const NextButton = styled.div`
   flex-direction: row;
   position: fixed;
 
-  width: 20rem;
+  width: calc(100vw - 10%);
   padding: 1rem 0;
   bottom: 0;
   gap: 0.5rem;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as Styled from '../TripPlanCountry/TripPlanCountry.styles';
 import { Continent } from './TripPlanCountry.types';
 import { worldData } from './constants/CountryData';
@@ -21,6 +21,16 @@ const TripPlanCountry = () => {
     setContinent(continentName || '전체');
   };
 
+  const getCountries = () => {
+    if (continent === '전체') {
+      return worldData[isOverseas ? '해외' : '국내'][0].subCategories;
+    }
+    const selectedContinent = worldData[isOverseas ? '해외' : '국내'].find(
+      (conti) => conti.name === continent,
+    );
+    return selectedContinent ? selectedContinent.subCategories : [];
+  };
+
   const selectCountry = (countryName: string) => {
     setCountry((prevCountries) => {
       if (prevCountries.includes(countryName)) {
@@ -37,19 +47,11 @@ const TripPlanCountry = () => {
     );
   };
 
-  const getCountries = () => {
-    if (continent === '전체') {
-      return worldData[isOverseas ? '해외' : '국내'][0].subCategories;
-    }
-    const selectedContinent = worldData[isOverseas ? '해외' : '국내'].find(
-      (conti) => conti.name === continent,
-    );
-    return selectedContinent ? selectedContinent.subCategories : [];
+  const getCountryImgByName = (countryName: string) => {
+    return worldData[isOverseas ? '해외' : '국내']
+      .flatMap((continent) => continent.subCategories)
+      .find((country) => country.name === countryName);
   };
-
-  useEffect(() => {
-    console.log('Current continent:', continent);
-  }, [continent]);
 
   return (
     <>
@@ -115,15 +117,19 @@ const TripPlanCountry = () => {
         </Styled.Container>
 
         <Styled.SelectedCountries country={country}>
-          {country.map((selectedCountry, index) => (
-            <div key={index}>
-              {selectedCountry}
-              <Styled.RemoveButton
-                onClick={() => removeCountry(selectedCountry)}>
-                x
-              </Styled.RemoveButton>
-            </div>
-          ))}
+          {country.map((selectedCountryName, index) => {
+            const selectedCountry = getCountryImgByName(selectedCountryName);
+            return (
+              <div key={index}>
+                <img src={selectedCountry?.img} />
+                <div className="selected-name">{selectedCountryName}</div>
+                <Styled.RemoveButton
+                  onClick={() => removeCountry(selectedCountryName)}>
+                  x
+                </Styled.RemoveButton>
+              </div>
+            );
+          })}
         </Styled.SelectedCountries>
         <TripPlanNextButton />
       </Styled.Wrapper>

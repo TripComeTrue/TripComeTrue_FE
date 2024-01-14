@@ -131,7 +131,7 @@ export const CountryContainer = styled.div`
     position: absolute;
     bottom: 0.5rem;
 
-    line-height: 1.1rem;
+    line-height: 1rem;
     color: ${({ theme }) => theme.brand.white};
   }
 
@@ -140,7 +140,7 @@ export const CountryContainer = styled.div`
   }
 
   .country-eng {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 `;
 
@@ -152,30 +152,51 @@ export const SelectedCountries = styled.div<SelectedCountriesProps>`
   position: fixed;
   bottom: 0;
 
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.7rem;
+  padding: 1rem 0;
 
-  width: 100%;
-  height: calc(100vh - 78%);
+  width: 22.5rem;
+  height: calc(100vh - 79%);
   background-color: white;
 
   div {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
 
-    height: 3rem;
-    object-fit: cover;
-    white-space: nowrap;
-    padding: 1rem;
-    border-radius: 15rem;
-    background-color: #d9d9d9;
+    padding: 0 0.2rem;
+
+    img {
+      width: 2.2rem;
+      height: 2.2rem;
+      border: 1.5px solid #b4f34c;
+      border-radius: 10rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .selected-name {
+      font-size: 0.625rem;
+    }
   }
 `;
 
 export const RemoveButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
-  right: 0.3rem;
+  right: 0.2rem;
   top: 0;
+
+  width: 0.7rem;
+  height: 0.7rem;
+  background-color: #626262;
+  border-radius: 50%;
+
+  font-size: 0.6rem;
+  color: white;
 `;
