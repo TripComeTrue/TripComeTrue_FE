@@ -1,6 +1,7 @@
 import {
   TripPlanDate,
   TripPlanCountry,
+  TripPlanCity,
 } from '../../../components/Trip/TripPlan';
 
 const TripPlan = () => {
@@ -8,6 +9,7 @@ const TripPlan = () => {
     <>
       <TripPlanDate />
       <TripPlanCountry />
+      <TripPlanCity />
     </>
   );
 };
