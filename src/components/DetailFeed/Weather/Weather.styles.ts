@@ -2,12 +2,10 @@ import styled from 'styled-components';
 import { alignCenter, justifyAround } from '@/styles/common';
 
 export const WeatherWrapper = styled.section`
-  width: 100%;
   height: 11rem;
 `;
 
 export const WeatherBox = styled.div`
-  width: 20rem;
   height: 6rem;
 
   margin-top: 1rem;

@@ -2,13 +2,11 @@ import styled from 'styled-components';
 import { justifyBetween } from '@/styles/common';
 
 export const ExchangeRateWrapper = styled.section`
-  width: 100%;
   height: 15rem;
   margin: 1rem 0;
 `;
 
 export const ExchangeRateBox = styled.div`
-  width: 100%;
   height: 10rem;
 
   display: flex;
@@ -23,7 +21,6 @@ export const ExchangeRateBox = styled.div`
 `;
 
 export const ExchangeRateContent = styled.div`
-  width: 100%;
   height: 3.25rem;
   ${justifyBetween}
 `;
@@ -38,7 +35,6 @@ export const ContentLeftBox = styled.div`
 `;
 
 export const CurrencyUnit = styled.div`
-  width: 100%;
   height: 1.4rem;
 
   padding: 0 0.45rem;

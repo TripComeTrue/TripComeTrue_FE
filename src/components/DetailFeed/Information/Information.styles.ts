@@ -1,18 +1,19 @@
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { alignCenter } from '@/styles/common';
 
 export const InformationWrapper = styled.section`
   height: 11rem;
 `;
 
-export const InformationBox = styled.div`
+export const InformationBox = styled(Swiper)`
   display: flex;
   gap: 0.5rem;
 
   margin-top: 1rem;
 `;
 
-export const InformationItem = styled.div`
+export const InformationItem = styled(SwiperSlide)`
   width: 7.5rem;
   height: 7.5rem;
   border-radius: 0.625rem;
