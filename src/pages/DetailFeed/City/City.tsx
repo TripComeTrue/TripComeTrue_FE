@@ -2,6 +2,7 @@ import {
   Banner,
   DetailFeedShorts,
   ExchangeRate,
+  Gallery,
   HotPlace,
   Information,
   TopReview,
@@ -13,6 +14,7 @@ const City = () => {
   return (
     <styled.CityWrap>
       <DetailFeedShorts />
+      <Gallery />
       <Weather />
       <Information />
       <ExchangeRate />

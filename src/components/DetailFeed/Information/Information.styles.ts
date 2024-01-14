@@ -7,9 +7,6 @@ export const InformationWrapper = styled.section`
 `;
 
 export const InformationBox = styled(Swiper)`
-  display: flex;
-  gap: 0.5rem;
-
   margin-top: 1rem;
 `;
 
