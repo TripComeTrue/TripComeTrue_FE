@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { add, differenceInCalendarDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';
+import Checkbox from '@mui/material/Checkbox';
 import * as Styled from './TripPlanCity.styles';
 import { SubTitle } from '@/components/common';
 import {
@@ -70,10 +71,11 @@ const TripPlanCity = () => {
           </Styled.Title>
 
           <label htmlFor="eachday">
-            <input
-              type="checkbox"
+            <Checkbox
               checked={isAllCitySame}
               onChange={handleCheckAllSameCity}
+              size="small"
+              style={{ width: '1rem', height: '1rem', color: '#b4f34c' }}
             />{' '}
             <span className="checkbox-text">방문 지역 모두 동일</span>
             {showInputPerDay()}

@@ -23,10 +23,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  input[type='checkbox'] {
-    border: 1px solid #b4f34c;
-  }
-
   .checkbox-text {
     font-size: ${({ theme }) => theme.fontSizes.xs};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
@@ -69,7 +65,7 @@ export const EachDayInput = styled.input`
   border-radius: 0.5rem;
   -webkit-transition: 0.3s;
   transition: border-color 0.3s;
-  outline-color: #ffe91e; // active시 border color
+  outline-color: #ffab00; // active시 border color
 
   font-size: ${({ theme }) => theme.fontSizes.xs};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
