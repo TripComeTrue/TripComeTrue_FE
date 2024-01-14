@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import { add, differenceInCalendarDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';

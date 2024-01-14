@@ -59,8 +59,6 @@ export const EachDayInputWrapper = styled.div`
 
 export const SlidingPane = styled(ReactSlidingPane)`
   .slide-pane__header {
-    height: 3.5rem;
-
     background-color: white;
     border: 0;
 
