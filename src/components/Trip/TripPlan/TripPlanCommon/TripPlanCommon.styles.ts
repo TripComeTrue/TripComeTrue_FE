@@ -21,7 +21,7 @@ export const NextButton = styled.div`
   flex-direction: row;
   position: fixed;
 
-  width: calc(100vw - 10%);
+  width: 20.625rem;
   padding: 1rem 0;
   bottom: 0;
   gap: 0.5rem;
@@ -41,9 +41,9 @@ export const Title = styled.div`
   padding: 0;
   margin-bottom: 1rem;
 
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   font-weight: ${({ theme }) => theme.fontWeights.light};
-  line-height: 2.5rem;
+  line-height: 2.2rem;
 `;
 
 export const Container = styled.div`

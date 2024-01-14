@@ -1,17 +1,18 @@
+import React, { useState } from 'react';
 import { add, differenceInCalendarDays } from 'date-fns';
+import PlaceIcon from '@mui/icons-material/Place';
 import * as Styled from './TripPlanCity.styles';
 import { SubTitle } from '@/components/common';
 import {
   TripPlanPrevButton,
   TripPlanNextButton,
 } from '../TripPlanCommon/TripPlanCommon';
-import React, { useState } from 'react';
 const TripPlanCity = () => {
   const [cityNames, setCityNames] = useState<string[]>([]);
   const [isAllCitySame, setIsAllCitySame] = useState(false);
 
   const startDate = new Date(2024, 0, 11);
-  const endDate = new Date(2024, 0, 15);
+  const endDate = new Date(2024, 0, 14);
 
   const totalTripDays = differenceInCalendarDays(endDate, startDate);
 
@@ -36,47 +37,50 @@ const TripPlanCity = () => {
       let eachTripDate = add(startDate, { days: i });
       totalInputs.push(
         <Styled.EachDayContainer key={i}>
-          <SubTitle fontSize={18}>
-            {i + 1}일차{' '}
+          <SubTitle fontSize={15}>
+            {i + 1}일차
             <Styled.EachDayText>
               ({eachTripDate.toLocaleDateString('ko')})
             </Styled.EachDayText>
           </SubTitle>
-          <Styled.EachDayInput
-            type="text"
-            placeholder="방문 지역을 선택해주세요"
-            value={cityNames[i] || ''}
-            onChange={(e) => handleChangeCityName(e.target.value, i)}
-            disabled={isAllCitySame}
-          />
+          <Styled.EachDayInputWrapper>
+            <PlaceIcon className="city-icon" style={{ fill: '#b4f34c' }} />
+            <Styled.EachDayInput
+              type="text"
+              placeholder="방문 지역을 선택해주세요"
+              value={cityNames[i] || ''}
+              onChange={(e) => handleChangeCityName(e.target.value, i)}
+              disabled={isAllCitySame}
+            />
+          </Styled.EachDayInputWrapper>
         </Styled.EachDayContainer>,
       );
     }
-
     return totalInputs;
   };
 
   return (
     <>
-      <TripPlanPrevButton />
       <Styled.Wrapper>
-        <SubTitle fontSize={20} margin="0.2rem">
-          여행 기간 동안
-          <br /> 방문할 지역을 선택해 주세요.
-        </SubTitle>
+        <TripPlanPrevButton />
         <Styled.Container>
+          <Styled.Title>
+            여행 기간 동안
+            <br /> 어느 지역을 방문했나요?
+          </Styled.Title>
+
           <label htmlFor="eachday">
             <input
               type="checkbox"
               checked={isAllCitySame}
               onChange={handleCheckAllSameCity}
             />{' '}
-            <span>방문 지역 모두 동일</span>
+            <span className="checkbox-text">방문 지역 모두 동일</span>
             {showInputPerDay()}
           </label>
         </Styled.Container>
+        <TripPlanNextButton />
       </Styled.Wrapper>
-      <TripPlanNextButton />
     </>
   );
 };

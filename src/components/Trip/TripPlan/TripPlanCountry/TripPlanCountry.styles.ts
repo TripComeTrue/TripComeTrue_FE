@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
+  width: 100%;
   padding: 0.2rem 1.2rem;
 `;
 
@@ -17,15 +18,14 @@ export const Title = styled.div`
   padding: 0;
   margin-bottom: 1rem;
 
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   font-weight: ${({ theme }) => theme.fontWeights.light};
-  line-height: 2.5rem;
+  line-height: 2.2rem;
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
 `;
 
 export const OverseasDomesticContainer = styled.div`
