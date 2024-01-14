@@ -1,90 +1,12 @@
-import React, { ButtonHTMLAttributes, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoSearchOutline } from 'react-icons/io5';
-import styled from 'styled-components';
-import SearchResult from './SearchResult';
-
-interface TabButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isSelected: boolean;
-}
-
-const SearchTop = styled.div`
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-
-  padding: 0.56rem 1.25rem 0.56rem 1rem;
-
-  font-size: ${({ theme }) => theme.fontSizes.md};
-`;
-
-const SearchForm = styled.form`
-  position: relative;
-  margin: 1rem;
-
-  button {
-    position: absolute;
-    top: 15%;
-    right: 1.2rem;
-    color: ${({ theme }) => theme.brand.primary};
-  }
-`;
-
-const SearchInput = styled.input`
-  padding: 0.6rem 3rem 0.6rem 1.5rem;
-  width: 100%;
-
-  box-sizing: border-box;
-  background-color: #2f2f2f;
-  border-radius: 1.875rem;
-  text-decoration: none;
-  border: none;
-  outline: none;
-  color: ${({ theme }) => theme.brand.white};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-
-  &:focus {
-    border: none;
-    outline: none;
-  }
-
-  &::placeholder {
-    color: ${({ theme }) => theme.brand.white};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-  }
-`;
-
-const TabContainer = styled.div`
-  margin: 0 1rem 1rem;
-  display: flex;
-  justify-content: flex-start;
-`;
-
-const TabButton = styled.button<TabButtonProps>`
-  position: relative;
-  padding: 0.5rem 0.7rem;
-  border: none;
-  background-color: transparent;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
-  color: ${({ isSelected }) => (isSelected ? '#373737' : '#626262')};
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    height: 0.125rem;
-    background-color: ${({ theme }) => theme.brand.primary};
-    transition:
-      width 0.3s,
-      transform 0.3s;
-    transform: translateX(-50%);
-    width: ${({ isSelected }) => (isSelected ? '80%' : '0')};
-  }
-`;
+import * as Styled from './Search.styles';
+import SearchAll from './SearchAll';
+import SearchCity from './SearchCity';
+import SearchSpot from './SearchSpot';
+import SearchCreator from './SearchCreator';
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -114,15 +36,29 @@ const Search: React.FC = () => {
     handleSearch();
   };
 
+  let SearchResult: JSX.Element | null = null;
+
+  if (tab === 'all') {
+    SearchResult = <SearchAll />;
+  } else if (tab === 'city') {
+    SearchResult = <SearchCity />;
+  } else if (tab === 'spot') {
+    SearchResult = <SearchSpot />;
+  } else if (tab === 'creator') {
+    SearchResult = <SearchCreator />;
+  } else if (tab === null) {
+    SearchResult = <div> </div>;
+  }
+
   if (searchParams.get('query') === null) {
     return (
       <>
-        <SearchTop>
+        <Styled.SearchTop>
           <IoIosArrowBack style={{ fontSize: 20, marginRight: 8 }} />
           검색
-        </SearchTop>
-        <SearchForm onSubmit={handleSubmit}>
-          <SearchInput
+        </Styled.SearchTop>
+        <Styled.SearchForm onSubmit={handleSubmit}>
+          <Styled.SearchInput
             type="text"
             name="query"
             value={query}
@@ -132,7 +68,7 @@ const Search: React.FC = () => {
           <button type="submit" aria-label="검색">
             <IoSearchOutline />
           </button>
-        </SearchForm>
+        </Styled.SearchForm>
       </>
     );
   }
@@ -140,12 +76,12 @@ const Search: React.FC = () => {
   if (searchParams.has('tab') && searchParams.has('query')) {
     return (
       <>
-        <SearchTop>
+        <Styled.SearchTop>
           <IoIosArrowBack style={{ fontSize: 20, marginRight: 8 }} />
           검색
-        </SearchTop>
-        <SearchForm onSubmit={handleSubmit}>
-          <SearchInput
+        </Styled.SearchTop>
+        <Styled.SearchForm onSubmit={handleSubmit}>
+          <Styled.SearchInput
             type="text"
             name="query"
             value={query}
@@ -155,32 +91,32 @@ const Search: React.FC = () => {
           <button type="submit" aria-label="검색">
             <IoSearchOutline />
           </button>
-        </SearchForm>
+        </Styled.SearchForm>
 
-        <TabContainer>
-          <TabButton
+        <Styled.TabContainer>
+          <Styled.TabButton
             isSelected={tab === 'all'}
             onClick={() => handleTabChange('all')}>
             전체
-          </TabButton>
-          <TabButton
+          </Styled.TabButton>
+          <Styled.TabButton
             isSelected={tab === 'city'}
             onClick={() => handleTabChange('city')}>
             도시
-          </TabButton>
-          <TabButton
+          </Styled.TabButton>
+          <Styled.TabButton
             isSelected={tab === 'spot'}
             onClick={() => handleTabChange('spot')}>
             여행지
-          </TabButton>
-          <TabButton
+          </Styled.TabButton>
+          <Styled.TabButton
             isSelected={tab === 'creator'}
             onClick={() => handleTabChange('creator')}>
             크리에이터
-          </TabButton>
-        </TabContainer>
+          </Styled.TabButton>
+        </Styled.TabContainer>
 
-        <SearchResult tab={tab} />
+        {SearchResult}
       </>
     );
   }
