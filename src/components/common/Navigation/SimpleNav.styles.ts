@@ -23,7 +23,7 @@ export const NavBackBtn = styled.div`
   width: 1.25rem;
   cursor: pointer;
   img {
-    margin-top: 4px;
+    margin-top: 0.5rem;
   }
 `;
 
