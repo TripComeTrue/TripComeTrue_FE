@@ -3,7 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
-import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
+import { TripDetail, TripHome, TripList } from '@/pages/Trip';
+import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
+import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 
@@ -25,7 +27,9 @@ function App() {
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:id" element={<TripDetail />} />
-          <Route path="plan" element={<TripPlan />} />
+          <Route path="plan" element={<TripPlanDate />} />
+          <Route path="country" element={<TripPlanCountry />} />
+          <Route path="city" element={<TripPlanCity />} />
         </Route>
       </Route>
     </Routes>
