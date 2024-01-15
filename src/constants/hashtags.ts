@@ -1,3 +1,5 @@
+import { TagTypeEnum } from '@/components/Trip/TripPlan/TripPlanPosting/TripPlanTagModal.types';
+
 interface HashTag {
   type: 'with' | 'type' | 'other';
   name: string;
@@ -28,3 +30,27 @@ const HASH_TAGS: HashTag[] = [
 ];
 
 export default HASH_TAGS;
+
+interface TripTag {
+  value: TagTypeEnum;
+  label: string;
+}
+
+export const TRIP_TAGS: TripTag[] = [
+  {
+    value: TagTypeEnum.flight,
+    label: '항공권 구매 주소',
+  },
+  {
+    value: TagTypeEnum.accommodation,
+    label: '숙박시설 예약 주소',
+  },
+  {
+    value: TagTypeEnum.location,
+    label: '음식점/관광시설 등의 위치 주소',
+  },
+  {
+    value: TagTypeEnum.ticket,
+    label: '티켓/입장권/패스 구매 주소',
+  },
+];
