@@ -20,7 +20,7 @@ const Information = () => {
       <SubTitle>기본 정보</SubTitle>
       <Styled.InformationBox
         spaceBetween={8}
-        slidesPerView={2.4}
+        slidesPerView={2.6}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {INFORMATION_DATA.map((data) => (
           <Styled.InformationItem key={data.id}>
