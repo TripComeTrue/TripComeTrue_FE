@@ -1,30 +1,39 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import ko from 'date-fns/locale/ko';
-import { differenceInDays } from 'date-fns';
 import DatePicker from 'react-datepicker';
+import ko from 'date-fns/locale/ko';
+import { getYear, getMonth, differenceInDays } from 'date-fns';
+import _ from 'lodash';
+import CalendarToday from '@mui/icons-material/CalendarMonth';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePickerStyles.css';
-import CalendarToday from '@mui/icons-material/CalendarMonth';
-import * as Styled from './TripPlanDate.styles';
-import { Button } from '@/components/common';
-
-interface DateProps {
-  startDate: Date | null;
-  endDate: Date | null;
-}
+import * as Styled from '../TripPlanCommon/TripPlanCommon.styles';
+import {
+  TripPlanPrevButton,
+  TripPlanNextButton,
+} from '../TripPlanCommon/TripPlanCommon';
 
 const TripPlanDate = () => {
-  const navigate = useNavigate();
-  const [dateRange, setDateRange] = useState<DateProps>({
+  const [dateRange, setDateRange] = useState<TripDateProps>({
     startDate: new Date(),
     endDate: null,
   });
   const { startDate, endDate } = dateRange;
+  const years = _.range(2010, getYear(new Date()) + 10);
+  const months = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+  ];
 
-  const goBack = () => {
-    navigate(-1);
-  };
   const getNightAndDays = () => {
     if (startDate && endDate) {
       const nights = differenceInDays(endDate, startDate);
@@ -34,44 +43,107 @@ const TripPlanDate = () => {
   };
 
   return (
-    <Styled.Wrapper>
-      <Styled.DateContainer>
-        <h1>여행 기간을 선택해 주세요.</h1>
-        <DatePicker
-          selected={startDate}
-          startDate={startDate}
-          endDate={endDate}
-          selectsRange
-          minDate={new Date()}
-          locale={ko}
-          dateFormat="yyyy.MM.dd"
-          isClearable
-          showPopperArrow={false}
-          onChange={(date) =>
-            setDateRange({
-              startDate: date[0] || null,
-              endDate: date[1] || null,
-            })
-          }
-          open
-          showMonthDropdown
-          showYearDropdown
-          showIcon
-          icon={<CalendarToday style={{ fill: '#ABABAB' }} />}>
-          <label className="react-datepicker-nightndays">
-            {getNightAndDays()}
-          </label>
-        </DatePicker>
-      </Styled.DateContainer>
-      <Styled.ButtonContainer>
-        <Button variants="gray-border" size="lg" rounded="sm" onClick={goBack}>
-          취소
-        </Button>
-        <Button variants="gray" size="lg" rounded="sm">
-          <Link to="/trip/country">다음</Link>
-        </Button>
-      </Styled.ButtonContainer>
-    </Styled.Wrapper>
+    <>
+      <Styled.Wrapper>
+        <TripPlanPrevButton />
+        <Styled.Container>
+          <Styled.Title>
+            여행 기간을 <br />
+            선택해 주세요
+          </Styled.Title>
+          <DatePicker
+            selected={startDate}
+            startDate={startDate}
+            endDate={endDate}
+            minDate={null}
+            disabledKeyboardNavigation
+            selectsRange
+            locale={ko}
+            dateFormat="yyyy.MM.dd"
+            isClearable
+            showPopperArrow={false}
+            onChange={(date) =>
+              setDateRange({
+                startDate: date[0] || null,
+                endDate: date[1] || null,
+              })
+            }
+            open
+            showIcon
+            icon={<CalendarToday />}
+            renderCustomHeader={({
+              date,
+              changeYear,
+              changeMonth,
+              decreaseMonth,
+              increaseMonth,
+              prevMonthButtonDisabled,
+              nextMonthButtonDisabled,
+            }) => {
+              return (
+                <div
+                  style={{
+                    margin: 10,
+                  }}>
+                  <div>
+                    <div className="header">
+                      <div className="year-and-month">
+                        <select
+                          className="select-year"
+                          value={getYear(date)}
+                          onChange={({ target: { value } }) =>
+                            changeYear(Number(value))
+                          }>
+                          {years.map((option: number) => (
+                            <option
+                              className="year-dropdown"
+                              key={option}
+                              value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          className="select-month"
+                          value={months[getMonth(date)]}
+                          onChange={({ target: { value } }) =>
+                            changeMonth(months.indexOf(value))
+                          }>
+                          {months.map((option) => (
+                            <option
+                              className="month-dropdown"
+                              key={option}
+                              value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="arrowButton">
+                        <button
+                          onClick={decreaseMonth}
+                          disabled={prevMonthButtonDisabled}>
+                          {'<'}
+                        </button>
+                        <button
+                          onClick={increaseMonth}
+                          disabled={nextMonthButtonDisabled}>
+                          {'>'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }}>
+            <label className="react-datepicker-nightndays">
+              {getNightAndDays()}
+            </label>
+          </DatePicker>
+        </Styled.Container>
+        <TripPlanNextButton />
+      </Styled.Wrapper>
+    </>
   );
 };
 
