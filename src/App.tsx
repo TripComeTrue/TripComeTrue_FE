@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
-import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
+import { TripDetail, TripHome, TripList } from '@/pages/Trip';
 import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
 import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import Home from './pages/Home/Home';
