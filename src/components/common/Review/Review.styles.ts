@@ -59,7 +59,6 @@ export const HotplaceDesWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  border-radius: 0 0 10px 10px;
 `;
 
 export const DesNightPlace = styled.div`
