@@ -36,6 +36,7 @@
     "swiper": "^11.0.5"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.54.10",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.43",

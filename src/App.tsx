@@ -8,6 +8,7 @@ import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
 import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="plan" element={<TripPlanDate />} />
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
+          <Route path="posting" element={<TripPlanPosting />} />
         </Route>
       </Route>
     </Routes>
