@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/common';
+import { Bookmark, SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
 import bankok from '/bangkok.png';
 
@@ -19,6 +19,9 @@ const Gallery = () => {
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {GELLARY_DATA.map((item) => (
           <Styled.GellaryItem key={item.id}>
+            <Styled.BookMarkBox>
+              <Bookmark count={20} />
+            </Styled.BookMarkBox>
             <img src={item.img} alt="방콕 사진" />
           </Styled.GellaryItem>
         ))}

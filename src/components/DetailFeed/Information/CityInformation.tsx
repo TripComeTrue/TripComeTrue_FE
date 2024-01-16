@@ -1,5 +1,5 @@
 import { SubTitle, Text } from '@/components/common';
-import * as Styled from './Information.styles';
+import * as Styled from './CityInformation.styles';
 import visa from '/visa.svg';
 import money from '/money.svg';
 import time from '/time.svg';
@@ -14,7 +14,7 @@ const INFORMATION_DATA = [
   { id: 5, content: '90일 무비자 체류', svg: visa },
 ];
 
-const Information = () => {
+const CityInformation = () => {
   return (
     <Styled.InformationWrapper>
       <SubTitle>기본 정보</SubTitle>
@@ -37,4 +37,4 @@ const Information = () => {
   );
 };
 
-export default Information;
+export default CityInformation;

@@ -38,15 +38,12 @@ export const MY_STYLES = [
 export const OPTIONS = {
   disableDefaultUI: true,
   styles: MY_STYLES,
-  center: {
-    lat: 37.569227,
-    lng: 126.9777256,
-  },
 };
 
 export const MAP_CONTAINER_STYLE = {
-  width: '360px',
-  height: '100vh',
+  width: '100%',
+  height: '13.5rem',
+  borderRadius: '10px',
 };
 
 export const FIELD_MASK_OPTIONS = [

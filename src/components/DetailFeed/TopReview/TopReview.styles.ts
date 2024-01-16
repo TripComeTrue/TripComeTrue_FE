@@ -32,7 +32,7 @@ export const DayOption = styled.div<DayOptionType>`
   display: flex;
   align-items: center;
 
-  border: 1px solid ${(props) => (props.daySelected ? 'white' : '#e2e2e2')};
+  border: 1px solid ${(props) => (props.selected ? 'white' : '#e2e2e2')};
   border-radius: 1.875rem;
 
   padding: 0.13rem 0.9rem;
@@ -40,7 +40,7 @@ export const DayOption = styled.div<DayOptionType>`
   cursor: pointer;
 
   background-color: ${(props) =>
-    props.daySelected
+    props.selected
       ? ({ theme }) => theme.brand.primary
       : ({ theme }) => theme.brand.white};
 `;
