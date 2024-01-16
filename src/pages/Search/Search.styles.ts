@@ -16,9 +16,11 @@ export const SearchForm = styled.form`
   position: relative;
   margin: 1rem;
 
+  cursor: pointer;
+
   button {
     position: absolute;
-    top: 15%;
+    top: 20%;
     right: 1.2rem;
     color: ${({ theme }) => theme.brand.primary};
   }
@@ -62,6 +64,8 @@ export const TabButton = styled.button<TabButtonProps>`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
   color: ${({ isSelected }) => (isSelected ? '#373737' : '#626262')};
+
+  cursor: pointer;
 
   &::after {
     content: '';

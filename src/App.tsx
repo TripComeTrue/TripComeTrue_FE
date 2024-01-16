@@ -9,6 +9,7 @@ import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 import Search from './pages/Search/Search';
+import SearchTag from './pages/Search/SearchTag';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         </Route>
         <Route path="home" element={<Home />} />
         <Route path="search/*" element={<Search />} />
+        <Route path="search/:tag" element={<SearchTag />} />
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />

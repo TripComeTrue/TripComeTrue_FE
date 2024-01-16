@@ -27,7 +27,7 @@ export const KeywordSelect = styled.div`
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.gray};
 
-  div {
+  button {
     margin: 0 0.2rem 0.4rem;
     padding: 0.1rem 0.6rem 0.15rem;
 
@@ -36,7 +36,7 @@ export const KeywordSelect = styled.div`
     border-radius: 1.8rem;
   }
 
-  div:hover {
+  button:hover {
     cursor: pointer;
   }
 `;
@@ -53,7 +53,7 @@ export const KeywordHotSelect = styled.div`
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.gray};
 
-  div {
+  button {
     margin: 0 0.2rem 0.4rem;
     padding: 0.1rem 0.6rem 0.15rem;
 
@@ -62,7 +62,7 @@ export const KeywordHotSelect = styled.div`
     border-radius: 1.8rem;
   }
 
-  div:hover {
+  button:hover {
     cursor: pointer;
   }
 `;
