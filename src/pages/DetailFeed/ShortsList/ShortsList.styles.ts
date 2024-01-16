@@ -17,5 +17,3 @@ export const ShortsListBox = styled.div`
     flex: 0 0 48%;
   }
 `;
-
-export const ShortsBox = styled.div``;
