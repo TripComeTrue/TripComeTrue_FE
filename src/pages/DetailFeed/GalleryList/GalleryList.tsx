@@ -1,7 +1,7 @@
 import { Bookmark, SimpleNav } from '@/components/common';
 import * as Styled from './GalleryList.styles';
 import { Filter } from '@/components/DetailFeed';
-import bangkok from '/bangkok.png';
+import jeju from '/domestic1.jpg';
 
 const GalleryList = () => {
   return (
@@ -13,31 +13,31 @@ const GalleryList = () => {
           <Styled.BookMarkBox>
             <Bookmark count={20} />
           </Styled.BookMarkBox>
-          <Styled.Photo src={bangkok} alt="방콕 사진" />
+          <Styled.Photo src={jeju} alt="방콕 사진" />
         </Styled.PhotoBox>
         <Styled.PhotoBox>
           <Styled.BookMarkBox>
             <Bookmark count={20} />
           </Styled.BookMarkBox>
-          <Styled.Photo src={bangkok} alt="방콕 사진" />
+          <Styled.Photo src={jeju} alt="방콕 사진" />
         </Styled.PhotoBox>
         <Styled.PhotoBox>
           <Styled.BookMarkBox>
             <Bookmark count={20} />
           </Styled.BookMarkBox>
-          <Styled.Photo src={bangkok} alt="방콕 사진" />
+          <Styled.Photo src={jeju} alt="방콕 사진" />
         </Styled.PhotoBox>
         <Styled.PhotoBox>
           <Styled.BookMarkBox>
             <Bookmark count={20} />
           </Styled.BookMarkBox>
-          <Styled.Photo src={bangkok} alt="방콕 사진" />
+          <Styled.Photo src={jeju} alt="방콕 사진" />
         </Styled.PhotoBox>
         <Styled.PhotoBox>
           <Styled.BookMarkBox>
             <Bookmark count={20} />
           </Styled.BookMarkBox>
-          <Styled.Photo src={bangkok} alt="방콕 사진" />
+          <Styled.Photo src={jeju} alt="방콕 사진" />
         </Styled.PhotoBox>
       </Styled.GalleryListBox>
     </div>
