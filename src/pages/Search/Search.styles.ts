@@ -10,6 +10,10 @@ export const SearchTop = styled.div`
   padding: 0.56rem 1.25rem 0.56rem 1rem;
 
   font-size: ${({ theme }) => theme.fontSizes.md};
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const SearchForm = styled.form`

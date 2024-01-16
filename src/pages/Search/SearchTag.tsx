@@ -20,6 +20,7 @@ const SearchTag = () => {
         />
         검색
       </Styled.SearchTop>
+
       <Styled.SearchForm>
         <Styled.SearchInput
           type="text"
@@ -40,7 +41,7 @@ const SearchTag = () => {
       </Styled.TabContainer>
 
       <Styled.TagContainer>
-        <Styled.TagTitle>&apos;{tag}&lsquo; 여행 후기</Styled.TagTitle>
+        <Styled.TagTitle>&apos;{tag}&apos; 여행 후기</Styled.TagTitle>
         <div>무한 스크롤</div>
       </Styled.TagContainer>
     </>
