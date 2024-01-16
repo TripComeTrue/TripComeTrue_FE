@@ -2,6 +2,17 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CreatorProfile from '../CreatorProfile/CreatorProfile';
+import exampleImg from '/domestic1.jpg';
+
+export interface CreatorData {
+  userImg: string;
+  username: string;
+  userInfo: string;
+  rate?: number;
+  userId: string;
+  review: number;
+  shorts: number;
+}
 
 const CreatorTop = styled.div`
   margin-bottom: 1rem;
@@ -27,6 +38,17 @@ const CreatorMore = () => {
     navigate(-1);
   };
 
+  const CreatorDatas: CreatorData = {
+    userImg: exampleImg,
+    username: '맥주덕후',
+    userInfo:
+      '독일에서 교환학생하며 실감나는 유럽의 삶을 담고 있는 유럽의 맥주덕후입니다.',
+    userId: 'user1',
+    rate: 4.8,
+    review: 18,
+    shorts: 7,
+  };
+
   return (
     <>
       <CreatorTop>
@@ -38,7 +60,9 @@ const CreatorMore = () => {
       </CreatorTop>
 
       <div>
-        <CreatorProfile />
+        <CreatorProfile data={CreatorDatas} />
+        <CreatorProfile data={CreatorDatas} />
+        <CreatorProfile data={CreatorDatas} />
       </div>
     </>
   );
