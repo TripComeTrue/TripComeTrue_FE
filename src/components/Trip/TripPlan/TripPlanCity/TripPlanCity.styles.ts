@@ -80,9 +80,7 @@ export const EachDayInput = styled.input`
 
   border: 1px solid #b4f34c;
   border-radius: 0.5rem;
-  -webkit-transition: 0.3s;
-  transition: border-color 0.3s;
-  outline-color: #ffab00; // active시 border color
+  outline-color: #b4f34c;
 
   font-size: ${({ theme }) => theme.fontSizes.xs};
   font-weight: ${({ theme }) => theme.fontWeights.bold};

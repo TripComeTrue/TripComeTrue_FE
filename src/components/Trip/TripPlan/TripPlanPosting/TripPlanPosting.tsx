@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { differenceInDays } from 'date-fns';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { GoPlusCircle } from 'react-icons/go';
+import speechBubble from '../../../../../public/images/speech-bubble.svg';
 import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
 import { TripPlanPrevButton } from '../TripPlanCommon/TripPlanCommon';
 import * as Styled from './TripPlanPosting.styles';
@@ -11,6 +16,7 @@ import * as Styled from './TripPlanPosting.styles';
 const TripPlanPosting = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const { register, handleSubmit, setValue } = useForm();
+  const UploadPhotoIconRef = useRef<HTMLInputElement>(null);
 
   // const navigate = useNavigate();
   const startDate = new Date('2024-01-12');
@@ -23,6 +29,7 @@ const TripPlanPosting = () => {
       city: '',
       place: '',
       note: '',
+      photo: '',
     })),
   );
 
@@ -75,6 +82,26 @@ const TripPlanPosting = () => {
     //   });
   };
 
+  const onImgUpload = (event: React.MouseEvent) => {
+    event.preventDefault();
+    UploadPhotoIconRef.current?.click();
+  };
+
+  const onImgChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    day: number,
+  ) => {
+    const file = event.target.files ? event.target.files[0] : null;
+    if (file) {
+      const fileUrl = URL.createObjectURL(file);
+      setFormData((prevFormData) => {
+        const newFormData = [...prevFormData];
+        newFormData[day] = { ...newFormData[day], photo: fileUrl };
+        return newFormData;
+      });
+    }
+  };
+
   const createDaysInput = () => {
     return (
       <Styled.TotalWrapper>
@@ -105,6 +132,7 @@ const TripPlanPosting = () => {
                   }
                 }}
               />
+
               <Styled.PlaceInputContainer>
                 <Styled.PlaceNumber>1</Styled.PlaceNumber>
                 <Styled.PlaceInput
@@ -118,6 +146,7 @@ const TripPlanPosting = () => {
                   }}
                 />
               </Styled.PlaceInputContainer>
+
               <Styled.NoteInput
                 {...register(`day${selectedDay}.note`)}
                 placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
@@ -127,6 +156,43 @@ const TripPlanPosting = () => {
                   }
                 }}
               />
+
+              <Styled.UploadPhotoIcon onClick={onImgUpload}>
+                <AddAPhotoIcon className="photo-icon" />
+                <p className="photo-text">사진 업로드</p>
+              </Styled.UploadPhotoIcon>
+              <Styled.PhotoInput
+                ref={UploadPhotoIconRef}
+                type="file"
+                accept="image/*"
+                name="file"
+                onChange={(event) => onImgChange}
+              />
+
+              <Styled.TagsInputContainer>
+                <Styled.TagsInputTitle>
+                  <LocalOfferIcon
+                    className="tag-icon"
+                    style={{
+                      width: '1.1rem',
+                      height: '1.1rem',
+                      fill: '#b4f34c',
+                    }}
+                  />
+                  여행 태그 추가하고 포인트 받아가세요!
+                </Styled.TagsInputTitle>
+                <Styled.TagsAddButton>
+                  <AddCircleIcon
+                    style={{
+                      width: '1.2rem',
+                      height: '1.2rem',
+                      fill: '#b4f34c',
+                    }}
+                  />{' '}
+                  태그 추가하기 <img src={speechBubble} aria-label="add tag" />
+                </Styled.TagsAddButton>
+                <Styled.TagsInput />
+              </Styled.TagsInputContainer>
             </Styled.PostingForm>
           </Styled.InputContainer>
         }
@@ -146,11 +212,18 @@ const TripPlanPosting = () => {
             <div className="nightndays">{getNightAndDays()}</div>
             <CalendarToday className="calendar-icon" />
           </Styled.DateDisplay>
+
           <Styled.GoogleMapsContainer>
             <TripPlanGoogleMaps />
           </Styled.GoogleMapsContainer>
+
           <Styled.InputContainer>{createDaysInput()}</Styled.InputContainer>
         </Styled.Container>
+
+        <Styled.PlaceAddButton>
+          <GoPlusCircle fontSize="28" style={{ fill: '#b4f34c' }} />
+          장소 추가
+        </Styled.PlaceAddButton>
       </Styled.Wrapper>
     </>
   );

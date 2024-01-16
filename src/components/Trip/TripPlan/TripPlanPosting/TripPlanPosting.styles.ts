@@ -34,12 +34,13 @@ export const Container = styled.div`
 
 export const DateDisplay = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: relative;
 
-  width: 18.75rem;
-  height: 2.2rem;
+  width: 20rem;
+  height: 2.5rem;
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   margin-bottom: 1rem;
@@ -49,26 +50,29 @@ export const DateDisplay = styled.div`
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
-  font-size: 0.8rem;
+  font-size: 0.95rem;
 
   .date {
-    margin-left: 1rem;
+    margin-left: 1.3rem;
   }
 
   .nightndays {
-    margin-left: 5rem;
+    margin-left: 4rem;
   }
 
   .calendar-icon {
     position: absolute;
-    top: 0.4rem;
-    left: 0.5rem;
+    top: 0.5rem;
+    left: 0.7rem;
 
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 `;
 
-export const GoogleMapsContainer = styled.div``;
+export const GoogleMapsContainer = styled.div`
+  width: 100%;
+  height: 10rem;
+`;
 
 export const DaysContainer = styled.div`
   display: flex;
@@ -82,6 +86,7 @@ export const DaysContainer = styled.div`
 export const DaysButton = styled.button<PostingProps>`
   width: 3.5rem;
   height: 1.5rem;
+
   background-color: ${(props) =>
     props.$isDaySelected ? '#b4f34c' : '#DCDCDC'};
   border-radius: 15rem;
@@ -107,7 +112,7 @@ export const PostingForm = styled.form`
   flex-direction: column;
   position: relative;
 
-  gap: 1rem;
+  gap: 0.8rem;
 
   .city-icon {
     position: absolute;
@@ -118,18 +123,18 @@ export const PostingForm = styled.form`
 
 export const CityInput = styled.input`
   width: 20rem;
-  height: 2.3rem;
+  height: 2.6rem;
 
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   padding-left: 2.5rem;
 
-  outline: none;
   appearance: none;
+  outline-color: #b4f34c;
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
-  font-size: 0.8rem;
+  font-size: 0.95rem;
 `;
 
 export const PlaceInputContainer = styled.div`
@@ -150,27 +155,27 @@ export const PlaceNumber = styled.div`
   background-color: ${({ theme }) => theme.brand.black};
   border-radius: 50%;
 
-  font-family: 'Mundial';
-  color: ${({ theme }) => theme.brand.white};
+  font-family: 'Mundial', sans-serif;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  font-size: 1rem;
+  color: ${({ theme }) => theme.brand.white};
+  font-size: ${({ theme }) => theme.fontSizes.md};
   text-align: center;
 `;
 
 export const PlaceInput = styled.input`
   width: 17.5rem;
-  height: 2.3rem;
+  height: 2.6rem;
 
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   padding-left: 0.8rem;
 
-  outline: none;
+  outline-color: #b4f34c;
   appearance: none;
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
-  font-size: 0.8rem;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
 `;
 
 export const NoteInput = styled.textarea`
@@ -179,13 +184,89 @@ export const NoteInput = styled.textarea`
 
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
-  margin-bottom: 1rem;
   padding: 0.75rem;
 
-  outline: none;
+  outline-color: #b4f34c;
   appearance: none;
+  resize: none;
 
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.black};
-  font-size: 0.75rem;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+`;
+
+export const UploadPhotoIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  width: 6rem;
+  height: 6rem;
+  margin-bottom: 1rem;
+
+  background-color: ${({ theme }) => theme.brand.gray};
+  border-radius: 0.9375rem;
+
+  .photo-icon {
+    position: absolute;
+    top: 1.6rem;
+  }
+
+  .photo-text {
+    position: absolute;
+    top: 3.4rem;
+
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+    color: ${({ theme }) => theme.brand.subBlack};
+  }
+`;
+
+export const PhotoInput = styled.input`
+  display: none;
+`;
+
+export const TagsInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  gap: 1rem;
+  border-bottom: 1px solid #dcdcdc;
+
+  font-size: 0.9375rem;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.brand.black};
+
+  .tag-icon {
+    margin-right: 0.3rem;
+  }
+`;
+
+export const TagsInputTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const TagsInput = styled.div``;
+
+export const TagsAddButton = styled.button`
+  color: ${({ theme }) => theme.text.gray};
+`;
+
+export const PlaceAddButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 1.5rem 0;
+  gap: 0.5rem;
+
+  font-size: 0.9375rem;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.text.gray};
 `;
