@@ -11,6 +11,7 @@ import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
+import CreatorDetail from './pages/Creator/CreatorDetails';
 
 function App() {
   return (
@@ -28,9 +29,8 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="search/*" element={<Search />} />
         <Route path="search/:tag" element={<SearchTag />} />
-        <Route path="creator/*" element={<Creator />}>
-          <Route path="detail/:id" />
-        </Route>
+        <Route path="creator/*" element={<Creator />} />
+        <Route path="creator/:id" element={<CreatorDetail />} />
 
         <Route path="/trip/*">
           <Route index element={<TripHome />} />

@@ -1,31 +1,15 @@
 import styled from 'styled-components';
 
-export const CreatorAllWrap = styled.div`
-  border-bottom: 1px solid #f6f6f6;
-`;
-
-export const CreatorTop = styled.div`
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: 0.65fr 1.35fr;
-
-  padding: 0.56rem 1.25rem 0.56rem 1rem;
-
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-
-  svg {
-    cursor: pointer;
-  }
-`;
-
 export const CreatorContainer = styled.div`
   margin: 1rem 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const CreatorWrap = styled.div`
+  text-align: start;
 `;
 
 export const CreatorInfo = styled.div`

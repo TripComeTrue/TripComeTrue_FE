@@ -1,41 +1,20 @@
 import { IoIosArrowBack } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import CreatorProfile from '../CreatorProfile/CreatorProfile';
 import exampleImg from '/domestic1.jpg';
-
-export interface CreatorData {
-  userImg: string;
-  username: string;
-  userInfo: string;
-  rate?: number;
-  userId: string;
-  review: number;
-  shorts: number;
-}
-
-const CreatorTop = styled.div`
-  margin-bottom: 1rem;
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-
-  padding: 0.56rem 1.25rem 0.56rem 1rem;
-
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-
-  svg {
-    cursor: pointer;
-  }
-`;
+import * as Styled from './CreatorMore.styles';
+import { CreatorData } from './CreateMore.types';
 
 const CreatorMore = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     navigate(-1);
+  };
+
+  const handleClick = (prop: string): string => {
+    navigate(`/creator/${prop}`);
+    return prop;
   };
 
   const CreatorDatas: CreatorData = {
@@ -51,19 +30,22 @@ const CreatorMore = () => {
 
   return (
     <>
-      <CreatorTop>
+      <Styled.CreatorTop>
         <IoIosArrowBack
           onClick={handleGoBack}
           style={{ fontSize: 20, marginRight: 8 }}
         />
         크리에이터 더보기
-      </CreatorTop>
+      </Styled.CreatorTop>
 
-      <div>
-        <CreatorProfile data={CreatorDatas} />
-        <CreatorProfile data={CreatorDatas} />
-        <CreatorProfile data={CreatorDatas} />
-      </div>
+      <Styled.CreatorAllWrap>
+        <button
+          aria-label="go to Details"
+          type="button"
+          onClick={() => handleClick(CreatorDatas.userId)}>
+          <CreatorProfile data={CreatorDatas} />
+        </button>
+      </Styled.CreatorAllWrap>
     </>
   );
 };
