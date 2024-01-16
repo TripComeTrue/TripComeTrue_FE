@@ -1,10 +1,10 @@
-import { CreatorDetail } from '../../components/Creator';
+import { CreatorDetail, CreatorInfo } from '../../components/Creator';
 
 const CreatorDetails = () => {
   return (
     <>
       <CreatorDetail />
-      안녕
+      <CreatorInfo />
     </>
   );
 };
