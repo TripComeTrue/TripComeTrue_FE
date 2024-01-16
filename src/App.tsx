@@ -9,6 +9,7 @@ import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 import { City, TouristSpot } from './pages/DetailFeed';
 import Home from './pages/Home/Home';
+import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
           <Route path="spot" element={<TouristSpot />} />
+          <Route path="shortslist" element={<ShortsList />} />
         </Route>
       </Route>
     </Routes>
