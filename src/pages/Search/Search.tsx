@@ -7,6 +7,7 @@ import SearchAll from './SearchAll';
 import SearchCity from './SearchCity';
 import SearchSpot from './SearchSpot';
 import SearchCreator from './SearchCreator';
+import { SearchKeyword } from '@/components/Search';
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -69,6 +70,7 @@ const Search: React.FC = () => {
             <IoSearchOutline />
           </button>
         </Styled.SearchForm>
+        <SearchKeyword />
       </>
     );
   }

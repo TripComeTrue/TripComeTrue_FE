@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { maxWidth } from '@/styles/common';
 
 export const NavWrap = styled.div`
-  position: fixed;
+  position: sticky;
   width: 100%;
   height: 2.5rem;
   top: 0;
