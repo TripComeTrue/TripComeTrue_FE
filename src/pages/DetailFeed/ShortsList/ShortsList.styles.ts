@@ -1,16 +1,21 @@
 import styled from 'styled-components';
 
 export const ShortsListWrapper = styled.div`
+  min-height: 100vh;
+`;
+
+export const ShortsListBox = styled.div`
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.3rem 0.875rem;
+  justify-content: space-between;
+  gap: 0.8rem 2%;
 
   padding: 0 1.25rem;
+
+  div {
+    flex: 0 0 48%;
+  }
 `;
 
-export const ShortsBox = styled.div`
-  width: 50%;
-  height: 16.5rem;
-
-  flex: 1 1 40%;
-`;
+export const ShortsBox = styled.div``;

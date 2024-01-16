@@ -6,40 +6,37 @@ import { SimpleNav } from '@/components/common';
 
 const ShortsList = () => {
   return (
-    <div>
+    <Styled.ShortsListWrapper>
       <SimpleNav>방콕</SimpleNav>
       <Filter />
-      <Styled.ShortsListWrapper>
-        <Styled.ShortsBox>
-          <ShortsSwiper
-            img={bangkok}
-            title="방콕여행 꿀팁 알려드립니다"
-            bookmark={20}
-          />
-        </Styled.ShortsBox>
-        <Styled.ShortsBox>
-          <ShortsSwiper
-            img={bangkok}
-            title="방콕여행 꿀팁 알려드립니다"
-            bookmark={20}
-          />
-        </Styled.ShortsBox>
-        <Styled.ShortsBox>
-          <ShortsSwiper
-            img={bangkok}
-            title="방콕여행 꿀팁 알려드립니다"
-            bookmark={20}
-          />
-        </Styled.ShortsBox>
-        <Styled.ShortsBox>
-          <ShortsSwiper
-            img={bangkok}
-            title="방콕여행 꿀팁 알려드립니다"
-            bookmark={20}
-          />
-        </Styled.ShortsBox>
-      </Styled.ShortsListWrapper>
-    </div>
+      <Styled.ShortsListBox>
+        <ShortsSwiper
+          img={bangkok}
+          title="방콕여행 꿀팁 알려드립니다"
+          bookmark={20}
+        />
+        <ShortsSwiper
+          img={bangkok}
+          title="방콕여행 꿀팁 알려드립니다"
+          bookmark={20}
+        />
+        <ShortsSwiper
+          img={bangkok}
+          title="방콕여행 꿀팁 알려드립니다"
+          bookmark={20}
+        />
+        <ShortsSwiper
+          img={bangkok}
+          title="방콕여행 꿀팁 알려드립니다"
+          bookmark={20}
+        />
+        <ShortsSwiper
+          img={bangkok}
+          title="방콕여행 꿀팁 알려드립니다"
+          bookmark={20}
+        />
+      </Styled.ShortsListBox>
+    </Styled.ShortsListWrapper>
   );
 };
 
