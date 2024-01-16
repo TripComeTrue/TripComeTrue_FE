@@ -37,6 +37,10 @@ const Search: React.FC = () => {
     handleSearch();
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   let SearchResult: JSX.Element | null = null;
 
   if (tab === 'all') {
@@ -55,7 +59,10 @@ const Search: React.FC = () => {
     return (
       <>
         <Styled.SearchTop>
-          <IoIosArrowBack style={{ fontSize: 20, marginRight: 8 }} />
+          <IoIosArrowBack
+            onClick={handleGoBack}
+            style={{ fontSize: 20, marginRight: 8 }}
+          />
           검색
         </Styled.SearchTop>
         <Styled.SearchForm onSubmit={handleSubmit}>

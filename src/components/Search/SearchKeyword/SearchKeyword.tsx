@@ -35,16 +35,16 @@ const SearchKeyword = () => {
       <Styled.KeywordWrap>
         <Styled.KeywordTitle>추천 키워드</Styled.KeywordTitle>
         <Styled.KeywordSelect>
-          <button type="button" onClick={() => handleSearch('#여행')}>
+          <button type="button" onClick={() => handleSearch('여행')}>
             #여행
           </button>
-          <button type="button" onClick={() => handleSearch('#맛집')}>
+          <button type="button" onClick={() => handleSearch('맛집')}>
             #맛집
           </button>
-          <button type="button" onClick={() => handleSearch('#일본')}>
+          <button type="button" onClick={() => handleSearch('일본')}>
             #일본
           </button>
-          <button type="button" onClick={() => handleSearch('#삿포로')}>
+          <button type="button" onClick={() => handleSearch('삿포로')}>
             #삿포로
           </button>
           <button type="button" onClick={() => handleSearch('#치앙마이')}>
@@ -102,8 +102,6 @@ const SearchKeyword = () => {
       </Styled.KeywordWrap>
     </Styled.KeywordComponent>
   );
-
-  return <div>에러</div>;
 };
 
 export default SearchKeyword;

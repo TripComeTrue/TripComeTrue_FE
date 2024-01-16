@@ -81,3 +81,14 @@ export const TabButton = styled.button<TabButtonProps>`
     width: ${({ isSelected }) => (isSelected ? '80%' : '0')};
   }
 `;
+
+export const TagContainer = styled.div`
+  margin: 1rem;
+`;
+
+export const TagTitle = styled.div`
+  margin-bottom: 1rem;
+
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+`;

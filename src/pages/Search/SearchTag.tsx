@@ -7,10 +7,17 @@ const SearchTag = () => {
   const { tag } = useParams();
   const navigate = useNavigate();
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <>
       <Styled.SearchTop>
-        <IoIosArrowBack style={{ fontSize: 20, marginRight: 8 }} />
+        <IoIosArrowBack
+          onClick={handleGoBack}
+          style={{ fontSize: 20, marginRight: 8 }}
+        />
         검색
       </Styled.SearchTop>
       <Styled.SearchForm>
@@ -32,7 +39,10 @@ const SearchTag = () => {
         <Styled.TabButton isSelected={false}>크리에이터</Styled.TabButton>
       </Styled.TabContainer>
 
-      {tag}
+      <Styled.TagContainer>
+        <Styled.TagTitle>&apos;{tag}&lsquo; 여행 후기</Styled.TagTitle>
+        <div>무한 스크롤</div>
+      </Styled.TagContainer>
     </>
   );
 };

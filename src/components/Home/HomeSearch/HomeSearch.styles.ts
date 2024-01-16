@@ -1,6 +1,5 @@
 import { IoIosSearch } from 'react-icons/io';
 import styled from 'styled-components';
-// import theme from '@/styles/theme';
 
 export const HomeSearchWrap = styled.div`
   margin: 2rem 1rem 0;
@@ -27,7 +26,7 @@ export const SearchWrap = styled.div`
   position: relative;
 `;
 
-export const SearchInput = styled.input`
+export const SearchInput = styled.div`
   margin-top: 1.2rem;
   padding: 0.8rem;
   padding-left: 3rem;
@@ -36,19 +35,14 @@ export const SearchInput = styled.input`
 
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: #0e0e0e;
+  color: #373737;
   background-image: linear-gradient(
     90deg,
     ${(props) => props.theme.brand.primary} 20%,
     ${(props) => props.theme.brand.yellow} 80%
   );
-  border-radius: 30px;
-  border: none;
-  outline: none;
-
-  &::placeholder {
-    color: #0e0e0e;
-  }
+  border-radius: 1.875rem;
+  cursor: pointer;
 
   &:focus {
     border: none;
@@ -58,8 +52,9 @@ export const SearchInput = styled.input`
 
 export const SearchIcon = styled(IoIosSearch)`
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 1.3rem;
 
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  cursor: pointer;
 `;
