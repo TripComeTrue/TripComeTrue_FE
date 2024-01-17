@@ -14,6 +14,7 @@ import {
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
 
 import { City, Reviews, TouristSpot } from './pages/DetailFeed';
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="plan" element={<TripPlanDate />} />
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
+          <Route path="posting" element={<TripPlanPosting />} />
         </Route>
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
