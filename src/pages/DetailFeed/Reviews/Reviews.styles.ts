@@ -14,6 +14,7 @@ export const NavWrap = styled.div`
   height: 2.5rem;
   background-color: ${({ theme }) => theme.brand.white};
   padding: 0 1.25rem;
+  margin-bottom: 2rem;
 `;
 
 export const NavBackBtn = styled.div`
@@ -29,19 +30,28 @@ export const NavTitle = styled.h3`
   font-weight: 600;
 `;
 
-export const Container = styled.div`
-  padding: 0 1.25rem;
-`;
+export const WriteBtnWrapper = styled.div`
+  position: relative;
 
-export const WriteBtn = styled.button`
   width: 1.25rem;
-  cursor: pointer;
+
   img {
     margin-top: 0.5rem;
   }
 `;
 
-export const BubbleWrapper = styled.div``;
+export const WriteBtn = styled.img`
+  cursor: pointer;
+`;
+
+export const BubbleWrapper = styled.div`
+  position: absolute;
+  right: -60%;
+`;
+
+export const Container = styled.div`
+  padding: 0 1.25rem;
+`;
 
 export const Header = styled.div`
   ${alignCenter};

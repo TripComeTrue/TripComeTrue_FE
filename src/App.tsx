@@ -20,7 +20,8 @@ import {
   SpotList,
   SpotSearch,
   TouristSpot,
-  Reviews
+  Reviews,
+  ReviewComment,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
@@ -63,7 +64,11 @@ function App() {
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
           <Route path="spot" element={<TouristSpot />} />
-          <Route path="spot/:id/review" element={<Reviews />} />
+          <Route path="spot/:spotId/review" element={<Reviews />} />
+          <Route
+            path="spot/:spotId/review/:reviewId/comment"
+            element={<ReviewComment />}
+          />
           <Route path="shortslist" element={<ShortsList />} />
           <Route path="gallerylist" element={<GalleryList />} />
           <Route path="spotlist" element={<SpotList />} />

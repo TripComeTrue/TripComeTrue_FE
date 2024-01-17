@@ -2,7 +2,7 @@ import { MouseEvent, useRef, useState } from 'react';
 import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
-import { Avatar, Text } from '@/components/common';
+import { Avatar, Bubble, Text } from '@/components/common';
 import LikeIcon from '/images/like.svg';
 import CommentIcon from '/images/comment.svg';
 import useClickOutside from '@/hooks/common/useClickOutside';
@@ -31,9 +31,12 @@ const Reviews = () => {
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
         <Styled.NavTitle>리뷰(14)</Styled.NavTitle>
-        <Styled.WriteBtn>
-          <img src={WriteIcon} alt="리뷰 작성" />
-        </Styled.WriteBtn>
+        <Styled.WriteBtnWrapper>
+          <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          <Styled.BubbleWrapper>
+            <Bubble direction="top">+ 2P</Bubble>
+          </Styled.BubbleWrapper>
+        </Styled.WriteBtnWrapper>
       </Styled.NavWrap>
       <Styled.Container>
         <Styled.Header>

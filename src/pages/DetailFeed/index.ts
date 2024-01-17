@@ -4,3 +4,4 @@ export { default as GalleryList } from '@/pages/DetailFeed/GalleryList/GalleryLi
 export { default as SpotList } from '@/pages/DetailFeed/SpotList/SpotList';
 export { default as SpotSearch } from '@/pages/DetailFeed/SpotSearch/SpotSearch';
 export { default as Reviews } from '@/pages/DetailFeed/Reviews/Reviews';
+export { default as ReviewComment } from '@/pages/DetailFeed/ReviewComment/ReviewComment';
