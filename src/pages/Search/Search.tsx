@@ -42,17 +42,24 @@ const Search: React.FC = () => {
   };
 
   let SearchResult: JSX.Element | null = null;
-
-  if (tab === 'all') {
-    SearchResult = <SearchAll />;
-  } else if (tab === 'city') {
-    SearchResult = <SearchCity />;
-  } else if (tab === 'spot') {
-    SearchResult = <SearchSpot />;
-  } else if (tab === 'creator') {
-    SearchResult = <SearchCreator />;
-  } else if (tab === null) {
-    SearchResult = <div> </div>;
+  switch (tab) {
+    case 'all':
+      SearchResult = <SearchAll />;
+      break;
+    case 'city':
+      SearchResult = <SearchCity />;
+      break;
+    case 'spot':
+      SearchResult = <SearchSpot />;
+      break;
+    case 'creator':
+      SearchResult = <SearchCreator />;
+      break;
+    case null:
+      SearchResult = <div> </div>;
+      break;
+    default:
+      break;
   }
 
   if (searchParams.get('query') === null) {
