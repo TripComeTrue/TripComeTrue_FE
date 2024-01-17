@@ -35,11 +35,11 @@ export const Container = styled.div`
 export const DateDisplay = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
 
-  width: 20rem;
+  width: 100%;
   height: 2.3rem;
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
@@ -53,11 +53,11 @@ export const DateDisplay = styled.div`
   font-size: 0.8rem;
 
   .date {
-    margin-left: 1.5rem;
+    margin-left: 2.1rem;
   }
 
   .nightndays {
-    margin-left: 6rem;
+    margin-right: 1rem;
   }
 
   .calendar-icon {
@@ -81,6 +81,7 @@ export const DaysContainer = styled.div`
   align-items: center;
 
   width: 100%;
+  gap: 0.7rem;
 `;
 
 export const DaysButton = styled.button<PostingProps>`
@@ -112,6 +113,7 @@ export const PostingForm = styled.form`
   flex-direction: column;
   position: relative;
 
+  width: 100%;
   gap: 0.8rem;
 
   .city-icon {
@@ -119,23 +121,26 @@ export const PostingForm = styled.form`
     top: 0.5rem;
     left: 0.5rem;
   }
+
+  input {
+    width: 100%;
+    height: 2.3rem;
+    background-color: ${({ theme }) => theme.brand.white};
+    border: 1px solid #b4f34c;
+
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    color: ${({ theme }) => theme.text.black};
+    font-size: 0.8rem;
+
+    &:focus {
+      border: 1px solid #b4f34c;
+    }
+  }
 `;
 
 export const CityInput = styled.input`
-  width: 20rem;
-  height: 2.3rem;
-
-  border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   padding-left: 2rem;
-
-  appearance: none;
-  outline-color: #b4f34c;
-  background-color: ${({ theme }) => theme.brand.white};
-
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.text.black};
-  font-size: 0.8rem;
 `;
 
 export const PlaceInputContainer = styled.div`
@@ -152,6 +157,7 @@ export const PlaceNumber = styled.div`
 
   width: 1.75rem;
   height: 1.75rem;
+  margin-right: 0.6rem;
 
   background-color: ${({ theme }) => theme.brand.black};
   border-radius: 50%;
@@ -164,24 +170,12 @@ export const PlaceNumber = styled.div`
 `;
 
 export const PlaceInput = styled.input`
-  width: 17.5rem;
-  height: 2.3rem;
-
-  border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   padding-left: 0.8rem;
-
-  outline-color: #b4f34c;
-  appearance: none;
-  background-color: ${({ theme }) => theme.brand.white};
-
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.text.black};
-  font-size: 0.8rem;
 `;
 
 export const NoteInput = styled.textarea`
-  width: 20rem;
+  width: 100%;
   height: 9rem;
 
   border: 1px solid #b4f34c;
@@ -190,7 +184,6 @@ export const NoteInput = styled.textarea`
 
   background-color: ${({ theme }) => theme.brand.white};
   outline-color: #b4f34c;
-  appearance: none;
   resize: none;
 
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};

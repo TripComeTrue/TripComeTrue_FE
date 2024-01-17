@@ -23,10 +23,10 @@ export const NextButton = styled.div`
   align-items: center;
   position: fixed;
 
-  width: 100vw;
+  width: 100%;
   height: 4.5rem;
-  left: 0;
   bottom: 0;
+  margin: 0 auto;
   padding: 0 1rem;
 
   background-color: white;

@@ -94,7 +94,7 @@ export const ContinentSwiper = styled(Swiper)`
 
 export const ContinentWrapper = styled(SwiperSlide)``;
 
-export const CountryWrapper = styled.div`
+export const CountryWrapper = styled.div<SelectedCountriesProps>`
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -102,7 +102,7 @@ export const CountryWrapper = styled.div`
   align-items: center;
 
   margin-top: 1rem;
-  margin-bottom: 9rem;
+  margin-bottom: ${(props) => (props.country.length > 0 ? '9rem' : '5rem')};
   gap: 0.8rem;
 `;
 

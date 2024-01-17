@@ -37,6 +37,7 @@ export const SelectCountries = styled.select`
   outline: none;
   border: 1px solid #b4f34c;
   border-radius: 0.5rem;
+  background-color: ${({ theme }) => theme.brand.white};
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};

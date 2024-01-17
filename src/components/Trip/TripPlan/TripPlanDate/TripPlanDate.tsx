@@ -44,107 +44,109 @@ const TripPlanDate = () => {
   };
 
   return (
-    <Styled.Wrapper>
-      <TripPlanPrevButton />
-      <Styled.Container>
-        <Styled.Title>
-          여행 기간을 <br />
-          선택해 주세요
-        </Styled.Title>
-        <DatePicker
-          selected={startDate}
-          startDate={startDate}
-          endDate={endDate}
-          minDate={null}
-          disabledKeyboardNavigation
-          selectsRange
-          locale={ko}
-          dateFormat="yyyy.MM.dd"
-          isClearable
-          showPopperArrow={false}
-          onChange={(date) =>
-            setDateRange({
-              startDate: date[0] || null,
-              endDate: date[1] || null,
-            })
-          }
-          open
-          showIcon
-          icon={<CalendarToday />}
-          renderCustomHeader={({
-            date,
-            changeYear,
-            changeMonth,
-            decreaseMonth,
-            increaseMonth,
-            prevMonthButtonDisabled,
-            nextMonthButtonDisabled,
-          }) => {
-            return (
-              <div
-                style={{
-                  margin: 10,
-                }}>
-                <div>
-                  <div className="header">
-                    <div className="year-and-month">
-                      <select
-                        className="select-year"
-                        value={getYear(date)}
-                        onChange={({ target: { value } }) =>
-                          changeYear(Number(value))
-                        }>
-                        {years.map((option: number) => (
-                          <option
-                            className="year-dropdown"
-                            key={option}
-                            value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                      <select
-                        className="select-month"
-                        value={months[getMonth(date)]}
-                        onChange={({ target: { value } }) =>
-                          changeMonth(months.indexOf(value))
-                        }>
-                        {months.map((option) => (
-                          <option
-                            className="month-dropdown"
-                            key={option}
-                            value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="arrowButton">
-                      <button
-                        type="button"
-                        onClick={decreaseMonth}
-                        disabled={prevMonthButtonDisabled}>
-                        {'<'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={increaseMonth}
-                        disabled={nextMonthButtonDisabled}>
-                        {'>'}
-                      </button>
+    <>
+      <Styled.Wrapper>
+        <TripPlanPrevButton />
+        <Styled.Container>
+          <Styled.Title>
+            여행 기간을 <br />
+            선택해 주세요
+          </Styled.Title>
+          <DatePicker
+            selected={startDate}
+            startDate={startDate}
+            endDate={endDate}
+            minDate={null}
+            disabledKeyboardNavigation
+            selectsRange
+            locale={ko}
+            dateFormat="yyyy.MM.dd"
+            isClearable
+            showPopperArrow={false}
+            onChange={(date) =>
+              setDateRange({
+                startDate: date[0] || null,
+                endDate: date[1] || null,
+              })
+            }
+            open
+            showIcon
+            icon={<CalendarToday />}
+            renderCustomHeader={({
+              date,
+              changeYear,
+              changeMonth,
+              decreaseMonth,
+              increaseMonth,
+              prevMonthButtonDisabled,
+              nextMonthButtonDisabled,
+            }) => {
+              return (
+                <div
+                  style={{
+                    margin: 10,
+                  }}>
+                  <div>
+                    <div className="header">
+                      <div className="year-and-month">
+                        <select
+                          className="select-year"
+                          value={getYear(date)}
+                          onChange={({ target: { value } }) =>
+                            changeYear(Number(value))
+                          }>
+                          {years.map((option: number) => (
+                            <option
+                              className="year-dropdown"
+                              key={option}
+                              value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          className="select-month"
+                          value={months[getMonth(date)]}
+                          onChange={({ target: { value } }) =>
+                            changeMonth(months.indexOf(value))
+                          }>
+                          {months.map((option) => (
+                            <option
+                              className="month-dropdown"
+                              key={option}
+                              value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="arrowButton">
+                        <button
+                          type="button"
+                          onClick={decreaseMonth}
+                          disabled={prevMonthButtonDisabled}>
+                          {'<'}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={increaseMonth}
+                          disabled={nextMonthButtonDisabled}>
+                          {'>'}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          }}>
-          <label className="react-datepicker-nightndays">
-            {getNightAndDays()}
-          </label>
-        </DatePicker>
-      </Styled.Container>
+              );
+            }}>
+            <label className="react-datepicker-nightndays">
+              {getNightAndDays()}
+            </label>
+          </DatePicker>
+        </Styled.Container>
+      </Styled.Wrapper>
       <TripPlanNextButton />
-    </Styled.Wrapper>
+    </>
   );
 };
 
