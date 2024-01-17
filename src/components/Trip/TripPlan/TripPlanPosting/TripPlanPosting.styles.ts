@@ -50,7 +50,7 @@ export const DateDisplay = styled.div`
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
-  font-size: 0.8rem;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
 
   .date {
     margin-left: 2.1rem;
@@ -124,13 +124,13 @@ export const PostingForm = styled.form`
 
   input {
     width: 100%;
-    height: 2.3rem;
+    height: 2.5rem;
     background-color: ${({ theme }) => theme.brand.white};
     border: 1px solid #b4f34c;
 
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     color: ${({ theme }) => theme.text.black};
-    font-size: 0.8rem;
+    font-size: ${({ theme }) => theme.fontSizes.md};
 
     &:focus {
       border: 1px solid #b4f34c;
@@ -198,8 +198,8 @@ export const UploadPhotoIcon = styled.div`
   align-items: center;
   position: relative;
 
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 7rem;
+  height: 7rem;
   margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.brand.gray};
@@ -207,13 +207,13 @@ export const UploadPhotoIcon = styled.div`
 
   .photo-icon {
     position: absolute;
-    top: 1.4rem;
+    top: 2rem;
     fill: #626262;
   }
 
   .photo-text {
     position: absolute;
-    top: 3.1rem;
+    top: 3.8rem;
 
     font-size: 0.7rem;
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
@@ -234,7 +234,7 @@ export const TagsInputContainer = styled.div`
   gap: 1rem;
   border-bottom: 1px solid #dcdcdc;
 
-  font-size: 0.8rem;
+  font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.brand.black};
 
@@ -268,7 +268,7 @@ export const PlaceAddButton = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 5rem 0;
   gap: 0.5rem;
 
   font-size: 0.9375rem;
@@ -282,8 +282,12 @@ export const SubmitButtonContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
   button {
-    width: 9.5rem;
-    height: 2.5rem;
+    width: 100%;
+    height: 2.8rem;
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
