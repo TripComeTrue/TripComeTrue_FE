@@ -22,7 +22,7 @@ const TopReview = () => {
         {DAY_OPTION.map(({ id, dayOption }) => (
           <Styled.DayOption
             key={id}
-            daySelected={id === day}
+            selected={id === day}
             onClick={() => onClickDay(id)}>
             <Text
               fontSize={12}

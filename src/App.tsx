@@ -6,13 +6,15 @@ import DashBoard from '@/components/layout';
 import { TripDetail, TripHome, TripList } from '@/pages/Trip';
 import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
 import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
-import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
-import { City, TripMap } from './pages/DetailFeed';
+
+import { City, TouristSpot } from './pages/DetailFeed';
+import Home from './pages/Home/Home';
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
+
 
 function App() {
   return (
@@ -43,7 +45,7 @@ function App() {
         </Route>
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
-          <Route path="map" element={<TripMap />} />
+          <Route path="spot" element={<TouristSpot />} />
         </Route>
       </Route>
     </Routes>

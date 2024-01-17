@@ -1,2 +1,2 @@
-export { default as TripMap } from '@/pages/DetailFeed/TripMap';
 export { default as City } from '@/pages/DetailFeed/City/City';
+export { default as TouristSpot } from '@/pages/DetailFeed/TouristSpot/TouristSpot';
