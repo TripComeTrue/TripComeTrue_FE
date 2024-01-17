@@ -19,7 +19,8 @@ export const PostUserWrap = styled.div`
 
 export const UserImg = styled.div`
   img {
-    width: 4.125rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
   }
 `;
