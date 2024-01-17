@@ -28,8 +28,11 @@ function App() {
           <Route path="findpw" element={<FindPw />} /> */}
         </Route>
         <Route path="home" element={<Home />} />
+
         <Route path="search/*" element={<Search />} />
-        <Route path="search/:tag" element={<SearchTag />} />
+        <Route path="search/select/:tag" element={<SearchTag />} />
+        {/* <Route path="search" element={<Search />} /> */}
+
         <Route path="creator/*" element={<Creator />} />
         <Route path="creator/:id" element={<CreatorDetail />} />
 
@@ -41,6 +44,7 @@ function App() {
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />R
         </Route>
+
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
           <Route path="map" element={<TripMap />} />

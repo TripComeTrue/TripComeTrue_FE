@@ -4,7 +4,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { IoSearchOutline } from 'react-icons/io5';
 import * as Styled from './Search.styles';
 import SearchAll from './SearchAll';
-import SearchCity from './SearchCity';
+import SearchCity from './SearchCitys';
 import SearchSpot from './SearchSpot';
 import SearchCreator from './SearchCreator';
 import { SearchKeyword } from '@/components/Search';
@@ -19,16 +19,14 @@ const Search: React.FC = () => {
     const queryParams = new URLSearchParams(window.location.search);
     setQuery(queryParams.get('query') || '');
     setTab(queryParams.get('tab') || 'all');
-  }, [setQuery, setTab]);
+  }, [setSearchParams]);
 
   const handleSearch = () => {
-    setSearchParams({ query, tab });
     navigate(`/search?query=${query}&tab=${tab}`);
   };
 
   const handleTabChange = (selectedTab: string) => {
     setTab(selectedTab);
-    setSearchParams({ query, tab: selectedTab });
     navigate(`/search?query=${query}&tab=${selectedTab}`);
   };
 
