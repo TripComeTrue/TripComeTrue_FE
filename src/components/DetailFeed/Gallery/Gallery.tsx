@@ -16,7 +16,7 @@ const Gallery = () => {
         <SubTitle variant="more">방콕 여행 갤러리</SubTitle>
       </Styled.SubtitleBox>
       <Styled.GellaryItemBox
-        spaceBetween={70}
+        spaceBetween={8}
         slidesPerView={2.6}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {GELLARY_DATA.map((item) => (

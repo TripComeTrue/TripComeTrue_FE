@@ -3,6 +3,9 @@ import { alignCenter, flexColumn } from '@/styles/common';
 
 export const Container = styled.div`
   ${flexColumn};
+
+  padding: 0 1.25rem;
+  margin-bottom: 2rem;
 `;
 
 export const Header = styled.div`

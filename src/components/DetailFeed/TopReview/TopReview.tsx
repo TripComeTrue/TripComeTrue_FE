@@ -14,7 +14,7 @@ const TopReview = () => {
   };
 
   return (
-    <Styled.TopReviewWrapper>
+    <div>
       <Styled.SubTitleBox>
         <SubTitle fontSize={18} icon={starIcon} variant="more">
           방콕 여행 후기 TOP 3
@@ -66,7 +66,7 @@ const TopReview = () => {
           ),
         )}
       </Styled.TopReviewItemBox>
-    </Styled.TopReviewWrapper>
+    </div>
   );
 };
 
