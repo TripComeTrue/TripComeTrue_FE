@@ -1,13 +1,13 @@
 import { Filter } from '@/components/DetailFeed';
-import { SimpleNav } from '@/components/common';
+import SpotListNav from '@/components/common/Navigation/SpotListNav';
+import SpotDescription from './SpotDescription';
 import * as Styled from './SpotList.styles';
 import bangkok from '/bangkok.png';
-import SpotDescription from './SpotDescription';
 
 const SpotList = () => {
   return (
     <div>
-      <SimpleNav>방콕</SimpleNav>
+      <SpotListNav>방콕</SpotListNav>
       <Filter />
       <Styled.SpotListWrapper>
         <Styled.SpotBox>
