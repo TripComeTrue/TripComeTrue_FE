@@ -1,7 +1,13 @@
-import { SimpleNav } from '@/components/common';
+import { SimpleNav, SubTitle } from '@/components/common';
 import * as Styled from './TripDetail.styles';
-import MainCarousel from '@/components/Trip/TripDetail/MainCarousel/MainCarousel';
-import Introduction from '@/components/Trip/TripDetail/Introduction/Introduction';
+import {
+  Introduction,
+  MainCarousel,
+  ReviewAlert,
+  TripCarousel,
+  TripComment,
+  TripContents,
+} from '@/components/Trip';
 
 const TripDetail = () => {
   return (
@@ -10,6 +16,15 @@ const TripDetail = () => {
       <Styled.Container>
         <MainCarousel />
         <Introduction />
+        <TripContents />
+        <TripComment />
+        <ReviewAlert />
+        <Styled.OtherTripDetails>
+          <SubTitle margin="0 1.25rem 0.875rem 0">
+            이 여행과 비슷한 여행
+          </SubTitle>
+          <TripCarousel />
+        </Styled.OtherTripDetails>
       </Styled.Container>
     </div>
   );

@@ -3,7 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
-import { TripDetail, TripHome, TripList, TripPlan } from '@/pages/Trip';
+import {
+  TripDetail,
+  TripHome,
+  TripList,
+  TripPlan,
+  TripReviewEdit,
+  TripReviewNew,
+} from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 
@@ -25,6 +32,8 @@ function App() {
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:id" element={<TripDetail />} />
+          <Route path="detail/:id/review" element={<TripReviewNew />} />
+          <Route path="detail/:id/review/edit" element={<TripReviewEdit />} />
           <Route path="plan" element={<TripPlan />} />
         </Route>
       </Route>

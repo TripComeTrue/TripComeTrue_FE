@@ -17,25 +17,25 @@ const TripHomeBody = () => {
 
   return (
     <Styled.Container>
-      <Styled.ContentsContainer>
+      <div>
         <SubTitle margin="0 0 0.875rem" icon={starIcon}>
           인기 크리에이터 일정 따라가기!
         </SubTitle>
         <TripCarousel size={170} />
-      </Styled.ContentsContainer>
-      <Styled.ContentsContainer>
+      </div>
+      <div>
         <SubTitle margin="0 0 0.875rem" icon={starIcon}>
           인기 여행지 쇼츠보기
         </SubTitle>
         <ShortCarousel />
-      </Styled.ContentsContainer>
-      <Styled.ContentsContainer>
+      </div>
+      <div>
         <SubTitle margin="0 0 0.875rem" icon={starIcon}>
           내 여행 취향과 맞는 크리에이터
         </SubTitle>
         <CreatorCarousel />
-      </Styled.ContentsContainer>
-      <Styled.ContentsContainer>
+      </div>
+      <div>
         <SubTitle
           margin="0 1.25rem 0.875rem 0"
           icon={dollar}
@@ -47,9 +47,9 @@ const TripHomeBody = () => {
           src="https://source.unsplash.com/random"
           alt="Thumbnail"
         />
-        <TripCarousel size={170} />
-      </Styled.ContentsContainer>
-      <Styled.ContentsContainer>
+        <TripCarousel />
+      </div>
+      <div>
         <SubTitle
           margin="0 1.25rem 0.875rem 0"
           icon={shower}
@@ -61,8 +61,8 @@ const TripHomeBody = () => {
           src="https://source.unsplash.com/random"
           alt="Thumbnail"
         />
-        <TripCarousel size={170} />
-      </Styled.ContentsContainer>
+        <TripCarousel />
+      </div>
     </Styled.Container>
   );
 };

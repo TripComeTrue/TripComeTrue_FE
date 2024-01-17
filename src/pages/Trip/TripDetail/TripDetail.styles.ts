@@ -5,3 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 1.125rem;
 `;
+
+export const OtherTripDetails = styled.div`
+  margin-left: 1.25rem;
+`;

@@ -1,7 +1,7 @@
 import { Avatar, Bookmark, Text } from '@/components/common';
 import * as Styled from './TripCard.styles';
 import MarkIcon from '/images/mark.svg';
-import comment from '/images/comment.svg';
+import CommentIcon from '/images/comment.svg';
 import pxToRem from '@/utils/pxToRem';
 import { TripCardProps } from './TripCard.types';
 
@@ -34,7 +34,7 @@ const TripCard = ({ size = 152 }: TripCardProps) => {
           너는 돈만 준비해. 계획은...
         </Text>
         <Styled.Comment>
-          <img src={comment} alt="commentIcon" />
+          <img src={CommentIcon} alt="comment icon" />
           <Text fontSize={10} color="gray">
             124
           </Text>

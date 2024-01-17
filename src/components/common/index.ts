@@ -10,3 +10,5 @@ export { default as Share } from '@/components/common/Share/Share';
 export { default as Bookmark } from '@/components/common/Bookmark/Bookmark';
 export { default as Avatar } from '@/components/common/Avatar/Avatar';
 export { default as Tag } from '@/components/common/Tag/Tag';
+export { default as Bubble } from '@/components/common/Bubble/Bubble';
+export { default as ReviewWrite } from '@/components/common/ReviewWrite/ReviewWrite';
