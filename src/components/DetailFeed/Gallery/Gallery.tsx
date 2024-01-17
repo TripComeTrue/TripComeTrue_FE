@@ -12,7 +12,9 @@ const GELLARY_DATA = [
 const Gallery = () => {
   return (
     <Styled.GellaryWrapper>
-      <SubTitle variant="more">방콕 여행 갤러리</SubTitle>
+      <Styled.SubtitleBox>
+        <SubTitle variant="more">방콕 여행 갤러리</SubTitle>
+      </Styled.SubtitleBox>
       <Styled.GellaryItemBox
         spaceBetween={70}
         slidesPerView={2.6}

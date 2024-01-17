@@ -14,9 +14,16 @@ import {
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import {
+  City,
+  GalleryList,
+  SpotList,
+  SpotSearch,
+  TouristSpot,
+  Reviews
+} from './pages/DetailFeed';
+import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
-
-import { City, Reviews, TouristSpot } from './pages/DetailFeed';
 
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
@@ -57,6 +64,10 @@ function App() {
           <Route path="city" element={<City />} />
           <Route path="spot" element={<TouristSpot />} />
           <Route path="spot/:id/review" element={<Reviews />} />
+          <Route path="shortslist" element={<ShortsList />} />
+          <Route path="gallerylist" element={<GalleryList />} />
+          <Route path="spotlist" element={<SpotList />} />
+          <Route path="spotsearch" element={<SpotSearch />} />
         </Route>
       </Route>
     </Routes>

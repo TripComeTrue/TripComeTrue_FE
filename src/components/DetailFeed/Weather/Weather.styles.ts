@@ -3,6 +3,8 @@ import { alignCenter, justifyAround } from '@/styles/common';
 
 export const WeatherWrapper = styled.section`
   height: 11rem;
+
+  padding: 0 1.25rem;
 `;
 
 export const WeatherBox = styled.div`

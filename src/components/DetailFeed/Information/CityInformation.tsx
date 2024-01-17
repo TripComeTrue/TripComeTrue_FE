@@ -17,7 +17,9 @@ const INFORMATION_DATA = [
 const CityInformation = () => {
   return (
     <Styled.InformationWrapper>
-      <SubTitle>기본 정보</SubTitle>
+      <Styled.SubTitleBox>
+        <SubTitle>기본 정보</SubTitle>
+      </Styled.SubTitleBox>
       <Styled.InformationBox
         spaceBetween={8}
         slidesPerView={2.6}
