@@ -9,3 +9,5 @@ export { default as SelectModal } from '@/components/common/Modal/SelectModal';
 export { default as Share } from '@/components/common/Share/Share';
 export { default as Bookmark } from '@/components/common/Bookmark/Bookmark';
 export { default as Avatar } from '@/components/common/Avatar/Avatar';
+export { default as Shorts } from '@/components/common/Shorts/Shorts';
+export { default as Spots } from '@/components/common/Spots/Spots';

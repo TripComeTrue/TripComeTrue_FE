@@ -1,7 +1,9 @@
 import logo from '/tripComeTrue.svg';
 import * as Styled from './HomeSearch.styles';
+import { useNavigate } from 'react-router-dom';
 
 const HomeSearch = () => {
+  const navigate = useNavigate();
   return (
     <Styled.HomeSearchWrap>
       <Styled.LogoImg>
@@ -14,7 +16,9 @@ const HomeSearch = () => {
         오늘도 트립컴트루해요:)
       </Styled.WelcomeMessage>
       <Styled.SearchWrap>
-        <Styled.SearchInput placeholder="낭만적인 프랑스 파리" />
+        <Styled.SearchInput onClick={() => navigate('/search')}>
+          낭만적인 프랑스 파리
+        </Styled.SearchInput>
         <Styled.SearchIcon />
       </Styled.SearchWrap>
       {/* </SearchWrap> */}
