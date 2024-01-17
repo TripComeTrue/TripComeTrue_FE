@@ -7,9 +7,11 @@ import { slideShorts } from '@/constants/DetailFeed/City';
 const DetailFeedShorts = () => {
   return (
     <Styled.DetailFeedShortsWrapper>
-      <SubTitle fontSize={18} icon={starIcon} variant="more">
-        강릉 여행 Shorts
-      </SubTitle>
+      <Styled.SubTitleBox>
+        <SubTitle fontSize={18} icon={starIcon} variant="more">
+          강릉 여행 Shorts
+        </SubTitle>
+      </Styled.SubTitleBox>
       <Shorts slides={slideShorts} slidesPerView={2.1} />
     </Styled.DetailFeedShortsWrapper>
   );

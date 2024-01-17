@@ -15,9 +15,11 @@ const TopReview = () => {
 
   return (
     <Styled.TopReviewWrapper>
-      <SubTitle fontSize={18} icon={starIcon} variant="more">
-        방콕 여행 후기 TOP 3
-      </SubTitle>
+      <Styled.SubTitleBox>
+        <SubTitle fontSize={18} icon={starIcon} variant="more">
+          방콕 여행 후기 TOP 3
+        </SubTitle>
+      </Styled.SubTitleBox>
       <Styled.DayOptions>
         {DAY_OPTION.map(({ id, dayOption }) => (
           <Styled.DayOption

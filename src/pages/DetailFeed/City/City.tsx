@@ -18,8 +18,8 @@ const City = () => {
       <Styled.CityWrapper>
         <DetailFeedShorts />
         <Gallery />
-        <Weather />
         <CityInformation />
+        <Weather />
         <ExchangeRate />
         <TopReview />
         <HotPlace />

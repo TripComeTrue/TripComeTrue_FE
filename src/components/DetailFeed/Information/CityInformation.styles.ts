@@ -7,7 +7,12 @@ export const InformationWrapper = styled.section`
 `;
 
 export const InformationBox = styled(Swiper)`
+  padding: 0 1.25rem;
   margin-top: 1rem;
+`;
+
+export const SubTitleBox = styled.div`
+  padding: 0 1.25rem;
 `;
 
 export const InformationItem = styled(SwiperSlide)`

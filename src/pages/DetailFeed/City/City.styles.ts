@@ -5,6 +5,5 @@ export const CityWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  padding: 0 1.25rem;
   margin-top: 1rem;
 `;

@@ -13,9 +13,11 @@ const PLACE_DATA = [
 const HotPlace = () => {
   return (
     <div>
-      <SubTitle fontSize={18} variant="more" icon={starIcon}>
-        요즘 뜨는 핫플
-      </SubTitle>
+      <Styled.SubTitleBox>
+        <SubTitle fontSize={18} variant="more" icon={starIcon}>
+          요즘 뜨는 핫플
+        </SubTitle>
+      </Styled.SubTitleBox>
       <Styled.PlaceBox>
         <Spots sort="space" creator={PLACE_DATA} />
       </Styled.PlaceBox>
