@@ -7,7 +7,13 @@ import { TripDetail, TripHome, TripList } from '@/pages/Trip';
 import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
 import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
-import { City, GalleryList, SpotList, TouristSpot } from './pages/DetailFeed';
+import {
+  City,
+  GalleryList,
+  SpotList,
+  SpotSearch,
+  TouristSpot,
+} from './pages/DetailFeed';
 import Home from './pages/Home/Home';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 
@@ -49,6 +55,7 @@ function App() {
           <Route path="shortslist" element={<ShortsList />} />
           <Route path="gallerylist" element={<GalleryList />} />
           <Route path="spotlist" element={<SpotList />} />
+          <Route path="spotsearch" element={<SpotSearch />} />
         </Route>
       </Route>
     </Routes>
