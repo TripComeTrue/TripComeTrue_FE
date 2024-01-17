@@ -8,3 +8,5 @@ export { default as HotPlace } from './HotPlace/HotPlace';
 export { default as Banner } from './Banner/Banner';
 export { default as Gallery } from './Gallery/Gallery';
 export { default as Filter } from './Filter/Filter';
+export { default as PlaceReview } from './PlaceReview/PlaceReview';
+

@@ -11,6 +11,7 @@ import {
   TripPlanNextButton,
 } from '../TripPlanCommon/TripPlanCommon';
 import CityListModal from './CityListModal/CityListModal';
+
 const TripPlanCity = () => {
   const [cityNames, setCityNames] = useState<string[]>([]);
   const [isAllCitySame, setIsAllCitySame] = useState(false);
@@ -57,8 +58,8 @@ const TripPlanCity = () => {
   const showInputPerDay = () => {
     const totalInputs = [];
 
-    for (let i = 0; i <= totalTripDays; i++) {
-      let eachTripDate = add(startDate, { days: i });
+    for (let i = 0; i <= totalTripDays; i += 1) {
+      const eachTripDate = add(startDate, { days: i });
       totalInputs.push(
         <Styled.EachDayContainer key={i}>
           <SubTitle fontSize={15}>
@@ -99,29 +100,27 @@ const TripPlanCity = () => {
   };
 
   return (
-    <>
-      <Styled.Wrapper>
-        <TripPlanPrevButton />
-        <Styled.Container>
-          <Styled.Title>
-            여행 기간 동안
-            <br /> 어느 지역을 방문했나요?
-          </Styled.Title>
+    <Styled.Wrapper>
+      <TripPlanPrevButton />
+      <Styled.Container>
+        <Styled.Title>
+          여행 기간 동안
+          <br /> 어느 지역을 방문했나요?
+        </Styled.Title>
 
-          <label htmlFor="eachday">
-            <Checkbox
-              checked={isAllCitySame}
-              onChange={handleCheckAllSameCity}
-              size="small"
-              style={{ width: '1rem', height: '1rem', color: '#b4f34c' }}
-            />{' '}
-            <span className="checkbox-text">방문 지역 모두 동일</span>
-            {showInputPerDay()}
-          </label>
-        </Styled.Container>
-        <TripPlanNextButton />
-      </Styled.Wrapper>
-    </>
+        <label htmlFor="eachday">
+          <Checkbox
+            checked={isAllCitySame}
+            onChange={handleCheckAllSameCity}
+            size="small"
+            style={{ width: '1rem', height: '1rem', color: '#b4f34c' }}
+          />{' '}
+          <span className="checkbox-text">방문 지역 모두 동일</span>
+          {showInputPerDay()}
+        </label>
+      </Styled.Container>
+      <TripPlanNextButton />
+    </Styled.Wrapper>
   );
 };
 

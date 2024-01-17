@@ -6,7 +6,7 @@ import TextProps from './Text.types';
  * @param children : Text 내부 요소
  * @param fontSize: font-size (단위: 픽셀숫자) / 기본: 14px
  * @param fontWeight: font-weight (단위: 숫자) / 기본 400
- * @param color: color - 'white' | 'black' | 'gray' | 'primary' / 기본: black
+ * @param color: color - 'white' | 'black' | 'gray' | 'primary' | 'tag' / 기본: black
  * @param tag: tag 변경 / 기본: span태그
  */
 

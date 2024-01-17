@@ -9,6 +9,7 @@ const theme: DefaultTheme = {
     gray: '#DCDCDC',
     lightGray: '#F6F6F6',
     white: '#FFFFFF',
+    tag: '#0099DA',
   },
   text: {
     black: '#373737',

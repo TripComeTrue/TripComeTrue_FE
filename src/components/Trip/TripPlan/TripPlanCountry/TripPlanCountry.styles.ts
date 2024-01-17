@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import {
   SelectButtonProps,
   SelectedCountriesProps,
 } from './TripPlanCountry.types';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Wrapper = styled.div`
   display: flex;

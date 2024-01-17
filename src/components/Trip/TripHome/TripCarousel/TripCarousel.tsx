@@ -6,11 +6,11 @@ import * as Styled from './TripCarousel.styles';
 import 'swiper/swiper-bundle.css';
 import { TripCarouselProps } from './TripCarousel.types';
 
-const TripCarousel = ({ size = 152 }: TripCarouselProps) => {
+const TripCarousel = ({ size = 144 }: TripCarouselProps) => {
   const stringifiedSize = pxToRem(size);
 
   return (
-    <Styled.Container spaceBetween={10} slidesPerView={1.8}>
+    <Styled.Container spaceBetween={10} slidesPerView={2.3}>
       {new Array(5).fill(0).map((_, index) => (
         <Styled.Slide $size={stringifiedSize} key={index}>
           <TripCard size={size} />
