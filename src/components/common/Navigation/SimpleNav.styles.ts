@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { maxWidth } from '@/styles/common';
 
 export const NavWrap = styled.div`
-  position: fixed;
+  position: sticky;
   width: 100%;
   height: 2.5rem;
   top: 0;
@@ -23,7 +23,7 @@ export const NavBackBtn = styled.div`
   width: 1.25rem;
   cursor: pointer;
   img {
-    margin-top: 4px;
+    margin-top: 0.5rem;
   }
 `;
 

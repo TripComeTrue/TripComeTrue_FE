@@ -4,16 +4,14 @@ import { alignCenter } from '@/styles/common';
 export const Container = styled.div<{
   $margin: string;
 }>`
-  display: flex;
+  ${alignCenter}
   justify-content: space-between;
-  align-items: center;
 
   margin: ${({ $margin }) => $margin};
 `;
 
 export const SubTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
+  ${alignCenter}
   gap: 0.25rem;
 `;
 

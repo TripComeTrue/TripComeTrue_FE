@@ -49,7 +49,7 @@ export const HotplaceBookmark = styled.div`
 export const HotplaceDesWrap = styled.div`
   background-color: ${({ theme }) => theme.brand.white};
   position: absolute;
-  bottom: 0.3rem;
+  bottom: 0;
 
   padding: 0.6rem;
   width: 100%;
@@ -59,7 +59,6 @@ export const HotplaceDesWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  border-radius: 0 0 10px 10px;
 `;
 
 export const DesNightPlace = styled.div`
