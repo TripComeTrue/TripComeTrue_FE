@@ -19,7 +19,6 @@ import jejuRImg from '/jeju.jpeg';
 import { SlideHotItem, SlideHots } from './HomeHotplace.types';
 import { SubTitle, Text } from '@/components/common';
 
-// 여기서부터 함수임
 const HomeHotplace = () => {
   const [selectedOption, setSelectedOption] = useState({
     cityCategory: '인기도시',

@@ -30,7 +30,7 @@ const SubTitle = ({
       {variant && (
         <Styled.MoreButton type="button" onClick={onClickButton}>
           <Text fontSize={12} color="gray">
-            더보기
+            더 보기
           </Text>
         </Styled.MoreButton>
       )}

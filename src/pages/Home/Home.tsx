@@ -5,6 +5,7 @@ import {
   HomeSearch,
   HomeShorts,
 } from '@/components/Home';
+import { TabBar } from '@/components/common';
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <HomeHotplace />
       <HomeCreator />
       <HomeMD />
+      <TabBar />
     </div>
   );
 };
