@@ -31,7 +31,7 @@ export const DayOptions = styled.div`
 export const DayOption = styled.div<DayOptionType>`
   display: flex;
   align-items: center;
-
+  
   border: 1px solid ${(props) => (props.selected ? 'white' : '#e2e2e2')};
   border-radius: 1.875rem;
 

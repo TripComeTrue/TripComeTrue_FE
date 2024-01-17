@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Styled from './SimpleNav.styles';
+import backArrow from '@/assets/back-arrow.svg';
 
 function SimpleNav({ children }: { children?: ReactNode }) {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function SimpleNav({ children }: { children?: ReactNode }) {
     <Styled.NavWrap>
       <Styled.NavInner>
         <Styled.NavBackBtn onClick={onClickBackBtn}>
-          <img src="/images/back-arrow.svg" alt="뒤로가기" />
+          <img src={backArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
         <Styled.NavTitle>{children}</Styled.NavTitle>
         <Styled.NavRightBtns />

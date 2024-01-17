@@ -92,7 +92,8 @@ const Button = styled.button<ButtonProps>`
   padding: ${(props) => getPadding(props.size)};
   font-size: ${(props) => getFontSize(props.size)};
   font-weight: bold;
-  color: ${(props) => props.theme.text.black};
+  color: ${(props) =>
+    props.variants === 'gray' ? props.theme.text.gray : props.theme.text.black};
   border-radius: ${(props) =>
     props.rounded === 'sm' ? '0.3125rem' : '2.5rem'};
   cursor: pointer;

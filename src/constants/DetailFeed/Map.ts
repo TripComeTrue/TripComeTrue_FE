@@ -46,6 +46,7 @@ export const MAP_CONTAINER_STYLE = {
   borderRadius: '10px',
 };
 
+
 export const FIELD_MASK_OPTIONS = [
   'places.formattedAddress',
   'places.displayName',
