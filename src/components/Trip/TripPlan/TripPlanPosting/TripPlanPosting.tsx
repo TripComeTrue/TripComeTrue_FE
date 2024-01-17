@@ -14,12 +14,15 @@ import TripPlanGoogleMaps from './TripPlanGoogleMaps';
 import { TripPlanPrevButton } from '../TripPlanCommon/TripPlanCommon';
 import * as Styled from './TripPlanPosting.styles';
 import { Button } from '@/components/common';
+// import TripPlanTagModal from './TripPlanTagModal';
+// import useModal from '@/hooks/common/useModal';
 // import { useNavigate } from 'react-router-dom';
 
 const TripPlanPosting = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const { register, handleSubmit, setValue } = useForm();
   const UploadPhotoIconRef = useRef<HTMLInputElement>(null);
+  // const { open, handleOpen, handleClose } = useModal();
 
   // const navigate = useNavigate();
   const startDate = new Date('2024-01-13');
@@ -229,6 +232,7 @@ const TripPlanPosting = () => {
                 태그 추가하기 <img src={speechBubble} aria-label="add tag" />
               </Styled.TagsAddButton>
               <Styled.TagsInput />
+              {/* <TripPlanTagModal open={open} onClose={handleClose}/> */}
             </Styled.TagsInputContainer>
           </Styled.PostingForm>
         </Styled.InputContainer>
