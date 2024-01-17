@@ -12,6 +12,7 @@ export const GellaryItemBox = styled(Swiper)`
 export const GellaryItem = styled(SwiperSlide)`
   height: 9rem;
   position: relative;
+
   img {
     height: 100%;
     border-radius: 0.625rem;
