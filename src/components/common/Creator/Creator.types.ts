@@ -8,5 +8,5 @@ export interface CreatorData {
   userImg: string;
   username: string;
   userInfo: string;
-  posts: PostData[];
+  posts?: PostData[];
 }
