@@ -26,5 +26,18 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'import/extensions': 'off',
     'no-param-reassign': 'off',
+    'react/function-component-definition': 'off',
+    'arrow-body-style': 'off',
+    'import/no-absolute-path': 'off',
+
+    'react-hooks/exhaustive-deps': 'off',
+    'no-nested-ternary': 'off',
+    'react/prop-types': 'off', // 임시
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        some: ['nesting', 'id'],
+      },
+    ],
   },
 };

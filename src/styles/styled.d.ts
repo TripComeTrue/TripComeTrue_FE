@@ -6,9 +6,11 @@ declare module 'styled-components' {
       primary: string;
       yellow: string;
       black: string;
+      subBlack: string;
       gray: string;
       lightGray: string;
       white: string;
+      tag: string;
     };
     text: {
       black: string;
@@ -27,6 +29,7 @@ declare module 'styled-components' {
       lg: string;
       xl: string;
       xxl: string;
+      xxxl: string;
     };
     fontWeights: {
       light: number;
