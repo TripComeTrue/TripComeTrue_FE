@@ -1,4 +1,9 @@
-import { Gallery, SpotInformation, TopReview } from '@/components/DetailFeed';
+import {
+  Gallery,
+  PlaceReview,
+  SpotInformation,
+  TopReview,
+} from '@/components/DetailFeed';
 import * as Styled from './TouristSpot.styles';
 
 const TouristSpot = () => {
@@ -7,6 +12,7 @@ const TouristSpot = () => {
       <Gallery />
       <SpotInformation />
       <TopReview />
+      <PlaceReview />
     </Styled.TouristSpotWrap>
   );
 };

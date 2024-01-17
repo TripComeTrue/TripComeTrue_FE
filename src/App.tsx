@@ -3,14 +3,21 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
-import { TripDetail, TripHome, TripList } from '@/pages/Trip';
 import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
 import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
+import {
+  TripDetail,
+  TripHome,
+  TripList,
+  TripReviewEdit,
+  TripReviewNew,
+} from '@/pages/Trip';
+import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
 
-import { City, TouristSpot } from './pages/DetailFeed';
-import Home from './pages/Home/Home';
+import { City, Reviews, TouristSpot } from './pages/DetailFeed';
+
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
@@ -39,15 +46,17 @@ function App() {
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:id" element={<TripDetail />} />
+          <Route path="detail/:id/review/write" element={<TripReviewNew />} />
+          <Route path="detail/:id/review/edit" element={<TripReviewEdit />} />
           <Route path="plan" element={<TripPlanDate />} />
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
           <Route path="posting" element={<TripPlanPosting />} />
-          <Route path="city" element={<TripPlanCity />} />R
         </Route>
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
           <Route path="spot" element={<TouristSpot />} />
+          <Route path="spot/:id/review" element={<Reviews />} />
         </Route>
       </Route>
     </Routes>
