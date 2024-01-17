@@ -102,7 +102,7 @@ export const CountryWrapper = styled.div`
   align-items: center;
 
   margin-top: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 9rem;
   gap: 0.8rem;
 `;
 
@@ -114,6 +114,7 @@ export const CountryContainer = styled.div`
     align-items: center;
     position: relative;
 
+    width: 100%;
     border: 2px solid white;
     border-radius: 0.625rem;
 
@@ -125,8 +126,9 @@ export const CountryContainer = styled.div`
   }
 
   img {
-    width: 9.5rem;
-    height: 6.5rem;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 
   .country-ko,
@@ -152,7 +154,7 @@ export const SelectedCountries = styled.div<SelectedCountriesProps>`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  position: sticky;
+  position: fixed;
   bottom: 3.3rem;
 
   width: 100%;

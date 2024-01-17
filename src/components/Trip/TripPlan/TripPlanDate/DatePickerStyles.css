@@ -76,6 +76,10 @@
   }
 
   .react-datepicker__close-icon::after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 0.7612rem;
     height: 0.7612rem;
     background-color: #626262 !important;
