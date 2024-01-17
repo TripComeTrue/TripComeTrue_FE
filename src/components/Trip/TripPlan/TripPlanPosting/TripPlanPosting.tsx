@@ -97,6 +97,7 @@ const TripPlanPosting = () => {
   };
 
   const onSubmit = (data: object) => {
+    /* eslint-disable no-console */
     console.log(data);
     // fetch(`api address`, {
     //   method: 'POST',
