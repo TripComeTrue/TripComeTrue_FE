@@ -15,7 +15,9 @@ import {
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
-import { City, TripMap } from './pages/DetailFeed';
+
+import { City, TouristSpot } from './pages/DetailFeed';
+
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
@@ -52,8 +54,7 @@ function App() {
         </Route>
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
-          <Route path="map" element={<TripMap />} />
-          <Route path="plan" element={<TripPlan />} />
+          <Route path="spot" element={<TouristSpot />} />
         </Route>
       </Route>
     </Routes>

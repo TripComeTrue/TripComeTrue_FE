@@ -1,10 +1,10 @@
 import {
   Banner,
+  CityInformation,
   DetailFeedShorts,
   ExchangeRate,
   Gallery,
   HotPlace,
-  Information,
   TopReview,
   Weather,
 } from '@/components/DetailFeed';
@@ -16,7 +16,7 @@ const City = () => {
       <DetailFeedShorts />
       <Gallery />
       <Weather />
-      <Information />
+      <CityInformation />
       <ExchangeRate />
       <TopReview />
       <HotPlace />

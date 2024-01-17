@@ -11,10 +11,16 @@ export const GellaryItemBox = styled(Swiper)`
 
 export const GellaryItem = styled(SwiperSlide)`
   height: 9rem;
+  position: relative;
 
   img {
     height: 100%;
     border-radius: 0.625rem;
     aspect-ratio: 1;
   }
+`;
+
+export const BookMarkBox = styled.div`
+  position: absolute;
+  left: 0.3rem;
 `;
