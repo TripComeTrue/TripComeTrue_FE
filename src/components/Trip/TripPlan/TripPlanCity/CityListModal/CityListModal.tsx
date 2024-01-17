@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import * as Styled from './CityListModal.styles';
 import { SlArrowDown } from 'react-icons/sl';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import * as Styled from './CityListModal.styles';
 import { Button } from '@/components/common';
-import image from '../../../TripPlan/TripPlanCountry/constants/france.png';
+import image from '../../TripPlanCountry/constants/france.png';
 import { SelectedCitiesProps } from './CityListModal.types';
 
 const CityListModal: React.FC<SelectedCitiesProps> = ({
@@ -49,9 +49,8 @@ const CityListModal: React.FC<SelectedCitiesProps> = ({
       const isAlreadySelected = prevCities.includes(cityName);
       if (isAlreadySelected) {
         return prevCities.filter((city) => city !== cityName);
-      } else {
-        return [...prevCities, cityName];
       }
+      return [...prevCities, cityName];
     });
   };
 
@@ -83,7 +82,7 @@ const CityListModal: React.FC<SelectedCitiesProps> = ({
             key={city}
             onClick={() => selectCity(city)}
             selected={selectedCities.includes(city)}>
-            <img src={image} />
+            <img src={image} alt="city" />
             {city}
             <CheckCircleIcon className="checked" fill="#b4f34c" />
           </Styled.EachCity>

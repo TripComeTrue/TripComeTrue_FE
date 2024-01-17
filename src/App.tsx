@@ -7,6 +7,7 @@ import { TripDetail, TripHome, TripList } from '@/pages/Trip';
 import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
 import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
 
 import { City, TouristSpot } from './pages/DetailFeed';
 import Home from './pages/Home/Home';
@@ -14,7 +15,6 @@ import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
-
 
 function App() {
   return (
@@ -41,6 +41,8 @@ function App() {
           <Route path="detail/:id" element={<TripDetail />} />
           <Route path="plan" element={<TripPlanDate />} />
           <Route path="country" element={<TripPlanCountry />} />
+          <Route path="city" element={<TripPlanCity />} />
+          <Route path="posting" element={<TripPlanPosting />} />
           <Route path="city" element={<TripPlanCity />} />R
         </Route>
         <Route path="/detailfeed/*">
