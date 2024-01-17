@@ -40,7 +40,7 @@ export const DateDisplay = styled.div`
   position: relative;
 
   width: 20rem;
-  height: 2.5rem;
+  height: 2.3rem;
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   margin-bottom: 1rem;
@@ -50,14 +50,14 @@ export const DateDisplay = styled.div`
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
-  font-size: 0.95rem;
+  font-size: 0.8rem;
 
   .date {
-    margin-left: 1.3rem;
+    margin-left: 1.5rem;
   }
 
   .nightndays {
-    margin-left: 4rem;
+    margin-left: 6rem;
   }
 
   .calendar-icon {
@@ -65,7 +65,7 @@ export const DateDisplay = styled.div`
     top: 0.5rem;
     left: 0.7rem;
 
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 `;
 
@@ -123,18 +123,19 @@ export const PostingForm = styled.form`
 
 export const CityInput = styled.input`
   width: 20rem;
-  height: 2.6rem;
+  height: 2.3rem;
 
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
-  padding-left: 2.5rem;
+  padding-left: 2rem;
 
   appearance: none;
   outline-color: #b4f34c;
+  background-color: ${({ theme }) => theme.brand.white};
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
-  font-size: 0.95rem;
+  font-size: 0.8rem;
 `;
 
 export const PlaceInputContainer = styled.div`
@@ -164,7 +165,7 @@ export const PlaceNumber = styled.div`
 
 export const PlaceInput = styled.input`
   width: 17.5rem;
-  height: 2.6rem;
+  height: 2.3rem;
 
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
@@ -172,27 +173,29 @@ export const PlaceInput = styled.input`
 
   outline-color: #b4f34c;
   appearance: none;
+  background-color: ${({ theme }) => theme.brand.white};
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: 0.8rem;
 `;
 
 export const NoteInput = styled.textarea`
   width: 20rem;
-  height: 10rem;
+  height: 9rem;
 
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   padding: 0.75rem;
 
+  background-color: ${({ theme }) => theme.brand.white};
   outline-color: #b4f34c;
   appearance: none;
   resize: none;
 
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.black};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
 `;
 
 export const UploadPhotoIcon = styled.div`
@@ -202,8 +205,8 @@ export const UploadPhotoIcon = styled.div`
   align-items: center;
   position: relative;
 
-  width: 6rem;
-  height: 6rem;
+  width: 5.5rem;
+  height: 5.5rem;
   margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.brand.gray};
@@ -211,16 +214,17 @@ export const UploadPhotoIcon = styled.div`
 
   .photo-icon {
     position: absolute;
-    top: 1.6rem;
+    top: 1.4rem;
+    fill: #626262;
   }
 
   .photo-text {
     position: absolute;
-    top: 3.4rem;
+    top: 3.1rem;
 
-    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-size: 0.7rem;
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-    color: ${({ theme }) => theme.brand.subBlack};
+    color: #626262;
   }
 `;
 
@@ -237,7 +241,7 @@ export const TagsInputContainer = styled.div`
   gap: 1rem;
   border-bottom: 1px solid #dcdcdc;
 
-  font-size: 0.9375rem;
+  font-size: 0.8rem;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.brand.black};
 
@@ -254,7 +258,15 @@ export const TagsInputTitle = styled.div`
 export const TagsInput = styled.div``;
 
 export const TagsAddButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   color: ${({ theme }) => theme.text.gray};
+
+  img {
+    margin-left: 0.3rem;
+  }
 `;
 
 export const PlaceAddButton = styled.div`
@@ -269,4 +281,16 @@ export const PlaceAddButton = styled.div`
   font-size: 0.9375rem;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.gray};
+`;
+
+export const SubmitButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    width: 9.5rem;
+    height: 2.5rem;
+  }
 `;

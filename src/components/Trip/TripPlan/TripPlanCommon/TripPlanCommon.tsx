@@ -12,7 +12,7 @@ export const TripPlanPrevButton = () => {
 
   return (
     <Styled.PrevButton>
-      <button onClick={goBack}>
+      <button type="button" onClick={goBack} aria-label="previous">
         <SlArrowLeft fontSize="15" />
       </button>
     </Styled.PrevButton>
@@ -21,7 +21,12 @@ export const TripPlanPrevButton = () => {
 export const TripPlanNextButton = () => {
   return (
     <Styled.NextButton>
-      <Button variants="gray" size="lg" rounded="sm">
+      <Button
+        type="button"
+        variants="gray"
+        size="lg"
+        rounded="sm"
+        aria-label="next">
         <Link to="/trip/country">다음</Link>
       </Button>
     </Styled.NextButton>
