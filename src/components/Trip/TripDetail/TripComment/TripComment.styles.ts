@@ -46,7 +46,7 @@ export const Creator = styled.div`
   gap: 0.5rem;
 `;
 
-export const ReplyContainer = styled.div`
+export const ReplyButton = styled.div`
   ${alignCenter};
   gap: 0.25rem;
 

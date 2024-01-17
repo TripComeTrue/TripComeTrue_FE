@@ -149,6 +149,7 @@ a {
 }
 
 input:focus {
+  outline: none;
   border: none;
 }
 

@@ -28,12 +28,12 @@ const TripComment = () => {
                 </Text>
               </Styled.CommentInfo>
               <Text>빠니보틀님 ㅜㅜ 팬이에요 좋은 정보 감사드립니다!!!!</Text>
-              <Styled.ReplyContainer>
+              <Styled.ReplyButton>
                 <img src={CommentIcon} alt="comment icon" />
                 <Text fontSize={10} color="gray" fontWeight={600}>
                   답글 달기
                 </Text>
-              </Styled.ReplyContainer>
+              </Styled.ReplyButton>
             </Styled.CommentCard>
 
             <Styled.ReplyList>
@@ -54,12 +54,12 @@ const TripComment = () => {
                   <Text>
                     빠니보틀님 ㅜㅜ 팬이에요 좋은 정보 감사드립니다!!!!
                   </Text>
-                  <Styled.ReplyContainer>
+                  <Styled.ReplyButton>
                     <img src={CommentIcon} alt="comment icon" />
                     <Text fontSize={10} color="gray" fontWeight={600}>
                       답글 달기
                     </Text>
-                  </Styled.ReplyContainer>
+                  </Styled.ReplyButton>
                 </Styled.ReplyCard>
               </Styled.ReplyItem>
             </Styled.ReplyList>

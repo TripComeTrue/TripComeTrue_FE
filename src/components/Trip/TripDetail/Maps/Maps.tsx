@@ -4,6 +4,7 @@ import {
   MarkerF,
   PolylineF,
 } from '@react-google-maps/api';
+import GOOGLE_MAPS from '@/constants/map';
 
 const Maps = () => {
   const place1 = {
@@ -25,7 +26,7 @@ const Maps = () => {
     scale: 2,
   };
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCMajdPsYbAxwovch-_WpuaerJyR6s8I5E">
+    <LoadScript googleMapsApiKey={GOOGLE_MAPS}>
       <GoogleMap
         mapContainerStyle={{ width: '100%', height: '11.25rem' }}
         center={place1}

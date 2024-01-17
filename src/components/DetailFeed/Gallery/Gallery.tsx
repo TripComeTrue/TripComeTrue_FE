@@ -1,5 +1,4 @@
 import { Bookmark, SubTitle } from '@/components/common';
-import { SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
 import bankok from '/bangkok.png';
 
