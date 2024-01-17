@@ -19,12 +19,15 @@ export const PrevButton = styled.div`
 export const NextButton = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   position: fixed;
 
-  width: 20.625rem;
-  padding: 1rem 0;
+  width: 100vw;
+  height: 4.5rem;
+  left: 0;
   bottom: 0;
-  gap: 0.5rem;
+  padding: 0 1rem;
 
   background-color: white;
 `;
@@ -34,6 +37,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
+  width: 100%;
   padding: 0.2rem 1.2rem;
 `;
 

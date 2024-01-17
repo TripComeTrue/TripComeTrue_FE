@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 
   width: 100%;
   padding: 0.2rem 1.2rem;
@@ -35,7 +36,7 @@ export const OverseasDomesticContainer = styled.div`
   align-items: center;
 
   padding: 0;
-  margin-bottom: 0.5rem;
+  margin: 0 -1.3rem 0.5rem -1.3rem;
   border-bottom: 1px solid #d9d9d9;
 `;
 
@@ -101,6 +102,7 @@ export const CountryWrapper = styled.div`
   align-items: center;
 
   margin-top: 1rem;
+  margin-bottom: 4rem;
   gap: 0.8rem;
 `;
 
@@ -114,6 +116,7 @@ export const CountryContainer = styled.div`
 
     border: 2px solid white;
     border-radius: 0.625rem;
+
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
     &:hover {
@@ -149,14 +152,13 @@ export const SelectedCountries = styled.div<SelectedCountriesProps>`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  position: fixed;
-  bottom: 0;
+  position: sticky;
+  bottom: 3.3rem;
 
+  width: 100%;
   gap: 0.7rem;
   padding: 1rem 0;
 
-  width: 22.5rem;
-  height: calc(100vh - 79%);
   background-color: white;
 
   div {

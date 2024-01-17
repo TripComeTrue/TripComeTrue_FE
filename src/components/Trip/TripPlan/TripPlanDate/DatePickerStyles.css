@@ -11,8 +11,9 @@
   align-items: center;
   position: relative;
 
-  width: 20rem;
-  margin-top: 1rem;
+  width: calc(100vw - 2.4rem);
+  padding: -1rem 0;
+  margin: 0 1.2rem;
 
   border: 1px solid #b4f34c;
 
@@ -89,7 +90,7 @@
 
 .react-datepicker-nightndays {
   position: absolute;
-  top: -3.5rem;
+  top: -2.6rem;
   right: 1.7rem;
 
   font-size: 0.875rem;
@@ -102,25 +103,26 @@ input:focus {
 
 .react-datepicker__current-month {
   display: none;
-  color: #999999;
 }
 
 .react-datepicker__month-container {
   font-size: 0.9rem;
 }
 
-.react-datepicker__header {
+.react-datepicker__header,
+.react-datepicker__header--custom {
   background-color: white;
-  border: 0;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.select-year,
+.select-month {
+  background-color: white;
 }
 
 .react-datepicker__day--outside-month {
   border-radius: 50%;
   color: #ababab !important;
-}
-
-.react-datepicker__day-names {
-  border-bottom: 1px solid #f6f6f6;
 }
 
 .react-datepicker__day-names,
