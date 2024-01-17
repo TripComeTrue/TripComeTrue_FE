@@ -63,40 +63,6 @@ export const CheckBoxContainer = styled.div`
   gap: 0.1875rem;
 `;
 
-export const FilterToggle = styled.div`
-  position: relative;
-`;
-
-export const ToggleBtn = styled.button`
-  cursor: pointer;
-`;
-
-export const FilterModal = styled.div`
-  ${flexColumn};
-
-  position: absolute;
-  top: 120%;
-  right: 0;
-
-  width: 9.375rem;
-  border-radius: 0.625rem;
-  background-color: ${({ theme }) => theme.brand.white};
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
-`;
-
-export const Option = styled.div`
-  ${alignCenter};
-  gap: 0.25rem;
-
-  width: 100%;
-  padding: 0.25rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #ebebeb;
-  }
-`;
-
 export const ReviewList = styled.ul``;
 
 export const ReviewItem = styled.li`

@@ -1,28 +1,14 @@
-import { MouseEvent, useRef, useState } from 'react';
+import { useState } from 'react';
+
 import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
-import { Avatar, Bubble, Text } from '@/components/common';
+import { Avatar, Bubble, Filter, Text } from '@/components/common';
 import LikeIcon from '/images/like.svg';
 import CommentIcon from '/images/comment.svg';
-import useClickOutside from '@/hooks/common/useClickOutside';
 
 const Reviews = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('최신순');
-  const filterModalRef = useRef(null);
-
-  const onClickFilterModal = (): void => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const onClickFilter = (event: MouseEvent<HTMLDivElement>): void => {
-    const target = event.target as HTMLDivElement;
-
-    setSelectedFilter(target.innerText);
-  };
-
-  useClickOutside(filterModalRef, () => setIsOpen(false));
 
   return (
     <div>
@@ -46,25 +32,13 @@ const Reviews = () => {
               포토 리뷰만
             </Text>
           </Styled.CheckBoxContainer>
-          <Styled.FilterToggle>
-            <Styled.ToggleBtn onClick={onClickFilterModal}>
-              <Text fontSize={12} fontWeight={600} color="gray">
-                {selectedFilter} ▼
-              </Text>
-            </Styled.ToggleBtn>
-            {isOpen && (
-              <Styled.FilterModal ref={filterModalRef}>
-                <Styled.Option
-                  style={{ borderBottom: '1px solid #dcdcdc' }}
-                  onClick={onClickFilter}>
-                  <Text fontSize={12}>최신순</Text>
-                </Styled.Option>
-                <Styled.Option onClick={onClickFilter}>
-                  <Text fontSize={12}>추천순</Text>
-                </Styled.Option>
-              </Styled.FilterModal>
-            )}
-          </Styled.FilterToggle>
+
+          <Filter
+            first="최신순"
+            second="보관순"
+            selectedFilter={selectedFilter}
+            setSelectedFilter={setSelectedFilter}
+          />
         </Styled.Header>
         <ul>
           <Styled.ReviewItem>
