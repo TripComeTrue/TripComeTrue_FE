@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import { tabBarHeight } from '@/styles/common';
+
+export const MyPageLayoutWrap = styled.div`
+  min-height: inherit;
+`;
 
 const MyPageContainer = styled.div`
-  min-height: 100vh;
-  padding: 0 0 5.0625rem;
+  ${tabBarHeight};
 `;
 
 export default MyPageContainer;

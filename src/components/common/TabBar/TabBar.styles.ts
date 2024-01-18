@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { TabItemProps, TabBarProps } from './TabBar.types';
 import { inner, justifyAround, maxWidth } from '@/styles/common';
 
-export const TabBarWrap = styled.div<{ $isfixed: string }>`
-  position: ${({ $isfixed }) => ($isfixed === 'true' ? 'fixed' : 'sticky')};
+export const TabBarWrap = styled.div`
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;

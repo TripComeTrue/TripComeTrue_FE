@@ -1,14 +1,14 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { TabBar } from '@/components/common';
-import MyPageContainer from './MyPageLayout.styles';
+import * as Styled from './MyPageLayout.styles';
 
 function MyPageLayout() {
   const { pathname } = useLocation();
   return (
-    <MyPageContainer>
+    <Styled.MyPageLayoutWrap>
       <Outlet />
       {pathname !== '/mypage/notification' && <TabBar />}
-    </MyPageContainer>
+    </Styled.MyPageLayoutWrap>
   );
 }
 
