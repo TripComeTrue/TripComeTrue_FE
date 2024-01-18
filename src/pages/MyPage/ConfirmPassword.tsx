@@ -1,5 +1,13 @@
+import { MyPageConfirmPassword } from '@/components/MyPage';
+import { SimpleNav } from '@/components/common';
+
 function ConfirmPassword() {
-  return <div>ConfirmPassword</div>;
+  return (
+    <>
+      <SimpleNav>계정관리</SimpleNav>
+      <MyPageConfirmPassword />
+    </>
+  );
 }
 
 export default ConfirmPassword;

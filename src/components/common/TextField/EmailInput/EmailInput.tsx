@@ -11,6 +11,7 @@ import {
 } from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
 import client from '@/apis';
+import { emailValidation } from '@/constants/Auth/validations';
 // import throttle from '@/utils/throttle';
 
 function EmailInput({
@@ -20,13 +21,7 @@ function EmailInput({
   allowCheckEmail,
 }: EmailInputProps<SignUpFormData>) {
   const { email } = getValues();
-  const emailValidation = {
-    required: '이메일은 필수 입니다.',
-    pattern: {
-      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-      message: '올바른 이메일을 입력해주세요',
-    },
-  };
+
   const emailDuplicatedValidation = {
     ...emailValidation,
     validate: {
