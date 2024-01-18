@@ -1,4 +1,4 @@
-import { TagTypeEnum } from '@/components/Trip/TripPlan/TripPlanPosting/TripPlanTagModal.types';
+import { TagTypeEnum } from '@/components/Trip/TripPlan/TripPlanPosting/TripPlanTagModal/TripPlanTagModal.types';
 
 interface HashTag {
   type: 'with' | 'type' | 'other';

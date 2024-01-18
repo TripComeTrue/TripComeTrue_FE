@@ -113,23 +113,23 @@ const TripPlanCountry = () => {
                 </button>
               </Styled.CountryContainer>
             ))}
+            <Styled.SelectedCountries country={country}>
+              {country.map((selectedCountryName) => {
+                const selectedCountry =
+                  getCountryImgByName(selectedCountryName);
+                return (
+                  <div key={selectedCountryName}>
+                    <img src={selectedCountry?.img} alt="selected-country" />
+                    <div className="selected-name">{selectedCountryName}</div>
+                    <Styled.RemoveButton
+                      onClick={() => removeCountry(selectedCountryName)}>
+                      x
+                    </Styled.RemoveButton>
+                  </div>
+                );
+              })}
+            </Styled.SelectedCountries>
           </Styled.CountryWrapper>
-
-          <Styled.SelectedCountries country={country}>
-            {country.map((selectedCountryName) => {
-              const selectedCountry = getCountryImgByName(selectedCountryName);
-              return (
-                <div key={selectedCountryName}>
-                  <img src={selectedCountry?.img} alt="selected-country" />
-                  <div className="selected-name">{selectedCountryName}</div>
-                  <Styled.RemoveButton
-                    onClick={() => removeCountry(selectedCountryName)}>
-                    x
-                  </Styled.RemoveButton>
-                </div>
-              );
-            })}
-          </Styled.SelectedCountries>
         </Styled.Container>
       </Styled.Wrapper>
       <TripPlanNextButton />

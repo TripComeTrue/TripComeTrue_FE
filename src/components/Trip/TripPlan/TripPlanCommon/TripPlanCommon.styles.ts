@@ -23,8 +23,12 @@ export const NextButton = styled.div`
   align-items: center;
   position: fixed;
 
-  width: 100%;
+  width: 360px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
   height: 4.5rem;
+
   bottom: 0;
   margin: 0 auto;
   padding: 0 1rem;

@@ -1,26 +1,13 @@
 import styled from 'styled-components';
+import ReactSlidingPane from 'react-sliding-pane';
 import { PostingProps } from './TripPlanPosting.types';
-
-export const PrevButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  padding: 1rem 0;
-  bottom: 0;
-
-  background-color: white;
-
-  button {
-    cursor: pointer;
-  }
-`;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  width: 100%;
 
   padding: 0.2rem 1.2rem;
 `;
@@ -77,11 +64,10 @@ export const GoogleMapsContainer = styled.div`
 export const DaysContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 
-  width: 100%;
-  gap: 0.7rem;
+  gap: 0.4rem;
 `;
 
 export const DaysButton = styled.button<PostingProps>`
@@ -98,14 +84,9 @@ export const DaysButton = styled.button<PostingProps>`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const TotalWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const InputContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 export const PostingForm = styled.form`
@@ -113,13 +94,16 @@ export const PostingForm = styled.form`
   flex-direction: column;
   position: relative;
 
-  width: 100%;
+  width: 360px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
   gap: 0.8rem;
 
   .city-icon {
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
+    top: 0.6rem;
+    left: 0.8rem;
   }
 
   input {
@@ -148,6 +132,22 @@ export const PlaceInputContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const SlidingPane = styled(ReactSlidingPane)`
+  .slide-pane__header {
+    background-color: white;
+    border: 0;
+
+    svg {
+      width: 0.9375rem;
+      height: 0.9375rem;
+    }
+  }
+
+  .slide-pane__close {
+    margin: 0;
+  }
 `;
 
 export const PlaceNumber = styled.div`

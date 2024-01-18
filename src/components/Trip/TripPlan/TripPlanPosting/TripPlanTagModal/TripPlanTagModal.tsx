@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
- 
+
 import { useEffect, useState } from 'react';
 import { Modal as MuiModal } from '@mui/material';
 import { IoCloseCircle } from 'react-icons/io5';

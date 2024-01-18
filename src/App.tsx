@@ -20,7 +20,7 @@ import {
   SpotList,
   SpotSearch,
   TouristSpot,
-  Reviews
+  Reviews,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';

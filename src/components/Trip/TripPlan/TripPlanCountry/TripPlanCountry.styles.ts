@@ -157,9 +157,13 @@ export const SelectedCountries = styled.div<SelectedCountriesProps>`
   position: fixed;
   bottom: 3.3rem;
 
-  width: 100%;
+  width: 360px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
   gap: 0.7rem;
-  padding: 1rem 0;
+  margin: 0 -1.2rem;
+  padding: 1rem 1rem;
 
   background-color: white;
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { EachCityProps } from './CityListModal.types';
+import { EachPlaceProps } from './TripPlanPlaceModal.types';
+import { Button } from '@/components/common';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -7,13 +8,20 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 
   padding: 0;
+  margin-top: -1.2rem;
 
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
 `;
 
-export const SelectedCountriesContainer = styled.div`
+export const AddNewPlaceButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SelectedPlaceContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -25,7 +33,7 @@ export const SelectedCountriesContainer = styled.div`
   }
 `;
 
-export const SelectCountries = styled.select`
+export const SelectPlace = styled.select`
   top: -1rem;
 
   width: 100%;
@@ -43,7 +51,7 @@ export const SelectCountries = styled.select`
   color: ${({ theme }) => theme.text.black};
 `;
 
-export const ShowCitiesContainer = styled.div`
+export const ShowPlacesContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -51,7 +59,7 @@ export const ShowCitiesContainer = styled.div`
   gap: 1rem;
 `;
 
-export const EachCity = styled.div<EachCityProps>`
+export const EachPlace = styled.div<EachPlaceProps>`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
