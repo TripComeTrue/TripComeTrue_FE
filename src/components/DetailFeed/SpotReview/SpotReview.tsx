@@ -1,10 +1,10 @@
 import { Avatar, Bubble, SubTitle, Text } from '../../common';
 import WriteIcon from '/images/write.svg';
-import * as Styled from './PlaceReview.styles';
+import * as Styled from './SpotReview.styles';
 import LikeIcon from '/images/like.svg';
 import CommentIcon from '/images/comment.svg';
 
-const PlaceReview = () => {
+const SpotReview = () => {
   return (
     <Styled.Container>
       <Styled.Header>
@@ -99,4 +99,4 @@ const PlaceReview = () => {
   );
 };
 
-export default PlaceReview;
+export default SpotReview;

@@ -4,7 +4,7 @@ import * as Styled from './ReviewWrite.styles';
 import CameraIcon from '/images/camera.svg';
 import { ReviewWriteProps } from './ReviewWrite.types';
 
-const ReviewWrite = ({ isEdit, placeName }: ReviewWriteProps) => {
+const ReviewWrite = ({ isEdit, spotName, variant }: ReviewWriteProps) => {
   const [imageFile, setImageFile] = useState('');
 
   const previewImage = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -21,10 +21,11 @@ const ReviewWrite = ({ isEdit, placeName }: ReviewWriteProps) => {
   };
 
   console.log(isEdit);
+  console.log(variant);
 
   return (
     <div>
-      <SimpleNav>{placeName || '여정 리뷰하기'}</SimpleNav>
+      <SimpleNav>{spotName || '여정 리뷰하기'}</SimpleNav>
       <Styled.ImageContainer htmlFor="input-file">
         {imageFile ? (
           <Styled.PreviewImage src={imageFile} />
@@ -66,9 +67,20 @@ const ReviewWrite = ({ isEdit, placeName }: ReviewWriteProps) => {
           </Text>
         </Styled.TextCountWrapper>
       </Styled.WriteContainer>
+
+      {variant === 'trip' && isEdit && (
+        <Styled.RatingContainer>
+          <Styled.RatingCustom
+            name="half-rating"
+            defaultValue={0}
+            precision={0.5}
+          />
+        </Styled.RatingContainer>
+      )}
+
       <Styled.ButtonWrapper>
         <Button variants="primary" size="lg" disabled>
-          리뷰 작성하기
+          리뷰 {isEdit === false ? '작성' : '수정'}하기
         </Button>
       </Styled.ButtonWrapper>
     </div>

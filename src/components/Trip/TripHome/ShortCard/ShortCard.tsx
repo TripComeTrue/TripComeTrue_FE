@@ -1,3 +1,4 @@
+import ReactPlayer from 'react-player';
 import { Bookmark, Text } from '@/components/common';
 import * as Styled from './ShortCard.styles';
 
@@ -5,7 +6,14 @@ const ShortCard = () => {
   return (
     <Styled.Container>
       <Styled.ImageContainer>
-        <Styled.Image src="https://source.unsplash.com/random" alt="Short" />
+        <ReactPlayer
+          url="https://www.youtube.com/shorts/AdL4EQm5CUg"
+          controls
+          light
+          width="100%"
+          height="100%"
+        />
+        {/* <Styled.Image src="https://source.unsplash.com/random" alt="Short" /> */}
         <Styled.BookMarkContainer>
           <Bookmark count={999} />
         </Styled.BookMarkContainer>
