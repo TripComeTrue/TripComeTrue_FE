@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { GoChevronRight } from 'react-icons/go';
 import { Button, Text } from '@/components/common';
 import { EditProfileForm } from './MyPageEditProfile.types';
-import { MyPageEditInputWrap } from './MyPageEditProfile.styles';
 import MyPageEditImage from './MyPageEditImage';
 import * as Styled from './MyPageEditProfile.styles';
 import * as StyledInput from '../MyPagePassword/MyPageConfirmPassword.styles';
@@ -31,7 +30,7 @@ function MyPageEditProfile() {
     <Styled.MyPageEditProfileWrap onSubmit={onSubmit}>
       <div>
         <MyPageEditImage />
-        <MyPageEditInputWrap>
+        <Styled.MyPageEditInputWrap>
           <label htmlFor="nickname">
             <Text fontSize={12} fontWeight={700}>
               크리에이터 명
@@ -49,8 +48,8 @@ function MyPageEditProfile() {
               {errors.nickname.message}
             </StyledInput.MyPageError>
           )}
-        </MyPageEditInputWrap>
-        <MyPageEditInputWrap>
+        </Styled.MyPageEditInputWrap>
+        <Styled.MyPageEditInputWrap>
           <label htmlFor="description">
             <Text fontSize={12} fontWeight={700}>
               소개글
@@ -68,7 +67,7 @@ function MyPageEditProfile() {
               {errors.nickname.message}
             </StyledInput.MyPageError>
           )}
-        </MyPageEditInputWrap>
+        </Styled.MyPageEditInputWrap>
         <Styled.MyPageEditLinkWrap>
           <div>
             <Styled.MyPageEditPasswordLink to="/mypage/change-password">
