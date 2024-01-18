@@ -13,3 +13,4 @@ export { default as MyPageConfirmPassword } from './MyPagePassword/MyPageConfirm
 export { default as MyPageChangePassword } from './MyPagePassword/MyPageChangePassword';
 export { default as MyPageEditProfile } from './MyPageEditProfile/MyPageEditProfile';
 export { default as MyPageEditImage } from './MyPageEditProfile/MyPageEditImage';
+export { default as MyPageAccordion } from './MyPageFaq/MyPageAccordion';
