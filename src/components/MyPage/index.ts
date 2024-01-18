@@ -7,3 +7,6 @@ export { default as MyPageComment } from './MyPageComment/MyPageComment';
 export { default as MyPageTopProfile } from './MyPageTopProfile/MyPageTopProfile';
 export { default as MyPagePopMenu } from './MyPagePopMenu/MyPagePopMenu';
 export { default as MyPagePopMenuAlt } from './MyPagePopMenu/MyPagePopMenuAlt';
+export { default as MyPageNoti } from './MyPageNoti/MyPageNoti';
+export { default as MyPageNotiIcon } from './MyPageNoti/MyPageNotiIcon';
+export { default as MyPageConfirmPassword } from './MyPagePassword/MyPageConfirmPassword';

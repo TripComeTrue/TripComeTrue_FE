@@ -2,6 +2,7 @@ import { rest } from 'msw';
 import SERVER_URL from '@/constants/api';
 import TRIP_PLANS from '@/constants/MyPage/tripPlan';
 import PLACE_DATA from '@/constants/MyPage/tripReview';
+import NOTIES from '@/constants/MyPage/notification';
 
 interface SignInRequestBody {
   email: string;
@@ -36,6 +37,16 @@ const handlers = [
       ctx.json({
         message: 'review data loaded',
         data: PLACE_DATA,
+      }),
+    );
+  }),
+  rest.get(`${SERVER_URL}/mypage/noti`, (_, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+        message: 'noti data loaded',
+        data: NOTIES,
       }),
     );
   }),

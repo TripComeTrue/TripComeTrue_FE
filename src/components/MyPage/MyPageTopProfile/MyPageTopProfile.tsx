@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   MdOutlineBookmarks,
   MdOutlineEdit,
@@ -8,6 +9,11 @@ import { Avatar, Text } from '@/components/common';
 import * as Styled from './MyPageTopProfile.styles';
 
 function MyPageTopProfile() {
+  const navigate = useNavigate();
+  const onClickEdit = () => {
+    navigate('confirm-password');
+  };
+
   return (
     <Styled.MyPageTopProfileWrap>
       <Styled.MyPageTopProfileBox>
@@ -24,7 +30,8 @@ function MyPageTopProfile() {
           <Styled.MyPageTopProfileBtn
             size="sm"
             variants="gray-border"
-            rounded="sm">
+            rounded="sm"
+            onClick={onClickEdit}>
             <MdOutlineEdit /> 계정관리
           </Styled.MyPageTopProfileBtn>
           <Styled.MyPageTopProfileBtn size="sm" variants="text" rounded="sm">
