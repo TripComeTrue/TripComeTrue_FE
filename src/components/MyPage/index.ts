@@ -10,3 +10,5 @@ export { default as MyPagePopMenuAlt } from './MyPagePopMenu/MyPagePopMenuAlt';
 export { default as MyPageNoti } from './MyPageNoti/MyPageNoti';
 export { default as MyPageNotiIcon } from './MyPageNoti/MyPageNotiIcon';
 export { default as MyPageConfirmPassword } from './MyPagePassword/MyPageConfirmPassword';
+export { default as MyPageEditProfile } from './MyPageEditProfile/MyPageEditProfile';
+export { default as MyPageEditImage } from './MyPageEditProfile/MyPageEditImage';

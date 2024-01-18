@@ -24,13 +24,13 @@ function MyPageConfirmPassword() {
   });
 
   return (
-    <Styled.MyPageConfirmPasswordForm onSubmit={onSubmit}>
+    <Styled.MyPageFormWrap onSubmit={onSubmit}>
       <div>
         <label htmlFor="password">
           <Text fontSize={14} fontWeight={700}>
             계정 정보 수정을 위해 비밀번호를 입력해 주세요.
           </Text>
-          <Styled.MyPagePasswordInput
+          <Styled.MyPageInput
             type="password"
             {...register('password', passwordValiation)}
             id="password"
@@ -39,9 +39,7 @@ function MyPageConfirmPassword() {
           />
         </label>
         {errors.password && (
-          <Styled.MyPagePasswordError>
-            {errors.password.message}
-          </Styled.MyPagePasswordError>
+          <Styled.MyPageError>{errors.password.message}</Styled.MyPageError>
         )}
       </div>
       <div>
@@ -52,7 +50,7 @@ function MyPageConfirmPassword() {
           확인
         </Button>
       </div>
-    </Styled.MyPageConfirmPasswordForm>
+    </Styled.MyPageFormWrap>
   );
 }
 

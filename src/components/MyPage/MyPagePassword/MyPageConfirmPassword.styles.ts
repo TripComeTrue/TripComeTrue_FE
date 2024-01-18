@@ -1,14 +1,19 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { tabBarHeight } from '@/styles/common';
 
-export const MyPageConfirmPasswordForm = styled.form`
+export const MyPageFormCss = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 7.5625rem);
   padding: 1.25rem 1.25rem 1.4375rem;
 `;
 
-export const MyPagePasswordInput = styled.input`
+export const MyPageFormWrap = styled.form`
+  ${tabBarHeight};
+  ${MyPageFormCss};
+`;
+
+export const MyPageInput = styled.input`
   display: block;
   width: 100%;
   appearance: none;
@@ -27,7 +32,7 @@ export const MyPagePasswordInput = styled.input`
   }
 `;
 
-export const MyPagePasswordError = styled.span`
+export const MyPageError = styled.span`
   display: block;
   color: ${({ theme }) => theme.semantic.negative};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
