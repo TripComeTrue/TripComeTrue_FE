@@ -7,15 +7,13 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SlArrowLeft } from 'react-icons/sl';
 import { GoPlusCircle } from 'react-icons/go';
-import speechBubble from '../../../../../public/images/speech-bubble.svg';
 import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
-import * as Styled from './TripPlanPosting.styles';
+import * as Styled from './TripPlanPostingPlan.styles';
 import { Button } from '@/components/common';
 import TripPlanPlaceModal from './TripPlanPlaceModal/TripPlanPlaceModal';
+import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
 // import TripPlanTagModal from './TripPlanTagModal';
 // import useModal from '@/hooks/common/useModal';
 // import { useNavigate } from 'react-router-dom';
@@ -242,33 +240,7 @@ const TripPlanPosting = () => {
               selectedDay !== null && onImgChange(event, selectedDay - 1)
             }
           />
-
-          <Styled.TagsInputContainer>
-            <Styled.TagsInputTitle>
-              <LocalOfferIcon
-                className="tag-icon"
-                style={{
-                  width: '1.1rem',
-                  height: '1.1rem',
-                  fill: '#b4f34c',
-                }}
-              />
-              여행 태그 추가하고 포인트 받아가세요!
-            </Styled.TagsInputTitle>
-            <Styled.TagsAddButton>
-              <AddCircleIcon
-                style={{
-                  width: '1.2rem',
-                  height: '1.2rem',
-                  fill: '#b4f34c',
-                  marginRight: '0.3rem',
-                }}
-              />{' '}
-              태그 추가하기 <img src={speechBubble} aria-label="add tag" />
-            </Styled.TagsAddButton>
-            <Styled.TagsInput />
-            {/* <TripPlanTagModal open={open} onClose={handleClose}/> */}
-          </Styled.TagsInputContainer>
+          <TripPlanAddHashtags />
         </Styled.PostingForm>
       </>
     );

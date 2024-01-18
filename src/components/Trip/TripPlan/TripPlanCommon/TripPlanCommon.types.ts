@@ -1,3 +1,3 @@
 export interface NavButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
 }

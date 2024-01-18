@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import TripPlanPosting from '@/components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
+import TripPlanPosting from '@/components/Trip/TripPlan/TripPlanPostingPlan/TripPlanPostingPlan';
 import {
   TripPlanDate,
   TripPlanCountry,

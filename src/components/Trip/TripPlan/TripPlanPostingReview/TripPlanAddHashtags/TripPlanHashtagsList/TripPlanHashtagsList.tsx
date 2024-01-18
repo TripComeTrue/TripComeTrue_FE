@@ -1,8 +1,8 @@
 import { SimpleNav, Text } from '@/components/common';
 import Container from '@/components/common/Container';
 import HASH_TAGS from '@/constants/hashtags';
-import * as Styled from './TripPlanHashtags.styles';
-import { TripPlanHashProps } from './TripPlanHashtags.types';
+import * as Styled from './TripPlanHashtagsList.styles';
+import { TripPlanHashProps } from './TripPlanHashtagsList.types';
 
 function TripPlanHashtags({ selectedTags }: TripPlanHashProps) {
   return (
