@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import * as Styled from './TabBar.styles';
 
@@ -9,9 +10,24 @@ const navItems = [
 
 function TabBar() {
   const { pathname } = useLocation();
+  const [isFixed, setIsFixed] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkHeight = () => {
+      const totalHeight = document.body.scrollHeight;
+      const viewportHeight = window.innerHeight;
+      setIsFixed(totalHeight <= viewportHeight);
+    };
+
+    checkHeight();
+    window.addEventListener('resize', checkHeight);
+
+    return () => window.removeEventListener('resize', checkHeight);
+  }, []);
 
   return (
-    <Styled.TabBarWrap>
+    <Styled.TabBarWrap
+      $isfixed={`${isFixed || pathname.startsWith(`/mypage`)}`}>
       <Styled.TabBar>
         <Styled.TabItems>
           {navItems.map((item) => (

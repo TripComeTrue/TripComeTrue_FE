@@ -20,7 +20,7 @@ import {
   SpotList,
   SpotSearch,
   TouristSpot,
-  Reviews
+  Reviews,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
@@ -29,6 +29,18 @@ import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
+import {
+  ChangePassword,
+  ConfirmPassword,
+  EditProfile,
+  Faq,
+  MyPage,
+  Notification,
+  TripPoint,
+  WishList,
+  WishListMore,
+} from './pages/MyPage';
+import { MyPageLayout } from './components/MyPage';
 
 function App() {
   return (
@@ -40,8 +52,6 @@ function App() {
           <Route path="agree" element={<SignUpAgree />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="social" element={<Social />} />
-          {/* <Route path="findemail" element={<FindEmail />} />
-          <Route path="findpw" element={<FindPw />} /> */}
         </Route>
         <Route path="home" element={<Home />} />
         <Route path="search/*" element={<Search />} />
@@ -68,6 +78,17 @@ function App() {
           <Route path="gallerylist" element={<GalleryList />} />
           <Route path="spotlist" element={<SpotList />} />
           <Route path="spotsearch" element={<SpotSearch />} />
+        </Route>
+        <Route path="/mypage/*" element={<MyPageLayout />}>
+          <Route index element={<MyPage />} />
+          <Route path="notification" element={<Notification />} />
+          <Route path="confirm-password" element={<ConfirmPassword />} />
+          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="change-password" element={<ChangePassword />} />
+          <Route path="wishlist" element={<WishList />} />
+          <Route path="wishlist/:type" element={<WishListMore />} />
+          <Route path="point" element={<TripPoint />} />
+          <Route path="faq" element={<Faq />} />
         </Route>
       </Route>
     </Routes>
