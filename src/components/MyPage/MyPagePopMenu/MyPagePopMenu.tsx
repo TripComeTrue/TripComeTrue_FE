@@ -1,12 +1,12 @@
 import { MouseEvent, useState } from 'react';
-import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { HiOutlineDotsHorizontal, HiOutlineDotsVertical } from 'react-icons/hi';
 import { MdArrowOutward, MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
 import { Menu, MenuItem } from '@mui/material';
 import { Text } from '@/components/common';
 import * as Styled from './MyPagePopMenu.styles';
 import { MyPagePopMenuProps } from './MyPagePopMenu.types';
 
-function MyPagePopMenu({ onOpenShare }: MyPagePopMenuProps) {
+function MyPagePopMenu({ vertical, onOpenShare }: MyPagePopMenuProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -28,8 +28,9 @@ function MyPagePopMenu({ onOpenShare }: MyPagePopMenuProps) {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         variants="text"
-        onClick={handleClick}>
-        <HiOutlineDotsHorizontal />
+        onClick={handleClick}
+        $vertical={`${vertical}`}>
+        {vertical ? <HiOutlineDotsVertical /> : <HiOutlineDotsHorizontal />}
       </Styled.MyPagePopMenuBtn>
       <Menu
         id="mypage-edit-menu"
