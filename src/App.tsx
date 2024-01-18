@@ -3,12 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
-import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
-import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import {
   TripDetail,
   TripHome,
   TripList,
+  TripPlan,
   TripReviewEdit,
   TripReviewNew,
 } from '@/pages/Trip';
@@ -23,7 +22,6 @@ import {
   Reviews,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
-import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
 
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
@@ -55,10 +53,10 @@ function App() {
           <Route path="detail/:id" element={<TripDetail />} />
           <Route path="detail/:id/review/write" element={<TripReviewNew />} />
           <Route path="detail/:id/review/edit" element={<TripReviewEdit />} />
-          <Route path="plan" element={<TripPlanDate />} />
-          <Route path="country" element={<TripPlanCountry />} />
+          <Route path="plan" element={<TripPlan />} />
+          {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
-          <Route path="posting" element={<TripPlanPosting />} />
+          <Route path="posting" element={<TripPlanPosting />} /> */}
         </Route>
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />

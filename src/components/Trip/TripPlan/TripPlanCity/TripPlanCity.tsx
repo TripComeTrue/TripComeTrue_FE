@@ -6,10 +6,6 @@ import Checkbox from '@mui/material/Checkbox';
 import { SlArrowLeft } from 'react-icons/sl';
 import * as Styled from './TripPlanCityList.styles';
 import { SubTitle } from '@/components/common';
-import {
-  TripPlanPrevButton,
-  TripPlanNextButton,
-} from '../TripPlanCommon/TripPlanCommon';
 import CityListModal from './TripPlanCityModal/TripPlanCityModal';
 
 const TripPlanCity = () => {
@@ -100,29 +96,25 @@ const TripPlanCity = () => {
   };
 
   return (
-    <>
-      <Styled.Wrapper>
-        <TripPlanPrevButton />
-        <Styled.Container>
-          <Styled.Title>
-            여행 기간 동안
-            <br /> 어느 지역을 방문했나요?
-          </Styled.Title>
+    <Styled.Wrapper>
+      <Styled.Container>
+        <Styled.Title>
+          여행 기간 동안
+          <br /> 어느 지역을 방문했나요?
+        </Styled.Title>
 
-          <label htmlFor="eachday">
-            <Checkbox
-              checked={isAllCitySame}
-              onChange={handleCheckAllSameCity}
-              size="small"
-              style={{ width: '1rem', height: '1rem', color: '#b4f34c' }}
-            />{' '}
-            <span className="checkbox-text">방문 지역 모두 동일</span>
-            {showInputPerDay()}
-          </label>
-        </Styled.Container>
-      </Styled.Wrapper>
-      <TripPlanNextButton />
-    </>
+        <label htmlFor="eachday">
+          <Checkbox
+            checked={isAllCitySame}
+            onChange={handleCheckAllSameCity}
+            size="small"
+            style={{ width: '1rem', height: '1rem', color: '#b4f34c' }}
+          />{' '}
+          <span className="checkbox-text">방문 지역 모두 동일</span>
+          {showInputPerDay()}
+        </label>
+      </Styled.Container>
+    </Styled.Wrapper>
   );
 };
 

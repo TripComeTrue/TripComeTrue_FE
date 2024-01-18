@@ -13,7 +13,6 @@ import { SlArrowLeft } from 'react-icons/sl';
 import { GoPlusCircle } from 'react-icons/go';
 import speechBubble from '../../../../../public/images/speech-bubble.svg';
 import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
-import { TripPlanPrevButton } from '../TripPlanCommon/TripPlanCommon';
 import * as Styled from './TripPlanPosting.styles';
 import { Button } from '@/components/common';
 import TripPlanPlaceModal from './TripPlanPlaceModal/TripPlanPlaceModal';
@@ -277,7 +276,6 @@ const TripPlanPosting = () => {
 
   return (
     <Styled.Wrapper>
-      <TripPlanPrevButton />
       <Styled.Container>
         <Styled.DateDisplay>
           <div className="date">

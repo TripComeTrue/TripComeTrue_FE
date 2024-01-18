@@ -6,7 +6,7 @@ export const PrevButton = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
 
-  padding: 1rem 0;
+  padding: 1rem 1rem;
   bottom: 0;
 
   background-color: white;
