@@ -1,5 +1,11 @@
+import { SearchCity } from '@/components/Search';
+
 const SearchAll = () => {
-  return <div>Search All</div>;
+  return (
+    <div>
+      <SearchCity />
+    </div>
+  );
 };
 
 export default SearchAll;

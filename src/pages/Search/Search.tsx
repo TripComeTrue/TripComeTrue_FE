@@ -6,7 +6,7 @@ import * as Styled from './Search.styles';
 import SearchAll from './SearchAll';
 import SearchCity from './SearchCitys';
 import SearchSpot from './SearchSpot';
-import SearchCreator from './SearchCreator';
+import SearchCreators from './SearchCreators';
 import { SearchKeyword } from '@/components/Search';
 
 const Search: React.FC = () => {
@@ -51,7 +51,7 @@ const Search: React.FC = () => {
       SearchResult = <SearchSpot />;
       break;
     case 'creator':
-      SearchResult = <SearchCreator />;
+      SearchResult = <SearchCreators />;
       break;
     case null:
       SearchResult = <div> </div>;
