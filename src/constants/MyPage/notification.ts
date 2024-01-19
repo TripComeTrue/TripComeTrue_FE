@@ -1,4 +1,4 @@
-import { Notification } from '@/components/MyPage/MyPageNoti/MyPageNoti.types';
+import { Notification } from '@/@types/mypage.types';
 
 const NOTIES: Notification[] = [
   {

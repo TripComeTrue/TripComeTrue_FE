@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import getNoties from './MyPageNoti.utils';
 import MyPageNotiItem from './MyPageNotiItem';
+import { getNoties } from '@/apis/mypage';
 
 function MyPageNoti() {
   const { data, isLoading } = useQuery({

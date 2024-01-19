@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import useModal from '@/hooks/common/useModal';
-import getMyReview from './MyPageReview.utils';
 import { SelectModal, Share } from '@/components/common';
 import {
   ShareKakaoIcon,
@@ -8,6 +7,7 @@ import {
 } from '@/components/common/Share/Share.styles';
 import MyPageReviewWrap from './MyPageReview.styles';
 import MyPageReviewItem from './MyPageReviewItem';
+import { getMyReview } from '@/apis/mypage';
 
 function MyPageReview() {
   const { open, handleOpen, handleClose } = useModal();

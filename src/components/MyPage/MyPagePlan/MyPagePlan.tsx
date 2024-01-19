@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import MyPagePlanWrap from './MyPagePlan.styles';
-import getMyPlan from './MyPagePlan.utils';
 import MyPagePlanItem from './MyPagePlanItem';
 import { SelectModal, Share } from '@/components/common';
 import useModal from '@/hooks/common/useModal';
@@ -8,6 +7,7 @@ import {
   ShareKakaoIcon,
   ShareLinkIcon,
 } from '@/components/common/Share/Share.styles';
+import { getMyPlan } from '@/apis/mypage';
 
 function MyPagePlan() {
   const { open, handleOpen, handleClose } = useModal();

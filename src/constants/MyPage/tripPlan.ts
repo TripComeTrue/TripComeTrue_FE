@@ -1,4 +1,4 @@
-import { MyTripPlan } from '@/components/MyPage/MyPagePlan/MyPagePlan.types';
+import { MyTripPlan } from '@/@types/mypage.types';
 
 const TRIP_PLANS: MyTripPlan[] = [
   {

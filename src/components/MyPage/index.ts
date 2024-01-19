@@ -14,3 +14,4 @@ export { default as MyPageChangePassword } from './MyPagePassword/MyPageChangePa
 export { default as MyPageEditProfile } from './MyPageEditProfile/MyPageEditProfile';
 export { default as MyPageEditImage } from './MyPageEditProfile/MyPageEditImage';
 export { default as MyPageAccordion } from './MyPageFaq/MyPageAccordion';
+export { default as MyPageWishListMore } from './MyPageWishList/MyPageWishListMore';

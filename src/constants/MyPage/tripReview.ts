@@ -1,4 +1,4 @@
-import { MyTripReview } from '@/components/MyPage/MyPageReview/MyPageReview.types';
+import { MyTripReview } from '@/@types/mypage.types';
 
 const PLACE_DATA: MyTripReview[] = [
   {
