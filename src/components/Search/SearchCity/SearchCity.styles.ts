@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CityContainer = styled.div`
-  margin: 1rem;
+  margin: 1rem 1rem 2rem 1rem;
 `;
 
 export const CityTitle = styled.div`

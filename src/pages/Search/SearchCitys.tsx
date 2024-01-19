@@ -1,11 +1,7 @@
 import { SearchCity } from '@/components/Search';
 
 const SearchCitys = () => {
-  return (
-    <div>
-      <SearchCity />
-    </div>
-  );
+  return <SearchCity />;
 };
 
 export default SearchCitys;
