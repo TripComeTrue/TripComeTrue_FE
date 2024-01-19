@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubTitle } from '@/components/common';
 import starIcon from '/starIcon.svg';
+import searchImg from '/searchImg.png';
 
 const CityContainer = styled.div`
   margin: 1rem;
@@ -16,6 +17,80 @@ const CityTitle = styled.div`
   img {
     width: 2rem;
     margin-right: 0.3rem;
+  }
+`;
+
+const CityImgWrap = styled.div`
+  position: relative;
+
+  margin: 0.8rem 0 0.6rem;
+  width: 100%;
+  aspect-ratio: 1;
+
+  border-radius: 0.625rem;
+
+  img {
+    width: 100%;
+  }
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+    aspect-ratio: 1;
+
+    border-radius: 10px;
+  }
+`;
+
+const ImgTitle = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+
+  text-align: center;
+  color: ${({ theme }) => theme.brand.white};
+  z-index: 1;
+
+  p {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    line-height: 0.9;
+  }
+
+  div {
+    font-family: 'Mundial-Demibold', 'SF-Pro', sans-serif;
+    font-size: ${({ theme }) => theme.fontSizes.xxxl};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+  }
+`;
+
+const UserTitle = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+
+  border-radius: 10px 0 4px 0;
+  background-color: ${({ theme }) => theme.brand.black};
+  color: ${({ theme }) => theme.brand.white};
+  font-size: 10px;
+
+  img {
+    margin-right: 0.2rem;
+    width: 1rem;
+    height: 1rem;
+
+    border-radius: 50%;
   }
 `;
 
@@ -114,7 +189,17 @@ const SearchCity = () => {
         도시
       </SubTitle>
 
-      <div>{query} 이미지 네모 ㅋ</div>
+      <CityImgWrap>
+        <img src={searchImg} alt="img" />
+        <ImgTitle>
+          <p>치앙마이</p>
+          <div>CHIANG MAI</div>
+        </ImgTitle>
+        <UserTitle>
+          <img src={searchImg} alt="img" />
+          <div>마이치앙마이</div>
+        </UserTitle>
+      </CityImgWrap>
 
       <CityTitle>
         <img src={starIcon} alt="starIcon" />
