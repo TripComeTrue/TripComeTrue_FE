@@ -12,6 +12,11 @@ export interface SpotsProps {
   fontSize?: number;
 }
 
+export interface SpotsWishListProps {
+  isDelete?: boolean;
+  onDelete?: () => void;
+}
+
 export interface SpotsSwiperProps extends PostData {
   sort: 'left' | 'center' | 'space';
   fontSize: number;
