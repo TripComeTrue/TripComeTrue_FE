@@ -15,3 +15,5 @@ export { default as MyPageEditProfile } from './MyPageEditProfile/MyPageEditProf
 export { default as MyPageEditImage } from './MyPageEditProfile/MyPageEditImage';
 export { default as MyPageAccordion } from './MyPageFaq/MyPageAccordion';
 export { default as MyPageWishListMore } from './MyPageWishList/MyPageWishListMore';
+export { default as MyPageMyTripPoint } from './MyPageTripPoint/MyPageMyTripPoint';
+export { default as MyPageLevel } from './MyPageTripPoint/MyPageLevel';
