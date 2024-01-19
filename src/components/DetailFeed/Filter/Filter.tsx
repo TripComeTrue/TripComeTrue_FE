@@ -1,15 +1,12 @@
-import { useState } from 'react';
-import { Text } from '@/components/common';
 import * as Styled from './Filter.styles';
-import polygon from '/polygon.svg';
+import { FilterProps } from './Filter.types';
+import FilterMenu from './FilterMenu';
 
-const Filter = () => {
-  const [filterOption] = useState('최신순');
+const Filter = ({ orderOption }: FilterProps) => {
   return (
     <Styled.FilterWrapper>
       <Styled.FilterBox>
-        <Text fontSize={16}>{filterOption}</Text>
-        <img src={polygon} alt="polygon" />
+        <FilterMenu orderOption={orderOption} />
       </Styled.FilterBox>
     </Styled.FilterWrapper>
   );

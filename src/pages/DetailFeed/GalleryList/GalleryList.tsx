@@ -7,7 +7,7 @@ const GalleryList = () => {
   return (
     <div>
       <SimpleNav>방콕</SimpleNav>
-      <Filter />
+      <Filter orderOption="최신순" />
       <Styled.GalleryListBox>
         <Styled.PhotoBox>
           <Styled.BookMarkBox>

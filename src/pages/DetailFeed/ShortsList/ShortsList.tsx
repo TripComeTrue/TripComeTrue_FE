@@ -8,7 +8,7 @@ const ShortsList = () => {
   return (
     <Styled.ShortsListWrapper>
       <SimpleNav>방콕</SimpleNav>
-      <Filter />
+      <Filter orderOption="최신순" />
       <Styled.ShortsListBox>
         <ShortsSwiper
           img={bangkok}

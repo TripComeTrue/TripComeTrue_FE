@@ -8,7 +8,7 @@ const SpotList = () => {
   return (
     <div>
       <SpotListNav>방콕</SpotListNav>
-      <Filter />
+      <Filter orderOption="리뷰순" />
       <Styled.SpotListWrapper>
         <Styled.SpotBox>
           <Styled.SpotImg src={bangkok} alt="방콕" />
