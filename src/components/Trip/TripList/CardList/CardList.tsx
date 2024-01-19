@@ -1,12 +1,13 @@
 import { TripCard } from '../..';
 import * as Styled from './CardList.styles';
+import { CardListProps } from './CardList.types';
 
-const CardList = () => {
+const CardList = ({ tripRecordsData }: CardListProps) => {
   return (
     <Styled.Container>
-      <TripCard />
-      <TripCard />
-      <TripCard />
+      {tripRecordsData?.map((data) => (
+        <TripCard key={data.tripRecordId} tripRecordData={data} />
+      ))}
     </Styled.Container>
   );
 };

@@ -4,7 +4,7 @@ import {
   Introduction,
   MainCarousel,
   ReviewAlert,
-  TripCarousel,
+  // TripCarousel,
   TripComment,
   TripContents,
 } from '@/components/Trip';
@@ -23,7 +23,7 @@ const TripDetail = () => {
           <SubTitle margin="0 1.25rem 0.875rem 0">
             이 여행과 비슷한 여행
           </SubTitle>
-          <TripCarousel />
+          {/* <TripCarousel /> */}
         </Styled.OtherTripDetails>
       </Styled.Container>
     </div>
