@@ -18,7 +18,7 @@ const handlers = [
     );
   }),
 
-  rest.get(`${SERVER_URL}/v1/trip-records`, (req, res, ctx) => {
+  rest.get(`${SERVER_URL}/v1/trip-records`, (_, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
