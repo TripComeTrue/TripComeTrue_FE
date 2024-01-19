@@ -3,10 +3,10 @@ import client from './client';
 // 여행 후기 관련 API
 
 // 여행 후기 리스트 조회
-export const getTripRecords = async () => {
-  const res = await client.get(`v1/trip-record`);
+export const getTripRecords = async (param?: string) => {
+  const res = await client.get(`v1/trip-records${param ? `?${param}` : ''}`);
 
-  return res;
+  return res.data;
 };
 
 // 여행 후기 세부 조회
