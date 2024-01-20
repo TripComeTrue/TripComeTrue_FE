@@ -28,6 +28,7 @@ import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
 import TripPlanAddTags from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
+import TripPlanAddPlace from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddPlace/TripPlanAddPlace';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="city" element={<TripPlanCity />} />
           <Route path="posting" element={<TripPlanPosting />} /> */}
           <Route path="addtag" element={<TripPlanAddTags />} />
+          <Route path="addplace" element={<TripPlanAddPlace />} />
         </Route>
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />

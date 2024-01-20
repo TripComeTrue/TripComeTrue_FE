@@ -4,11 +4,16 @@ import HASH_TAGS from '@/constants/hashtags';
 import * as Styled from './TripPlanHashtagsList.styles';
 import { TripPlanHashProps } from './TripPlanHashtagsList.types';
 
-function TripPlanHashtags({ selectedTags }: TripPlanHashProps) {
+function TripPlanHashtagsList({
+  selectedTags,
+  onHashtagsSelection,
+  onCloseModal,
+}: TripPlanHashProps) {
   return (
     <>
       <SimpleNav>어떤 여행이었나요?</SimpleNav>
       <Container>
+        어떤 여행이었나요?
         <Styled.TripPlanHashWrap>
           <Text fontSize={14} fontWeight={700}>
             누구와 함께 떠난 여행인가요?
@@ -26,7 +31,6 @@ function TripPlanHashtags({ selectedTags }: TripPlanHashProps) {
             ))}
           </Styled.TripPlanHashTagsWrap>
         </Styled.TripPlanHashWrap>
-
         <Styled.TripPlanHashWrap>
           <Text fontSize={14} fontWeight={700}>
             어떤 형태의 여행인가요?
@@ -44,7 +48,6 @@ function TripPlanHashtags({ selectedTags }: TripPlanHashProps) {
             ))}
           </Styled.TripPlanHashTagsWrap>
         </Styled.TripPlanHashWrap>
-
         <Styled.TripPlanHashWrap>
           <Text fontSize={14} fontWeight={700}>
             또 다른 특징이 있나요?
@@ -64,9 +67,17 @@ function TripPlanHashtags({ selectedTags }: TripPlanHashProps) {
             )}
           </Styled.TripPlanHashTagsWrap>
         </Styled.TripPlanHashWrap>
+        <button
+          type="button"
+          onClick={() => {
+            onHashtagsSelection(selectedTags);
+            onCloseModal();
+          }}>
+          선택 완료
+        </button>
       </Container>
     </>
   );
 }
 
-export default TripPlanHashtags;
+export default TripPlanHashtagsList;

@@ -12,7 +12,8 @@ import { GoPlusCircle } from 'react-icons/go';
 import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
 import * as Styled from './TripPlanPostingPlan.styles';
 import { Button } from '@/components/common';
-import TripPlanPlaceModal from './TripPlanPlaceModal/TripPlanPlaceModal';
+import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
+import TripPlanAddTagsTitle from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsButton/TripPlanAddTagsButton';
 import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
 // import TripPlanTagModal from './TripPlanTagModal';
 // import useModal from '@/hooks/common/useModal';
@@ -240,7 +241,9 @@ const TripPlanPosting = () => {
               selectedDay !== null && onImgChange(event, selectedDay - 1)
             }
           />
+
           <TripPlanAddHashtags />
+          <TripPlanAddTagsTitle />
         </Styled.PostingForm>
       </>
     );

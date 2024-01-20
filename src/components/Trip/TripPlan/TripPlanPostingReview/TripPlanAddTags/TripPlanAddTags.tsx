@@ -14,7 +14,7 @@ const TripPlanAddTags = () => {
   // const { register, watch, setValue, handleSubmit } = useForm();
 
   const navigate = useNavigate();
-  const goPrev = navigate(-1);
+  const goPrev = () => navigate(-1);
 
   //   const openModal = () => setIsModalOpen(true);
   //   const closeModal = () => setIsModalOpen(false);
@@ -27,7 +27,7 @@ const TripPlanAddTags = () => {
   return (
     <>
       <Styled.Title>
-        <TripPlanPrevButton onClick={() => goPrev} />
+        <TripPlanPrevButton onClick={goPrev} />
         <p>태그하기</p>
       </Styled.Title>
 

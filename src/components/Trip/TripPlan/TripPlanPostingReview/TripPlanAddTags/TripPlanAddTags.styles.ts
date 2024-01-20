@@ -19,22 +19,22 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  gap: 1rem;
+  gap: 1.5rem;
 `;
 
 export const PhotoDisplay = styled.div`
   position: relative;
 
-  width: 16rem;
-  height: 16rem;
+  width: 17.5rem;
+  height: 17.5rem;
   border-radius: 0.625rem;
   background-color: ${({ theme }) => theme.brand.lightGray};
   margin: 0 1rem;
 
   .plus-icon {
     position: absolute;
-    top: 7.5rem;
-    left: 7.5rem;
+    top: 8rem;
+    left: 8rem;
   }
 `;
 
@@ -44,7 +44,7 @@ export const InfoContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-top: 1.3rem;
+  margin-top: 1.6rem;
   gap: 0.5rem;
 
   img {
