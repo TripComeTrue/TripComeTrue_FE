@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SlArrowLeft } from 'react-icons/sl';
+import { IoCloseCircle } from 'react-icons/io5';
 import { SubTitle } from '@/components/common';
 import Container from '@/components/common/Container';
 import * as Styled from './TripPlanAddHashtags.styles';
@@ -11,29 +12,45 @@ const TripPlanAddHashtags = () => {
     isPaneOpenLeft: false,
   });
 
-  const handleHashtagsModalSelection = (hashtags: string[] | undefined) => {
-    if (hashtags) {
-      setSelectedHashtags(hashtags);
+  const handleSelectHashtag = (hashtag: string) => {
+    if (selectedHashtags.includes(hashtag)) {
+      setSelectedHashtags(selectedHashtags.filter((hash) => hash !== hashtag));
+    } else {
+      setSelectedHashtags([...selectedHashtags, hashtag]);
     }
-    setIsHashtagsModalOpen({ isPaneOpenLeft: false });
+  };
+
+  const handleRemoveHashtag = (event: React.MouseEvent, hashtag: string) => {
+    event.stopPropagation();
+
+    if (selectedHashtags.includes(hashtag)) {
+      setSelectedHashtags(selectedHashtags.filter((hash) => hash !== hashtag));
+    }
+    return [...selectedHashtags, hashtag];
   };
 
   return (
-    <Container>
+    <Container style={{ marginTop: '-2rem' }}>
       <SubTitle fontSize={17}>어떤 여행이었나요?</SubTitle>
-      <Styled.HashtagsInput
-        type="text"
-        // {...register(`day${selectedDay}.hashtags`)}
-        placeholder="해시태그를 선택해 주세요"
-        // value={selectedPlace || ''}
-        // onChange={(e) => handleChangePlaceName(e.target.value)}
-        value={selectedHashtags.join(', ')}
-        readOnly
-        onClick={() => setIsHashtagsModalOpen({ isPaneOpenLeft: true })}
-      />
+      <Styled.HashtagsDisplay
+        onClick={() => setIsHashtagsModalOpen({ isPaneOpenLeft: true })}>
+        {selectedHashtags.map((tag) => (
+          <Styled.Hashtag key={tag}>
+            &#35;{tag}
+            <Styled.RemoveBtn
+              onClick={(event) => handleRemoveHashtag(event, tag)}>
+              <IoCloseCircle color="#626161" />
+            </Styled.RemoveBtn>
+          </Styled.Hashtag>
+        ))}
+        <span className="placeholder">
+          {selectedHashtags.length === 0 ? '해시태그를 선택해 주세요' : ''}
+        </span>
+      </Styled.HashtagsDisplay>
+
       <Styled.SlidingPane
-        className="citymodal"
         closeIcon={<SlArrowLeft fontSize="15" />}
+        title="어떤 여행이었나요?"
         isOpen={isHashtagsModalOpen.isPaneOpenLeft}
         onRequestClose={() => {
           setIsHashtagsModalOpen({ isPaneOpenLeft: false });
@@ -41,8 +58,7 @@ const TripPlanAddHashtags = () => {
         width="22.5rem">
         <TripPlanHashtagsList
           selectedTags={selectedHashtags}
-          onHashtagsSelection={handleHashtagsModalSelection}
-          onCloseModal={() => setIsHashtagsModalOpen({ isPaneOpenLeft: false })}
+          onSelectHashtag={handleSelectHashtag}
         />
       </Styled.SlidingPane>
     </Container>

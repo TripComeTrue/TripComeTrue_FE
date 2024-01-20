@@ -16,9 +16,6 @@ import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPl
 import TripPlanAddTagsTitle from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsButton/TripPlanAddTagsButton';
 import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
 import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPlanSetBudget';
-// import TripPlanTagModal from './TripPlanTagModal';
-// import useModal from '@/hooks/common/useModal';
-// import { useNavigate } from 'react-router-dom';
 
 const TripPlanPosting = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
@@ -28,7 +25,6 @@ const TripPlanPosting = () => {
   const [isPlaceModalOpen, setIsPlaceModalOpen] = useState({
     isPaneOpenLeft: false,
   });
-  // const { open, handleOpen, handleClose } = useModal();
 
   // const navigate = useNavigate();
   const startDate = new Date('2024-01-15');

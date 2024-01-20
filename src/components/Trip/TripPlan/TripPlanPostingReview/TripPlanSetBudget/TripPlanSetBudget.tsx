@@ -17,7 +17,7 @@ const TripPlanSetBudget = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ marginTop: '-2rem' }}>
       <SubTitle fontSize={17}>여행 경비는 얼마로 준비하셨나요?</SubTitle>
 
       <Styled.BudgetWrapper>

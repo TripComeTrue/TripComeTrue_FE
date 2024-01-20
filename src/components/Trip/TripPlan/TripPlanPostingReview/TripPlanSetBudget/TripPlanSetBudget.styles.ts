@@ -16,8 +16,8 @@ export const BudgetSelection = styled.select`
   -moz-appearance: none;
   appearance: none;
   outline: none;
-  background-color: ${({ theme }) => theme.brand.white};
-  border: 1px solid #b4f34c;
+  background-color: ${({ theme }) => theme.brand.lightGray};
+  border: 0;
   border-radius: 0.5rem;
   margin: 0.5rem 0;
   box-sizing: border-box;
@@ -25,10 +25,6 @@ export const BudgetSelection = styled.select`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
   font-size: ${({ theme }) => theme.fontSizes.sm};
-
-  &:focus {
-    border: 1px solid #b4f34c;
-  }
 `;
 
 export const ArrowIcon = styled(SlArrowDown)`
