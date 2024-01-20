@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { SimpleNav, SubTitle } from '@/components/common';
 import * as Styled from './TripDetail.styles';
 import {
@@ -8,14 +10,22 @@ import {
   TripComment,
   TripContents,
 } from '@/components/Trip';
+import { getTripRecord } from '@/apis/trip-records';
 
 const TripDetail = () => {
+  const { tripRecordId } = useParams() as { tripRecordId: string };
+
+  const { data: tripRecordData } = useQuery({
+    queryKey: ['TripRecordDetailData'],
+    queryFn: () => getTripRecord(tripRecordId),
+  });
+
   return (
     <div>
       <SimpleNav>여행후기</SimpleNav>
       <Styled.Container>
-        <MainCarousel />
-        <Introduction />
+        <MainCarousel imagesData={tripRecordData?.data.images} />
+        <Introduction tripRecordData={tripRecordData?.data} />
         <TripContents />
         <TripComment />
         <ReviewAlert />

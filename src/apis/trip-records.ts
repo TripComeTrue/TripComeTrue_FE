@@ -10,10 +10,10 @@ export const getTripRecords = async (param?: string) => {
 };
 
 // 여행 후기 세부 조회
-export const getTripRecord = async (tripRecordId: number) => {
-  const res = await client.get(`v1/trip-record/${tripRecordId}`);
+export const getTripRecord = async (tripRecordId: string) => {
+  const res = await client.get(`v1/trip-records/${tripRecordId}`);
 
-  return res;
+  return res.data;
 };
 
 // 특정 여행 후기에 대한 다수의 리뷰 조희

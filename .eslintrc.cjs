@@ -34,6 +34,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'react/prop-types': 'off', // 임시
+    'react/jsx-no-useless-fragment': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {
