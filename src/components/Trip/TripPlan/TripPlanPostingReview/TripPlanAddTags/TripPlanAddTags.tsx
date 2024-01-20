@@ -5,7 +5,7 @@ import { HiMagnifyingGlass } from 'react-icons/hi2';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { TripPlanPrevButton } from '../../TripPlanCommon/TripPlanCommon';
-import addTagIcon from '../../../../../../public/images/addtag.png';
+import addTagIcon from '/images/addtag.png';
 import * as Styled from './TripPlanAddTags.styles';
 // import TripPlanTagsModal from './TripPlanTagsModal/TripPlanTagsModal';
 

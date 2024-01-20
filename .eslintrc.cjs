@@ -33,6 +33,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off',
     'no-nested-ternary': 'off',
     'react/prop-types': 'off', // 임시
+    'react/require-default-props': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {

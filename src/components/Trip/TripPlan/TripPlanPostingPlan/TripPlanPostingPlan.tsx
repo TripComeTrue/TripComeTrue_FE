@@ -15,6 +15,7 @@ import { Button } from '@/components/common';
 import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
 import TripPlanAddTagsTitle from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsButton/TripPlanAddTagsButton';
 import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
+import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPlanSetBudget';
 // import TripPlanTagModal from './TripPlanTagModal';
 // import useModal from '@/hooks/common/useModal';
 // import { useNavigate } from 'react-router-dom';
@@ -242,6 +243,7 @@ const TripPlanPosting = () => {
             }
           />
 
+          <TripPlanSetBudget />
           <TripPlanAddHashtags />
           <TripPlanAddTagsTitle />
         </Styled.PostingForm>

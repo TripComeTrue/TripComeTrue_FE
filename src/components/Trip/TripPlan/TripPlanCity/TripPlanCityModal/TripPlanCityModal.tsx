@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { SlArrowDown } from 'react-icons/sl';
+import { useEffect, useRef, useState } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as Styled from './TripPlanCityModal.styles';
 import { Button } from '@/components/common';
@@ -32,6 +31,13 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
       cities: ['베이징', '상하이', '광저우', '선전'],
     },
   ];
+
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  const handleArrowClick = () => {
+    selectRef.current?.click();
+  };
+
   const [selectedCountry, setSelectedCountry] = useState<string>(
     countryAndCities[0].name,
   );
@@ -71,9 +77,7 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
             </option>
           ))}
         </Styled.SelectCountries>
-        <span className="select-arrow">
-          <SlArrowDown style={{ color: '#505050' }} />
-        </span>
+        <Styled.ArrowIcon onClick={handleArrowClick} />
       </Styled.SelectedCountriesContainer>
 
       <Styled.ShowCitiesContainer>

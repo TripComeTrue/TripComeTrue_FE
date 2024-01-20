@@ -1,7 +1,7 @@
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from 'react-router-dom';
-import speechBubble from '/public/images/speech-bubble.svg';
+import speechBubble from '/images/speech-bubble.svg';
 import * as Styled from './TripPlanAddTagsButton.styles';
 
 const TripPlanAddTagsButton = () => {

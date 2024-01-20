@@ -20,7 +20,7 @@ const TripPlanAddHashtags = () => {
 
   return (
     <Container>
-      <SubTitle>어떤 여행이었나요?</SubTitle>
+      <SubTitle fontSize={17}>어떤 여행이었나요?</SubTitle>
       <Styled.HashtagsInput
         type="text"
         // {...register(`day${selectedDay}.hashtags`)}

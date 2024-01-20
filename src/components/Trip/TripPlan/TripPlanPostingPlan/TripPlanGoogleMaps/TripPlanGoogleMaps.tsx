@@ -5,7 +5,7 @@ import {
   MarkerF,
   OverlayView,
 } from '@react-google-maps/api';
-import mapMarker from '../../../../../../public/images/map-mark.svg';
+import mapMarker from '/images/map-mark.svg';
 import MarkerText from './TripPlanGoogleMaps.styles';
 
 const center = {
@@ -20,8 +20,8 @@ const options = {
 };
 
 interface GoogleMapsProps {
-  height: string;
-  placeName: string;
+  height?: string;
+  placeName?: string;
 }
 
 interface OffsetProps {
@@ -32,7 +32,7 @@ interface OffsetProps {
 function TripPlanGoogleMaps({ height = '10rem', placeName }: GoogleMapsProps) {
   const containerStyle = {
     width: '100%',
-    height: height,
+    height,
   };
 
   const { isLoaded, loadError } = useJsApiLoader({
