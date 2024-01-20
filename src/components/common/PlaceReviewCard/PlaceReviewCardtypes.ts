@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
-export interface TripRecordCardProps {
+export interface PlaceReviewCardProps {
   children: ReactNode;
 }

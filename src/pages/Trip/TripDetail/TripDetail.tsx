@@ -11,6 +11,7 @@ import {
   TripContents,
 } from '@/components/Trip';
 import { getTripRecord } from '@/apis/trip-records';
+import TripRecordReviewCard from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
 
 const TripDetail = () => {
   const { tripRecordId } = useParams() as { tripRecordId: string };
@@ -20,6 +21,8 @@ const TripDetail = () => {
     queryFn: () => getTripRecord(tripRecordId),
   });
 
+  console.log(tripRecordData);
+
   return (
     <div>
       <SimpleNav>여행후기</SimpleNav>
@@ -28,7 +31,13 @@ const TripDetail = () => {
         <Introduction tripRecordData={tripRecordData?.data} />
         <TripContents />
         <TripComment />
-        <ReviewAlert />
+        <TripRecordReviewCard>
+          <TripRecordReviewCard.Title>
+            이 여행의 후기(1)
+          </TripRecordReviewCard.Title>
+          <TripRecordReviewCard.Main />
+          <TripRecordReviewCard.Rating />
+        </TripRecordReviewCard>
         <Styled.OtherTripDetails>
           <SubTitle margin="0 1.25rem 0.875rem 0">
             이 여행과 비슷한 여행

@@ -1,16 +1,17 @@
 import { Avatar, Text } from '..';
-import * as Styled from './TripRecordCard.styles';
+import * as Styled from './PlaceReviewCard.styles';
 import LikeIcon from '/images/like.svg';
 import CommentIcon from '/images/comment.svg';
-import { TripRecordCardProps } from './TripRecordCard.types';
+import { PlaceReviewCardProps } from './PlaceReviewCardtypes';
+import ActionsModal from '../ActionsModal/ActionsModal';
 
-const TripRecordCard = ({ children }: TripRecordCardProps) => {
+const PlaceReviewCard = ({ children }: PlaceReviewCardProps) => {
   return <Styled.ReviewItem>{children}</Styled.ReviewItem>;
 };
 
-export default TripRecordCard;
+export default PlaceReviewCard;
 
-const TripHeader = ({
+const PlaceHeader = ({
   nickName,
   profileUrl,
   days,
@@ -21,10 +22,10 @@ const TripHeader = ({
 }) => {
   return (
     <Styled.ReviewInfo>
-      <Styled.TripCreator>
+      <Styled.PlaceCreator>
         <Avatar src={profileUrl} size={32} />
         <Text fontWeight={700}>{nickName}</Text>
-      </Styled.TripCreator>
+      </Styled.PlaceCreator>
       <Text fontSize={10} fontWeight={700}>
         {days}
       </Text>
@@ -42,15 +43,19 @@ const MyPageHeader = ({
   days: string;
 }) => {
   return (
-    <Styled.ReviewInfo>
-      <Styled.MyPageCreator>
-        <Avatar src={profileUrl} size={32} />
-        <Text fontWeight={700}>{nickName}</Text>
-      </Styled.MyPageCreator>
+    <div>
+      <Styled.ReviewInfo>
+        <Styled.MyPageCreator>
+          <Avatar src={profileUrl} size={32} />
+          <Text fontWeight={700}>{nickName}</Text>
+        </Styled.MyPageCreator>
+
+        <ActionsModal />
+      </Styled.ReviewInfo>
       <Text fontSize={10} fontWeight={700}>
         {days}
       </Text>
-    </Styled.ReviewInfo>
+    </div>
   );
 };
 
@@ -88,7 +93,7 @@ const InteractionButtons = ({
   );
 };
 
-TripRecordCard.TripHeader = TripHeader;
-TripRecordCard.MyPageHeader = MyPageHeader;
-TripRecordCard.Main = Main;
-TripRecordCard.InteractionButtons = InteractionButtons;
+PlaceReviewCard.PlaceHeader = PlaceHeader;
+PlaceReviewCard.MyPageHeader = MyPageHeader;
+PlaceReviewCard.Main = Main;
+PlaceReviewCard.InteractionButtons = InteractionButtons;

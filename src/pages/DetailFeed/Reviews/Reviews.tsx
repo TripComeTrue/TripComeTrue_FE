@@ -3,7 +3,7 @@ import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
 import { Bubble, Filter, Text } from '@/components/common';
-import TripRecordCard from '@/components/common/TripRecordCard/TripRecordCard';
+import TripRecordCard from '@/components/common/PlaceReviewCard/PlaceReviewCard';
 
 const Reviews = () => {
   const [selectedFilter, setSelectedFilter] = useState('최신순');
@@ -40,7 +40,7 @@ const Reviews = () => {
         </Styled.Header>
         <ul>
           <TripRecordCard>
-            <TripRecordCard.TripHeader
+            <TripRecordCard.MyPageHeader
               nickName="홍길동"
               profileUrl="https://source.unsplash.com/random"
               days="2023.12.25"

@@ -23,12 +23,13 @@ export const ReviewImage = styled.img`
   object-position: center;
 `;
 
-export const TripCreator = styled.div`
+export const PlaceCreator = styled.div`
   ${alignCenter};
   gap: 0.5rem;
 `;
 
 export const MyPageCreator = styled.div`
+  ${alignCenter};
   gap: 0.5rem;
 `;
 
