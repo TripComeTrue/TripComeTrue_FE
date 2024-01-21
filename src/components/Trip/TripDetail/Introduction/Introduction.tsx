@@ -3,7 +3,7 @@ import * as Styled from './Introduction.styles';
 import MarkIcon from '/images/mark.svg';
 import BookMarkIcon from '/images/bookMark.svg';
 import DownloadIcon from '/images/download.svg';
-import StarListIcon from '/images/starList.svg';
+import AverageIcon from '/images/averageIcon.svg';
 import { IntroductionProps } from './Introduction.types';
 
 const Introduction = ({ tripRecordData }: IntroductionProps) => {
@@ -25,7 +25,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
     <Styled.Container>
       <Styled.Header>
         <Styled.CreatorContainer>
-          <Avatar size={32} src="https://source.unsplash.com/random" />
+          <Avatar size={32} src={tripRecordData?.member.profileImage} />
           <Text fontWeight={700}>{tripRecordData?.member.nickname}</Text>
           <Styled.Mark src={MarkIcon} alt="mark icon" />
         </Styled.CreatorContainer>
@@ -33,7 +33,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
           <img src={DownloadIcon} alt="download icon" />
           <Styled.BookMarkContainer>
             <img src={BookMarkIcon} alt="bookmark icon" />
-            <Text fontSize={10}>999+</Text>
+            <Text fontSize={10}>{tripRecordData?.storeCount}</Text>
           </Styled.BookMarkContainer>
         </Styled.SaveContainer>
       </Styled.Header>
@@ -51,7 +51,12 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
                 평균 평점
               </Text>
             </Styled.ItemTitle>
-            <img src={StarListIcon} alt="star list icon" />
+            <Styled.AverageContainer>
+              <img src={AverageIcon} alt="평점 별 아이콘" />
+              <Text color="gray" fontSize={12} fontWeight={700}>
+                {tripRecordData?.average_rating}점
+              </Text>
+            </Styled.AverageContainer>
           </Styled.Item>
           <Styled.Item>
             <Styled.ItemTitle>

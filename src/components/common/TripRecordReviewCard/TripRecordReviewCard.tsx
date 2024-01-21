@@ -15,7 +15,15 @@ const Title = ({ children }: { children: ReactNode }) => {
   return <SubTitle fontSize={14}>{children}</SubTitle>;
 };
 
-const Main = () => {
+const Main = ({
+  nickname,
+  averageRating,
+  content,
+}: {
+  nickname: string;
+  averageRating: number;
+  content: string;
+}) => {
   return (
     <Styled.ReviewContainer>
       <Styled.ImageWrapper>
@@ -24,17 +32,17 @@ const Main = () => {
       <Styled.ReviewContents>
         <Styled.InfoContainer>
           <Text fontSize={12} fontWeight={700}>
-            홍길동
+            {nickname}
           </Text>
           <Styled.Divider>&nbsp;|&nbsp;</Styled.Divider>
           <div>
             <img src={RatingIcon} alt="rating icon" />
             <Text fontSize={12} fontWeight={700}>
-              4.0
+              {averageRating}
             </Text>
           </div>
         </Styled.InfoContainer>
-        <Text fontSize={12}>여행조아여행조아여행조아여행조아</Text>
+        <Text fontSize={12}>{content}</Text>
       </Styled.ReviewContents>
     </Styled.ReviewContainer>
   );

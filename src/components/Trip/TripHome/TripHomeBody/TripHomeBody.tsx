@@ -5,9 +5,8 @@ import { SubTitle } from '@/components/common';
 import StarIcon from '/starIcon.svg';
 import DollarIcon from '/images/dollar.svg';
 import TripCarousel from '../TripCarousel/TripCarousel';
-import ShortCarousel from '../ShortCarousel/ShortCarousel';
-import { getTripRecords } from '@/apis/trip-records';
-import CreatorCarousel from '../CreatorCarousel/CreatorCarousel';
+import ShortsCarousel from '../ShortsCarousel/ShortsCarousel';
+import { getHotShorts, getTripRecords } from '@/apis/trip-records';
 
 const TripHomeBody = () => {
   const navigate = useNavigate();
@@ -15,6 +14,7 @@ const TripHomeBody = () => {
     { data: tripRecordsDefault },
     { data: tripRecordsExpense },
     { data: tripRecordsTotalDays },
+    { data: ShortsData },
   ] = useQueries({
     queries: [
       {
@@ -29,8 +29,14 @@ const TripHomeBody = () => {
         queryKey: ['TripRecordsTotalDaysFilterData'],
         queryFn: () => getTripRecords('totalDays=2'),
       },
+      {
+        queryKey: ['ShortsData'],
+        queryFn: () => getHotShorts(),
+      },
     ],
   });
+
+  console.log(ShortsData?.data);
 
   const onClickMoveToList = (param: string): void => {
     navigate(`/trip/list?${param}`);
@@ -48,13 +54,7 @@ const TripHomeBody = () => {
         <SubTitle margin="0 0 0.875rem" icon={StarIcon}>
           인기 여행지 쇼츠보기
         </SubTitle>
-        <ShortCarousel />
-      </div>
-      <div>
-        <SubTitle margin="0 0 0.875rem" icon={StarIcon}>
-          내 여행 취향과 맞는 크리에이터
-        </SubTitle>
-        <CreatorCarousel />
+        <ShortsCarousel shortsData={ShortsData?.data} />
       </div>
       <div>
         <SubTitle

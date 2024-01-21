@@ -12,58 +12,58 @@ const PlaceReviewCard = ({ children }: PlaceReviewCardProps) => {
 export default PlaceReviewCard;
 
 const PlaceHeader = ({
-  nickName,
+  nickname,
   profileUrl,
-  days,
+  writeDate,
 }: {
-  nickName: string;
+  nickname: string;
   profileUrl: string;
-  days: string;
+  writeDate: string;
 }) => {
   return (
     <Styled.ReviewInfo>
       <Styled.PlaceCreator>
         <Avatar src={profileUrl} size={32} />
-        <Text fontWeight={700}>{nickName}</Text>
+        <Text fontWeight={700}>{nickname}</Text>
       </Styled.PlaceCreator>
       <Text fontSize={10} fontWeight={700}>
-        {days}
+        {writeDate}
       </Text>
     </Styled.ReviewInfo>
   );
 };
 
 const MyPageHeader = ({
-  nickName,
+  nickname,
   profileUrl,
-  days,
+  writeDate,
 }: {
-  nickName: string;
+  nickname: string;
   profileUrl: string;
-  days: string;
+  writeDate: string;
 }) => {
   return (
     <div>
       <Styled.ReviewInfo>
         <Styled.MyPageCreator>
           <Avatar src={profileUrl} size={32} />
-          <Text fontWeight={700}>{nickName}</Text>
+          <Text fontWeight={700}>{nickname}</Text>
         </Styled.MyPageCreator>
 
         <ActionsModal />
       </Styled.ReviewInfo>
       <Text fontSize={10} fontWeight={700}>
-        {days}
+        {writeDate}
       </Text>
     </div>
   );
 };
 
-const Main = ({ imageUrl, text }: { imageUrl: string; text: string }) => {
+const Main = ({ imageUrl, content }: { imageUrl: string; content: string }) => {
   return (
     <>
       {imageUrl && <Styled.ReviewImage src={imageUrl} alt="리뷰 대표" />}
-      <Text>{text}</Text>
+      <Text>{content}</Text>
     </>
   );
 };

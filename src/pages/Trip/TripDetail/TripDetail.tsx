@@ -5,7 +5,7 @@ import * as Styled from './TripDetail.styles';
 import {
   Introduction,
   MainCarousel,
-  ReviewAlert,
+
   // TripCarousel,
   TripComment,
   TripContents,
@@ -21,15 +21,13 @@ const TripDetail = () => {
     queryFn: () => getTripRecord(tripRecordId),
   });
 
-  console.log(tripRecordData);
-
   return (
     <div>
       <SimpleNav>여행후기</SimpleNav>
       <Styled.Container>
         <MainCarousel imagesData={tripRecordData?.data.images} />
         <Introduction tripRecordData={tripRecordData?.data} />
-        <TripContents />
+        <TripContents schedulesData={tripRecordData?.data.schedules} />
         <TripComment />
         <TripRecordReviewCard>
           <TripRecordReviewCard.Title>

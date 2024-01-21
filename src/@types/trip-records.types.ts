@@ -50,11 +50,22 @@ interface TripRecordDetail {
   expenseRangeType: string;
   id: number;
   images: ImagesData[];
-  member: { nickname: string };
+  member: { nickname: string; profileImage: string };
   schedules: SchedulesData[];
   tags: TagData[];
   totalDays: number;
   tripEndDay: string;
   tripStartDay: string;
   title: string;
+  storeCount: number;
+  average_rating: number;
+}
+
+interface ShortData {
+  tripRecordId: number;
+  videoId: number;
+  thumbnailUrl: string;
+  member: {
+    nickname: string;
+  };
 }

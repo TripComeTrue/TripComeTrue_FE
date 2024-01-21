@@ -17,3 +17,5 @@ export { default as Tag } from '@/components/common/Tag/Tag';
 export { default as Bubble } from '@/components/common/Bubble/Bubble';
 export { default as ReviewWrite } from '@/components/common/ReviewWrite/ReviewWrite';
 export { default as Filter } from '@/components/common/Filter/Filter';
+export { default as PlaceReviewCard } from '@/components/common/PlaceReviewCard/PlaceReviewCard';
+export { default as TripRecordReviewCard } from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
