@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import useModal from '@/hooks/common/useModal';
 import { SelectModal, Share } from '@/components/common';
 import {
@@ -11,7 +11,7 @@ import { getMyReview } from '@/apis/mypage';
 
 function MyPageReview() {
   const { open, handleOpen, handleClose } = useModal();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useSuspenseQuery({
     queryKey: ['mypage/review'],
     queryFn: getMyReview,
   });

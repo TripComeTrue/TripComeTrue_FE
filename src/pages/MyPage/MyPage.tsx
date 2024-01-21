@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import {
   MyPageComment,
   MyPageNav,
@@ -9,6 +9,7 @@ import {
 } from '@/components/MyPage';
 import { TabName } from '@/components/MyPage/MyPageTab/MyPageTab.types';
 import MyPageContainer from '@/components/MyPage/MyPageLayout/MyPageLayout.styles';
+import { RetryErrorBoundary } from '@/components/common';
 
 function MyPage() {
   const [selectedTab, setSelectedTab] = useState<TabName | string>(
@@ -21,9 +22,27 @@ function MyPage() {
       <MyPageContainer>
         <MyPageTopProfile />
         <MyPageTab tab={selectedTab} setTab={setSelectedTab} />
-        {selectedTab === TabName.plan && <MyPagePlan />}
-        {selectedTab === TabName.review && <MyPageReview />}
-        {selectedTab === TabName.comment && <MyPageComment />}
+        {selectedTab === TabName.plan && (
+          <RetryErrorBoundary>
+            <Suspense fallback={<h1>Loading plan item..</h1>}>
+              <MyPagePlan />
+            </Suspense>
+          </RetryErrorBoundary>
+        )}
+        {selectedTab === TabName.review && (
+          <RetryErrorBoundary>
+            <Suspense fallback={<h1>Loading review item..</h1>}>
+              <MyPageReview />
+            </Suspense>
+          </RetryErrorBoundary>
+        )}
+        {selectedTab === TabName.comment && (
+          <RetryErrorBoundary>
+            <Suspense fallback={<h1>Loading comment item..</h1>}>
+              <MyPageComment />
+            </Suspense>
+          </RetryErrorBoundary>
+        )}
       </MyPageContainer>
     </>
   );

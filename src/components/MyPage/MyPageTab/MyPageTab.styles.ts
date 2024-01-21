@@ -25,4 +25,5 @@ export const MyPageTabItem = styled.button<{ $isactive: string }>`
   transition:
     color,
     border-bottom-color 0.3s;
+  cursor: pointer;
 `;

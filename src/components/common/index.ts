@@ -16,3 +16,4 @@ export { default as Spots } from '@/components/common/Spots/Spots';
 export { default as Tag } from '@/components/common/Tag/Tag';
 export { default as Bubble } from '@/components/common/Bubble/Bubble';
 export { default as ReviewWrite } from '@/components/common/ReviewWrite/ReviewWrite';
+export { default as RetryErrorBoundary } from '@/components/common/ErrorBoundary/RetryErrorBoundary';
