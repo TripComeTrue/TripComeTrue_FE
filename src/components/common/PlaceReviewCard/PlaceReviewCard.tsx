@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Avatar, Text } from '..';
 import * as Styled from './PlaceReviewCard.styles';
 import LikeIcon from '/images/like.svg';
@@ -37,10 +38,12 @@ const MyPageHeader = ({
   nickname,
   profileUrl,
   writeDate,
+  children,
 }: {
   nickname: string;
   profileUrl: string;
   writeDate: string;
+  children: ReactNode;
 }) => {
   return (
     <div>
@@ -50,7 +53,7 @@ const MyPageHeader = ({
           <Text fontWeight={700}>{nickname}</Text>
         </Styled.MyPageCreator>
 
-        <ActionsModal />
+        {children}
       </Styled.ReviewInfo>
       <Text fontSize={10} fontWeight={700}>
         {writeDate}
@@ -97,3 +100,4 @@ PlaceReviewCard.PlaceHeader = PlaceHeader;
 PlaceReviewCard.MyPageHeader = MyPageHeader;
 PlaceReviewCard.Main = Main;
 PlaceReviewCard.InteractionButtons = InteractionButtons;
+MyPageHeader.ActionsModal = ActionsModal;

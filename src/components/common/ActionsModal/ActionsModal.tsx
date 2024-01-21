@@ -3,8 +3,9 @@ import { Menu } from '@mui/material';
 import { AiOutlineMore } from 'react-icons/ai';
 import { Text } from '@/components/common';
 import * as Styled from './ActionsModal.styles';
+import { ActionsModalProps } from './ActionsModal.types';
 
-const ActionsModal = () => {
+const ActionsModal = ({ onClickModify, onClickDelete }: ActionsModalProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -36,10 +37,11 @@ const ActionsModal = () => {
         <Styled.MenuItem
           style={{
             borderBottom: '1px solid #dcdcdc',
-          }}>
+          }}
+          onClick={onClickModify}>
           <Text fontSize={12}>수정하기</Text>
         </Styled.MenuItem>
-        <Styled.MenuItem>
+        <Styled.MenuItem onClick={onClickDelete}>
           <Text fontSize={12}>삭제하기</Text>
         </Styled.MenuItem>
       </Menu>
