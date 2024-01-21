@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const MyPageCommentWrap = styled.div`
-  padding: 1.25rem;
+  padding: 0 1.25rem;
 `;
 
 export const MyPageCommentTab = styled.div`
   display: flex;
   gap: 1.125rem;
-  margin-bottom: 0.75rem;
+  padding: 1.25rem 1.25rem 0.75rem;
 `;
 
 export const MyPageCommentTabItem = styled.button<{ $selected: string }>`

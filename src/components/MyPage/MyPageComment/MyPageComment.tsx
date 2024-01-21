@@ -10,7 +10,7 @@ function MyPageComment() {
   };
 
   return (
-    <Styled.MyPageCommentWrap>
+    <div>
       <Styled.MyPageCommentTab>
         <Styled.MyPageCommentTabItem
           type="button"
@@ -25,9 +25,13 @@ function MyPageComment() {
           여행후기 리뷰
         </Styled.MyPageCommentTabItem>
       </Styled.MyPageCommentTab>
-      {selectedTab === 'place' && <MyPagePlaceReview />}
+      {selectedTab === 'place' && (
+        <Styled.MyPageCommentWrap>
+          <MyPagePlaceReview />
+        </Styled.MyPageCommentWrap>
+      )}
       {selectedTab === 'trip' && <MyPageTripRecordReview />}
-    </Styled.MyPageCommentWrap>
+    </div>
   );
 }
 

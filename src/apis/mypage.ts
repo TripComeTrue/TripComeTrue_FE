@@ -1,6 +1,12 @@
-import client from '.';
+import client from './client';
 import { PostData } from '@/components/common/Spots/Spots.types';
-import { MyTripPlan, MyTripReview, Notification } from '@/@types/mypage.types';
+import {
+  MyPlaceReview,
+  MyTripPlan,
+  MyTripRecordReview,
+  MyTripReview,
+  Notification,
+} from '@/@types/mypage.types';
 
 export const getMyPlan = async () => {
   const { data } = await client.get<{ message: string; data: MyTripPlan[] }>(
@@ -13,6 +19,21 @@ export const getMyReview = async () => {
   const { data } = await client.get<{ message: string; data: MyTripReview[] }>(
     '/mypage/review',
   );
+  return data;
+};
+
+export const getMyPlaceReview = async () => {
+  const { data } = await client.get<{ message: string; data: MyPlaceReview[] }>(
+    '/mypage/place',
+  );
+  return data;
+};
+
+export const getMyTripRecordReview = async () => {
+  const { data } = await client.get<{
+    message: string;
+    data: MyTripRecordReview[];
+  }>('/mypage/trip-record');
   return data;
 };
 

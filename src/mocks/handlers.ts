@@ -8,6 +8,8 @@ import {
   WISH_LOCATION,
   WISH_TRIP,
 } from '@/constants/MyPage/wishlist';
+import PLACE_REVIEW from '@/constants/MyPage/placeReview';
+import TRIP_RECORD_REVIEW from '@/constants/MyPage/tripRecord';
 
 interface SignInRequestBody {
   email: string;
@@ -42,6 +44,26 @@ const handlers = [
       ctx.json({
         message: 'review data loaded',
         data: PLACE_DATA,
+      }),
+    );
+  }),
+  rest.get(`${SERVER_URL}/mypage/place`, (_, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+        message: 'place review data loaded',
+        data: PLACE_REVIEW,
+      }),
+    );
+  }),
+  rest.get(`${SERVER_URL}/mypage/trip-record`, (_, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+        message: 'trip record review data loaded',
+        data: TRIP_RECORD_REVIEW,
       }),
     );
   }),
