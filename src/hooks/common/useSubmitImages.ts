@@ -1,27 +1,33 @@
-import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { postImages } from '@/apis/images';
 
 const useSubmitImages = (
   files: File[],
   setFiles: Dispatch<SetStateAction<File[]>>,
 ) => {
-  const [imagesUrl, setImagesUrl] = useState<File[]>([]);
+  const handleSubmitImages = async () => {
+    try {
+      const res = await Promise.all(
+        files.map((file: File) => {
+          const formData = new FormData();
+          formData.append('file', file);
 
-  const handleSubmitImages = async (event: FormEvent) => {
-    event.preventDefault();
-    const res = files.map((file: File) => {
-      const formData = new FormData();
-      formData.append('file', file);
+          return postImages(formData);
+        }),
+      );
 
-      return postImages(formData);
-    });
+      const urls = res.map((response) => response.imageUrl);
+      setFiles([]);
 
-    const promiseAll = await Promise.all(res);
-    setFiles([]);
-    setImagesUrl(promiseAll);
+      return urls;
+    } catch (error) {
+      console.error('Error submitting images:', error);
+
+      throw error;
+    }
   };
 
-  return { handleSubmitImages, imagesUrl };
+  return { handleSubmitImages };
 };
 
 export default useSubmitImages;
