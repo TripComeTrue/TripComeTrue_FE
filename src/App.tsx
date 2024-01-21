@@ -55,13 +55,13 @@ function App() {
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
-          <Route path="detail/:detailId" element={<TripDetail />} />
+          <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
-            path="detail/:detailId/review/:reviewId/write"
+            path="detail/:tripRecordId/review/:reviewId/write"
             element={<TripReviewWriteNew />}
           />
           <Route
-            path="detail/:detailId/review/:reviewId/edit"
+            path="detail/:tripRecordId/review/:reviewId/edit"
             element={<TripReviewWriteEdit />}
           />
           <Route path="plan" element={<TripPlanDate />} />

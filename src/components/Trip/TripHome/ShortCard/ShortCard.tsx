@@ -1,8 +1,9 @@
 import ReactPlayer from 'react-player';
 import { Bookmark, Text } from '@/components/common';
 import * as Styled from './ShortCard.styles';
+import { ShortCardProps } from './ShortCard.types';
 
-const ShortCard = () => {
+const ShortCard = ({ data }: ShortCardProps) => {
   return (
     <Styled.Container>
       <Styled.ImageContainer>

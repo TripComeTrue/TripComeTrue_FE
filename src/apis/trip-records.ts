@@ -9,11 +9,18 @@ export const getTripRecords = async (param?: string) => {
   return res.data;
 };
 
-// 여행 후기 세부 조회
-export const getTripRecord = async (tripRecordId: number) => {
-  const res = await client.get(`v1/trip-record/${tripRecordId}`);
+// 여행 후기 쇼츠 리스트 조회
+export const getHotShorts = async () => {
+  const res = await client.get(`v1/trip-records/hot-shorts-list`);
 
-  return res;
+  return res.data;
+};
+
+// 여행 후기 세부 조회
+export const getTripRecord = async (tripRecordId: string) => {
+  const res = await client.get(`v1/trip-records/${tripRecordId}`);
+
+  return res.data;
 };
 
 // 특정 여행 후기에 대한 다수의 리뷰 조희
