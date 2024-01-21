@@ -1,6 +1,6 @@
 import axios from 'axios';
 import SERVER_URL from '@/constants/api';
-import getCookie from '@/utils/token';
+import { getCookie } from '@/utils/cookie';
 
 const client = axios.create({
   baseURL: SERVER_URL,

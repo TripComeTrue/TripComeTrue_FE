@@ -1,7 +1,7 @@
 import { ReviewWrite } from '@/components/common';
 
-const SpotReviewWriteEdit = () => {
+const PlaceReviewWriteEdit = () => {
   return <ReviewWrite variant="spot" isEdit />;
 };
 
-export default SpotReviewWriteEdit;
+export default PlaceReviewWriteEdit;

@@ -22,8 +22,8 @@ import {
   TouristSpot,
   Reviews,
   ReviewComment,
-  SpotReviewWriteNew,
-  SpotReviewWriteEdit,
+  PlaceReviewWriteNew,
+  PlaceReviewWriteEdit,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
@@ -72,14 +72,14 @@ function App() {
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
           <Route path="spot" element={<TouristSpot />} />
-          <Route path="spot/:spotId/review" element={<Reviews />} />
+          <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
-            path="spot/:spotId/review/:reviewId/write"
-            element={<SpotReviewWriteNew />}
+            path="spot/:placeId/review/write"
+            element={<PlaceReviewWriteNew />}
           />
           <Route
-            path="spot/:spotId/review/:reviewId/edit"
-            element={<SpotReviewWriteEdit />}
+            path="spot/:placeId/review/edit"
+            element={<PlaceReviewWriteEdit />}
           />
           <Route
             path="spot/:spotId/review/:reviewId/comment"

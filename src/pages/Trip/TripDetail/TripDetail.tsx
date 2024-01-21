@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { SimpleNav, SubTitle } from '@/components/common';
 import * as Styled from './TripDetail.styles';
 import {
@@ -10,16 +10,34 @@ import {
   TripComment,
   TripContents,
 } from '@/components/Trip';
-import { getTripRecord } from '@/apis/trip-records';
+import { getTripRecord, getTripRecordLatestReview } from '@/apis/trip-records';
 import TripRecordReviewCard from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
+import { getCookie } from '@/utils/cookie';
 
 const TripDetail = () => {
+  const isSignIn = getCookie('accessToken');
   const { tripRecordId } = useParams() as { tripRecordId: string };
 
-  const { data: tripRecordData } = useQuery({
-    queryKey: ['TripRecordDetailData'],
-    queryFn: () => getTripRecord(tripRecordId),
-  });
+  const [{ data: tripRecordData }, { data: tripRecordReviewData }] = useQueries(
+    {
+      queries: [
+        {
+          queryKey: ['TripRecordDetailData'],
+          queryFn: () => getTripRecord(tripRecordId),
+        },
+        {
+          queryKey: ['TripRecordReviewData'],
+          queryFn: () => {
+            if (isSignIn) return getTripRecordLatestReview(tripRecordId);
+            return null;
+          },
+        },
+      ],
+    },
+  );
+
+  console.log(isSignIn);
+  console.log(tripRecordReviewData);
 
   return (
     <div>
@@ -29,13 +47,16 @@ const TripDetail = () => {
         <Introduction tripRecordData={tripRecordData?.data} />
         <TripContents schedulesData={tripRecordData?.data.schedules} />
         <TripComment />
-        <TripRecordReviewCard>
-          <TripRecordReviewCard.Title>
-            이 여행의 후기(1)
-          </TripRecordReviewCard.Title>
-          <TripRecordReviewCard.Main />
-          <TripRecordReviewCard.Rating />
-        </TripRecordReviewCard>
+        {isSignIn && (
+          <TripRecordReviewCard>
+            <TripRecordReviewCard.Main
+              nickname="홍길동"
+              averageRating={4}
+              content="여행이 조아"
+            />
+            <TripRecordReviewCard.Rating />
+          </TripRecordReviewCard>
+        )}
         <Styled.OtherTripDetails>
           <SubTitle margin="0 1.25rem 0.875rem 0">
             이 여행과 비슷한 여행
