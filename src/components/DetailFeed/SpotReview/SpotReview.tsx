@@ -1,22 +1,20 @@
 import { Avatar, Bubble, SubTitle, Text } from '../../common';
 import WriteIcon from '/images/write.svg';
-import * as Styled from './PlaceReview.styles';
+import * as Styled from './SpotReview.styles';
 import LikeIcon from '/images/like.svg';
 import CommentIcon from '/images/comment.svg';
 
-const PlaceReview = () => {
+const SpotReview = () => {
   return (
     <Styled.Container>
       <Styled.Header>
         <SubTitle>리뷰(14)</SubTitle>
-        <Styled.WriteButtonContainer>
-          <button type="button">
-            <img src={WriteIcon} alt="write icon" />
-          </button>
+        <Styled.WriteBtnWrapper>
+          <Styled.WriteBtn src={WriteIcon} alt="write icon" />
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
           </Styled.BubbleWrapper>
-        </Styled.WriteButtonContainer>
+        </Styled.WriteBtnWrapper>
       </Styled.Header>
 
       <Styled.ReviewList>
@@ -101,4 +99,4 @@ const PlaceReview = () => {
   );
 };
 
-export default PlaceReview;
+export default SpotReview;

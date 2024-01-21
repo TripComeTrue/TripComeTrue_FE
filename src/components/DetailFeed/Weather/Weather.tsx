@@ -1,31 +1,25 @@
 import { SubTitle, Text } from '@/components/common';
 import * as Styled from './Weather.styles';
+import { WeatherProps } from '@/pages/DetailFeed/City/City.types';
 
-const WEATEHR_DATA = [
-  { id: 1, month: '12월', temperature: { high: '32°', low: '23°' } },
-  { id: 2, month: '1월', temperature: { high: '32°', low: '23°' } },
-  { id: 3, month: '2월', temperature: { high: '32°', low: '23°' } },
-  { id: 4, month: '3월', temperature: { high: '32°', low: '23°' } },
-];
-
-const Weather = () => {
+const Weather = ({ weatherData }: WeatherProps) => {
   return (
     <Styled.WeatherWrapper>
       <SubTitle>날씨</SubTitle>
       <Styled.WeatherBox>
-        {WEATEHR_DATA.map((data) => (
-          <Styled.WeatherItem key={data.id}>
+        {weatherData.map(({ maxAvgTempC, minAvgTempC, month }) => (
+          <Styled.WeatherItem key={month}>
             <Styled.WeatherMonth>
               <Text fontSize={12} color="primary">
-                {data.month}
+                {month}월
               </Text>
             </Styled.WeatherMonth>
             <Styled.WeatherTemperature>
               <Text fontSize={18} color="black">
-                {data.temperature.high}
+                {Math.ceil(maxAvgTempC)}°
               </Text>
               <Text fontSize={18} color="gray">
-                {data.temperature.low}
+                {Math.ceil(minAvgTempC)}°
               </Text>
             </Styled.WeatherTemperature>
           </Styled.WeatherItem>

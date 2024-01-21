@@ -1,6 +1,6 @@
 import {
   Gallery,
-  PlaceReview,
+  SpotReview,
   SpotInformation,
   TopReview,
 } from '@/components/DetailFeed';
@@ -15,7 +15,7 @@ const TouristSpot = () => {
         <Gallery />
         <SpotInformation />
         <TopReview />
-        <PlaceReview />
+        <SpotReview />
       </Styled.TouristSpotWrap>
     </div>
   );

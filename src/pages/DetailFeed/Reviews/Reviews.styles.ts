@@ -14,6 +14,7 @@ export const NavWrap = styled.div`
   height: 2.5rem;
   background-color: ${({ theme }) => theme.brand.white};
   padding: 0 1.25rem;
+  margin-bottom: 2rem;
 `;
 
 export const NavBackBtn = styled.div`
@@ -29,19 +30,28 @@ export const NavTitle = styled.h3`
   font-weight: 600;
 `;
 
-export const Container = styled.div`
-  padding: 0 1.25rem;
-`;
+export const WriteBtnWrapper = styled.div`
+  position: relative;
 
-export const WriteBtn = styled.button`
   width: 1.25rem;
-  cursor: pointer;
+
   img {
     margin-top: 0.5rem;
   }
 `;
 
-export const BubbleWrapper = styled.div``;
+export const WriteBtn = styled.img`
+  cursor: pointer;
+`;
+
+export const BubbleWrapper = styled.div`
+  position: absolute;
+  right: -60%;
+`;
+
+export const Container = styled.div`
+  padding: 0 1.25rem;
+`;
 
 export const Header = styled.div`
   ${alignCenter};
@@ -51,40 +61,6 @@ export const Header = styled.div`
 export const CheckBoxContainer = styled.div`
   ${alignCenter};
   gap: 0.1875rem;
-`;
-
-export const FilterToggle = styled.div`
-  position: relative;
-`;
-
-export const ToggleBtn = styled.button`
-  cursor: pointer;
-`;
-
-export const FilterModal = styled.div`
-  ${flexColumn};
-
-  position: absolute;
-  top: 120%;
-  right: 0;
-
-  width: 9.375rem;
-  border-radius: 0.625rem;
-  background-color: ${({ theme }) => theme.brand.white};
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
-`;
-
-export const Option = styled.div`
-  ${alignCenter};
-  gap: 0.25rem;
-
-  width: 100%;
-  padding: 0.25rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #ebebeb;
-  }
 `;
 
 export const ReviewList = styled.ul``;

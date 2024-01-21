@@ -9,6 +9,13 @@ import { Slide } from '@/components/Home/HomeShorts/HomeShorts.types';
 // 임시 이미지
 import bangkokImg from '/bangkok.png';
 import tokyoImg from '/tokyo.png';
+import {
+  getCityGallery,
+  getCityHotPlace,
+  getCityInfo,
+  getCityShorts,
+  getCityWeather,
+} from '@/apis/cityFeed';
 
 export const slideShorts: Slide[] = [
   { img: domestic1, title: '해외같은 제주 풀빌라', bookmark: 234 },
@@ -71,4 +78,12 @@ export const DAY_OPTION = [
   { id: 2, dayOption: '3박 4일' },
   { id: 3, dayOption: '4박 5일' },
   { id: 4, dayOption: '기타' },
+];
+
+export const QUERYS = [
+  { key: 'shorts', fn: getCityShorts },
+  { key: 'gallery', fn: getCityGallery },
+  { key: 'informaiton', fn: getCityInfo },
+  { key: 'weather', fn: getCityWeather },
+  { key: 'hotPlace', fn: getCityHotPlace },
 ];

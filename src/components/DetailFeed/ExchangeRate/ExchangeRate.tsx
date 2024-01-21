@@ -1,7 +1,17 @@
+import { useQuery } from '@tanstack/react-query';
 import { SubTitle, Text } from '@/components/common';
 import * as Styled from './ExchangeRate.styles';
+import { ExchangeRateType } from '@/pages/DetailFeed/City/City.types';
+import { getExchangeRate } from '@/apis/cityFeed';
 
-const ExchangeRate = () => {
+const ExchangeRate = ({ curUnit }: { curUnit: string }) => {
+  const { data, isLoading } = useQuery<ExchangeRateType>({
+    queryKey: ['exchangeRate', curUnit],
+    queryFn: () => getExchangeRate(curUnit),
+    staleTime: 600000,
+  });
+
+  if (isLoading) return <div>Loding....</div>;
   return (
     <Styled.ExchangeRateWrapper>
       <SubTitle>환율</SubTitle>
@@ -13,13 +23,13 @@ const ExchangeRate = () => {
             </Text>
             <Styled.CurrencyUnit>
               <Text fontSize={14} fontWeight={700} color="primary">
-                THB(바트)
+                {data?.curUnit}({data?.curName})
               </Text>
             </Styled.CurrencyUnit>
           </Styled.ContentLeftBox>
           <Styled.ContentRightBox>
             <Text fontSize={18} fontWeight={700} color="gray">
-              1 THB
+              1 {data?.curUnit}
             </Text>
           </Styled.ContentRightBox>
         </Styled.ExchangeRateContent>
@@ -37,7 +47,7 @@ const ExchangeRate = () => {
           </Styled.ContentLeftBox>
           <Styled.ContentRightBox>
             <Text fontSize={18} fontWeight={700} color="gray">
-              38 KRW
+              {data?.exchangeRate.split(':')[1]} KRW
             </Text>
           </Styled.ContentRightBox>
         </Styled.ExchangeRateContent>

@@ -1,20 +1,22 @@
 import { SubTitle, Text } from '@/components/common';
 import * as Styled from './CityInformation.styles';
-import visa from '/visa.svg';
-import money from '/money.svg';
-import time from '/time.svg';
-import language from '/language.svg';
-import power from '/power.svg';
+import visaImage from '/visa.svg';
+import moneyImage from '/money.svg';
+import timeImage from '/time.svg';
+import languageImage from '/language.svg';
+import powerImage from '/power.svg';
+import { CityInfoProps } from '@/pages/DetailFeed/City/City.types';
 
-const INFORMATION_DATA = [
-  { id: 1, content: '태국어', svg: language },
-  { id: 2, content: '2시간 느림', svg: time },
-  { id: 3, content: '바트(THB)', svg: money },
-  { id: 4, content: '220V', svg: power },
-  { id: 5, content: '90일 무비자 체류', svg: visa },
-];
-
-const CityInformation = () => {
+const CityInformation = ({ cityInformation }: CityInfoProps) => {
+  const { language, timeDifference, curName, curUnit, voltage, visa } =
+    cityInformation;
+  const INFORMATION_DATA = [
+    { id: 1, content: language, svg: languageImage },
+    { id: 2, content: timeDifference, svg: timeImage },
+    { id: 3, content: `${curName}(${curUnit})`, svg: moneyImage },
+    { id: 4, content: voltage, svg: powerImage },
+    { id: 5, content: visa, svg: visaImage },
+  ];
   return (
     <Styled.InformationWrapper>
       <Styled.SubTitleBox>
