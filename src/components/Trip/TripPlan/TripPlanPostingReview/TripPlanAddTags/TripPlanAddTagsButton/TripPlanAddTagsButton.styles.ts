@@ -7,7 +7,6 @@ export const TagsInputContainer = styled.div`
   align-items: flex-start;
 
   gap: 1rem;
-  padding: 0 1rem;
   border-bottom: 1px solid #dcdcdc;
 
   font-size: ${({ theme }) => theme.fontSizes.md};

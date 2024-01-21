@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import ReactSlidingPane from 'react-sliding-pane';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { PostingProps } from './TripPlanPostingPlan.types';
 
 export const Wrapper = styled.div`
@@ -9,8 +8,6 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 
   width: 100%;
-
-  padding: 0.2rem 1.2rem;
 `;
 
 export const Container = styled.div`
@@ -18,6 +15,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  padding: 0 1rem;
 `;
 
 export const DateDisplay = styled.div`
@@ -68,6 +67,7 @@ export const DaysContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
 
+  padding: 0 1rem;
   gap: 0.4rem;
 `;
 
@@ -102,10 +102,12 @@ export const PostingForm = styled.form`
 
   gap: 0.8rem;
 
+  padding: 0 1rem;
+
   .city-icon {
     position: absolute;
     top: 0.6rem;
-    left: 0.8rem;
+    left: 1.5rem;
   }
 
   input {
@@ -157,8 +159,8 @@ export const PlaceNumber = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2rem;
+  height: 2rem;
   margin-right: 0.6rem;
 
   background-color: ${({ theme }) => theme.brand.black};
@@ -191,83 +193,6 @@ export const NoteInput = styled.textarea`
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.black};
   font-size: ${({ theme }) => theme.fontSizes.xs};
-`;
-
-export const UploadImageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  padding: 0 1rem;
-`;
-
-export const UploadImageIcon = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
-  width: 7rem;
-  height: 7rem;
-  flex-shrink: 0;
-  margin-bottom: 1rem;
-
-  background-color: ${({ theme }) => theme.brand.gray};
-  border-radius: 0.9375rem;
-
-  cursor: pointer;
-
-  .image-icon {
-    position: absolute;
-    top: 2rem;
-    fill: #626262;
-  }
-
-  .photo-text {
-    position: absolute;
-    top: 3.8rem;
-
-    font-size: 0.7rem;
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-    color: #626262;
-  }
-`;
-
-export const ImageInput = styled.input`
-  display: none;
-`;
-
-export const UploadedImageSwiper = styled(Swiper)`
-  padding: 0 0.9rem;
-`;
-
-export const UploadedImage = styled(SwiperSlide)`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  position: relative;
-
-  width: 7rem;
-
-  img {
-    width: 7rem;
-    height: 7rem;
-    object-fit: cover;
-    border-radius: 0.8rem;
-  }
-`;
-
-export const RemoveBtn = styled.button`
-  position: absolute;
-  top: 0.2rem;
-  left: 5.7rem;
-  z-index: 10;
-
-  width: 1rem;
-  height: 1rem;
-  border: none;
-
-  cursor: pointer;
 `;
 
 export const PlaceAddButton = styled.div`
