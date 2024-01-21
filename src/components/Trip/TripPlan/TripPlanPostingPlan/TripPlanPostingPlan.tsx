@@ -8,20 +8,22 @@ import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { SlArrowLeft } from 'react-icons/sl';
+import { IoCloseCircle } from 'react-icons/io5';
 import { GoPlusCircle } from 'react-icons/go';
 import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
 import * as Styled from './TripPlanPostingPlan.styles';
 import { Button } from '@/components/common';
 import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
-import TripPlanAddTagsTitle from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsButton/TripPlanAddTagsButton';
 import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
 import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPlanSetBudget';
+import TripPlanAddTagsButton from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsButton/TripPlanAddTagsButton';
 
 const TripPlanPosting = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [selectedPlace, setSelectedPlace] = useState<string>('');
   const { register, handleSubmit, setValue } = useForm();
-  const UploadPhotoIconRef = useRef<HTMLInputElement>(null);
+  const UploadImageIconRef = useRef<HTMLInputElement>(null);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const [isPlaceModalOpen, setIsPlaceModalOpen] = useState({
     isPaneOpenLeft: false,
   });
@@ -129,18 +131,19 @@ const TripPlanPosting = () => {
     //   });
   };
 
-  const onImgUpload = (event: React.MouseEvent) => {
+  const handleUploadImage = (event: React.MouseEvent) => {
     event.preventDefault();
-    UploadPhotoIconRef.current?.click();
+    UploadImageIconRef.current?.click();
   };
 
-  const onImgChange = async (
+  const handleChangeImage = async (
     event: React.ChangeEvent<HTMLInputElement>,
     day: number,
   ) => {
     const file = event.target.files ? event.target.files[0] : null;
     if (file) {
       const fileUrl = URL.createObjectURL(file);
+      setUploadedImages((prevImages) => [...prevImages, fileUrl]);
 
       setFormData((prevFormData) => {
         const newFormData = [...prevFormData];
@@ -149,6 +152,12 @@ const TripPlanPosting = () => {
         return newFormData;
       });
     }
+  };
+
+  const handleRemoveImage = (imageNumber: number) => {
+    setUploadedImages((currentImages) =>
+      currentImages.filter((_, index) => index !== imageNumber),
+    );
   };
 
   const createDaysInput = () => {
@@ -225,24 +234,48 @@ const TripPlanPosting = () => {
             }}
           />
 
-          <Styled.UploadPhotoIcon onClick={onImgUpload}>
-            <AddAPhotoIcon className="photo-icon" />
-            <p className="photo-text">사진 업로드</p>
-          </Styled.UploadPhotoIcon>
-          <Styled.PhotoInput
-            ref={UploadPhotoIconRef}
-            type="file"
-            accept="image/*"
-            name="file"
-            onChange={(event) =>
-              selectedDay !== null && onImgChange(event, selectedDay - 1)
-            }
-          />
+          <Styled.UploadImageContainer>
+            <Styled.UploadImageIcon onClick={handleUploadImage}>
+              <AddAPhotoIcon className="image-icon" />
+              <p className="photo-text">사진 업로드</p>
+            </Styled.UploadImageIcon>
 
-          <TripPlanSetBudget />
-          <TripPlanAddHashtags />
-          <TripPlanAddTagsTitle />
+            <Styled.ImageInput
+              ref={UploadImageIconRef}
+              type="file"
+              accept="image/*"
+              name="file"
+              onChange={(event) =>
+                selectedDay !== null &&
+                handleChangeImage(event, selectedDay - 1)
+              }
+              disabled={uploadedImages.length >= 5}
+            />
+
+            <Styled.UploadedImageSwiper
+              spaceBetween={1}
+              slidesPerView={uploadedImages.length > 1 ? 1.5 : 1}
+              direction="horizontal"
+              scrollbar={{
+                draggable: true,
+                el: '.swiper-scrollbar',
+                hide: false,
+              }}>
+              {uploadedImages.map((image, number) => (
+                <Styled.UploadedImage key={image}>
+                  <img src={image} alt={`Uploaded ${number + 1}`} />
+                  <Styled.RemoveBtn onClick={() => handleRemoveImage(number)}>
+                    <IoCloseCircle color="#626161" />
+                  </Styled.RemoveBtn>
+                </Styled.UploadedImage>
+              ))}
+            </Styled.UploadedImageSwiper>
+          </Styled.UploadImageContainer>
+
+          <TripPlanAddTagsButton />
         </Styled.PostingForm>
+        <TripPlanSetBudget />
+        <TripPlanAddHashtags />
       </>
     );
   };

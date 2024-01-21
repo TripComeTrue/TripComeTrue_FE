@@ -33,6 +33,8 @@ export const TagsAddButton = styled.button`
 
   color: ${({ theme }) => theme.text.gray};
 
+  cursor: pointer;
+
   img {
     margin-left: 0.3rem;
   }
