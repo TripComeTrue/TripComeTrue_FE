@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { SignInBtnIcon } from '../SignInBtns/SignInBtns.styles';
@@ -9,10 +10,14 @@ import SignUpFormWrap from './SignUpForm.styles';
 import { SignUpFormData, SignUpFormProps } from './SignUpForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
 import { Button } from '@/components/common';
-import client from '@/apis/client';
+import { checkDuplicatedEmail, postSignUp } from '@/apis/auth';
 
 function SignUpForm({ handleOpen, setErrorMsg }: SignUpFormProps) {
   const navigate = useNavigate();
+  const mutation = useMutation({
+    mutationKey: ['signup'],
+    mutationFn: postSignUp,
+  });
   const [isPassPage, setIsPassPage] = useState(false);
   const [isOk, setIsOk] = useState(false);
   const {
@@ -25,22 +30,32 @@ function SignUpForm({ handleOpen, setErrorMsg }: SignUpFormProps) {
     clearErrors,
   } = useForm<SignUpFormData>({
     mode: 'onChange',
+    defaultValues: {
+      email: '',
+      password: '',
+      passwordCheck: '',
+    },
   });
   const { email } = getValues();
   const passWatch = watch('password');
   const passChkWatch = watch('passwordCheck');
-  const onClickNext = () => {
+  const onClickNext = async () => {
     if (email === '' || errors.email) return;
+    const code = await checkDuplicatedEmail(email);
+    if (code === 400) {
+      setError('email', {
+        type: 'duplicated-email',
+        message: '이미 가입된 회원입니다.',
+      });
+      return;
+    }
     setIsPassPage(true);
   };
   const onSubmit = handleSubmit(async (data) => {
+    if (data.email === undefined || data.password === undefined) return;
     try {
-      const res = await client.post('/v1/member/signup', {
-        email: data.email,
-        password: data.password,
-      });
-      const { email: userEmail, name } = res.data;
-      console.log(userEmail, name);
+      await mutation.mutate({ email: data.email, password: data.password });
+
       // TODO: 나중에 welcome 페이지로 변경 필요
       navigate('/auth/signin-email');
     } catch (error) {
