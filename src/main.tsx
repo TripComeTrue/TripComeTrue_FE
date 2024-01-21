@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 });
 
 if (process.env.NODE_ENV === 'development') {
-  worker.start();
+  worker.stop();
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

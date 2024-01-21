@@ -25,7 +25,7 @@ const TripDescription = () => {
                 메이빈 숙소 좋았어요~ 스위스 풍경이 한눈에 다 보이기도 하고
                 기차역이랑 가까워서 좋았습니다. 주변 풍경이 예술이에요.
               </Text>
-              <Tag>메이빈 숙소 예약하기</Tag>
+              <Tag>해당 후기의 숙박시설 보러가기</Tag>
             </Styled.PlaceContents>
           </Styled.PlaceContainer>
           <Styled.PlaceCarousel spaceBetween={8} slidesPerView={2.4}>
@@ -54,7 +54,7 @@ const TripDescription = () => {
                 메이빈 숙소 좋았어요~ 스위스 풍경이 한눈에 다 보이기도 하고
                 기차역이랑 가까워서 좋았습니다. 주변 풍경이 예술이에요.
               </Text>
-              <Tag>메이빈 숙소 예약하기</Tag>
+              <Tag>해당 후기의 숙박시설 보러가기</Tag>
             </Styled.PlaceContents>
           </Styled.PlaceContainer>
           <Styled.PlaceCarousel spaceBetween={8} slidesPerView={2.4}>
@@ -83,7 +83,7 @@ const TripDescription = () => {
                 메이빈 숙소 좋았어요~ 스위스 풍경이 한눈에 다 보이기도 하고
                 기차역이랑 가까워서 좋았습니다. 주변 풍경이 예술이에요.
               </Text>
-              <Tag>메이빈 숙소 예약하기</Tag>
+              <Tag>해당 후기의 숙박시설 보러가기</Tag>
             </Styled.PlaceContents>
           </Styled.PlaceContainer>
           <Styled.PlaceCarousel spaceBetween={8} slidesPerView={2.4}>
