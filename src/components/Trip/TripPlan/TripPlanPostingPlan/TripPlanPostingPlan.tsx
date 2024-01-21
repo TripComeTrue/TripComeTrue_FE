@@ -28,7 +28,7 @@ const TripPlanPosting = () => {
   });
 
   // const navigate = useNavigate();
-  const startDate = new Date('2024-01-15');
+  const startDate = new Date('2024-01-18');
   const endDate = new Date();
   const formattedStartDate = startDate.toLocaleDateString();
   const formattedEndDate = endDate.toLocaleDateString();
@@ -99,7 +99,6 @@ const TripPlanPosting = () => {
       setFormData((prevFormData) => {
         const newFormData = [...prevFormData];
         const newPlace = {
-          city: '',
           place: '',
           note: '',
           photo: '',
@@ -133,84 +132,66 @@ const TripPlanPosting = () => {
   const createDaysInput = () => {
     return (
       <>
-        <Styled.DaysContainer>
-          {Array.from({ length: totalTripDays }, (_, i) => {
-            const day = i + 1;
-            return (
-              <React.Fragment key={day}>
-                <Styled.DaysButton
-                  $isDaySelected={selectedDay === day}
-                  onClick={() => handleDayButtonClick(day)}>
-                  {day}일차
-                </Styled.DaysButton>
-              </React.Fragment>
-            );
-          })}
-        </Styled.DaysContainer>
-        <Styled.PostingForm onSubmit={handleSubmit(onSubmit)}>
-          <PlaceIcon
-            className="city-icon"
-            fontSize="small"
-            style={{ fill: '#b4f34c' }}
-          />
-          <Styled.CityInput
+        <PlaceIcon
+          className="city-icon"
+          fontSize="small"
+          style={{ fill: '#b4f34c' }}
+        />
+        <Styled.CityInput
+          type="text"
+          {...register(`day${selectedDay}.city`)}
+          onChange={(event) => {
+            if (selectedDay !== null) {
+              handleInputChange(selectedDay, 'city', event);
+            }
+          }}
+        />
+
+        <Styled.PlaceInputContainer>
+          <Styled.PlaceNumber>1</Styled.PlaceNumber>
+          <Styled.PlaceInput
             type="text"
-            {...register(`day${selectedDay}.city`)}
-            onChange={(event) => {
-              if (selectedDay !== null) {
-                handleInputChange(selectedDay, 'city', event);
-              }
-            }}
+            {...register(`day${selectedDay}.place`)}
+            placeholder="방문할 장소를 선택해주세요"
+            // onChange={(event) => {
+            //   if (selectedDay !== null) {
+            //     handleInputChange(selectedDay, 'place', event);
+            //   }
+            // }}
+            value={selectedPlace || ''}
+            onChange={(e) => handleChangePlaceName(e.target.value)}
+            onClick={() => setIsPlaceModalOpen({ isPaneOpenLeft: true })}
           />
-
-          <Styled.PlaceInputContainer>
-            <Styled.PlaceNumber>1</Styled.PlaceNumber>
-            <Styled.PlaceInput
-              type="text"
-              {...register(`day${selectedDay}.place`)}
-              placeholder="방문할 장소를 선택해주세요"
-              // onChange={(event) => {
-              //   if (selectedDay !== null) {
-              //     handleInputChange(selectedDay, 'place', event);
-              //   }
-              // }}
-              value={selectedPlace || ''}
-              onChange={(e) => handleChangePlaceName(e.target.value)}
-              onClick={() => setIsPlaceModalOpen({ isPaneOpenLeft: true })}
+          <Styled.SlidingPane
+            className="citymodal"
+            closeIcon={<SlArrowLeft fontSize="15" />}
+            isOpen={isPlaceModalOpen.isPaneOpenLeft}
+            onRequestClose={() => {
+              setIsPlaceModalOpen({ isPaneOpenLeft: false });
+            }}
+            width="22.5rem">
+            <TripPlanPlaceModal
+              selectedPlace={selectedPlace}
+              onPlaceSelection={handlePlaceModalSelection}
+              onCloseModal={closePlaceListModal}
             />
-            <Styled.SlidingPane
-              className="citymodal"
-              closeIcon={<SlArrowLeft fontSize="15" />}
-              isOpen={isPlaceModalOpen.isPaneOpenLeft}
-              onRequestClose={() => {
-                setIsPlaceModalOpen({ isPaneOpenLeft: false });
-              }}
-              width="22.5rem">
-              <TripPlanPlaceModal
-                selectedPlace={selectedPlace}
-                onPlaceSelection={handlePlaceModalSelection}
-                onCloseModal={closePlaceListModal}
-              />
-            </Styled.SlidingPane>
-          </Styled.PlaceInputContainer>
+          </Styled.SlidingPane>
+        </Styled.PlaceInputContainer>
 
-          <Styled.NoteInput
-            {...register(`day${selectedDay}.note`)}
-            placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
-            onChange={(event) => {
-              if (selectedDay !== null) {
-                handleInputChange(selectedDay, 'note', event);
-              }
-            }}
-          />
-          <TripPlanUploadImages
-            setFormData={setFormData}
-            selectedDay={selectedDay}
-          />
-          <TripPlanAddTagsButton />
-        </Styled.PostingForm>
-        <TripPlanSetBudget />
-        <TripPlanAddHashtags />
+        <Styled.NoteInput
+          {...register(`day${selectedDay}.note`)}
+          placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
+          onChange={(event) => {
+            if (selectedDay !== null) {
+              handleInputChange(selectedDay, 'note', event);
+            }
+          }}
+        />
+        <TripPlanUploadImages
+          setFormData={setFormData}
+          selectedDay={selectedDay}
+        />
+        <TripPlanAddTagsButton />
       </>
     );
   };
@@ -232,13 +213,33 @@ const TripPlanPosting = () => {
           <TripPlanGoogleMaps />
         </Styled.GoogleMapsContainer>
 
-        <Styled.InputContainer>{createDaysInput()}</Styled.InputContainer>
+        <Styled.DaysContainer>
+          {Array.from({ length: totalTripDays }, (_, i) => {
+            const day = i + 1;
+            return (
+              <React.Fragment key={day}>
+                <Styled.DaysButton
+                  $isDaySelected={selectedDay === day}
+                  onClick={() => handleDayButtonClick(day)}>
+                  {day}일차
+                </Styled.DaysButton>
+              </React.Fragment>
+            );
+          })}
+        </Styled.DaysContainer>
+
+        <Styled.PostingForm onSubmit={handleSubmit(onSubmit)}>
+          <Styled.InputContainer>{createDaysInput()}</Styled.InputContainer>
+        </Styled.PostingForm>
       </Styled.Container>
 
-      <Styled.PlaceAddButton onClick={() => handleAddPlace}>
+      <TripPlanSetBudget />
+      <TripPlanAddHashtags />
+
+      <Styled.AddPlaceButton onClick={() => handleAddPlace}>
         <GoPlusCircle fontSize="28" style={{ fill: '#b4f34c' }} />
         장소 추가
-      </Styled.PlaceAddButton>
+      </Styled.AddPlaceButton>
 
       <Styled.SubmitButtonContainer>
         <Button type="button" className="tempsave-btn" variants="gray">

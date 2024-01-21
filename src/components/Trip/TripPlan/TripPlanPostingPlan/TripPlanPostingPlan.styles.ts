@@ -89,6 +89,9 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  padding: 0 1rem;
+  gap: 1rem;
+
   width: 360px;
   @media screen and (max-width: 480px) {
     width: 100%;
@@ -101,8 +104,6 @@ export const PostingForm = styled.form`
   position: relative;
 
   gap: 0.8rem;
-
-  padding: 0 1rem;
 
   .city-icon {
     position: absolute;
@@ -195,7 +196,7 @@ export const NoteInput = styled.textarea`
   font-size: ${({ theme }) => theme.fontSizes.xs};
 `;
 
-export const PlaceAddButton = styled.div`
+export const AddPlaceButton = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
