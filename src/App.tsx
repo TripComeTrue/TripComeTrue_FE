@@ -47,7 +47,7 @@ function App() {
     <Routes>
       <Route element={<DashBoard />}>
         <Route index element={<SignIn />} />
-        <Route path="/auth/*">
+        <Route path="auth">
           <Route path="signin-email" element={<SignInEmail />} />
           <Route path="agree" element={<SignUpAgree />} />
           <Route path="signup" element={<SignUp />} />
@@ -79,7 +79,7 @@ function App() {
           <Route path="spotlist" element={<SpotList />} />
           <Route path="spotsearch" element={<SpotSearch />} />
         </Route>
-        <Route path="/mypage/*" element={<MyPageLayout />}>
+        <Route path="mypage" element={<MyPageLayout />}>
           <Route index element={<MyPage />} />
           <Route path="notification" element={<Notification />} />
           <Route path="confirm-password" element={<ConfirmPassword />} />
