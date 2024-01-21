@@ -85,34 +85,15 @@ export const DaysButton = styled.button<PostingProps>`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding: 0 1rem;
-  gap: 1rem;
-
-  width: 360px;
-  @media screen and (max-width: 480px) {
-    width: 100%;
-  }
-`;
-
 export const PostingForm = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
 
   gap: 0.8rem;
-
-  .city-icon {
-    position: absolute;
-    top: 0.6rem;
-    left: 1.5rem;
-  }
+  width: 100%;
 
   input {
-    width: 100%;
     height: 2.5rem;
     background-color: ${({ theme }) => theme.brand.white};
     border: 1px solid #b4f34c;
@@ -127,9 +108,45 @@ export const PostingForm = styled.form`
   }
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+`;
+
+export const CityInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  margin-bottom: 0.8rem;
+
+  .city-icon {
+    position: absolute;
+    top: 50%;
+    left: 0.6rem;
+    transform: translateY(-50%);
+  }
+`;
+
 export const CityInput = styled.input`
-  border-radius: 0.4rem;
+  width: 100%;
+  height: 2.5rem;
+  background-color: ${({ theme }) => theme.brand.white};
+  border: 1px solid #b4f34c;
   padding-left: 2rem;
+  border-radius: 0.4rem;
+
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.text.black};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+
+  &:focus {
+    border: 1px solid #b4f34c;
+  }
 `;
 
 export const PlaceInputContainer = styled.div`
@@ -160,8 +177,9 @@ export const PlaceNumber = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 2rem;
-  height: 2rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  flex-shrink: 0;
   margin-right: 0.6rem;
 
   background-color: ${({ theme }) => theme.brand.black};
@@ -175,8 +193,9 @@ export const PlaceNumber = styled.div`
 `;
 
 export const PlaceInput = styled.input`
+  width: 100%;
   border-radius: 0.4rem;
-  padding-left: 0.8rem;
+  padding-left: 1rem;
 `;
 
 export const NoteInput = styled.textarea`

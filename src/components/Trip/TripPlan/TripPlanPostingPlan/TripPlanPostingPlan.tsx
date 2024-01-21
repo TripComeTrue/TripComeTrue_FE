@@ -38,6 +38,7 @@ const TripPlanPosting = () => {
       city: '',
       places: [
         {
+          id: 1,
           place: '',
           note: '',
           photo: '',
@@ -82,10 +83,6 @@ const TripPlanPosting = () => {
     });
   };
 
-  const handleChangePlaceName = (place: string) => {
-    setSelectedPlace(place);
-  };
-
   const closePlaceListModal = () => {
     setIsPlaceModalOpen({ isPaneOpenLeft: false });
   };
@@ -98,13 +95,15 @@ const TripPlanPosting = () => {
     if (selectedDay !== null) {
       setFormData((prevFormData) => {
         const newFormData = [...prevFormData];
+        const currentPlaces = newFormData[selectedDay - 1].places;
         const newPlace = {
+          id: currentPlaces.length + 1,
           place: '',
           note: '',
           photo: '',
           tags: '',
         };
-        newFormData[selectedDay - 1].places.push(newPlace);
+        newFormData[selectedDay - 1].places = [...currentPlaces, newPlace];
         return newFormData;
       });
     }
@@ -130,70 +129,55 @@ const TripPlanPosting = () => {
   };
 
   const createDaysInput = () => {
-    return (
-      <>
-        <PlaceIcon
-          className="city-icon"
-          fontSize="small"
-          style={{ fill: '#b4f34c' }}
-        />
-        <Styled.CityInput
-          type="text"
-          {...register(`day${selectedDay}.city`)}
-          onChange={(event) => {
-            if (selectedDay !== null) {
-              handleInputChange(selectedDay, 'city', event);
-            }
-          }}
-        />
-
-        <Styled.PlaceInputContainer>
-          <Styled.PlaceNumber>1</Styled.PlaceNumber>
-          <Styled.PlaceInput
-            type="text"
-            {...register(`day${selectedDay}.place`)}
-            placeholder="방문할 장소를 선택해주세요"
-            // onChange={(event) => {
-            //   if (selectedDay !== null) {
-            //     handleInputChange(selectedDay, 'place', event);
-            //   }
-            // }}
-            value={selectedPlace || ''}
-            onChange={(e) => handleChangePlaceName(e.target.value)}
-            onClick={() => setIsPlaceModalOpen({ isPaneOpenLeft: true })}
-          />
-          <Styled.SlidingPane
-            className="citymodal"
-            closeIcon={<SlArrowLeft fontSize="15" />}
-            isOpen={isPlaceModalOpen.isPaneOpenLeft}
-            onRequestClose={() => {
-              setIsPlaceModalOpen({ isPaneOpenLeft: false });
-            }}
-            width="22.5rem">
-            <TripPlanPlaceModal
-              selectedPlace={selectedPlace}
-              onPlaceSelection={handlePlaceModalSelection}
-              onCloseModal={closePlaceListModal}
+    return selectedDay !== null
+      ? formData[selectedDay - 1].places.map((place) => (
+          <Styled.InputContainer key={`day-${selectedDay}-place-${place.id}`}>
+            <Styled.PlaceInputContainer>
+              <Styled.PlaceNumber>{place.id}</Styled.PlaceNumber>
+              <Styled.PlaceInput
+                type="text"
+                {...register(`day${selectedDay}.places[${place.id}].place`)}
+                placeholder="방문할 장소를 선택해주세요"
+                onChange={(event) => {
+                  if (selectedDay !== null) {
+                    handleInputChange(selectedDay, 'place', event);
+                  }
+                }}
+                value={selectedPlace || ''}
+                onClick={() => setIsPlaceModalOpen({ isPaneOpenLeft: true })}
+              />
+              <Styled.SlidingPane
+                className="citymodal"
+                closeIcon={<SlArrowLeft fontSize="15" />}
+                isOpen={isPlaceModalOpen.isPaneOpenLeft}
+                onRequestClose={() => {
+                  setIsPlaceModalOpen({ isPaneOpenLeft: false });
+                }}
+                width="22.5rem">
+                <TripPlanPlaceModal
+                  selectedPlace={selectedPlace}
+                  onPlaceSelection={handlePlaceModalSelection}
+                  onCloseModal={closePlaceListModal}
+                />
+              </Styled.SlidingPane>
+            </Styled.PlaceInputContainer>
+            <Styled.NoteInput
+              {...register(`day${selectedDay}.note`)}
+              placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
+              onChange={(event) => {
+                if (selectedDay !== null) {
+                  handleInputChange(selectedDay, 'note', event);
+                }
+              }}
             />
-          </Styled.SlidingPane>
-        </Styled.PlaceInputContainer>
-
-        <Styled.NoteInput
-          {...register(`day${selectedDay}.note`)}
-          placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
-          onChange={(event) => {
-            if (selectedDay !== null) {
-              handleInputChange(selectedDay, 'note', event);
-            }
-          }}
-        />
-        <TripPlanUploadImages
-          setFormData={setFormData}
-          selectedDay={selectedDay}
-        />
-        <TripPlanAddTagsButton />
-      </>
-    );
+            <TripPlanUploadImages
+              setFormData={setFormData}
+              selectedDay={selectedDay}
+            />
+            <TripPlanAddTagsButton />
+          </Styled.InputContainer>
+        ))
+      : null;
   };
 
   return (
@@ -228,15 +212,32 @@ const TripPlanPosting = () => {
           })}
         </Styled.DaysContainer>
 
+        <Styled.CityInputContainer>
+          <Styled.CityInput
+            type="text"
+            {...register(`day${selectedDay}.city`)}
+            onChange={(event) => {
+              if (selectedDay !== null) {
+                handleInputChange(selectedDay, 'city', event);
+              }
+            }}
+          />
+          <PlaceIcon
+            className="city-icon"
+            fontSize="small"
+            style={{ fill: '#b4f34c' }}
+          />
+        </Styled.CityInputContainer>
+
         <Styled.PostingForm onSubmit={handleSubmit(onSubmit)}>
-          <Styled.InputContainer>{createDaysInput()}</Styled.InputContainer>
+          {createDaysInput()}
         </Styled.PostingForm>
       </Styled.Container>
 
       <TripPlanSetBudget />
       <TripPlanAddHashtags />
 
-      <Styled.AddPlaceButton onClick={() => handleAddPlace}>
+      <Styled.AddPlaceButton onClick={handleAddPlace}>
         <GoPlusCircle fontSize="28" style={{ fill: '#b4f34c' }} />
         장소 추가
       </Styled.AddPlaceButton>

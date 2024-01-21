@@ -7,29 +7,21 @@ import {
 } from '@react-google-maps/api';
 import mapMarker from '/images/map-mark.svg';
 import MarkerText from './TripPlanGoogleMaps.styles';
+import { GoogleMapsProps, OffsetProps } from './TripPlanGoogleMaps.types';
 
-const center = {
-  lat: 48.864716,
-  lng: 2.349014,
-};
+function TripPlanGoogleMaps({
+  height = '10rem',
+  placeName,
+  lat = 48.864716,
+  lng = 2.349014,
+}: GoogleMapsProps) {
+  const center = { lat, lng };
+  const options = {
+    minZoom: 7,
+    maxZoom: 13,
+    mapTypeControl: false,
+  };
 
-const options = {
-  minZoom: 7,
-  maxZoom: 13,
-  mapTypeControl: false,
-};
-
-interface GoogleMapsProps {
-  height?: string;
-  placeName?: string;
-}
-
-interface OffsetProps {
-  x: number;
-  y: number;
-}
-
-function TripPlanGoogleMaps({ height = '10rem', placeName }: GoogleMapsProps) {
   const containerStyle = {
     width: '100%',
     height,

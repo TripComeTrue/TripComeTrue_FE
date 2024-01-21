@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as Styled from './TripPlanPlaceModal.styles';
@@ -41,17 +42,19 @@ const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
 
   return (
     <Styled.Wrapper>
-      <Styled.AddNewPlaceButton
-        type="button"
-        variants="primary-border"
-        rounded="sm"
-        size="lg">
-        <AiFillPlusCircle
-          fontSize="17"
-          style={{ fill: '#b4f34c', marginRight: '0.5rem' }}
-        />
-        방문 장소 직접 추가하기
-      </Styled.AddNewPlaceButton>
+      <Link to="/trip/addplace">
+        <Styled.AddNewPlaceButton
+          type="button"
+          variants="primary-border"
+          rounded="sm"
+          size="lg">
+          <AiFillPlusCircle
+            fontSize="17"
+            style={{ fill: '#b4f34c', marginRight: '0.5rem' }}
+          />
+          방문 장소 직접 추가하기
+        </Styled.AddNewPlaceButton>
+      </Link>
       <SubTitle margin="1rem 0">추천 방문장소</SubTitle>
       <Styled.ShowPlacesContainer>
         {placesForSelectedCity.map((place) => (

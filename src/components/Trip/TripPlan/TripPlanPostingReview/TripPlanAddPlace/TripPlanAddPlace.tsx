@@ -18,6 +18,8 @@ const TripPlanAddPlace = ({
 }: TripPlanAddPlaceProps) => {
   const [placeName, setPlaceName] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [lat, setLat] = useState<number>();
+  const [lng, setLng] = useState<number>();
   // const currentAddress = watch?.('address');
   // const currentPlaceName = watch?.('placeName');
 
@@ -45,11 +47,27 @@ const TripPlanAddPlace = ({
   //   }
   // }, [currentAddress, currentPlaceName]);
 
+  // 임시 테스트용
+  const handleLatChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setLat(value);
+  };
+
+  const handleLngChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setLng(value);
+  };
+
   return (
     <>
       <SimpleNav>1일차 장소 추가하기</SimpleNav>
       <Styled.Wrapper>
-        <TripPlanGoogleMaps height="30rem" placeName={placeName} />
+        <TripPlanGoogleMaps
+          height="23rem"
+          placeName={placeName}
+          lat={lat}
+          lng={lng}
+        />
 
         <Styled.ToolTip>
           <PlaceIcon
@@ -60,6 +78,20 @@ const TripPlanAddPlace = ({
           지도 위에서 방문 장소를 확인해보세요
         </Styled.ToolTip>
 
+        <input
+          className="lat"
+          type="number"
+          value={lat}
+          onChange={handleLatChange}
+          placeholder="위도 입력"
+        />
+        <input
+          className="lng"
+          type="number"
+          value={lng}
+          onChange={handleLngChange}
+          placeholder="경도 입력"
+        />
         <form onSubmit={onSubmit}>
           <Styled.AddressInputContainer>
             <SubTitle fontSize={14}>주소</SubTitle>
