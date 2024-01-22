@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import * as Styled from './Reviews.styles';
@@ -11,12 +11,17 @@ import FormattedDate from '@/utils/formattedDate';
 const Reviews = () => {
   const { placeId } = useParams() as { placeId: string };
   const [selectedFilter, setSelectedFilter] = useState('최신순');
-  const { data: placeReviewsData } = useQuery({
+  const [onlyImage, setOnlyImage] = useState(false);
+  const { data: placeReviewsData, refetch } = useQuery({
     queryKey: ['PlaceReviewsData'],
-    queryFn: () => getPlaceReviews(placeId),
+    queryFn: () => getPlaceReviews(placeId, selectedFilter, onlyImage),
   });
 
   console.log(placeReviewsData);
+
+  useEffect(() => {
+    refetch();
+  }, [selectedFilter, onlyImage]);
 
   return (
     <div>
@@ -37,7 +42,7 @@ const Reviews = () => {
       <Styled.Container>
         <Styled.Header>
           <Styled.CheckBoxContainer>
-            <input type="checkbox" />
+            <input type="checkbox" onClick={() => setOnlyImage(!onlyImage)} />
             <Text fontSize={12} fontWeight={600} color="gray">
               포토 리뷰만
             </Text>
@@ -45,7 +50,7 @@ const Reviews = () => {
 
           <Filter
             first="최신순"
-            second="보관순"
+            second="추천순"
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
           />
