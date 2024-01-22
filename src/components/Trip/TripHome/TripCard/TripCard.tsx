@@ -1,42 +1,47 @@
 import { Avatar, Bookmark, Text } from '@/components/common';
 import * as Styled from './TripCard.styles';
-import mark from '/images/mark.svg';
-import comment from '/images/comment.svg';
+import MarkIcon from '/images/mark.svg';
+import CommentIcon from '/images/comment.svg';
 import pxToRem from '@/utils/pxToRem';
 import { TripCardProps } from './TripCard.types';
 
-const TripCard = ({ size = 152 }: TripCardProps) => {
+const TripCard = ({ size = 152, tripRecordData }: TripCardProps) => {
   const stringifiedSize = pxToRem(size);
+  const formatDays = `${tripRecordData.totalDays - 1}박 ${
+    tripRecordData.totalDays
+  }일`;
+  const [mainCountries, ...countries] = tripRecordData.countries.split(',');
+  const formatCountries =
+    countries.length === 0
+      ? mainCountries
+      : `${mainCountries} 외 ${countries.length}곳`;
 
   return (
     <Styled.Container $size={stringifiedSize}>
       <Styled.ImageContainer $size={stringifiedSize}>
-        <Styled.Image
-          src="https://source.unsplash.com/random"
-          alt="여행 일정"
-        />
+        <Styled.Image src={tripRecordData.imageUrl} alt="여행 일정" />
         <Styled.BookMarkContainer>
-          <Bookmark count={999} />
+          <Bookmark count={tripRecordData.storeCount} />
         </Styled.BookMarkContainer>
         <Styled.Creator>
-          <Avatar src="https://source.unsplash.com/random" size={12} />
+          <Avatar src={tripRecordData.member.profileImage} size={12} />
           <Text fontSize={10} color="white">
-            류스나
+            {tripRecordData.member.nickname}
           </Text>
-          <img src={mark} alt="markIcon" />
+          <img src={MarkIcon} alt="mark icon" />
         </Styled.Creator>
       </Styled.ImageContainer>
       <Styled.InfoContainer>
         <Text fontSize={10} color="gray">
-          5박 7일・ 스위스 외 3곳
+          {formatDays} ・ {formatCountries}
         </Text>
         <Text fontSize={12} fontWeight={700}>
-          너는 돈만 준비해. 계획은...
+          {tripRecordData.title}
         </Text>
         <Styled.Comment>
-          <img src={comment} alt="commentIcon" />
+          <img src={CommentIcon} alt="comment icon" />
           <Text fontSize={10} color="gray">
-            124
+            {tripRecordData.commentCount}
           </Text>
         </Styled.Comment>
       </Styled.InfoContainer>

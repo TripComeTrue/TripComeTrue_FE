@@ -4,6 +4,7 @@ import { justifyBetween } from '@/styles/common';
 export const ExchangeRateWrapper = styled.section`
   height: 15rem;
   margin: 1rem 0;
+  padding: 0 1.25rem;
 `;
 
 export const ExchangeRateBox = styled.div`

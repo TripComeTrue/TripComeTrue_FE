@@ -10,7 +10,7 @@ import {
   ValidateIcon,
 } from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
-import client from '@/apis';
+import client from '@/apis/client';
 // import throttle from '@/utils/throttle';
 
 function EmailInput({

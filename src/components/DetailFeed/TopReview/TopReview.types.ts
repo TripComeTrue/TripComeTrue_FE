@@ -1,3 +1,3 @@
 export interface DayOptionType {
-  daySelected: boolean;
+  selected: boolean;
 }
