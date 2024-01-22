@@ -1,51 +1,98 @@
-import { ChangeEvent, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Bubble, Button, SimpleNav, SubTitle, Text } from '@/components/common';
 import * as Styled from './ReviewWrite.styles';
 import CameraIcon from '/images/camera.svg';
 import { ReviewWriteProps } from './ReviewWrite.types';
-import useSubmitImages from '@/hooks/common/useSubmitImages';
-import { postPlaceReview, putPlaceReview } from '@/apis/place';
-import useDeleteImages from '@/hooks/common/useDeleteImages';
 
-const ReviewWrite = ({ isEdit, spotName, variant }: ReviewWriteProps) => {
-  const navigate = useNavigate();
-  const [files, setFiles] = useState<File[]>([]);
-  const [content, setContent] = useState('');
-  const [imageFile, setImageFile] = useState('');
-  const { placeId } = useParams() as { placeId: string };
+const ReviewWrite = ({ children }: ReviewWriteProps) => {
+  return (
+    // <div>
+    //   <SimpleNav>{spotName || '여정 리뷰하기'}</SimpleNav>
+    //   <Styled.ImageContainer htmlFor="input-file">
+    //     {imageFile ? (
+    //       <Styled.PreviewImage src={imageFile} />
+    //     ) : (
+    //       <Styled.UploadContainer>
+    //         <Styled.ImageUploadPoint>
+    //           <Bubble>+ 1P</Bubble>
+    //         </Styled.ImageUploadPoint>
+    //         <Styled.UploadImage src={CameraIcon} />
+    //         <Text color="gray" fontWeight={700}>
+    //           사진 업로드
+    //         </Text>
+    //       </Styled.UploadContainer>
+    //     )}
+    //     <Styled.UploadInput
+    //       type="file"
+    //       id="input-file"
+    //       onChange={previewImage}
+    //     />
+    //   </Styled.ImageContainer>
+    //   <Styled.WriteContainer>
+    //     <Styled.WritePoint>
+    //       <Bubble>+ 1P</Bubble>
+    //     </Styled.WritePoint>
+    //     <SubTitle fontSize={14}>
+    //       여행 후기에 대해 남기고 싶은 말을 남겨주세요
+    //     </SubTitle>
+    //     <Styled.TextArea
+    //       maxLength={2000}
+    //       cols={3}
+    //       placeholder="여행 후기를 참고한 경험을 솔직하게 남겨주세요"
+    //       value={content}
+    //       onChange={onChangeContent}
+    //     />
+    //     <Styled.TextCountWrapper>
+    //       <Text color="primary" fontSize={10}>
+    //         {content.length}
+    //       </Text>
+    //       <Text color="gray" fontSize={10}>
+    //         &nbsp;/&nbsp;2000
+    //       </Text>
+    //     </Styled.TextCountWrapper>
+    //   </Styled.WriteContainer>
 
-  const { handleSubmitImages } = useSubmitImages(files, setFiles);
-  const { handleDeleteImages } = useDeleteImages();
-  const { mutate: postReviewMutate } = useMutation({
-    mutationFn: ({
-      imageUrl,
-      contentValue,
-    }: {
-      imageUrl: string;
-      contentValue: string;
-    }) => postPlaceReview(placeId, { imageUrl, content: contentValue }),
-  });
-  // const { mutate: putReviewMutate } = useMutation({
-  //   mutationFn: (placeReviewId, {}) =>
-  //     putPlaceReview(placeReviewId, { imageUrl, content }),
-  // });
+    //   {variant === 'trip' && isEdit && (
+    //     <Styled.RatingContainer>
+    //       <Styled.RatingCustom
+    //         name="half-rating"
+    //         defaultValue={0}
+    //         precision={0.5}
+    //       />
+    //     </Styled.RatingContainer>
+    //   )}
 
-  // 리뷰 작성하기 함수
-  const onClickPostReview = async () => {
-    const res = await handleSubmitImages();
-    postReviewMutate({ imageUrl: res[0], contentValue: content });
-    navigate(`/detailfeed/spot/${placeId}/review`);
-  };
+    //   <Styled.ButtonWrapper>
+    //     <Button
+    //       variants="primary"
+    //       size="lg"
+    //       disabled={content.length < 10}
+    //       onClick={onClickPostReview}>
+    //       리뷰 {!isEdit ? '작성' : '수정'}하기
+    //     </Button>
+    //   </Styled.ButtonWrapper>
+    // </div>
 
-  // 리뷰 수정하기 함수
-  // const onClickPutReview = async () => {
-  //   await handleDeleteImages();
-  // };
+    <div>{children}</div>
+  );
+};
 
+export default ReviewWrite;
+
+const Nav = ({ title }: { title: string }) => {
+  return <SimpleNav>{title}</SimpleNav>;
+};
+
+const Image = ({
+  imageUrl,
+  setFiles,
+}: {
+  imageUrl?: string;
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+}) => {
+  const [previewImage, setPreviewImage] = useState('');
   // 이미지 미리보기 함수
-  const previewImage = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handlePreviewImage = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files !== null) {
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -54,83 +101,141 @@ const ReviewWrite = ({ isEdit, spotName, variant }: ReviewWriteProps) => {
 
       reader.onload = () => {
         const result = reader.result as string;
-        setImageFile(result);
+        setPreviewImage(result);
       };
     }
   };
 
-  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>): void => {
-    setContent(event.target.value);
-  };
+  useEffect(() => {
+    if (imageUrl) {
+      setPreviewImage(imageUrl);
+    }
+  }, [imageUrl]);
 
   return (
-    <div>
-      <SimpleNav>{spotName || '여정 리뷰하기'}</SimpleNav>
-      <Styled.ImageContainer htmlFor="input-file">
-        {imageFile ? (
-          <Styled.PreviewImage src={imageFile} />
-        ) : (
-          <Styled.UploadContainer>
-            <Styled.ImageUploadPoint>
-              <Bubble>+ 1P</Bubble>
-            </Styled.ImageUploadPoint>
-            <Styled.UploadImage src={CameraIcon} />
-            <Text color="gray" fontWeight={700}>
-              사진 업로드
-            </Text>
-          </Styled.UploadContainer>
-        )}
-        <Styled.UploadInput
-          type="file"
-          id="input-file"
-          onChange={previewImage}
-        />
-      </Styled.ImageContainer>
-      <Styled.WriteContainer>
-        <Styled.WritePoint>
-          <Bubble>+ 1P</Bubble>
-        </Styled.WritePoint>
-        <SubTitle fontSize={14}>
-          여행 후기에 대해 남기고 싶은 말을 남겨주세요
-        </SubTitle>
-        <Styled.TextArea
-          maxLength={2000}
-          cols={3}
-          placeholder="여행 후기를 참고한 경험을 솔직하게 남겨주세요"
-          value={content}
-          onChange={onChangeContent}
-        />
-        <Styled.TextCountWrapper>
-          <Text color="primary" fontSize={10}>
-            {content.length}
+    <Styled.ImageContainer htmlFor="input-file">
+      {previewImage ? (
+        <Styled.PreviewImage src={previewImage} />
+      ) : (
+        <Styled.UploadContainer>
+          <Styled.ImageUploadPoint>
+            <Bubble>+ 1P</Bubble>
+          </Styled.ImageUploadPoint>
+          <Styled.UploadImage src={CameraIcon} />
+          <Text color="gray" fontWeight={700}>
+            사진 업로드
           </Text>
-          <Text color="gray" fontSize={10}>
-            &nbsp;/&nbsp;2000
-          </Text>
-        </Styled.TextCountWrapper>
-      </Styled.WriteContainer>
-
-      {variant === 'trip' && isEdit && (
-        <Styled.RatingContainer>
-          <Styled.RatingCustom
-            name="half-rating"
-            defaultValue={0}
-            precision={0.5}
-          />
-        </Styled.RatingContainer>
+        </Styled.UploadContainer>
       )}
-
-      <Styled.ButtonWrapper>
-        <Button
-          variants="primary"
-          size="lg"
-          disabled={content.length < 10}
-          onClick={onClickPostReview}>
-          리뷰 {!isEdit ? '작성' : '수정'}하기
-        </Button>
-      </Styled.ButtonWrapper>
-    </div>
+      <Styled.UploadInput
+        type="file"
+        id="input-file"
+        onChange={handlePreviewImage}
+      />
+    </Styled.ImageContainer>
   );
 };
 
-export default ReviewWrite;
+const Write = ({
+  defaultValue,
+  content,
+  setContent,
+}: {
+  defaultValue?: string;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    setContent(event.target.value);
+  };
+  return (
+    <Styled.WriteContainer>
+      <Styled.WritePoint>
+        <Bubble>+ 1P</Bubble>
+      </Styled.WritePoint>
+      <SubTitle fontSize={14}>
+        여행 후기에 대해 남기고 싶은 말을 남겨주세요
+      </SubTitle>
+      <Styled.TextArea
+        maxLength={2000}
+        cols={3}
+        placeholder="여행 후기를 참고한 경험을 솔직하게 남겨주세요"
+        defaultValue={defaultValue}
+        onChange={onChangeContent}
+      />
+      <Styled.TextCountWrapper>
+        <Text color="primary" fontSize={10}>
+          {defaultValue ? defaultValue.length : content?.length}
+        </Text>
+        <Text color="gray" fontSize={10}>
+          &nbsp;/&nbsp;2000
+        </Text>
+      </Styled.TextCountWrapper>
+    </Styled.WriteContainer>
+  );
+};
+
+const Rating = () => {
+  return (
+    <Styled.RatingContainer>
+      <Styled.RatingCustom
+        name="half-rating"
+        defaultValue={0}
+        precision={0.5}
+      />
+    </Styled.RatingContainer>
+  );
+};
+
+const WriteButton = ({
+  content,
+  title,
+  onClickFunc,
+}: {
+  content: string;
+  title: string;
+  onClickFunc: () => void;
+}) => {
+  return (
+    <Styled.ButtonWrapper>
+      <Button
+        variants="primary"
+        size="lg"
+        disabled={content?.length < 10}
+        onClick={onClickFunc}>
+        {title}
+      </Button>
+    </Styled.ButtonWrapper>
+  );
+};
+
+const EditButton = ({
+  files,
+  content,
+  title,
+  onClickFunc,
+}: {
+  files: File[];
+  content: string;
+  title: string;
+  onClickFunc: () => void;
+}) => {
+  return (
+    <Styled.ButtonWrapper>
+      <Button
+        variants="primary"
+        size="lg"
+        disabled={!(files.length !== 0 || content.length !== 0)}
+        onClick={onClickFunc}>
+        {title}
+      </Button>
+    </Styled.ButtonWrapper>
+  );
+};
+
+ReviewWrite.Nav = Nav;
+ReviewWrite.Image = Image;
+ReviewWrite.Write = Write;
+ReviewWrite.Rating = Rating;
+ReviewWrite.WriteButton = WriteButton;
+ReviewWrite.EditButton = EditButton;

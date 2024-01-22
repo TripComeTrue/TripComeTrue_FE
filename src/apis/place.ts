@@ -47,9 +47,9 @@ export const putPlaceReview = async (
   return res;
 };
 
-// 특정 여행지에 대한 리뷰 조회
+// 특정 여행지에 대한 리뷰 1건 조회
 export const getPlaceReview = async (placeReviewId: string) => {
-  const res = await client.get(`v1/places/reviews/${placeReviewId}`);
+  const { data } = await client.get(`v1/places/reviews/${placeReviewId}`);
 
-  return res;
+  return data.data;
 };

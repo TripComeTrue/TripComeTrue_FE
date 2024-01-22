@@ -78,11 +78,11 @@ function App() {
             element={<PlaceReviewWriteNew />}
           />
           <Route
-            path="spot/:placeId/review/edit"
+            path="spot/:placeId/review/:placeReviewId/edit"
             element={<PlaceReviewWriteEdit />}
           />
           <Route
-            path="spot/:spotId/review/:placeReviewId/comment"
+            path="spot/:placeId/review/:placeReviewId/comment"
             element={<ReviewComment />}
           />
           <Route path="shortslist" element={<ShortsList />} />

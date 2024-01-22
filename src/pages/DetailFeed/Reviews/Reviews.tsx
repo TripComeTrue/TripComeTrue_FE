@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
@@ -74,6 +74,7 @@ const Reviews = () => {
             </PlaceReviewCard>
           ))}
         </ul>
+        <Link to="/detailfeed/spot/1/review/1/edit">이동</Link>
       </Styled.Container>
     </div>
   );
