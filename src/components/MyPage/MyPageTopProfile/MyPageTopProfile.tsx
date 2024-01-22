@@ -7,11 +7,16 @@ import {
 import { GoChevronRight } from 'react-icons/go';
 import { Avatar, Text } from '@/components/common';
 import * as Styled from './MyPageTopProfile.styles';
+import { setCookie } from '@/utils/cookie';
 
 function MyPageTopProfile() {
   const navigate = useNavigate();
   const onClickEdit = () => {
     navigate('confirm-password');
+  };
+  const onClickLogout = () => {
+    setCookie('accessToken', '', 0);
+    navigate('/');
   };
 
   return (
@@ -34,7 +39,12 @@ function MyPageTopProfile() {
             onClick={onClickEdit}>
             <MdOutlineEdit /> 계정관리
           </Styled.MyPageTopProfileBtn>
-          <Styled.MyPageTopProfileBtn size="sm" variants="text" rounded="sm">
+          <Styled.MyPageTopProfileBtn
+            size="sm"
+            variants="text"
+            rounded="sm"
+            onClick={onClickLogout}
+            type="button">
             로그아웃
           </Styled.MyPageTopProfileBtn>
         </Styled.MyPageTopProfileBtns>
