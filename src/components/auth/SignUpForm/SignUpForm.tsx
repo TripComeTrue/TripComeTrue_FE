@@ -53,17 +53,20 @@ function SignUpForm({ handleOpen, setErrorMsg }: SignUpFormProps) {
   };
   const onSubmit = handleSubmit(async (data) => {
     if (data.email === undefined || data.password === undefined) return;
-    try {
-      await mutation.mutate({ email: data.email, password: data.password });
-
-      // TODO: 나중에 welcome 페이지로 변경 필요
-      navigate('/auth/signin-email');
-    } catch (error) {
-      if (isAxiosError(error)) {
-        setErrorMsg(error.response?.data.errorMessage);
-        handleOpen();
-      }
-    }
+    mutation.mutate(
+      { email: data.email, password: data.password },
+      {
+        onSuccess: () => {
+          navigate('/auth/signin-email');
+        },
+        onError: (error) => {
+          if (isAxiosError(error)) {
+            setErrorMsg(error.response?.data.errorMessage);
+            handleOpen();
+          }
+        },
+      },
+    );
   });
 
   useEffect(() => {

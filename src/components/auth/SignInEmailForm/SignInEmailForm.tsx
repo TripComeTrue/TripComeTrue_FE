@@ -27,19 +27,24 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
   });
   const onSubmit = handleSubmit(async (data) => {
     if (data.email === undefined || data.password === undefined) return;
-    try {
-      const token = await mutation.mutateAsync({
+    mutation.mutate(
+      {
         email: data.email,
         password: data.password,
-      });
-      setCookie('accessToken', token, MAX_AGE);
-      navigate('/home', { replace: true });
-    } catch (error) {
-      if (isAxiosError(error)) {
-        handleOpen();
-        console.log(error.response?.data.errorMessage);
-      }
-    }
+      },
+      {
+        onSuccess: (token) => {
+          setCookie('accessToken', token, MAX_AGE);
+          navigate('/home', { replace: true });
+        },
+        onError: (error) => {
+          if (isAxiosError(error)) {
+            handleOpen();
+            console.log(error.response?.data.errorMessage);
+          }
+        },
+      },
+    );
   });
 
   return (
