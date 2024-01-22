@@ -1,7 +1,7 @@
 import { Avatar } from '@/components/common';
 import * as Styled from './MyPageEditImage.styles';
 
-function MyPageEditImage() {
+function MyPageEditImage({ handleEditProfile }: MyPageEditImageProps) {
   return (
     <Styled.MyPageAvatarWrap>
       <Avatar src="/busan.jpeg" size={83} />
@@ -9,7 +9,8 @@ function MyPageEditImage() {
         size="sm"
         rounded="sm"
         variants="gray-border"
-        type="button">
+        type="button"
+        onClick={handleEditProfile}>
         사진 편집
       </Styled.MyPageAvatarEditBtn>
     </Styled.MyPageAvatarWrap>

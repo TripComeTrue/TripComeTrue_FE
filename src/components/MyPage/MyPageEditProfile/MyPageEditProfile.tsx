@@ -4,12 +4,15 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { GoChevronRight } from 'react-icons/go';
 import { Button, Text } from '@/components/common';
-import { EditProfileForm } from './MyPageEditProfile.types';
+import {
+  EditProfileForm,
+  MyPageEditProfileProps,
+} from './MyPageEditProfile.types';
 import MyPageEditImage from './MyPageEditImage';
 import * as Styled from './MyPageEditProfile.styles';
 import * as StyledInput from '../MyPagePassword/MyPageConfirmPassword.styles';
 
-function MyPageEditProfile() {
+function MyPageEditProfile({ handleEditProfile }: MyPageEditProfileProps) {
   const {
     register,
     handleSubmit,
@@ -29,7 +32,7 @@ function MyPageEditProfile() {
   return (
     <Styled.MyPageEditProfileWrap onSubmit={onSubmit}>
       <div>
-        <MyPageEditImage />
+        <MyPageEditImage handleEditProfile={handleEditProfile} />
         <Styled.MyPageEditInputWrap>
           <label htmlFor="nickname">
             <Text fontSize={12} fontWeight={700}>

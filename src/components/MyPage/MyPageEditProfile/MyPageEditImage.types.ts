@@ -1,0 +1,3 @@
+interface MyPageEditImageProps {
+  handleEditProfile: VoidFunction;
+}

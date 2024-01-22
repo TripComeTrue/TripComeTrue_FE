@@ -4,6 +4,6 @@ export interface ModalProps {
   children?: ReactNode;
   type?: 'error' | 'success' | 'info';
   open: boolean;
-  onClose: () => void;
+  onClose: VoidFunction;
   title?: string;
 }

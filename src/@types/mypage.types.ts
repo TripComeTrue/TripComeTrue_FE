@@ -40,3 +40,8 @@ export interface Notification {
   time: string;
   read: boolean;
 }
+
+export interface CheckPasswordReqBody {
+  newPassword: string;
+  confirmPassword: string;
+}
