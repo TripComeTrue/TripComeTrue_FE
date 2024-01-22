@@ -18,9 +18,9 @@ export const getHotShorts = async () => {
 
 // 여행 후기 세부 조회
 export const getTripRecord = async (tripRecordId: string) => {
-  const res = await client.get(`v1/trip-records/${tripRecordId}`);
+  const { data } = await client.get(`v1/trip-records/${tripRecordId}`);
 
-  return res.data;
+  return data.data;
 };
 
 // 가장 최신 여행 후기 리뷰 1건 + 내 평점 조회

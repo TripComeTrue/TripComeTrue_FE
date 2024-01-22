@@ -18,8 +18,8 @@ const TripDetail = () => {
   const isSignIn = getCookie('accessToken');
   const { tripRecordId } = useParams() as { tripRecordId: string };
 
-  const [{ data: tripRecordData }, { data: tripRecordReviewData }] = useQueries(
-    {
+  const [{ data: tripRecordDetailData }, { data: tripRecordReviewData }] =
+    useQueries({
       queries: [
         {
           queryKey: ['TripRecordDetailData'],
@@ -33,19 +33,17 @@ const TripDetail = () => {
           },
         },
       ],
-    },
-  );
+    });
 
-  console.log(isSignIn);
-  console.log(tripRecordReviewData);
+  console.log(tripRecordDetailData);
 
   return (
     <div>
       <SimpleNav>여행후기</SimpleNav>
       <Styled.Container>
-        <MainCarousel imagesData={tripRecordData?.data.images} />
-        <Introduction tripRecordData={tripRecordData?.data} />
-        <TripContents schedulesData={tripRecordData?.data.schedules} />
+        <MainCarousel imagesData={tripRecordDetailData?.images} />
+        <Introduction tripRecordData={tripRecordDetailData} />
+        <TripContents schedulesData={tripRecordDetailData?.schedules} />
         <TripComment />
         {isSignIn && (
           <TripRecordReviewCard>

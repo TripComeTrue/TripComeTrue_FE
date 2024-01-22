@@ -31,7 +31,9 @@ interface SchedulesData {
 }
 
 interface DayData {
+  cityName: string;
   content: string;
+  countryName: string;
   dayNumber: number;
   id: number;
   latitude: number;
@@ -39,12 +41,15 @@ interface DayData {
   ordering: number;
   placeId: number;
   placeName: string;
+  tagType: string;
+  tagUrl: string;
   tripRecordId: number;
   images: { id: number; imageUrl: string }[];
   videos: { id: number; videoUrl: string }[];
 }
 
 interface TripRecordDetail {
+  averageRating: number;
   content: string;
   countries: string;
   expenseRangeType: string;
@@ -58,7 +63,6 @@ interface TripRecordDetail {
   tripStartDay: string;
   title: string;
   storeCount: number;
-  average_rating: number;
 }
 
 interface ShortData {

@@ -19,6 +19,21 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
       ? mainCountries
       : `${mainCountries} 외 ${countries.length}곳`;
 
+  const handleExpense = (expense: string) => {
+    switch (expense) {
+      case 'BELOW_50':
+        return '50만원 이하';
+      case 'BELOW_100':
+        return '50만원~100만원 이하';
+      case 'BELOW_200':
+        return '100만원~200만원 이하';
+      case 'BELOW_300':
+        return '200만원~300만원 이하';
+      default:
+        return '300만원 이상';
+    }
+  };
+
   console.log(tripRecordData);
 
   return (
@@ -54,7 +69,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
             <Styled.AverageContainer>
               <img src={AverageIcon} alt="평점 별 아이콘" />
               <Text color="gray" fontSize={12} fontWeight={700}>
-                {tripRecordData?.average_rating}점
+                {tripRecordData?.averageRating}점
               </Text>
             </Styled.AverageContainer>
           </Styled.Item>
@@ -65,7 +80,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
               </Text>
             </Styled.ItemTitle>
             <Text color="gray" fontSize={12} fontWeight={700}>
-              200만원 ~ 300만원
+              {handleExpense(tripRecordData?.expenseRangeType)}
             </Text>
           </Styled.Item>
         </Styled.RatingAndExpense>
