@@ -8,8 +8,8 @@ import {
   TripHome,
   TripList,
   TripPlan,
-  TripReviewEdit,
-  TripReviewNew,
+  TripReviewWriteEdit,
+  TripReviewWriteNew,
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
@@ -20,6 +20,9 @@ import {
   SpotSearch,
   TouristSpot,
   Reviews,
+  ReviewComment,
+  SpotReviewWriteNew,
+  SpotReviewWriteEdit,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 
@@ -53,10 +56,27 @@ function App() {
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:id" element={<TripDetail />} />
-          <Route path="detail/:id/review/write" element={<TripReviewNew />} />
-          <Route path="detail/:id/review/edit" element={<TripReviewEdit />} />
+          <Route
+            path="detail/:id/review/write"
+            element={<TripReviewWriteNew />}
+          />
+          <Route
+            path="detail/:id/review/edit"
+            element={<TripReviewWriteEdit />}
+          />
           <Route path="plan" element={<TripPlan />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
+          <Route path="detail/:tripRecordId" element={<TripDetail />} />
+          <Route
+            path="detail/:tripRecordId/review/:reviewId/write"
+            element={<TripReviewWriteNew />}
+          />
+          <Route
+            path="detail/:tripRecordId/review/:reviewId/edit"
+            element={<TripReviewWriteEdit />}
+          />
+          <Route path="plan" element={<TripPlanDate />} />
+          <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
           <Route path="posting" element={<TripPlanPosting />} /> */}
           <Route path="addtag" element={<TripPlanAddTags />} />
@@ -65,7 +85,19 @@ function App() {
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
           <Route path="spot" element={<TouristSpot />} />
-          <Route path="spot/:id/review" element={<Reviews />} />
+          <Route path="spot/:spotId/review" element={<Reviews />} />
+          <Route
+            path="spot/:spotId/review/:reviewId/write"
+            element={<SpotReviewWriteNew />}
+          />
+          <Route
+            path="spot/:spotId/review/:reviewId/edit"
+            element={<SpotReviewWriteEdit />}
+          />
+          <Route
+            path="spot/:spotId/review/:reviewId/comment"
+            element={<ReviewComment />}
+          />
           <Route path="shortslist" element={<ShortsList />} />
           <Route path="gallerylist" element={<GalleryList />} />
           <Route path="spotlist" element={<SpotList />} />

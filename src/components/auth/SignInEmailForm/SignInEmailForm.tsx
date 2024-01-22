@@ -6,7 +6,7 @@ import { SignInBtnIcon } from '../SignInBtns/SignInBtns.styles';
 import * as Styled from './SignInEmailForm.styles';
 import { LoginFormData, SignInEmailFormProps } from './SignEmailForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
-import client from '@/apis';
+import client from '@/apis/client';
 import { setCookie } from '@/utils/cookie';
 import MAX_AGE from '@/constants/maxAge';
 

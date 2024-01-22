@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Rating } from '@mui/material';
 import { alignCenter, flexColumn } from '@/styles/common';
 
 export const ImageContainer = styled.label`
@@ -56,6 +57,29 @@ export const TextCountWrapper = styled.div`
   position: absolute;
   bottom: 5%;
   right: 5%;
+`;
+
+export const RatingContainer = styled.div`
+  ${flexColumn}
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+
+  margin-bottom: 1.25rem;
+`;
+
+export const RatingCustom = styled(Rating)`
+  ${alignCenter};
+  justify-content: center;
+
+  > span {
+    color: ${({ theme }) => theme.brand.yellow};
+  }
+
+  span svg {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
 `;
 
 export const ButtonWrapper = styled.div`

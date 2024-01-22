@@ -9,7 +9,7 @@ import SignUpFormWrap from './SignUpForm.styles';
 import { SignUpFormData, SignUpFormProps } from './SignUpForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
 import { Button } from '@/components/common';
-import client from '@/apis';
+import client from '@/apis/client';
 
 function SignUpForm({ handleOpen, setErrorMsg }: SignUpFormProps) {
   const navigate = useNavigate();

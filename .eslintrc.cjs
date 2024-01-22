@@ -32,8 +32,10 @@ module.exports = {
 
     'react-hooks/exhaustive-deps': 'off',
     'no-nested-ternary': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
     'react/prop-types': 'off', // 임시
-    'react/require-default-props': 'off',
+    'react/jsx-no-useless-fragment': 'off',
+    'no-restricted-syntax': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {
