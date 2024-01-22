@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { SubTitle } from '@/components/common';
 import Creator from '@/components/common/Creator/Creator';
 import { CreatorData } from './SearchCreator.types';
@@ -15,10 +16,15 @@ const SearchCreator = () => {
     shorts: 7,
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
       <Styled.CreatorTitleWrap>
-        <SubTitle fontSize={14} variant="more">
+        <SubTitle
+          fontSize={14}
+          variant="more"
+          onClickButton={() => navigate('/creator')}>
           크리에이터
         </SubTitle>
       </Styled.CreatorTitleWrap>
