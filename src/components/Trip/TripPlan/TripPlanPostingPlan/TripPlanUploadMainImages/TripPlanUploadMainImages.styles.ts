@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
 export const UploadImageContainer = styled.div`
   display: flex;
   flex-direction: row;
+  z-index: 0;
 
   width: 100%;
 `;
