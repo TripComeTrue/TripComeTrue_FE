@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 export const UploadImageContainer = styled.div`
   display: flex;
   flex-direction: row;
+  z-index: 0;
 `;
 
 export const UploadImageIcon = styled.div`

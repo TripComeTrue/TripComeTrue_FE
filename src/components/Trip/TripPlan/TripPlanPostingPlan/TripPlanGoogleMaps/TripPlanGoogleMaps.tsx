@@ -16,6 +16,7 @@ function TripPlanGoogleMaps({
   lng = 2.349014,
 }: GoogleMapsProps) {
   const center = { lat, lng };
+
   const options = {
     minZoom: 7,
     maxZoom: 13,

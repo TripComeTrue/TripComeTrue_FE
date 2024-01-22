@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import * as Styled from './TripPlanUploadMainImages.styles';
-import deleteIcon from '/public/images/delete.svg';
+import deleteIcon from '/images/delete.svg';
 import { UploadImagesProps } from '../TripPlanUploadImages/TripPlanUploadImages.types';
 import { SubTitle } from '@/components/common';
 
@@ -25,7 +25,7 @@ const TripPlanUploadMainImages: React.FC<UploadImagesProps> = ({
       const fileUrl = URL.createObjectURL(file);
       setUploadedImages((prevImages) => [...prevImages, fileUrl]);
 
-      setFormData((prevFormData) => {
+      setFormData((prevFormData: any) => {
         const newFormData = [...prevFormData];
         return newFormData;
       });

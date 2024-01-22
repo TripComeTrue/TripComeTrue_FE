@@ -14,9 +14,9 @@ import { Button } from '@/components/common';
 import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
 import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
 import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPlanSetBudget';
-import TripPlanAddTagsButton from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsButton/TripPlanAddTagsButton';
 import TripPlanUploadImages from './TripPlanUploadImages/TripPlanUploadImages';
 import TripPlanUploadMainImages from './TripPlanUploadMainImages/TripPlanUploadMainImages';
+import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
 
 const TripPlanPosting = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
@@ -174,7 +174,7 @@ const TripPlanPosting = () => {
               setFormData={setFormData}
               selectedDay={selectedDay}
             />
-            <TripPlanAddTagsButton />
+            <TripPlanAddTags />
           </Styled.InputContainer>
         ))
       : null;

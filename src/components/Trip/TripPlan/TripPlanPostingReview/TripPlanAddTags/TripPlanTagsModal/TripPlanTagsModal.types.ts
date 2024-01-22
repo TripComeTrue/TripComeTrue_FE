@@ -14,6 +14,7 @@ export type TripPlanTagModalProps = Pick<
   watch: UseFormWatch<TagForm>;
   setValue: UseFormSetValue<TagForm>;
   onSubmit: (e?: React.BaseSyntheticEvent<object, any, any>) => void;
+  onSubmitTags: () => void;
 };
 
 export interface TagForm {
