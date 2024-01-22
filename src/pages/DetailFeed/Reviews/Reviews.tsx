@@ -33,7 +33,9 @@ const Reviews = () => {
           리뷰({placeReviewsData?.totalElements})
         </Styled.NavTitle>
         <Styled.WriteBtnWrapper>
-          <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          <Link to="/detailfeed/spot/1/review/write">
+            <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          </Link>
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
           </Styled.BubbleWrapper>
@@ -74,7 +76,6 @@ const Reviews = () => {
             </PlaceReviewCard>
           ))}
         </ul>
-        <Link to="/detailfeed/spot/1/review/1/edit">이동</Link>
       </Styled.Container>
     </div>
   );

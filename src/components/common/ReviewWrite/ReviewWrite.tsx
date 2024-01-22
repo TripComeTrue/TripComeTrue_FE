@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Bubble, Button, SimpleNav, SubTitle, Text } from '@/components/common';
 import * as Styled from './ReviewWrite.styles';
 import CameraIcon from '/images/camera.svg';
