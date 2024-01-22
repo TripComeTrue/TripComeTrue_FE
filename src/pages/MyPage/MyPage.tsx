@@ -3,7 +3,9 @@ import {
   MyPageComment,
   MyPageNav,
   MyPagePlan,
+  MyPagePlanSkeleton,
   MyPageReview,
+  MyPageReviewSkeleton,
   MyPageTab,
   MyPageTopProfile,
 } from '@/components/MyPage';
@@ -24,25 +26,19 @@ function MyPage() {
         <MyPageTab tab={selectedTab} setTab={setSelectedTab} />
         {selectedTab === TabName.plan && (
           <RetryErrorBoundary>
-            <Suspense fallback={<h1>Loading plan item..</h1>}>
+            <Suspense fallback={<MyPagePlanSkeleton />}>
               <MyPagePlan />
             </Suspense>
           </RetryErrorBoundary>
         )}
         {selectedTab === TabName.review && (
           <RetryErrorBoundary>
-            <Suspense fallback={<h1>Loading review item..</h1>}>
+            <Suspense fallback={<MyPageReviewSkeleton />}>
               <MyPageReview />
             </Suspense>
           </RetryErrorBoundary>
         )}
-        {selectedTab === TabName.comment && (
-          <RetryErrorBoundary>
-            <Suspense fallback={<h1>Loading comment item..</h1>}>
-              <MyPageComment />
-            </Suspense>
-          </RetryErrorBoundary>
-        )}
+        {selectedTab === TabName.comment && <MyPageComment />}
       </MyPageContainer>
     </>
   );
