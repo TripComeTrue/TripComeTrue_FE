@@ -20,9 +20,9 @@ function MyPageReview() {
   return (
     <>
       <MyPageReviewWrap>
-        {data?.data.map((review) => (
+        {data?.data.content.map((review) => (
           <MyPageReviewItem
-            key={review.postTitle}
+            key={review.tripRecordId}
             review={review}
             onOpenShare={handleOpen}
           />

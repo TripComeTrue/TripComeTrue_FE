@@ -19,7 +19,7 @@ function MyPagePlan() {
   return (
     <div>
       <MyPagePlanWrap>
-        {data?.data.map((plan) => (
+        {data?.data.content.map((plan) => (
           <MyPagePlanItem key={plan.id} plan={plan} onOpenShare={handleOpen} />
         ))}
       </MyPagePlanWrap>

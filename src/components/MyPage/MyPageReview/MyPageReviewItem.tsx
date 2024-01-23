@@ -9,21 +9,21 @@ function MyPageReviewItem({ review, onOpenShare }: MyPageReviewItemProps) {
   return (
     <Styled.MyPageReviewItemWrap>
       <Spots.SliderImg>
-        <img src={review.postImg} alt="img" />
+        <img src={review.imageUrl} alt="img" />
         <Spots.Bookmark>
-          <Bookmark count={review.bookmark} />
+          <Bookmark count={review.storeCount} />
         </Spots.Bookmark>
       </Spots.SliderImg>
       <Spots.SliderTitleSortLeft>
         <Text tag="p" fontSize={10} color="gray" fontWeight={600}>
-          {review.dates} ・ {review.location}
+          {review.totalDays - 1}박 {review.totalDays}일 ・ {review.countries}
         </Text>
         <Text tag="h4" fontSize={12} fontWeight={600}>
-          {review.postTitle}
+          {review.title}
         </Text>
         <Spots.SpaceImg>
           <img src={messageIcon} alt="message" />
-          {review.reviews}
+          {review.commentCount}
         </Spots.SpaceImg>
       </Spots.SliderTitleSortLeft>
       <Styled.MyPageReviewPopBtn>
