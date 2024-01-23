@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { differenceInDays } from 'date-fns';
+import { differenceInCalendarDays, format } from 'date-fns';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -17,8 +17,11 @@ import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPl
 import TripPlanUploadImages from './TripPlanUploadImages/TripPlanUploadImages';
 import TripPlanUploadMainImages from './TripPlanUploadMainImages/TripPlanUploadMainImages';
 import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
+import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
+import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 
 const TripPlanPosting = () => {
+  const { tripPlanData, updateTripPlanData } = useTripFormData();
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [selectedPlace, setSelectedPlace] = useState<string>('');
   const { register, handleSubmit, setValue } = useForm();
@@ -28,11 +31,10 @@ const TripPlanPosting = () => {
   });
 
   // const navigate = useNavigate();
-  const startDate = new Date('2024-01-18');
-  const endDate = new Date();
-  const formattedStartDate = startDate.toLocaleDateString();
-  const formattedEndDate = endDate.toLocaleDateString();
-  const totalTripDays = differenceInDays(endDate, startDate) + 1;
+  const startDate = new Date(tripPlanData.tripStartDay);
+  const endDate = new Date(tripPlanData.tripEndDay);
+  const totalTripDays = differenceInCalendarDays(endDate, startDate);
+
   const [formData, setFormData] = useState(() =>
     Array.from({ length: totalTripDays }, () => ({
       city: '',
@@ -47,14 +49,6 @@ const TripPlanPosting = () => {
       ],
     })),
   );
-
-  const getNightAndDays = () => {
-    if (startDate && endDate) {
-      const nights = differenceInDays(endDate, startDate);
-      return `${nights}박 ${nights + 1}일`;
-    }
-    return '';
-  };
 
   const handleDayButtonClick = (day: number) => {
     setSelectedDay((prevDay) => (prevDay === day ? null : day));
@@ -185,9 +179,16 @@ const TripPlanPosting = () => {
       <Styled.Container>
         <Styled.DateDisplay>
           <div className="date">
-            {formattedStartDate} - {formattedEndDate}
+            {startDate &&
+              endDate &&
+              `${format(startDate, 'yyyy.MM.dd')} - ${format(
+                endDate,
+                'yyyy.MM.dd',
+              )}`}
           </div>
-          <div className="nightndays">{getNightAndDays()}</div>
+          <div className="nightndays">
+            {getNightAndDays({ endDate, startDate })}
+          </div>
           <CalendarToday className="calendar-icon" />
         </Styled.DateDisplay>
 

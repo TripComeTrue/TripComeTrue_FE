@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { SubTitle } from '@/components/common';
 import Container from '@/components/common/Container';
-import BudgetOptions from '@/constants/tripBudget';
+import { BudgetOptions } from '@/constants/tripPlanAndRecord';
 import * as Styled from './TripPlanSetBudget.styles';
 
 const TripPlanSetBudget = () => {

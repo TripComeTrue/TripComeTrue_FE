@@ -7,8 +7,11 @@ import { SlArrowLeft } from 'react-icons/sl';
 import * as Styled from './TripPlanCityList.styles';
 import { SubTitle } from '@/components/common';
 import CityListModal from './TripPlanCityModal/TripPlanCityModal';
+import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
+import { getTotalTripDays } from '../TripPlanDate/TripPlanDate.utils';
 
 const TripPlanCity = () => {
+  const { tripPlanData, updateTripPlanData } = useTripFormData();
   const [cityNames, setCityNames] = useState<string[]>([]);
   const [isAllCitySame, setIsAllCitySame] = useState(false);
   const [isCityModalOpen, setIsCityModalOpen] = useState({
@@ -16,8 +19,8 @@ const TripPlanCity = () => {
   });
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
 
-  const startDate = new Date(2024, 0, 11);
-  const endDate = new Date(2024, 0, 14);
+  const startDate = new Date(tripPlanData.tripStartDay);
+  const endDate = new Date(tripPlanData.tripEndDay);
   const totalTripDays = differenceInCalendarDays(endDate, startDate);
 
   const closeCityListModal = () => {
@@ -55,7 +58,7 @@ const TripPlanCity = () => {
     const totalInputs = [];
 
     for (let i = 0; i <= totalTripDays; i += 1) {
-      const eachTripDate = add(startDate, { days: i });
+      const eachTripDate = add(new Date(startDate), { days: i });
       totalInputs.push(
         <Styled.EachDayContainer key={i}>
           <SubTitle fontSize={15}>

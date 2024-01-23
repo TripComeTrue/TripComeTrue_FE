@@ -3,6 +3,7 @@ export interface TripPlanData {
   countries: string;
   tripStartDay: string;
   tripEndDay: string;
+  referencedBy: number | null;
   tripPlanSchedules: TripPlanSchedule[];
 }
 
@@ -20,6 +21,7 @@ export const defaultTripPlanData: TripPlanData = {
   countries: '',
   tripStartDay: '',
   tripEndDay: '',
+  referencedBy: null,
   tripPlanSchedules: [],
 };
 
