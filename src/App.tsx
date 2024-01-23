@@ -32,6 +32,7 @@ import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
+import SearchNons from './pages/Search/SearchNons';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
 
         <Route path="search/*" element={<Search />} />
         <Route path="search/select/:tag" element={<SearchTag />} />
+        <Route path="search-non" element={<SearchNons />} />
         {/* <Route path="search" element={<Search />} /> */}
 
         <Route path="creator/*" element={<Creator />} />
