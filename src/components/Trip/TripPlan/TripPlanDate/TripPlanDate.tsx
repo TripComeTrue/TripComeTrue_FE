@@ -8,7 +8,7 @@ import './DatePickerStyles.css';
 import * as Styled from '../TripPlanCommon/TripPlanCommon.styles';
 import { TripDateProps } from './TripPlanDate.types';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
-import { months, years } from '@/constants/tripPlanAndRecord';
+import { Months, Years } from '@/constants/tripPlanAndRecord';
 import dateToString from '@/utils/dateToString';
 import { getNightAndDays } from './TripPlanDate.utils';
 
@@ -78,7 +78,7 @@ const TripPlanDate = () => {
                         onChange={({ target: { value } }) =>
                           changeYear(Number(value))
                         }>
-                        {years.map((option: number) => (
+                        {Years.map((option: number) => (
                           <option
                             className="year-dropdown"
                             key={option}
@@ -89,11 +89,11 @@ const TripPlanDate = () => {
                       </select>
                       <select
                         className="select-month"
-                        value={months[getMonth(date)]}
+                        value={Months[getMonth(date)]}
                         onChange={({ target: { value } }) =>
-                          changeMonth(months.indexOf(value))
+                          changeMonth(Months.indexOf(value))
                         }>
-                        {months.map((option) => (
+                        {Months.map((option) => (
                           <option
                             className="month-dropdown"
                             key={option}

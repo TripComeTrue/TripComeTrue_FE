@@ -5,7 +5,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as Styled from './TripPlanPlaceModal.styles';
 import { Button, SubTitle } from '@/components/common';
 import { SelectedPlaceProps } from './TripPlanPlaceModal.types';
-import image from '../../../TripPlanCountry/constants/france.png';
 
 const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
   selectedPlace,

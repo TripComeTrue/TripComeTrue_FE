@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as Styled from './TripPlanCityModal.styles';
 import { Button } from '@/components/common';
-import image from '../../TripPlanCountry/constants/france.png';
 import { SelectedCitiesProps } from './TripPlanCityModal.types';
 
 const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({

@@ -8,7 +8,6 @@ import * as Styled from './TripPlanCityList.styles';
 import { SubTitle } from '@/components/common';
 import CityListModal from './TripPlanCityModal/TripPlanCityModal';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
-import { getTotalTripDays } from '../TripPlanDate/TripPlanDate.utils';
 
 const TripPlanCity = () => {
   const { tripPlanData, updateTripPlanData } = useTripFormData();

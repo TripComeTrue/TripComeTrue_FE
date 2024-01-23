@@ -115,20 +115,22 @@ export const CountryContainer = styled.div`
     position: relative;
 
     width: 100%;
+    height: 7rem;
     border: 2px solid white;
-    border-radius: 0.625rem;
+    overflow: hidden;
 
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
     &:hover {
       border: 2px solid #b4f34c;
     }
-  }
 
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.625rem;
+    }
   }
 
   .country-ko,

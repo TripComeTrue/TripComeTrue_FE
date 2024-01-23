@@ -1,30 +1,30 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import * as Styled from './TripPlanCountry.styles';
-import { Continent } from './TripPlanCountry.types';
-import { worldData } from './constants/CountryData';
+import { getTripCountries } from '@/apis/trip-planandrecords';
+import { CountryData } from '@/@types/trip-alldata.types';
+import { Continents } from '@/constants/tripPlanAndRecord';
 
 const TripPlanCountry = () => {
   const [isOverseas, setIsOverseas] = useState<boolean>(true);
-  const [continent, setContinent] = useState<Continent | string>('전체');
+  const [continent, setContinent] = useState<string>('all');
   const [country, setCountry] = useState<string[]>([]);
+
+  // default : 해외 - '전체' 대륙
+  const param = isOverseas && continent === 'all' ? '' : continent;
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['TripCountries', param],
+    queryFn: () => getTripCountries(param),
+  });
 
   const selectOverseas = (isOverseasValue: boolean) => {
     setIsOverseas(isOverseasValue);
-    setContinent('전체');
+    setContinent('all');
   };
 
   const selectContinent = (continentName: string) => {
-    setContinent(continentName || '전체');
-  };
-
-  const getCountries = () => {
-    if (continent === '전체') {
-      return worldData[isOverseas ? '해외' : '국내'][0].subCategories;
-    }
-    const selectedContinent = worldData[isOverseas ? '해외' : '국내'].find(
-      (conti) => conti.name === continent,
-    );
-    return selectedContinent ? selectedContinent.subCategories : [];
+    setContinent(continentName || 'all');
   };
 
   const selectCountry = (countryName: string) => {
@@ -40,12 +40,6 @@ const TripPlanCountry = () => {
     setCountry((prevCountries) =>
       prevCountries.filter((c) => c !== countryToRemove),
     );
-  };
-
-  const getCountryImgByName = (countryName: string) => {
-    return worldData[isOverseas ? '해외' : '국내']
-      .flatMap((conti) => conti.subCategories)
-      .find((c) => c.name === countryName);
   };
 
   return (
@@ -80,34 +74,34 @@ const TripPlanCountry = () => {
             el: '.swiper-scrollbar',
             hide: false,
           }}>
-          {worldData[isOverseas ? '해외' : '국내'].map((item) => (
-            <Styled.ContinentWrapper key={item.name}>
+          {Continents.map((continentName) => (
+            <Styled.ContinentWrapper key={continentName.continent}>
               <button
                 type="button"
                 className={`continent ${
-                  continent === item.name ? 'selected' : ''
+                  continent === continentName.continent ? 'selected' : ''
                 }`}
-                onClick={() => selectContinent(item.name)}>
-                {item.name}
+                onClick={() => selectContinent(continentName.continent)}>
+                {continentName.continentName}
               </button>
             </Styled.ContinentWrapper>
           ))}
         </Styled.ContinentSwiper>
 
         <Styled.CountryWrapper country={country}>
-          {getCountries().map((c) => (
-            <Styled.CountryContainer key={c.name}>
-              <button type="button" onClick={() => selectCountry(c.name)}>
-                <img src={c.img} alt="country" />
+          {data?.data.map((item: CountryData) => (
+            <Styled.CountryContainer key={item.country}>
+              <button type="button" onClick={() => selectCountry(item.country)}>
+                <img src={item.countryImageUrl} alt="country" />
                 <span className="country-ko">
-                  {c.name}
+                  {item.countryName}
                   <br />
-                  <span className="country-eng">{c.eng}</span>
+                  <span className="country-eng">{item.country}</span>
                 </span>
               </button>
             </Styled.CountryContainer>
           ))}
-          <Styled.SelectedCountries country={country}>
+          {/* <Styled.SelectedCountries country={country}>
             {country.map((selectedCountryName) => {
               const selectedCountry = getCountryImgByName(selectedCountryName);
               return (
@@ -121,7 +115,7 @@ const TripPlanCountry = () => {
                 </div>
               );
             })}
-          </Styled.SelectedCountries>
+          </Styled.SelectedCountries> */}
         </Styled.CountryWrapper>
       </Styled.Container>
     </Styled.Wrapper>
