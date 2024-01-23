@@ -22,7 +22,11 @@ function MyPageMyTripPoint({ data }: MyPageMyTripPointProps) {
         </Text>
         <Styled.MyTripPointProgressBg>
           <Styled.MyTripPointProgress
-            $percent={`${(data.totalPoint / (pointLevel.end + 1)) * 100}%`}
+            $percent={`${
+              ((data.totalPoint - pointLevel.start) /
+                (pointLevel.end + 1 - pointLevel.start)) *
+              100
+            }%`}
           />
         </Styled.MyTripPointProgressBg>
         <Styled.MyTripPointProgressText>
