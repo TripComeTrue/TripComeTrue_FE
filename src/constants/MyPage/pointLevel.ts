@@ -1,4 +1,7 @@
-import { PointLevel } from '@/components/MyPage/MyPageTripPoint/MyPageLevel.types';
+import {
+  PointLevel,
+  PointLevelLimit,
+} from '@/components/MyPage/MyPageTripPoint/MyPageLevel.types';
 import {
   BeginnerBenefit,
   RunnerBenefit,
@@ -28,5 +31,11 @@ const POINT_LEVEL_MENU: PointLevel[] = [
     benefit: TravelerBenefit,
   },
 ];
+
+export const POINT_LEVEL: PointLevelLimit = {
+  beginner: { start: 0, end: 149, next: '러너' },
+  runner: { start: 150, end: 279, next: '트레블러' },
+  traveler: { start: 280, end: 9999, next: '최고레벨' },
+};
 
 export default POINT_LEVEL_MENU;
