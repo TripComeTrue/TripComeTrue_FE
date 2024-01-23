@@ -1,6 +1,6 @@
 export interface EditProfileForm {
   nickname: string;
-  description: string;
+  introduction: string;
 }
 
 export type MyProfile = EditProfileForm & {
@@ -9,5 +9,6 @@ export type MyProfile = EditProfileForm & {
 
 export interface MyPageEditProfileProps {
   handleEditProfile: VoidFunction;
-  // setImage: React.Dispatch<React.SetStateAction<string>>;
+  image?: string;
+  setImage: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
