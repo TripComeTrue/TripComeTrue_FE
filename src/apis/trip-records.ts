@@ -4,9 +4,11 @@ import client from './client';
 
 // 여행 후기 리스트 조회
 export const getTripRecords = async (param?: string) => {
-  const res = await client.get(`v1/trip-records${param ? `?${param}` : ''}`);
+  const { data } = await client.get(
+    `v1/trip-records${param ? `?${param}` : ''}`,
+  );
 
-  return res.data;
+  return data.data;
 };
 
 // 여행 후기 쇼츠 리스트 조회

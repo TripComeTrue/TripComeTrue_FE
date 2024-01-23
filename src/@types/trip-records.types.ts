@@ -27,7 +27,7 @@ interface TagData {
 }
 
 interface SchedulesData {
-  schedules: DayData[];
+  schedules: { [key: string]: DayData[] };
 }
 
 interface DayData {

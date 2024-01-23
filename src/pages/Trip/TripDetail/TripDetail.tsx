@@ -1,19 +1,18 @@
 import { useParams } from 'react-router-dom';
-import { useMutation, useQueries } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { SimpleNav, SubTitle } from '@/components/common';
 import * as Styled from './TripDetail.styles';
 import {
   Introduction,
   MainCarousel,
-
-  // TripCarousel,
+  TripCarousel,
   TripComment,
   TripContents,
 } from '@/components/Trip';
 import {
   getTripRecord,
   getTripRecordLatestReview,
-  postTripRecordReview,
+  getTripRecords,
 } from '@/apis/trip-records';
 import TripRecordReviewCard from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
 import { getCookie } from '@/utils/cookie';
@@ -22,24 +21,29 @@ const TripDetail = () => {
   const isSignIn = getCookie('accessToken');
   const { tripRecordId } = useParams() as { tripRecordId: string };
 
-  const [{ data: tripRecordDetailData }, { data: tripRecordLatestReviewData }] =
-    useQueries({
-      queries: [
-        {
-          queryKey: ['TripRecordDetailData'],
-          queryFn: () => getTripRecord(tripRecordId),
+  const [
+    { data: tripRecordDetailData },
+    { data: tripRecordLatestReviewData },
+    { data: tripRecordsDefaultData },
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ['TripRecordDetailData'],
+        queryFn: () => getTripRecord(tripRecordId),
+      },
+      {
+        queryKey: ['TripRecordLatestReviewData'],
+        queryFn: () => {
+          if (isSignIn) return getTripRecordLatestReview(tripRecordId);
+          return null;
         },
-        {
-          queryKey: ['TripRecordLatestReviewData'],
-          queryFn: () => {
-            if (isSignIn) return getTripRecordLatestReview(tripRecordId);
-            return null;
-          },
-        },
-      ],
-    });
-
-  console.log(tripRecordLatestReviewData);
+      },
+      {
+        queryKey: ['TripRecordsDefaultData'],
+        queryFn: () => getTripRecords('size=5'),
+      },
+    ],
+  });
 
   return (
     <div>
@@ -77,9 +81,9 @@ const TripDetail = () => {
         )}
         <Styled.OtherTripDetails>
           <SubTitle margin="0 1.25rem 0.875rem 0">
-            이 여행과 비슷한 여행
+            최근 올라온 여행 후기
           </SubTitle>
-          {/* <TripCarousel /> */}
+          <TripCarousel tripRecordsData={tripRecordsDefaultData} />
         </Styled.OtherTripDetails>
       </Styled.Container>
     </div>

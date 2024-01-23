@@ -1,3 +1,4 @@
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { Avatar, SubTitle, Text } from '@/components/common';
 import * as Styled from './Introduction.styles';
 import MarkIcon from '/images/mark.svg';
@@ -5,6 +6,7 @@ import BookMarkIcon from '/images/bookMark.svg';
 import DownloadIcon from '/images/download.svg';
 import AverageIcon from '/images/averageIcon.svg';
 import { IntroductionProps } from './Introduction.types';
+import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
 
 const Introduction = ({ tripRecordData }: IntroductionProps) => {
   const formatDays = tripRecordData
@@ -34,6 +36,8 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
     }
   };
 
+  console.log(tripRecordData?.schedules);
+
   return (
     <Styled.Container>
       <Styled.Header>
@@ -43,7 +47,14 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
           <Styled.Mark src={MarkIcon} alt="mark icon" />
         </Styled.CreatorContainer>
         <Styled.SaveContainer>
-          <img src={DownloadIcon} alt="download icon" />
+          <PDFDownloadLink
+            document={
+              <TripDownloadDoc schedulesData={tripRecordData?.schedules} />
+            }
+            fileName="trip_schedule.pdf">
+            <img src={DownloadIcon} alt="download icon" />
+          </PDFDownloadLink>
+
           <Styled.BookMarkContainer>
             <img src={BookMarkIcon} alt="bookmark icon" />
             <Text fontSize={10}>{tripRecordData?.storeCount}</Text>
