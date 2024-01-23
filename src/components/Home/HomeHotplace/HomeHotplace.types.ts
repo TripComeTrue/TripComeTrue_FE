@@ -11,7 +11,7 @@ export interface SlideHotCity {
 }
 
 export interface SlideHotReview {
-  cityNames: string;
+  cityNames: string[];
   storedCount: number;
   subtitle: string;
   imageUrl: string;

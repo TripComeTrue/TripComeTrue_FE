@@ -36,6 +36,8 @@ module.exports = {
     'react/prop-types': 'off', // 임시
     'react/jsx-no-useless-fragment': 'off',
     'no-restricted-syntax': 'off',
+    'prefer-template': 'off',
+    'no-console': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {

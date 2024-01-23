@@ -48,7 +48,31 @@ const HomeHotplace = () => {
     fetchData();
   }, [selectedOption]);
 
-  console.log(hotData);
+  const generateCityString = (cityNames: string[]): string => {
+    if (cityNames.length > 1) {
+      const firstCity = cityNames[0];
+      const remainingCitiesCount = cityNames.length - 1;
+      return `${firstCity} 외 ${remainingCitiesCount}곳`;
+    }
+
+    if (cityNames.length === 1) {
+      return cityNames[0];
+    }
+
+    return '';
+  };
+
+  const generateStay = (totalDays: number | string): string => {
+    const nights =
+      typeof totalDays === 'string'
+        ? parseInt(totalDays, 10) - 1
+        : totalDays - 1;
+    return `${nights}박 ${totalDays}일`;
+  };
+
+  const truncateTitle = (title: string): string => {
+    return title.length > 10 ? `${title.slice(0, 10)}...` : title;
+  };
 
   return (
     <>
@@ -139,7 +163,7 @@ const HomeHotplace = () => {
           }}>
           {selected === 'city'
             ? hotData.map((item: SlideHotCity) => (
-                <SwiperSlide key={item.cityName}>
+                <SwiperSlide key={`${item.cityName} ${item.storedCount}`}>
                   <Styled.HotplaceCityWrap>
                     <Styled.HotplaceCityImg>
                       <img src={item.imageUrl} alt="img" />
@@ -162,7 +186,8 @@ const HomeHotplace = () => {
               ))
             : selected === 'review'
               ? hotData.map((item: SlideHotReview) => (
-                  <SwiperSlide key={item.cityNames}>
+                  <SwiperSlide
+                    key={`${item.tripRecordTitle} ${item.storedCount}`}>
                     <Styled.HotplaceReviewWrap>
                       <Styled.HotplaceImg>
                         <img src={item.imageUrl} alt="img" />
@@ -176,9 +201,10 @@ const HomeHotplace = () => {
                       <Styled.HotplaceDesWrap>
                         <Styled.DesNightPlace>
                           <div>
-                            {item.totalDays} ・ {item.cityNames}
+                            {generateStay(item.totalDays)} ・{' '}
+                            {generateCityString(item.cityNames)}
                           </div>
-                          <p>{item.tripRecordTitle}</p>
+                          <p>{truncateTitle(item.tripRecordTitle)}</p>
                         </Styled.DesNightPlace>
 
                         <Styled.DesRate>
