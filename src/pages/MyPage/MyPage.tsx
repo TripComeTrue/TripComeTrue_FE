@@ -8,6 +8,7 @@ import {
   MyPageReviewSkeleton,
   MyPageTab,
   MyPageTopProfile,
+  MyPageTopProfileSkeleton,
 } from '@/components/MyPage';
 import { TabName } from '@/components/MyPage/MyPageTab/MyPageTab.types';
 import MyPageContainer from '@/components/MyPage/MyPageLayout/MyPageLayout.styles';
@@ -22,7 +23,11 @@ function MyPage() {
     <>
       <MyPageNav />
       <MyPageContainer>
-        <MyPageTopProfile />
+        <RetryErrorBoundary>
+          <Suspense fallback={<MyPageTopProfileSkeleton />}>
+            <MyPageTopProfile />
+          </Suspense>
+        </RetryErrorBoundary>
         <MyPageTab tab={selectedTab} setTab={setSelectedTab} />
         {selectedTab === TabName.plan && (
           <RetryErrorBoundary>

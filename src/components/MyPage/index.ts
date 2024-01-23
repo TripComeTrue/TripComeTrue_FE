@@ -9,6 +9,7 @@ export { default as MyPageComment } from './MyPageComment/MyPageComment';
 export { default as MyPagePlaceReviewSkeleton } from './MyPageComment/MyPagePlaceReviewSkeleton';
 export { default as MyPageTripRecordReviewSkeleton } from './MyPageComment/MyPageTripRecordReviewSkeleton';
 export { default as MyPageTopProfile } from './MyPageTopProfile/MyPageTopProfile';
+export { default as MyPageTopProfileSkeleton } from './MyPageTopProfile/MyPageTopProfileSkeleton';
 export { default as MyPagePopMenu } from './MyPagePopMenu/MyPagePopMenu';
 export { default as MyPagePopMenuAlt } from './MyPagePopMenu/MyPagePopMenuAlt';
 export { default as MyPageNoti } from './MyPageNoti/MyPageNoti';
@@ -18,6 +19,7 @@ export { default as MyPageChangePassword } from './MyPagePassword/MyPageChangePa
 export { default as MyPageEditProfile } from './MyPageEditProfile/MyPageEditProfile';
 export { default as MyPageEditImage } from './MyPageEditProfile/MyPageEditImage';
 export { default as MyPageAccordion } from './MyPageFaq/MyPageAccordion';
+export { default as MyPageWishList } from './MyPageWishList/MyPageWishList';
 export { default as MyPageWishListMore } from './MyPageWishList/MyPageWishListMore';
 export { default as MyPageMyTripPoint } from './MyPageTripPoint/MyPageMyTripPoint';
 export { default as MyPageLevel } from './MyPageTripPoint/MyPageLevel';
