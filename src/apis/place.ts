@@ -18,7 +18,7 @@ export const getPlaceReviews = async (
   sort: string,
   onlyImage: boolean,
 ) => {
-  const { data } = await client.get(
+  const { data } = await client.get<{ code: number; data: PlaceReviewsData }>(
     `v1/places/${placeId}/reviews?${
       sort === '추천순' ? 'sort=likeCount' : 'sort=createdAt'
     }&onlyImage=${onlyImage}`,

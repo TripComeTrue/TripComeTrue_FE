@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useQueries } from '@tanstack/react-query';
+import { useMutation, useQueries } from '@tanstack/react-query';
 import { SimpleNav, SubTitle } from '@/components/common';
 import * as Styled from './TripDetail.styles';
 import {
@@ -10,7 +10,11 @@ import {
   TripComment,
   TripContents,
 } from '@/components/Trip';
-import { getTripRecord, getTripRecordLatestReview } from '@/apis/trip-records';
+import {
+  getTripRecord,
+  getTripRecordLatestReview,
+  postTripRecordReview,
+} from '@/apis/trip-records';
 import TripRecordReviewCard from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
 import { getCookie } from '@/utils/cookie';
 
@@ -18,7 +22,7 @@ const TripDetail = () => {
   const isSignIn = getCookie('accessToken');
   const { tripRecordId } = useParams() as { tripRecordId: string };
 
-  const [{ data: tripRecordDetailData }, { data: tripRecordReviewData }] =
+  const [{ data: tripRecordDetailData }, { data: tripRecordLatestReviewData }] =
     useQueries({
       queries: [
         {
@@ -26,7 +30,7 @@ const TripDetail = () => {
           queryFn: () => getTripRecord(tripRecordId),
         },
         {
-          queryKey: ['TripRecordReviewData'],
+          queryKey: ['TripRecordLatestReviewData'],
           queryFn: () => {
             if (isSignIn) return getTripRecordLatestReview(tripRecordId);
             return null;
@@ -35,7 +39,7 @@ const TripDetail = () => {
       ],
     });
 
-  console.log(tripRecordDetailData);
+  console.log(tripRecordLatestReviewData);
 
   return (
     <div>
@@ -47,12 +51,28 @@ const TripDetail = () => {
         <TripComment />
         {isSignIn && (
           <TripRecordReviewCard>
-            <TripRecordReviewCard.Main
-              nickname="홍길동"
-              averageRating={4}
-              content="여행이 조아"
+            <TripRecordReviewCard.Title>
+              이 여행 후기의 리뷰({tripRecordLatestReviewData?.totalCount})
+            </TripRecordReviewCard.Title>
+            {tripRecordLatestReviewData?.latestTripRecordReview ? (
+              <TripRecordReviewCard>
+                <TripRecordReviewCard.Main
+                  nickname={tripRecordLatestReviewData?.nickname}
+                  averageRating={tripRecordLatestReviewData?.ratingScore}
+                  content={tripRecordLatestReviewData?.content}
+                />
+              </TripRecordReviewCard>
+            ) : (
+              <TripRecordReviewCard.EmptyMain
+                title="리뷰를 기다리고 있어요"
+                subTitle="여행 일정을 복사해 계획을 세우고 여행을 다녀와보세요!"
+              />
+            )}
+            <TripRecordReviewCard.Rating
+              disabled={!!tripRecordLatestReviewData?.myRatingScore}
+              tripRecordId={tripRecordId}
+              myRatingScore={tripRecordLatestReviewData?.myRatingScore}
             />
-            <TripRecordReviewCard.Rating />
           </TripRecordReviewCard>
         )}
         <Styled.OtherTripDetails>

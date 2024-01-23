@@ -38,7 +38,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
     <Styled.Container>
       <Styled.Header>
         <Styled.CreatorContainer>
-          <Avatar size={32} src={tripRecordData?.member.profileImage} />
+          <Avatar size={32} src={tripRecordData?.member.profileImage || ''} />
           <Text fontWeight={700}>{tripRecordData?.member.nickname}</Text>
           <Styled.Mark src={MarkIcon} alt="mark icon" />
         </Styled.CreatorContainer>
@@ -78,7 +78,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
               </Text>
             </Styled.ItemTitle>
             <Text color="gray" fontSize={12} fontWeight={700}>
-              {classifyExpense(tripRecordData?.expenseRangeType)}
+              {classifyExpense(tripRecordData?.expenseRangeType || '')}
             </Text>
           </Styled.Item>
         </Styled.RatingAndExpense>

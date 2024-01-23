@@ -21,11 +21,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <RecoilRoot>
       <BrowserRouter>
-        <React.StrictMode>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
-        </React.StrictMode>
+        {/* <React.StrictMode> */}
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+        {/* </React.StrictMode> */}
       </BrowserRouter>
     </RecoilRoot>
     <ReactQueryDevtools initialIsOpen={false} />

@@ -73,3 +73,20 @@ interface ShortData {
     nickname: string;
   };
 }
+
+interface TripRecordLatestReview {
+  totalCount: number;
+  latestTripRecordReview: {
+    tripRecordId: number;
+    tripRecordTitle: string;
+    tripRecordReviewId: number;
+    memberId: number;
+    nickname: string;
+    ratingStore: number;
+    content: string;
+    likeCount: number;
+    amILike: boolean;
+    createdAt: string;
+  };
+  myRatingScore: number;
+}
