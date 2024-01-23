@@ -1,12 +1,10 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
-import ReactPlayer from 'react-player';
 import styles from './TripDownloadDoc.styles';
 import { TripDownloadDocProps } from './TripDownloadDoc.types';
 
 function TripDownloadDoc({ schedulesData }: TripDownloadDocProps) {
   const schedulesArr = schedulesData && Object.entries(schedulesData);
 
-  console.log(schedulesArr);
   return (
     <Document>
       <Page size="A4" style={styles.page}>

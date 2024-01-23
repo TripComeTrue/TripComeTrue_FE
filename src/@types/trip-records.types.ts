@@ -1,5 +1,5 @@
 interface TripRecord {
-  tripRecordId: string;
+  tripRecordId: number;
   title: string;
   countries: string;
   totalDays: number;

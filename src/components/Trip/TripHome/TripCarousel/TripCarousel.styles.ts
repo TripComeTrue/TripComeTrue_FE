@@ -6,5 +6,6 @@ export const Container = styled(Swiper)`
 `;
 
 export const Slide = styled(SwiperSlide)<{ $size: string }>`
+  cursor: pointer;
   min-width: ${({ $size }) => $size};
 `;

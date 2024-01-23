@@ -36,8 +36,6 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
     }
   };
 
-  console.log(tripRecordData?.schedules);
-
   return (
     <Styled.Container>
       <Styled.Header>

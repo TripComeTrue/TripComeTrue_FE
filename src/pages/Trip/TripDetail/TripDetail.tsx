@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { SimpleNav, SubTitle } from '@/components/common';
 import * as Styled from './TripDetail.styles';
 import {
@@ -22,9 +23,12 @@ const TripDetail = () => {
   const { tripRecordId } = useParams() as { tripRecordId: string };
 
   const [
-    { data: tripRecordDetailData },
-    { data: tripRecordLatestReviewData },
-    { data: tripRecordsDefaultData },
+    { data: tripRecordDetailData, refetch: tripRecordDetailRefetch },
+    {
+      data: tripRecordLatestReviewData,
+      refetch: tripRecordLatestReviewRefetch,
+    },
+    { data: tripRecordsDefaultData, refetch: tripRecordsDefaultRefetch },
   ] = useQueries({
     queries: [
       {
@@ -44,6 +48,12 @@ const TripDetail = () => {
       },
     ],
   });
+
+  useEffect(() => {
+    tripRecordDetailRefetch();
+    tripRecordLatestReviewRefetch();
+    tripRecordsDefaultRefetch();
+  }, [tripRecordId]);
 
   return (
     <div>
