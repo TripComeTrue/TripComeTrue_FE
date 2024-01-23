@@ -6,30 +6,27 @@ import {
   IntroductionReqBody,
   IntroductionResBody,
   MemberDetailResBody,
-  MyTripPlan,
   MyTripRecordReview,
-  MyTripReview,
   NicknameReqBody,
   NicknameResBody,
   Notification,
   PlaceReviewResBody,
   PlacesStoresResBody,
+  PlanResBody,
+  ProfileImageBody,
+  TripRecordResBody,
   TripStoresResBody,
 } from '@/@types/mypage.types';
 
 // const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
 
 export const getMyPlan = async () => {
-  const { data } = await client.get<{ message: string; data: MyTripPlan[] }>(
-    '/mypage/plan',
-  );
+  const { data } = await client.get<PlanResBody>('/v1/trip-plan/my');
   return data;
 };
 
 export const getMyReview = async () => {
-  const { data } = await client.get<{ message: string; data: MyTripReview[] }>(
-    '/mypage/review',
-  );
+  const { data } = await client.get<TripRecordResBody>('/v1/trip-records/my');
   return data;
 };
 
@@ -82,11 +79,22 @@ export const getTripStores = async () => {
 };
 
 export const getWishListMore = async (type: string) => {
-  const { data } = await client.get<{
-    message: string;
-    data: PostData[];
-  }>(`/mypage/wishlist/more?type=${type}`);
-  return data;
+  const { data } = await client.get(`/v1/${type}/stores`);
+  const moreData = data.data.content.map(
+    (item: {
+      imageUrl: string;
+      storeCount: string;
+      storedCount: string;
+      name: string;
+      title: string;
+    }) => ({
+      postImg: item.imageUrl ?? '',
+      bookmark: item.storeCount || item.storedCount,
+      postTitle: item.name || item.title,
+      reviews: 0,
+    }),
+  );
+  return moreData as PostData[];
 };
 
 // 비밀번호 변경, 확인 api
@@ -121,6 +129,16 @@ export const patchNickname = async (reqBody: NicknameReqBody) => {
   const { data } = await client.patch<NicknameResBody>(`/v1/member/nickname`, {
     nickname: reqBody.nickname,
   });
+  return data;
+};
+
+export const patchProfileImage = async (imageUrl: string) => {
+  const { data } = await client.patch<ProfileImageBody>(
+    `/v1/member/profile-image`,
+    {
+      profile_image: imageUrl,
+    },
+  );
   return data;
 };
 

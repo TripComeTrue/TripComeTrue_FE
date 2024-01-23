@@ -57,6 +57,13 @@ export interface NicknameResBody {
   };
 }
 
+export interface ProfileImageBody {
+  code: number;
+  data: {
+    profileImageUrl: string;
+  };
+}
+
 export interface IntroductionReqBody {
   introduction: string;
 }
@@ -152,18 +159,26 @@ export interface PlaceReview {
 // 보관 여행지 리스트
 export interface PlacesStoresResBody {
   code: number;
-  data: CityStores;
+  data: PlacesStores;
 }
 export type PlacesStores = Stores & {
   content: PlacesStoresContent[];
 };
-interface PlacesStoresContent {
+export interface PlacesStoresContent {
   id: number;
   name: string;
   address: string;
-  latitude: string;
-  longtitude: string;
+  description?: string;
+  weekdayOpenTime?: string;
+  weekdayCloseTime?: string;
+  weekendOpenTime?: string;
+  weekendCloseTime?: string;
+  storedCount: number;
+  commentCount?: number;
   cityId: number;
+  latitude?: number;
+  longtitude?: number;
+  imageUrl?: string;
 }
 
 // 보관 여행 후기 리스트
@@ -203,4 +218,45 @@ export interface MemberDetail {
   totalPoint: number;
   tripLevel: string;
   introduction?: string;
+}
+
+// 여행 계획
+export interface PlanResBody {
+  code: number;
+  data: PlanData;
+}
+
+export type PlanData = Stores & {
+  content: PlanContent[];
+};
+
+export interface PlanContent {
+  id: number;
+  countries: string;
+  tripStartDay: string;
+  tripEndDay: string;
+  viewCount: number;
+  createdAt: string;
+  placesVisited: string[];
+}
+
+// 여행 후기
+
+export interface TripRecordResBody {
+  code: number;
+  data: TripRecordData;
+}
+
+export type TripRecordData = Stores & {
+  content: TripRecordContent[];
+};
+
+export interface TripRecordContent {
+  tripRecordId: number;
+  title: string;
+  countries: string;
+  totalDays: number;
+  commentCount: number;
+  storeCount: number;
+  imageUrl: string;
 }

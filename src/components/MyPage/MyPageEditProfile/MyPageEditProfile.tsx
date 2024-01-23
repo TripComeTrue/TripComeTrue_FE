@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { GoChevronRight } from 'react-icons/go';
 import { isAxiosError } from 'axios';
 import { Button, Text } from '@/components/common';
@@ -13,21 +13,15 @@ import {
 import MyPageEditImage from './MyPageEditImage';
 import * as Styled from './MyPageEditProfile.styles';
 import * as StyledInput from '../MyPagePassword/MyPageConfirmPassword.styles';
-import {
-  getMemberDetail,
-  patchIntroduction,
-  patchNickname,
-} from '@/apis/mypage';
+import { patchIntroduction, patchNickname } from '@/apis/mypage';
 
 function MyPageEditProfile({
-  handleEditProfile,
+  data,
+  refetch,
+  handleOpen,
   image,
   setImage,
 }: MyPageEditProfileProps) {
-  const { data } = useQuery({
-    queryKey: ['member/detail'],
-    queryFn: getMemberDetail,
-  });
   const nicknameMutate = useMutation({
     mutationKey: ['nickname'],
     mutationFn: patchNickname,
@@ -44,54 +38,82 @@ function MyPageEditProfile({
   } = useForm<EditProfileForm>({
     mode: 'onChange',
     defaultValues: {
-      nickname: data?.data.nickname,
-      introduction: data?.data.introduction,
+      nickname: data.nickname,
+      introduction: data.introduction,
     },
   });
+
+  // 닉네임 mutate option
+  const nicknameOption = {
+    onError: (error: Error) => {
+      if (isAxiosError(error)) {
+        setError('nickname', {
+          type: 'invalid-nickname',
+          message: error.response?.data.errorMessage,
+        });
+      }
+    },
+  };
+  // 소개글 mutate option
+  const introductionOption = {
+    onError: (error: Error) => {
+      if (isAxiosError(error)) {
+        setError('introduction', {
+          type: 'invalid-introduction',
+          message: error.response?.data.errorMessage,
+        });
+      }
+    },
+  };
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (formData) => {
-    if (formData.nickname !== data?.data.nickname) {
-      // 닉네임 값에 변경이 있을 때
-      await nicknameMutate.mutate(
-        { nickname: formData.nickname },
-        {
-          onError: (error) => {
-            if (isAxiosError(error)) {
-              setError('nickname', {
-                type: 'invalid-nickname',
-                message: error.response?.data.errorMessage,
-              });
-            }
-          },
-        },
-      );
+    if (
+      formData.introduction === data.introduction &&
+      formData.nickname !== data.nickname
+    ) {
+      // 닉네임 값에만 변경이 있을 때
+      nicknameMutate.mutate({ nickname: formData.nickname }, nicknameOption);
+      navigate('/mypage');
     }
-    if (formData.introduction !== data?.data.introduction) {
-      // 소개글 값에 변경이 있을 때
-      await introductionMutate.mutate(
+    if (
+      formData.nickname === data.nickname &&
+      formData.introduction !== data.introduction
+    ) {
+      // 소개글 값에만 변경이 있을 때
+      introductionMutate.mutate(
         { introduction: formData.introduction },
-        {
-          onError: (error) => {
-            if (isAxiosError(error)) {
-              setError('introduction', {
-                type: 'invalid-introduction',
-                message: error.response?.data.errorMessage,
-              });
-            }
-          },
-        },
+        introductionOption,
       );
+      navigate('/mypage');
     }
+    if (
+      formData.nickname !== data.nickname &&
+      formData.introduction !== data.introduction
+    ) {
+      // 둘 다 변경이 있을 때
+      const nicknameRes = await nicknameMutate.mutateAsync(
+        { nickname: formData.nickname },
+        nicknameOption,
+      );
+      const introRes = await introductionMutate.mutateAsync(
+        { introduction: formData.introduction },
+        introductionOption,
+      );
+      if (nicknameRes.code === 200 && introRes.code === 200) {
+        navigate('/mypage');
+      }
+    }
+    refetch();
   });
 
   return (
     <Styled.MyPageEditProfileWrap onSubmit={onSubmit}>
       <div>
         <MyPageEditImage
-          image={data?.data.profileImage}
+          image={data.profileImage}
           newImage={image}
           setImage={setImage}
-          handleEditProfile={handleEditProfile}
+          handleOpen={handleOpen}
         />
         <Styled.MyPageEditInputWrap>
           <label htmlFor="nickname">

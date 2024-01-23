@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import { Avatar } from '@/components/common';
 import * as Styled from './MyPageEditImage.styles';
 
@@ -6,19 +6,20 @@ function MyPageEditImage({
   image,
   newImage,
   setImage,
-  handleEditProfile,
+  handleOpen,
 }: MyPageEditImageProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const input = useRef<HTMLInputElement>(null);
   // handle Click
   const handleInputClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    if (inputRef.current) inputRef.current.click();
+    if (input.current) input.current.click();
   };
-  // handle Change
-  const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditProfile = async (e: ChangeEvent<HTMLInputElement>) => {
+    handleOpen();
     if (e.target.files && e.target.files[0])
       setImage(URL.createObjectURL(e.target.files[0]));
-    handleEditProfile();
+    // 파일 초기화!
+    if (input.current) input.current.value = '';
   };
 
   if (!image) return null;
@@ -28,8 +29,8 @@ function MyPageEditImage({
       <Styled.MyPageInputEl
         type="file"
         accept="image/*"
-        ref={inputRef}
-        onChange={handleImgChange}
+        ref={input}
+        onChange={handleEditProfile}
       />
       <Styled.MyPageAvatarEditBtn
         size="sm"

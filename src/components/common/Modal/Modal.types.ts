@@ -6,4 +6,7 @@ export interface ModalProps {
   open: boolean;
   onClose: VoidFunction;
   title?: string;
+  dialog?: boolean;
+  onReset?: VoidFunction;
+  onConfirm?: VoidFunction;
 }
