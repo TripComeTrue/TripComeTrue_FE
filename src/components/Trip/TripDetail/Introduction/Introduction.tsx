@@ -19,7 +19,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
       ? mainCountries
       : `${mainCountries} 외 ${countries.length}곳`;
 
-  const handleExpense = (expense: string) => {
+  const classifyExpense = (expense: string) => {
     switch (expense) {
       case 'BELOW_50':
         return '50만원 이하';
@@ -33,8 +33,6 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
         return '300만원 이상';
     }
   };
-
-  console.log(tripRecordData);
 
   return (
     <Styled.Container>
@@ -80,7 +78,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
               </Text>
             </Styled.ItemTitle>
             <Text color="gray" fontSize={12} fontWeight={700}>
-              {handleExpense(tripRecordData?.expenseRangeType)}
+              {classifyExpense(tripRecordData?.expenseRangeType)}
             </Text>
           </Styled.Item>
         </Styled.RatingAndExpense>

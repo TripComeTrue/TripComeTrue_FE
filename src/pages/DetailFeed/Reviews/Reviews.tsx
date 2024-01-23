@@ -17,8 +17,6 @@ const Reviews = () => {
     queryFn: () => getPlaceReviews(placeId, selectedFilter, onlyImage),
   });
 
-  console.log(placeReviewsData);
-
   useEffect(() => {
     refetch();
   }, [selectedFilter, onlyImage]);
@@ -29,9 +27,7 @@ const Reviews = () => {
         <Styled.NavBackBtn>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>
-          리뷰({placeReviewsData?.totalElements})
-        </Styled.NavTitle>
+        <Styled.NavTitle>리뷰({placeReviewsData?.totalCount})</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
           <Link to="/detailfeed/spot/1/review/write">
             <Styled.WriteBtn src={WriteIcon} alt="write icon" />
@@ -58,7 +54,7 @@ const Reviews = () => {
           />
         </Styled.Header>
         <ul>
-          {placeReviewsData?.content.map((data: PlaceReviewData) => (
+          {placeReviewsData?.placeReviews.map((data: PlaceReviewData) => (
             <PlaceReviewCard key={data.placeReviewId}>
               <PlaceReviewCard.PlaceHeader
                 nickname={data.nickname}

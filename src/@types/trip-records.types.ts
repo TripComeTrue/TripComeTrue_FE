@@ -56,7 +56,7 @@ interface TripRecordDetail {
   id: number;
   images: ImagesData[];
   member: { nickname: string; profileImage: string };
-  schedules: SchedulesData[];
+  schedules: { [key: string]: DayData[] };
   tags: TagData[];
   totalDays: number;
   tripEndDay: string;
