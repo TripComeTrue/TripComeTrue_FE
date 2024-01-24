@@ -23,6 +23,10 @@ export interface PoinLevelImageProps {
   $bgSize: string;
 }
 
+export interface PointLevelNames {
+  [key: string]: string;
+}
+
 export interface MyPageLevelProps {
   tripLevel: string;
 }

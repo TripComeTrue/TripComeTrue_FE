@@ -10,10 +10,14 @@ import * as ModalStyled from './Modal.styles';
  * @param onClose 닫혔을때 실행할 함수를 전달합니다.
  * @returns 모달 컴포넌트를 반환 합니다.
  */
-function AuthModal({ open, onClose }: AuthModalProps) {
+function AuthModal({ open, onClose, redirectUrl }: AuthModalProps) {
   const navigate = useNavigate();
   const onClickLogin = () => {
-    navigate('/');
+    navigate(`${redirectUrl ? `/?redirect=${redirectUrl}` : '/'}`);
+  };
+  const onClickLater = () => {
+    onClose();
+    navigate(-1);
   };
   return (
     <MuiModal
@@ -40,7 +44,7 @@ function AuthModal({ open, onClose }: AuthModalProps) {
         <Button size="lg" variants="primary" onClick={onClickLogin}>
           로그인하기
         </Button>
-        <Button size="lg" variants="text" onClick={onClose}>
+        <Button size="lg" variants="text" onClick={onClickLater}>
           다음에 할게요
         </Button>
       </ModalStyled.ModalBox>

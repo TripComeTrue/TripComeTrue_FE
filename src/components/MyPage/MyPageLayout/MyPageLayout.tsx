@@ -8,17 +8,17 @@ import getCookie from '@/utils/token';
 function MyPageLayout() {
   const { pathname } = useLocation();
   const { open, handleOpen, handleClose } = useModal();
+  const token = getCookie('accessToken');
 
   useEffect(() => {
-    const token = getCookie('accessToken');
     if (!token) handleOpen();
   }, []);
 
   return (
     <Styled.MyPageLayoutWrap>
-      <Outlet />
-      {pathname !== '/mypage/notification' && <TabBar />}
-      <AuthModal open={open} onClose={handleClose} />
+      {token && <Outlet />}
+      {token && pathname !== '/mypage/notification' && <TabBar />}
+      <AuthModal open={open} onClose={handleClose} redirectUrl={pathname} />
     </Styled.MyPageLayoutWrap>
   );
 }
