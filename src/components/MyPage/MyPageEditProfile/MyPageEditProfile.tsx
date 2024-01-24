@@ -19,6 +19,7 @@ function MyPageEditProfile({
   data,
   refetch,
   handleOpen,
+  handleDeleteOpen,
   image,
   setImage,
 }: MyPageEditProfileProps) {
@@ -165,7 +166,9 @@ function MyPageEditProfile({
             </Styled.MyPageEditPasswordLink>
           </div>
           <div>
-            <Styled.MyPageEditDeleteUserBtn type="button">
+            <Styled.MyPageEditDeleteUserBtn
+              type="button"
+              onClick={handleDeleteOpen}>
               회원탈퇴
             </Styled.MyPageEditDeleteUserBtn>
           </div>

@@ -1,23 +1,44 @@
 /* eslint-disable no-console */
 import { useRef, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import AvatarEditor from 'react-avatar-editor';
 import { Slider } from '@mui/material';
 import { isAxiosError } from 'axios';
 import { MyPageEditProfile } from '@/components/MyPage';
 import MyPageContainer from '@/components/MyPage/MyPageLayout/MyPageLayout.styles';
-import { Modal, SimpleNav } from '@/components/common';
+import { Modal, SimpleNav, Text } from '@/components/common';
 import useModal from '@/hooks/common/useModal';
 import { deleteImages, postImages } from '@/apis/images';
-import { getMemberDetail, patchProfileImage } from '@/apis/mypage';
+import {
+  deleteMember,
+  getMemberDetail,
+  patchProfileImage,
+} from '@/apis/mypage';
+import { setCookie } from '@/utils/cookie';
 
 function EditProfile() {
+  const navigate = useNavigate();
   const { data: memberData, refetch } = useQuery({
     queryKey: ['member/detail'],
     queryFn: getMemberDetail,
   });
   const editor = useRef<AvatarEditor>(null);
   const { open, handleOpen, handleClose } = useModal();
+  const {
+    open: deleteOpen,
+    handleOpen: handleDeleteOpen,
+    handleClose: handleDeleteClose,
+  } = useModal();
+  // 회원탈퇴 mutation
+  const mutation = useMutation({
+    mutationKey: ['member', 'delete'],
+    mutationFn: deleteMember,
+    onSuccess: () => {
+      setCookie('accessToken', '', 0);
+      navigate('/');
+    },
+  });
   const [image, setImage] = useState<string>();
   const [slideValue, setSlideValue] = useState(10);
   // 확인 버튼을 누르면 할일
@@ -54,6 +75,11 @@ function EditProfile() {
   const handleChangeSlider = (_: Event, newValue: number | number[]) => {
     setSlideValue(newValue as number);
   };
+  // 회원 탈퇴 api 호출 함수
+  const handleDeleteMember = async () => {
+    mutation.mutate();
+    handleDeleteClose();
+  };
 
   if (!memberData) return null;
   return (
@@ -64,6 +90,7 @@ function EditProfile() {
           data={memberData.data}
           refetch={refetch}
           handleOpen={handleOpen}
+          handleDeleteOpen={handleDeleteOpen}
           image={image}
           setImage={setImage}
         />
@@ -96,6 +123,19 @@ function EditProfile() {
           value={slideValue}
           onChange={handleChangeSlider}
         />
+      </Modal>
+      <Modal
+        type="info"
+        dialog
+        open={deleteOpen}
+        onClose={handleDeleteMember}
+        onReset={handleDeleteClose}>
+        <Text fontSize={14} fontWeight={600}>
+          회원 탈퇴시 <br />
+          작성하신 모든 게시글/댓글이 <br />
+          삭제되며 복구는 불가능합니다. <br />
+          그래도 탈퇴 하시겠습니까?
+        </Text>
       </Modal>
     </>
   );

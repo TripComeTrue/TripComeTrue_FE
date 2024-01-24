@@ -147,3 +147,9 @@ export const getMemberDetail = async () => {
   const { data } = await client.get<MemberDetailResBody>(`/v1/member/details`);
   return data;
 };
+
+// 회원탈퇴
+export const deleteMember = async () => {
+  const { status } = await client.delete(`v1/member`);
+  return status;
+};

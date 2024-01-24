@@ -16,6 +16,7 @@ export interface MyPageEditProfileProps {
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<MemberDetailResBody, Error>>;
   handleOpen: VoidFunction;
+  handleDeleteOpen: VoidFunction;
   image?: string;
   setImage: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
