@@ -152,3 +152,18 @@ export const InfoMoneyWrap = styled.div`
     color: ${({ theme }) => theme.brand.primary};
   }
 `;
+
+export const CityNull = styled.div`
+  margin: 2rem;
+  text-align: center;
+  color: ${({ theme }) => theme.text.gray};
+
+  span {
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-size: 10px;
+  }
+`;

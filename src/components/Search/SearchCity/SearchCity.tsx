@@ -41,9 +41,9 @@ const SearchCity = () => {
 
   console.log(cityData);
 
-  if (!cityData) {
-    return null;
-  }
+  // if (!cityData) {
+  //   return null;
+  // }
 
   const ExchangeRate = (value: string): string | null => {
     const matchResult = value.match(/1:(\d+(\.\d+)?)/);
@@ -57,71 +57,83 @@ const SearchCity = () => {
         도시
       </SubTitle>
 
-      <Styled.CityImgWrap>
-        <img src={cityData.imageUrl} alt="cityImg" />
-        <Styled.ImgTitle>
-          <p>{cityData.country}</p>
-          <div>{cityData.country}</div>
-        </Styled.ImgTitle>
-      </Styled.CityImgWrap>
-
-      <Styled.CityTitle>
-        <img src={starIcon} alt="starIcon" />
-        {queryCity}
-      </Styled.CityTitle>
-
-      <Styled.Recommend>{cityData.weatherRecommendation}</Styled.Recommend>
-      <Styled.RecommendDetail>
-        {cityData.weatherDescription}
-      </Styled.RecommendDetail>
-
-      <Styled.InfoContainer>
-        <Styled.InfoWrap>
-          <Styled.InfoWrapTitle>
-            {queryCity}
-            <br />
-            도시 정보
-          </Styled.InfoWrapTitle>
-          <Styled.InfoCityWrap>
-            <Styled.CityInfo>
-              <div>위치</div>
+      {cityData && Object.keys(cityData).length !== 0 ? (
+        <div>
+          <Styled.CityImgWrap>
+            <img src={cityData.imageUrl} alt="cityImg" />
+            <Styled.ImgTitle>
               <p>{cityData.country}</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>언어</div>
-              <p>{cityData.language}</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>시차</div>
-              <p>{cityData.timeDifference}</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>통화</div>
-              <p>{cityData.curUnit}</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>전압</div>
-              <p>{cityData.voltage}</p>
-            </Styled.CityInfo>
-          </Styled.InfoCityWrap>
-        </Styled.InfoWrap>
+              <div>{cityData.country}</div>
+            </Styled.ImgTitle>
+          </Styled.CityImgWrap>
 
-        <Styled.InfoWrap>
-          <Styled.InfoWrapTitle>
+          <Styled.CityTitle>
+            <img src={starIcon} alt="starIcon" />
             {queryCity}
-            <br />
-            환율 정보
-          </Styled.InfoWrapTitle>
-          <Styled.InfoMoneyWrap>
-            <p>1 원</p>
-            <div>
-              = {ExchangeRate('1:9.786')}
-              <br />
-              {cityData.curUnit}
-            </div>
-          </Styled.InfoMoneyWrap>
-        </Styled.InfoWrap>
-      </Styled.InfoContainer>
+          </Styled.CityTitle>
+
+          <Styled.Recommend>{cityData.weatherRecommendation}</Styled.Recommend>
+          <Styled.RecommendDetail>
+            {cityData.weatherDescription}
+          </Styled.RecommendDetail>
+
+          <Styled.InfoContainer>
+            <Styled.InfoWrap>
+              <Styled.InfoWrapTitle>
+                {queryCity}
+                <br />
+                도시 정보
+              </Styled.InfoWrapTitle>
+              <Styled.InfoCityWrap>
+                <Styled.CityInfo>
+                  <div>위치</div>
+                  <p>{cityData.country}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>언어</div>
+                  <p>{cityData.language}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>시차</div>
+                  <p>{cityData.timeDifference}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>통화</div>
+                  <p>{cityData.curUnit}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>전압</div>
+                  <p>{cityData.voltage}</p>
+                </Styled.CityInfo>
+              </Styled.InfoCityWrap>
+            </Styled.InfoWrap>
+
+            <Styled.InfoWrap>
+              <Styled.InfoWrapTitle>
+                {queryCity}
+                <br />
+                환율 정보
+              </Styled.InfoWrapTitle>
+              <Styled.InfoMoneyWrap>
+                <p>1 원</p>
+                <div>
+                  = {ExchangeRate('1:9.786')}
+                  <br />
+                  {cityData.curUnit}
+                </div>
+              </Styled.InfoMoneyWrap>
+            </Styled.InfoWrap>
+          </Styled.InfoContainer>
+        </div>
+      ) : (
+        <Styled.CityNull>
+          {' '}
+          <span>&apos;{queryCity}&apos;</span>에 대한
+          <br />
+          검색 결과가 없습니다.
+          <p>단어의 철자를 확인 해 주세요.</p>
+        </Styled.CityNull>
+      )}
     </Styled.CityContainer>
   );
 };
