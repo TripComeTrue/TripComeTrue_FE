@@ -6,8 +6,9 @@ import { getPlaceReview, putPlaceReview } from '@/apis/place';
 import useDeleteImages from '@/hooks/common/useDeleteImages';
 import useSubmitImages from '@/hooks/common/useSubmitImages';
 
-const PlaceReviewWriteEdit = () => {
+const PlaceReviewEdit = () => {
   const [files, setFiles] = useState<File[]>([]);
+  const [content, setContent] = useState('');
   const { placeReviewId } = useParams() as { placeReviewId: string };
   const { handleDeleteImages } = useDeleteImages();
   const { handleSubmitImages } = useSubmitImages(files, setFiles);
@@ -15,7 +16,6 @@ const PlaceReviewWriteEdit = () => {
     queryKey: ['PlaceReviewData'],
     queryFn: () => getPlaceReview(placeReviewId),
   });
-  const [content, setContent] = useState('');
 
   const { mutate: putReviewMutate } = useMutation({
     mutationFn: ({
@@ -68,4 +68,4 @@ const PlaceReviewWriteEdit = () => {
   );
 };
 
-export default PlaceReviewWriteEdit;
+export default PlaceReviewEdit;

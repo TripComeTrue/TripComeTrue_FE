@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { SimpleNav, SubTitle } from '@/components/common';
@@ -19,6 +19,7 @@ import TripRecordReviewCard from '@/components/common/TripRecordReviewCard/TripR
 import { getCookie } from '@/utils/cookie';
 
 const TripDetail = () => {
+  const navigate = useNavigate();
   const isSignIn = getCookie('accessToken');
   const { tripRecordId } = useParams() as { tripRecordId: string };
 
@@ -54,6 +55,8 @@ const TripDetail = () => {
     tripRecordLatestReviewRefetch();
     tripRecordsDefaultRefetch();
   }, [tripRecordId]);
+
+  console.log(tripRecordLatestReviewData);
 
   return (
     <div>
@@ -94,6 +97,7 @@ const TripDetail = () => {
               tripRecordId={tripRecordId}
               myRatingScore={tripRecordLatestReviewData?.myRatingScore}
             />
+            <TripRecordReviewCard.WriteButton />
           </TripRecordReviewCard>
         )}
         <Styled.OtherTripDetails>

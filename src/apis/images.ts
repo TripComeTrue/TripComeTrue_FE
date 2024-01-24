@@ -13,7 +13,7 @@ imageClient.interceptors.request.use(
   (config) => {
     // const accessToken = getCookie('accessToken');
     // if (accessToken) {
-    config.headers.Authorization = `Bearer eyJraWQiOiJrZXkyIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJuZXcxMUBuYXZlci5jb20iLCJpYXQiOjE3MDU3NzE5MjEsImV4cCI6MTcwNTkxNTkyMX0.23GePapRh7Nr_Xw6kJtpO6m1HoNwg3_FnmAQNXlFXmM`;
+    config.headers.Authorization = `eyJraWQiOiJrZXkyIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJ0ZXN0dGVzdDExMTFAbmF2ZXIuY29tIiwiaWF0IjoxNzA2MDgyNDQwLCJleHAiOjE3MDYyMjY0NDB9.C0lfl_A6p04aa4jHNFw9Jia1XkxnGHI_kE5q7blJGcE`;
     // }
 
     return config;

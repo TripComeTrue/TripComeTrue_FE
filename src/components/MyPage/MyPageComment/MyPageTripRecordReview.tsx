@@ -26,11 +26,12 @@ function MyPageTripRecordReview() {
             onClickDelete={() => {}}
           />
           <TripRecordReviewCard.Main
+            reviewImage="https://source.unsplash.com/random"
             nickname="룰루랄라"
             averageRating={item.averageRating}
             content={item.content}
           />
-          <TripRecordReviewCard.Rating />
+          <TripRecordReviewCard.Rating disabled myRatingScore={4.5} />
         </TripRecordReviewCard>
       ))}
     </div>
