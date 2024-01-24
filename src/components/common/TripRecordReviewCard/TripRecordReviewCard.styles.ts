@@ -61,6 +61,10 @@ export const RatingCustom = styled(Rating)`
     color: ${({ theme }) => theme.brand.yellow};
   }
 
+  > span input {
+    pointer-events: none;
+  }
+
   span svg {
     width: 2.25rem;
     height: 2.25rem;
@@ -71,4 +75,13 @@ export const BubbleWrapper = styled.div`
   position: absolute;
   right: 7%;
   bottom: 22%;
+`;
+
+export const EmptyContainer = styled.div`
+  ${flexColumn};
+  justify-content: center;
+  align-items: center;
+  gap: 0.375rem;
+
+  padding: 1.25rem 0.875rem 0;
 `;

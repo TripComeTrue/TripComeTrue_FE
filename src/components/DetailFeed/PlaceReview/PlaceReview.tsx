@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { Avatar, Bubble, SubTitle, Text } from '../../common';
 import WriteIcon from '/images/write.svg';
 import * as Styled from './PlaceReview.styles';
@@ -6,8 +5,6 @@ import LikeIcon from '/images/like.svg';
 import CommentIcon from '/images/comment.svg';
 
 const PlaceReview = () => {
-  const navigate = useNavigate();
-
   return (
     <Styled.Container>
       <Styled.Header>

@@ -1,3 +1,11 @@
+interface PlaceReviewsData {
+  isFirst: boolean;
+  isLast: boolean;
+  nowPageNumber: number;
+  placeReviews: PlaceReviewData[];
+  totalCount: number;
+}
+
 interface PlaceReviewData {
   amILike: boolean;
   commentCount: number;

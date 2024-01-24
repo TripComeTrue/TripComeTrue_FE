@@ -19,15 +19,15 @@ const TripHomeBody = () => {
     queries: [
       {
         queryKey: ['TripRecordsDefaultData'],
-        queryFn: () => getTripRecords(),
+        queryFn: () => getTripRecords('size=5'),
       },
       {
         queryKey: ['TripRecordsExpenseFilterData'],
-        queryFn: () => getTripRecords('expenseRangeType=100'),
+        queryFn: () => getTripRecords('size=5&expenseRangeType=100'),
       },
       {
         queryKey: ['TripRecordsTotalDaysFilterData'],
-        queryFn: () => getTripRecords('totalDays=2'),
+        queryFn: () => getTripRecords('size=5&totalDays=2'),
       },
       {
         queryKey: ['ShortsData'],
@@ -35,8 +35,6 @@ const TripHomeBody = () => {
       },
     ],
   });
-
-  console.log(ShortsData?.data);
 
   const onClickMoveToList = (param: string): void => {
     navigate(`/trip/list?${param}`);

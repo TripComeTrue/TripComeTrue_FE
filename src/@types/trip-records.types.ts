@@ -1,5 +1,5 @@
 interface TripRecord {
-  tripRecordId: string;
+  tripRecordId: number;
   title: string;
   countries: string;
   totalDays: number;
@@ -27,11 +27,13 @@ interface TagData {
 }
 
 interface SchedulesData {
-  schedules: DayData[];
+  schedules: { [key: string]: DayData[] };
 }
 
 interface DayData {
+  cityName: string;
   content: string;
+  countryName: string;
   dayNumber: number;
   id: number;
   latitude: number;
@@ -39,26 +41,28 @@ interface DayData {
   ordering: number;
   placeId: number;
   placeName: string;
+  tagType: string;
+  tagUrl: string;
   tripRecordId: number;
   images: { id: number; imageUrl: string }[];
   videos: { id: number; videoUrl: string }[];
 }
 
 interface TripRecordDetail {
+  averageRating: number;
   content: string;
   countries: string;
   expenseRangeType: string;
   id: number;
   images: ImagesData[];
   member: { nickname: string; profileImage: string };
-  schedules: SchedulesData[];
+  schedules: { [key: string]: DayData[] };
   tags: TagData[];
   totalDays: number;
   tripEndDay: string;
   tripStartDay: string;
   title: string;
   storeCount: number;
-  average_rating: number;
 }
 
 interface ShortData {
@@ -68,4 +72,21 @@ interface ShortData {
   member: {
     nickname: string;
   };
+}
+
+interface TripRecordLatestReview {
+  totalCount: number;
+  latestTripRecordReview: {
+    tripRecordId: number;
+    tripRecordTitle: string;
+    tripRecordReviewId: number;
+    memberId: number;
+    nickname: string;
+    ratingStore: number;
+    content: string;
+    likeCount: number;
+    amILike: boolean;
+    createdAt: string;
+  };
+  myRatingScore: number;
 }

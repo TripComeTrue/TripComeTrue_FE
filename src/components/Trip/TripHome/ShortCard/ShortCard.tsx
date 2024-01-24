@@ -4,6 +4,7 @@ import * as Styled from './ShortCard.styles';
 import { ShortCardProps } from './ShortCard.types';
 
 const ShortCard = ({ data }: ShortCardProps) => {
+  console.log(data);
   return (
     <Styled.Container>
       <Styled.ImageContainer>

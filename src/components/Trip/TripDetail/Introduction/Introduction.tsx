@@ -1,3 +1,4 @@
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { Avatar, SubTitle, Text } from '@/components/common';
 import * as Styled from './Introduction.styles';
 import MarkIcon from '/images/mark.svg';
@@ -5,6 +6,7 @@ import BookMarkIcon from '/images/bookMark.svg';
 import DownloadIcon from '/images/download.svg';
 import AverageIcon from '/images/averageIcon.svg';
 import { IntroductionProps } from './Introduction.types';
+import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
 
 const Introduction = ({ tripRecordData }: IntroductionProps) => {
   const formatDays = tripRecordData
@@ -19,18 +21,38 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
       ? mainCountries
       : `${mainCountries} 외 ${countries.length}곳`;
 
-  console.log(tripRecordData);
+  const classifyExpense = (expense: string) => {
+    switch (expense) {
+      case 'BELOW_50':
+        return '50만원 이하';
+      case 'BELOW_100':
+        return '50만원~100만원 이하';
+      case 'BELOW_200':
+        return '100만원~200만원 이하';
+      case 'BELOW_300':
+        return '200만원~300만원 이하';
+      default:
+        return '300만원 이상';
+    }
+  };
 
   return (
     <Styled.Container>
       <Styled.Header>
         <Styled.CreatorContainer>
-          <Avatar size={32} src={tripRecordData?.member.profileImage} />
+          <Avatar size={32} src={tripRecordData?.member.profileImage || ''} />
           <Text fontWeight={700}>{tripRecordData?.member.nickname}</Text>
           <Styled.Mark src={MarkIcon} alt="mark icon" />
         </Styled.CreatorContainer>
         <Styled.SaveContainer>
-          <img src={DownloadIcon} alt="download icon" />
+          <PDFDownloadLink
+            document={
+              <TripDownloadDoc schedulesData={tripRecordData?.schedules} />
+            }
+            fileName="trip_schedule.pdf">
+            <img src={DownloadIcon} alt="download icon" />
+          </PDFDownloadLink>
+
           <Styled.BookMarkContainer>
             <img src={BookMarkIcon} alt="bookmark icon" />
             <Text fontSize={10}>{tripRecordData?.storeCount}</Text>
@@ -54,7 +76,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
             <Styled.AverageContainer>
               <img src={AverageIcon} alt="평점 별 아이콘" />
               <Text color="gray" fontSize={12} fontWeight={700}>
-                {tripRecordData?.average_rating}점
+                {tripRecordData?.averageRating}점
               </Text>
             </Styled.AverageContainer>
           </Styled.Item>
@@ -65,7 +87,7 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
               </Text>
             </Styled.ItemTitle>
             <Text color="gray" fontSize={12} fontWeight={700}>
-              200만원 ~ 300만원
+              {classifyExpense(tripRecordData?.expenseRangeType || '')}
             </Text>
           </Styled.Item>
         </Styled.RatingAndExpense>

@@ -12,12 +12,19 @@ const Reviews = () => {
   const { placeId } = useParams() as { placeId: string };
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const [onlyImage, setOnlyImage] = useState(false);
-  const { data: placeReviewsData, refetch } = useQuery({
+  const {
+    data: placeReviewsData = {
+      isFirst: true,
+      isLast: true,
+      nowPageNumber: 0,
+      placeReviews: [],
+      totalCount: 0,
+    },
+    refetch,
+  } = useQuery({
     queryKey: ['PlaceReviewsData'],
     queryFn: () => getPlaceReviews(placeId, selectedFilter, onlyImage),
   });
-
-  console.log(placeReviewsData);
 
   useEffect(() => {
     refetch();
@@ -29,9 +36,7 @@ const Reviews = () => {
         <Styled.NavBackBtn>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>
-          리뷰({placeReviewsData?.totalElements})
-        </Styled.NavTitle>
+        <Styled.NavTitle>리뷰({placeReviewsData.totalCount})</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
           <Link to="/detailfeed/spot/1/review/write">
             <Styled.WriteBtn src={WriteIcon} alt="write icon" />
@@ -58,7 +63,7 @@ const Reviews = () => {
           />
         </Styled.Header>
         <ul>
-          {placeReviewsData?.content.map((data: PlaceReviewData) => (
+          {placeReviewsData.placeReviews.map((data: PlaceReviewData) => (
             <PlaceReviewCard key={data.placeReviewId}>
               <PlaceReviewCard.PlaceHeader
                 nickname={data.nickname}

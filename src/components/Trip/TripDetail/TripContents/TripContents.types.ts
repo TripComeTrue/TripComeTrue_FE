@@ -1,3 +1,3 @@
 export interface TripContentsProps {
-  schedulesData: SchedulesData[];
+  schedulesData: { [key: string]: DayData[] };
 }
