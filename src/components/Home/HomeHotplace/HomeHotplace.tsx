@@ -46,6 +46,10 @@ const HomeHotplace = () => {
     };
 
     fetchData();
+
+    return () => {
+      setHotData([]);
+    };
   }, [selectedOption]);
 
   const generateCityString = (cityNames: string[]): string => {
