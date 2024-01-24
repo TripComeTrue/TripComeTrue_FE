@@ -2,15 +2,19 @@ import { Slide } from './Shorts.types';
 import * as Styled from './Shorts.style';
 import Bookmark from '../Bookmark/Bookmark';
 
-const ShortsSwiper: React.FC<Slide> = ({ img, title, bookmark }) => (
+const ShortsSwiper: React.FC<Slide> = ({
+  thumbnailUrl,
+  tripRecordTitle,
+  storeCount,
+}) => (
   <Styled.SliderContent>
     <Styled.SliderBackground>
-      <img src={img} alt={title} />
+      <img src={thumbnailUrl} alt={tripRecordTitle} />
     </Styled.SliderBackground>
     <Styled.Bookmark>
-      <Bookmark count={bookmark} />
+      <Bookmark count={storeCount} />
     </Styled.Bookmark>
-    <Styled.ShortTitle>{title}</Styled.ShortTitle>
+    <Styled.ShortTitle>{tripRecordTitle}</Styled.ShortTitle>
   </Styled.SliderContent>
 );
 
