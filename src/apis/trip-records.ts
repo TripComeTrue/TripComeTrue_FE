@@ -13,9 +13,9 @@ export const getTripRecords = async (param?: string) => {
 
 // 여행 후기 쇼츠 리스트 조회
 export const getHotShorts = async () => {
-  const res = await client.get(`v1/trip-records/hot-shorts-list`);
+  const { data } = await client.get(`v1/trip-records/hot-shorts-list`);
 
-  return res.data;
+  return data.data;
 };
 
 // 여행 후기 세부 조회
@@ -53,11 +53,14 @@ export const postTripRecordReview = async (
   tripRecordId: string,
   ratingScore: number,
 ) => {
-  const res = await client.post(`v1/trip-records/${tripRecordId}/reviews`, {
-    ratingScore,
-  });
+  const { data } = await client.post(
+    `v1/trip-records/${tripRecordId}/reviews`,
+    {
+      ratingScore,
+    },
+  );
 
-  return res;
+  return data.data;
 };
 
 // 여행 후기 리뷰 수정하기
