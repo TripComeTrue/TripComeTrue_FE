@@ -1,12 +1,55 @@
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SubTitle } from '@/components/common';
 import starIcon from '/starIcon.svg';
-import searchImg from '/searchImg.png';
 import * as Styled from './SearchCity.styles';
+import { SearchCityInfo } from '@/apis/search';
+
+interface CityDataType {
+  cityId: number;
+  name: string;
+  language: string;
+  timeDifference: string;
+  voltage: string;
+  visa?: string;
+  curUnit: string;
+  exchangeRate: string;
+  weatherRecommendation: string;
+  weatherDescription: string;
+  country: string;
+  imageUrl: string;
+}
 
 const SearchCity = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query');
+  const queryCity = searchParams.get('query');
+  const [cityData, setCityData] = useState<CityDataType | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (queryCity !== null) {
+          const data = await SearchCityInfo(queryCity);
+          setCityData(data[0]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [queryCity]);
+
+  console.log(cityData);
+
+  // if (!cityData) {
+  //   return null;
+  // }
+
+  const ExchangeRate = (value: string): string | null => {
+    const matchResult = value.match(/1:(\d+(\.\d+)?)/);
+
+    return matchResult ? matchResult[1] : null;
+  };
 
   return (
     <Styled.CityContainer>
@@ -14,76 +57,83 @@ const SearchCity = () => {
         도시
       </SubTitle>
 
-      <Styled.CityImgWrap>
-        <img src={searchImg} alt="img" />
-        <Styled.ImgTitle>
-          <p>치앙마이</p>
-          <div>CHIANG MAI</div>
-        </Styled.ImgTitle>
-        <Styled.UserTitle>
-          <img src={searchImg} alt="img" />
-          <div>마이치앙마이</div>
-        </Styled.UserTitle>
-      </Styled.CityImgWrap>
+      {cityData && Object.keys(cityData).length !== 0 ? (
+        <div>
+          <Styled.CityImgWrap>
+            <img src={cityData.imageUrl} alt="cityImg" />
+            <Styled.ImgTitle>
+              <p>{cityData.country}</p>
+              <div>{cityData.country}</div>
+            </Styled.ImgTitle>
+          </Styled.CityImgWrap>
 
-      <Styled.CityTitle>
-        <img src={starIcon} alt="starIcon" />
-        {query}
-      </Styled.CityTitle>
+          <Styled.CityTitle>
+            <img src={starIcon} alt="starIcon" />
+            {queryCity}
+          </Styled.CityTitle>
 
-      <Styled.Recommend>11월 ~ 2월 사이 여행을 추천드려요.</Styled.Recommend>
-      <Styled.RecommendDetail>
-        비 오는 날이 적고 아침 저녁으로 선선한 날씨가 이어지며 다양한 축제가
-        열리는 시기입니다. 아침 저녁으로 온화한 날씨가 연일 이어지고 러이끄라통,
-        NAP, 치앙마이 꽃 축제, 갤러리나잇 등 다양한 행사가 열려 볼거리가
-        풍성합니다.
-      </Styled.RecommendDetail>
+          <Styled.Recommend>{cityData.weatherRecommendation}</Styled.Recommend>
+          <Styled.RecommendDetail>
+            {cityData.weatherDescription}
+          </Styled.RecommendDetail>
 
-      <Styled.InfoContainer>
-        <Styled.InfoWrap>
-          <Styled.InfoWrapTitle>
-            {query}
-            <br />
-            도시 정보
-          </Styled.InfoWrapTitle>
-          <Styled.InfoCityWrap>
-            <Styled.CityInfo>
-              <div>위치</div>
-              <p>태국 북부</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>언어</div>
-              <p>태국어</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>시차</div>
-              <p>2시간 빠름</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>통화</div>
-              <p>바트(THB)</p>
-            </Styled.CityInfo>
-            <Styled.CityInfo>
-              <div>전압</div>
-              <p>220V</p>
-            </Styled.CityInfo>
-          </Styled.InfoCityWrap>
-        </Styled.InfoWrap>
+          <Styled.InfoContainer>
+            <Styled.InfoWrap>
+              <Styled.InfoWrapTitle>
+                {queryCity}
+                <br />
+                도시 정보
+              </Styled.InfoWrapTitle>
+              <Styled.InfoCityWrap>
+                <Styled.CityInfo>
+                  <div>위치</div>
+                  <p>{cityData.country}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>언어</div>
+                  <p>{cityData.language}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>시차</div>
+                  <p>{cityData.timeDifference}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>통화</div>
+                  <p>{cityData.curUnit}</p>
+                </Styled.CityInfo>
+                <Styled.CityInfo>
+                  <div>전압</div>
+                  <p>{cityData.voltage}</p>
+                </Styled.CityInfo>
+              </Styled.InfoCityWrap>
+            </Styled.InfoWrap>
 
-        <Styled.InfoWrap>
-          <Styled.InfoWrapTitle>
-            {query}
-            <br />
-            환율 정보
-          </Styled.InfoWrapTitle>
-          <Styled.InfoMoneyWrap>
-            <p>1 THB</p>
-            <div>
-              KRW <br /> = 38원
-            </div>
-          </Styled.InfoMoneyWrap>
-        </Styled.InfoWrap>
-      </Styled.InfoContainer>
+            <Styled.InfoWrap>
+              <Styled.InfoWrapTitle>
+                {queryCity}
+                <br />
+                환율 정보
+              </Styled.InfoWrapTitle>
+              <Styled.InfoMoneyWrap>
+                <p>1 원</p>
+                <div>
+                  = {ExchangeRate('1:9.786')}
+                  <br />
+                  {cityData.curUnit}
+                </div>
+              </Styled.InfoMoneyWrap>
+            </Styled.InfoWrap>
+          </Styled.InfoContainer>
+        </div>
+      ) : (
+        <Styled.CityNull>
+          {' '}
+          <span>&apos;{queryCity}&apos;</span>에 대한
+          <br />
+          검색 결과가 없습니다.
+          <p>단어의 철자를 확인 해 주세요.</p>
+        </Styled.CityNull>
+      )}
     </Styled.CityContainer>
   );
 };

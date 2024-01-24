@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { SignInBody, SignUpReqBody, SignUpResBody } from '@/@types/auth.types';
 
-const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
+const serverUrl = 'http://tripcometrue.site';
 
 export const checkDuplicatedEmail = async (v: string | undefined) => {
   const { status } = await axios.get(
