@@ -10,7 +10,9 @@ function MyPagePopMenu({
   vertical,
   onOpenShare,
   plan,
+  review,
   setPlanItem,
+  setReviewItem,
 }: MyPagePopMenuProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -19,12 +21,14 @@ function MyPagePopMenu({
   };
   const handleClose = () => {
     setAnchorEl(null);
-    setPlanItem(undefined);
+    if (setPlanItem) setPlanItem(undefined);
+    if (setReviewItem) setReviewItem(undefined);
   };
   const handleShareClick = () => {
     onOpenShare();
     handleClose();
-    setPlanItem(plan);
+    if (setPlanItem && plan) setPlanItem(plan);
+    if (setReviewItem && review) setReviewItem(review);
   };
 
   return (

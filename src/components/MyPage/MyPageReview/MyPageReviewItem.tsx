@@ -5,7 +5,11 @@ import * as Styled from './MyPageReviewItem.styles';
 import * as Spots from '@/components/common/Spots/Spots.style';
 import MyPagePopMenu from '../MyPagePopMenu/MyPagePopMenu';
 
-function MyPageReviewItem({ review, onOpenShare }: MyPageReviewItemProps) {
+function MyPageReviewItem({
+  review,
+  onOpenShare,
+  setReviewItem,
+}: MyPageReviewItemProps) {
   return (
     <Styled.MyPageReviewItemWrap>
       <Spots.SliderImg>
@@ -27,7 +31,12 @@ function MyPageReviewItem({ review, onOpenShare }: MyPageReviewItemProps) {
         </Spots.SpaceImg>
       </Spots.SliderTitleSortLeft>
       <Styled.MyPageReviewPopBtn>
-        <MyPagePopMenu vertical onOpenShare={onOpenShare} />
+        <MyPagePopMenu
+          vertical
+          onOpenShare={onOpenShare}
+          review={review}
+          setReviewItem={setReviewItem}
+        />
       </Styled.MyPageReviewPopBtn>
     </Styled.MyPageReviewItemWrap>
   );
