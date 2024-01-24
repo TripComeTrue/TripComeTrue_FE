@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode } from 'react';
+import { MouseEvent, ReactNode, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Bubble, Button, SubTitle, Text } from '..';
 import * as Styled from './TripRecordReviewCard.styles';
@@ -18,10 +18,12 @@ const Title = ({ children }: { children: ReactNode }) => {
 };
 
 const Main = ({
+  reviewImage,
   nickname,
   averageRating,
   content,
 }: {
+  reviewImage: string;
   nickname: string;
   averageRating: number;
   content: string;
@@ -29,7 +31,7 @@ const Main = ({
   return (
     <Styled.ReviewContainer>
       <Styled.ImageWrapper>
-        <Styled.ReviewImage src="https://source.unsplash.com/random" />
+        <Styled.ReviewImage src={reviewImage} />
       </Styled.ImageWrapper>
       <Styled.ReviewContents>
         <Styled.InfoContainer>
@@ -59,9 +61,15 @@ const Rating = ({
   myRatingScore: number;
   tripRecordId?: string;
 }) => {
+  const [disable, setDisable] = useState(false);
+  const [rating, setRating] = useState(0);
   const { mutate: tripRecordReviewMutate } = useMutation({
     mutationFn: (ratingScore: number) =>
       postTripRecordReview(tripRecordId, ratingScore),
+    onSuccess: (data) => {
+      setRating(data.ratingScore);
+      setDisable(true);
+    },
   });
 
   const onClickRating = (event: MouseEvent<HTMLSpanElement>) => {
@@ -77,10 +85,11 @@ const Rating = ({
     <Styled.RatingContainer>
       <Styled.RatingCustom
         name="half-rating"
-        value={myRatingScore || 0}
+        defaultValue={0}
+        value={myRatingScore || rating}
         precision={0.5}
         onClick={onClickRating}
-        disabled={disabled}
+        disabled={disabled || disable}
       />
 
       <Text fontSize={12} fontWeight={700} color="gray">

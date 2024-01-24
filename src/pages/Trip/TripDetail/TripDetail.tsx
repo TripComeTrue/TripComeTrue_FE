@@ -69,13 +69,20 @@ const TripDetail = () => {
               이 여행 후기의 리뷰({tripRecordLatestReviewData?.totalCount})
             </TripRecordReviewCard.Title>
             {tripRecordLatestReviewData?.latestTripRecordReview ? (
-              <TripRecordReviewCard>
-                <TripRecordReviewCard.Main
-                  nickname={tripRecordLatestReviewData?.nickname}
-                  averageRating={tripRecordLatestReviewData?.ratingScore}
-                  content={tripRecordLatestReviewData?.content}
-                />
-              </TripRecordReviewCard>
+              <TripRecordReviewCard.Main
+                reviewImage={
+                  tripRecordLatestReviewData?.latestTripRecordReview.imageUrl
+                }
+                nickname={
+                  tripRecordLatestReviewData?.latestTripRecordReview.nickname
+                }
+                averageRating={
+                  tripRecordLatestReviewData?.latestTripRecordReview.ratingScore
+                }
+                content={
+                  tripRecordLatestReviewData?.latestTripRecordReview.content
+                }
+              />
             ) : (
               <TripRecordReviewCard.EmptyMain
                 title="리뷰를 기다리고 있어요"

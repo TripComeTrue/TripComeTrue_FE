@@ -1,3 +1,3 @@
 export interface ShortCardProps {
-  data: ShortData;
+  shortData: ShortData;
 }
