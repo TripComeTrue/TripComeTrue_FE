@@ -11,8 +11,7 @@ import {
 } from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
 import { emailValidation } from '@/constants/Auth/validations';
-import client from '@/apis/client';
-// import throttle from '@/utils/throttle';
+import { checkDuplicatedEmail } from '@/apis/auth';
 
 function EmailInput({
   register,
@@ -27,10 +26,7 @@ function EmailInput({
     validate: {
       chkDuplicated: _.throttle(async (v: string | undefined) => {
         try {
-          const res = await client.get(
-            `v1/member/check-duplicated-email?email=${v}`,
-          );
-          const code = res.status;
+          const code = await checkDuplicatedEmail(v);
           if (code === 200) return true;
         } catch (error) {
           if (isAxiosError(error)) {

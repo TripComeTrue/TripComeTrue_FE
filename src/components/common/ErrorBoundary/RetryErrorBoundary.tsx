@@ -14,10 +14,7 @@ const Fallback = ({ resetErrorBoundary }: FallbackProps) => (
         에러가 지속되면 고객센터로 문의해주세요.
       </Text>
     </Styled.ErrorTitle>
-    <Button
-      variants="primary"
-      onClick={() => resetErrorBoundary()}
-      type="button">
+    <Button variants="primary" onClick={resetErrorBoundary} type="button">
       다시 시도
     </Button>
   </Styled.ErrorContent>
