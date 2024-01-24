@@ -4,13 +4,9 @@ import { add, differenceInCalendarDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';
 import Checkbox from '@mui/material/Checkbox';
 import { SlArrowLeft } from 'react-icons/sl';
-import * as Styled from './TripPlanCity.styles';
+import * as Styled from './TripPlanCityList.styles';
 import { SubTitle } from '@/components/common';
-import {
-  TripPlanPrevButton,
-  TripPlanNextButton,
-} from '../TripPlanCommon/TripPlanCommon';
-import CityListModal from './CityListModal/CityListModal';
+import CityListModal from './TripPlanCityModal/TripPlanCityModal';
 
 const TripPlanCity = () => {
   const [cityNames, setCityNames] = useState<string[]>([]);
@@ -101,7 +97,6 @@ const TripPlanCity = () => {
 
   return (
     <Styled.Wrapper>
-      <TripPlanPrevButton />
       <Styled.Container>
         <Styled.Title>
           여행 기간 동안
@@ -119,7 +114,6 @@ const TripPlanCity = () => {
           {showInputPerDay()}
         </label>
       </Styled.Container>
-      <TripPlanNextButton />
     </Styled.Wrapper>
   );
 };

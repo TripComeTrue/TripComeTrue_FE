@@ -2,10 +2,6 @@ import { useState } from 'react';
 import * as Styled from './TripPlanCountry.styles';
 import { Continent } from './TripPlanCountry.types';
 import { worldData } from './constants/CountryData';
-import {
-  TripPlanPrevButton,
-  TripPlanNextButton,
-} from '../TripPlanCommon/TripPlanCommon';
 
 const TripPlanCountry = () => {
   const [isOverseas, setIsOverseas] = useState<boolean>(true);
@@ -54,7 +50,6 @@ const TripPlanCountry = () => {
 
   return (
     <Styled.Wrapper>
-      <TripPlanPrevButton />
       <Styled.Container>
         <Styled.Title>
           여행 기간 동안
@@ -99,7 +94,7 @@ const TripPlanCountry = () => {
           ))}
         </Styled.ContinentSwiper>
 
-        <Styled.CountryWrapper>
+        <Styled.CountryWrapper country={country}>
           {getCountries().map((c) => (
             <Styled.CountryContainer key={c.name}>
               <button type="button" onClick={() => selectCountry(c.name)}>
@@ -112,25 +107,23 @@ const TripPlanCountry = () => {
               </button>
             </Styled.CountryContainer>
           ))}
+          <Styled.SelectedCountries country={country}>
+            {country.map((selectedCountryName) => {
+              const selectedCountry = getCountryImgByName(selectedCountryName);
+              return (
+                <div key={selectedCountryName}>
+                  <img src={selectedCountry?.img} alt="selected-country" />
+                  <div className="selected-name">{selectedCountryName}</div>
+                  <Styled.RemoveButton
+                    onClick={() => removeCountry(selectedCountryName)}>
+                    x
+                  </Styled.RemoveButton>
+                </div>
+              );
+            })}
+          </Styled.SelectedCountries>
         </Styled.CountryWrapper>
       </Styled.Container>
-
-      <Styled.SelectedCountries country={country}>
-        {country.map((selectedCountryName) => {
-          const selectedCountry = getCountryImgByName(selectedCountryName);
-          return (
-            <div key={selectedCountryName}>
-              <img src={selectedCountry?.img} alt="selected-country" />
-              <div className="selected-name">{selectedCountryName}</div>
-              <Styled.RemoveButton
-                onClick={() => removeCountry(selectedCountryName)}>
-                x
-              </Styled.RemoveButton>
-            </div>
-          );
-        })}
-      </Styled.SelectedCountries>
-      <TripPlanNextButton />
     </Styled.Wrapper>
   );
 };

@@ -10,8 +10,8 @@ import {
   ValidateIcon,
 } from '../TextField.styles';
 import { SignUpFormData } from '@/components/auth/SignUpForm/SignUpForm.types';
-import client from '@/apis/client';
-// import throttle from '@/utils/throttle';
+import { emailValidation } from '@/constants/Auth/validations';
+import { checkDuplicatedEmail } from '@/apis/auth';
 
 function EmailInput({
   register,
@@ -20,22 +20,13 @@ function EmailInput({
   allowCheckEmail,
 }: EmailInputProps<SignUpFormData>) {
   const { email } = getValues();
-  const emailValidation = {
-    required: '이메일은 필수 입니다.',
-    pattern: {
-      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-      message: '올바른 이메일을 입력해주세요',
-    },
-  };
+
   const emailDuplicatedValidation = {
     ...emailValidation,
     validate: {
       chkDuplicated: _.throttle(async (v: string | undefined) => {
         try {
-          const res = await client.get(
-            `v1/member/check-duplicated-email?email=${v}`,
-          );
-          const code = res.status;
+          const code = await checkDuplicatedEmail(v);
           if (code === 200) return true;
         } catch (error) {
           if (isAxiosError(error)) {

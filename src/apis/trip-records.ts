@@ -23,6 +23,15 @@ export const getTripRecord = async (tripRecordId: string) => {
   return res.data;
 };
 
+// 가장 최신 여행 후기 리뷰 1건 + 내 평점 조회
+export const getTripRecordLatestReview = async (tripRecordId: string) => {
+  const res = await client.get(
+    `v1/trip-records/${tripRecordId}/reviews/latest`,
+  );
+
+  return res;
+};
+
 // 특정 여행 후기에 대한 다수의 리뷰 조희
 export const getTripRecordReviews = async (tripRecordId: number) => {
   const res = await client.get(`v1/trip-records/${tripRecordId}/reviews`);

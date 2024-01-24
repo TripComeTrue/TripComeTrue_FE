@@ -7,10 +7,6 @@ import CalendarToday from '@mui/icons-material/CalendarMonth';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePickerStyles.css';
 import * as Styled from '../TripPlanCommon/TripPlanCommon.styles';
-import {
-  TripPlanPrevButton,
-  TripPlanNextButton,
-} from '../TripPlanCommon/TripPlanCommon';
 import { TripDateProps } from './TripPlanDate.types';
 
 const TripPlanDate = () => {
@@ -45,7 +41,6 @@ const TripPlanDate = () => {
 
   return (
     <Styled.Wrapper>
-      <TripPlanPrevButton />
       <Styled.Container>
         <Styled.Title>
           여행 기간을 <br />
@@ -143,7 +138,6 @@ const TripPlanDate = () => {
           </label>
         </DatePicker>
       </Styled.Container>
-      <TripPlanNextButton />
     </Styled.Wrapper>
   );
 };
