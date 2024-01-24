@@ -52,7 +52,6 @@ const MyPageHeader = ({
           <Avatar src={profileUrl} size={32} />
           <Text fontWeight={700}>{nickname}</Text>
         </Styled.MyPageCreator>
-
         {children}
       </Styled.ReviewInfo>
       <Text fontSize={10} fontWeight={700}>

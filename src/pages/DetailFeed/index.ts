@@ -5,5 +5,5 @@ export { default as SpotList } from '@/pages/DetailFeed/SpotList/SpotList';
 export { default as SpotSearch } from '@/pages/DetailFeed/SpotSearch/SpotSearch';
 export { default as Reviews } from '@/pages/DetailFeed/Reviews/Reviews';
 export { default as ReviewComment } from '@/pages/DetailFeed/ReviewComment/ReviewComment';
-export { default as SpotReviewWriteNew } from '@/pages/DetailFeed/SpotReviewWrite/SpotReviewWriteNew';
-export { default as SpotReviewWriteEdit } from '@/pages/DetailFeed/SpotReviewWrite/SpotReviewWriteEdit';
+export { default as PlaceReviewWriteNew } from '@/pages/DetailFeed/PlaceReviewWrite/PlaceReviewWriteNew';
+export { default as PlaceReviewWriteEdit } from '@/pages/DetailFeed/PlaceReviewWrite/PlaceReviewWriteEdit';

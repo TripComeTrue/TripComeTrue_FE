@@ -4,9 +4,11 @@ import client from './client';
 
 // 여행 후기 리스트 조회
 export const getTripRecords = async (param?: string) => {
-  const res = await client.get(`v1/trip-records${param ? `?${param}` : ''}`);
+  const { data } = await client.get(
+    `v1/trip-records${param ? `?${param}` : ''}`,
+  );
 
-  return res.data;
+  return data.data;
 };
 
 // 여행 후기 쇼츠 리스트 조회
@@ -18,9 +20,18 @@ export const getHotShorts = async () => {
 
 // 여행 후기 세부 조회
 export const getTripRecord = async (tripRecordId: string) => {
-  const res = await client.get(`v1/trip-records/${tripRecordId}`);
+  const { data } = await client.get(`v1/trip-records/${tripRecordId}`);
 
-  return res.data;
+  return data.data;
+};
+
+// 가장 최신 여행 후기 리뷰 1건 + 내 평점 조회
+export const getTripRecordLatestReview = async (tripRecordId: string) => {
+  const { data } = await client.get(
+    `v1/trip-records/${tripRecordId}/reviews/latest`,
+  );
+
+  return data.data;
 };
 
 // 특정 여행 후기에 대한 다수의 리뷰 조희
@@ -38,8 +49,13 @@ export const getTripRecordReview = async (tripRecordReviewId: number) => {
 };
 
 // 특정 여행 후기에 대해 평가하기
-export const postTripRecordReview = async (tripRecordId: number) => {
-  const res = await client.post(`v1/trip-records/${tripRecordId}/reviews`);
+export const postTripRecordReview = async (
+  tripRecordId: string,
+  ratingScore: number,
+) => {
+  const res = await client.post(`v1/trip-records/${tripRecordId}/reviews`, {
+    ratingScore,
+  });
 
   return res;
 };

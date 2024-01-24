@@ -1,5 +1,3 @@
-// TODO: 나중에 삭제 예정
-/* eslint-disable react/no-array-index-key */
 import { Swiper, SwiperSlide } from 'swiper/react';
 import * as Styled from './CreatorCarousel.styles';
 import 'swiper/swiper-bundle.css';
