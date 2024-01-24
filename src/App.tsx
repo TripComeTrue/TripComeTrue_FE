@@ -30,6 +30,7 @@ import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
+import SearchNons from './pages/Search/SearchNons';
 import TripPlanAddTags from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsForImage/TripPlanAddTagsForImage';
 import TripPlanAddPlace from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddPlace/TripPlanAddPlace';
 import {
@@ -57,8 +58,12 @@ function App() {
           <Route path="social" element={<Social />} />
         </Route>
         <Route path="home" element={<Home />} />
+
         <Route path="search/*" element={<Search />} />
-        <Route path="search/:tag" element={<SearchTag />} />
+        <Route path="search/select/:tag" element={<SearchTag />} />
+        <Route path="search-non" element={<SearchNons />} />
+        {/* <Route path="search" element={<Search />} /> */}
+
         <Route path="creator/*" element={<Creator />} />
         <Route path="creator/:id" element={<CreatorDetail />} />
 
@@ -92,6 +97,7 @@ function App() {
           <Route path="addtag" element={<TripPlanAddTags />} />
           <Route path="addplace" element={<TripPlanAddPlace />} />
         </Route>
+
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />
           <Route path="spot" element={<TouristSpot />} />

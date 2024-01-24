@@ -7,7 +7,7 @@ const SearchKeyword = () => {
   const navigate = useNavigate();
 
   const handleSearch = (prop: string) => {
-    navigate(`/search/${prop}`);
+    navigate(`/search/select/${prop}`);
   };
 
   return (
