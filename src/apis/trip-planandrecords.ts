@@ -18,9 +18,9 @@ export const getTripCountries = async (
   return data;
 };
 
-// 여행 후기 쇼츠 리스트 조회
-export const getHotShorts = async () => {
-  const res = await client.get(`v1/trip-records/hot-shorts-list`);
+// 여행 도시 리스트 조회
+export const getTripCities = async () => {
+  const res = await client.get(`v1/country-city`);
 
   return res.data;
 };

@@ -1,35 +1,31 @@
 import { useEffect, useRef, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as Styled from './TripPlanCityModal.styles';
 import { Button } from '@/components/common';
 import { SelectedCitiesProps } from './TripPlanCityModal.types';
+import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
+import { getTripCities } from '@/apis/trip-planandrecords';
+import { City, CountryData } from '@/@types/trip-alldata.types';
 
 const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
   selectedCities,
   onCitySelection,
   onCloseModal,
 }: SelectedCitiesProps) => {
+  const { tripPlanData } = useTripFormData();
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    tripPlanData.countries[0],
+  );
+  const selectedCountries = tripPlanData.countries;
   const [selectedCitiesInModal, setSelectedCitiesInModal] = useState<string[]>(
     [],
   );
-  const countryAndCities = [
-    {
-      name: '프랑스',
-      cities: ['파리', '리옹', '마르세유', '니스'],
-    },
-    {
-      name: '영국',
-      cities: ['런던', '맨체스터', '에딘버러', '글래스고'],
-    },
-    {
-      name: '미국',
-      cities: ['뉴욕', '로스앤젤레스', '시카고', '샌프란시스코'],
-    },
-    {
-      name: '중국',
-      cities: ['베이징', '상하이', '광저우', '선전'],
-    },
-  ];
+
+  const { data } = useQuery({
+    queryKey: ['TripCities'],
+    queryFn: () => getTripCities(),
+  });
 
   const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -37,17 +33,9 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
     selectRef.current?.click();
   };
 
-  const [selectedCountry, setSelectedCountry] = useState<string>(
-    countryAndCities[0].name,
-  );
-
   const selectCountry = (country: string) => {
     setSelectedCountry(country);
   };
-
-  const citiesInSelectedCountry =
-    countryAndCities.find((country) => country.name === selectedCountry)
-      ?.cities || [];
 
   const selectCity = (cityName: string) => {
     setSelectedCitiesInModal((prevCities) => {
@@ -70,9 +58,9 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
           className="select-citydetail"
           onChange={(e) => selectCountry(e.target.value)}
           value={selectedCountry}>
-          {countryAndCities.map((country) => (
-            <option key={country.name} value={country.name}>
-              {country.name}
+          {selectedCountries.map((country) => (
+            <option key={country} value={country}>
+              {country}
             </option>
           ))}
         </Styled.SelectCountries>
@@ -80,16 +68,22 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
       </Styled.SelectedCountriesContainer>
 
       <Styled.ShowCitiesContainer>
-        {citiesInSelectedCountry.map((city) => (
-          <Styled.EachCity
-            key={city}
-            onClick={() => selectCity(city)}
-            selected={selectedCities.includes(city)}>
-            <img src={image} alt="city" />
-            {city}
-            <CheckCircleIcon className="checked" fill="#b4f34c" />
-          </Styled.EachCity>
-        ))}
+        {Array.isArray(data?.data) &&
+          data.data
+            .filter(
+              (country: CountryData) => country.countryName === selectedCountry,
+            )
+            .flatMap((countryName: CountryData) => countryName.cityList)
+            .map((city: City) => (
+              <Styled.EachCity
+                key={city.cityId}
+                onClick={() => selectCity(city.cityName)}
+                selected={selectedCities.includes(city.cityName)}>
+                <img src={city.cityImageUrl} alt="selected-city" />
+                {city.cityName}
+                <CheckCircleIcon className="checked" fill="#b4f34c" />
+              </Styled.EachCity>
+            ))}
       </Styled.ShowCitiesContainer>
 
       <Styled.FinalSelectionButton>
