@@ -21,6 +21,7 @@ export { default as MyPageEditImage } from './MyPageEditProfile/MyPageEditImage'
 export { default as MyPageAccordion } from './MyPageFaq/MyPageAccordion';
 export { default as MyPageWishList } from './MyPageWishList/MyPageWishList';
 export { default as MyPageWishListMore } from './MyPageWishList/MyPageWishListMore';
+export { default as MyPageWishListSkeleton } from './MyPageWishList/MyPageWishListSkeleton';
 export { default as MyPageMyTripPoint } from './MyPageTripPoint/MyPageMyTripPoint';
 export { default as MyPageLevel } from './MyPageTripPoint/MyPageLevel';
 export { default as MyPageItemNone } from './MyPageItemNone/MyPageItemNone';

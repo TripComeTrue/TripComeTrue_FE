@@ -3,6 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getMyPlaceReview } from '@/apis/mypage';
 import { PlaceReviewCard } from '@/components/common';
 import dateToString from './MyPagePlaceReview.utils';
+import MyPageItemNone from '../MyPageItemNone/MyPageItemNone';
 
 function MyPagePlaceReview() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function MyPagePlaceReview() {
 
   return (
     <div>
+      {data?.data.placeReviews.length === 0 && <MyPageItemNone />}
       {data.data.placeReviews.map((item) => (
         <PlaceReviewCard key={item.placeReviewId}>
           <PlaceReviewCard.MyPageHeader

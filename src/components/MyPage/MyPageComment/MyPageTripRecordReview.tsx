@@ -3,6 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getMyTripRecordReview } from '@/apis/mypage';
 import { TripRecordReviewCard } from '@/components/common';
 import * as Styled from './MyPageTripRecordReview.styles';
+import MyPageItemNone from '../MyPageItemNone/MyPageItemNone';
 
 function MyPageTripRecordReview() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function MyPageTripRecordReview() {
 
   return (
     <div>
+      {data?.data.length === 0 && <MyPageItemNone />}
       {data.data.map((item) => (
         <TripRecordReviewCard key={item.id}>
           <Styled.TripRecordReviewTop>
@@ -33,7 +35,7 @@ function MyPageTripRecordReview() {
             averageRating={item.averageRating}
             content={item.content}
           />
-          <TripRecordReviewCard.Rating />
+          <TripRecordReviewCard.Rating disabled={false} myRatingScore={5} />
         </TripRecordReviewCard>
       ))}
     </div>

@@ -8,6 +8,7 @@ import {
 import MyPageReviewWrap from './MyPageReview.styles';
 import MyPageReviewItem from './MyPageReviewItem';
 import { getMyReview } from '@/apis/mypage';
+import MyPageItemNone from '../MyPageItemNone/MyPageItemNone';
 
 function MyPageReview() {
   const { open, handleOpen, handleClose } = useModal();
@@ -19,6 +20,7 @@ function MyPageReview() {
 
   return (
     <>
+      {data?.data.content.length === 0 && <MyPageItemNone />}
       <MyPageReviewWrap>
         {data?.data.content.map((review) => (
           <MyPageReviewItem
