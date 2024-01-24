@@ -4,16 +4,17 @@ import * as Styled from './TripPlanCountry.styles';
 import { getTripCountries } from '@/apis/trip-planandrecords';
 import { CountryData } from '@/@types/trip-alldata.types';
 import { Continents } from '@/constants/tripPlanAndRecord';
+import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 
 const TripPlanCountry = () => {
+  const { updateTripPlanData } = useTripFormData();
   const [isOverseas, setIsOverseas] = useState<boolean>(true);
   const [continent, setContinent] = useState<string>('ALL');
-  const [country, setCountry] = useState<string[]>([]);
+  const [selectedCountries, setSelectedCountries] = useState<CountryData[]>([]);
 
-  // default : 해외 - '전체' 대륙, 만약 국내 선택시 대한민국이 나옴.
   const param = isOverseas ? (continent === 'ALL' ? '' : continent) : 'KOREA';
 
-  const { data, isLoading, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ['TripCountries', param],
     queryFn: () => getTripCountries(param, isOverseas),
   });
@@ -27,18 +28,28 @@ const TripPlanCountry = () => {
     setContinent(continentName || 'ALL');
   };
 
-  const selectCountry = (countryName: string) => {
-    setCountry((prevCountries) => {
-      if (prevCountries.includes(countryName)) {
-        return prevCountries;
+  const selectCountry = (selectedCountry: CountryData) => {
+    setSelectedCountries((prevCountries) => {
+      const sortedSelectedCountries = prevCountries.some(
+        (c) => c.countryName === selectedCountry.countryName,
+      );
+
+      let finalUpdatedCountries = prevCountries;
+      if (!sortedSelectedCountries) {
+        finalUpdatedCountries = [...prevCountries, selectedCountry];
       }
-      return [...prevCountries, countryName];
+
+      updateTripPlanData({
+        countries: finalUpdatedCountries.map((c) => c.countryName),
+      });
+
+      return finalUpdatedCountries;
     });
   };
 
   const removeCountry = (countryToRemove: string) => {
-    setCountry((prevCountries) =>
-      prevCountries.filter((c) => c !== countryToRemove),
+    setSelectedCountries((prevCountries) =>
+      prevCountries.filter((c) => c.countryName !== countryToRemove),
     );
   };
 
@@ -53,13 +64,13 @@ const TripPlanCountry = () => {
         <Styled.OverseasDomesticContainer>
           <Styled.SelectButton
             className="overseas"
-            isSelected={isOverseas}
+            $isSelected={isOverseas}
             onClick={() => selectOverseas(true)}>
             해외
           </Styled.SelectButton>
           <Styled.SelectButton
             className="domestic"
-            isSelected={!isOverseas}
+            $isSelected={!isOverseas}
             onClick={() => selectOverseas(false)}>
             국내
           </Styled.SelectButton>
@@ -100,10 +111,10 @@ const TripPlanCountry = () => {
             ))}
         </Styled.ContinentSwiper>
 
-        <Styled.CountryWrapper country={country}>
+        <Styled.CountryWrapper $selectedCountries={selectedCountries}>
           {data?.map((item: CountryData) => (
             <Styled.CountryContainer key={item.country}>
-              <button type="button" onClick={() => selectCountry(item.country)}>
+              <button type="button" onClick={() => selectCountry(item)}>
                 <img src={item.countryImageUrl} alt="country" />
                 <span className="country-ko">
                   {item.countryName}
@@ -113,21 +124,23 @@ const TripPlanCountry = () => {
               </button>
             </Styled.CountryContainer>
           ))}
-          {/* <Styled.SelectedCountries country={country}>
-            {country.map((selectedCountryName) => {
-              const selectedCountry = getCountryImgByName(selectedCountryName);
-              return (
-                <div key={selectedCountryName}>
-                  <img src={selectedCountry?.img} alt="selected-country" />
-                  <div className="selected-name">{selectedCountryName}</div>
-                  <Styled.RemoveButton
-                    onClick={() => removeCountry(selectedCountryName)}>
-                    x
-                  </Styled.RemoveButton>
+          <Styled.SelectedCountries $selectedCountries={selectedCountries}>
+            {selectedCountries.map((selectedCountry) => (
+              <div key={selectedCountry.countryName}>
+                <img
+                  src={selectedCountry.countryImageUrl}
+                  alt="selected-country"
+                />
+                <div className="selected-name">
+                  {selectedCountry.countryName}
                 </div>
-              );
-            })}
-          </Styled.SelectedCountries> */}
+                <Styled.RemoveButton
+                  onClick={() => removeCountry(selectedCountry.countryName)}>
+                  x
+                </Styled.RemoveButton>
+              </div>
+            ))}
+          </Styled.SelectedCountries>
         </Styled.CountryWrapper>
       </Styled.Container>
     </Styled.Wrapper>

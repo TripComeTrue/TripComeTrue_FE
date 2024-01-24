@@ -1,6 +1,6 @@
 // 여행 계획 작성
 export interface TripPlanData {
-  countries: string;
+  countries: string[];
   tripStartDay: string;
   tripEndDay: string;
   referencedBy: number | null;
@@ -18,7 +18,7 @@ export interface TripPlanSchedule {
 
 // 여행 계획 작성시 기본 값
 export const defaultTripPlanData: TripPlanData = {
-  countries: '',
+  countries: [],
   tripStartDay: '',
   tripEndDay: '',
   referencedBy: null,
