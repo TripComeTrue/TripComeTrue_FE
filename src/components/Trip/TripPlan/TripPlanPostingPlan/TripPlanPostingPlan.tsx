@@ -1,31 +1,34 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { differenceInDays } from 'date-fns';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { SlArrowLeft } from 'react-icons/sl';
 import { GoPlusCircle } from 'react-icons/go';
-import speechBubble from '../../../../../public/images/speech-bubble.svg';
-import TripPlanGoogleMaps from './TripPlanGoogleMaps';
-import { TripPlanPrevButton } from '../TripPlanCommon/TripPlanCommon';
-import * as Styled from './TripPlanPosting.styles';
+import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
+import * as Styled from './TripPlanPostingPlan.styles';
 import { Button } from '@/components/common';
-// import TripPlanTagModal from './TripPlanTagModal';
-// import useModal from '@/hooks/common/useModal';
-// import { useNavigate } from 'react-router-dom';
+import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
+import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
+import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPlanSetBudget';
+import TripPlanUploadImages from './TripPlanUploadImages/TripPlanUploadImages';
+import TripPlanUploadMainImages from './TripPlanUploadMainImages/TripPlanUploadMainImages';
+import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
 
 const TripPlanPosting = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
+  const [selectedPlace, setSelectedPlace] = useState<string>('');
   const { register, handleSubmit, setValue } = useForm();
-  const UploadPhotoIconRef = useRef<HTMLInputElement>(null);
-  // const { open, handleOpen, handleClose } = useModal();
+
+  const [isPlaceModalOpen, setIsPlaceModalOpen] = useState({
+    isPaneOpenLeft: false,
+  });
 
   // const navigate = useNavigate();
-  const startDate = new Date('2024-01-13');
+  const startDate = new Date('2024-01-18');
   const endDate = new Date();
   const formattedStartDate = startDate.toLocaleDateString();
   const formattedEndDate = endDate.toLocaleDateString();
@@ -35,6 +38,7 @@ const TripPlanPosting = () => {
       city: '',
       places: [
         {
+          id: 1,
           place: '',
           note: '',
           photo: '',
@@ -79,18 +83,27 @@ const TripPlanPosting = () => {
     });
   };
 
+  const closePlaceListModal = () => {
+    setIsPlaceModalOpen({ isPaneOpenLeft: false });
+  };
+
+  const handlePlaceModalSelection = (place: string) => {
+    setSelectedPlace(place);
+  };
+
   const handleAddPlace = () => {
     if (selectedDay !== null) {
       setFormData((prevFormData) => {
         const newFormData = [...prevFormData];
+        const currentPlaces = newFormData[selectedDay - 1].places;
         const newPlace = {
-          city: '',
+          id: currentPlaces.length + 1,
           place: '',
           note: '',
           photo: '',
           tags: '',
         };
-        newFormData[selectedDay - 1].places.push(newPlace);
+        newFormData[selectedDay - 1].places = [...currentPlaces, newPlace];
         return newFormData;
       });
     }
@@ -115,31 +128,75 @@ const TripPlanPosting = () => {
     //   });
   };
 
-  const onImgUpload = (event: React.MouseEvent) => {
-    event.preventDefault();
-    UploadPhotoIconRef.current?.click();
-  };
-
-  const onImgChange = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-    day: number,
-  ) => {
-    const file = event.target.files ? event.target.files[0] : null;
-    if (file) {
-      const fileUrl = URL.createObjectURL(file);
-
-      setFormData((prevFormData) => {
-        const newFormData = [...prevFormData];
-        const firstPlace = newFormData[day].places[0];
-        newFormData[day].places[0] = { ...firstPlace, photo: fileUrl };
-        return newFormData;
-      });
-    }
-  };
-
   const createDaysInput = () => {
-    return (
-      <Styled.TotalWrapper>
+    return selectedDay !== null
+      ? formData[selectedDay - 1].places.map((place) => (
+          <Styled.InputContainer key={`day-${selectedDay}-place-${place.id}`}>
+            <Styled.PlaceInputContainer>
+              <Styled.PlaceNumber>{place.id}</Styled.PlaceNumber>
+              <Styled.PlaceInput
+                type="text"
+                {...register(`day${selectedDay}.places[${place.id}].place`)}
+                placeholder="방문할 장소를 선택해주세요"
+                onChange={(event) => {
+                  if (selectedDay !== null) {
+                    handleInputChange(selectedDay, 'place', event);
+                  }
+                }}
+                value={selectedPlace || ''}
+                onClick={() => setIsPlaceModalOpen({ isPaneOpenLeft: true })}
+              />
+              <Styled.SlidingPane
+                className="citymodal"
+                closeIcon={<SlArrowLeft fontSize="15" />}
+                isOpen={isPlaceModalOpen.isPaneOpenLeft}
+                onRequestClose={() => {
+                  setIsPlaceModalOpen({ isPaneOpenLeft: false });
+                }}
+                width="22.5rem">
+                <TripPlanPlaceModal
+                  selectedPlace={selectedPlace}
+                  onPlaceSelection={handlePlaceModalSelection}
+                  onCloseModal={closePlaceListModal}
+                />
+              </Styled.SlidingPane>
+            </Styled.PlaceInputContainer>
+            <Styled.NoteInput
+              {...register(`day${selectedDay}.note`)}
+              placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
+              onChange={(event) => {
+                if (selectedDay !== null) {
+                  handleInputChange(selectedDay, 'note', event);
+                }
+              }}
+            />
+            <TripPlanUploadImages
+              setFormData={setFormData}
+              selectedDay={selectedDay}
+            />
+            <TripPlanAddTags />
+          </Styled.InputContainer>
+        ))
+      : null;
+  };
+
+  return (
+    <Styled.Wrapper>
+      <Styled.Container>
+        <Styled.DateDisplay>
+          <div className="date">
+            {formattedStartDate} - {formattedEndDate}
+          </div>
+          <div className="nightndays">{getNightAndDays()}</div>
+          <CalendarToday className="calendar-icon" />
+        </Styled.DateDisplay>
+
+        <TripPlanUploadMainImages setFormData={setFormData} />
+
+        <Styled.GoogleMapsContainer>
+          <TripPlanGoogleMaps />
+        </Styled.GoogleMapsContainer>
+
         <Styled.DaysContainer>
           {Array.from({ length: totalTripDays }, (_, i) => {
             const day = i + 1;
@@ -154,116 +211,36 @@ const TripPlanPosting = () => {
             );
           })}
         </Styled.DaysContainer>
-        <Styled.InputContainer>
-          <Styled.PostingForm onSubmit={handleSubmit(onSubmit)}>
-            <PlaceIcon
-              className="city-icon"
-              fontSize="small"
-              style={{ fill: '#b4f34c' }}
-            />
-            <Styled.CityInput
-              type="text"
-              {...register(`day${selectedDay}.city`)}
-              onChange={(event) => {
-                if (selectedDay !== null) {
-                  handleInputChange(selectedDay, 'city', event);
-                }
-              }}
-            />
 
-            <Styled.PlaceInputContainer>
-              <Styled.PlaceNumber>1</Styled.PlaceNumber>
-              <Styled.PlaceInput
-                type="text"
-                {...register(`day${selectedDay}.place`)}
-                placeholder="방문할 장소를 선택해주세요"
-                onChange={(event) => {
-                  if (selectedDay !== null) {
-                    handleInputChange(selectedDay, 'place', event);
-                  }
-                }}
-              />
-            </Styled.PlaceInputContainer>
-
-            <Styled.NoteInput
-              {...register(`day${selectedDay}.note`)}
-              placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
-              onChange={(event) => {
-                if (selectedDay !== null) {
-                  handleInputChange(selectedDay, 'note', event);
-                }
-              }}
-            />
-
-            <Styled.UploadPhotoIcon onClick={onImgUpload}>
-              <AddAPhotoIcon className="photo-icon" />
-              <p className="photo-text">사진 업로드</p>
-            </Styled.UploadPhotoIcon>
-            <Styled.PhotoInput
-              ref={UploadPhotoIconRef}
-              type="file"
-              accept="image/*"
-              name="file"
-              onChange={(event) =>
-                selectedDay !== null && onImgChange(event, selectedDay - 1)
+        <Styled.CityInputContainer>
+          <Styled.CityInput
+            type="text"
+            {...register(`day${selectedDay}.city`)}
+            onChange={(event) => {
+              if (selectedDay !== null) {
+                handleInputChange(selectedDay, 'city', event);
               }
-            />
+            }}
+          />
+          <PlaceIcon
+            className="city-icon"
+            fontSize="small"
+            style={{ fill: '#b4f34c' }}
+          />
+        </Styled.CityInputContainer>
 
-            <Styled.TagsInputContainer>
-              <Styled.TagsInputTitle>
-                <LocalOfferIcon
-                  className="tag-icon"
-                  style={{
-                    width: '1.1rem',
-                    height: '1.1rem',
-                    fill: '#b4f34c',
-                  }}
-                />
-                여행 태그 추가하고 포인트 받아가세요!
-              </Styled.TagsInputTitle>
-              <Styled.TagsAddButton>
-                <AddCircleIcon
-                  style={{
-                    width: '1.2rem',
-                    height: '1.2rem',
-                    fill: '#b4f34c',
-                    marginRight: '0.3rem',
-                  }}
-                />{' '}
-                태그 추가하기 <img src={speechBubble} aria-label="add tag" />
-              </Styled.TagsAddButton>
-              <Styled.TagsInput />
-              {/* <TripPlanTagModal open={open} onClose={handleClose}/> */}
-            </Styled.TagsInputContainer>
-          </Styled.PostingForm>
-        </Styled.InputContainer>
-      </Styled.TotalWrapper>
-    );
-  };
-
-  return (
-    <Styled.Wrapper>
-      <TripPlanPrevButton />
-      <Styled.Container>
-        <Styled.DateDisplay>
-          <div className="date">
-            {formattedStartDate} - {formattedEndDate}
-          </div>
-          <div className="nightndays">{getNightAndDays()}</div>
-          <CalendarToday className="calendar-icon" />
-        </Styled.DateDisplay>
-
-        <Styled.GoogleMapsContainer>
-          <TripPlanGoogleMaps />
-        </Styled.GoogleMapsContainer>
-
-        <Styled.InputContainer>{createDaysInput()}</Styled.InputContainer>
+        <Styled.PostingForm onSubmit={handleSubmit(onSubmit)}>
+          {createDaysInput()}
+        </Styled.PostingForm>
       </Styled.Container>
 
-      <Styled.PlaceAddButton onClick={() => handleAddPlace}>
+      <TripPlanSetBudget />
+      <TripPlanAddHashtags />
+
+      <Styled.AddPlaceButton onClick={handleAddPlace}>
         <GoPlusCircle fontSize="28" style={{ fill: '#b4f34c' }} />
         장소 추가
-      </Styled.PlaceAddButton>
+      </Styled.AddPlaceButton>
 
       <Styled.SubmitButtonContainer>
         <Button type="button" className="tempsave-btn" variants="gray">

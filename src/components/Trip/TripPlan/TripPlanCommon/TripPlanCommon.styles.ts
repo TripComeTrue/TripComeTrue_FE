@@ -6,7 +6,7 @@ export const PrevButton = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
 
-  padding: 1rem 0;
+  padding: 1rem 1rem;
   bottom: 0;
 
   background-color: white;
@@ -19,12 +19,19 @@ export const PrevButton = styled.div`
 export const NextButton = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   position: fixed;
 
-  width: 20.625rem;
-  padding: 1rem 0;
+  width: 360px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+  height: 4.5rem;
+
   bottom: 0;
-  gap: 0.5rem;
+  margin: 0 auto;
+  padding: 0 1rem;
 
   background-color: white;
 `;
@@ -34,6 +41,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
+  width: 100%;
   padding: 0.2rem 1.2rem;
 `;
 

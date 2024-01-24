@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
-import { SlArrowDown } from 'react-icons/sl';
+import { useEffect, useRef, useState } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import * as Styled from './CityListModal.styles';
+import * as Styled from './TripPlanCityModal.styles';
 import { Button } from '@/components/common';
 import image from '../../TripPlanCountry/constants/france.png';
-import { SelectedCitiesProps } from './CityListModal.types';
+import { SelectedCitiesProps } from './TripPlanCityModal.types';
 
-const CityListModal: React.FC<SelectedCitiesProps> = ({
+const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
   selectedCities,
   onCitySelection,
   onCloseModal,
@@ -14,7 +13,7 @@ const CityListModal: React.FC<SelectedCitiesProps> = ({
   const [selectedCitiesInModal, setSelectedCitiesInModal] = useState<string[]>(
     [],
   );
-  const selectedCountries = [
+  const countryAndCities = [
     {
       name: '프랑스',
       cities: ['파리', '리옹', '마르세유', '니스'],
@@ -32,8 +31,15 @@ const CityListModal: React.FC<SelectedCitiesProps> = ({
       cities: ['베이징', '상하이', '광저우', '선전'],
     },
   ];
+
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  const handleArrowClick = () => {
+    selectRef.current?.click();
+  };
+
   const [selectedCountry, setSelectedCountry] = useState<string>(
-    selectedCountries[0].name,
+    countryAndCities[0].name,
   );
 
   const selectCountry = (country: string) => {
@@ -41,7 +47,7 @@ const CityListModal: React.FC<SelectedCitiesProps> = ({
   };
 
   const citiesInSelectedCountry =
-    selectedCountries.find((country) => country.name === selectedCountry)
+    countryAndCities.find((country) => country.name === selectedCountry)
       ?.cities || [];
 
   const selectCity = (cityName: string) => {
@@ -65,15 +71,13 @@ const CityListModal: React.FC<SelectedCitiesProps> = ({
           className="select-citydetail"
           onChange={(e) => selectCountry(e.target.value)}
           value={selectedCountry}>
-          {selectedCountries.map((country) => (
+          {countryAndCities.map((country) => (
             <option key={country.name} value={country.name}>
               {country.name}
             </option>
           ))}
         </Styled.SelectCountries>
-        <span className="select-arrow">
-          <SlArrowDown style={{ color: '#505050' }} />
-        </span>
+        <Styled.ArrowIcon onClick={handleArrowClick} />
       </Styled.SelectedCountriesContainer>
 
       <Styled.ShowCitiesContainer>
@@ -116,4 +120,4 @@ const CityListModal: React.FC<SelectedCitiesProps> = ({
   );
 };
 
-export default CityListModal;
+export default TripPlanCityModal;

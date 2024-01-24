@@ -25,7 +25,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   .checkbox-text {
-    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     color: ${({ theme }) => theme.text.gray};
   }
@@ -47,9 +47,11 @@ export const EachDayContainer = styled.div`
 export const EachDayInputWrapper = styled.div`
   position: relative;
 
+  width: 100%;
+
   .city-icon {
     position: absolute;
-    top: 0.4rem;
+    top: 0.5rem;
     left: 0.5rem;
 
     width: 1.2rem;
@@ -74,17 +76,20 @@ export const SlidingPane = styled(ReactSlidingPane)`
 `;
 
 export const EachDayInput = styled.input`
-  width: 20rem;
-  height: 2rem;
+  width: 100%;
+  height: 2.3rem;
   padding: 1rem 1.8rem;
 
   border: 1px solid #b4f34c;
   border-radius: 0.5rem;
-  outline-color: #b4f34c;
 
-  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
+
+  &:focus {
+    border: 1px solid #b4f34c;
+  }
 `;
 
 export const EachDayText = styled.span`

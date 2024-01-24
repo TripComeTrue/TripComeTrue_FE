@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
- 
+
 import { useEffect, useState } from 'react';
 import { Modal as MuiModal } from '@mui/material';
 import { IoCloseCircle } from 'react-icons/io5';
-import { TripPlanTagModalProps } from './TripPlanTagModal.types';
+import { TripPlanTagModalProps } from './TripPlanTagsModal.types';
 import {
   SelectModalContent,
   SelectModalWrap,
 } from '@/components/common/Modal/SelectModal.styles';
 import { Button, Text } from '@/components/common';
 import { TRIP_TAGS } from '@/constants/hashtags';
-import * as Styled from './TripPlanTagModal.styles';
+import * as Styled from './TripPlanTagsModal.styles';
 
 /**
  * 여행 태그 종류를 선택하는 모달 입니다.
@@ -21,7 +21,7 @@ import * as Styled from './TripPlanTagModal.styles';
  * @param onSubmit form이 submit 되었을때 실행될 함수를 전달합니다.(폼을 제출할때 할 일을 정하는 용도)
  * @returns 모달 컴포넌트를 반환 합니다.
  */
-function TripPlanTagModal({
+function TripPlanTagsModal({
   open,
   onClose,
   register,
@@ -98,4 +98,4 @@ function TripPlanTagModal({
   );
 }
 
-export default TripPlanTagModal;
+export default TripPlanTagsModal;

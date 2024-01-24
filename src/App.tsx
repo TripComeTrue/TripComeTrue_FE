@@ -3,12 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
-import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
-import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import {
   TripDetail,
   TripHome,
   TripList,
+  TripPlan,
   TripReviewWriteEdit,
   TripReviewWriteNew,
 } from '@/pages/Trip';
@@ -26,12 +25,13 @@ import {
   PlaceReviewWriteEdit,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
-import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
 
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
+import TripPlanAddTags from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsForImage/TripPlanAddTagsForImage';
+import TripPlanAddPlace from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddPlace/TripPlanAddPlace';
 import {
   ChangePassword,
   ConfirmPassword,
@@ -65,6 +65,17 @@ function App() {
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
+          <Route path="detail/:id" element={<TripDetail />} />
+          <Route
+            path="detail/:id/review/write"
+            element={<TripReviewWriteNew />}
+          />
+          <Route
+            path="detail/:id/review/edit"
+            element={<TripReviewWriteEdit />}
+          />
+          <Route path="plan" element={<TripPlan />} />
+          {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
             path="detail/:tripRecordId/review/:reviewId/write"
@@ -77,7 +88,9 @@ function App() {
           <Route path="plan" element={<TripPlanDate />} />
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
-          <Route path="posting" element={<TripPlanPosting />} />
+          <Route path="posting" element={<TripPlanPosting />} /> */}
+          <Route path="addtag" element={<TripPlanAddTags />} />
+          <Route path="addplace" element={<TripPlanAddPlace />} />
         </Route>
         <Route path="/detailfeed/*">
           <Route path="city" element={<City />} />

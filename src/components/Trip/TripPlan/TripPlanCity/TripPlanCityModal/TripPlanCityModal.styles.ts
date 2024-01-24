@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import { EachCityProps } from './CityListModal.types';
+import { SlArrowDown } from 'react-icons/sl';
+import { EachCityProps } from './TripPlanCityModal.types';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
+  margin-top: -1.2rem;
   padding: 0;
 
   font-size: ${({ theme }) => theme.fontSizes.sm};
@@ -17,12 +19,6 @@ export const SelectedCountriesContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-
-  .select-arrow {
-    position: absolute;
-    top: 0.7rem;
-    right: 0.6rem;
-  }
 `;
 
 export const SelectCountries = styled.select`
@@ -37,9 +33,19 @@ export const SelectCountries = styled.select`
   outline: none;
   border: 1px solid #b4f34c;
   border-radius: 0.5rem;
+  background-color: ${({ theme }) => theme.brand.white};
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.text.black};
+`;
+
+export const ArrowIcon = styled(SlArrowDown)`
+  position: absolute;
+  right: 5%;
+  top: 38%;
+  transform: translateY(-50%);
+
+  pointer-events: none;
 `;
 
 export const ShowCitiesContainer = styled.div`
