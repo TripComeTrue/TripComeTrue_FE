@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Shorts, Spots } from '@/components/common';
 import SearchKeyword from '../SearchKeyword/SearchKeyword';
 import * as Styled from './SearchNon.styles';
 import { HomeShortsList, HomeTopReview } from '@/apis/home';
 
 const SearchNon = () => {
+  const [searchParams] = useSearchParams();
+  const queryData = searchParams.get('query');
   const [shortsData, setShortsData] = useState([]);
   const [hotReview, setHotReview] = useState([]);
 
@@ -39,7 +42,7 @@ const SearchNon = () => {
   return (
     <div>
       <Styled.SearchNonWrap>
-        <span>&apos;치아아이이잉마이이잉&apos;</span>에 대한
+        <span>&apos;{queryData}&apos;</span>에 대한
         <br />
         검색 결과가 없습니다.
         <p>단어의 철자를 확인해주세요</p>
