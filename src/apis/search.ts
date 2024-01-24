@@ -5,3 +5,9 @@ export const SearchCityInfo = async (cityName?: string) => {
 
   return res.data.data;
 };
+
+export const SearchSpotInfo = async (placeName?: string) => {
+  const res = await client.get(`v1/places/search?placeName=${placeName}`);
+
+  return res.data.data;
+};
