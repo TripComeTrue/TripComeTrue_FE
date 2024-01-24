@@ -63,3 +63,7 @@ export const maxWidth = css`
     max-width: none;
   }
 `;
+
+export const tabBarHeight = css`
+  min-height: calc(100vh - 7.5625rem);
+`;
