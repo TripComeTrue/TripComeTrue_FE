@@ -45,6 +45,12 @@ const SearchCity = () => {
     return null;
   }
 
+  const ExchangeRate = (value: string): string | null => {
+    const matchResult = value.match(/1:(\d+(\.\d+)?)/);
+
+    return matchResult ? matchResult[1] : null;
+  };
+
   return (
     <Styled.CityContainer>
       <SubTitle fontSize={14} variant="more">
@@ -107,9 +113,11 @@ const SearchCity = () => {
             환율 정보
           </Styled.InfoWrapTitle>
           <Styled.InfoMoneyWrap>
-            <p>1 {cityData.curUnit}</p>
+            <p>1 원</p>
             <div>
-              KRW <br /> = 38원
+              = {ExchangeRate('1:9.786')}
+              <br />
+              {cityData.curUnit}
             </div>
           </Styled.InfoMoneyWrap>
         </Styled.InfoWrap>
