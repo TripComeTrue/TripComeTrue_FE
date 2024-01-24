@@ -11,3 +11,9 @@ export const SearchSpotInfo = async (placeName?: string) => {
 
   return res.data.data;
 };
+
+export const SearchCreatorInfo = async (query?: string) => {
+  const res = await client.get(`v1/members/list?query=${query}`);
+
+  return res.data;
+};
