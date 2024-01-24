@@ -9,12 +9,12 @@ import useSubmitImages from '@/hooks/common/useSubmitImages';
 const PlaceReviewEdit = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [content, setContent] = useState('');
-  const { placeReviewId } = useParams() as { placeReviewId: string };
+  const { reviewId } = useParams() as { reviewId: string };
   const { handleDeleteImages } = useDeleteImages();
   const { handleSubmitImages } = useSubmitImages(files, setFiles);
   const { data: placeReviewData } = useQuery({
     queryKey: ['PlaceReviewData'],
-    queryFn: () => getPlaceReview(placeReviewId),
+    queryFn: () => getPlaceReview(reviewId),
   });
 
   const { mutate: putReviewMutate } = useMutation({
@@ -24,7 +24,7 @@ const PlaceReviewEdit = () => {
     }: {
       imageUrl: string;
       contentValue: string;
-    }) => putPlaceReview(placeReviewId, { imageUrl, content: contentValue }),
+    }) => putPlaceReview(reviewId, { imageUrl, content: contentValue }),
   });
 
   // 리뷰 수정하기 함수

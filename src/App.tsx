@@ -107,7 +107,7 @@ function App() {
             element={<PlaceReviewWrite />}
           />
           <Route
-            path="spot/:placeId/review/:placeReviewId/edit"
+            path="spot/:placeId/review/:reviewId/edit"
             element={<PlaceReviewEdit />}
           />
           <Route
