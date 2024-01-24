@@ -5,10 +5,25 @@ import starIcon from '/starIcon.svg';
 import * as Styled from './SearchCity.styles';
 import { SearchCityInfo } from '@/apis/search';
 
+interface CityDataType {
+  cityId: number;
+  name: string;
+  language: string;
+  timeDifference: string;
+  voltage: string;
+  visa?: string;
+  curUnit: string;
+  exchangeRate: string;
+  weatherRecommendation: string;
+  weatherDescription: string;
+  country: string;
+  imageUrl: string;
+}
+
 const SearchCity = () => {
   const [searchParams] = useSearchParams();
   const queryCity = searchParams.get('query');
-  const [cityData, setCityData] = useState([]);
+  const [cityData, setCityData] = useState<CityDataType | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +40,10 @@ const SearchCity = () => {
   }, [queryCity]);
 
   console.log(cityData);
+
+  if (!cityData) {
+    return null;
+  }
 
   return (
     <Styled.CityContainer>
