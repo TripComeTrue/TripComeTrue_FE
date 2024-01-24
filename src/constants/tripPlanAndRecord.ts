@@ -19,12 +19,25 @@ export const Months = [
 export const Years = _.range(2010, getYear(new Date()) + 10);
 
 export const Continents = [
-  { continent: 'ALL', continentName: '전체' },
-  { continent: 'KOREA', continentName: '대한민국' },
-  { continent: 'ASIA', continentName: '아시아' },
-  { continent: 'AMERICA', continentName: '아메리카' },
-  { continent: 'EUROPE', continentName: '유럽' },
-  { continent: 'OCEANIA', continentName: '오세아니아' },
+  {
+    mainCategory: 'OVERSEAS',
+    mainCategoryName: '해외',
+    subCategories: [
+      { continent: 'ALL', continentName: '전체' },
+      { continent: 'ASIA', continentName: '아시아' },
+      { continent: 'AMERICA', continentName: '아메리카' },
+      { continent: 'EUROPE', continentName: '유럽' },
+      { continent: 'OCEANIA', continentName: '오세아니아' },
+    ],
+  },
+  {
+    mainCategory: 'DOMESTIC',
+    mainCategoryName: '국내',
+    subCategories: [
+      { continent: 'ALL', continentName: '전체' },
+      { continent: 'KOREA', continentName: '대한민국' },
+    ],
+  },
 ];
 
 export const BudgetOptions = [

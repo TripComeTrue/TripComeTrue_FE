@@ -7,24 +7,24 @@ import { Continents } from '@/constants/tripPlanAndRecord';
 
 const TripPlanCountry = () => {
   const [isOverseas, setIsOverseas] = useState<boolean>(true);
-  const [continent, setContinent] = useState<string>('all');
+  const [continent, setContinent] = useState<string>('ALL');
   const [country, setCountry] = useState<string[]>([]);
 
-  // default : 해외 - '전체' 대륙
-  const param = isOverseas && continent === 'all' ? '' : continent;
+  // default : 해외 - '전체' 대륙, 만약 국내 선택시 대한민국이 나옴.
+  const param = isOverseas ? (continent === 'ALL' ? '' : continent) : 'KOREA';
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['TripCountries', param],
-    queryFn: () => getTripCountries(param),
+    queryFn: () => getTripCountries(param, isOverseas),
   });
 
   const selectOverseas = (isOverseasValue: boolean) => {
     setIsOverseas(isOverseasValue);
-    setContinent('all');
+    setContinent('ALL');
   };
 
   const selectContinent = (continentName: string) => {
-    setContinent(continentName || 'all');
+    setContinent(continentName || 'ALL');
   };
 
   const selectCountry = (countryName: string) => {
@@ -74,22 +74,34 @@ const TripPlanCountry = () => {
             el: '.swiper-scrollbar',
             hide: false,
           }}>
-          {Continents.map((continentName) => (
-            <Styled.ContinentWrapper key={continentName.continent}>
-              <button
-                type="button"
-                className={`continent ${
-                  continent === continentName.continent ? 'selected' : ''
-                }`}
-                onClick={() => selectContinent(continentName.continent)}>
-                {continentName.continentName}
-              </button>
-            </Styled.ContinentWrapper>
-          ))}
+          {Continents.filter((mainCategory) =>
+            isOverseas
+              ? mainCategory.mainCategory === 'OVERSEAS'
+              : mainCategory.mainCategory === 'DOMESTIC',
+          )
+            .flatMap((mainCategory) =>
+              isOverseas
+                ? mainCategory.subCategories
+                : mainCategory.subCategories.filter(
+                    (sub) => sub.continent === 'ALL',
+                  ),
+            )
+            .map((subCategory) => (
+              <Styled.ContinentWrapper key={subCategory.continent}>
+                <button
+                  type="button"
+                  className={`continent ${
+                    continent === subCategory.continent ? 'selected' : ''
+                  }`}
+                  onClick={() => selectContinent(subCategory.continent)}>
+                  {subCategory.continentName}
+                </button>
+              </Styled.ContinentWrapper>
+            ))}
         </Styled.ContinentSwiper>
 
         <Styled.CountryWrapper country={country}>
-          {data?.data.map((item: CountryData) => (
+          {data?.map((item: CountryData) => (
             <Styled.CountryContainer key={item.country}>
               <button type="button" onClick={() => selectCountry(item.country)}>
                 <img src={item.countryImageUrl} alt="country" />

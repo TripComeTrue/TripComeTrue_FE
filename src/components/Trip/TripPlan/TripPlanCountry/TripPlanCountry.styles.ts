@@ -118,6 +118,7 @@ export const CountryContainer = styled.div`
     height: 7rem;
     border: 2px solid white;
     overflow: hidden;
+    border-radius: 1rem;
 
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
@@ -140,6 +141,7 @@ export const CountryContainer = styled.div`
 
     line-height: 1rem;
     color: ${({ theme }) => theme.brand.white};
+    text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.9);
   }
 
   .country-ko {
