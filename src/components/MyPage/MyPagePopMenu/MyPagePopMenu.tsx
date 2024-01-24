@@ -6,7 +6,12 @@ import { Text } from '@/components/common';
 import * as Styled from './MyPagePopMenu.styles';
 import { MyPagePopMenuProps } from './MyPagePopMenu.types';
 
-function MyPagePopMenu({ vertical, onOpenShare }: MyPagePopMenuProps) {
+function MyPagePopMenu({
+  vertical,
+  onOpenShare,
+  plan,
+  setPlanItem,
+}: MyPagePopMenuProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -14,10 +19,12 @@ function MyPagePopMenu({ vertical, onOpenShare }: MyPagePopMenuProps) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+    setPlanItem(undefined);
   };
   const handleShareClick = () => {
     onOpenShare();
     handleClose();
+    setPlanItem(plan);
   };
 
   return (

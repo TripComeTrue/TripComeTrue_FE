@@ -3,7 +3,12 @@ import { MyPagePlanItemProps } from './MyPagePlanItem.types';
 import MyPagePopMenu from '../MyPagePopMenu/MyPagePopMenu';
 import * as Styled from './MyPagePlanItem.styles';
 
-function MyPagePlanItem({ plan, onOpenShare }: MyPagePlanItemProps) {
+function MyPagePlanItem({
+  plan,
+  onOpenShare,
+  setPlanItem,
+}: MyPagePlanItemProps) {
+  if (!plan) return null;
   return (
     <Styled.MyPagePlanItemWrap>
       <div>
@@ -18,7 +23,11 @@ function MyPagePlanItem({ plan, onOpenShare }: MyPagePlanItemProps) {
         </Styled.MyPagePlanDate>
       </div>
       <div>
-        <MyPagePopMenu onOpenShare={onOpenShare} />
+        <MyPagePopMenu
+          onOpenShare={onOpenShare}
+          plan={plan}
+          setPlanItem={setPlanItem}
+        />
       </div>
     </Styled.MyPagePlanItemWrap>
   );
