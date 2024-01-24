@@ -8,6 +8,7 @@ export { default as SubTitle } from '@/components/common/SubTitle/SubTitle';
 export { default as Modal } from '@/components/common/Modal/Modal';
 export { default as SelectModal } from '@/components/common/Modal/SelectModal';
 export { default as ShortsModal } from '@/components/common/Modal/ShortsModal';
+export { default as AuthModal } from '@/components/common/Modal/AuthModal';
 export { default as Share } from '@/components/common/Share/Share';
 export { default as Bookmark } from '@/components/common/Bookmark/Bookmark';
 export { default as Avatar } from '@/components/common/Avatar/Avatar';
