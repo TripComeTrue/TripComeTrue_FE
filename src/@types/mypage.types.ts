@@ -15,12 +15,31 @@ export interface MyTripReview {
   location: string;
 }
 
-export interface MyTripRecordReview {
-  id: string;
-  tripRecordId: string;
-  postTitle: string;
-  averageRating: number;
+export interface MyTripRecordReviewResBody {
+  code: number;
+  data: MyTripRecordReviewData;
+}
+
+export interface MyTripRecordReviewData {
+  totalCount: number;
+  nowPageNumber: number;
+  isFirst: boolean;
+  isLast: boolean;
+  tripRecordReviews: TripRecordReview[];
+}
+
+export interface TripRecordReview {
+  tripRecordId: number;
+  tripRecordTitle: string;
+  tripRecordReviewId: number;
+  imageUrl: string;
+  memberId: number;
+  nickname: string;
+  ratingScore: number;
   content: string;
+  likeCount: number;
+  amILike: boolean;
+  createdAt: string;
 }
 
 export interface MyPlaceReview {

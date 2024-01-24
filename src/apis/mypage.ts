@@ -6,7 +6,7 @@ import {
   IntroductionReqBody,
   IntroductionResBody,
   MemberDetailResBody,
-  MyTripRecordReview,
+  MyTripRecordReviewResBody,
   NicknameReqBody,
   NicknameResBody,
   Notification,
@@ -38,10 +38,9 @@ export const getMyPlaceReview = async () => {
 };
 
 export const getMyTripRecordReview = async () => {
-  const { data } = await client.get<{
-    message: string;
-    data: MyTripRecordReview[];
-  }>('/mypage/trip-record');
+  const { data } = await client.get<MyTripRecordReviewResBody>(
+    '/v1/trip-records/reviews/my',
+  );
   return data;
 };
 

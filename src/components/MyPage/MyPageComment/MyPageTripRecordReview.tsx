@@ -14,28 +14,31 @@ function MyPageTripRecordReview() {
 
   return (
     <div>
-      {data?.data.length === 0 && <MyPageItemNone />}
-      {data.data.map((item) => (
-        <TripRecordReviewCard key={item.id}>
+      {data.data.tripRecordReviews.length === 0 && <MyPageItemNone />}
+      {data.data.tripRecordReviews.map((item) => (
+        <TripRecordReviewCard key={item.tripRecordReviewId}>
           <Styled.TripRecordReviewTop>
             <TripRecordReviewCard.Title>
-              {item.postTitle}
+              {item.tripRecordTitle}
             </TripRecordReviewCard.Title>
             <TripRecordReviewCard.ActionsModal
               onClickModify={() => {
                 navigate(
-                  `/trip/detail/${item.tripRecordId}/review/${item.id}/edit`,
+                  `/trip/detail/${item.tripRecordId}/review/${item.tripRecordReviewId}/edit`,
                 );
               }}
               onClickDelete={() => {}}
             />
           </Styled.TripRecordReviewTop>
           <TripRecordReviewCard.Main
-            nickname="룰루랄라"
-            averageRating={item.averageRating}
+            nickname={item.nickname}
+            averageRating={item.ratingScore}
             content={item.content}
           />
-          <TripRecordReviewCard.Rating disabled={false} myRatingScore={5} />
+          <TripRecordReviewCard.Rating
+            disabled={false}
+            myRatingScore={item.ratingScore}
+          />
         </TripRecordReviewCard>
       ))}
     </div>
