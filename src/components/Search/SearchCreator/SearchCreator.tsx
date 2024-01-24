@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { SubTitle } from '@/components/common';
-import Creator from '@/components/common/Creator/Creator';
+// import Creator from '@/components/common/Creator/Creator';
 import * as Styled from './SearchCreator.styles';
 import { SearchCreatorInfo } from '@/apis/search';
 
@@ -40,7 +40,7 @@ const SearchCreator = () => {
 
       {creatorData && Object.keys(creatorData).length !== 0 ? (
         <div>
-          {/* 
+          {/*  여기 map 돌리기.. type 지정도 해야 함. 예외 처리만 했음
           <Styled.CreatorContent>
             <Creator creator={creatorData.members} starRate={creatorData.members.averageRating} />
           </Styled.CreatorContent>
