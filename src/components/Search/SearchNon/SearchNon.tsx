@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Shorts, Spots } from '@/components/common';
 import SearchKeyword from '../SearchKeyword/SearchKeyword';
 import * as Styled from './SearchNon.styles';
-import { HomeShortsList, HomeTopCity } from '@/apis/home';
+import { HomeShortsList, HomeTopReview } from '@/apis/home';
 
 const SearchNon = () => {
   const [shortsData, setShortsData] = useState([]);
@@ -25,7 +25,7 @@ const SearchNon = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await HomeTopCity('overseas');
+        const data = await HomeTopReview('overseas');
         setHotReview(data);
       } catch (error) {
         console.error(error);

@@ -7,9 +7,9 @@ import Bookmark from '../Bookmark/Bookmark';
 import pxToRem from '@/utils/pxToRem';
 
 const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
-  postTitle,
-  postImg,
-  bookmark,
+  tripRecordTitle,
+  imageUrl,
+  storedCount,
   reviews,
   sort,
   fontSize,
@@ -23,9 +23,9 @@ const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
   return (
     <>
       <Styled.SliderImg>
-        <img src={postImg} alt="img" />
+        <img src={imageUrl} alt="img" />
         <Styled.Bookmark>
-          <Bookmark count={bookmark} />
+          <Bookmark count={storedCount} />
         </Styled.Bookmark>
         {isDelete && (
           <Styled.DeleteBtn type="button" onClick={onDelete}>
@@ -39,19 +39,19 @@ const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
           case 'left':
             return (
               <Styled.SliderTitleSortLeft style={titleStyle}>
-                {postTitle}
+                {tripRecordTitle}
               </Styled.SliderTitleSortLeft>
             );
           case 'center':
             return (
               <Styled.SliderTitle style={titleStyle}>
-                {postTitle}
+                {tripRecordTitle}
               </Styled.SliderTitle>
             );
           case 'space':
             return (
               <Styled.SliderTitleSpace style={titleStyle}>
-                <Styled.SpaceTitle>{postTitle}</Styled.SpaceTitle>
+                <Styled.SpaceTitle>{tripRecordTitle}</Styled.SpaceTitle>
                 <Styled.SpaceImg>
                   <img src={messageIcon} alt="img" />
                   {reviews}
@@ -61,7 +61,7 @@ const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
           default:
             return (
               <Styled.SliderTitle style={titleStyle}>
-                {postTitle}
+                {tripRecordTitle}
               </Styled.SliderTitle>
             );
         }
