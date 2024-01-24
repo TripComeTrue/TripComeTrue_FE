@@ -8,10 +8,10 @@ import {
 import { GoChevronRight } from 'react-icons/go';
 import { Avatar, Text } from '@/components/common';
 import * as Styled from './MyPageTopProfile.styles';
-import { setCookie } from '@/utils/cookie';
 import { getMemberDetail } from '@/apis/mypage';
+import { MyPageTopProfileProps } from './MyPageTopProfile.types';
 
-function MyPageTopProfile() {
+function MyPageTopProfile({ handleOpen }: MyPageTopProfileProps) {
   const navigate = useNavigate();
   const { data } = useSuspenseQuery({
     queryKey: ['member/detail'],
@@ -19,10 +19,6 @@ function MyPageTopProfile() {
   });
   const onClickEdit = () => {
     navigate('confirm-password');
-  };
-  const onClickLogout = () => {
-    setCookie('accessToken', '', 0);
-    navigate('/');
   };
 
   return (
@@ -49,7 +45,7 @@ function MyPageTopProfile() {
             size="sm"
             variants="text"
             rounded="sm"
-            onClick={onClickLogout}
+            onClick={handleOpen}
             type="button">
             로그아웃
           </Styled.MyPageTopProfileBtn>
