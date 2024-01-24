@@ -45,6 +45,7 @@ import {
   WishListMore,
 } from './pages/MyPage';
 import { MyPageLayout } from './components/MyPage';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -130,6 +131,7 @@ function App() {
           <Route path="point" element={<TripPoint />} />
           <Route path="faq" element={<Faq />} />
         </Route>
+        <Route path="404" element={<NotFound />} />
       </Route>
     </Routes>
   );
