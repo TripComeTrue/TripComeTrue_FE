@@ -40,19 +40,21 @@ const TripHomeBody = () => {
     navigate(`/trip/list?${param}`);
   };
 
+  console.log(ShortsData);
+
   return (
     <Styled.Container>
       <div>
         <SubTitle margin="0 0 0.875rem" icon={StarIcon}>
           인기 크리에이터 일정 따라가기!
         </SubTitle>
-        <TripCarousel size={170} tripRecordsData={tripRecordsDefault?.data} />
+        <TripCarousel size={170} tripRecordsData={tripRecordsDefault} />
       </div>
       <div>
         <SubTitle margin="0 0 0.875rem" icon={StarIcon}>
           인기 여행지 쇼츠보기
         </SubTitle>
-        <ShortsCarousel shortsData={ShortsData?.data} />
+        <ShortsCarousel shortsData={ShortsData} />
       </div>
       <div>
         <SubTitle
@@ -63,10 +65,10 @@ const TripHomeBody = () => {
           100만원으로 다녀온 인생 여행
         </SubTitle>
         <Styled.Thumbnail
-          src="https://source.unsplash.com/random"
-          alt="Thumbnail"
+          src="/images/theme1.jpg"
+          alt="100만원으로 다녀온 인생 여행 썸네일"
         />
-        <TripCarousel tripRecordsData={tripRecordsExpense?.data} />
+        <TripCarousel tripRecordsData={tripRecordsExpense} />
       </div>
       <div>
         <SubTitle
@@ -77,10 +79,10 @@ const TripHomeBody = () => {
           1박2일 여행 일정 모음
         </SubTitle>
         <Styled.Thumbnail
-          src="https://source.unsplash.com/random"
-          alt="Thumbnail"
+          src="/images/theme2.jpg"
+          alt="1박 2일 여행 모음 썸네일"
         />
-        <TripCarousel tripRecordsData={tripRecordsTotalDays?.data} />
+        <TripCarousel tripRecordsData={tripRecordsTotalDays} />
       </div>
     </Styled.Container>
   );

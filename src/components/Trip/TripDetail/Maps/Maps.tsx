@@ -3,6 +3,7 @@ import {
   LoadScript,
   MarkerF,
   PolylineF,
+  useJsApiLoader,
 } from '@react-google-maps/api';
 import { Fragment, useEffect, useState } from 'react';
 import GOOGLE_MAPS from '@/constants/map';
@@ -37,6 +38,11 @@ const Maps = ({ daysData }: MapsProps) => {
     ],
   };
 
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: GOOGLE_MAPS,
+  });
+
   const onLoad = (mapData: google.maps.Map) => {
     setMap(mapData);
   };
@@ -55,7 +61,7 @@ const Maps = ({ daysData }: MapsProps) => {
   }, [map, locations]);
 
   return (
-    <LoadScript googleMapsApiKey={GOOGLE_MAPS}>
+    isLoaded && (
       <GoogleMap
         mapContainerStyle={{ width: '100%', height: '11.25rem' }}
         center={defaultCenter}
@@ -94,7 +100,7 @@ const Maps = ({ daysData }: MapsProps) => {
           );
         })}
       </GoogleMap>
-    </LoadScript>
+    )
   );
 };
 
