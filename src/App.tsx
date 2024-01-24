@@ -12,7 +12,14 @@ import {
   TripReviewWriteNew,
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
-import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import {
+  SignIn,
+  SignInEmail,
+  SignUp,
+  SignUpAgree,
+  Social,
+  Welcome,
+} from './pages/Auth';
 import {
   City,
   GalleryList,
@@ -57,6 +64,7 @@ function App() {
           <Route path="agree" element={<SignUpAgree />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="social" element={<Social />} />
+          <Route path="welcome" element={<Welcome />} />
         </Route>
         <Route path="home" element={<Home />} />
 
