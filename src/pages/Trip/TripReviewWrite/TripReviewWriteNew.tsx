@@ -1,7 +1,5 @@
-import { ReviewWrite } from '@/components/common';
-
 const TripReviewWriteNew = () => {
-  return <ReviewWrite variant="trip" />;
+  return <div>TripReviewWriteNew</div>;
 };
 
 export default TripReviewWriteNew;

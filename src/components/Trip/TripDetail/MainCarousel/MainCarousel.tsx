@@ -4,6 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Tag } from '@/components/common';
 import { MainCarouselProps } from './MainCarousel.types';
+import classifyTag from '@/utils/classifyTag';
 
 const MainCarousel = ({ imagesData }: MainCarouselProps) => {
   return (
@@ -21,7 +22,7 @@ const MainCarousel = ({ imagesData }: MainCarouselProps) => {
                 bgColor="white"
                 size="sm"
                 src={data.tagUrl}>
-                해당 후기의 숙박시설 보러가기
+                {classifyTag(data.tagType)}
               </Tag>
             </Styled.TagWrapper>
           )}
