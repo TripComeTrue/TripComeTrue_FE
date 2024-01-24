@@ -21,6 +21,14 @@ export const Field = styled.input<{ $iserror: string }>`
       props.$iserror === 'true'
         ? props.theme.semantic.negative
         : props.theme.brand.primary};
+  &:focus {
+    border-bottom: 1px solid
+      ${(props) =>
+        props.$iserror === 'true'
+          ? props.theme.semantic.negative
+          : props.theme.brand.primary};
+  }
+  appearance: none;
 `;
 export const ErrorMsg = styled.p`
   font-size: ${(props) => props.theme.fontSizes.xs};

@@ -1,5 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface ReviewWriteProps {
-  variant: 'trip' | 'spot';
-  isEdit?: boolean;
-  spotName?: string;
+  children: ReactNode;
 }

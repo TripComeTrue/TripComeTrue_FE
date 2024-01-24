@@ -1,3 +1,4 @@
+export { default as OnBoarding } from '@/components/auth/OnBoarding/OnBoarding';
 export { default as SignInTitle } from '@/components/auth/SignInTitle/SignInTitle';
 export { default as SignInBtns } from '@/components/auth/SignInBtns/SignInBtns';
 export { default as SignInLogo } from '@/components/auth/SignInLogo/SignInLogo';
