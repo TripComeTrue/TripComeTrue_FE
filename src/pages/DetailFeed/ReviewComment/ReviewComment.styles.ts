@@ -162,4 +162,5 @@ export const CommentSubmit = styled.button`
   color: ${({ theme }) => theme.brand.primary};
   margin-right: 0.625rem;
   font-size: ${({ theme }) => theme.fontSizes.xxl};
+  cursor: pointer;
 `;
