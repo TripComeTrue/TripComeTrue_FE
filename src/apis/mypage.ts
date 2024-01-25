@@ -10,10 +10,12 @@ import {
   NicknameReqBody,
   NicknameResBody,
   Notification,
+  PlaceReviewDelReqBody,
   PlaceReviewResBody,
   PlacesStoresResBody,
   PlanResBody,
   ProfileImageBody,
+  RecordReviewDelReqBody,
   TripRecordResBody,
   TripStoresResBody,
 } from '@/@types/mypage.types';
@@ -153,18 +155,34 @@ export const getMemberDetail = async () => {
 
 // 회원탈퇴
 export const deleteMember = async () => {
-  const { status } = await client.delete(`v1/member`);
+  const { status } = await client.delete(`/v1/member`);
   return status;
 };
 
 // 내 여행계획 삭제
 export const deleteMyTripPlan = async (id: number) => {
-  const { status } = await client.delete(`v1/trip-plan/${id}`);
+  const { status } = await client.delete(`/v1/trip-plan/${id}`);
   return status;
 };
 
 // 내 여행후기 삭제
 export const deleteMyTripRecord = async (id: number) => {
-  const { status } = await client.delete(`v1/trip-record/${id}`);
+  const { status } = await client.delete(`/v1/trip-record/${id}`);
+  return status;
+};
+
+// 내 여행지 리뷰 삭제
+export const deleteMyPlaceReview = async (reqBody: PlaceReviewDelReqBody) => {
+  const { status } = await client.delete(`/v1/places/reviews`, {
+    data: reqBody,
+  });
+  return status;
+};
+
+// 내 여행지 리뷰 삭제
+export const deleteMyRecordReview = async (reqBody: RecordReviewDelReqBody) => {
+  const { status } = await client.delete(`/v1/trip-records/reviews`, {
+    data: reqBody,
+  });
   return status;
 };
