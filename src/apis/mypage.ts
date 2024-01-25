@@ -34,16 +34,16 @@ export const getMyReview = async (page: number) => {
   return data;
 };
 
-export const getMyPlaceReview = async () => {
+export const getMyPlaceReview = async (page: number) => {
   const { data } = await client.get<PlaceReviewResBody>(
-    '/v1/places/reviews/my',
+    `/v1/places/reviews/my?page=${page}&size=4`,
   );
   return data;
 };
 
-export const getMyTripRecordReview = async () => {
+export const getMyTripRecordReview = async (page: number) => {
   const { data } = await client.get<MyTripRecordReviewResBody>(
-    '/v1/trip-records/reviews/my',
+    `/v1/trip-records/reviews/my?page=${page}&size=4`,
   );
   return data;
 };
