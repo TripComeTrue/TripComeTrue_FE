@@ -20,13 +20,17 @@ import {
 
 // const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
 
-export const getMyPlan = async () => {
-  const { data } = await client.get<PlanResBody>('/v1/trip-plan/my');
+export const getMyPlan = async (page: number) => {
+  const { data } = await client.get<PlanResBody>(
+    `/v1/trip-plan/my?page=${page}&size=4`,
+  );
   return data;
 };
 
-export const getMyReview = async () => {
-  const { data } = await client.get<TripRecordResBody>('/v1/trip-records/my');
+export const getMyReview = async (page: number) => {
+  const { data } = await client.get<TripRecordResBody>(
+    `/v1/trip-records/my?page=${page}&size=4`,
+  );
   return data;
 };
 

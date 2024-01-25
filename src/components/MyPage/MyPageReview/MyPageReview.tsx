@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { Alert, Snackbar } from '@mui/material';
+import { useInView } from 'react-intersection-observer';
 import useModal from '@/hooks/common/useModal';
 import { SelectModal, Share } from '@/components/common';
 import {
@@ -14,13 +15,18 @@ import MyPageItemNone from '../MyPageItemNone/MyPageItemNone';
 import { TripRecordContent } from '@/@types/mypage.types';
 import { copyClipboard } from '@/utils/copyClipboard';
 import useKakaoShare from '@/hooks/common/useKakaoShare';
+import MyPageReviewSkeleton from './MyPageReviewSkeleton';
 
 function MyPageReview() {
+  const { ref, inView } = useInView();
   const [success, setSuccess] = useState(false);
   const { open, handleOpen, handleClose } = useModal();
-  const { data, isLoading } = useSuspenseQuery({
-    queryKey: ['mypage/review'],
-    queryFn: getMyReview,
+  const { data, fetchNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
+    queryKey: ['mypage', 'review'],
+    queryFn: async ({ pageParam }) => getMyReview(pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _, lastPageParam) =>
+      !lastPage.data.last ? lastPageParam + 1 : undefined,
   });
   const [selectedReview, setSelectedReview] = useState<TripRecordContent>();
 
@@ -40,7 +46,7 @@ function MyPageReview() {
   const onClickLinkCopy = () => {
     const BASE_URL = 'https://tripcometrue.vercel.app/';
     if (selectedReview) {
-      copyClipboard(`${BASE_URL}trip/${selectedReview.tripRecordId}`);
+      copyClipboard(`${BASE_URL}trip/detail/${selectedReview.tripRecordId}`);
     }
     handleClose();
     setSuccess(true);
@@ -48,21 +54,32 @@ function MyPageReview() {
   const onClickAlertClose = () => {
     setSuccess(false);
   };
-  if (isLoading) return null;
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
 
   return (
     <>
-      {data?.data.content.length === 0 && <MyPageItemNone />}
+      {data?.pages[0].data.content.length === 0 && <MyPageItemNone />}
       <MyPageReviewWrap>
-        {data?.data.content.map((review) => (
-          <MyPageReviewItem
-            key={review.tripRecordId}
-            review={review}
-            onOpenShare={handleOpen}
-            setReviewItem={setSelectedReview}
-          />
+        {data?.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page?.data.content.map((review) => (
+              <MyPageReviewItem
+                key={review.tripRecordId}
+                review={review}
+                onOpenShare={handleOpen}
+                setReviewItem={setSelectedReview}
+              />
+            ))}
+          </React.Fragment>
         ))}
+        {isFetchingNextPage && <MyPageReviewSkeleton />}
       </MyPageReviewWrap>
+      <div ref={ref}>&nbsp;</div>
       <SelectModal open={open} onClose={handleClose} title="공유하기">
         <Share icon={<ShareKakaoIcon />} onClickShare={onClickKakaoShare}>
           카카오톡으로 공유하기
