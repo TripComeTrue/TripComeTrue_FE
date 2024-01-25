@@ -49,8 +49,10 @@ import {
   WishList,
   WishListMore,
 } from './pages/MyPage';
+import TripPlanRecord from './pages/Trip/TripPlan/TripPlanRecord';
 import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
+import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 
 function App() {
   return (
@@ -87,6 +89,8 @@ function App() {
             element={<TripRecordReviewEdit />}
           />
           <Route path="plan" element={<TripPlan />} />
+          <Route path="tripPlanRecord" element={<TripPlanSelect />} />
+          <Route path="tripPlanRecord/:id" element={<TripPlanRecord />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
