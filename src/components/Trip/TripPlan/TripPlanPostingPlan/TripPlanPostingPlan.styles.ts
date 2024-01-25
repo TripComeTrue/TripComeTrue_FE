@@ -11,10 +11,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 
   padding: 0 1rem;
 `;
@@ -62,19 +62,23 @@ export const GoogleMapsContainer = styled.div`
 `;
 
 export const DaysContainer = styled.div`
+  width: 100%;
+  overflow: scroll;
+`;
+
+export const DaysInner = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-
-  padding: 0 1rem;
   gap: 0.4rem;
 `;
 
-export const DaysButton = styled.button<PostingProps>`
+export const DaysButton = styled.span<PostingProps>`
+  flex-shrink: 0;
   width: 3.5rem;
   height: 1.5rem;
-
+  line-height: 1.5rem;
   background-color: ${(props) =>
     props.$isDaySelected ? '#b4f34c' : '#DCDCDC'};
   border-radius: 15rem;
@@ -83,6 +87,8 @@ export const DaysButton = styled.button<PostingProps>`
   color: ${(props) => (props.$isDaySelected ? '#373737' : '#626262')};
   font-size: ${({ theme }) => theme.fontSizes.xs};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
+  cursor: pointer;
+  text-align: center;
 `;
 
 export const PostingForm = styled.form`
