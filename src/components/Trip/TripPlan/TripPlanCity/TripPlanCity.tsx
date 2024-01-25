@@ -10,13 +10,15 @@ import CityListModal from './TripPlanCityModal/TripPlanCityModal';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 
 const TripPlanCity = () => {
-  const { tripPlanData, updateTripPlanData } = useTripFormData();
+  const { tripPlanData } = useTripFormData();
   const [cityNames, setCityNames] = useState<string[]>([]);
+  const [activeDayInput, setActiveDayInput] = useState<number | null>(null);
+  const [eachDayCityInput, setEachDayCityInput] = useState<string[]>([]);
   const [isAllCitySame, setIsAllCitySame] = useState(false);
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [isCityModalOpen, setIsCityModalOpen] = useState({
     isPaneOpenLeft: false,
   });
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
 
   const startDate = new Date(tripPlanData.tripStartDay);
   const endDate = new Date(tripPlanData.tripEndDay);
@@ -28,34 +30,37 @@ const TripPlanCity = () => {
 
   const handleCityModalSelection = (cities: string[]) => {
     setSelectedCities(cities);
+    setCityNames(cities);
+
+    if (activeDayInput !== null) {
+      const updatedInputs = [...eachDayCityInput];
+      updatedInputs[activeDayInput] = cities.join(', ');
+      setEachDayCityInput(updatedInputs);
+    }
   };
 
   const handleCheckAllSameCity = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsAllCitySame(e.target.checked);
     if (e.target.checked) {
-      const firstDayCity = cityNames[0] || '';
-      setCityNames(Array(totalTripDays + 1).fill(firstDayCity));
+      const firstDayCity = eachDayCityInput[0] || '';
+      setEachDayCityInput(Array(totalTripDays + 1).fill(firstDayCity));
     }
   };
 
-  const handleChangeCityName = (city: string, index: number) => {
-    const newCityNames = [...city];
-    newCityNames[index] = city;
+  const handleSetActiveDayInput = (dayIndex: number) => {
+    setActiveDayInput(dayIndex);
+
+    setIsCityModalOpen({ isPaneOpenLeft: true });
+  };
+
+  const handleChangeCityName = (cityName: string, dayIndex: number) => {
+    const newCityNames = [...cityNames];
+    newCityNames[dayIndex] = cityName;
     setCityNames(newCityNames);
   };
 
-  useEffect(() => {
-    if (selectedCities.length > 0) {
-      const updatedCityNames = selectedCities.map((city, index) =>
-        index <= totalTripDays ? city : '',
-      );
-      setCityNames(updatedCityNames);
-    }
-  }, [selectedCities, totalTripDays]);
-
   const showInputPerDay = () => {
     const totalInputs = [];
-
     for (let i = 0; i <= totalTripDays; i += 1) {
       const eachTripDate = add(new Date(startDate), { days: i });
       totalInputs.push(
@@ -69,28 +74,15 @@ const TripPlanCity = () => {
           <Styled.EachDayInputWrapper>
             <PlaceIcon className="city-icon" style={{ fill: '#b4f34c' }} />
             <Styled.EachDayInput
+              key={i}
               type="text"
               placeholder="방문 지역을 선택해주세요"
-              value={cityNames[i] || ''}
+              value={eachDayCityInput[i] || ''}
               onChange={(e) => handleChangeCityName(e.target.value, i)}
               disabled={isAllCitySame}
-              onClick={() => setIsCityModalOpen({ isPaneOpenLeft: true })}
+              onClick={() => handleSetActiveDayInput(i)}
             />
           </Styled.EachDayInputWrapper>
-          <Styled.SlidingPane
-            className="citymodal"
-            closeIcon={<SlArrowLeft fontSize="15" />}
-            isOpen={isCityModalOpen.isPaneOpenLeft}
-            onRequestClose={() => {
-              setIsCityModalOpen({ isPaneOpenLeft: false });
-            }}
-            width="22.5rem">
-            <CityListModal
-              selectedCities={selectedCities}
-              onCitySelection={handleCityModalSelection}
-              onCloseModal={closeCityListModal}
-            />
-          </Styled.SlidingPane>
         </Styled.EachDayContainer>,
       );
     }
@@ -115,6 +107,20 @@ const TripPlanCity = () => {
           <span className="checkbox-text">방문 지역 모두 동일</span>
           {showInputPerDay()}
         </label>
+        <Styled.SlidingPane
+          className="citymodal"
+          closeIcon={<SlArrowLeft fontSize="15" />}
+          isOpen={isCityModalOpen.isPaneOpenLeft}
+          onRequestClose={() => {
+            setIsCityModalOpen({ isPaneOpenLeft: false });
+          }}
+          width="22.5rem">
+          <CityListModal
+            selectedCities={selectedCities}
+            onCitySelection={handleCityModalSelection}
+            onCloseModal={closeCityListModal}
+          />
+        </Styled.SlidingPane>
       </Styled.Container>
     </Styled.Wrapper>
   );

@@ -14,10 +14,10 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
   onCloseModal,
 }: SelectedCitiesProps) => {
   const { tripPlanData } = useTripFormData();
+  const selectedCountries = tripPlanData.countries;
   const [selectedCountry, setSelectedCountry] = useState<string>(
     tripPlanData.countries[0],
   );
-  const selectedCountries = tripPlanData.countries;
   const [selectedCitiesInModal, setSelectedCitiesInModal] = useState<string[]>(
     [],
   );
@@ -49,7 +49,7 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
 
   useEffect(() => {
     onCitySelection(selectedCitiesInModal);
-  }, [selectedCitiesInModal, onCitySelection]);
+  }, [selectedCitiesInModal]);
 
   return (
     <Styled.Wrapper>

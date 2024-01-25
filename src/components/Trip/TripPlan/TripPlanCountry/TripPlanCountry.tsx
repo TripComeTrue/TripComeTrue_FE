@@ -38,7 +38,6 @@ const TripPlanCountry = () => {
       if (!sortedSelectedCountries) {
         finalUpdatedCountries = [...prevCountries, selectedCountry];
       }
-
       updateTripPlanData({
         countries: finalUpdatedCountries.map((c) => c.countryName),
       });

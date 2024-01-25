@@ -30,7 +30,7 @@ const TripPlanAddHashtags = () => {
   };
 
   return (
-    <Container style={{ marginTop: '-1rem' }}>
+    <Container style={{ marginTop: '1rem' }}>
       <SubTitle fontSize={17}>어떤 여행이었나요?</SubTitle>
       <Styled.HashtagsDisplay
         onClick={() => setIsHashtagsModalOpen({ isPaneOpenLeft: true })}>
