@@ -8,6 +8,7 @@ import * as ModalStyled from './Modal.styles';
  * 로그인 모달을 생성하는 컴포넌트 입니다.
  * @param open 열림 / 닫힘 여부를 전달합니다.
  * @param onClose 닫혔을때 실행할 함수를 전달합니다.
+ * @param redirectUrl 로그인 완료 후 다시 돌아올 페이지 주소를 전달합니다.
  * @returns 모달 컴포넌트를 반환 합니다.
  */
 function AuthModal({ open, onClose, redirectUrl }: AuthModalProps) {
