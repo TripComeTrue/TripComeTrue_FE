@@ -31,12 +31,13 @@ function MyPageTripRecordReview() {
             />
           </Styled.TripRecordReviewTop>
           <TripRecordReviewCard.Main
+            reviewImage="https://source.unsplash.com/random"
             nickname={item.nickname}
             averageRating={item.ratingScore}
             content={item.content}
           />
           <TripRecordReviewCard.Rating
-            disabled={false}
+            disabled
             myRatingScore={item.ratingScore}
           />
         </TripRecordReviewCard>

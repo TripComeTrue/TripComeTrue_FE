@@ -8,8 +8,8 @@ import {
   TripHome,
   TripList,
   TripPlan,
-  TripReviewWriteEdit,
-  TripReviewWriteNew,
+  TripRecordReviewEdit,
+  TripRecordReviewWrite,
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
 import {
@@ -28,8 +28,8 @@ import {
   TouristSpot,
   Reviews,
   ReviewComment,
-  PlaceReviewWriteNew,
-  PlaceReviewWriteEdit,
+  PlaceReviewWrite,
+  PlaceReviewEdit,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 
@@ -81,12 +81,12 @@ function App() {
           <Route path="list" element={<TripList />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
-            path="detail/:id/review/write"
-            element={<TripReviewWriteNew />}
+            path="trip-record/review/:reviewId/write"
+            element={<TripRecordReviewWrite />}
           />
           <Route
-            path="detail/:id/review/edit"
-            element={<TripReviewWriteEdit />}
+            path="trip-record/review/:reviewId/edit"
+            element={<TripRecordReviewEdit />}
           />
           <Route path="plan" element={<TripPlan />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
@@ -113,11 +113,11 @@ function App() {
           <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"
-            element={<PlaceReviewWriteNew />}
+            element={<PlaceReviewWrite />}
           />
           <Route
-            path="spot/:placeId/review/:placeReviewId/edit"
-            element={<PlaceReviewWriteEdit />}
+            path="spot/:placeId/review/:reviewId/edit"
+            element={<PlaceReviewEdit />}
           />
           <Route
             path="spot/:placeId/review/:placeReviewId/comment"
