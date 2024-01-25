@@ -1,6 +1,10 @@
+import { useSearchParams } from 'react-router-dom';
 import * as Styled from './SignInBtns.styles';
 
 function SignInBtns() {
+  const [searchParams] = useSearchParams();
+  const redirectUrl = searchParams.get('redirect');
+
   return (
     <Styled.SignInBtnsWrap>
       <Styled.SignInBtnGoogle to="http://tripcometrue.site/oauth2/authorization/google">
@@ -15,7 +19,10 @@ function SignInBtns() {
         <Styled.SignInBtnIcon icon="kakao" />
         카카오로 시작하기
       </Styled.SignInBtnKakao>
-      <Styled.SignInBtnEmail to="/auth/signin-email">
+      <Styled.SignInBtnEmail
+        to={`/auth/signin-email${
+          redirectUrl ? `?redirect=${redirectUrl}` : ''
+        }`}>
         이메일로 시작하기 <Styled.SignInBtnRight />
       </Styled.SignInBtnEmail>
     </Styled.SignInBtnsWrap>

@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getMyPlaceReview } from '@/apis/mypage';
 import { PlaceReviewCard } from '@/components/common';
+import dateToString from './MyPagePlaceReview.utils';
+import MyPageItemNone from '../MyPageItemNone/MyPageItemNone';
 
 function MyPagePlaceReview() {
   const navigate = useNavigate();
@@ -12,28 +14,29 @@ function MyPagePlaceReview() {
 
   return (
     <div>
-      {data.data.map((item) => (
-        <PlaceReviewCard key={item.id}>
+      {data?.data.placeReviews.length === 0 && <MyPageItemNone />}
+      {data.data.placeReviews.map((item) => (
+        <PlaceReviewCard key={item.placeReviewId}>
           <PlaceReviewCard.MyPageHeader
-            nickname="룰루랄라"
-            profileUrl="/busan.jpeg"
-            writeDate={item.dates}>
+            nickname={item.nickname}
+            profileUrl={item.profileUrl}
+            writeDate={`${dateToString(item.createdAt)}`}>
             <PlaceReviewCard.MyPageHeader.ActionsModal
               onClickModify={() =>
                 navigate(
-                  `/detailfeed/spot/${item.spotId}/review/${item.id}/edit`,
+                  `/detailfeed/spot/${1}/review/${item.placeReviewId}/edit`,
                 )
               }
               onClickDelete={() => {}}
             />
           </PlaceReviewCard.MyPageHeader>
           <PlaceReviewCard.Main
-            imageUrl={item.postImg ?? ''}
-            content={item.text}
+            imageUrl={item?.imageUrl ?? ''}
+            content={item.content}
           />
           <PlaceReviewCard.InteractionButtons
-            likeCount={item.likes}
-            commentCount={item.comments}
+            likeCount={item.likeCount}
+            commentCount={item.commentCount}
           />
         </PlaceReviewCard>
       ))}

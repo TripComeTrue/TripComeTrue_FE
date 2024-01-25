@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getMyTripRecordReview } from '@/apis/mypage';
 import { TripRecordReviewCard } from '@/components/common';
+import * as Styled from './MyPageTripRecordReview.styles';
+import MyPageItemNone from '../MyPageItemNone/MyPageItemNone';
 
 function MyPageTripRecordReview() {
   const navigate = useNavigate();
@@ -12,25 +14,31 @@ function MyPageTripRecordReview() {
 
   return (
     <div>
-      {data.data.map((item) => (
-        <TripRecordReviewCard key={item.id}>
-          <TripRecordReviewCard.Title>
-            {item.postTitle}
-          </TripRecordReviewCard.Title>
-          <TripRecordReviewCard.ActionsModal
-            onClickModify={() => {
-              navigate(
-                `/trip/detail/${item.tripRecordId}/review/${item.id}/edit`,
-              );
-            }}
-            onClickDelete={() => {}}
-          />
+      {data.data.tripRecordReviews.length === 0 && <MyPageItemNone />}
+      {data.data.tripRecordReviews.map((item) => (
+        <TripRecordReviewCard key={item.tripRecordReviewId}>
+          <Styled.TripRecordReviewTop>
+            <TripRecordReviewCard.Title>
+              {item.tripRecordTitle}
+            </TripRecordReviewCard.Title>
+            <TripRecordReviewCard.ActionsModal
+              onClickModify={() => {
+                navigate(
+                  `/trip/detail/${item.tripRecordId}/review/${item.tripRecordReviewId}/edit`,
+                );
+              }}
+              onClickDelete={() => {}}
+            />
+          </Styled.TripRecordReviewTop>
           <TripRecordReviewCard.Main
-            nickname="룰루랄라"
-            averageRating={item.averageRating}
+            nickname={item.nickname}
+            averageRating={item.ratingScore}
             content={item.content}
           />
-          <TripRecordReviewCard.Rating />
+          <TripRecordReviewCard.Rating
+            disabled={false}
+            myRatingScore={item.ratingScore}
+          />
         </TripRecordReviewCard>
       ))}
     </div>

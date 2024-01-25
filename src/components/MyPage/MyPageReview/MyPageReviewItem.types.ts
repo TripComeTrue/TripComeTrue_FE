@@ -1,6 +1,7 @@
-import { MyTripReview } from './MyPageReview.types';
+import { TripRecordContent } from '@/@types/mypage.types';
 
 export interface MyPageReviewItemProps {
-  review: MyTripReview;
+  review: TripRecordContent;
   onOpenShare: () => void;
+  setReviewItem: (review: TripRecordContent | undefined) => void;
 }

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import {
   MdOutlineBookmarks,
   MdOutlineEdit,
@@ -7,9 +8,20 @@ import {
 import { GoChevronRight } from 'react-icons/go';
 import { Avatar, Text } from '@/components/common';
 import * as Styled from './MyPageTopProfile.styles';
+import { getMemberDetail } from '@/apis/mypage';
+import { MyPageTopProfileProps } from './MyPageTopProfile.types';
+import { LEVEL_NAME } from '@/constants/MyPage/pointLevel';
 
-function MyPageTopProfile() {
+function MyPageTopProfile({ handleOpen }: MyPageTopProfileProps) {
+  // 회원정보 수정하고 반영이 안되는 경우를 위해 캐싱 시간을 줄임.
+  const HALF_MINUTE = 1000 * 30;
+
   const navigate = useNavigate();
+  const { data } = useSuspenseQuery({
+    queryKey: ['member/detail'],
+    queryFn: getMemberDetail,
+    gcTime: HALF_MINUTE,
+  });
   const onClickEdit = () => {
     navigate('confirm-password');
   };
@@ -18,12 +30,14 @@ function MyPageTopProfile() {
     <Styled.MyPageTopProfileWrap>
       <Styled.MyPageTopProfileBox>
         <Styled.MyPageTopProfileInfo>
-          <Avatar src="/busan.jpeg" />
+          <Avatar src={data.data.profileImage} />
           <div>
             <Text tag="p" fontWeight={600}>
-              룰루랄라
+              {data.data.nickname}
             </Text>
-            <Styled.MyPageTopProfileLevel>비기너</Styled.MyPageTopProfileLevel>
+            <Styled.MyPageTopProfileLevel>
+              {LEVEL_NAME[data.data.tripLevel]}
+            </Styled.MyPageTopProfileLevel>
           </div>
         </Styled.MyPageTopProfileInfo>
         <Styled.MyPageTopProfileBtns>
@@ -34,7 +48,12 @@ function MyPageTopProfile() {
             onClick={onClickEdit}>
             <MdOutlineEdit /> 계정관리
           </Styled.MyPageTopProfileBtn>
-          <Styled.MyPageTopProfileBtn size="sm" variants="text" rounded="sm">
+          <Styled.MyPageTopProfileBtn
+            size="sm"
+            variants="text"
+            rounded="sm"
+            onClick={handleOpen}
+            type="button">
             로그아웃
           </Styled.MyPageTopProfileBtn>
         </Styled.MyPageTopProfileBtns>
@@ -46,7 +65,7 @@ function MyPageTopProfile() {
           </Text>
           <Styled.MyPageTopProfilePointText>
             <Text fontSize={14} fontWeight={700}>
-              320p
+              {data.data.totalPoint}p
             </Text>
             <GoChevronRight />
           </Styled.MyPageTopProfilePointText>

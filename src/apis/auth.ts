@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { SignInBody, SignUpReqBody, SignUpResBody } from '@/@types/auth.types';
+import {
+  JWTBody,
+  SignInBody,
+  SignUpReqBody,
+  SignUpResBody,
+} from '@/@types/auth.types';
+import getCookie from '@/utils/token';
 
 const serverUrl = 'http://tripcometrue.site';
 
@@ -30,5 +36,15 @@ export const postSignUp = async (reqBody: SignUpReqBody) => {
       password: reqBody.password,
     },
   );
+  return data;
+};
+
+export const getTokenTest = async () => {
+  const accessToken = getCookie('accessToken');
+  const { data } = await axios.get<JWTBody>(`${serverUrl}/v1/member/test/jwt`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   return data;
 };
