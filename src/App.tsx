@@ -31,8 +31,6 @@ import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
 import SearchNons from './pages/Search/SearchNons';
-import TripPlanAddTags from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsForImage/TripPlanAddTagsForImage';
-import TripPlanAddPlace from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddPlace/TripPlanAddPlace';
 import {
   ChangePassword,
   ConfirmPassword,
@@ -94,8 +92,6 @@ function App() {
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
           <Route path="posting" element={<TripPlanPosting />} /> */}
-          <Route path="addtag" element={<TripPlanAddTags />} />
-          <Route path="addplace" element={<TripPlanAddPlace />} />
         </Route>
 
         <Route path="/detailfeed/*">

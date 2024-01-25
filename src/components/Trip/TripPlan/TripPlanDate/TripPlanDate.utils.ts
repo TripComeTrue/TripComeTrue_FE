@@ -1,4 +1,4 @@
-import { differenceInCalendarDays } from 'date-fns';
+import { differenceInCalendarDays, differenceInDays } from 'date-fns';
 import { TripDateProps } from './TripPlanDate.types';
 
 export const getNightAndDays = ({ startDate, endDate }: TripDateProps) => {
@@ -11,7 +11,7 @@ export const getNightAndDays = ({ startDate, endDate }: TripDateProps) => {
 
 export const getTotalTripDays = ({ startDate, endDate }: TripDateProps) => {
   if (startDate instanceof Date && endDate instanceof Date) {
-    const totalTripDays = differenceInCalendarDays(endDate, startDate);
+    const totalTripDays = differenceInDays(endDate, startDate);
     return totalTripDays;
   }
   return 0;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
-import { add, differenceInCalendarDays } from 'date-fns';
+import { add, differenceInDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';
 import Checkbox from '@mui/material/Checkbox';
 import { SlArrowLeft } from 'react-icons/sl';
@@ -22,7 +22,7 @@ const TripPlanCity = () => {
 
   const startDate = new Date(tripPlanData.tripStartDay);
   const endDate = new Date(tripPlanData.tripEndDay);
-  const totalTripDays = differenceInCalendarDays(endDate, startDate);
+  const totalTripDays = differenceInDays(endDate, startDate);
 
   const closeCityListModal = () => {
     setIsCityModalOpen({ isPaneOpenLeft: false });

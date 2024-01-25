@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { differenceInCalendarDays, format } from 'date-fns';
+import { differenceInCalendarDays, differenceInDays, format } from 'date-fns';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -33,7 +33,7 @@ const TripPlanPosting = () => {
   // const navigate = useNavigate();
   const startDate = new Date(tripPlanData.tripStartDay);
   const endDate = new Date(tripPlanData.tripEndDay);
-  const totalTripDays = differenceInCalendarDays(endDate, startDate);
+  const totalTripDays = differenceInDays(endDate, startDate);
 
   const [formData, setFormData] = useState(() =>
     Array.from({ length: totalTripDays }, () => ({
@@ -104,7 +104,6 @@ const TripPlanPosting = () => {
   };
 
   const onSubmit = (data: object) => {
-    /* eslint-disable no-console */
     console.log(data);
     // fetch(`api address`, {
     //   method: 'POST',
