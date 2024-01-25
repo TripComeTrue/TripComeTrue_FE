@@ -8,9 +8,25 @@ export interface PointLevel {
   benefit: ReactNode;
 }
 
+export interface PointLevelLimit {
+  [key: string]: {
+    start: number;
+    end: number;
+    next: string;
+  };
+}
+
 export interface PoinLevelImageProps {
   $isactive: string;
   $level: string;
   $bgColor: string;
   $bgSize: string;
+}
+
+export interface PointLevelNames {
+  [key: string]: string;
+}
+
+export interface MyPageLevelProps {
+  tripLevel: string;
 }

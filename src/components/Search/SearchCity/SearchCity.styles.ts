@@ -27,6 +27,9 @@ export const CityImgWrap = styled.div`
 
   img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.625rem;
   }
 
   &::after {
@@ -38,7 +41,7 @@ export const CityImgWrap = styled.div`
     background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
     aspect-ratio: 1;
 
-    border-radius: 10px;
+    border-radius: 0.625rem;
   }
 `;
 
@@ -62,31 +65,6 @@ export const ImgTitle = styled.div`
     font-family: 'Mundial-Demibold', 'SF-Pro', sans-serif;
     font-size: ${({ theme }) => theme.fontSizes.xxxl};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
-  }
-`;
-
-export const UserTitle = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  padding: 0.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5.5rem;
-
-  border-radius: 10px 0 4px 0;
-  background-color: ${({ theme }) => theme.brand.black};
-  color: ${({ theme }) => theme.brand.white};
-  font-size: 10px;
-
-  img {
-    margin-right: 0.2rem;
-    width: 1rem;
-    height: 1rem;
-
-    border-radius: 50%;
   }
 `;
 
@@ -172,5 +150,20 @@ export const InfoMoneyWrap = styled.div`
 
   p {
     color: ${({ theme }) => theme.brand.primary};
+  }
+`;
+
+export const CityNull = styled.div`
+  margin: 2rem;
+  text-align: center;
+  color: ${({ theme }) => theme.text.gray};
+
+  span {
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-size: 10px;
   }
 `;

@@ -3,3 +3,4 @@ export { default as SearchCity } from './SearchCity/SearchCity';
 export { default as SearchSpot } from './SearchSpot/SearchSpot';
 export { default as SearchCreator } from './SearchCreator/SearchCreator';
 export { default as SearchNon } from './SearchNon/SearchNon';
+export { default as SearchCreatorShorts } from './SearchCreator/SearchCreatorShorts';

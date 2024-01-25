@@ -8,11 +8,18 @@ import {
   TripHome,
   TripList,
   TripPlan,
-  TripReviewWriteEdit,
-  TripReviewWriteNew,
+  TripRecordReviewEdit,
+  TripRecordReviewWrite,
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
-import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import {
+  SignIn,
+  SignInEmail,
+  SignUp,
+  SignUpAgree,
+  Social,
+  Welcome,
+} from './pages/Auth';
 import {
   City,
   GalleryList,
@@ -21,8 +28,8 @@ import {
   TouristSpot,
   Reviews,
   ReviewComment,
-  PlaceReviewWriteNew,
-  PlaceReviewWriteEdit,
+  PlaceReviewWrite,
+  PlaceReviewEdit,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 
@@ -43,6 +50,7 @@ import {
   WishListMore,
 } from './pages/MyPage';
 import { MyPageLayout } from './components/MyPage';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -54,6 +62,7 @@ function App() {
           <Route path="agree" element={<SignUpAgree />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="social" element={<Social />} />
+          <Route path="welcome" element={<Welcome />} />
         </Route>
         <Route path="home" element={<Home />} />
 
@@ -68,14 +77,14 @@ function App() {
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
-          <Route path="detail/:id" element={<TripDetail />} />
+          <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
-            path="detail/:id/review/write"
-            element={<TripReviewWriteNew />}
+            path="trip-record/review/:reviewId/write"
+            element={<TripRecordReviewWrite />}
           />
           <Route
-            path="detail/:id/review/edit"
-            element={<TripReviewWriteEdit />}
+            path="trip-record/review/:reviewId/edit"
+            element={<TripRecordReviewEdit />}
           />
           <Route path="plan" element={<TripPlan />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
@@ -100,11 +109,11 @@ function App() {
           <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"
-            element={<PlaceReviewWriteNew />}
+            element={<PlaceReviewWrite />}
           />
           <Route
-            path="spot/:placeId/review/:placeReviewId/edit"
-            element={<PlaceReviewWriteEdit />}
+            path="spot/:placeId/review/:reviewId/edit"
+            element={<PlaceReviewEdit />}
           />
           <Route
             path="spot/:placeId/review/:placeReviewId/comment"
@@ -126,6 +135,7 @@ function App() {
           <Route path="point" element={<TripPoint />} />
           <Route path="faq" element={<Faq />} />
         </Route>
+        <Route path="404" element={<NotFound />} />
       </Route>
     </Routes>
   );

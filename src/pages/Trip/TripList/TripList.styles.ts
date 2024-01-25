@@ -16,4 +16,5 @@ export const SearchButton = styled.button`
   margin-bottom: 1.5rem;
   padding: 0.625rem 1.25rem;
   border-radius: 1.875rem;
+  cursor: pointer;
 `;

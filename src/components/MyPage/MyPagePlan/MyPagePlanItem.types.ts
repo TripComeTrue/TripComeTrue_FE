@@ -1,6 +1,7 @@
-import { MyTripPlan } from './MyPagePlan.types';
+import { PlanContent } from '@/@types/mypage.types';
 
 export interface MyPagePlanItemProps {
-  plan?: MyTripPlan;
+  plan?: PlanContent;
   onOpenShare: () => void;
+  setPlanItem: (plan: PlanContent | undefined) => void;
 }

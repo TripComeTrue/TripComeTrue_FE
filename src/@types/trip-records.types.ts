@@ -66,12 +66,15 @@ interface TripRecordDetail {
 }
 
 interface ShortData {
-  tripRecordId: number;
-  videoId: number;
-  thumbnailUrl: string;
   member: {
     nickname: string;
+    profileImage: string;
   };
+  thumbnailUrl: string;
+  tripRecordId: number;
+  tripRecordStoreCount: number;
+  tripRecordTitle: string;
+  videoId: number;
 }
 
 interface TripRecordLatestReview {

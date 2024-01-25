@@ -19,3 +19,13 @@ export interface SignInBody {
     token: string;
   };
 }
+
+export interface JWTBody {
+  code: number;
+  data: {
+    email: string;
+    nickname: string;
+    authority: string;
+    provider?: string;
+  };
+}

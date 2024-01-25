@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
@@ -13,6 +13,9 @@ import { postSignIn } from '@/apis/auth';
 
 function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectUrl = searchParams.get('redirect');
+
   const mutation = useMutation({
     mutationKey: ['login'],
     mutationFn: postSignIn,
@@ -35,7 +38,7 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
       {
         onSuccess: (token) => {
           setCookie('accessToken', token, MAX_AGE);
-          navigate('/home', { replace: true });
+          navigate(`${redirectUrl || '/home'}`, { replace: true });
         },
         onError: (error) => {
           if (isAxiosError(error)) {

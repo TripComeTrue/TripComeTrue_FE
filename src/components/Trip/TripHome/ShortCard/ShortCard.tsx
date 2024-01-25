@@ -1,27 +1,18 @@
-import ReactPlayer from 'react-player';
 import { Bookmark, Text } from '@/components/common';
 import * as Styled from './ShortCard.styles';
 import { ShortCardProps } from './ShortCard.types';
 
-const ShortCard = ({ data }: ShortCardProps) => {
-  console.log(data);
+const ShortCard = ({ shortData }: ShortCardProps) => {
   return (
     <Styled.Container>
       <Styled.ImageContainer>
-        <ReactPlayer
-          url="https://www.youtube.com/shorts/AdL4EQm5CUg"
-          controls
-          light
-          width="100%"
-          height="100%"
-        />
-        {/* <Styled.Image src="https://source.unsplash.com/random" alt="Short" /> */}
+        <Styled.Image src={shortData.thumbnailUrl} />
         <Styled.BookMarkContainer>
-          <Bookmark count={999} />
+          <Bookmark count={shortData.tripRecordStoreCount} />
         </Styled.BookMarkContainer>
         <Styled.Excerpt>
           <Text color="white" fontSize={10}>
-            방콕 여행 꿀팁 알려드립니다
+            {shortData.tripRecordTitle}
           </Text>
         </Styled.Excerpt>
       </Styled.ImageContainer>

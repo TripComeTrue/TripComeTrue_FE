@@ -12,3 +12,4 @@ export { default as SignUpPrivacyAgree } from '@/components/auth/SignUpPolicy/Si
 export { default as SignUpMarketingAgree } from '@/components/auth/SignUpPolicy/SignUpMarketingAgree';
 export { default as SignUpLocationAgree } from '@/components/auth/SignUpPolicy/SignUpLocationAgree';
 export { default as SignUpForm } from '@/components/auth/SignUpForm/SignUpForm';
+export { default as WelcomeContent } from '@/components/auth/Welcome/WelcomeContent';
