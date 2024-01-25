@@ -1,4 +1,4 @@
 export interface ActionsModalProps {
-  onClickModify: () => void;
-  onClickDelete: () => void;
+  onClickModify?: () => void;
+  onClickDelete?: () => void;
 }

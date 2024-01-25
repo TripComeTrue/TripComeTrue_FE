@@ -197,10 +197,12 @@ const Rating = ({
 };
 
 const WriteButton = ({
+  files,
   content,
   title,
   onClickFunc,
 }: {
+  files?: File[];
   content: string;
   title: string;
   onClickFunc: () => void;
@@ -210,7 +212,11 @@ const WriteButton = ({
       <Button
         variants="primary"
         size="lg"
-        disabled={content?.length < 10}
+        disabled={
+          files
+            ? !(files.length !== 0 && content?.length >= 10)
+            : content?.length < 10
+        }
         onClick={onClickFunc}>
         {title}
       </Button>

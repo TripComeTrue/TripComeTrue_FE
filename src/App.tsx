@@ -120,7 +120,7 @@ function App() {
             element={<PlaceReviewEdit />}
           />
           <Route
-            path="spot/:placeId/review/:placeReviewId/comment"
+            path="spot/:placeId/review/:reviewId/comment"
             element={<ReviewComment />}
           />
           <Route path="shortslist" element={<ShortsList />} />
