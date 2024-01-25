@@ -31,29 +31,6 @@ export const SpotGradient = styled.div`
   border-radius: 10px;
 `;
 
-export const SpotProfile = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.3rem 0.6rem 0.25rem 0.5rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 10px;
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.brand.white};
-  background-color: ${({ theme }) => theme.brand.black};
-  border-radius: 10px 0 4px 0;
-
-  img {
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.4rem;
-  }
-`;
-
 export const SpotTitle = styled.div`
   position: absolute;
   bottom: 1.5rem;
@@ -108,5 +85,20 @@ export const SpotInfos = styled.div`
   span {
     margin-right: 0.2rem;
     font-weight: ${({ theme }) => theme.fontWeights.bold};
+  }
+`;
+
+export const SpotNull = styled.div`
+  margin: 2rem;
+  text-align: center;
+  color: ${({ theme }) => theme.text.gray};
+
+  span {
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-size: 10px;
   }
 `;

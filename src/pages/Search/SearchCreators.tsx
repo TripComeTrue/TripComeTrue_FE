@@ -1,7 +1,12 @@
-import { SearchCreator } from '@/components/Search';
+import { SearchCreator, SearchCreatorShorts } from '@/components/Search';
 
 const SearchCreators = () => {
-  return <SearchCreator />;
+  return (
+    <>
+      <SearchCreator />
+      <SearchCreatorShorts />
+    </>
+  );
 };
 
 export default SearchCreators;

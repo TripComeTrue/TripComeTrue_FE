@@ -12,7 +12,14 @@ import {
   TripRecordReviewWrite,
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
-import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import {
+  SignIn,
+  SignInEmail,
+  SignUp,
+  SignUpAgree,
+  Social,
+  Welcome,
+} from './pages/Auth';
 import {
   City,
   GalleryList,
@@ -45,6 +52,7 @@ import {
   WishListMore,
 } from './pages/MyPage';
 import { MyPageLayout } from './components/MyPage';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -56,6 +64,7 @@ function App() {
           <Route path="agree" element={<SignUpAgree />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="social" element={<Social />} />
+          <Route path="welcome" element={<Welcome />} />
         </Route>
         <Route path="home" element={<Home />} />
 
@@ -130,6 +139,7 @@ function App() {
           <Route path="point" element={<TripPoint />} />
           <Route path="faq" element={<Faq />} />
         </Route>
+        <Route path="404" element={<NotFound />} />
       </Route>
     </Routes>
   );

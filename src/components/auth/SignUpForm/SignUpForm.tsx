@@ -57,7 +57,7 @@ function SignUpForm({ handleOpen, setErrorMsg }: SignUpFormProps) {
       { email: data.email, password: data.password },
       {
         onSuccess: () => {
-          navigate('/auth/signin-email');
+          navigate('/auth/welcome');
         },
         onError: (error) => {
           if (isAxiosError(error)) {

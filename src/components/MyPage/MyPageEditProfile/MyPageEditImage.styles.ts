@@ -7,6 +7,13 @@ export const MyPageAvatarWrap = styled.div`
   text-align: center;
 `;
 
+export const MyPageInputEl = styled.input`
+  appearance: none;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+`;
+
 export const MyPageAvatarEditBtn = styled(Button)`
   margin-top: 0.8125rem;
   padding: 0.25rem 0.5rem;
