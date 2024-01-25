@@ -17,6 +17,32 @@ export interface TripPlanSchedule {
   tagUrl: string;
 }
 
+// 여행 계획 선택 후 후기 작성을 위해 받아온 데이터
+export interface TripPlanResBody {
+  code: number;
+  data: TripPlanResData;
+}
+
+export interface TripPlanResData {
+  countries: string;
+  tripStartDay: number[];
+  tripEndDay: number[];
+  tripPlanSchedules: TripPlanScheduleItem[];
+}
+
+export type TripPlanScheduleItem = TripPlanSchedule & {
+  latitude: number;
+  longitude: number;
+  country: string;
+  cityName: string;
+  placeName: string;
+};
+
+/* 최종 단계에서 계획 작성시 불러올 선택된 도시 리스트 */
+export interface TripPlanCities {
+  cities: string[];
+}
+
 // 여행 계획 작성시 기본 값
 export const defaultTripPlanData: TripPlanData = {
   countries: [],

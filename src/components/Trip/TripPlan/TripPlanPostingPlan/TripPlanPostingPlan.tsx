@@ -12,8 +12,6 @@ import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
 import * as Styled from './TripPlanPostingPlan.styles';
 import { Button } from '@/components/common';
 import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
-import TripPlanAddHashtags from '../TripPlanPostingReview/TripPlanAddHashtags/TripPlanAddHashtags';
-import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPlanSetBudget';
 import TripPlanUploadImages from './TripPlanUploadImages/TripPlanUploadImages';
 import TripPlanUploadMainImages from './TripPlanUploadMainImages/TripPlanUploadMainImages';
 import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
@@ -234,9 +232,6 @@ const TripPlanPosting = () => {
           {createDaysInput()}
         </Styled.PostingForm>
       </Styled.Container>
-
-      <TripPlanSetBudget />
-      <TripPlanAddHashtags />
 
       <Styled.AddPlaceButton onClick={handleAddPlace}>
         <GoPlusCircle fontSize="28" style={{ fill: '#b4f34c' }} />

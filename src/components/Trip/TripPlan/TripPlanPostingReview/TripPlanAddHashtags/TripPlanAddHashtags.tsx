@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { SlArrowLeft } from 'react-icons/sl';
 import { IoCloseCircle } from 'react-icons/io5';
 import { SubTitle } from '@/components/common';
-import Container from '@/components/common/Container';
 import * as Styled from './TripPlanAddHashtags.styles';
 import TripPlanHashtagsList from './TripPlanHashtagsList/TripPlanHashtagsList';
+import { TripPlanAddHashtagsProps } from './TripPlanAddHashtags.types';
 
-const TripPlanAddHashtags = () => {
-  const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
+const TripPlanAddHashtags = ({
+  selectedHashtags,
+  setSelectedHashtags,
+}: TripPlanAddHashtagsProps) => {
+  // const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
   const [isHashtagsModalOpen, setIsHashtagsModalOpen] = useState({
     isPaneOpenLeft: false,
   });
@@ -30,7 +33,7 @@ const TripPlanAddHashtags = () => {
   };
 
   return (
-    <Container style={{ marginTop: '1rem' }}>
+    <div>
       <SubTitle fontSize={17}>어떤 여행이었나요?</SubTitle>
       <Styled.HashtagsDisplay
         onClick={() => setIsHashtagsModalOpen({ isPaneOpenLeft: true })}>
@@ -61,7 +64,7 @@ const TripPlanAddHashtags = () => {
           onSelectHashtag={handleSelectHashtag}
         />
       </Styled.SlidingPane>
-    </Container>
+    </div>
   );
 };
 

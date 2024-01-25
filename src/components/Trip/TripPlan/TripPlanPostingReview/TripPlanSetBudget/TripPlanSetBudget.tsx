@@ -1,39 +1,28 @@
-import { useRef, useState } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+// import { useRef } from 'react';
 import { SubTitle } from '@/components/common';
-import Container from '@/components/common/Container';
 import { BudgetOptions } from '@/constants/tripPlanAndRecord';
 import * as Styled from './TripPlanSetBudget.styles';
+import { TripPlanSetBudgetProps } from './TripPlanSetBudget.types';
 
-const TripPlanSetBudget = () => {
-  const [selectedBudget, setSelectedBudget] = useState('');
-  const selectRef = useRef<HTMLSelectElement>(null);
-
-  const handleArrowClick = () => {
-    selectRef.current?.click();
-  };
-
-  const handleSelectBudget = (budget: string) => {
-    setSelectedBudget(budget);
-  };
-
+const TripPlanSetBudget = ({ register }: TripPlanSetBudgetProps) => {
   return (
-    <Container style={{ marginTop: '1rem' }}>
+    <div>
       <SubTitle fontSize={17}>여행 경비는 얼마로 준비하셨나요?</SubTitle>
 
       <Styled.BudgetWrapper>
         <Styled.BudgetSelection
-          ref={selectRef}
-          onChange={(e) => handleSelectBudget(e.target.value)}
-          value={selectedBudget}>
+          // ref={selectRef}
+          {...register('expenseRangeType')}>
           {BudgetOptions.map((budget) => (
             <option key={budget.label} value={budget.value}>
               {budget.label}
             </option>
           ))}
         </Styled.BudgetSelection>
-        <Styled.ArrowIcon onClick={handleArrowClick} />
+        <Styled.ArrowIcon />
       </Styled.BudgetWrapper>
-    </Container>
+    </div>
   );
 };
 
