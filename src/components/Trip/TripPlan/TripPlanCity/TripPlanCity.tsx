@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import { add, differenceInDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -10,7 +10,7 @@ import CityListModal from './TripPlanCityModal/TripPlanCityModal';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 
 const TripPlanCity = () => {
-  const { tripPlanData } = useTripFormData();
+  const { tripPlanData, updateTripPlanData } = useTripFormData();
   const [cityNames, setCityNames] = useState<string[]>([]);
   const [activeDayInput, setActiveDayInput] = useState<number | null>(null);
   const [eachDayCityInput, setEachDayCityInput] = useState<string[]>([]);
@@ -59,6 +59,10 @@ const TripPlanCity = () => {
     setCityNames(newCityNames);
   };
 
+  useEffect(() => {
+    updateTripPlanData({ tripPlanCities: eachDayCityInput });
+  }, [eachDayCityInput]);
+
   const showInputPerDay = () => {
     const totalInputs = [];
     for (let i = 0; i <= totalTripDays; i += 1) {
@@ -74,7 +78,6 @@ const TripPlanCity = () => {
           <Styled.EachDayInputWrapper>
             <PlaceIcon className="city-icon" style={{ fill: '#b4f34c' }} />
             <Styled.EachDayInput
-              key={i}
               type="text"
               placeholder="방문 지역을 선택해주세요"
               value={eachDayCityInput[i] || ''}

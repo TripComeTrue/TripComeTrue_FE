@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { differenceInCalendarDays, differenceInDays, format } from 'date-fns';
+import { differenceInDays, format } from 'date-fns';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -25,7 +25,6 @@ const TripPlanPosting = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [selectedPlace, setSelectedPlace] = useState<string>('');
   const { register, handleSubmit, setValue } = useForm();
-
   const [isPlaceModalOpen, setIsPlaceModalOpen] = useState({
     isPaneOpenLeft: false,
   });
@@ -33,10 +32,10 @@ const TripPlanPosting = () => {
   // const navigate = useNavigate();
   const startDate = new Date(tripPlanData.tripStartDay);
   const endDate = new Date(tripPlanData.tripEndDay);
-  const totalTripDays = differenceInDays(endDate, startDate);
+  const totalTripDays = differenceInDays(endDate, startDate) + 1;
 
   const [formData, setFormData] = useState(() =>
-    Array.from({ length: totalTripDays }, () => ({
+    Array.from({ length: totalTripDays }, (_) => ({
       city: '',
       places: [
         {
@@ -102,6 +101,10 @@ const TripPlanPosting = () => {
       });
     }
   };
+
+  useEffect(() => {
+    console.log(tripPlanData.tripPlanCities);
+  });
 
   const onSubmit = (data: object) => {
     console.log(data);
@@ -201,13 +204,13 @@ const TripPlanPosting = () => {
           {Array.from({ length: totalTripDays }, (_, i) => {
             const day = i + 1;
             return (
-              <React.Fragment key={day}>
+              <div key={day}>
                 <Styled.DaysButton
                   $isDaySelected={selectedDay === day}
                   onClick={() => handleDayButtonClick(day)}>
                   {day}일차
                 </Styled.DaysButton>
-              </React.Fragment>
+              </div>
             );
           })}
         </Styled.DaysContainer>
@@ -216,11 +219,9 @@ const TripPlanPosting = () => {
           <Styled.CityInput
             type="text"
             {...register(`day${selectedDay}.city`)}
-            onChange={(event) => {
-              if (selectedDay !== null) {
-                handleInputChange(selectedDay, 'city', event);
-              }
-            }}
+            value={
+              selectedDay ? tripPlanData.tripPlanCities?.[selectedDay - 1] : ''
+            }
           />
           <PlaceIcon
             className="city-icon"

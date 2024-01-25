@@ -5,6 +5,7 @@ export interface TripPlanData {
   tripEndDay: string;
   referencedBy: number | null;
   tripPlanSchedules: TripPlanSchedule[];
+  tripPlanCities?: string[]; // 국가+도시 형태 이름 저장시 사용하는 임시 데이터
 }
 
 export interface TripPlanSchedule {
@@ -14,11 +15,6 @@ export interface TripPlanSchedule {
   content: string;
   tagType: string;
   tagUrl: string;
-}
-
-/* 최종 단계에서 계획 작성시 불러올 선택된 도시 리스트 */
-export interface TripPlanCities {
-  cities: string[];
 }
 
 // 여행 계획 작성시 기본 값

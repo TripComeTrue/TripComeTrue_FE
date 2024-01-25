@@ -65,10 +65,13 @@ export const DaysContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
 
-  padding: 0 1rem;
+  width: 100%;
+  padding: 0;
   gap: 0.4rem;
+
+  overflow-y: scroll;
 `;
 
 export const DaysButton = styled.button<PostingProps>`

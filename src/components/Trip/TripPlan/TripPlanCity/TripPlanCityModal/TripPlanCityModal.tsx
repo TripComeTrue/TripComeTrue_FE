@@ -21,8 +21,11 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
   const [selectedCitiesInModal, setSelectedCitiesInModal] = useState<string[]>(
     [],
   );
+  const [selectedCountryCityNames, setSelectedCountryCityNames] = useState<
+    string[]
+  >([]);
 
-  const { data } = useQuery({
+  const { data: tripCitiesData } = useQuery({
     queryKey: ['TripCities'],
     queryFn: () => getTripCities(),
   });
@@ -38,12 +41,21 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
   };
 
   const selectCity = (cityName: string) => {
+    const combinedName = `${selectedCountry} ${cityName}`;
     setSelectedCitiesInModal((prevCities) => {
       const isAlreadySelected = prevCities.includes(cityName);
       if (isAlreadySelected) {
         return prevCities.filter((city) => city !== cityName);
       }
       return [...prevCities, cityName];
+    });
+
+    setSelectedCountryCityNames((prevNames) => {
+      const isAlreadySelected = prevNames.includes(combinedName);
+      if (!isAlreadySelected) {
+        return [...prevNames, combinedName];
+      }
+      return prevNames;
     });
   };
 
@@ -68,8 +80,8 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
       </Styled.SelectedCountriesContainer>
 
       <Styled.ShowCitiesContainer>
-        {Array.isArray(data?.data) &&
-          data.data
+        {Array.isArray(tripCitiesData?.data) &&
+          tripCitiesData.data
             .filter(
               (country: CountryData) => country.countryName === selectedCountry,
             )
@@ -94,7 +106,7 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
             size="lg"
             rounded="sm"
             onClick={() => {
-              onCitySelection(selectedCitiesInModal);
+              onCitySelection(selectedCountryCityNames);
               onCloseModal();
             }}>
             {selectedCities.length === 1

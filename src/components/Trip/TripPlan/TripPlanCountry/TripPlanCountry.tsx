@@ -14,7 +14,7 @@ const TripPlanCountry = () => {
 
   const param = isOverseas ? (continent === 'ALL' ? '' : continent) : 'KOREA';
 
-  const { data } = useQuery({
+  const { data: tripCountriesData } = useQuery({
     queryKey: ['TripCountries', param],
     queryFn: () => getTripCountries(param, isOverseas),
   });
@@ -111,7 +111,7 @@ const TripPlanCountry = () => {
         </Styled.ContinentSwiper>
 
         <Styled.CountryWrapper $selectedCountries={selectedCountries}>
-          {data?.map((item: CountryData) => (
+          {tripCountriesData?.map((item: CountryData) => (
             <Styled.CountryContainer key={item.country}>
               <button type="button" onClick={() => selectCountry(item)}>
                 <img src={item.countryImageUrl} alt="country" />

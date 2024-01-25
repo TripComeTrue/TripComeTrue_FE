@@ -51,6 +51,7 @@ import {
 } from './pages/MyPage';
 import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
+import TripPlanRecord from './pages/Trip/TripPlan/TripPlanRecord';
 
 function App() {
   return (
@@ -86,7 +87,8 @@ function App() {
             path="trip-record/review/:reviewId/edit"
             element={<TripRecordReviewEdit />}
           />
-          <Route path="plan" element={<TripPlan />} />
+          <Route path="tripplan" element={<TripPlan />} />
+          <Route path="tripplanrecord" element={<TripPlanRecord />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
