@@ -17,3 +17,4 @@ export { default as Tag } from '@/components/common/Tag/Tag';
 export { default as Bubble } from '@/components/common/Bubble/Bubble';
 export { default as ReviewWrite } from '@/components/common/ReviewWrite/ReviewWrite';
 export { default as Filter } from '@/components/common/Filter/Filter';
+export { default as EmptyContents } from '@/components/common/EmptyContents/EmptyContents';

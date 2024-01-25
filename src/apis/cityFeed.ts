@@ -1,4 +1,3 @@
-import { ExchangeRateType } from '@/pages/DetailFeed/City/City.types';
 import client from './client';
 
 export const getCityShorts = async (cityId: number) => {
@@ -29,7 +28,7 @@ export const getCityWeather = async (cityId: number) => {
 };
 
 export const getCityHotPlace = async (cityId: number) => {
-  const { data } = await client.get<WeatherResponseType>(
+  const { data } = await client.get<HotPlaceResponseType>(
     `/cities/${cityId}/hot-places`,
   );
   return data.data;

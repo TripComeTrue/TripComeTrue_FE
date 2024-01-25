@@ -1,13 +1,26 @@
 import { SubTitle, Text } from '@/components/common';
+import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './Weather.styles';
-import { WeatherProps } from '@/pages/DetailFeed/City/City.types';
 
-const Weather = ({ weatherData }: WeatherProps) => {
+const Weather = ({ cityId }: { cityId: number }) => {
+  const { data, isLoading } = useDetailFeedQuery<WeatherResponseType>({
+    queryKey: 'weather',
+    id: cityId,
+    fnUrl: `/cities/${cityId}/weathers`,
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data || !data.data) {
+    return <p>Data not available</p>;
+  }
   return (
     <Styled.WeatherWrapper>
       <SubTitle>날씨</SubTitle>
       <Styled.WeatherBox>
-        {weatherData.map(({ maxAvgTempC, minAvgTempC, month }) => (
+        {data.data.map(({ maxAvgTempC, minAvgTempC, month }) => (
           <Styled.WeatherItem key={month}>
             <Styled.WeatherMonth>
               <Text fontSize={12} color="primary">

@@ -1,15 +1,30 @@
 import { SubTitle, Text } from '@/components/common';
+import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './CityInformation.styles';
-import visaImage from '/visa.svg';
-import moneyImage from '/money.svg';
-import timeImage from '/time.svg';
 import languageImage from '/language.svg';
+import moneyImage from '/money.svg';
 import powerImage from '/power.svg';
-import { CityInfoProps } from '@/pages/DetailFeed/City/City.types';
+import timeImage from '/time.svg';
+import visaImage from '/visa.svg';
 
-const CityInformation = ({ cityInformation }: CityInfoProps) => {
+const CityInformation = ({ cityId }: { cityId: number }) => {
+  const { data, isLoading } = useDetailFeedQuery<CityInfoResponseType>({
+    queryKey: 'information',
+    id: cityId,
+    fnUrl: `/cities/${cityId}`,
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data || !data.data) {
+    return <p>Data not available</p>;
+  }
+
   const { language, timeDifference, curName, curUnit, voltage, visa } =
-    cityInformation;
+    data.data;
+
   const INFORMATION_DATA = [
     { id: 1, content: language, svg: languageImage },
     { id: 2, content: timeDifference, svg: timeImage },
@@ -26,13 +41,13 @@ const CityInformation = ({ cityInformation }: CityInfoProps) => {
         spaceBetween={8}
         slidesPerView={2.6}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {INFORMATION_DATA.map((data) => (
-          <Styled.InformationItem key={data.id}>
+        {INFORMATION_DATA.map(({ id, svg, content }) => (
+          <Styled.InformationItem key={id}>
             <Styled.InformationIconBox>
-              <Styled.InformationIcon src={data.svg} alt="visa icon" />
+              <Styled.InformationIcon src={svg} alt="visa icon" />
             </Styled.InformationIconBox>
             <Text fontSize={13} fontWeight={700}>
-              {data.content}
+              {content}
             </Text>
           </Styled.InformationItem>
         ))}

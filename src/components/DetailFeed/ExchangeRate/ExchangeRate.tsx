@@ -4,7 +4,7 @@ import * as Styled from './ExchangeRate.styles';
 import { ExchangeRateType } from '@/pages/DetailFeed/City/City.types';
 import { getExchangeRate } from '@/apis/cityFeed';
 
-const ExchangeRate = ({ curUnit }: { curUnit: string }) => {
+const ExchangeRate = ({ cityId }: { cityId: number }) => {
   const { data, isLoading } = useQuery<ExchangeRateType>({
     queryKey: ['exchangeRate', curUnit],
     queryFn: () => getExchangeRate(curUnit),

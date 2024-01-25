@@ -8,14 +8,14 @@ export const MY_STYLES = [
       },
     ],
   },
-  {
-    featureType: 'poi',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
+  // {
+  //   featureType: 'poi',
+  //   stylers: [
+  //     {
+  //       visibility: 'off',
+  //     },
+  //   ],
+  // },
   {
     featureType: 'road',
     elementType: 'labels.icon',
@@ -45,7 +45,6 @@ export const MAP_CONTAINER_STYLE = {
   height: '13.5rem',
   borderRadius: '10px',
 };
-
 
 export const FIELD_MASK_OPTIONS = [
   'places.formattedAddress',

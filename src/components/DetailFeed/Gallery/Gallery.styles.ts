@@ -20,6 +20,7 @@ export const GellaryItem = styled(SwiperSlide)`
 
   img {
     width: 100%;
+    height: 9rem;
     border-radius: 0.625rem;
   }
 `;

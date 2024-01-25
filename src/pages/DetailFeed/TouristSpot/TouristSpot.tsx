@@ -1,23 +1,25 @@
 import {
   Gallery,
-  SpotReview,
+  RecommendSpot,
   SpotInformation,
-  TopReview,
+  SpotReview,
+  SpotTopReview,
 } from '@/components/DetailFeed';
-import * as Styled from './TouristSpot.styles';
 import { FeedNav } from '@/components/common';
+import * as Styled from './TouristSpot.styles';
 
-const TouristSpot = () => {
+const TouristSpot = ({ placeId = 1 }: { placeId?: number }) => {
   return (
-    <div>
-      <FeedNav isScheduleIcon>순천만습지</FeedNav>
+    <>
+      <FeedNav isScheduleIcon>여행지 이름</FeedNav>
       <Styled.TouristSpotWrap>
-        <Gallery />
-        <SpotInformation />
-        <TopReview />
-        <SpotReview />
+        <Gallery id={placeId} galleryType="spot" />
+        <SpotInformation id={placeId} />
+        <SpotTopReview id={placeId} />
+        {/* <SpotReview placeId={placeId} /> */}
+        <RecommendSpot id={placeId} />
       </Styled.TouristSpotWrap>
-    </div>
+    </>
   );
 };
 

@@ -13,13 +13,13 @@ interface ShortsResponseType {
 }
 
 interface GalleryDataType {
-  id: number;
+  id?: number;
   tripRecordId: number;
-  storedCount: number;
+  TripRecordStoreNum: number;
   imageUrl: string;
 }
 
-interface GallryResponseType {
+interface GalleryResponseType {
   code: 200;
   data: GalleryDataType[];
   errorMessage: null;
@@ -78,4 +78,34 @@ interface ExchangeRateResponseType {
     exchangeRate: string;
   };
   errorMessage: null;
+}
+
+interface CityTopReviewDataType {
+  tripRecordId: number;
+  tripRecordTitle: string;
+  memberId: number;
+  memberName: string;
+  profileImageUrl: string;
+  cityNames: null;
+  totalDays: number;
+  averageRating: number;
+  storedCount: number;
+  imageUrl: string;
+}
+
+interface CityTopReviewResponse {
+  code: 200;
+  data: {
+    content: CityTopReviewDataType[];
+    currentPageNum: number;
+    first: boolean;
+    last: boolean;
+    pageSize: number;
+    sort: {
+      direction: 'ASC' | 'DESC';
+      orderProperty: '"storeCount"' | 'averageRating';
+      sorted: boolean;
+    };
+    totalCount: number;
+  };
 }

@@ -2,16 +2,20 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { alignCenter } from '@/styles/common';
 
-export const SubTitleBox = styled.div`
+export const RecommendWrapper = styled.section`
+  margin-bottom: 2rem;
+`;
+
+export const SubtitleBox = styled.div`
   padding: 0 1.25rem;
 `;
 
-export const PlaceBox = styled(Swiper)`
-  margin-top: 1.5rem;
+export const RecommendItemBox = styled(Swiper)`
+  margin-top: 1rem;
   padding: 0 1.25rem;
 `;
 
-export const PlaceItem = styled(SwiperSlide)`
+export const RecommendItem = styled(SwiperSlide)`
   width: 9.5rem;
   position: relative;
   img {
