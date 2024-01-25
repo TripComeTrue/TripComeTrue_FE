@@ -1,7 +1,13 @@
 import axios from 'axios';
-import { SignInBody, SignUpReqBody, SignUpResBody } from '@/@types/auth.types';
+import {
+  JWTBody,
+  SignInBody,
+  SignUpReqBody,
+  SignUpResBody,
+} from '@/@types/auth.types';
+import getCookie from '@/utils/token';
 
-const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
+const serverUrl = 'http://tripcometrue.site';
 
 export const checkDuplicatedEmail = async (v: string | undefined) => {
   const { status } = await axios.get(
@@ -30,5 +36,15 @@ export const postSignUp = async (reqBody: SignUpReqBody) => {
       password: reqBody.password,
     },
   );
+  return data;
+};
+
+export const getTokenTest = async () => {
+  const accessToken = getCookie('accessToken');
+  const { data } = await axios.get<JWTBody>(`${serverUrl}/v1/member/test/jwt`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   return data;
 };

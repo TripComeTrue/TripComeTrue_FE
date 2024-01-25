@@ -1,10 +1,10 @@
 import { Text } from '@/components/common';
 import * as Styled from './MyPageLevel.styles';
 import POINT_LEVEL_MENU from '@/constants/MyPage/pointLevel';
+import { MyPageLevelProps } from './MyPageLevel.types';
 
-function MyPageLevel() {
-  const level = 'beginner';
-
+function MyPageLevel({ tripLevel }: MyPageLevelProps) {
+  const level = tripLevel.toLowerCase();
   return (
     <>
       <Text tag="h4" fontSize={12} fontWeight={700}>

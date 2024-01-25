@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import MyPagePlaceReview from './MyPagePlaceReview';
 import MyPageTripRecordReview from './MyPageTripRecordReview';
 import * as Styled from './MyPageComment.styles';
+import { RetryErrorBoundary } from '@/components/common';
+import MyPagePlaceReviewSkeleton from './MyPagePlaceReviewSkeleton';
+import MyPageTripRecordReviewSkeleton from './MyPageTripRecordReviewSkeleton';
 
 function MyPageComment() {
   const [selectedTab, setSelectedTab] = useState('place');
@@ -27,10 +30,20 @@ function MyPageComment() {
       </Styled.MyPageCommentTab>
       {selectedTab === 'place' && (
         <Styled.MyPageCommentWrap>
-          <MyPagePlaceReview />
+          <RetryErrorBoundary>
+            <Suspense fallback={<MyPagePlaceReviewSkeleton />}>
+              <MyPagePlaceReview />
+            </Suspense>
+          </RetryErrorBoundary>
         </Styled.MyPageCommentWrap>
       )}
-      {selectedTab === 'trip' && <MyPageTripRecordReview />}
+      {selectedTab === 'trip' && (
+        <RetryErrorBoundary>
+          <Suspense fallback={<MyPageTripRecordReviewSkeleton />}>
+            <MyPageTripRecordReview />
+          </Suspense>
+        </RetryErrorBoundary>
+      )}
     </div>
   );
 }

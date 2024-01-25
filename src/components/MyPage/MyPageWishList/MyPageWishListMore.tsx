@@ -8,7 +8,7 @@ import MyPageWishListMoreWrap from './MyPageWishListMore.styles';
 function MyPageWishListMore({ type }: MyPageWishListMoreProps) {
   const sort = WISH_SORT[type] as 'left' | 'center' | 'space';
   const { data, isLoading } = useQuery({
-    queryKey: [`mypage/wishlist/${type}`],
+    queryKey: ['wishlist', type, 'more'],
     queryFn: () => getWishListMore(type),
   });
   const onDelete = () => {};
@@ -16,7 +16,7 @@ function MyPageWishListMore({ type }: MyPageWishListMoreProps) {
   if (isLoading) return null;
   return (
     <MyPageWishListMoreWrap>
-      {data?.data.map((item) => (
+      {data?.map((item) => (
         <div key={item.postTitle}>
           <SpotsSwiper
             postImg={item.postImg}
