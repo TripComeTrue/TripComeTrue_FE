@@ -1,4 +1,5 @@
 import { MouseEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { HiOutlineDotsHorizontal, HiOutlineDotsVertical } from 'react-icons/hi';
 import { MdArrowOutward, MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
 import { Menu, MenuItem } from '@mui/material';
@@ -8,12 +9,14 @@ import { MyPagePopMenuProps } from './MyPagePopMenu.types';
 
 function MyPagePopMenu({
   vertical,
+  onOpenDel,
   onOpenShare,
   plan,
   review,
   setPlanItem,
   setReviewItem,
 }: MyPagePopMenuProps) {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -23,6 +26,17 @@ function MyPagePopMenu({
     setAnchorEl(null);
     if (setPlanItem) setPlanItem(undefined);
     if (setReviewItem) setReviewItem(undefined);
+  };
+  const onClickEdit = () => {
+    if (plan) navigate(`/trip/tripPlan/view/${plan.id}`);
+    if (review) navigate(`/trip/detail/${review.tripRecordId}/review/edit`);
+    handleClose();
+  };
+  const onClickDel = () => {
+    onOpenDel();
+    handleClose();
+    if (setPlanItem && plan) setPlanItem(plan);
+    if (setReviewItem && review) setReviewItem(review);
   };
   const handleShareClick = () => {
     onOpenShare();
@@ -51,13 +65,13 @@ function MyPagePopMenu({
         MenuListProps={{
           'aria-labelledby': 'mypage-edit-button',
         }}>
-        <MenuItem onClick={handleClose} dense>
+        <MenuItem onClick={onClickEdit} dense>
           <Styled.MyPagePopMenuIcon fontSize={16}>
             <MdOutlineEdit />
           </Styled.MyPagePopMenuIcon>
           <Text fontSize={12}>수정하기</Text>
         </MenuItem>
-        <MenuItem onClick={handleClose} dense>
+        <MenuItem onClick={onClickDel} dense>
           <Styled.MyPagePopMenuIcon fontSize={16}>
             <MdOutlineDelete />
           </Styled.MyPagePopMenuIcon>

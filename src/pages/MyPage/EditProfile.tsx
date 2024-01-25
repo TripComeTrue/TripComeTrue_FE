@@ -20,7 +20,7 @@ import { setCookie } from '@/utils/cookie';
 function EditProfile() {
   const navigate = useNavigate();
   const { data: memberData, refetch } = useQuery({
-    queryKey: ['member/detail'],
+    queryKey: ['member', 'detail'],
     queryFn: getMemberDetail,
   });
   const editor = useRef<AvatarEditor>(null);

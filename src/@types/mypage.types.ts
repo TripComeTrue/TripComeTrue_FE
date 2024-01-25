@@ -279,3 +279,11 @@ export interface TripRecordContent {
   storeCount: number;
   imageUrl: string;
 }
+
+export interface PlaceReviewDelReqBody {
+  placeReviewIds: number[];
+}
+
+export interface RecordReviewDelReqBody {
+  tripRecordReviewIds: number[];
+}
