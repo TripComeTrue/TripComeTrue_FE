@@ -7,6 +7,7 @@ import calcDateDiff from '@/utils/dateDiff';
 
 function MyPagePlanItem({
   plan,
+  onOpenDel,
   onOpenShare,
   setPlanItem,
 }: MyPagePlanItemProps) {
@@ -31,6 +32,7 @@ function MyPagePlanItem({
       </Link>
       <div>
         <MyPagePopMenu
+          onOpenDel={onOpenDel}
           onOpenShare={onOpenShare}
           plan={plan}
           setPlanItem={setPlanItem}

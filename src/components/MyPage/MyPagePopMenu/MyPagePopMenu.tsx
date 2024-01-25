@@ -9,6 +9,7 @@ import { MyPagePopMenuProps } from './MyPagePopMenu.types';
 
 function MyPagePopMenu({
   vertical,
+  onOpenDel,
   onOpenShare,
   plan,
   review,
@@ -30,6 +31,12 @@ function MyPagePopMenu({
     if (plan) navigate(`/trip/tripPlan/view/${plan.id}`);
     if (review) navigate(`/trip/detail/${review.tripRecordId}/review/edit`);
     handleClose();
+  };
+  const onClickDel = () => {
+    onOpenDel();
+    handleClose();
+    if (setPlanItem && plan) setPlanItem(plan);
+    if (setReviewItem && review) setReviewItem(review);
   };
   const handleShareClick = () => {
     onOpenShare();
@@ -64,7 +71,7 @@ function MyPagePopMenu({
           </Styled.MyPagePopMenuIcon>
           <Text fontSize={12}>수정하기</Text>
         </MenuItem>
-        <MenuItem onClick={handleClose} dense>
+        <MenuItem onClick={onClickDel} dense>
           <Styled.MyPagePopMenuIcon fontSize={16}>
             <MdOutlineDelete />
           </Styled.MyPagePopMenuIcon>

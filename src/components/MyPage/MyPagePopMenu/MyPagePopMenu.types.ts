@@ -2,7 +2,8 @@ import { PlanContent, TripRecordContent } from '@/@types/mypage.types';
 
 export interface MyPagePopMenuProps {
   vertical?: boolean;
-  onOpenShare: () => void;
+  onOpenDel: VoidFunction;
+  onOpenShare: VoidFunction;
   plan?: PlanContent;
   review?: TripRecordContent;
   setPlanItem?: (item: PlanContent | undefined) => void;

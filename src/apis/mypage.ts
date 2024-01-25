@@ -156,3 +156,15 @@ export const deleteMember = async () => {
   const { status } = await client.delete(`v1/member`);
   return status;
 };
+
+// 내 여행계획 삭제
+export const deleteMyTripPlan = async (id: number) => {
+  const { status } = await client.delete(`v1/trip-plan/${id}`);
+  return status;
+};
+
+// 내 여행후기 삭제
+export const deleteMyTripRecord = async (id: number) => {
+  const { status } = await client.delete(`v1/trip-record/${id}`);
+  return status;
+};

@@ -8,6 +8,7 @@ import MyPagePopMenu from '../MyPagePopMenu/MyPagePopMenu';
 
 function MyPageReviewItem({
   review,
+  onOpenDel,
   onOpenShare,
   setReviewItem,
 }: MyPageReviewItemProps) {
@@ -36,6 +37,7 @@ function MyPageReviewItem({
       <Styled.MyPageReviewPopBtn>
         <MyPagePopMenu
           vertical
+          onOpenDel={onOpenDel}
           onOpenShare={onOpenShare}
           review={review}
           setReviewItem={setReviewItem}
