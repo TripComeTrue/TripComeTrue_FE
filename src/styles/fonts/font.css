@@ -31,25 +31,25 @@
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 200;
-  src: url('./SF-Pro.ttf') format('truetype');
+  src: url('./SF-Pro-Text-Light.otf') format('OpenType');
 }
 
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 400;
-  src: url('./SF-Pro.ttf') format('truetype');
+  src: url('./SF-Pro-Text-Medium.otf') format('OpenType');
 }
 
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 600;
-  src: url('./SF-Pro.ttf') format('truetype');
+  src: url('./SF-Pro-Text-Semibold.otf') format('OpenType');
 }
 
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 700;
-  src: url('./SF-Pro.ttf') format('truetype');
+  src: url('./SF-Pro-Text-Bold.otf') format('OpenType');
 }
 
 @font-face {
