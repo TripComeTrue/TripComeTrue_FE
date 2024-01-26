@@ -52,10 +52,9 @@ const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
           slidesPerView={2.15}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
           {data.data.map(
-            ({ tripRecordStoreCount, imageUrl, tripRecordId }, index) => (
+            ({ tripRecordStoreCount, imageUrl, tripRecordId, imageId }) => (
               <Styled.GellaryItem
-                // eslint-disable-next-line react/no-array-index-key
-                key={index}
+                key={imageId}
                 onClick={() => navigate(`/trip/detail/${tripRecordId}`)}>
                 <Styled.BookMarkBox>
                   <Bookmark count={tripRecordStoreCount} />

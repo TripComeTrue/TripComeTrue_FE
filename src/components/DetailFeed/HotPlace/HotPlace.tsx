@@ -64,8 +64,7 @@ const HotPlace = ({
             index,
           ) => (
             <Styled.PlaceItem
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
+              key={placeId}
               onClick={() => handlePlaceClick({ placeId, placeName })}>
               <Styled.BookMarkBox>
                 <Bookmark count={storedCount} />

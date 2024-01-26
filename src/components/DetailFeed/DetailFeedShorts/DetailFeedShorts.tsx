@@ -16,6 +16,7 @@ const DetailFeedShorts = ({
     id: cityId,
     fnUrl: `/v1/cities/${cityId}/videos/list`,
   });
+
   const navigate = useNavigate();
   if (isLoading) {
     return <p>Loading...</p>;

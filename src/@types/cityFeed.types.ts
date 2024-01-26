@@ -3,6 +3,7 @@ interface ShortsDataType {
   tripRecordId: number;
   tripRecordTitle: string;
   videoUrl: string;
+  storeCount: number;
   storedCount: number;
   memberId: number;
   memberName: string;
@@ -34,7 +35,7 @@ interface AllShortsResponseType {
 }
 
 interface GalleryDataType {
-  id?: number;
+  imageId: number;
   tripRecordId: number;
   tripRecordStoreCount: number;
   imageUrl: string;
