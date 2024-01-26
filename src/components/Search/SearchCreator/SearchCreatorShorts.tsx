@@ -8,7 +8,7 @@ import { CreatorResponse } from './SearchCreator.types';
 const SearchCreatorShorts = () => {
   const [searchParams] = useSearchParams();
   const queryCreator = searchParams.get('query');
-  const [creatorData, setCreatorData] = useState<CreatorResponse[]>([]);
+  const [creatorData, setCreatorData] = useState<CreatorResponse | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +33,9 @@ const SearchCreatorShorts = () => {
       <Styled.CreatorTitle>
         검색된 크리에이터가 업로드한 쇼츠
       </Styled.CreatorTitle>
-      <Shorts slides={creatorData[0].videos} slidesPerView={2.1} />
+      {creatorData && creatorData.videos && (
+        <Shorts slides={creatorData.videos} slidesPerView={2.1} />
+      )}
     </div>
   );
 };

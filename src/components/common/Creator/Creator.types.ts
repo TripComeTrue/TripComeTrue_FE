@@ -3,4 +3,5 @@ export interface CreatorData {
   nickname: string;
   introduction: string;
   profileImageUrl: string;
+  averageRating?: number;
 }

@@ -1,38 +1,41 @@
-export interface Member {
+export interface CreatorData {
   memberId: number;
   nickname: string;
   introduction: string;
   profileImageUrl: string;
   averageRating: number;
+  tripRecordTotal: number;
+  videoTotal: number;
 }
 
-export interface Video {
+export interface CreatorDetailProps {
+  data: {
+    memberDetailInfo: CreatorData;
+    videos: Video[];
+    tripRecords: TripRecord[];
+  } | null;
+}
+
+interface Video {
   videoId: number;
   tripRecordId: number;
   tripRecordTitle: string;
-  thumbnailUrl: string;
   videoUrl: string;
-  storedCount: number;
+  thumbnailUrl: string;
+  storeCount: number;
   memberId: number;
   memberName: string;
   profileImageUrl: string;
 }
 
-export interface TripRecord {
+interface TripRecord {
   tripRecordId: number;
   tripRecordTitle: string;
   memberId: number;
   memberName: string;
   profileImageUrl: string;
-  cityNames: string[] | null;
   totalDays: number;
   averageRating: number;
   storedCount: number;
   imageUrl: string;
-}
-
-export interface CreatorResponse {
-  members: Member[];
-  videos: Video[];
-  tripRecords: TripRecord[];
 }
