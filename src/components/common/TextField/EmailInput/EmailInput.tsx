@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { KeyboardEvent } from 'react';
 import { isAxiosError } from 'axios';
 import _ from 'lodash';
 import * as Styled from './EmailInput.styles';
@@ -38,9 +39,17 @@ function EmailInput({
     },
   };
 
+  // 엔터 이벤트를 막기
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    const key = event.key || event.keyCode;
+    if (key === 'Enter' || key === 13) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <TextFieldWrap>
-      <Label htmlFor="email">아이디</Label>
+      <Label htmlFor="email">이메일</Label>
       <Styled.EmailField
         type="email"
         id="email"
@@ -51,6 +60,7 @@ function EmailInput({
         placeholder="이메일을 입력해주세요"
         autoComplete="off"
         $iserror={`${Boolean(errors.email)}`}
+        onKeyDown={onKeyDown}
       />
       {email && <ValidateIcon $isvalid={`${Boolean(errors.email)}`} />}
       <ErrorMsg>{errors.email?.message}</ErrorMsg>

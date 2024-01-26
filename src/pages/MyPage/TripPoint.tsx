@@ -7,7 +7,7 @@ import { getMemberDetail } from '@/apis/mypage';
 
 function TripPoint() {
   const { data, isLoading } = useQuery({
-    queryKey: ['member/detail'],
+    queryKey: ['member', 'detail'],
     queryFn: getMemberDetail,
   });
 

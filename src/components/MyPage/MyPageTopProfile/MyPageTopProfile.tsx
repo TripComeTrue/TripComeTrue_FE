@@ -18,7 +18,7 @@ function MyPageTopProfile({ handleOpen }: MyPageTopProfileProps) {
 
   const navigate = useNavigate();
   const { data } = useSuspenseQuery({
-    queryKey: ['member/detail'],
+    queryKey: ['member', 'detail'],
     queryFn: getMemberDetail,
     gcTime: HALF_MINUTE,
   });
