@@ -16,7 +16,6 @@ import Home from './pages/Home/Home';
 import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
 import {
   City,
-  GalleryList,
   SpotList,
   SpotSearch,
   TouristSpot,
@@ -24,6 +23,8 @@ import {
   ReviewComment,
   SpotReviewWriteNew,
   SpotReviewWriteEdit,
+  CityGalleryList,
+  SpotGalleryList,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
@@ -72,8 +73,8 @@ function App() {
           <Route path="posting" element={<TripPlanPosting />} />
         </Route>
         <Route path="/detailfeed/*">
-          <Route path="city" element={<City />} />
-          <Route path="spot" element={<TouristSpot />} />
+          <Route path="city/:cityId" element={<City />} />
+          <Route path="spot/:spotId" element={<TouristSpot />} />
           <Route path="spot/:spotId/review" element={<Reviews />} />
           <Route
             path="spot/:spotId/review/:reviewId/write"
@@ -87,9 +88,16 @@ function App() {
             path="spot/:spotId/review/:reviewId/comment"
             element={<ReviewComment />}
           />
-          <Route path="shortslist" element={<ShortsList />} />
-          <Route path="gallerylist" element={<GalleryList />} />
-          <Route path="spotlist" element={<SpotList />} />
+          <Route path="shortslist/:placeId" element={<ShortsList />} />
+          <Route
+            path="citygallerylist/:placeName"
+            element={<CityGalleryList />}
+          />
+          <Route
+            path="spotgallerylist/:placeName"
+            element={<SpotGalleryList />}
+          />
+          <Route path="spotlist/:placeId" element={<SpotList />} />
           <Route path="spotsearch" element={<SpotSearch />} />
         </Route>
       </Route>

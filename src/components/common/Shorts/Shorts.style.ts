@@ -11,6 +11,7 @@ export const SwiperSlideWrap = styled(SwiperSlide)``;
 export const SliderContent = styled.div`
   position: relative;
   aspect-ratio: 9/16;
+  cursor: pointer;
 
   border-radius: 10px;
 `;

@@ -18,6 +18,7 @@ export const RecommendItemBox = styled(Swiper)`
 export const RecommendItem = styled(SwiperSlide)`
   width: 9.5rem;
   position: relative;
+  cursor: pointer;
   img {
     width: 100%;
     height: 9.5rem;

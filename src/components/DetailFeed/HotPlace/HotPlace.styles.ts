@@ -14,6 +14,7 @@ export const PlaceBox = styled(Swiper)`
 export const PlaceItem = styled(SwiperSlide)`
   width: 9.5rem;
   position: relative;
+  cursor: pointer;
   img {
     width: 100%;
     height: 9.5rem;

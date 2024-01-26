@@ -7,7 +7,13 @@ import ReviewSwiper from '@/components/common/Review/ReviewSwiper';
 import { DAY_OPTION } from '@/constants/DetailFeed/City';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 
-const SpotTopReview = ({ id }: { id: number }) => {
+const SpotTopReview = ({
+  id,
+  placeName,
+}: {
+  id: number;
+  placeName: string;
+}) => {
   const [day, setDay] = useState(2);
   const { data, isLoading } = useDetailFeedQuery<SpotTopReviewResponseType>({
     queryKey: 'spotTopReview',
@@ -26,13 +32,12 @@ const SpotTopReview = ({ id }: { id: number }) => {
   const onClickDay = (totalDays: number) => {
     setDay(totalDays);
   };
-
   const REVIEW_DATA = data.data;
   return (
     <div>
       <Styled.SubTitleBox>
-        <SubTitle fontSize={18} icon={starIcon} variant="more">
-          방콕 여행 후기 TOP 3
+        <SubTitle fontSize={18} icon={starIcon}>
+          {placeName} 여행 후기 TOP 3
         </SubTitle>
       </Styled.SubTitleBox>
       <Styled.DayOptions>
@@ -60,7 +65,6 @@ const SpotTopReview = ({ id }: { id: number }) => {
           {REVIEW_DATA.map(
             ({
               member,
-              commentCount,
               averageRating,
               countries,
               title,
@@ -71,7 +75,7 @@ const SpotTopReview = ({ id }: { id: number }) => {
             }) => (
               <Styled.TopReviewItem key={tripRecordId}>
                 <ReviewSwiper
-                  key={tripRecordId}
+                  tripRecordId={tripRecordId}
                   title={countries}
                   bookmark={storeCount}
                   img={imageUrl}

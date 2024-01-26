@@ -1,5 +1,5 @@
 export interface SlideHotItem {
-  title?: string;
+  title: string;
   bookmark: number;
   img: string;
   rate: number;
@@ -7,6 +7,7 @@ export interface SlideHotItem {
   userphoto: string;
   nights: string;
   postTitle: string;
+  tripRecordId: number;
 }
 
 export interface ReviewProps {

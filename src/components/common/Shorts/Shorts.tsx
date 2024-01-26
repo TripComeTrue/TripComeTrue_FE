@@ -16,12 +16,12 @@ const Shorts: React.FC<ShortsProps> = ({ slides, slidesPerView = 2.1 }) => (
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
     {slides.map((slide: Slide) => (
-      <Styled.SwiperSlideWrap key={slide.title}>
+      <Styled.SwiperSlideWrap key={slide.tripRecordTitle}>
         <ShortsSwiper
-          key={slide.title}
-          img={slide.img}
-          title={slide.title}
-          bookmark={slide.bookmark}
+          thumbnailUrl={slide.thumbnailUrl}
+          tripRecordTitle={slide.tripRecordTitle}
+          storedCount={slide.storedCount}
+          tripRecordId={slide.tripRecordId}
         />
       </Styled.SwiperSlideWrap>
     ))}

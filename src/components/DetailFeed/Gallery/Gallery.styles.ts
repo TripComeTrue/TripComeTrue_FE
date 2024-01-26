@@ -17,7 +17,7 @@ export const GellaryItemBox = styled(Swiper)`
 export const GellaryItem = styled(SwiperSlide)`
   position: relative;
   width: 9rem;
-
+  cursor: pointer;
   img {
     width: 100%;
     height: 9rem;

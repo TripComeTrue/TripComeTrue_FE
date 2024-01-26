@@ -1,17 +1,28 @@
-import { useQuery } from '@tanstack/react-query';
 import { SubTitle, Text } from '@/components/common';
+import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './ExchangeRate.styles';
-import { ExchangeRateType } from '@/pages/DetailFeed/City/City.types';
-import { getExchangeRate } from '@/apis/cityFeed';
 
-const ExchangeRate = ({ cityId }: { cityId: number }) => {
-  const { data, isLoading } = useQuery<ExchangeRateType>({
-    queryKey: ['exchangeRate', curUnit],
-    queryFn: () => getExchangeRate(curUnit),
-    staleTime: 600000,
+const ExchangeRate = ({
+  cityId,
+  country,
+}: {
+  cityId: number;
+  country?: string;
+}) => {
+  const { data, isLoading } = useDetailFeedQuery<ExchangeRateResponseType>({
+    queryKey: 'exchangeRate',
+    id: cityId,
+    fnUrl: `/cities/${cityId}/exchange-rates`,
   });
 
-  if (isLoading) return <div>Loding....</div>;
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data || !data.data) {
+    return <p>Data not available</p>;
+  }
+
   return (
     <Styled.ExchangeRateWrapper>
       <SubTitle>환율</SubTitle>
@@ -19,17 +30,17 @@ const ExchangeRate = ({ cityId }: { cityId: number }) => {
         <Styled.ExchangeRateContent>
           <Styled.ContentLeftBox>
             <Text fontSize={14} fontWeight={700}>
-              태국
+              {country}
             </Text>
             <Styled.CurrencyUnit>
               <Text fontSize={14} fontWeight={700} color="primary">
-                {data?.curUnit}({data?.curName})
+                {data.data.curUnit}({data.data.curName})
               </Text>
             </Styled.CurrencyUnit>
           </Styled.ContentLeftBox>
           <Styled.ContentRightBox>
             <Text fontSize={18} fontWeight={700} color="gray">
-              1 {data?.curUnit}
+              1 {data.data.curUnit}
             </Text>
           </Styled.ContentRightBox>
         </Styled.ExchangeRateContent>
@@ -47,7 +58,7 @@ const ExchangeRate = ({ cityId }: { cityId: number }) => {
           </Styled.ContentLeftBox>
           <Styled.ContentRightBox>
             <Text fontSize={18} fontWeight={700} color="gray">
-              {data?.exchangeRate.split(':')[1]} KRW
+              {data.data.exchangeRate.split(':')[1]} KRW
             </Text>
           </Styled.ContentRightBox>
         </Styled.ExchangeRateContent>

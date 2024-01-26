@@ -4,6 +4,7 @@ export const CountryItem = styled.li<{ $height: number }>`
   height: ${({ $height }) => `${$height}px`};
   overflow: hidden;
   transition: height 0.3s;
+  cursor: pointer;
 `;
 export const CountryItemButton = styled.button<{ $active: string }>`
   position: relative;
@@ -32,4 +33,10 @@ export const CountryItemButton = styled.button<{ $active: string }>`
     transform: ${({ $active }) =>
       $active === 'true' ? 'rotate(180deg)' : 'rotate(0deg)'};
   }
+`;
+
+export const KoreaItem = styled.li<{ $height: number }>`
+  height: ${({ $height }) => `${$height}px`};
+  cursor: pointer;
+  padding: 0.6875rem 1.25rem;
 `;

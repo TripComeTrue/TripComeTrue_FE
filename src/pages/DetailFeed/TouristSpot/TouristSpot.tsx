@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import {
   Gallery,
   RecommendSpot,
@@ -8,14 +9,16 @@ import {
 import { FeedNav } from '@/components/common';
 import * as Styled from './TouristSpot.styles';
 
-const TouristSpot = ({ placeId = 1 }: { placeId?: number }) => {
+const TouristSpot = () => {
+  const location = useLocation();
+  const { placeName, placeId } = location.state;
   return (
     <>
-      <FeedNav isScheduleIcon>여행지 이름</FeedNav>
+      <FeedNav isScheduleIcon>{placeName}</FeedNav>
       <Styled.TouristSpotWrap>
-        <Gallery id={placeId} galleryType="spot" />
+        <Gallery id={placeId} placeName={placeName} galleryType="spot" />
         <SpotInformation id={placeId} />
-        <SpotTopReview id={placeId} />
+        <SpotTopReview id={placeId} placeName={placeName} />
         {/* <SpotReview placeId={placeId} /> */}
         <RecommendSpot id={placeId} />
       </Styled.TouristSpotWrap>

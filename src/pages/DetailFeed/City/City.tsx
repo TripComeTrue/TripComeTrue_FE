@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import {
   Banner,
   CityInformation,
@@ -10,20 +11,24 @@ import {
 } from '@/components/DetailFeed';
 import { FeedNav } from '@/components/common';
 import * as Styled from './City.styles';
+import ShortCard from '@/components/Trip/TripHome/ShortCard/ShortCard';
 
-const City = ({ cityId = 5 }: { cityId?: number }) => {
+const City = () => {
+  const location = useLocation();
+  const { cityId, name, isDomestic, country }: CityState = location.state;
+
   return (
     <>
-      <FeedNav>도시이름</FeedNav>
+      <FeedNav>{name}</FeedNav>
       <Styled.CityWrapper>
-        {/* <DetailFeedShorts cityId={cityId} /> */}
-        <Gallery id={cityId} />
-        <CityInformation cityId={cityId} />
+        <DetailFeedShorts cityId={cityId} placeName={name} />
+        <Gallery id={cityId} placeName={name} />
+        {!isDomestic && <CityInformation cityId={cityId} />}
         <Weather cityId={cityId} />
-        {/* <ExchangeRate cityId={cityId} /> */}
-        <CityTopReview cityId={cityId} />
-        <HotPlace cityId={cityId} />
-        <Banner />
+        {!isDomestic && <ExchangeRate cityId={cityId} country={country} />}
+        <CityTopReview cityId={cityId} cityName={name} />
+        <HotPlace cityId={cityId} cityName={name} />
+        <Banner isDomestic={isDomestic} />
       </Styled.CityWrapper>
     </>
   );

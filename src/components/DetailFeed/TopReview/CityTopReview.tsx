@@ -7,7 +7,13 @@ import ReviewSwiper from '@/components/common/Review/ReviewSwiper';
 import { DAY_OPTION } from '@/constants/DetailFeed/City';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 
-const CityTopReview = ({ cityId }: { cityId: number }) => {
+const CityTopReview = ({
+  cityId,
+  cityName,
+}: {
+  cityId: number;
+  cityName: string;
+}) => {
   const [day, setDay] = useState(2);
   const { data, isLoading } = useDetailFeedQuery<CityTopReviewResponse>({
     queryKey: 'cityTopReview',
@@ -26,13 +32,12 @@ const CityTopReview = ({ cityId }: { cityId: number }) => {
   const onClickDay = (totalDays: number) => {
     setDay(totalDays);
   };
-
   const REVIEW_DATA = data.data.content;
   return (
     <div>
       <Styled.SubTitleBox>
-        <SubTitle fontSize={18} icon={starIcon} variant="more">
-          방콕 여행 후기 TOP 3
+        <SubTitle fontSize={18} icon={starIcon}>
+          {cityName} 여행 후기 TOP 3
         </SubTitle>
       </Styled.SubTitleBox>
       <Styled.DayOptions>
@@ -70,9 +75,10 @@ const CityTopReview = ({ cityId }: { cityId: number }) => {
             }) => (
               <Styled.TopReviewItem key={tripRecordId}>
                 <ReviewSwiper
-                  key={tripRecordId}
+                  tripRecordId={tripRecordId}
                   bookmark={storedCount}
                   img={imageUrl}
+                  title={cityName}
                   username={memberName}
                   rate={averageRating}
                   userphoto={profileImageUrl}

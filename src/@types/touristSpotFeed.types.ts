@@ -61,6 +61,7 @@ interface RecommendSpotDataType {
   latitude: number;
   longitude: number;
   storedCount: number;
+  reviewCount: number;
 }
 
 interface RecommendSpotResponseType {

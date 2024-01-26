@@ -7,6 +7,8 @@ export const NavWrap = styled.div`
   height: 2.5rem;
   top: 0;
   left: 0;
+
+  z-index: 100;
 `;
 
 export const NavInner = styled.div`

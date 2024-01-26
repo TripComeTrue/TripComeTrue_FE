@@ -1,9 +1,13 @@
 interface ShortsDataType {
-  id: number;
+  videoId: number;
   tripRecordId: number;
   tripRecordTitle: string;
   videoUrl: string;
   storedCount: number;
+  memberId: number;
+  memberName: string;
+  profileImageUrl: string;
+  thumbnailUrl: string;
 }
 
 interface ShortsResponseType {
@@ -12,10 +16,27 @@ interface ShortsResponseType {
   errorMessage: null;
 }
 
+interface AllShortsResponseType {
+  code: 200;
+  data: {
+    content: ShortsDataType[];
+    currentPageNum: number;
+    first: boolean;
+    last: boolean;
+    pageSize: number;
+    sort: {
+      direction: 'ASC' | 'DESC';
+      orderProperty: '"storeCount"' | 'averageRating';
+      sorted: boolean;
+    };
+    totalCount: number;
+  };
+}
+
 interface GalleryDataType {
   id?: number;
   tripRecordId: number;
-  TripRecordStoreNum: number;
+  tripRecordStoreCount: number;
   imageUrl: string;
 }
 
@@ -70,13 +91,14 @@ interface HotPlaceResponseType {
   errorMessage: null;
 }
 
+interface ExchangeRateData {
+  curUnit: string;
+  curName: string;
+  exchangeRate: string;
+}
 interface ExchangeRateResponseType {
   code: 200;
-  data: {
-    curUnit: string;
-    curName: string;
-    exchangeRate: string;
-  };
+  data: ExchangeRateData;
   errorMessage: null;
 }
 
@@ -108,4 +130,53 @@ interface CityTopReviewResponse {
     };
     totalCount: number;
   };
+}
+interface SpotListDataType {
+  placeId: number;
+  placeName: string;
+  storedCount: number;
+  commentTotal: number;
+  imageUrl: string;
+}
+
+interface SpotListResponse {
+  code: 200;
+  data: {
+    content: SpotListDataType[];
+    currentPageNum: number;
+    first: boolean;
+    last: boolean;
+    pageSize: number;
+    sort: {
+      direction: 'ASC' | 'DESC';
+      orderProperty: '"storeCount"' | 'averageRating';
+      sorted: boolean;
+    };
+    totalCount: number;
+  };
+}
+
+interface CityState {
+  name: string;
+  cityId: number;
+  isDomestic: boolean;
+  country?: string;
+}
+
+interface CityGalleryResponse {
+  code: 200;
+  data: {
+    content: GalleryDataType[];
+  };
+  sort: {
+    sorted: boolean;
+    direction: string;
+    orderProperty: string;
+  };
+  totalCount: number;
+  currentPageNum: number;
+  pageSize: number;
+  first: boolean;
+  last: boolean;
+  errorMessage: null;
 }
