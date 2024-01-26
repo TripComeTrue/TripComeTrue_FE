@@ -87,16 +87,19 @@ export const getWishListMore = async (type: string) => {
   const { data } = await client.get(`/v1/${type}/stores`);
   const moreData = data.data.content.map(
     (item: {
+      id: number;
       imageUrl: string;
-      storeCount: string;
-      storedCount: string;
+      storeCount: number;
+      storedCount: number;
+      commentCount: number;
       name: string;
       title: string;
     }) => ({
-      postImg: item.imageUrl ?? '',
-      bookmark: item.storeCount || item.storedCount,
-      postTitle: item.name || item.title,
-      reviews: 0,
+      id: item.id,
+      imageUrl: item.imageUrl ?? '',
+      tripRecordTitle: item.name || item.title,
+      storedCount: item.storeCount || item.storedCount,
+      reviews: item.commentCount,
     }),
   );
   return moreData as PostData[];

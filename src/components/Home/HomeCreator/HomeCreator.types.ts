@@ -19,5 +19,12 @@ export interface TripRecordsData {
 
 export interface CreatorData {
   memberInfo: MemberInfoData;
-  tripRecords: TripRecordsData;
+  tripRecords: TripRecordsData[];
+}
+
+export interface PostData {
+  imageUrl: string;
+  storedCount: number;
+  tripRecordTitle: string;
+  reviews?: number;
 }

@@ -1,9 +1,9 @@
 export interface CreatorData {
-  userImg: string;
-  username: string;
-  userInfo: string;
-  rate?: number;
-  userId: string;
-  review: number;
-  shorts: number;
+  memberId: number;
+  nickname: string;
+  introduction: string;
+  profileImageUrl: string;
+  averageRating: number;
+  tripRecordTotal: number;
+  videoTotal: number;
 }

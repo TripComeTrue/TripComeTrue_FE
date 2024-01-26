@@ -6,11 +6,16 @@ import {
   defaultTripRecordData,
 } from '@/@types/trip-alldata.types';
 
-const TripFormDataContext = createContext({
+const TripFormDataContext = createContext<{
+  tripPlanData: TripPlanData;
+  tripRecordData: TripRecordData;
+  updateTripPlanData: (newData: Partial<TripPlanData>) => void;
+  updateTripRecordData: (newData: Partial<TripRecordData>) => void;
+}>({
   tripPlanData: defaultTripPlanData,
   tripRecordData: defaultTripRecordData,
-  updateTripPlanData: (newData: Partial<TripPlanData>) => {},
-  updateTripRecordData: (newData: Partial<TripRecordData>) => {},
+  updateTripPlanData: () => {},
+  updateTripRecordData: () => {},
 });
 
 export const TripFormDataProvider: React.FC<{ children: ReactNode }> = ({

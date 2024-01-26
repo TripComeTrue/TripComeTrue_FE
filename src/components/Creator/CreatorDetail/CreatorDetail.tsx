@@ -13,14 +13,14 @@ const CreatorDetail = () => {
   };
 
   const CreatorDatas: CreatorData = {
-    userImg: exampleImg,
-    username: '맥주덕후',
-    userInfo:
+    profileImageUrl: exampleImg,
+    nickname: '맥주덕후',
+    introduction:
       '독일에서 교환학생하며 실감나는 유럽의 삶을 담고 있는 유럽의 맥주덕후입니다.',
-    userId: 'user1',
-    rate: 4.8,
-    review: 18,
-    shorts: 7,
+    memberId: 1,
+    averageRating: 4.8,
+    tripRecordTotal: 18,
+    videoTotal: 7,
   };
 
   return (
