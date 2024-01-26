@@ -52,12 +52,30 @@ export interface MyPlaceReview {
   dates: string;
 }
 
+// 알림
 export interface Notification {
-  id: string;
-  title: string;
-  text?: string;
-  time: string;
-  read: boolean;
+  code: number;
+  data: NotificationData;
+}
+
+export type NotificationData = Stores & {
+  content: NotificationContent[];
+};
+
+export interface NotificationContent {
+  alarmId: number;
+  alarmArgs: string;
+  fromMemberNickname: string;
+  windowId: number;
+  objectId: number;
+  alarmType: AlarmType;
+  createdAt: string;
+}
+
+export enum AlarmType {
+  NEW_TRIP_RECORD_REVIEW = 'NEW_TRIP_RECORD_REVIEW',
+  NEW_TRIP_RECORD_COMMENT = 'NEW_TRIP_RECORD_COMMENT',
+  NEW_PLACE_REVIEW_COMMENT = 'NEW_PLACE_REVIEW_COMMENT',
 }
 
 export interface CheckPasswordReqBody {

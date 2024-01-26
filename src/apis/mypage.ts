@@ -52,9 +52,7 @@ export const getMyTripRecordReview = async (page: number) => {
 };
 
 export const getNoties = async () => {
-  const { data } = await client.get<{ message: string; data: Notification[] }>(
-    '/mypage/noti',
-  );
+  const { data } = await client.get<Notification>('/v1/member/alarms');
   return data;
 };
 
