@@ -8,9 +8,4 @@ export const Container = styled(Swiper)`
 
 export const Slide = styled(SwiperSlide)`
   min-width: 9.5625rem;
-<<<<<<< HEAD:src/components/Trip/TripHome/ShortCarousel/ShortCarousel.styles.ts
-  min-height: 16.8rem;
-=======
-  cursor: pointer;
->>>>>>> b690699919bebbe76bc83921c752c9836d3c73bc:src/components/Trip/TripHome/ShortsCarousel/ShortsCarousel.styles.ts
 `;
