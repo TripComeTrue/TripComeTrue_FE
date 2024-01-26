@@ -7,8 +7,8 @@ import { GalleyProps } from './Gallery.types';
 const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
   const queryKey = galleryType ? 'spotGallery' : 'cityGallery';
   const fnUrl = galleryType
-    ? `/trip-records-schedules?placeId=${id}&size=10`
-    : `/cities/${id}/images/list`;
+    ? `/v1/trip-records-schedules?placeId=${id}&size=10`
+    : `/v1/cities/${id}/images/list`;
 
   const { data, isLoading } = useDetailFeedQuery<GalleryResponseType>({
     queryKey,

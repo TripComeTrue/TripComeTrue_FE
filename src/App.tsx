@@ -54,6 +54,7 @@ import TripPlanRecord from './pages/Trip/TripPlan/TripPlanRecord';
 import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
 import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
+import { HomeAllCity } from './components/Home';
 
 function App() {
   return (
@@ -68,7 +69,7 @@ function App() {
           <Route path="welcome" element={<Welcome />} />
         </Route>
         <Route path="home" element={<Home />} />
-
+        <Route path="citylist" element={<HomeAllCity />} />
         <Route path="search/*" element={<Search />} />
         <Route path="search/select/:tag" element={<SearchTag />} />
         <Route path="search-non" element={<SearchNons />} />

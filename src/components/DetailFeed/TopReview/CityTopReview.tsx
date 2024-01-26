@@ -18,7 +18,7 @@ const CityTopReview = ({
   const { data, isLoading } = useDetailFeedQuery<CityTopReviewResponse>({
     queryKey: 'cityTopReview',
     id: cityId,
-    fnUrl: `/trip-records/search?cityId=${cityId}&totalDays=${day}&size=3&sort=storeCount,desc&sort=averageRating,desc`,
+    fnUrl: `/v1/trip-records/search?cityId=${cityId}&totalDays=${day}&size=3&sort=storeCount,desc&sort=averageRating,desc`,
   });
 
   if (isLoading) {

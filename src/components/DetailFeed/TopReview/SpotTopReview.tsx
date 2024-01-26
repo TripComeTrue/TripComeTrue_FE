@@ -18,7 +18,7 @@ const SpotTopReview = ({
   const { data, isLoading } = useDetailFeedQuery<SpotTopReviewResponseType>({
     queryKey: 'spotTopReview',
     id,
-    fnUrl: `trip-records?size=5&page=0&orderBy=storeCount&order=DESC&totalDays=${day}&placeId=${id}`,
+    fnUrl: `/v1/trip-records?size=5&page=0&orderBy=storeCount&order=DESC&totalDays=${day}&placeId=${id}`,
   });
 
   if (isLoading) {

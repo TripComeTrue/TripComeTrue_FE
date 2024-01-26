@@ -16,7 +16,7 @@ const HotPlace = ({
   const { data, isLoading } = useDetailFeedQuery<HotPlaceResponseType>({
     queryKey: 'hotPlace',
     id: cityId,
-    fnUrl: `/cities/${cityId}/hot-places`,
+    fnUrl: `/v1/cities/${cityId}/hot-places`,
   });
 
   if (isLoading) {

@@ -13,7 +13,7 @@ const CityGalleryList = () => {
   const { data, isLoading } = useDetailFeedQuery<CityGalleryResponse>({
     queryKey: 'cityGalleryAll',
     id,
-    fnUrl: `/cities/${id}/images?sort=${order},desc&page=0&size=18`,
+    fnUrl: `/v1/cities/${id}/images?sort=${order},desc&page=0&size=18`,
   });
 
   const navigate = useNavigate();

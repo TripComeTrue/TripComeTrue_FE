@@ -11,7 +11,7 @@ const CityInformation = ({ cityId }: { cityId: number }) => {
   const { data, isLoading } = useDetailFeedQuery<CityInfoResponseType>({
     queryKey: 'information',
     id: cityId,
-    fnUrl: `/cities/${cityId}`,
+    fnUrl: `/v1/cities/${cityId}`,
   });
 
   if (isLoading) {

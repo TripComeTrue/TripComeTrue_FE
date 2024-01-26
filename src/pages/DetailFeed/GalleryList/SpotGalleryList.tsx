@@ -12,7 +12,7 @@ const SpotGalleryList = () => {
   const { data, isLoading } = useDetailFeedQuery<GalleryResponseType>({
     queryKey: 'spotGalleryAll',
     id,
-    fnUrl: `/trip-records-schedules?placeId=${id}&page=0&size=18`,
+    fnUrl: `/v1/trip-records-schedules?placeId=${id}&page=0&size=18`,
   });
 
   const navigate = useNavigate();

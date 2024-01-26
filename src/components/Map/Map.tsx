@@ -1,7 +1,6 @@
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
 import axios, { AxiosInstance } from 'axios';
-import { useQuery } from '@tanstack/react-query';
 import * as Styled from './Map.styles';
 import { MAP_CONTAINER_STYLE, OPTIONS } from '@/constants/DetailFeed/Map';
 import defaultPin from '/defaultPin.svg';
@@ -9,7 +8,6 @@ import defaultPin from '/defaultPin.svg';
 const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 interface MapProps {
-  spotName: string;
   spotCenter: {
     lat: number;
     lng: number;
@@ -24,7 +22,7 @@ const instance: AxiosInstance = axios.create({
   },
 });
 
-const Map = ({ spotCenter, spotName }: MapProps) => {
+const Map = ({ spotCenter }: MapProps) => {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey,
@@ -43,11 +41,6 @@ const Map = ({ spotCenter, spotName }: MapProps) => {
   if (loadError) {
     return <div>Error loading Google Maps API</div>;
   }
-
-  const request = {
-    query: spotName,
-    fields: ['name', 'geometry'],
-  };
 
   return (
     <Styled.MapWrapper>

@@ -9,7 +9,7 @@ const RecommendSpot = ({ id }: { id: number }) => {
   const { data, isLoading } = useDetailFeedQuery<RecommendSpotResponseType>({
     queryKey: 'recommendSpot',
     id,
-    fnUrl: `/places/${id}/nearby`,
+    fnUrl: `/v1/places/${id}/nearby`,
   });
 
   if (isLoading) {

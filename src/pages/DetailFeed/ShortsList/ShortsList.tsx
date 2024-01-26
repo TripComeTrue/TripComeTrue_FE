@@ -13,7 +13,7 @@ const ShortsList = () => {
   const { data, isLoading } = useDetailFeedQuery<AllShortsResponseType>({
     queryKey: 'AllShotrs',
     id,
-    fnUrl: `/cities/${id}/videos?sort=${orderOption},desc&page=0&size=6`,
+    fnUrl: `/v1/cities/${id}/videos?sort=${orderOption},desc&page=0&size=6`,
   });
 
   const navigate = useNavigate();

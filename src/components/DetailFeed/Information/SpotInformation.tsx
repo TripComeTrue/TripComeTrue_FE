@@ -10,7 +10,7 @@ const SpotInformation = ({ id }: { id: number }) => {
   const { data, isLoading } = useDetailFeedQuery<SpotInfoResponseType>({
     queryKey: 'spotMapInfo',
     id,
-    fnUrl: `/places/${id}`,
+    fnUrl: `/v1/places/${id}`,
   });
 
   if (isLoading) {
@@ -24,7 +24,7 @@ const SpotInformation = ({ id }: { id: number }) => {
   return (
     <Styled.SpotInfoWrapper>
       <SubTitle>기본정보</SubTitle>
-      <Map spotName={name} spotCenter={{ lat: latitude, lng: longitude }} />
+      <Map spotCenter={{ lat: latitude, lng: longitude }} />
       <Styled.SpotInfoBox>
         <Styled.SpotInfo>
           <Styled.InfoIcon src={pin} />

@@ -14,7 +14,7 @@ const DetailFeedShorts = ({
   const { data, isLoading } = useDetailFeedQuery<ShortsResponseType>({
     queryKey: 'shorts',
     id: cityId,
-    fnUrl: `/cities/${cityId}/videos/list`,
+    fnUrl: `/v1/cities/${cityId}/videos/list`,
   });
   const navigate = useNavigate();
   if (isLoading) {
@@ -37,7 +37,7 @@ const DetailFeedShorts = ({
   const slideShorts = data.data;
   return (
     <Styled.DetailFeedShortsWrapper>
-      {/* <Styled.SubTitleBox>
+      <Styled.SubTitleBox>
         <SubTitle
           fontSize={18}
           icon={starIcon}
@@ -49,8 +49,8 @@ const DetailFeedShorts = ({
       {slideShorts.length === 0 ? (
         <EmptyContents />
       ) : (
-        <Shorts shortsData={slideShorts} />
-      )} */}
+        <Shorts slides={slideShorts} />
+      )}
     </Styled.DetailFeedShortsWrapper>
   );
 };

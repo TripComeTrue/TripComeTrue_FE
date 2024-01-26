@@ -6,7 +6,7 @@ const Weather = ({ cityId }: { cityId: number }) => {
   const { data, isLoading } = useDetailFeedQuery<WeatherResponseType>({
     queryKey: 'weather',
     id: cityId,
-    fnUrl: `/cities/${cityId}/weathers`,
+    fnUrl: `/v1/cities/${cityId}/weathers`,
   });
 
   if (isLoading) {

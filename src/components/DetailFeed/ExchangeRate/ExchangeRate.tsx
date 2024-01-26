@@ -12,7 +12,7 @@ const ExchangeRate = ({
   const { data, isLoading } = useDetailFeedQuery<ExchangeRateResponseType>({
     queryKey: 'exchangeRate',
     id: cityId,
-    fnUrl: `/cities/${cityId}/exchange-rates`,
+    fnUrl: `/v1/cities/${cityId}/exchange-rates`,
   });
 
   if (isLoading) {
