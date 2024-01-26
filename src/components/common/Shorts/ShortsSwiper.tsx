@@ -6,7 +6,7 @@ const ShortsSwiper: React.FC<Slide> = ({
   thumbnailUrl,
   tripRecordTitle,
   storedCount,
-  tripRecordId,
+  // tripRecordId,
 }) => {
   return (
     <Styled.SliderContent>

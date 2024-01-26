@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import * as Styled from './ShortsList.styles';
 import ShortsSwiper from '@/components/common/Shorts/ShortsSwiper';
@@ -15,8 +15,6 @@ const ShortsList = () => {
     id,
     fnUrl: `/v1/cities/${id}/videos?sort=${orderOption},desc&page=0&size=6`,
   });
-
-  const navigate = useNavigate();
 
   if (isLoading) {
     return <p>Loading...</p>;

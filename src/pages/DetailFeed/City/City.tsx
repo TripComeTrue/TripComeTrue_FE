@@ -11,7 +11,6 @@ import {
 } from '@/components/DetailFeed';
 import { FeedNav } from '@/components/common';
 import * as Styled from './City.styles';
-import ShortCard from '@/components/Trip/TripHome/ShortCard/ShortCard';
 
 const City = () => {
   const location = useLocation();
