@@ -15,8 +15,6 @@ const CreatorDetail = () => {
 
   const location = useLocation();
   const { state } = location;
-
-  // Check if location.state is not null before destructuring
   const { memberId } = state || {};
 
   const [creatorProfile, setCreatorProfile] = useState<
