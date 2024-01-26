@@ -18,20 +18,20 @@ function MyPageWishList() {
   };
 
   const trip = results[0].data.data.content.map((item) => ({
-    postImg: item.imageUrl,
-    bookmark: item.storeCount,
-    postTitle: item.title,
+    imageUrl: item.imageUrl,
+    storedCount: item.storeCount,
+    tripRecordTitle: item.title,
   }));
   const city = results[1].data.data.content.map((item) => ({
-    postImg: item.imageUrl,
-    bookmark: item.storeCount,
-    postTitle: item.name,
-    reviews: 0,
+    imageUrl: item.imageUrl,
+    storedCount: item.storeCount,
+    tripRecordTitle: item.name,
   }));
   const places = results[2].data.data.content.map((item) => ({
-    postImg: item.imageUrl ?? '',
-    bookmark: item.storedCount,
-    postTitle: item.name,
+    imageUrl: item.imageUrl ?? '',
+    storedCount: item.storedCount,
+    tripRecordTitle: item.name,
+    reviews: item.commentCount,
   }));
 
   return (

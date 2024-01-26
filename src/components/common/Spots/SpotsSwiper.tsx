@@ -13,6 +13,7 @@ const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
   reviews,
   sort,
   fontSize,
+  id,
   isDelete,
   onDelete,
 }) => {
@@ -27,8 +28,8 @@ const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
         <Styled.Bookmark>
           <Bookmark count={storedCount} />
         </Styled.Bookmark>
-        {isDelete && (
-          <Styled.DeleteBtn type="button" onClick={onDelete}>
+        {isDelete && onDelete && id && (
+          <Styled.DeleteBtn type="button" onClick={() => onDelete(id)}>
             <IoCloseSharp />
           </Styled.DeleteBtn>
         )}
