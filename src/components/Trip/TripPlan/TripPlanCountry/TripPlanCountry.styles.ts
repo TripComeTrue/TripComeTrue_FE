@@ -45,10 +45,10 @@ export const SelectButton = styled.button<SelectButtonProps>`
   padding: 0.35rem;
   flex-grow: 1;
   font-weight: 700;
-  color: ${(props) => (props.isSelected ? '#373737' : '#626262')};
+  color: ${(props) => (props.$isSelected ? '#373737' : '#626262')};
 
   &::after {
-    display: ${(props) => (props.isSelected ? 'block' : 'none')};
+    display: ${(props) => (props.$isSelected ? 'block' : 'none')};
     content: '';
     position: absolute;
     top: 2.13rem;
@@ -102,7 +102,8 @@ export const CountryWrapper = styled.div<SelectedCountriesProps>`
   align-items: center;
 
   margin-top: 1rem;
-  margin-bottom: ${(props) => (props.country.length > 0 ? '9rem' : '5rem')};
+  margin-bottom: ${(props) =>
+    props.$selectedCountries.length > 0 ? '9rem' : '5rem'};
   gap: 0.8rem;
 `;
 
@@ -115,20 +116,23 @@ export const CountryContainer = styled.div`
     position: relative;
 
     width: 100%;
+    height: 7rem;
     border: 2px solid white;
-    border-radius: 0.625rem;
+    overflow: hidden;
+    border-radius: 1rem;
 
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
     &:hover {
       border: 2px solid #b4f34c;
     }
-  }
 
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.625rem;
+    }
   }
 
   .country-ko,
@@ -138,6 +142,7 @@ export const CountryContainer = styled.div`
 
     line-height: 1rem;
     color: ${({ theme }) => theme.brand.white};
+    text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.9);
   }
 
   .country-ko {
@@ -150,12 +155,15 @@ export const CountryContainer = styled.div`
 `;
 
 export const SelectedCountries = styled.div<SelectedCountriesProps>`
-  display: ${(props) => (props.country.length > 0 ? 'flex' : 'none')};
+  display: ${(props) =>
+    props.$selectedCountries.length > 0 ? 'flex' : 'none'};
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   position: fixed;
   bottom: 3.3rem;
+
+  overflow-x: scroll;
 
   width: 360px;
   @media screen and (max-width: 480px) {
@@ -173,6 +181,7 @@ export const SelectedCountries = styled.div<SelectedCountriesProps>`
     justify-content: center;
     align-items: center;
     position: relative;
+    flex-shrink: 0;
 
     padding: 0 0.2rem;
 

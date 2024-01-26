@@ -1,43 +1,26 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
-import { getYear, getMonth, differenceInDays } from 'date-fns';
-import _ from 'lodash';
+import { getYear, getMonth } from 'date-fns';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePickerStyles.css';
 import * as Styled from '../TripPlanCommon/TripPlanCommon.styles';
 import { TripDateProps } from './TripPlanDate.types';
+import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
+import { Months, Years } from '@/constants/tripPlanAndRecord';
+import dateToString from '@/utils/dateToString';
+import { getNightAndDays } from './TripPlanDate.utils';
 
 const TripPlanDate = () => {
+  const { tripPlanData, updateTripPlanData } = useTripFormData();
   const [dateRange, setDateRange] = useState<TripDateProps>({
-    startDate: new Date(),
-    endDate: null,
+    startDate: tripPlanData.tripStartDay
+      ? new Date(tripPlanData.tripStartDay)
+      : new Date(),
+    endDate: tripPlanData.tripEndDay ? new Date(tripPlanData.tripEndDay) : null,
   });
   const { startDate, endDate } = dateRange;
-  const years = _.range(2010, getYear(new Date()) + 10);
-  const months = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-  ];
-
-  const getNightAndDays = () => {
-    if (startDate && endDate) {
-      const nights = differenceInDays(endDate, startDate);
-      return `${nights}박 ${nights + 1}일`;
-    }
-    return '';
-  };
 
   return (
     <Styled.Wrapper>
@@ -57,12 +40,18 @@ const TripPlanDate = () => {
           dateFormat="yyyy.MM.dd"
           isClearable
           showPopperArrow={false}
-          onChange={(date) =>
+          onChange={(date) => {
+            const newStartDate = date[0] || null;
+            const newEndDate = date[1] || null;
             setDateRange({
-              startDate: date[0] || null,
-              endDate: date[1] || null,
-            })
-          }
+              startDate: newStartDate,
+              endDate: newEndDate,
+            });
+            updateTripPlanData({
+              tripStartDay: dateToString(newStartDate),
+              tripEndDay: dateToString(newEndDate),
+            });
+          }}
           open
           showIcon
           icon={<CalendarToday />}
@@ -89,7 +78,7 @@ const TripPlanDate = () => {
                         onChange={({ target: { value } }) =>
                           changeYear(Number(value))
                         }>
-                        {years.map((option: number) => (
+                        {Years.map((option: number) => (
                           <option
                             className="year-dropdown"
                             key={option}
@@ -100,11 +89,11 @@ const TripPlanDate = () => {
                       </select>
                       <select
                         className="select-month"
-                        value={months[getMonth(date)]}
+                        value={Months[getMonth(date)]}
                         onChange={({ target: { value } }) =>
-                          changeMonth(months.indexOf(value))
+                          changeMonth(Months.indexOf(value))
                         }>
-                        {months.map((option) => (
+                        {Months.map((option) => (
                           <option
                             className="month-dropdown"
                             key={option}
@@ -134,7 +123,7 @@ const TripPlanDate = () => {
             );
           }}>
           <label className="react-datepicker-nightndays">
-            {getNightAndDays()}
+            {getNightAndDays({ startDate, endDate })}
           </label>
         </DatePicker>
       </Styled.Container>

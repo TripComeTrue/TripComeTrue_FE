@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 
   width: 100%;
 
-  padding: 0.2rem 1.2rem;
+  padding: 0.2rem 1.2rem 5rem 1.2rem;
 `;
 
 export const Title = styled.div`

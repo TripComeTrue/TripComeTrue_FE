@@ -9,16 +9,14 @@ import {
   TripPlanNextButton,
   TripPlanPrevButton,
 } from '@/components/Trip/TripPlan/TripPlanCommon/TripPlanCommon';
+import { TripFormDataProvider } from './TripFormDataContext';
 
-interface StepProps<Case extends number> {
-  caseBy: Partial<Record<Case, JSX.Element | null>>;
-  value: Case;
+interface StepProps {
+  caseBy: Record<number, JSX.Element | null>;
+  value: number;
 }
 
-const CheckEachStep = <Case extends number>({
-  value,
-  caseBy,
-}: StepProps<Case>) => {
+const CheckEachStep = ({ value, caseBy }: StepProps) => {
   return caseBy[value] || <div>Step not found</div>;
 };
 
@@ -39,7 +37,7 @@ const TripPlan = () => {
   };
 
   return (
-    <>
+    <TripFormDataProvider>
       <TripPlanPrevButton onClick={handleGoPrev} />
       <CheckEachStep
         value={step}
@@ -51,7 +49,7 @@ const TripPlan = () => {
         }}
       />
       <TripPlanNextButton onClick={handleGoNext} />
-    </>
+    </TripFormDataProvider>
   );
 };
 

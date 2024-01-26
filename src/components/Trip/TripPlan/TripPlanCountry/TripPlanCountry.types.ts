@@ -1,22 +1,9 @@
-export interface Country {
-  name: string;
-  eng: string;
-  img?: string;
-}
-export interface Continent {
-  name: string;
-  subCategories: Country[];
-}
-
-export interface WorldData {
-  해외: Continent[];
-  국내: Continent[];
-}
+import { CountryData } from '@/@types/trip-alldata.types';
 
 export interface SelectButtonProps {
-  isSelected: boolean;
+  $isSelected: boolean;
 }
 
 export interface SelectedCountriesProps {
-  country: string[];
+  $selectedCountries: CountryData[];
 }

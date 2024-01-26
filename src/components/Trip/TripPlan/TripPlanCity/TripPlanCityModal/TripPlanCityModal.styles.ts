@@ -52,7 +52,7 @@ export const ShowCitiesContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.5rem 3rem 0.2rem;
   gap: 1rem;
 `;
 
@@ -90,14 +90,15 @@ export const EachCity = styled.div<EachCityProps>`
 export const FinalSelectionButton = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-end;
   position: fixed;
-  bottom: 1rem;
+  bottom: 0;
 
   width: 18.5rem;
+  height: 3rem;
+  padding: 1rem 0;
+  background-color: white;
 
   gap: 0.5rem;
-
-  background-color: white;
 `;
