@@ -1,20 +1,37 @@
 import { SubTitle, Text } from '@/components/common';
+import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './CityInformation.styles';
-import visa from '/visa.svg';
-import money from '/money.svg';
-import time from '/time.svg';
-import language from '/language.svg';
-import power from '/power.svg';
+import languageImage from '/language.svg';
+import moneyImage from '/money.svg';
+import powerImage from '/power.svg';
+import timeImage from '/time.svg';
+import visaImage from '/visa.svg';
 
-const INFORMATION_DATA = [
-  { id: 1, content: '태국어', svg: language },
-  { id: 2, content: '2시간 느림', svg: time },
-  { id: 3, content: '바트(THB)', svg: money },
-  { id: 4, content: '220V', svg: power },
-  { id: 5, content: '90일 무비자 체류', svg: visa },
-];
+const CityInformation = ({ cityId }: { cityId: number }) => {
+  const { data, isLoading } = useDetailFeedQuery<CityInfoResponseType>({
+    queryKey: 'information',
+    id: cityId,
+    fnUrl: `/v1/cities/${cityId}`,
+  });
 
-const CityInformation = () => {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data || !data.data) {
+    return <p>Data not available</p>;
+  }
+
+  const { language, timeDifference, curName, curUnit, voltage, visa } =
+    data.data;
+
+  const INFORMATION_DATA = [
+    { id: 1, content: language, svg: languageImage },
+    { id: 2, content: timeDifference, svg: timeImage },
+    { id: 3, content: `${curName}(${curUnit})`, svg: moneyImage },
+    { id: 4, content: voltage, svg: powerImage },
+    { id: 5, content: visa, svg: visaImage },
+  ];
   return (
     <Styled.InformationWrapper>
       <Styled.SubTitleBox>
@@ -24,13 +41,13 @@ const CityInformation = () => {
         spaceBetween={8}
         slidesPerView={2.6}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {INFORMATION_DATA.map((data) => (
-          <Styled.InformationItem key={data.id}>
+        {INFORMATION_DATA.map(({ id, svg, content }) => (
+          <Styled.InformationItem key={id}>
             <Styled.InformationIconBox>
-              <Styled.InformationIcon src={data.svg} alt="visa icon" />
+              <Styled.InformationIcon src={svg} alt="visa icon" />
             </Styled.InformationIconBox>
             <Text fontSize={13} fontWeight={700}>
-              {data.content}
+              {content}
             </Text>
           </Styled.InformationItem>
         ))}

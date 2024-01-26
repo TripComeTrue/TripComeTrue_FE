@@ -6,7 +6,9 @@ export const SliderWrap = styled(Swiper)`
 `;
 
 // 인기 여행 후기 부분
-export const HotplaceReviewWrap = styled(SwiperSlide)``;
+export const HotplaceReviewWrap = styled(SwiperSlide)`
+  cursor: pointer;
+`;
 
 export const HotplaceImg = styled.div`
   position: relative;

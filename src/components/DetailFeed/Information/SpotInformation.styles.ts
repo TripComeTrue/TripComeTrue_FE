@@ -10,8 +10,6 @@ export const SpotInfoWrapper = styled.section`
 `;
 
 export const SpotInfoBox = styled.div`
-  height: 5rem;
-
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

@@ -29,7 +29,7 @@ module.exports = {
     'react/function-component-definition': 'off',
     'arrow-body-style': 'off',
     'import/no-absolute-path': 'off',
-
+    'react/require-default-props': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'no-nested-ternary': 'off',
     '@typescript-eslint/no-unused-vars': 'off',

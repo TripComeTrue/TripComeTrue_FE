@@ -2,24 +2,19 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { DayOptionType } from './TopReview.types';
 
-export const TopReviewWrapper = styled.section`
-  height: 19.5rem;
-`;
+export const TopReviewWrapper = styled.section``;
 
 export const SubTitleBox = styled.div`
   padding: 0 1.25rem;
 `;
 
 export const TopReviewItemBox = styled(Swiper)`
-  height: 13rem;
-
   margin: 1rem 0;
   padding: 0 1.25rem;
 `;
 
 export const TopReviewItem = styled(SwiperSlide)`
   width: 100%;
-  height: 100%;
 `;
 
 export const DayOptions = styled.div`

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const GellaryWrapper = styled.section`
-  height: 12.5rem;
+  margin-top: 1rem;
 `;
 
 export const SubtitleBox = styled.div`
@@ -10,18 +10,18 @@ export const SubtitleBox = styled.div`
 `;
 
 export const GellaryItemBox = styled(Swiper)`
-  margin: 1rem 0;
+  margin-top: 1rem;
   padding: 0 1.25rem;
 `;
 
 export const GellaryItem = styled(SwiperSlide)`
-  height: 9rem;
   position: relative;
-
+  width: 9rem;
+  cursor: pointer;
   img {
-    height: 100%;
+    width: 100%;
+    height: 9rem;
     border-radius: 0.625rem;
-    aspect-ratio: 1;
   }
 `;
 

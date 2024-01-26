@@ -7,6 +7,7 @@ export interface SlideHotItem {
   userphoto: string;
   nights: string;
   postTitle: string;
+  tripRecordId: number;
 }
 
 export interface ReviewProps {

@@ -3,39 +3,44 @@ import * as Styled from './SpotInformation.styles';
 import Map from '@/components/Map/Map';
 import phone from '/infoPhone.svg';
 import pin from '/infoPin.svg';
-import time from '/infoTime.svg';
+import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 
-const SPOT_INFORMATION_DATA = [
-  {
-    id: 1,
-    icon: pin,
-    title: '주소',
-    content: '강원도 강릉시 창해로 14번길',
-  },
-  { id: 2, icon: phone, title: '전화번호', content: '+82336603887' },
-  {
-    id: 3,
-    icon: time,
-    title: '홈페이지',
-    content: 'http://anmokbeach.co.kr/',
-  },
-];
+const SpotInformation = ({ id }: { id: number }) => {
+  const { data, isLoading } = useDetailFeedQuery<SpotInfoResponseType>({
+    queryKey: 'spotMapInfo',
+    id,
+    fnUrl: `/v1/places/${id}`,
+  });
 
-const SpotInformation = () => {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data || !data.data) {
+    return <p>Data not available</p>;
+  }
+  const { address, latitude, longitude, phoneNumber } = data.data;
   return (
     <Styled.SpotInfoWrapper>
       <SubTitle>기본정보</SubTitle>
-      <Map center={{ lat: 37.779391, lng: 128.93 }} />
+      <Map spotCenter={{ lat: latitude, lng: longitude }} />
       <Styled.SpotInfoBox>
-        {SPOT_INFORMATION_DATA.map(({ id, icon, title, content }) => (
-          <Styled.SpotInfo key={id}>
-            <Styled.InfoIcon src={icon} />
+        <Styled.SpotInfo>
+          <Styled.InfoIcon src={pin} />
+          <Text fontSize={10} fontWeight={700}>
+            주소:
+          </Text>
+          <Text fontSize={10}>{address}</Text>
+        </Styled.SpotInfo>
+        {phoneNumber && (
+          <Styled.SpotInfo>
+            <Styled.InfoIcon src={phone} />
             <Text fontSize={10} fontWeight={700}>
-              {title}:
+              전화번호:
             </Text>
-            <Text fontSize={10}>{content}</Text>
+            <Text fontSize={10}>{phoneNumber}</Text>
           </Styled.SpotInfo>
-        ))}
+        )}
       </Styled.SpotInfoBox>
     </Styled.SpotInfoWrapper>
   );
