@@ -7,6 +7,12 @@ import { SearchCreatorsInfiniteInfo } from '@/apis/search';
 
 interface CreatorDatas {
   memberId: number;
+  nickname: string;
+  introduction: string;
+  profileImageUrl: string;
+  averageRating: number;
+  tripRecordTotal: number;
+  videoTotal: number;
 }
 
 const CreatorMore = () => {
@@ -19,10 +25,10 @@ const CreatorMore = () => {
     navigate(-1);
   };
 
-  const handleClick = (prop: string): string => {
-    navigate(`/creator/${prop}`);
-    return prop;
-  };
+  // const handleClick = (prop: string): string => {
+  //   navigate(`/creator/${prop}`);
+  //   return prop;
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +42,7 @@ const CreatorMore = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [queryCreator]);
 
   console.log(creatorsDatas);
 
@@ -54,8 +60,9 @@ const CreatorMore = () => {
         <button
           aria-label="go to Details"
           type="button"
-          onClick={() => handleClick(creatorsDatas.memberId)}>
-          <CreatorProfile data={creatorsDatas} />
+          // onClick={() => handleClick(creatorsDatas.memberId)}
+        >
+          <CreatorProfile data={creatorsDatas[0]} />
         </button>
       </Styled.CreatorAllWrap>
     </>

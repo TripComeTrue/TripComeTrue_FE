@@ -3,7 +3,11 @@ import starFill from '/starFill.svg';
 import * as Styled from './CreatorProfile.styles';
 import { CreatorData } from '../CreatorMore/CreateMore.types';
 
-const CreatorProfile = ({ data }: { data: CreatorData }) => {
+interface CreatorProfileProps {
+  data: CreatorData; // 이 부분을 CreatorDatas로 정의하지 않도록 변경
+}
+
+const CreatorProfile: React.FC<CreatorProfileProps> = ({ data }) => {
   return (
     <Styled.CreatorContainer>
       <Styled.CreatorWrap>
@@ -15,18 +19,18 @@ const CreatorProfile = ({ data }: { data: CreatorData }) => {
           <div>평균 별점</div>
           <Styled.CreatorRate>
             <img src={starFill} alt="starIcon" />
-            {data.rate}
+            {data.averageRating}
           </Styled.CreatorRate>
         </Styled.CreatorInfoWrap>
 
         <Styled.CreatorInfoWrap>
           <div>작성한 여행 후기 수</div>
-          <Styled.CreatorRate>{data.review}</Styled.CreatorRate>
+          <Styled.CreatorRate>{data.tripRecordTotal}</Styled.CreatorRate>
         </Styled.CreatorInfoWrap>
 
         <Styled.CreatorInfoWrap>
           <div>올린 쇼츠 수</div>
-          <Styled.CreatorRate>{data.shorts}</Styled.CreatorRate>
+          <Styled.CreatorRate>{data.videoTotal}</Styled.CreatorRate>
         </Styled.CreatorInfoWrap>
       </Styled.CreatorInfo>
     </Styled.CreatorContainer>

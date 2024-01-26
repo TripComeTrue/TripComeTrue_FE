@@ -37,6 +37,7 @@ const Spots: React.FC<
           reviews={item?.reviews}
           sort={sort}
           fontSize={fontSize}
+          id={item.id}
           isDelete={isDelete}
           onDelete={onDelete}
         />

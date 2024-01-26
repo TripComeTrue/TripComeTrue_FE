@@ -42,6 +42,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'import/prefer-default-export': 'off',
     'react/destructuring-assignment': 'off',
+    '@typescript-eslint/naming-convention': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {
