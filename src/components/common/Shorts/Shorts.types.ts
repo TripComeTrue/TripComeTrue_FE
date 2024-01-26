@@ -1,6 +1,6 @@
 export interface Slide {
   storeCount: number;
-  storedCount?: number;
+  storedCount: number;
   thumbnailUrl?: string;
   tripRecordTitle: string;
   videoUrl: string;
@@ -9,6 +9,17 @@ export interface Slide {
   memberId: number;
   memberName: string;
   profileImageUrl: string;
+}
+
+export interface SlideType {
+  thumbnailUrl?: string;
+  storeCount: number;
+  videoUrl: string;
+  profileImageUrl: string;
+  memberName: string;
+  tripRecordId: number;
+  tripRecordTitle: string;
+  memberId: number;
 }
 
 export interface SwiperProps {

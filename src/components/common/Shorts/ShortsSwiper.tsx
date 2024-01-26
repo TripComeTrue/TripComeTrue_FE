@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { Slide } from './Shorts.types';
+import { SlideType } from './Shorts.types';
 import * as Styled from './Shorts.style';
 import Bookmark from '../Bookmark/Bookmark';
 import tokyo from '/tokyo.png';
 import { ShortsModal } from '..';
 import useModal from '@/hooks/common/useModal';
 
-const ShortsSwiper: React.FC<Slide> = ({
+const ShortsSwiper: React.FC<SlideType> = ({
   thumbnailUrl,
   storeCount,
   videoUrl,

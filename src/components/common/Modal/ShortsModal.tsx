@@ -29,7 +29,6 @@ function ShortsModal({
 }: ShortsModalProps) {
   const [isMuted, setIsMuted] = useState(true);
   const [isPaused, setIsPaused] = useState(true);
-  const [width, setWidth] = useState(0);
   const player = useRef<YouTubePlayer>(null);
   const { pathname } = useLocation();
   const navigate = useNavigate();

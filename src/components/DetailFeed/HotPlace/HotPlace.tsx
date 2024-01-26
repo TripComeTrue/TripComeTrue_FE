@@ -59,10 +59,7 @@ const HotPlace = ({
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {data.data.map(
-          (
-            { imageUrl, storedCount, placeName, placeId, commentTotal },
-            index,
-          ) => (
+          ({ imageUrl, storedCount, placeName, placeId, commentTotal }) => (
             <Styled.PlaceItem
               key={placeId}
               onClick={() => handlePlaceClick({ placeId, placeName })}>
