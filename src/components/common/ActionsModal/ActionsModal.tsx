@@ -38,10 +38,17 @@ const ActionsModal = ({ onClickModify, onClickDelete }: ActionsModalProps) => {
           style={{
             borderBottom: '1px solid #dcdcdc',
           }}
-          onClick={onClickModify}>
+          onClick={() => {
+            if (onClickModify) onClickModify();
+            handleClose();
+          }}>
           <Text fontSize={12}>수정하기</Text>
         </Styled.MenuItem>
-        <Styled.MenuItem onClick={onClickDelete}>
+        <Styled.MenuItem
+          onClick={() => {
+            if (onClickDelete) onClickDelete();
+            handleClose();
+          }}>
           <Text fontSize={12}>삭제하기</Text>
         </Styled.MenuItem>
       </Menu>

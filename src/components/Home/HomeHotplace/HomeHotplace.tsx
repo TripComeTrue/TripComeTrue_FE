@@ -5,6 +5,7 @@ import starIcon from '/starIcon.svg';
 import bookmarkPress from '/bookmarkPress.svg';
 import starFillIcon from '/starFill.svg';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 import * as Styled from './HomeHotplace.styles';
 
 import { SlideHotCity, SlideHotReview } from './HomeHotplace.types';
@@ -226,10 +227,12 @@ const HomeHotplace = () => {
               : null}
         </Styled.SliderWrap>
       </Styled.HotplaceWrap>
-      <Styled.GoAllCity>
-        <div>전체 도시 보러가기</div>
-        <IoIosArrowForward style={{ fontSize: 25 }} />
-      </Styled.GoAllCity>
+      <Link to="/citylist">
+        <Styled.GoAllCity>
+          <div>전체 도시 보러가기</div>
+          <IoIosArrowForward style={{ fontSize: 25 }} />
+        </Styled.GoAllCity>
+      </Link>
     </>
   );
 };
