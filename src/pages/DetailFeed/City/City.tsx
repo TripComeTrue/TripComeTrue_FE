@@ -4,7 +4,7 @@ import {
   CityInformation,
   DetailFeedShorts,
   ExchangeRate,
-  Gallery,
+  CityGallery,
   HotPlace,
   CityTopReview,
   Weather,
@@ -21,7 +21,7 @@ const City = () => {
       <FeedNav id={cityId}>{name}</FeedNav>
       <Styled.CityWrapper>
         <DetailFeedShorts cityId={cityId} placeName={name} />
-        <Gallery id={cityId} placeName={name} />
+        <CityGallery id={cityId} placeName={name} />
         {!isDomestic && <CityInformation cityId={cityId} />}
         <Weather cityId={cityId} />
         {!isDomestic && <ExchangeRate cityId={cityId} country={country} />}

@@ -40,7 +40,12 @@ interface GalleryDataType {
   imageUrl: string;
 }
 
-interface GalleryResponseType {
+interface CityGalleryResponseType {
+  code: 200;
+  data: GalleryDataType[];
+  errorMessage: null;
+}
+interface SpotGalleryResponseType {
   totalElements: number;
   code: 200;
   data: {
@@ -71,7 +76,7 @@ interface GalleryResponseType {
     totalElements: number;
     totalPages: number;
   };
-  errorMessage: null;
+  errorMessage?: null;
 }
 
 interface CityInfoDataType {

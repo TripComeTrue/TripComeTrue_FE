@@ -2,17 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { Bookmark, EmptyContents, SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
-import { GalleyProps } from './Gallery.types';
 
-const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
-  const queryKey = galleryType ? 'spotGallery' : 'cityGallery';
-  const fnUrl = galleryType
-    ? `/v1/trip-records-schedules?placeId=${id}&size=10&orderBy=storeCount`
-    : `/v1/cities/${id}/images/list`;
-  const { data, isLoading } = useDetailFeedQuery<GalleryResponseType>({
-    queryKey,
+const CityGallery = ({ id, placeName }: { id: number; placeName: string }) => {
+  const { data, isLoading } = useDetailFeedQuery<CityGalleryResponseType>({
+    queryKey: 'cityGallery',
     id,
-    fnUrl,
+    fnUrl: `/v1/cities/${id}/images/list`,
   });
   const navigate = useNavigate();
 
@@ -25,15 +20,9 @@ const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
   }
 
   const handleMoreClick = () => {
-    if (galleryType) {
-      navigate(`/detailfeed/spotgallerylist/${placeName}`, {
-        state: { id, placeName },
-      });
-    } else {
-      navigate(`/detailfeed/citygallerylist/${placeName}`, {
-        state: { id, placeName },
-      });
-    }
+    navigate(`/detailfeed/citygallerylist/${placeName}`, {
+      state: { id, placeName },
+    });
   };
 
   return (
@@ -43,14 +32,14 @@ const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
           {placeName} 여행 갤러리
         </SubTitle>
       </Styled.SubtitleBox>
-      {data.totalElements === 0 ? (
+      {data.data.length === 0 ? (
         <EmptyContents />
       ) : (
         <Styled.GellaryItemBox
           spaceBetween={8}
           slidesPerView={2.15}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-          {data.data.content.map(
+          {data.data.map(
             ({ tripRecordStoreCount, imageUrl, tripRecordId }, index) => (
               <Styled.GellaryItem
                 // eslint-disable-next-line react/no-array-index-key
@@ -69,4 +58,4 @@ const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
   );
 };
 
-export default Gallery;
+export default CityGallery;
