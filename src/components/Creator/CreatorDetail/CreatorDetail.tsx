@@ -14,7 +14,11 @@ const CreatorDetail = () => {
   };
 
   const location = useLocation();
-  const { memberId } = location.state;
+  const { state } = location;
+
+  // Check if location.state is not null before destructuring
+  const { memberId } = state || {};
+
   const [creatorProfile, setCreatorProfile] = useState<
     CreatorDetailProps['data'] | null
   >(null);
@@ -22,8 +26,10 @@ const CreatorDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const creatorData = await SearchCreatorProfile(memberId);
-        setCreatorProfile(creatorData);
+        if (memberId) {
+          const creatorData = await SearchCreatorProfile(memberId);
+          setCreatorProfile(creatorData);
+        }
       } catch (error) {
         console.error(error);
       }
