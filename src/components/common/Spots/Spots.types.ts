@@ -1,8 +1,9 @@
 export interface PostData {
-  postImg: string;
-  bookmark: number;
-  postTitle: string;
+  imageUrl: string;
+  storedCount: number;
+  tripRecordTitle: string;
   reviews?: number;
+  id?: number;
 }
 
 export interface SpotsProps {
@@ -10,6 +11,11 @@ export interface SpotsProps {
   slidesPerView?: number;
   sort: 'left' | 'center' | 'space';
   fontSize?: number;
+}
+
+export interface SpotsWishListProps {
+  isDelete?: boolean;
+  onDelete?: (id: number) => void;
 }
 
 export interface SpotsSwiperProps extends PostData {

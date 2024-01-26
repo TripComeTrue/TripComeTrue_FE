@@ -11,10 +11,16 @@ import '@/styles/fonts/font.css';
 import '@/styles/index.css';
 import worker from './mocks/browser';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      throwOnError: true,
+    },
+  },
+});
 
 if (process.env.NODE_ENV === 'development') {
-  worker.start();
+  worker.stop();
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

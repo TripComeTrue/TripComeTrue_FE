@@ -1,6 +1,10 @@
 export { default as City } from '@/pages/DetailFeed/City/City';
 export { default as TouristSpot } from '@/pages/DetailFeed/TouristSpot/TouristSpot';
-export { default as GalleryList } from '@/pages/DetailFeed/GalleryList/GalleryList';
+export { default as CityGalleryList } from '@/pages/DetailFeed/GalleryList/CityGalleryList';
+export { default as SpotGalleryList } from '@/pages/DetailFeed/GalleryList/SpotGalleryList';
 export { default as SpotList } from '@/pages/DetailFeed/SpotList/SpotList';
 export { default as SpotSearch } from '@/pages/DetailFeed/SpotSearch/SpotSearch';
 export { default as Reviews } from '@/pages/DetailFeed/Reviews/Reviews';
+export { default as ReviewComment } from '@/pages/DetailFeed/ReviewComment/ReviewComment';
+export { default as PlaceReviewWrite } from '@/pages/DetailFeed/PlaceReview/PlaceReviewWrite';
+export { default as PlaceReviewEdit } from '@/pages/DetailFeed/PlaceReview/PlaceReviewEdit';

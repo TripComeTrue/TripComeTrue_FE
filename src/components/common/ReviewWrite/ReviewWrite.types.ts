@@ -1,4 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface ReviewWriteProps {
-  isEdit?: boolean;
-  placeName?: string;
+  children: ReactNode;
 }

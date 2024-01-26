@@ -5,5 +5,5 @@ export const TouristSpotWrap = styled.div`
   flex-direction: column;
   gap: 2rem;
 
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;

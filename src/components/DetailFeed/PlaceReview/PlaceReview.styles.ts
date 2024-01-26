@@ -3,6 +3,8 @@ import { alignCenter, flexColumn } from '@/styles/common';
 
 export const Container = styled.div`
   ${flexColumn};
+
+  padding: 0 1.25rem;
 `;
 
 export const Header = styled.div`
@@ -10,13 +12,23 @@ export const Header = styled.div`
   justify-content: space-between;
 `;
 
-export const WriteButtonContainer = styled.div`
+export const WriteBtnWrapper = styled.div`
   position: relative;
+
+  width: 1.25rem;
+
+  img {
+    margin-top: 0.5rem;
+  }
+`;
+
+export const WriteBtn = styled.img`
+  cursor: pointer;
 `;
 
 export const BubbleWrapper = styled.div`
   position: absolute;
-  right: -40%;
+  right: -60%;
 `;
 
 export const ReviewList = styled.ul`

@@ -1,4 +1,4 @@
-import { PostData, SpotsProps } from './Spots.types';
+import { PostData, SpotsProps, SpotsWishListProps } from './Spots.types';
 import SpotsSwiper from './SpotsSwiper';
 import * as Styled from './Spots.style';
 
@@ -12,11 +12,15 @@ import * as Styled from './Spots.style';
 
 // creator 배열에 리뷰 정보도 있으면 sort='space' 하시면 됩니다 ts파일 참고해주세요!
 
-const Spots: React.FC<SpotsProps & { sort?: 'left' | 'center' | 'space' }> = ({
+const Spots: React.FC<
+  SpotsProps & { sort?: 'left' | 'center' | 'space' } & SpotsWishListProps
+> = ({
   creator,
   slidesPerView = 2.1,
   sort = 'center',
   fontSize = 14,
+  isDelete,
+  onDelete,
 }) => (
   <Styled.SwiperWrap
     spaceBetween={8}
@@ -25,14 +29,17 @@ const Spots: React.FC<SpotsProps & { sort?: 'left' | 'center' | 'space' }> = ({
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
     {creator.map((item: PostData) => (
-      <Styled.SwiperSlideWrap key={item.postTitle}>
+      <Styled.SwiperSlideWrap key={item.tripRecordTitle}>
         <SpotsSwiper
-          postImg={item.postImg}
-          postTitle={item.postTitle}
-          bookmark={item.bookmark}
+          imageUrl={item.imageUrl}
+          tripRecordTitle={item.tripRecordTitle}
+          storedCount={item.storedCount}
           reviews={item?.reviews}
           sort={sort}
           fontSize={fontSize}
+          id={item.id}
+          isDelete={isDelete}
+          onDelete={onDelete}
         />
       </Styled.SwiperSlideWrap>
     ))}

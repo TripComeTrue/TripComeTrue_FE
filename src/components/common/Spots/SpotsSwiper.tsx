@@ -1,17 +1,21 @@
 import React from 'react';
-import { SpotsSwiperProps } from './Spots.types';
+import { IoCloseSharp } from 'react-icons/io5';
+import { SpotsSwiperProps, SpotsWishListProps } from './Spots.types';
 import * as Styled from './Spots.style';
 import messageIcon from '/message.svg';
 import Bookmark from '../Bookmark/Bookmark';
 import pxToRem from '@/utils/pxToRem';
 
-const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
-  postTitle,
-  postImg,
-  bookmark,
+const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
+  tripRecordTitle,
+  imageUrl,
+  storedCount,
   reviews,
   sort,
   fontSize,
+  id,
+  isDelete,
+  onDelete,
 }) => {
   const fontSizeRem = pxToRem(fontSize);
 
@@ -20,10 +24,15 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
   return (
     <>
       <Styled.SliderImg>
-        <img src={postImg} alt="img" />
+        <img src={imageUrl} alt="img" />
         <Styled.Bookmark>
-          <Bookmark count={bookmark} />
+          <Bookmark count={storedCount} />
         </Styled.Bookmark>
+        {isDelete && onDelete && id && (
+          <Styled.DeleteBtn type="button" onClick={() => onDelete(id)}>
+            <IoCloseSharp />
+          </Styled.DeleteBtn>
+        )}
       </Styled.SliderImg>
 
       {(() => {
@@ -31,19 +40,19 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
           case 'left':
             return (
               <Styled.SliderTitleSortLeft style={titleStyle}>
-                {postTitle}
+                {tripRecordTitle}
               </Styled.SliderTitleSortLeft>
             );
           case 'center':
             return (
               <Styled.SliderTitle style={titleStyle}>
-                {postTitle}
+                {tripRecordTitle}
               </Styled.SliderTitle>
             );
           case 'space':
             return (
               <Styled.SliderTitleSpace style={titleStyle}>
-                <Styled.SpaceTitle>{postTitle}</Styled.SpaceTitle>
+                <Styled.SpaceTitle>{tripRecordTitle}</Styled.SpaceTitle>
                 <Styled.SpaceImg>
                   <img src={messageIcon} alt="img" />
                   {reviews}
@@ -53,7 +62,7 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
           default:
             return (
               <Styled.SliderTitle style={titleStyle}>
-                {postTitle}
+                {tripRecordTitle}
               </Styled.SliderTitle>
             );
         }

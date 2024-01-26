@@ -1,20 +1,30 @@
-export interface PostData {
-  postImg: string;
-  bookmark: number;
-  postTitle: string;
+export interface MemberInfoData {
+  memberId: number;
+  nickname: string;
+  introduction: string;
+  profileImageUrl: string;
+}
+
+export interface TripRecordsData {
+  tripRecordId: number;
+  tripRecordTitle: string;
+  memberId: number;
+  memberName: string;
+  profileImageUrl: string;
+  totalDays: number;
+  averageRating: number;
+  storedCount: number;
+  imageUrl: string;
 }
 
 export interface CreatorData {
-  userImg: string;
-  username: string;
-  userInfo: string;
-  rate?: number;
-  posts: PostData[];
+  memberInfo: MemberInfoData;
+  tripRecords: TripRecordsData[];
 }
 
-export interface HotCreatorDataTypes {
-  creator1: CreatorData[];
-  creator2: CreatorData[];
-  creator3: CreatorData[];
-  creator4: CreatorData[];
+export interface PostData {
+  imageUrl: string;
+  storedCount: number;
+  tripRecordTitle: string;
+  reviews?: number;
 }

@@ -29,10 +29,20 @@ module.exports = {
     'react/function-component-definition': 'off',
     'arrow-body-style': 'off',
     'import/no-absolute-path': 'off',
-
+    'react/require-default-props': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'no-nested-ternary': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
     'react/prop-types': 'off', // 임시
+    'react/jsx-no-useless-fragment': 'off',
+    'no-restricted-syntax': 'off',
+    'prefer-template': 'off',
+    'no-console': 'off',
+    'react/require-default-props': 'off',
+    'react/no-array-index-key': 'off',
+    'import/prefer-default-export': 'off',
+    'react/destructuring-assignment': 'off',
+    '@typescript-eslint/naming-convention': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {

@@ -9,14 +9,12 @@ const PlaceReview = () => {
     <Styled.Container>
       <Styled.Header>
         <SubTitle>리뷰(14)</SubTitle>
-        <Styled.WriteButtonContainer>
-          <button type="button">
-            <img src={WriteIcon} alt="write icon" />
-          </button>
+        <Styled.WriteBtnWrapper>
+          <Styled.WriteBtn src={WriteIcon} alt="write icon" />
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
           </Styled.BubbleWrapper>
-        </Styled.WriteButtonContainer>
+        </Styled.WriteBtnWrapper>
       </Styled.Header>
 
       <Styled.ReviewList>

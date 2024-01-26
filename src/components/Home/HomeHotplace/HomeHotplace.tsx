@@ -5,27 +5,20 @@ import starIcon from '/starIcon.svg';
 import bookmarkPress from '/bookmarkPress.svg';
 import starFillIcon from '/starFill.svg';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 import * as Styled from './HomeHotplace.styles';
 
-// 임시 이미지
-import bangkokImg from '/bangkok.png';
-import tokyoImg from '/tokyo.png';
-import jejuImg from '/domestic1.jpg';
-import namyangjuImg from '/domestic3.jpg';
-import osakaImg from '/osaka.png';
-import danagImg from '/danag.png';
-import busanImg from '/busan.jpeg';
-import jejuRImg from '/jeju.jpeg';
-import { SlideHotItem, SlideHots } from './HomeHotplace.types';
+import { SlideHotCity, SlideHotReview } from './HomeHotplace.types';
 import { SubTitle, Text } from '@/components/common';
+import { HomeTopCity, HomeTopReview } from '@/apis/home';
 
 const HomeHotplace = () => {
   const [selectedOption, setSelectedOption] = useState({
     cityCategory: '인기도시',
-    locationCategory: '국내',
+    locationCategory: 'domestic',
   });
-
-  const [selectedValue, setSelectedValue] = useState('hot1');
+  const [hotData, setHotData] = useState([]);
+  const [selected, setSelected] = useState('city');
 
   const handleOptionChange = (category: string, value: string) => {
     setSelectedOption((prevOptions) => ({
@@ -34,130 +27,57 @@ const HomeHotplace = () => {
     }));
   };
 
-  const generateResultString = () => {
-    const { cityCategory, locationCategory } = selectedOption;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { cityCategory, locationCategory } = selectedOption;
 
-    if (cityCategory === '인기도시' && locationCategory === '국내') {
-      return 'hot1';
+        if (cityCategory === '인기도시') {
+          const data = await HomeTopCity(locationCategory);
+          setHotData(data);
+          setSelected('city');
+        } else if (cityCategory === '인기여행후기') {
+          const data = await HomeTopReview(locationCategory);
+          setHotData(data);
+          setSelected('review');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      setHotData([]);
+    };
+  }, [selectedOption]);
+
+  const generateCityString = (cityNames: string[]): string => {
+    if (cityNames.length > 1) {
+      const firstCity = cityNames[0];
+      const remainingCitiesCount = cityNames.length - 1;
+      return `${firstCity} 외 ${remainingCitiesCount}곳`;
     }
-    if (cityCategory === '인기도시' && locationCategory === '해외') {
-      return 'hot2';
-    }
-    if (cityCategory === '인기여행후기' && locationCategory === '국내') {
-      return 'hot3';
-    }
-    if (cityCategory === '인기여행후기' && locationCategory === '해외') {
-      return 'hot4';
+
+    if (cityNames.length === 1) {
+      return cityNames[0];
     }
 
     return '';
   };
 
-  useEffect(() => {
-    const resultString = generateResultString();
-    setSelectedValue(resultString);
-  }, [selectedOption]);
-
-  const slideHots: SlideHots = {
-    hot1: [
-      {
-        title: '제주',
-        subtitle: 'Jeju',
-        bookmark: 123,
-        img: jejuImg,
-        rate: 0,
-        username: '',
-        nights: '',
-        userphoto: '',
-        postTitle: '',
-      },
-      {
-        title: '남양주',
-        subtitle: 'Namyangju',
-        bookmark: 213,
-        img: namyangjuImg,
-        rate: 0,
-        username: '',
-        nights: '',
-        userphoto: '',
-        postTitle: '',
-      },
-    ],
-    hot2: [
-      {
-        title: '방콕',
-        subtitle: 'Bangkok',
-        bookmark: 173,
-        img: bangkokImg,
-        rate: 0,
-        username: '',
-        nights: '',
-        userphoto: '',
-        postTitle: '',
-      },
-      {
-        title: '도쿄',
-        subtitle: 'Tokyo',
-        bookmark: 200,
-        img: tokyoImg,
-        rate: 0,
-        username: '',
-        nights: '',
-        userphoto: '',
-        postTitle: '',
-      },
-    ],
-    hot3: [
-      {
-        title: '부산',
-        subtitle: 'Busan',
-        bookmark: 210,
-        img: busanImg,
-        rate: 4.8,
-        username: '바닷가재',
-        nights: '1박 2일',
-        userphoto: busanImg,
-        postTitle: '광안리 드론쇼',
-      },
-      {
-        title: '제주',
-        subtitle: 'Jeju',
-        bookmark: 95,
-        img: jejuRImg,
-        rate: 4.6,
-        username: '루피',
-        nights: '2박 3일',
-        userphoto: jejuRImg,
-        postTitle: '돌고래 구경하는 법',
-      },
-    ],
-    hot4: [
-      {
-        title: '오사카',
-        subtitle: 'Osaka',
-        bookmark: 122,
-        img: osakaImg,
-        rate: 4.9,
-        username: '맥주덕후',
-        nights: '2박 3일',
-        userphoto: osakaImg,
-        postTitle: '나만의 프라이빗 코스',
-      },
-      {
-        title: '다낭',
-        subtitle: 'Tokyo',
-        bookmark: 88,
-        img: danagImg,
-        rate: 4.7,
-        username: '여우처럼살고파',
-        nights: '3박 4일',
-        userphoto: danagImg,
-        postTitle: '현지 꿀팁',
-      },
-    ],
+  const generateStay = (totalDays: number | string): string => {
+    const nights =
+      typeof totalDays === 'string'
+        ? parseInt(totalDays, 10) - 1
+        : totalDays - 1;
+    return `${nights}박 ${totalDays}일`;
   };
 
-  const filteredSlides = slideHots[selectedValue];
+  const truncateTitle = (title: string): string => {
+    return title.length > 10 ? `${title.slice(0, 10)}...` : title;
+  };
 
   return (
     <>
@@ -204,28 +124,32 @@ const HomeHotplace = () => {
         <Styled.PlaceWrap>
           <Styled.Label
             htmlFor="domesticHot"
-            checked={selectedOption.locationCategory === '국내'}>
+            checked={selectedOption.locationCategory === 'domestic'}>
             <input
               id="domesticHot"
               type="radio"
               name="locationCategory"
-              value="국내"
-              checked={selectedOption.locationCategory === '국내'}
-              onChange={() => handleOptionChange('locationCategory', '국내')}
+              value="domestic"
+              checked={selectedOption.locationCategory === 'domestic'}
+              onChange={() =>
+                handleOptionChange('locationCategory', 'domestic')
+              }
               style={{ display: 'none' }}
             />
             국내
           </Styled.Label>
           <Styled.Label
             htmlFor="overseasHot"
-            checked={selectedOption.locationCategory === '해외'}>
+            checked={selectedOption.locationCategory === 'overseas'}>
             <input
               id="overseasHot"
               type="radio"
               name="locationCategory"
-              value="해외"
-              checked={selectedOption.locationCategory === '해외'}
-              onChange={() => handleOptionChange('locationCategory', '해외')}
+              value="overseas"
+              checked={selectedOption.locationCategory === 'overseas'}
+              onChange={() =>
+                handleOptionChange('locationCategory', 'overseas')
+              }
               style={{ display: 'none' }}
             />
             해외
@@ -242,57 +166,59 @@ const HomeHotplace = () => {
             el: '.swiper-scrollbar',
             hide: false,
           }}>
-          {selectedValue === 'hot1' || selectedValue === 'hot2'
-            ? filteredSlides.map((item: SlideHotItem) => (
-                <SwiperSlide key={item.title}>
+          {selected === 'city'
+            ? hotData.map((item: SlideHotCity) => (
+                <SwiperSlide key={`${item.cityName} ${item.storedCount}`}>
                   <Styled.HotplaceCityWrap>
                     <Styled.HotplaceCityImg>
-                      <img src={item.img} alt="img" />
+                      <img src={item.imageUrl} alt="img" />
                       <Styled.Gradient> </Styled.Gradient>
                     </Styled.HotplaceCityImg>
                     <Styled.HotplaceCityBookmark>
                       <img src={bookmarkPress} alt="bookmarkPress" />
-                      {item.bookmark}
+                      {item.storedCount}
                     </Styled.HotplaceCityBookmark>
                     <Styled.HotplaceCityTag>
                       <Styled.HotplaceCityTitle>
-                        {item.title}
+                        {item.cityName}
                       </Styled.HotplaceCityTitle>
                       <Styled.HotplaceCitySubtitle>
-                        {item.subtitle}
+                        {item.cityName}
                       </Styled.HotplaceCitySubtitle>
                     </Styled.HotplaceCityTag>
                   </Styled.HotplaceCityWrap>
                 </SwiperSlide>
               ))
-            : selectedValue === 'hot3' || selectedValue === 'hot4'
-              ? filteredSlides.map((item: SlideHotItem) => (
-                  <SwiperSlide key={item.title}>
+            : selected === 'review'
+              ? hotData.map((item: SlideHotReview) => (
+                  <SwiperSlide
+                    key={`${item.tripRecordTitle} ${item.storedCount}`}>
                     <Styled.HotplaceReviewWrap>
                       <Styled.HotplaceImg>
-                        <img src={item.img} alt="img" />
+                        <img src={item.imageUrl} alt="img" />
                         <Styled.GradientReview> </Styled.GradientReview>
                       </Styled.HotplaceImg>
                       <Styled.HotplaceBookmark>
                         <img src={bookmarkPress} alt="bookmarkPress" />
-                        {item.bookmark}
+                        {item.storedCount}
                       </Styled.HotplaceBookmark>
 
                       <Styled.HotplaceDesWrap>
                         <Styled.DesNightPlace>
                           <div>
-                            {item.nights} ・ {item.title}
+                            {generateStay(item.totalDays)} ・{' '}
+                            {generateCityString(item.cityNames)}
                           </div>
-                          <p>{item.postTitle}</p>
+                          <p>{truncateTitle(item.tripRecordTitle)}</p>
                         </Styled.DesNightPlace>
 
                         <Styled.DesRate>
-                          <img src={starFillIcon} alt="bookmark" />
-                          {item.rate}
+                          <img src={starFillIcon} alt="Icon" />
+                          {item.averageRating}
                         </Styled.DesRate>
                         <Styled.UserInfo>
-                          <img src={item.userphoto} alt="user" />
-                          {item.username}
+                          <img src={item.profileImageUrl} alt="user" />
+                          {item.memberName}
                         </Styled.UserInfo>
                       </Styled.HotplaceDesWrap>
                     </Styled.HotplaceReviewWrap>
@@ -301,10 +227,12 @@ const HomeHotplace = () => {
               : null}
         </Styled.SliderWrap>
       </Styled.HotplaceWrap>
-      <Styled.GoAllCity>
-        <div>전체 도시 보러가기</div>
-        <IoIosArrowForward style={{ fontSize: 25 }} />
-      </Styled.GoAllCity>
+      <Link to="/citylist">
+        <Styled.GoAllCity>
+          <div>전체 도시 보러가기</div>
+          <IoIosArrowForward style={{ fontSize: 25 }} />
+        </Styled.GoAllCity>
+      </Link>
     </>
   );
 };

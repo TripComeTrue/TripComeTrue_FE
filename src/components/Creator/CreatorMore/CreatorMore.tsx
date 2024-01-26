@@ -1,32 +1,50 @@
+import { useEffect, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import CreatorProfile from '../CreatorProfile/CreatorProfile';
-import exampleImg from '/domestic1.jpg';
 import * as Styled from './CreatorMore.styles';
-import { CreatorData } from './CreateMore.types';
+import { SearchCreatorsInfiniteInfo } from '@/apis/search';
+
+interface CreatorDatas {
+  memberId: number;
+  nickname: string;
+  introduction: string;
+  profileImageUrl: string;
+  averageRating: number;
+  tripRecordTotal: number;
+  videoTotal: number;
+}
 
 const CreatorMore = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const queryCreator = searchParams.get('query');
+  const [creatorsDatas, setCreatorsDatas] = useState<CreatorDatas[]>([]);
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  const handleClick = (prop: string): string => {
-    navigate(`/creator/${prop}`);
-    return prop;
-  };
+  // const handleClick = (prop: string): string => {
+  //   navigate(`/creator/${prop}`);
+  //   return prop;
+  // };
 
-  const CreatorDatas: CreatorData = {
-    userImg: exampleImg,
-    username: '맥주덕후',
-    userInfo:
-      '독일에서 교환학생하며 실감나는 유럽의 삶을 담고 있는 유럽의 맥주덕후입니다.',
-    userId: 'user1',
-    rate: 4.8,
-    review: 18,
-    shorts: 7,
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (queryCreator !== null) {
+          const data = await SearchCreatorsInfiniteInfo(queryCreator, 1, 4);
+          setCreatorsDatas(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [queryCreator]);
+
+  console.log(creatorsDatas);
 
   return (
     <>
@@ -42,8 +60,9 @@ const CreatorMore = () => {
         <button
           aria-label="go to Details"
           type="button"
-          onClick={() => handleClick(CreatorDatas.userId)}>
-          <CreatorProfile data={CreatorDatas} />
+          // onClick={() => handleClick(creatorsDatas.memberId)}
+        >
+          <CreatorProfile data={creatorsDatas[0]} />
         </button>
       </Styled.CreatorAllWrap>
     </>

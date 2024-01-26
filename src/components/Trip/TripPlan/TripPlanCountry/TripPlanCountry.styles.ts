@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 
   width: 100%;
   padding: 0.2rem 1.2rem;
@@ -35,7 +36,7 @@ export const OverseasDomesticContainer = styled.div`
   align-items: center;
 
   padding: 0;
-  margin-bottom: 0.5rem;
+  margin: 0 -1.3rem 0.5rem -1.3rem;
   border-bottom: 1px solid #d9d9d9;
 `;
 
@@ -44,10 +45,10 @@ export const SelectButton = styled.button<SelectButtonProps>`
   padding: 0.35rem;
   flex-grow: 1;
   font-weight: 700;
-  color: ${(props) => (props.isSelected ? '#373737' : '#626262')};
+  color: ${(props) => (props.$isSelected ? '#373737' : '#626262')};
 
   &::after {
-    display: ${(props) => (props.isSelected ? 'block' : 'none')};
+    display: ${(props) => (props.$isSelected ? 'block' : 'none')};
     content: '';
     position: absolute;
     top: 2.13rem;
@@ -93,7 +94,7 @@ export const ContinentSwiper = styled(Swiper)`
 
 export const ContinentWrapper = styled(SwiperSlide)``;
 
-export const CountryWrapper = styled.div`
+export const CountryWrapper = styled.div<SelectedCountriesProps>`
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -101,6 +102,8 @@ export const CountryWrapper = styled.div`
   align-items: center;
 
   margin-top: 1rem;
+  margin-bottom: ${(props) =>
+    props.$selectedCountries.length > 0 ? '9rem' : '5rem'};
   gap: 0.8rem;
 `;
 
@@ -112,18 +115,24 @@ export const CountryContainer = styled.div`
     align-items: center;
     position: relative;
 
+    width: 100%;
+    height: 7rem;
     border: 2px solid white;
-    border-radius: 0.625rem;
+    overflow: hidden;
+    border-radius: 1rem;
+
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
     &:hover {
       border: 2px solid #b4f34c;
     }
-  }
 
-  img {
-    width: 9.5rem;
-    height: 6.5rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.625rem;
+    }
   }
 
   .country-ko,
@@ -133,6 +142,7 @@ export const CountryContainer = styled.div`
 
     line-height: 1rem;
     color: ${({ theme }) => theme.brand.white};
+    text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.9);
   }
 
   .country-ko {
@@ -145,18 +155,24 @@ export const CountryContainer = styled.div`
 `;
 
 export const SelectedCountries = styled.div<SelectedCountriesProps>`
-  display: ${(props) => (props.country.length > 0 ? 'flex' : 'none')};
+  display: ${(props) =>
+    props.$selectedCountries.length > 0 ? 'flex' : 'none'};
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   position: fixed;
-  bottom: 0;
+  bottom: 3.3rem;
 
+  overflow-x: scroll;
+
+  width: 360px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
   gap: 0.7rem;
-  padding: 1rem 0;
+  margin: 0 -1.2rem;
+  padding: 1rem 1rem;
 
-  width: 22.5rem;
-  height: calc(100vh - 79%);
   background-color: white;
 
   div {
@@ -165,6 +181,7 @@ export const SelectedCountries = styled.div<SelectedCountriesProps>`
     justify-content: center;
     align-items: center;
     position: relative;
+    flex-shrink: 0;
 
     padding: 0 0.2rem;
 

@@ -1,3 +1,3 @@
 export interface TripDownloadDocProps {
-  data?: string;
+  schedulesData: { [key: string]: DayData[] };
 }

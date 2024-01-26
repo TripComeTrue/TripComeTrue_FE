@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
-import { add, differenceInCalendarDays } from 'date-fns';
+import { add, differenceInDays } from 'date-fns';
 import PlaceIcon from '@mui/icons-material/Place';
 import Checkbox from '@mui/material/Checkbox';
 import { SlArrowLeft } from 'react-icons/sl';
-import * as Styled from './TripPlanCity.styles';
+import * as Styled from './TripPlanCityList.styles';
 import { SubTitle } from '@/components/common';
-import {
-  TripPlanPrevButton,
-  TripPlanNextButton,
-} from '../TripPlanCommon/TripPlanCommon';
-import CityListModal from './CityListModal/CityListModal';
+import CityListModal from './TripPlanCityModal/TripPlanCityModal';
+import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 
 const TripPlanCity = () => {
+  const { tripPlanData, updateTripPlanData } = useTripFormData();
   const [cityNames, setCityNames] = useState<string[]>([]);
+  const [activeDayInput, setActiveDayInput] = useState<number | null>(null);
+  const [eachDayCityInput, setEachDayCityInput] = useState<string[]>([]);
   const [isAllCitySame, setIsAllCitySame] = useState(false);
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [isCityModalOpen, setIsCityModalOpen] = useState({
     isPaneOpenLeft: false,
   });
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
 
-  const startDate = new Date(2024, 0, 11);
-  const endDate = new Date(2024, 0, 14);
-  const totalTripDays = differenceInCalendarDays(endDate, startDate);
+  const startDate = new Date(tripPlanData.tripStartDay);
+  const endDate = new Date(tripPlanData.tripEndDay);
+  const totalTripDays = differenceInDays(endDate, startDate);
 
   const closeCityListModal = () => {
     setIsCityModalOpen({ isPaneOpenLeft: false });
@@ -30,36 +30,43 @@ const TripPlanCity = () => {
 
   const handleCityModalSelection = (cities: string[]) => {
     setSelectedCities(cities);
+    setCityNames(cities);
+
+    if (activeDayInput !== null) {
+      const updatedInputs = [...eachDayCityInput];
+      updatedInputs[activeDayInput] = cities.join(', ');
+      setEachDayCityInput(updatedInputs);
+    }
   };
 
   const handleCheckAllSameCity = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsAllCitySame(e.target.checked);
     if (e.target.checked) {
-      const firstDayCity = cityNames[0] || '';
-      setCityNames(Array(totalTripDays + 1).fill(firstDayCity));
+      const firstDayCity = eachDayCityInput[0] || '';
+      setEachDayCityInput(Array(totalTripDays + 1).fill(firstDayCity));
     }
   };
 
-  const handleChangeCityName = (city: string, index: number) => {
-    const newCityNames = [...city];
-    newCityNames[index] = city;
+  const handleSetActiveDayInput = (dayIndex: number) => {
+    setActiveDayInput(dayIndex);
+
+    setIsCityModalOpen({ isPaneOpenLeft: true });
+  };
+
+  const handleChangeCityName = (cityName: string, dayIndex: number) => {
+    const newCityNames = [...cityNames];
+    newCityNames[dayIndex] = cityName;
     setCityNames(newCityNames);
   };
 
   useEffect(() => {
-    if (selectedCities.length > 0) {
-      const updatedCityNames = selectedCities.map((city, index) =>
-        index <= totalTripDays ? city : '',
-      );
-      setCityNames(updatedCityNames);
-    }
-  }, [selectedCities, totalTripDays]);
+    updateTripPlanData({ tripPlanCities: eachDayCityInput });
+  }, [eachDayCityInput]);
 
   const showInputPerDay = () => {
     const totalInputs = [];
-
     for (let i = 0; i <= totalTripDays; i += 1) {
-      const eachTripDate = add(startDate, { days: i });
+      const eachTripDate = add(new Date(startDate), { days: i });
       totalInputs.push(
         <Styled.EachDayContainer key={i}>
           <SubTitle fontSize={15}>
@@ -73,26 +80,12 @@ const TripPlanCity = () => {
             <Styled.EachDayInput
               type="text"
               placeholder="방문 지역을 선택해주세요"
-              value={cityNames[i] || ''}
+              value={eachDayCityInput[i] || ''}
               onChange={(e) => handleChangeCityName(e.target.value, i)}
               disabled={isAllCitySame}
-              onClick={() => setIsCityModalOpen({ isPaneOpenLeft: true })}
+              onClick={() => handleSetActiveDayInput(i)}
             />
           </Styled.EachDayInputWrapper>
-          <Styled.SlidingPane
-            className="citymodal"
-            closeIcon={<SlArrowLeft fontSize="15" />}
-            isOpen={isCityModalOpen.isPaneOpenLeft}
-            onRequestClose={() => {
-              setIsCityModalOpen({ isPaneOpenLeft: false });
-            }}
-            width="22.5rem">
-            <CityListModal
-              selectedCities={selectedCities}
-              onCitySelection={handleCityModalSelection}
-              onCloseModal={closeCityListModal}
-            />
-          </Styled.SlidingPane>
         </Styled.EachDayContainer>,
       );
     }
@@ -101,7 +94,6 @@ const TripPlanCity = () => {
 
   return (
     <Styled.Wrapper>
-      <TripPlanPrevButton />
       <Styled.Container>
         <Styled.Title>
           여행 기간 동안
@@ -118,8 +110,21 @@ const TripPlanCity = () => {
           <span className="checkbox-text">방문 지역 모두 동일</span>
           {showInputPerDay()}
         </label>
+        <Styled.SlidingPane
+          className="citymodal"
+          closeIcon={<SlArrowLeft fontSize="15" />}
+          isOpen={isCityModalOpen.isPaneOpenLeft}
+          onRequestClose={() => {
+            setIsCityModalOpen({ isPaneOpenLeft: false });
+          }}
+          width="22.5rem">
+          <CityListModal
+            selectedCities={selectedCities}
+            onCitySelection={handleCityModalSelection}
+            onCloseModal={closeCityListModal}
+          />
+        </Styled.SlidingPane>
       </Styled.Container>
-      <TripPlanNextButton />
     </Styled.Wrapper>
   );
 };
