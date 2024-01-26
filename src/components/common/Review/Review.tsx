@@ -23,6 +23,7 @@ const Review: React.FC<ReviewProps> = ({ slides, slidesPerView = 1.63 }) => (
     {slides.map((item: SlideHotItem) => (
       <SwiperSlide key={item.title}>
         <ReviewSwiper
+          tripRecordId={item.tripRecordId}
           key={item.title}
           title={item.title}
           bookmark={item.bookmark}
