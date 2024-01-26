@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
 import * as Styled from './ReviewComment.styles';
 import BackArrow from '@/assets/back-arrow.svg';
@@ -34,6 +34,7 @@ const ReviewComment = () => {
       postPlaceReviewComment(reviewId, { content }),
     onSuccess: () => {
       placeReviewRefetch();
+      setComment('');
     },
   });
   const { mutate: postReplyMutate } = useMutation({
@@ -46,6 +47,8 @@ const ReviewComment = () => {
     }) => postPlaceReviewReply(placeReviewCommentId, { content }),
     onSuccess: () => {
       placeReviewRefetch();
+      setComment('');
+      setIsComment(true);
     },
   });
   const { mutate: deleteCommentMutate } = useMutation({
@@ -85,19 +88,6 @@ const ReviewComment = () => {
     }
   };
 
-  const onClickPostComment = (): void => {
-    postCommentMutate({ content: comment });
-    setComment('');
-  };
-
-  const onClickPostReply = (): void => {
-    postReplyMutate({
-      placeReviewCommentId: commentId,
-      content: comment,
-    });
-    setComment('');
-  };
-
   const onClickDeleteComment = (id: number): void => {
     deleteCommentMutate(id);
   };
@@ -108,7 +98,17 @@ const ReviewComment = () => {
     return postLikeMutate(id);
   };
 
-  console.log(placeReviewData);
+  const onKeyDownEnter = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter') {
+      if (isComment) {
+        postCommentMutate({ content: comment });
+      } else
+        postReplyMutate({
+          placeReviewCommentId: commentId,
+          content: comment,
+        });
+    }
+  };
 
   return (
     <div>
@@ -237,12 +237,20 @@ const ReviewComment = () => {
             type="text"
             placeholder={isComment ? '댓글을 남겨주세요' : '답글을 남겨주세요'}
             onChange={onChangeComment}
+            onKeyDown={onKeyDownEnter}
             ref={inputRef}
             value={comment}
           />
           {comment && (
             <Styled.CommentSubmit
-              onClick={isComment ? onClickPostComment : onClickPostReply}>
+              onClick={() =>
+                isComment
+                  ? postCommentMutate({ content: comment })
+                  : postReplyMutate({
+                      placeReviewCommentId: commentId,
+                      content: comment,
+                    })
+              }>
               <BsArrowRightCircleFill />
             </Styled.CommentSubmit>
           )}

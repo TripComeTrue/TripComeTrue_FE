@@ -99,8 +99,13 @@ export const deleteTripRecordReviews = async () => {
 };
 
 // 여행 후기에 대한 모든 댓글 조회
-export const getTripRecordComments = async (tripRecordId: string) => {
-  const { data } = await client.get(`v1/trip-records/${tripRecordId}/comments`);
+export const getTripRecordComments = async (
+  tripRecordId: string,
+  pageParams: number,
+) => {
+  const { data } = await client.get(
+    `v1/trip-records/${tripRecordId}/comments?page=${pageParams}&size=5`,
+  );
 
   return data.data;
 };
