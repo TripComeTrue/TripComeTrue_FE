@@ -13,8 +13,8 @@ const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
   selectedPlace,
   onPlaceSelection,
   onCloseModal,
-  countryName,
-  cityName,
+  countryName = '',
+  cityName = '',
 }: SelectedPlaceProps) => {
   const { data: tripPlacesData } = useQuery({
     queryKey: ['TripPlaces', countryName, cityName],

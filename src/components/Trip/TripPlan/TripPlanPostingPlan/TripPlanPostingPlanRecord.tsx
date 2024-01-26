@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
-import { useSuspenseQuery } from '@tanstack/react-query';
+// import { useParams } from 'react-router-dom';
+// import { useSuspenseQuery } from '@tanstack/react-query';
 import { differenceInDays, format } from 'date-fns';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -14,19 +14,19 @@ import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPl
 import TripPlanUploadMainImages from './TripPlanUploadMainImages/TripPlanUploadMainImages';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 import TripPlanDaysInput from './TripPlanDaysInput/TripPlanDaysInput';
-import { getTripPlanById } from '@/apis/trip-planandrecords';
+// import { getTripPlanById } from '@/apis/trip-planandrecords';
 import * as Styled from './TripPlanPostingPlan.styles';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 
 const TripPlanPostingPlanRecord = () => {
   const { tripPlanData } = useTripFormData();
-  const { id } = useParams();
+  // const { id } = useParams();
   // 기존 여행 계획 가져오기
-  const { data: tripPlan } = useSuspenseQuery({
-    queryKey: ['trip-plan', id],
-    queryFn: () => getTripPlanById(Number(id)),
-  });
+  // const { data: tripPlan } = useSuspenseQuery({
+  //   queryKey: ['trip-plan', id],
+  //   queryFn: () => getTripPlanById(Number(id)),
+  // });
   // 선택한 일차
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   // 방문한 장소
