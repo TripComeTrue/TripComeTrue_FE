@@ -39,8 +39,6 @@ import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
 import SearchNons from './pages/Search/SearchNons';
-import TripPlanAddTags from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsForImage/TripPlanAddTagsForImage';
-import TripPlanAddPlace from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddPlace/TripPlanAddPlace';
 import {
   ChangePassword,
   ConfirmPassword,
@@ -52,8 +50,10 @@ import {
   WishList,
   WishListMore,
 } from './pages/MyPage';
+import TripPlanRecord from './pages/Trip/TripPlan/TripPlanRecord';
 import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
+import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 
 function App() {
   return (
@@ -89,7 +89,9 @@ function App() {
             path="trip-record/review/:reviewId/edit"
             element={<TripRecordReviewEdit />}
           />
-          <Route path="plan" element={<TripPlan />} />
+          <Route path="tripplan" element={<TripPlan />} />
+          <Route path="tripPlanRecord" element={<TripPlanSelect />} />
+          <Route path="tripPlanRecord/:id" element={<TripPlanRecord />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
@@ -104,8 +106,6 @@ function App() {
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
           <Route path="posting" element={<TripPlanPosting />} /> */}
-          <Route path="addtag" element={<TripPlanAddTags />} />
-          <Route path="addplace" element={<TripPlanAddPlace />} />
         </Route>
 
         <Route path="/detailfeed/*">
