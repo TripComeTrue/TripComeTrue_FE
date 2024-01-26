@@ -62,7 +62,12 @@ export const GoogleMapsContainer = styled.div`
 `;
 
 export const DaysContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
   width: 100%;
+  padding: 0;
+  gap: 0.5rem;
   overflow: scroll;
 `;
 
@@ -81,7 +86,11 @@ export const DaysInner = styled.div`
 `;
 
 export const DaysButton = styled.span<PostingProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-shrink: 0;
+
   width: 3.5rem;
   height: 1.5rem;
   line-height: 1.5rem;

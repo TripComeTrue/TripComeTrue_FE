@@ -1,12 +1,12 @@
 import { Suspense } from 'react';
-import { TripPlanPosting } from '@/components/Trip/TripPlan';
 import { RetryErrorBoundary } from '@/components/common';
+import TripPlanPostingPlanRecord from '@/components/Trip/TripPlan/TripPlanPostingPlan/TripPlanPostingPlanRecord';
 
 const TripPlanRecord = () => {
   return (
     <RetryErrorBoundary>
       <Suspense fallback={<div>loading...</div>}>
-        <TripPlanPosting />
+        <TripPlanPostingPlanRecord />
       </Suspense>
     </RetryErrorBoundary>
   );

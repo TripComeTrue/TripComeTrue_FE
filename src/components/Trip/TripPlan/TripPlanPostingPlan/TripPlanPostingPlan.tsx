@@ -12,14 +12,14 @@ import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
 import * as Styled from './TripPlanPostingPlan.styles';
 import { Button } from '@/components/common';
 import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
-import TripPlanUploadImages from './TripPlanUploadImages/TripPlanUploadImages';
-import TripPlanUploadMainImages from './TripPlanUploadMainImages/TripPlanUploadMainImages';
+
 import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 
 const TripPlanPosting = () => {
-  const { tripPlanData, updateTripPlanData } = useTripFormData();
+  // const { tripPlanData, updateTripPlanData } = useTripFormData();
+  const { tripPlanData } = useTripFormData();
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [selectedPlace, setSelectedPlace] = useState<string>('');
   const { register, handleSubmit, setValue } = useForm();
@@ -164,10 +164,7 @@ const TripPlanPosting = () => {
                 }
               }}
             />
-            <TripPlanUploadImages
-              setFormData={setFormData}
-              selectedDay={selectedDay}
-            />
+
             <TripPlanAddTags />
           </Styled.InputContainer>
         ))
@@ -191,8 +188,6 @@ const TripPlanPosting = () => {
           </div>
           <CalendarToday className="calendar-icon" />
         </Styled.DateDisplay>
-
-        <TripPlanUploadMainImages setFormData={setFormData} />
 
         <Styled.GoogleMapsContainer>
           <TripPlanGoogleMaps />

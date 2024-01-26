@@ -17,8 +17,10 @@ import TripPlanDaysInput from './TripPlanDaysInput/TripPlanDaysInput';
 import { getTripPlanById } from '@/apis/trip-planandrecords';
 import * as Styled from './TripPlanPostingPlan.styles';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
+import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 
-const TripPlanPosting = () => {
+const TripPlanPostingPlanRecord = () => {
+  const { tripPlanData } = useTripFormData();
   const { id } = useParams();
   // 기존 여행 계획 가져오기
   const { data: tripPlan } = useSuspenseQuery({
@@ -38,12 +40,8 @@ const TripPlanPosting = () => {
   });
 
   // const navigate = useNavigate();
-  const startDate = new Date(
-    `${tripPlan.data.tripStartDay[0]}-${tripPlan.data.tripStartDay[1]}-${tripPlan.data.tripStartDay[2]}`,
-  );
-  const endDate = new Date(
-    `${tripPlan.data.tripEndDay[0]}-${tripPlan.data.tripEndDay[1]}-${tripPlan.data.tripEndDay[2]}`,
-  );
+  const startDate = new Date(tripPlanData.tripStartDay);
+  const endDate = new Date(tripPlanData.tripEndDay);
   const totalTripDays = differenceInDays(endDate, startDate);
 
   const [formData, setFormData] = useState(() =>
@@ -239,4 +237,4 @@ const TripPlanPosting = () => {
   );
 };
 
-export default TripPlanPosting;
+export default TripPlanPostingPlanRecord;
