@@ -22,3 +22,4 @@ export { default as RetryErrorBoundary } from '@/components/common/ErrorBoundary
 export { default as Filter } from '@/components/common/Filter/Filter';
 export { default as PlaceReviewCard } from '@/components/common/PlaceReviewCard/PlaceReviewCard';
 export { default as TripRecordReviewCard } from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
+export { default as Comment } from '@/components/common/Comment/Comment';

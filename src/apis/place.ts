@@ -53,3 +53,44 @@ export const getPlaceReview = async (placeReviewId: string) => {
 
   return data.data;
 };
+
+// 여행지 리뷰에 대한 댓글 작성
+export const postPlaceReviewComment = async (
+  placeReviewId: string,
+  commentData: { content: string },
+) => {
+  const { data } = await client.post(
+    `v1/places/reviews/${placeReviewId}/comments`,
+    commentData,
+  );
+
+  return data.data;
+};
+
+// 여행지 리뷰의 댓글에 대한 대댓글 작성
+export const postPlaceReviewReply = async (
+  placeReviewCommentId: number,
+  replyData: { content: string },
+) => {
+  const { data } = await client.post(
+    `v1/places/reviews/comments/${placeReviewCommentId}/reply-comments`,
+    replyData,
+  );
+
+  return data.data;
+};
+
+// 여행지 리뷰에 대한 댓글, 대댓글 삭제
+export const deletePlaceReviewComment = async (deleteCommentId: number) => {
+  await client.delete(`v1/places/reviews/comments/${deleteCommentId}`);
+};
+
+// 여행지 리뷰 좋아요 요청
+export const postLike = async (placeReviewId: number) => {
+  await client.post(`v1/places/reviews/${placeReviewId}/likes`);
+};
+
+// 여행지 리뷰 좋아요 취소
+export const deleteLike = async (placeReviewId: number) => {
+  await client.delete(`v1/places/reviews/${placeReviewId}/likes`);
+};

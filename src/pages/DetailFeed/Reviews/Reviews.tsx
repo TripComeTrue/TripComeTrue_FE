@@ -30,6 +30,8 @@ const Reviews = () => {
     refetch();
   }, [selectedFilter, onlyImage]);
 
+  console.log(placeReviewsData);
+
   return (
     <div>
       <Styled.NavWrap>
@@ -64,21 +66,25 @@ const Reviews = () => {
         </Styled.Header>
         <ul>
           {placeReviewsData.placeReviews.map((data: PlaceReviewData) => (
-            <PlaceReviewCard key={data.placeReviewId}>
-              <PlaceReviewCard.PlaceHeader
-                nickname={data.nickname}
-                profileUrl="https://source.unsplash.com/random"
-                writeDate={FormattedDate(data.createdAt)}
-              />
-              <PlaceReviewCard.Main
-                imageUrl={data.imageUrl}
-                content={data.content}
-              />
-              <PlaceReviewCard.InteractionButtons
-                likeCount={data.likeCount}
-                commentCount={data.commentCount}
-              />
-            </PlaceReviewCard>
+            <Link
+              key={data.placeReviewId}
+              to={`/detailfeed/spot/${placeId}/review/${data.placeReviewId}/comment`}>
+              <PlaceReviewCard>
+                <PlaceReviewCard.PlaceHeader
+                  nickname={data.nickname}
+                  profileUrl="https://source.unsplash.com/random"
+                  writeDate={FormattedDate(data.createdAt)}
+                />
+                <PlaceReviewCard.Main
+                  imageUrl={data.imageUrl}
+                  content={data.content}
+                />
+                <PlaceReviewCard.InteractionButtons
+                  likeCount={data.likeCount}
+                  commentCount={data.commentCount}
+                />
+              </PlaceReviewCard>
+            </Link>
           ))}
         </ul>
       </Styled.Container>

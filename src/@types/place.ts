@@ -17,3 +17,24 @@ interface PlaceReviewData {
   placeReviewId: number;
   imageUrl: string;
 }
+
+interface CommentData {
+  commentId: number;
+  content: string;
+  createdAt: string;
+  isWriter: boolean;
+  memberId: number;
+  nickname: string;
+  profileUrl: string;
+  replyComments: ReplyData[];
+}
+
+interface ReplyData {
+  commentId: number;
+  content: string;
+  createdAt: string;
+  isWriter: boolean;
+  memberId: number;
+  nickname: string;
+  profileUrl: string;
+}

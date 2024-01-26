@@ -49,10 +49,6 @@ export const BubbleWrapper = styled.div`
   right: -60%;
 `;
 
-export const Container = styled.div`
-  /* margin: 0 1.25rem; */
-`;
-
 export const ReviewContainer = styled.div`
   ${flexColumn};
   gap: 0.625rem;
@@ -96,12 +92,15 @@ export const LikeButton = styled.div`
 export const CommentButton = styled.div`
   ${alignCenter};
   gap: 0.25rem;
+
+  cursor: pointer;
 `;
 
 export const CommentContainer = styled.div`
   ${flexColumn};
   gap: 0.5rem;
 
+  margin-bottom: 4.625rem;
   padding: 0.75rem 0;
 `;
 
@@ -112,42 +111,8 @@ export const CommentTitle = styled.div`
   padding: 0 1.25rem;
 `;
 
-export const CommentList = styled.ul``;
-
-export const CommentItem = styled.li``;
-
-export const CommentCard = styled.div`
-  ${flexColumn};
-  gap: 0.625rem;
-
-  padding: 0.625rem 1.25rem;
-  border-bottom: 1px solid ${({ theme }) => theme.brand.gray};
-`;
-
-export const CommentInfo = styled.div`
+export const Header = styled.div`
   ${alignCenter}
-  justify-content: space-between;
-`;
-
-export const ReplyButton = styled.div`
-  ${alignCenter};
-  gap: 0.25rem;
-
-  width: max-content;
-  cursor: pointer;
-`;
-
-export const ReplyList = styled.ul``;
-
-export const ReplyItem = styled.li``;
-
-export const ReplyCard = styled.div`
-  ${flexColumn};
-  gap: 0.625rem;
-
-  padding: 0.625rem 1.25rem 0.625rem 2.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.brand.gray};
-  background-color: ${({ theme }) => theme.brand.lightGray};
 `;
 
 export const EmptyComment = styled.div`
@@ -161,7 +126,7 @@ export const EmptyText = styled.span`
   color: #bebebe;
 `;
 
-export const InputWrapper = styled.div`
+export const Footer = styled.div`
   position: fixed;
   bottom: 0;
 
@@ -169,17 +134,32 @@ export const InputWrapper = styled.div`
   max-width: 22.5rem;
   padding: 1rem 1.25rem;
   border-top: 1px solid ${({ theme }) => theme.brand.lightGray};
+  background-color: ${({ theme }) => theme.brand.white};
 
   @media screen and (max-width: 30rem) {
     max-width: none;
   }
 `;
 
-export const CommentInput = styled.input`
+export const CommentWriteContainer = styled.div`
+  ${alignCenter};
+
   width: 100%;
   background-color: ${({ theme }) => theme.brand.lightGray};
+  border-radius: 0.5rem;
+`;
+
+export const CommentInput = styled.input`
+  width: 100%;
   padding: 0.625rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 700;
-  border-radius: 0.5rem;
+`;
+
+export const CommentSubmit = styled.button`
+  ${alignCenter};
+
+  color: ${({ theme }) => theme.brand.primary};
+  margin-right: 0.625rem;
+  font-size: ${({ theme }) => theme.fontSizes.xxl};
 `;
