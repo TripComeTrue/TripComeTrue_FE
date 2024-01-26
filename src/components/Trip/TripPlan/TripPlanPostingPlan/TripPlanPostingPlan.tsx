@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { differenceInDays, format } from 'date-fns';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -18,10 +18,8 @@ import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 
 const TripPlanPosting = () => {
-  // const { tripPlanData, updateTripPlanData } = useTripFormData();
   const { tripPlanData } = useTripFormData();
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
-  const [selectedCountry, setSelectedCountry] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState<string>('');
   const [selectedPlace, setSelectedPlace] = useState<string>('');
   const { register, handleSubmit, setValue } = useForm();
@@ -84,16 +82,12 @@ const TripPlanPosting = () => {
   const handleOpenPlaceModal = (day: number) => {
     const selectedCityCountry = selectedCitiesPerDay?.[day - 1];
 
-    let country;
     let city;
-
     if (selectedCityCountry) {
-      [country, city] = selectedCityCountry.split(' ');
+      [, city] = selectedCityCountry.split(' ');
     } else {
-      country = '';
       city = '';
     }
-    setSelectedCountry(country);
     setSelectedCity(city);
     setIsPlaceModalOpen({ isPaneOpenLeft: true });
   };
@@ -119,10 +113,6 @@ const TripPlanPosting = () => {
       });
     }
   };
-
-  useEffect(() => {
-    console.log(tripPlanData.tripPlanCities);
-  });
 
   const onSubmit = (data: object) => {
     console.log(data);
@@ -170,10 +160,10 @@ const TripPlanPosting = () => {
                 width="22.5rem">
                 <TripPlanPlaceModal
                   selectedPlace={selectedPlace}
-                  countryName={selectedCountry}
                   cityName={selectedCity}
                   onPlaceSelection={handlePlaceModalSelection}
                   onCloseModal={closePlaceListModal}
+                  dayIndex={selectedDay - 1}
                 />
               </Styled.SlidingPane>
             </Styled.PlaceInputContainer>

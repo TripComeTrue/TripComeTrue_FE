@@ -5,6 +5,7 @@ export interface TripPlanData {
   tripEndDay: string;
   referencedBy: number | null;
   tripPlanSchedules: TripPlanSchedule[];
+  tripPlanCountriesEng?: string[]; // 장소 데이터 조회시 params에 사용될 영문 국가명
   tripPlanCities?: string[]; // 국가+도시 형태 이름 저장시 사용하는 임시 데이터
 }
 

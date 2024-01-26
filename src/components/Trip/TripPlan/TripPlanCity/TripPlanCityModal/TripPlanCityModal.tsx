@@ -5,7 +5,10 @@ import * as Styled from './TripPlanCityModal.styles';
 import { Button } from '@/components/common';
 import { SelectedCitiesProps } from './TripPlanCityModal.types';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
-import { getTripCities } from '@/apis/trip-planandrecords';
+import {
+  getTripCities,
+  getTripCountryEngName,
+} from '@/apis/trip-planandrecords';
 import { City, CountryData } from '@/@types/trip-alldata.types';
 
 const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
@@ -13,7 +16,7 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
   onCitySelection,
   onCloseModal,
 }: SelectedCitiesProps) => {
-  const { tripPlanData } = useTripFormData();
+  const { tripPlanData, updateTripPlanData } = useTripFormData();
   const selectedCountries = tripPlanData.countries;
   const [selectedCountry, setSelectedCountry] = useState<string>(
     tripPlanData.countries[0],
@@ -40,7 +43,7 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
     setSelectedCountry(country);
   };
 
-  const selectCity = (cityName: string) => {
+  const selectCity = async (cityName: string) => {
     const combinedName = `${selectedCountry} ${cityName}`;
     setSelectedCitiesInModal((prevCities) => {
       const isAlreadySelected = prevCities.includes(cityName);
@@ -56,6 +59,15 @@ const TripPlanCityModal: React.FC<SelectedCitiesProps> = ({
         return [...prevNames, combinedName];
       }
       return prevNames;
+    });
+
+    const countryNameInEnglish = await getTripCountryEngName(selectedCountry);
+
+    updateTripPlanData({
+      tripPlanCountriesEng: [
+        ...(tripPlanData.tripPlanCountriesEng || []),
+        countryNameInEnglish,
+      ],
     });
   };
 
