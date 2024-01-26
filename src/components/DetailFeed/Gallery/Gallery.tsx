@@ -7,9 +7,8 @@ import { GalleyProps } from './Gallery.types';
 const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
   const queryKey = galleryType ? 'spotGallery' : 'cityGallery';
   const fnUrl = galleryType
-    ? `/v1/trip-records-schedules?placeId=${id}&size=10`
+    ? `/v1/trip-records-schedules?placeId=${id}&size=10&orderBy=storeCount`
     : `/v1/cities/${id}/images/list`;
-
   const { data, isLoading } = useDetailFeedQuery<GalleryResponseType>({
     queryKey,
     id,
@@ -44,14 +43,14 @@ const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
           {placeName} 여행 갤러리
         </SubTitle>
       </Styled.SubtitleBox>
-      {data.data.length === 0 ? (
+      {data.totalElements === 0 ? (
         <EmptyContents />
       ) : (
         <Styled.GellaryItemBox
           spaceBetween={8}
           slidesPerView={2.15}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-          {data.data.map(
+          {data.data.content.map(
             ({ tripRecordStoreCount, imageUrl, tripRecordId }, index) => (
               <Styled.GellaryItem
                 // eslint-disable-next-line react/no-array-index-key

@@ -1,24 +1,41 @@
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   PiBookmarkSimpleFill,
   PiBookmarkSimpleLight,
   PiCalendarBlankLight,
 } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
+import share from '@/assets/share.svg';
+import backArrow from '@/assets/back-arrow.svg';
+import { cancelStoreSpot, postStoreSpot } from '@/apis/detailfeed';
+import * as Styled from './FeedNav.styles';
 import { FeedNavProps } from './FeedNav.types';
 import { NavBackBtn, NavInner, NavWrap } from './SimpleNav.styles';
-import * as Styled from './FeedNav.styles';
-import backArrow from '@/assets/back-arrow.svg';
-import share from '@/assets/share.svg';
 
-function FeedNav({ children, isScheduleIcon }: FeedNavProps) {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+function FeedNav({ children, isScheduleIcon, id, isStored }: FeedNavProps) {
+  const [isBookmarked, setIsBookMarked] = useState(isStored);
   const navigate = useNavigate();
   const onClickBackBtn = () => {
     navigate(-1);
   };
+
+  const { mutate: storeSpotMutate } = useMutation({
+    mutationFn: (placeId: number) => postStoreSpot(placeId),
+    onSuccess: () => setIsBookMarked(true),
+  });
+
+  const { mutate: unStoreSpotMutate } = useMutation({
+    mutationFn: (placeId: number) => cancelStoreSpot(placeId),
+    onSuccess: () => setIsBookMarked(false),
+  });
+
   const onClickBookmark = () => {
-    setIsBookmarked((prev) => !prev);
+    if (isBookmarked) {
+      unStoreSpotMutate(id);
+    } else {
+      storeSpotMutate(id);
+    }
   };
 
   return (
@@ -33,7 +50,6 @@ function FeedNav({ children, isScheduleIcon }: FeedNavProps) {
           {children}
         </Styled.FeedNavTitle>
         <Styled.FeedNavRight $isScheduleIcon={`${isScheduleIcon}`}>
-          {/* 일정에 추가하는 버튼 */}
           {isScheduleIcon && (
             <Styled.FeedNavSchedule>
               <PiCalendarBlankLight />

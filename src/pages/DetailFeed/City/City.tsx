@@ -18,7 +18,7 @@ const City = () => {
 
   return (
     <>
-      <FeedNav>{name}</FeedNav>
+      <FeedNav id={cityId}>{name}</FeedNav>
       <Styled.CityWrapper>
         <DetailFeedShorts cityId={cityId} placeName={name} />
         <Gallery id={cityId} placeName={name} />
