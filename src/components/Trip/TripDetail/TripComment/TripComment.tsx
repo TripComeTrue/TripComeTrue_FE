@@ -1,70 +1,212 @@
-import { Avatar, Text } from '@/components/common';
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { BsArrowRightCircleFill } from 'react-icons/bs';
+import { Comment, Text } from '@/components/common';
 import * as Styled from './TripComment.styles';
-import CommentIcon from '/images/comment.svg';
+import {
+  deleteTripRecordComment,
+  getTripRecordComments,
+  postTripRecordComment,
+  postTripRecordReply,
+} from '@/apis/trip-records';
 
 const TripComment = () => {
+  const { tripRecordId } = useParams() as { tripRecordId: string };
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [comment, setComment] = useState('');
+  const [isComment, setIsComment] = useState(true);
+  const [commentId, setCommentId] = useState(0);
+  const {
+    data: tripRecordCommentsData,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+  } = useInfiniteQuery({
+    queryKey: ['TripRecordCommentsData'],
+    queryFn: ({ pageParam }) => getTripRecordComments(tripRecordId, pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      if (Math.ceil(lastPage.totalCount / 5) >= lastPageParam + 1)
+        return lastPageParam + 1;
+
+      return null;
+    },
+  });
+
+  const { mutate: postCommentMutate } = useMutation({
+    mutationFn: ({ content }: { content: string }) =>
+      postTripRecordComment(tripRecordId, { content }),
+    onSuccess: () => {
+      refetch();
+      setComment('');
+    },
+  });
+  const { mutate: postReplyMutate } = useMutation({
+    mutationFn: ({
+      tripRecordCommentId,
+      content,
+    }: {
+      tripRecordCommentId: number;
+      content: string;
+    }) => postTripRecordReply(tripRecordCommentId, { content }),
+    onSuccess: () => {
+      refetch();
+      setIsComment(true);
+      setComment('');
+    },
+  });
+  const { mutate: deleteCommentMutate } = useMutation({
+    mutationFn: (deleteCommentId: number) =>
+      deleteTripRecordComment(deleteCommentId),
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const onChangeComment = (event: ChangeEvent<HTMLInputElement>): void => {
+    setComment(event.target.value);
+  };
+
+  const onClickReply = (id: number): void => {
+    setIsComment(false);
+    setCommentId(id);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const onClickDeleteComment = (id: number): void => {
+    deleteCommentMutate(id);
+  };
+
+  const onKeyDownEnter = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter') {
+      if (isComment) {
+        postCommentMutate({ content: comment });
+      } else
+        postReplyMutate({
+          tripRecordCommentId: commentId,
+          content: comment,
+        });
+    }
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [tripRecordId]);
+
   return (
     <Styled.Container>
-      <Styled.InputWrapper>
-        <Styled.CommentInput type="text" placeholder="댓글을 남겨주세요" />
-      </Styled.InputWrapper>
+      <Styled.CommentHeader>
+        <Styled.CommentWriteContainer>
+          <Styled.CommentInput
+            type="text"
+            placeholder={isComment ? '댓글을 남겨주세요' : '답글을 남겨주세요'}
+            onChange={onChangeComment}
+            onKeyDown={onKeyDownEnter}
+            ref={inputRef}
+            value={comment}
+          />
+          {comment && (
+            <Styled.CommentSubmit
+              onClick={() =>
+                isComment
+                  ? postCommentMutate({ content: comment })
+                  : postReplyMutate({
+                      tripRecordCommentId: commentId,
+                      content: comment,
+                    })
+              }>
+              <BsArrowRightCircleFill />
+            </Styled.CommentSubmit>
+          )}
+        </Styled.CommentWriteContainer>
+      </Styled.CommentHeader>
 
       <div>
         <Styled.TotalComments>
           <Text fontSize={12} fontWeight={700} color="gray">
-            댓글 (200)
+            댓글 ({tripRecordCommentsData?.pages[0].totalCount})
           </Text>
         </Styled.TotalComments>
-        <Styled.CommentList>
-          <Styled.CommentItem>
-            <Styled.CommentCard>
-              <Styled.CommentInfo>
-                <Styled.Creator>
-                  <Avatar src="https://source.unsplash.com/random" size={32} />
-                  <Text fontWeight={700}>아이고나죽네</Text>
-                </Styled.Creator>
-                <Text fontSize={10} fontWeight={700}>
-                  2023.12.15
+        {tripRecordCommentsData?.pages[0].totalCount ? (
+          <>
+            <ul>
+              {tripRecordCommentsData?.pages.map((page) =>
+                page.comments.map((commentData: CommentData) => (
+                  <li key={commentData?.commentId}>
+                    <Comment>
+                      <Comment.CommentCard>
+                        <Styled.Header>
+                          <Comment.Info
+                            isWriter={commentData?.isWriter}
+                            profileUrl={commentData?.profileUrl}
+                            nickname={commentData?.nickname}
+                            createdAt={commentData?.createdAt}
+                          />
+                          {commentData?.isWriter && (
+                            <Comment.ActionsModal
+                              onClickDelete={() =>
+                                onClickDeleteComment(commentData.commentId)
+                              }
+                            />
+                          )}
+                        </Styled.Header>
+                        <Comment.Content content={commentData.content} />
+                        <Comment.ReplyButton
+                          onClickFunc={() => {
+                            onClickReply(commentData.commentId);
+                          }}
+                          replyLength={commentData.replyComments.length}
+                        />
+                      </Comment.CommentCard>
+                    </Comment>
+                    <ul>
+                      {commentData.replyComments.map((replyData: ReplyData) => (
+                        <li key={replyData.commentId}>
+                          <Comment>
+                            <Comment.ReplyCard>
+                              <Styled.Header>
+                                <Comment.Info
+                                  isWriter={replyData.isWriter}
+                                  profileUrl={replyData.profileUrl}
+                                  nickname={replyData.nickname}
+                                  createdAt={replyData.createdAt}
+                                />
+                                {replyData.isWriter && (
+                                  <Comment.ActionsModal
+                                    onClickDelete={() =>
+                                      onClickDeleteComment(replyData.commentId)
+                                    }
+                                  />
+                                )}
+                              </Styled.Header>
+                              <Comment.Content content={replyData.content} />
+                            </Comment.ReplyCard>
+                          </Comment>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )),
+              )}
+            </ul>
+            {hasNextPage && (
+              <Styled.CommentMoreBtn
+                type="button"
+                onClick={() => fetchNextPage()}>
+                <Text color="gray" fontSize={14} fontWeight={600}>
+                  댓글 더 보기
                 </Text>
-              </Styled.CommentInfo>
-              <Text>빠니보틀님 ㅜㅜ 팬이에요 좋은 정보 감사드립니다!!!!</Text>
-              <Styled.ReplyButton>
-                <img src={CommentIcon} alt="comment icon" />
-                <Text fontSize={10} color="gray" fontWeight={600}>
-                  답글 달기
-                </Text>
-              </Styled.ReplyButton>
-            </Styled.CommentCard>
-
-            <Styled.ReplyList>
-              <Styled.ReplyItem>
-                <Styled.ReplyCard>
-                  <Styled.CommentInfo>
-                    <Styled.Creator>
-                      <Avatar
-                        src="https://source.unsplash.com/random"
-                        size={32}
-                      />
-                      <Text fontWeight={700}>아이고나죽네</Text>
-                    </Styled.Creator>
-                    <Text fontSize={10} fontWeight={700}>
-                      2023.12.15
-                    </Text>
-                  </Styled.CommentInfo>
-                  <Text>
-                    빠니보틀님 ㅜㅜ 팬이에요 좋은 정보 감사드립니다!!!!
-                  </Text>
-                  <Styled.ReplyButton>
-                    <img src={CommentIcon} alt="comment icon" />
-                    <Text fontSize={10} color="gray" fontWeight={600}>
-                      답글 달기
-                    </Text>
-                  </Styled.ReplyButton>
-                </Styled.ReplyCard>
-              </Styled.ReplyItem>
-            </Styled.ReplyList>
-          </Styled.CommentItem>
-        </Styled.CommentList>
+              </Styled.CommentMoreBtn>
+            )}
+          </>
+        ) : (
+          <Styled.EmptyComment>
+            <Styled.EmptyText>첫 댓글을 달아보세요</Styled.EmptyText>
+          </Styled.EmptyComment>
+        )}
       </div>
     </Styled.Container>
   );

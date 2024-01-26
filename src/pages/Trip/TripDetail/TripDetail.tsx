@@ -21,7 +21,6 @@ import { getCookie } from '@/utils/cookie';
 const TripDetail = () => {
   const isSignIn = getCookie('accessToken');
   const { tripRecordId } = useParams() as { tripRecordId: string };
-
   const [
     { data: tripRecordDetailData, refetch: tripRecordDetailRefetch },
     {
