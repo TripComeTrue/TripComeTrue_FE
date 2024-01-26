@@ -6,16 +6,16 @@ import { getPlaceReview, putPlaceReview } from '@/apis/place';
 import useDeleteImages from '@/hooks/common/useDeleteImages';
 import useSubmitImages from '@/hooks/common/useSubmitImages';
 
-const PlaceReviewWriteEdit = () => {
+const PlaceReviewEdit = () => {
   const [files, setFiles] = useState<File[]>([]);
-  const { placeReviewId } = useParams() as { placeReviewId: string };
+  const [content, setContent] = useState('');
+  const { reviewId } = useParams() as { reviewId: string };
   const { handleDeleteImages } = useDeleteImages();
   const { handleSubmitImages } = useSubmitImages(files, setFiles);
   const { data: placeReviewData } = useQuery({
     queryKey: ['PlaceReviewData'],
-    queryFn: () => getPlaceReview(placeReviewId),
+    queryFn: () => getPlaceReview(reviewId),
   });
-  const [content, setContent] = useState('');
 
   const { mutate: putReviewMutate } = useMutation({
     mutationFn: ({
@@ -24,7 +24,7 @@ const PlaceReviewWriteEdit = () => {
     }: {
       imageUrl: string;
       contentValue: string;
-    }) => putPlaceReview(placeReviewId, { imageUrl, content: contentValue }),
+    }) => putPlaceReview(reviewId, { imageUrl, content: contentValue }),
   });
 
   // 리뷰 수정하기 함수
@@ -68,4 +68,4 @@ const PlaceReviewWriteEdit = () => {
   );
 };
 
-export default PlaceReviewWriteEdit;
+export default PlaceReviewEdit;

@@ -7,7 +7,7 @@ import {
 } from '@/@types/auth.types';
 import getCookie from '@/utils/token';
 
-const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
+const serverUrl = 'http://tripcometrue.site';
 
 export const checkDuplicatedEmail = async (v: string | undefined) => {
   const { status } = await axios.get(

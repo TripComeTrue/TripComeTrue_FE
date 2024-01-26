@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { Bubble, Button, SimpleNav, SubTitle, Text } from '@/components/common';
 import * as Styled from './ReviewWrite.styles';
 import CameraIcon from '/images/camera.svg';
@@ -175,12 +175,21 @@ const Write = ({
   );
 };
 
-const Rating = () => {
+const Rating = ({
+  myRatingScore,
+  rating,
+  onClickFunc,
+}: {
+  myRatingScore: number;
+  rating: number;
+  onClickFunc: (event: MouseEvent<HTMLSpanElement>) => void;
+}) => {
   return (
     <Styled.RatingContainer>
       <Styled.RatingCustom
+        onClick={onClickFunc}
         name="half-rating"
-        defaultValue={0}
+        value={rating || myRatingScore || 0}
         precision={0.5}
       />
     </Styled.RatingContainer>
@@ -213,11 +222,13 @@ const EditButton = ({
   files,
   content,
   title,
+  rating,
   onClickFunc,
 }: {
   files: File[];
   content: string;
   title: string;
+  rating?: number;
   onClickFunc: () => void;
 }) => {
   return (
@@ -225,7 +236,7 @@ const EditButton = ({
       <Button
         variants="primary"
         size="lg"
-        disabled={!(files.length !== 0 || content.length !== 0)}
+        disabled={!(files.length !== 0 || content.length !== 0 || rating)}
         onClick={onClickFunc}>
         {title}
       </Button>
