@@ -287,3 +287,8 @@ export interface PlaceReviewDelReqBody {
 export interface RecordReviewDelReqBody {
   tripRecordReviewIds: number[];
 }
+
+export interface WishListDelReqBody {
+  type: string;
+  id: number;
+}

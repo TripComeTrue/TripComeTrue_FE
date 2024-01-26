@@ -18,6 +18,7 @@ import {
   RecordReviewDelReqBody,
   TripRecordResBody,
   TripStoresResBody,
+  WishListDelReqBody,
 } from '@/@types/mypage.types';
 
 // const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
@@ -188,4 +189,12 @@ export const deleteMyRecordReview = async (reqBody: RecordReviewDelReqBody) => {
     data: reqBody,
   });
   return status;
+};
+
+// 보관하기 취소
+export const deleteWishList = async (reqBody: WishListDelReqBody) => {
+  const { status } = await client.delete(
+    `/v1/${reqBody.type}/${reqBody.id}/stores`,
+  );
+  return { status, type: reqBody.type, id: reqBody.id };
 };
