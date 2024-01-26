@@ -62,7 +62,7 @@ const Rating = ({
   tripRecordId?: string;
 }) => {
   const [disable, setDisable] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
   const { mutate: tripRecordReviewMutate } = useMutation({
     mutationFn: (ratingScore: number) =>
       postTripRecordReview(tripRecordId, ratingScore),

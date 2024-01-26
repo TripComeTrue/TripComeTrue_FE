@@ -13,9 +13,21 @@ import { Button } from '..';
  * @param open 열림 / 닫힘 여부를 전달합니다.
  * @param onClose 닫혔을때 실행할 함수를 전달합니다.
  * @param title `optional` 모달의 제목을 전달합니다.
+ * @param dialog `optional` 취소버튼을 추가합니다.
+ * @param onReset `optional` 취소버튼을 눌렀을때 실행할 함수.
+ * @param onConfirm `optional` 확인버튼을 눌렀을때 실행할 함수.
  * @returns 모달 컴포넌트를 반환 합니다.
  */
-function Modal({ children, type, open, onClose, title }: ModalProps) {
+function Modal({
+  children,
+  type,
+  open,
+  onClose,
+  title,
+  dialog,
+  onReset,
+  onConfirm,
+}: ModalProps) {
   return (
     <MuiModal
       open={open}
@@ -38,9 +50,16 @@ function Modal({ children, type, open, onClose, title }: ModalProps) {
           )}
           <div id="modal-modal-description">{children}</div>
         </Styled.ModalContentWrap>
-        <Button size="md" variants="primary" onClick={onClose}>
-          확인
-        </Button>
+        <Styled.ModalBtnWrap>
+          {dialog && (
+            <Button size="md" variants="primary-border" onClick={onReset}>
+              취소
+            </Button>
+          )}
+          <Button size="md" variants="primary" onClick={onConfirm || onClose}>
+            확인
+          </Button>
+        </Styled.ModalBtnWrap>
       </Styled.ModalBox>
     </MuiModal>
   );

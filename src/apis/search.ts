@@ -17,3 +17,16 @@ export const SearchCreatorInfo = async (query?: string) => {
 
   return res.data;
 };
+
+// 검색된 크리에이터 '더보기' 조회
+export const SearchCreatorsInfiniteInfo = async (
+  query?: string,
+  page?: number,
+  size?: number,
+) => {
+  const res = await client.get(
+    `v1/members?query=${query}&page=${page}&size=${size}`,
+  );
+
+  return res.data;
+};

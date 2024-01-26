@@ -1,6 +1,5 @@
 import {
   GoogleMap,
-  LoadScript,
   MarkerF,
   PolylineF,
   useJsApiLoader,

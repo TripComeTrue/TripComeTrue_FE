@@ -20,3 +20,10 @@ export const HomeTopReview = async (type?: string) => {
 
   return res.data.data;
 };
+
+// 홈 메인 HOT 여행 크리에이터 리스트 조회
+export const HomeHotCreatorList = async () => {
+  const res = await client.get(`v1/members/top-list`);
+
+  return res.data.data;
+};

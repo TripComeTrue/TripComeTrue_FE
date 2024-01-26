@@ -1,5 +1,6 @@
 import axios from 'axios';
 import SERVER_URL from '@/constants/api';
+import getCookie from '@/utils/token';
 
 const imageClient = axios.create({
   baseURL: SERVER_URL,
@@ -11,10 +12,10 @@ const imageClient = axios.create({
 
 imageClient.interceptors.request.use(
   (config) => {
-    // const accessToken = getCookie('accessToken');
-    // if (accessToken) {
-    config.headers.Authorization = `Bearer eyJraWQiOiJrZXkyIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJuZXcxMUBuYXZlci5jb20iLCJpYXQiOjE3MDU3NzE5MjEsImV4cCI6MTcwNTkxNTkyMX0.23GePapRh7Nr_Xw6kJtpO6m1HoNwg3_FnmAQNXlFXmM`;
-    // }
+    const accessToken = getCookie('accessToken');
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
 
     return config;
   },
