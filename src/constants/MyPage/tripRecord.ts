@@ -1,6 +1,10 @@
-import { MyTripRecordReview } from '@/@types/mypage.types';
-
-const TRIP_RECORD_REVIEW: MyTripRecordReview[] = [
+const TRIP_RECORD_REVIEW: {
+  id: string;
+  tripRecordId: string;
+  averageRating: number;
+  content: string;
+  postTitle: string;
+}[] = [
   {
     id: '1',
     tripRecordId: '1',

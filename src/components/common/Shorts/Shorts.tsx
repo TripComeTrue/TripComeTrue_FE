@@ -18,10 +18,10 @@ const Shorts: React.FC<ShortsProps> = ({ slides, slidesPerView = 2.1 }) => (
     {slides.map((slide: Slide) => (
       <Styled.SwiperSlideWrap key={slide.tripRecordTitle}>
         <ShortsSwiper
-          // key={slide.tripRecordTitle}
+          tripRecordId={slide.tripRecordId}
           thumbnailUrl={slide.thumbnailUrl}
           tripRecordTitle={slide.tripRecordTitle}
-          storeCount={slide.storeCount}
+          storedCount={slide.storedCount}
         />
       </Styled.SwiperSlideWrap>
     ))}

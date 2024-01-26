@@ -1,23 +1,28 @@
+import { useLocation } from 'react-router-dom';
 import {
   Gallery,
+  RecommendSpot,
   PlaceReview,
   SpotInformation,
-  TopReview,
+  SpotTopReview,
 } from '@/components/DetailFeed';
-import * as Styled from './TouristSpot.styles';
 import { FeedNav } from '@/components/common';
+import * as Styled from './TouristSpot.styles';
 
 const TouristSpot = () => {
+  const location = useLocation();
+  const { placeName, placeId } = location.state;
   return (
-    <div>
-      <FeedNav isScheduleIcon>순천만습지</FeedNav>
+    <>
+      <FeedNav isScheduleIcon>{placeName}</FeedNav>
       <Styled.TouristSpotWrap>
-        <Gallery />
-        <SpotInformation />
-        <TopReview />
+        <Gallery id={placeId} placeName={placeName} galleryType="spot" />
+        <SpotInformation id={placeId} />
+        <SpotTopReview id={placeId} placeName={placeName} />
+        <RecommendSpot id={placeId} />
         <PlaceReview />
       </Styled.TouristSpotWrap>
-    </div>
+    </>
   );
 };
 

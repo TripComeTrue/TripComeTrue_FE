@@ -39,6 +39,7 @@ const TripRecordReviewWrite = () => {
       <ReviewWrite.Image setFiles={setFiles} />
       <ReviewWrite.Write content={content} setContent={setContent} />
       <ReviewWrite.WriteButton
+        files={files}
         content={content}
         title="리뷰 작성하기"
         onClickFunc={onClickPutReviewContents}
