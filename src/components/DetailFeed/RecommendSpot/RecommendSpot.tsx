@@ -1,22 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { Bookmark, SubTitle, Text } from '@/components/common';
+import * as Styled from './RecommendSpot.styles';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
-import * as Styled from './HotPlace.styles';
 import messageIcon from '/message.svg';
-import starIcon from '/starIcon.svg';
 
-const HotPlace = ({
-  cityId,
-  cityName,
-}: {
-  cityId: number;
-  cityName: string;
-}) => {
+const RecommendSpot = ({ id }: { id: number }) => {
   const navigate = useNavigate();
-  const { data, isLoading } = useDetailFeedQuery<HotPlaceResponseType>({
-    queryKey: 'hotPlace',
-    id: cityId,
-    fnUrl: `/v1/cities/${cityId}/hot-places`,
+  const { data, isLoading } = useDetailFeedQuery<RecommendSpotResponseType>({
+    queryKey: 'recommendSpot',
+    id,
+    fnUrl: `/v1/places/${id}/nearby`,
   });
 
   if (isLoading) {
@@ -37,35 +30,19 @@ const HotPlace = ({
     navigate(`/detailfeed/spot/${placeId}`, { state: { placeId, placeName } });
   };
 
-  const handleMoreClick = () => {
-    navigate(`/detailfeed/spotlist/${cityId}`, {
-      state: { placeName: cityName, id: cityId },
-    });
-  };
-
   return (
-    <div>
-      <Styled.SubTitleBox>
-        <SubTitle
-          fontSize={18}
-          variant="more"
-          icon={starIcon}
-          onClickButton={handleMoreClick}>
-          요즘 뜨는 핫플
-        </SubTitle>
-      </Styled.SubTitleBox>
-      <Styled.PlaceBox
+    <Styled.RecommendWrapper>
+      <Styled.SubtitleBox>
+        <SubTitle>근처 추천 여행지</SubTitle>
+      </Styled.SubtitleBox>
+      <Styled.RecommendItemBox
         spaceBetween={8}
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {data.data.map(
-          (
-            { imageUrl, storedCount, placeName, placeId, commentTotal },
-            index,
-          ) => (
-            <Styled.PlaceItem
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
+          ({ reviewCount, imageUrl, storedCount, placeName, placeId }) => (
+            <Styled.RecommendItem
+              key={placeName}
               onClick={() => handlePlaceClick({ placeId, placeName })}>
               <Styled.BookMarkBox>
                 <Bookmark count={storedCount} />
@@ -76,16 +53,16 @@ const HotPlace = ({
                 <Styled.ReviewBox>
                   <img src={messageIcon} alt="리뷰 아이콘" />
                   <Text fontSize={10} color="gray">
-                    {commentTotal}
+                    {reviewCount}
                   </Text>
                 </Styled.ReviewBox>
               </Styled.ItemBottom>
-            </Styled.PlaceItem>
+            </Styled.RecommendItem>
           ),
         )}
-      </Styled.PlaceBox>
-    </div>
+      </Styled.RecommendItemBox>
+    </Styled.RecommendWrapper>
   );
 };
 
-export default HotPlace;
+export default RecommendSpot;

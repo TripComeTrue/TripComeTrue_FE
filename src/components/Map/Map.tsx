@@ -1,5 +1,6 @@
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
+// import axios, { AxiosInstance } from 'axios';
 import * as Styled from './Map.styles';
 import { MAP_CONTAINER_STYLE, OPTIONS } from '@/constants/DetailFeed/Map';
 import defaultPin from '/defaultPin.svg';
@@ -7,18 +8,25 @@ import defaultPin from '/defaultPin.svg';
 const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 interface MapProps {
-  center: {
+  spotCenter: {
     lat: number;
     lng: number;
   };
 }
 
-const Map = ({ center }: MapProps) => {
-  const [, setMapRef] = useState<google.maps.Map | null>(null);
+// const instance: AxiosInstance = axios.create({
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'X-Goog-Api-Key': googleMapsApiKey,
+//     'X-Goog-FieldMask': ['places.displayName'],
+//   },
+// });
 
+const Map = ({ spotCenter }: MapProps) => {
+  const [, setMapRef] = useState<google.maps.Map | null>(null);
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey,
-    libraries: ['places', 'maps', 'marker'],
+    libraries: ['places', 'maps'],
     language: 'ko',
   });
 
@@ -33,18 +41,19 @@ const Map = ({ center }: MapProps) => {
   if (loadError) {
     return <div>Error loading Google Maps API</div>;
   }
+
   return (
     <Styled.MapWrapper>
       {isLoaded ? (
         <GoogleMap
-          center={center}
+          center={spotCenter}
           onUnmount={onUnmount}
           onLoad={onLoad}
           mapContainerStyle={MAP_CONTAINER_STYLE}
           options={OPTIONS}
-          zoom={13}>
+          zoom={14}>
           <MarkerF
-            position={{ lat: center.lat, lng: center.lng }}
+            position={{ lat: spotCenter.lat, lng: spotCenter.lng }}
             icon={{
               url: defaultPin,
               scaledSize: new google.maps.Size(45, 45),

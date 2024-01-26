@@ -22,12 +22,13 @@ import {
 } from './pages/Auth';
 import {
   City,
-  GalleryList,
   SpotList,
   SpotSearch,
   TouristSpot,
   Reviews,
   ReviewComment,
+  CityGalleryList,
+  SpotGalleryList,
   PlaceReviewWrite,
   PlaceReviewEdit,
 } from './pages/DetailFeed';
@@ -53,6 +54,7 @@ import TripPlanRecord from './pages/Trip/TripPlan/TripPlanRecord';
 import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
 import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
+import { HomeAllCity } from './components/Home';
 
 function App() {
   return (
@@ -67,7 +69,7 @@ function App() {
           <Route path="welcome" element={<Welcome />} />
         </Route>
         <Route path="home" element={<Home />} />
-
+        <Route path="citylist" element={<HomeAllCity />} />
         <Route path="search/*" element={<Search />} />
         <Route path="search/select/:tag" element={<SearchTag />} />
         <Route path="search-non" element={<SearchNons />} />
@@ -108,9 +110,9 @@ function App() {
         </Route>
 
         <Route path="/detailfeed/*">
-          <Route path="city" element={<City />} />
-          <Route path="spot" element={<TouristSpot />} />
-          <Route path="spot/:placeId/review" element={<Reviews />} />
+          <Route path="city/:cityId" element={<City />} />
+          <Route path="spot/:spotId" element={<TouristSpot />} />
+          <Route path="spot/:spotId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"
             element={<PlaceReviewWrite />}
@@ -123,9 +125,16 @@ function App() {
             path="spot/:placeId/review/:reviewId/comment"
             element={<ReviewComment />}
           />
-          <Route path="shortslist" element={<ShortsList />} />
-          <Route path="gallerylist" element={<GalleryList />} />
-          <Route path="spotlist" element={<SpotList />} />
+          <Route path="shortslist/:placeId" element={<ShortsList />} />
+          <Route
+            path="citygallerylist/:placeName"
+            element={<CityGalleryList />}
+          />
+          <Route
+            path="spotgallerylist/:placeName"
+            element={<SpotGalleryList />}
+          />
+          <Route path="spotlist/:placeId" element={<SpotList />} />
           <Route path="spotsearch" element={<SpotSearch />} />
         </Route>
         <Route path="mypage" element={<MyPageLayout />}>

@@ -6,9 +6,18 @@ export const GalleryListBox = styled.div`
   gap: 1.1%;
 `;
 
+export const FilterBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 3rem;
+  padding: 0 1.25rem;
+`;
+
 export const PhotoBox = styled.div`
   position: relative;
   flex: 0 0 32.6%;
+  cursor: pointer;
 `;
 
 export const BookMarkBox = styled.div`

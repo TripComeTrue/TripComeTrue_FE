@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import {
   Banner,
   CityInformation,
@@ -5,27 +6,30 @@ import {
   ExchangeRate,
   Gallery,
   HotPlace,
-  TopReview,
+  CityTopReview,
   Weather,
 } from '@/components/DetailFeed';
-import * as Styled from './City.styles';
 import { FeedNav } from '@/components/common';
+import * as Styled from './City.styles';
 
 const City = () => {
+  const location = useLocation();
+  const { cityId, name, isDomestic, country }: CityState = location.state;
+
   return (
-    <div>
-      <FeedNav>안목해변</FeedNav>
+    <>
+      <FeedNav>{name}</FeedNav>
       <Styled.CityWrapper>
-        <DetailFeedShorts />
-        <Gallery />
-        <CityInformation />
-        <Weather />
-        <ExchangeRate />
-        <TopReview />
-        <HotPlace />
-        <Banner />
+        <DetailFeedShorts cityId={cityId} placeName={name} />
+        <Gallery id={cityId} placeName={name} />
+        {!isDomestic && <CityInformation cityId={cityId} />}
+        <Weather cityId={cityId} />
+        {!isDomestic && <ExchangeRate cityId={cityId} country={country} />}
+        <CityTopReview cityId={cityId} cityName={name} />
+        <HotPlace cityId={cityId} cityName={name} />
+        <Banner isDomestic={isDomestic} />
       </Styled.CityWrapper>
-    </div>
+    </>
   );
 };
 

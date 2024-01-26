@@ -1,18 +1,30 @@
-import { SlArrowDown } from 'react-icons/sl';
+import { useNavigate } from 'react-router-dom';
 import * as Styled from './HomeCountryItem.styles';
 import { HomeKoreaCitiesProps } from './HomeKoreaCityItem.types';
 
 function HomeKoreaCities({ city }: HomeKoreaCitiesProps) {
+  const navigate = useNavigate();
+
   if (!city) return null;
+
+  function handleCityClick({ name, cityId, isDomestic }: CityState) {
+    navigate(`/detailfeed/city/${cityId}`, {
+      state: { name, cityId, isDomestic },
+    });
+  }
   return (
-    <Styled.CountryItem key={city.name} $height={52}>
-      <Styled.CountryItemButton $active="false">
-        {city.name}
-        <span className="down-icon">
-          <SlArrowDown />
-        </span>
-      </Styled.CountryItemButton>
-    </Styled.CountryItem>
+    <Styled.KoreaItem
+      key={city.name}
+      $height={52}
+      onClick={() =>
+        handleCityClick({
+          cityId: city.cityId,
+          name: city.name,
+          isDomestic: city.isDomestic,
+        })
+      }>
+      {city.name}
+    </Styled.KoreaItem>
   );
 }
 
