@@ -16,10 +16,13 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
   const [searchParams] = useSearchParams();
   const redirectUrl = searchParams.get('redirect');
 
+  // 로그인 mutation
   const mutation = useMutation({
     mutationKey: ['login'],
     mutationFn: postSignIn,
   });
+
+  // react hook form hook
   const {
     register,
     handleSubmit,
@@ -28,6 +31,8 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
   } = useForm<LoginFormData>({
     mode: 'onChange',
   });
+
+  // 로그인 로직
   const onSubmit = handleSubmit(async (data) => {
     if (data.email === undefined || data.password === undefined) return;
     mutation.mutate(

@@ -18,11 +18,11 @@ const Creator = ({
   return (
     <Styled.PostUserWrap>
       <Styled.UserImg>
-        <img src={creator.userImg} alt="userImg" />
+        <img src={creator.profileImageUrl} alt="userImg" />
       </Styled.UserImg>
       <Styled.UserInfo>
-        <p>{creator.username}</p>
-        <div>{creator.userInfo}</div>
+        <p>{creator.nickname}</p>
+        <div>{creator.introduction}</div>
         {starRate !== null && (
           <Styled.UserRate>
             <img src={StarIcon} alt="star" />

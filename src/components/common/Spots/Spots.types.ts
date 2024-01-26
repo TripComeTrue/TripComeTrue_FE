@@ -1,7 +1,7 @@
 export interface PostData {
-  postImg: string;
-  bookmark: number;
-  postTitle: string;
+  imageUrl: string;
+  storedCount: number;
+  tripRecordTitle: string;
   reviews?: number;
 }
 

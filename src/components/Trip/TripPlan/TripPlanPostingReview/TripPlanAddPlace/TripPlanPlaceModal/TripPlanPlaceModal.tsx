@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
+// import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as Styled from './TripPlanPlaceModal.styles';
 import { Button, SubTitle } from '@/components/common';
 import { SelectedPlaceProps } from './TripPlanPlaceModal.types';
-import image from '../../../TripPlanCountry/constants/france.png';
+// import { getTripPlaces } from '@/apis/trip-planandrecords';
 
 const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
   selectedPlace,
   onPlaceSelection,
   onCloseModal,
 }: SelectedPlaceProps) => {
+  // const { data: tripPlacesData } = useQuery({
+  //   queryKey: ['TripPlaces'],
+  //   queryFn: () => getTripPlaces(countryName, cityName),
+  // });
+
   const [selectedPlaceInModal, setSelectedPlaceInModal] = useState<string>('');
+
   const placesForSelectedCity = [
     {
       name: '에펠탑',
@@ -62,7 +69,7 @@ const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
             key={place.name}
             onClick={() => selectPlace(place.name)}
             selected={selectedPlace.includes(place.name)}>
-            <img src={image} alt="city" />
+            {/* <img src={image} alt="city" /> */}
             {place.name}
             <CheckCircleIcon className="checked" fill="#b4f34c" />
           </Styled.EachPlace>

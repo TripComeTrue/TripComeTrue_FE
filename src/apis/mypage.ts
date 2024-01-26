@@ -10,36 +10,42 @@ import {
   NicknameReqBody,
   NicknameResBody,
   Notification,
+  PlaceReviewDelReqBody,
   PlaceReviewResBody,
   PlacesStoresResBody,
   PlanResBody,
   ProfileImageBody,
+  RecordReviewDelReqBody,
   TripRecordResBody,
   TripStoresResBody,
 } from '@/@types/mypage.types';
 
 // const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
 
-export const getMyPlan = async () => {
-  const { data } = await client.get<PlanResBody>('/v1/trip-plan/my');
-  return data;
-};
-
-export const getMyReview = async () => {
-  const { data } = await client.get<TripRecordResBody>('/v1/trip-records/my');
-  return data;
-};
-
-export const getMyPlaceReview = async () => {
-  const { data } = await client.get<PlaceReviewResBody>(
-    '/v1/places/reviews/my',
+export const getMyPlan = async (page: number) => {
+  const { data } = await client.get<PlanResBody>(
+    `/v1/trip-plan/my?page=${page}&size=4`,
   );
   return data;
 };
 
-export const getMyTripRecordReview = async () => {
+export const getMyReview = async (page: number) => {
+  const { data } = await client.get<TripRecordResBody>(
+    `/v1/trip-records/my?page=${page}&size=4`,
+  );
+  return data;
+};
+
+export const getMyPlaceReview = async (page: number) => {
+  const { data } = await client.get<PlaceReviewResBody>(
+    `/v1/places/reviews/my?page=${page}&size=4`,
+  );
+  return data;
+};
+
+export const getMyTripRecordReview = async (page: number) => {
   const { data } = await client.get<MyTripRecordReviewResBody>(
-    '/v1/trip-records/reviews/my',
+    `/v1/trip-records/reviews/my?page=${page}&size=4`,
   );
   return data;
 };
@@ -149,6 +155,34 @@ export const getMemberDetail = async () => {
 
 // 회원탈퇴
 export const deleteMember = async () => {
-  const { status } = await client.delete(`v1/member`);
+  const { status } = await client.delete(`/v1/member`);
+  return status;
+};
+
+// 내 여행계획 삭제
+export const deleteMyTripPlan = async (id: number) => {
+  const { status } = await client.delete(`/v1/trip-plan/${id}`);
+  return status;
+};
+
+// 내 여행후기 삭제
+export const deleteMyTripRecord = async (id: number) => {
+  const { status } = await client.delete(`/v1/trip-record/${id}`);
+  return status;
+};
+
+// 내 여행지 리뷰 삭제
+export const deleteMyPlaceReview = async (reqBody: PlaceReviewDelReqBody) => {
+  const { status } = await client.delete(`/v1/places/reviews`, {
+    data: reqBody,
+  });
+  return status;
+};
+
+// 내 여행지 리뷰 삭제
+export const deleteMyRecordReview = async (reqBody: RecordReviewDelReqBody) => {
+  const { status } = await client.delete(`/v1/trip-records/reviews`, {
+    data: reqBody,
+  });
   return status;
 };

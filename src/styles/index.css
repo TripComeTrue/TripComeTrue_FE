@@ -163,3 +163,7 @@ input:focus {
   background-color: #f8fafc;
   color: #444;
 }
+
+.slide-pane__overlay {
+  z-index: 100;
+}

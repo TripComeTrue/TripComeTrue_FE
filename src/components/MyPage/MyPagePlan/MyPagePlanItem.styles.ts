@@ -27,3 +27,13 @@ export const MyPagePlanDate = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.xs};
   margin-top: 0.25rem;
 `;
+
+export const MyPagePlanDateDiff = styled.span`
+  display: inline-block;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.text.gray};
+  padding: 0 0.375rem;
+  background-color: #e9fcca;
+  margin-left: 0.25rem;
+  border-radius: 0.25rem;
+`;

@@ -29,11 +29,11 @@ const Spots: React.FC<
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
     {creator.map((item: PostData) => (
-      <Styled.SwiperSlideWrap key={item.postTitle}>
+      <Styled.SwiperSlideWrap key={item.tripRecordTitle}>
         <SpotsSwiper
-          postImg={item.postImg}
-          postTitle={item.postTitle}
-          bookmark={item.bookmark}
+          imageUrl={item.imageUrl}
+          tripRecordTitle={item.tripRecordTitle}
+          storedCount={item.storedCount}
           reviews={item?.reviews}
           sort={sort}
           fontSize={fontSize}

@@ -2,6 +2,7 @@ import { TripRecordContent } from '@/@types/mypage.types';
 
 export interface MyPageReviewItemProps {
   review: TripRecordContent;
-  onOpenShare: () => void;
+  onOpenDel: VoidFunction;
+  onOpenShare: VoidFunction;
   setReviewItem: (review: TripRecordContent | undefined) => void;
 }

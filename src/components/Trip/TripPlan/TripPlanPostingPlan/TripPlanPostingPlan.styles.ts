@@ -11,10 +11,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 
   padding: 0 1rem;
 `;
@@ -64,17 +64,36 @@ export const GoogleMapsContainer = styled.div`
 export const DaysContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
 
-  padding: 0 1rem;
-  gap: 0.4rem;
+  width: 100%;
+  padding: 0;
+  gap: 0.5rem;
+  overflow: scroll;
 `;
 
-export const DaysButton = styled.button<PostingProps>`
+export const DaysInner = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+  padding: 0;
+  align-items: center;
+  gap: 0.4rem;
+
+  overflow-y: scroll;
+`;
+
+export const DaysButton = styled.span<PostingProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
   width: 3.5rem;
   height: 1.5rem;
-
+  line-height: 1.5rem;
   background-color: ${(props) =>
     props.$isDaySelected ? '#b4f34c' : '#DCDCDC'};
   border-radius: 15rem;
@@ -83,6 +102,8 @@ export const DaysButton = styled.button<PostingProps>`
   color: ${(props) => (props.$isDaySelected ? '#373737' : '#626262')};
   font-size: ${({ theme }) => theme.fontSizes.xs};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
+  cursor: pointer;
+  text-align: center;
 `;
 
 export const PostingForm = styled.form`

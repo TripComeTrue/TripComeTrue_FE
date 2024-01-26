@@ -8,6 +8,7 @@ import {
 import mapMarker from '/images/map-mark.svg';
 import MarkerText from './TripPlanGoogleMaps.styles';
 import { GoogleMapsProps, OffsetProps } from './TripPlanGoogleMaps.types';
+import GOOGLE_MAPS from '@/constants/map';
 
 function TripPlanGoogleMaps({
   height = '10rem',
@@ -30,7 +31,7 @@ function TripPlanGoogleMaps({
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: GOOGLE_MAPS,
   });
 
   // const [map, setMap] = useState(null);
