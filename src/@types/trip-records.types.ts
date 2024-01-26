@@ -49,6 +49,7 @@ interface DayData {
 }
 
 interface TripRecordDetail {
+  isStored: boolean;
   averageRating: number;
   content: string;
   countries: string;

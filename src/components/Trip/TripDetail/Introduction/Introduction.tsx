@@ -1,14 +1,23 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import { Avatar, SubTitle, Text } from '@/components/common';
 import * as Styled from './Introduction.styles';
 import MarkIcon from '/images/mark.svg';
-import BookMarkIcon from '/images/bookMark.svg';
+import EmptiedBookMarkIcon from '/images/emptiedBookMark.svg';
+import FilledBookMarkIcon from '/images/filledBookMark.svg';
 import DownloadIcon from '/images/download.svg';
 import AverageIcon from '/images/averageIcon.svg';
 import { IntroductionProps } from './Introduction.types';
 import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
+import classifyExpense from '@/utils/classifyExpense';
+import { deleteStore, getStoreCount, postStore } from '@/apis/trip-records';
 
-const Introduction = ({ tripRecordData }: IntroductionProps) => {
+const Introduction = ({
+  tripRecordData,
+  tripRecordDetailRefetch,
+}: IntroductionProps) => {
+  const { tripRecordId } = useParams() as { tripRecordId: string };
   const formatDays = tripRecordData
     ? `${tripRecordData.totalDays - 1}박 ${tripRecordData.totalDays}일`
     : '';
@@ -21,19 +30,23 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
       ? mainCountries
       : `${mainCountries} 외 ${countries.length}곳`;
 
-  const classifyExpense = (expense: string) => {
-    switch (expense) {
-      case 'BELOW_50':
-        return '50만원 이하';
-      case 'BELOW_100':
-        return '50만원~100만원 이하';
-      case 'BELOW_200':
-        return '100만원~200만원 이하';
-      case 'BELOW_300':
-        return '200만원~300만원 이하';
-      default:
-        return '300만원 이상';
-    }
+  const { data: storeCountData } = useQuery({
+    queryKey: ['StoreCountData'],
+    queryFn: () => getStoreCount(tripRecordId),
+  });
+  const { mutate: postStoreMutate } = useMutation({
+    mutationFn: () => postStore(tripRecordId),
+    onSuccess: () => tripRecordDetailRefetch(),
+  });
+
+  const { mutate: deleteStoreMutate } = useMutation({
+    mutationFn: () => deleteStore(tripRecordId),
+    onSuccess: () => tripRecordDetailRefetch(),
+  });
+
+  const onClickStoreButton = () => {
+    if (tripRecordData.isStored) return deleteStoreMutate();
+    return postStoreMutate();
   };
 
   return (
@@ -50,13 +63,22 @@ const Introduction = ({ tripRecordData }: IntroductionProps) => {
               <TripDownloadDoc schedulesData={tripRecordData?.schedules} />
             }
             fileName="trip_schedule.pdf">
-            <img src={DownloadIcon} alt="download icon" />
+            <img src={DownloadIcon} alt="PDF 다운로드 아이콘" />
           </PDFDownloadLink>
 
-          <Styled.BookMarkContainer>
-            <img src={BookMarkIcon} alt="bookmark icon" />
+          <Styled.StoreContainer>
+            <Styled.StoreButton type="button" onClick={onClickStoreButton}>
+              <img
+                src={
+                  tripRecordData?.isStored
+                    ? FilledBookMarkIcon
+                    : EmptiedBookMarkIcon
+                }
+                alt="북마크 아이콘"
+              />
+            </Styled.StoreButton>
             <Text fontSize={10}>{tripRecordData?.storeCount}</Text>
-          </Styled.BookMarkContainer>
+          </Styled.StoreContainer>
         </Styled.SaveContainer>
       </Styled.Header>
       <Styled.Main>

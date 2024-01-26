@@ -139,3 +139,13 @@ export const deleteTripRecordComment = async (deleteCommentId: number) => {
 
   return res;
 };
+
+// 여행 후기 보관 요청
+export const postStore = async (tripRecordId: string) => {
+  await client.post(`v1/trip-records/stores`, { tripRecordId });
+};
+
+// 여행 후기 보관 취소
+export const deleteStore = async (tripRecordId: string) => {
+  await client.delete(`v1/trip-records/${tripRecordId}/stores`);
+};
