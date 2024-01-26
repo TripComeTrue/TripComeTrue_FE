@@ -22,3 +22,18 @@ export const CreatorReview = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
+
+export const CreatorNull = styled.div`
+  margin: 2rem;
+  text-align: center;
+  color: ${({ theme }) => theme.text.gray};
+
+  span {
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-size: 10px;
+  }
+`;
