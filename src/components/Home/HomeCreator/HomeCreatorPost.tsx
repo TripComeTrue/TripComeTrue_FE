@@ -1,9 +1,15 @@
-import { CreatorData } from './HomeCreator.types';
 import * as Styled from './HomeCreator.styles';
 import Spots from '@/components/common/Spots/Spots';
 import Creator from '@/components/common/Creator/Creator';
+import { MemberInfoData, TripRecordsData } from './HomeCreator.types';
 
-const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
+const HomeCreatorPost = ({
+  creator,
+  creatorData,
+}: {
+  creator: MemberInfoData;
+  creatorData: TripRecordsData;
+}) => {
   return (
     <Styled.HotPostWrap>
       {/* Creator 공통 컴포넌트 사용 */}
@@ -14,7 +20,7 @@ const HomeCreatorPost = ({ creator }: { creator: CreatorData }) => {
       <Styled.SwiperDiv>
         {/* Spot 공통 컴포넌트 사용 */}
         <Spots
-          creator={creator.posts}
+          creator={creatorData}
           slidesPerView={2.5}
           sort="center"
           fontSize={10}

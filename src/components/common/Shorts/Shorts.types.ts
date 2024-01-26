@@ -1,7 +1,7 @@
 export interface Slide {
-  img: string;
-  title: string;
-  bookmark: number;
+  thumbnailUrl: string;
+  tripRecordTitle: string;
+  storeCount: number;
 }
 
 export interface SwiperProps {
