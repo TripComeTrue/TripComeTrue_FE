@@ -17,14 +17,15 @@ function MyPageWishListMore({ type }: MyPageWishListMoreProps) {
   return (
     <MyPageWishListMoreWrap>
       {data?.map((item) => (
-        <div key={item.postTitle}>
+        <div key={item.tripRecordTitle}>
           <SpotsSwiper
-            postImg={item.postImg}
-            postTitle={item.postTitle}
-            bookmark={item.bookmark}
-            reviews={item?.reviews}
+            imageUrl={item.imageUrl}
+            tripRecordTitle={item.tripRecordTitle}
+            storedCount={item.storedCount}
+            reviews={item.reviews}
             sort={sort}
             fontSize={14}
+            id={item.id}
             isDelete
             onDelete={onDelete}
           />
