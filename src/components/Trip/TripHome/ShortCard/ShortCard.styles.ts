@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { alignCenter } from '@/styles/common';
 
 export const Container = styled.div`
-  width: 100%;
+  min-width: 9.5625rem;
 `;
 
 export const ImageContainer = styled.div`
   position: relative;
 
-  height: 16.8rem;
+  height: 13.625rem;
   border-radius: 1rem;
   overflow: hidden;
 `;

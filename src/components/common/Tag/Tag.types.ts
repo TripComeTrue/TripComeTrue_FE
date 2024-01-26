@@ -6,4 +6,5 @@ export interface TagProps {
   color?: 'primary';
   bgColor?: 'white';
   size?: 'sm';
+  src: string;
 }

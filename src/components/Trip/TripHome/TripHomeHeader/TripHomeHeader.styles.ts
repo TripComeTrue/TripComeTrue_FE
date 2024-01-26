@@ -10,8 +10,9 @@ export const Container = styled.div`
   height: 21.5rem;
   padding: 3.4375rem 1.25rem 12.25rem;
 
-  background-image: url('https://source.unsplash.com/random');
+  background-image: url('/images/tripMainImage.jpg');
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 `;
 

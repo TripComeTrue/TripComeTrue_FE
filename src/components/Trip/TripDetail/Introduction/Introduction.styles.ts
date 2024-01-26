@@ -68,6 +68,11 @@ export const ItemTitle = styled.div`
   background-color: #b4f34c4d;
 `;
 
+export const AverageContainer = styled.div`
+  ${alignCenter};
+  gap: 0.25rem;
+`;
+
 export const HashTagList = styled.div`
   ${alignCenter}
   gap: 0.375rem;

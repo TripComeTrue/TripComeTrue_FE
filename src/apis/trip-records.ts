@@ -4,16 +4,34 @@ import client from './client';
 
 // 여행 후기 리스트 조회
 export const getTripRecords = async (param?: string) => {
-  const res = await client.get(`v1/trip-records${param ? `?${param}` : ''}`);
+  const { data } = await client.get(
+    `v1/trip-records${param ? `?${param}` : ''}`,
+  );
 
-  return res.data;
+  return data.data;
+};
+
+// 여행 후기 쇼츠 리스트 조회
+export const getHotShorts = async () => {
+  const { data } = await client.get(`v1/trip-records/hot-shorts-list`);
+
+  return data.data;
 };
 
 // 여행 후기 세부 조회
-export const getTripRecord = async (tripRecordId: number) => {
-  const res = await client.get(`v1/trip-record/${tripRecordId}`);
+export const getTripRecord = async (tripRecordId: string) => {
+  const { data } = await client.get(`v1/trip-records/${tripRecordId}`);
 
-  return res;
+  return data.data;
+};
+
+// 가장 최신 여행 후기 리뷰 1건 + 내 평점 조회
+export const getTripRecordLatestReview = async (tripRecordId: string) => {
+  const { data } = await client.get(
+    `v1/trip-records/${tripRecordId}/reviews/latest`,
+  );
+
+  return data.data;
 };
 
 // 특정 여행 후기에 대한 다수의 리뷰 조희
@@ -24,22 +42,51 @@ export const getTripRecordReviews = async (tripRecordId: number) => {
 };
 
 // 1건의 여행 후기 리뷰 조회
-export const getTripRecordReview = async (tripRecordReviewId: number) => {
-  const res = await client.get(`v1/trip-records/reviews/${tripRecordReviewId}`);
+export const getTripRecordReview = async (tripRecordReviewId: string) => {
+  const { data } = await client.get(
+    `v1/trip-records/reviews/${tripRecordReviewId}`,
+  );
 
-  return res;
+  return data.data;
 };
 
 // 특정 여행 후기에 대해 평가하기
-export const postTripRecordReview = async (tripRecordId: number) => {
-  const res = await client.post(`v1/trip-records/${tripRecordId}/reviews`);
+export const postTripRecordReview = async (
+  tripRecordId: string,
+  ratingScore: number,
+) => {
+  const { data } = await client.post(
+    `v1/trip-records/${tripRecordId}/reviews`,
+    {
+      ratingScore,
+    },
+  );
 
-  return res;
+  return data.data;
+};
+
+// 여행 후기 리뷰(본문 + 이미지) 등록
+export const putTripRecordReviewContent = async (
+  tripRecordReviewId: string,
+  reviewData: { imageUrl: string; content: string },
+) => {
+  const { data } = await client.put(
+    `v1/trip-records/reviews/${tripRecordReviewId}/contents`,
+    reviewData,
+  );
+
+  return data.data;
 };
 
 // 여행 후기 리뷰 수정하기
-export const putTripRecordReview = async (tripRecordReviewId: number) => {
-  const res = await client.put(`v1/trip-records/reviews/${tripRecordReviewId}`);
+export const putTripRecordReview = async (
+  tripRecordReviewId: string,
+  reviewData: { imageUrl: string; content: string; ratingScore: number },
+) => {
+  const res = await client.put(
+    `v1/trip-records/reviews/${tripRecordReviewId}`,
+    reviewData,
+  );
 
   return res;
 };

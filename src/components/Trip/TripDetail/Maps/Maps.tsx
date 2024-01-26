@@ -1,48 +1,105 @@
 import {
   GoogleMap,
-  LoadScript,
   MarkerF,
   PolylineF,
+  useJsApiLoader,
 } from '@react-google-maps/api';
+import { Fragment, useEffect, useState } from 'react';
 import GOOGLE_MAPS from '@/constants/map';
+import { MapsProps } from './Maps.types';
+import MarkerFIcon from '/images/markerF.svg';
 
-const Maps = () => {
-  const place1 = {
-    lat: 37.630016,
-    lng: 127.045892,
+const Maps = ({ daysData }: MapsProps) => {
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+  let prevData: DayData;
+  const locations: { lat: number; lng: number }[] = [];
+  daysData?.forEach((dayData) => {
+    locations.push({ lat: dayData.latitude, lng: dayData.longitude });
+  });
+
+  const defaultCenter = {
+    lat: daysData ? daysData[0].latitude : 0,
+    lng: daysData ? daysData[0].longitude : 0,
   };
 
-  const place2 = {
-    lat: 37.610978,
-    lng: 127.047992,
-  };
-  const path = [
-    { lat: 37.630016, lng: 127.045892 },
-    { lat: 37.610978, lng: 127.047992 },
-  ];
   const lineSymbol = {
-    path: 'M 0,-1 0,1',
-    strokeOpacity: 1,
-    scale: 2,
+    strokeOpacity: 0,
+    icons: [
+      {
+        icon: {
+          path: 'M 0,-1 0,1',
+          strokeOpacity: 1,
+          scale: 2,
+        },
+        offset: '0',
+        repeat: '12px',
+      },
+    ],
   };
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: GOOGLE_MAPS,
+  });
+
+  const onLoad = (mapData: google.maps.Map) => {
+    setMap(mapData);
+  };
+
+  useEffect(() => {
+    if (map) {
+      const bounds = new window.google.maps.LatLngBounds();
+      locations.forEach((location) => {
+        bounds.extend(
+          new window.google.maps.LatLng(location.lat, location.lng),
+        );
+      });
+
+      map.fitBounds(bounds);
+    }
+  }, [map, locations]);
+
   return (
-    <LoadScript googleMapsApiKey={GOOGLE_MAPS}>
+    isLoaded && (
       <GoogleMap
         mapContainerStyle={{ width: '100%', height: '11.25rem' }}
-        center={place1}
+        center={defaultCenter}
         zoom={12}
+        onLoad={onLoad}
         options={{ disableDefaultUI: true }}>
-        <MarkerF position={place1} />
-        <PolylineF
-          path={path}
-          options={{
-            strokeOpacity: 0,
-            icons: [{ icon: lineSymbol, offset: '0', repeat: '12px' }],
-          }}
-        />
-        <MarkerF position={place2} />
+        {daysData?.map((day, index) => {
+          const path = prevData && [
+            { lat: prevData?.latitude, lng: prevData?.longitude },
+            { lat: day?.latitude, lng: day?.longitude },
+          ];
+          prevData = day;
+          return (
+            <Fragment key={index}>
+              {index <= 2 && (
+                <PolylineF
+                  key={`polyline-${index}`}
+                  options={lineSymbol}
+                  path={path}
+                />
+              )}
+              <MarkerF
+                key={`marker-${day.id}`}
+                position={{ lat: day.latitude, lng: day.longitude }}
+                options={{
+                  label: {
+                    text: String(day.ordering),
+                    color: 'white',
+                  },
+                  icon: {
+                    url: MarkerFIcon,
+                  },
+                }}
+              />
+            </Fragment>
+          );
+        })}
       </GoogleMap>
-    </LoadScript>
+    )
   );
 };
 

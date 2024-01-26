@@ -39,3 +39,9 @@ export const ModalTitle = styled.h3`
 export const ModalContentWrap = styled.div`
   margin-bottom: 1rem;
 `;
+
+export const ModalBtnWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 0.625rem;
+`;

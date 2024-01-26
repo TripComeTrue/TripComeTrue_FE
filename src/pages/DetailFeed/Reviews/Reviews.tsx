@@ -1,14 +1,34 @@
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Link, useParams } from 'react-router-dom';
 import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
-import { Avatar, Bubble, Filter, Text } from '@/components/common';
-import LikeIcon from '/images/like.svg';
-import CommentIcon from '/images/comment.svg';
+import { Bubble, Filter, PlaceReviewCard, Text } from '@/components/common';
+import { getPlaceReviews } from '@/apis/place';
+import FormattedDate from '@/utils/formattedDate';
 
 const Reviews = () => {
+  const { placeId } = useParams() as { placeId: string };
   const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [onlyImage, setOnlyImage] = useState(false);
+  const {
+    data: placeReviewsData = {
+      isFirst: true,
+      isLast: true,
+      nowPageNumber: 0,
+      placeReviews: [],
+      totalCount: 0,
+    },
+    refetch,
+  } = useQuery({
+    queryKey: ['PlaceReviewsData'],
+    queryFn: () => getPlaceReviews(placeId, selectedFilter, onlyImage),
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [selectedFilter, onlyImage]);
 
   return (
     <div>
@@ -16,9 +36,11 @@ const Reviews = () => {
         <Styled.NavBackBtn>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>리뷰(14)</Styled.NavTitle>
+        <Styled.NavTitle>리뷰({placeReviewsData.totalCount})</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
-          <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          <Link to="/detailfeed/spot/1/review/write">
+            <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          </Link>
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
           </Styled.BubbleWrapper>
@@ -27,7 +49,7 @@ const Reviews = () => {
       <Styled.Container>
         <Styled.Header>
           <Styled.CheckBoxContainer>
-            <input type="checkbox" />
+            <input type="checkbox" onClick={() => setOnlyImage(!onlyImage)} />
             <Text fontSize={12} fontWeight={600} color="gray">
               포토 리뷰만
             </Text>
@@ -35,156 +57,29 @@ const Reviews = () => {
 
           <Filter
             first="최신순"
-            second="보관순"
+            second="추천순"
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
           />
         </Styled.Header>
         <ul>
-          <Styled.ReviewItem>
-            <Styled.ReviewInfo>
-              <Styled.Creator>
-                <Avatar src="https://source.unsplash.com/random" size={32} />
-                <Text fontWeight={700}>아이고나죽네</Text>
-              </Styled.Creator>
-              <Text fontSize={10} fontWeight={700}>
-                2023.12.15
-              </Text>
-            </Styled.ReviewInfo>
-            <div>
-              <Styled.ReviewImage
-                src="https://source.unsplash.com/random"
-                alt=""
+          {placeReviewsData.placeReviews.map((data: PlaceReviewData) => (
+            <PlaceReviewCard key={data.placeReviewId}>
+              <PlaceReviewCard.PlaceHeader
+                nickname={data.nickname}
+                profileUrl="https://source.unsplash.com/random"
+                writeDate={FormattedDate(data.createdAt)}
               />
-              <Text>
-                강릉은 정말 아름다운 곳이라 많이 놀러오고 싶어요. 특히
-                안목해변은 부서지는 파도와 푸른 하늘 모든게 조화가
-                대박이었다랄까요?? 한번쯤 다들 꼭 들르셨으면
-              </Text>
-            </div>
-            <Styled.InteractionButtons>
-              <Styled.LikeButton>
-                <img src={LikeIcon} alt="like icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  21
-                </Text>
-              </Styled.LikeButton>
-              <Styled.CommentButton>
-                <img src={CommentIcon} alt="comment icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  댓글 달기
-                </Text>
-              </Styled.CommentButton>
-            </Styled.InteractionButtons>
-          </Styled.ReviewItem>
-          <Styled.ReviewItem>
-            <Styled.ReviewInfo>
-              <Styled.Creator>
-                <Avatar src="https://source.unsplash.com/random" size={32} />
-                <Text fontWeight={700}>아이고나죽네</Text>
-              </Styled.Creator>
-              <Text fontSize={10} fontWeight={700}>
-                2023.12.15
-              </Text>
-            </Styled.ReviewInfo>
-            <div>
-              <Styled.ReviewImage
-                src="https://source.unsplash.com/random"
-                alt=""
+              <PlaceReviewCard.Main
+                imageUrl={data.imageUrl}
+                content={data.content}
               />
-              <Text>
-                강릉은 정말 아름다운 곳이라 많이 놀러오고 싶어요. 특히
-                안목해변은 부서지는 파도와 푸른 하늘 모든게 조화가
-                대박이었다랄까요?? 한번쯤 다들 꼭 들르셨으면
-              </Text>
-            </div>
-            <Styled.InteractionButtons>
-              <Styled.LikeButton>
-                <img src={LikeIcon} alt="like icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  21
-                </Text>
-              </Styled.LikeButton>
-              <Styled.CommentButton>
-                <img src={CommentIcon} alt="comment icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  댓글 달기
-                </Text>
-              </Styled.CommentButton>
-            </Styled.InteractionButtons>
-          </Styled.ReviewItem>
-          <Styled.ReviewItem>
-            <Styled.ReviewInfo>
-              <Styled.Creator>
-                <Avatar src="https://source.unsplash.com/random" size={32} />
-                <Text fontWeight={700}>아이고나죽네</Text>
-              </Styled.Creator>
-              <Text fontSize={10} fontWeight={700}>
-                2023.12.15
-              </Text>
-            </Styled.ReviewInfo>
-            <div>
-              <Styled.ReviewImage
-                src="https://source.unsplash.com/random"
-                alt=""
+              <PlaceReviewCard.InteractionButtons
+                likeCount={data.likeCount}
+                commentCount={data.commentCount}
               />
-              <Text>
-                강릉은 정말 아름다운 곳이라 많이 놀러오고 싶어요. 특히
-                안목해변은 부서지는 파도와 푸른 하늘 모든게 조화가
-                대박이었다랄까요?? 한번쯤 다들 꼭 들르셨으면
-              </Text>
-            </div>
-            <Styled.InteractionButtons>
-              <Styled.LikeButton>
-                <img src={LikeIcon} alt="like icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  21
-                </Text>
-              </Styled.LikeButton>
-              <Styled.CommentButton>
-                <img src={CommentIcon} alt="comment icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  댓글 달기
-                </Text>
-              </Styled.CommentButton>
-            </Styled.InteractionButtons>
-          </Styled.ReviewItem>
-          <Styled.ReviewItem>
-            <Styled.ReviewInfo>
-              <Styled.Creator>
-                <Avatar src="https://source.unsplash.com/random" size={32} />
-                <Text fontWeight={700}>아이고나죽네</Text>
-              </Styled.Creator>
-              <Text fontSize={10} fontWeight={700}>
-                2023.12.15
-              </Text>
-            </Styled.ReviewInfo>
-            <div>
-              <Styled.ReviewImage
-                src="https://source.unsplash.com/random"
-                alt=""
-              />
-              <Text>
-                강릉은 정말 아름다운 곳이라 많이 놀러오고 싶어요. 특히
-                안목해변은 부서지는 파도와 푸른 하늘 모든게 조화가
-                대박이었다랄까요?? 한번쯤 다들 꼭 들르셨으면
-              </Text>
-            </div>
-            <Styled.InteractionButtons>
-              <Styled.LikeButton>
-                <img src={LikeIcon} alt="like icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  21
-                </Text>
-              </Styled.LikeButton>
-              <Styled.CommentButton>
-                <img src={CommentIcon} alt="comment icon" />
-                <Text fontSize={12} fontWeight={700} color="gray">
-                  댓글 달기
-                </Text>
-              </Styled.CommentButton>
-            </Styled.InteractionButtons>
-          </Styled.ReviewItem>
+            </PlaceReviewCard>
+          ))}
         </ul>
       </Styled.Container>
     </div>

@@ -1,3 +1,4 @@
+export { default as OnBoarding } from '@/components/auth/OnBoarding/OnBoarding';
 export { default as SignInTitle } from '@/components/auth/SignInTitle/SignInTitle';
 export { default as SignInBtns } from '@/components/auth/SignInBtns/SignInBtns';
 export { default as SignInLogo } from '@/components/auth/SignInLogo/SignInLogo';
@@ -11,3 +12,4 @@ export { default as SignUpPrivacyAgree } from '@/components/auth/SignUpPolicy/Si
 export { default as SignUpMarketingAgree } from '@/components/auth/SignUpPolicy/SignUpMarketingAgree';
 export { default as SignUpLocationAgree } from '@/components/auth/SignUpPolicy/SignUpLocationAgree';
 export { default as SignUpForm } from '@/components/auth/SignUpForm/SignUpForm';
+export { default as WelcomeContent } from '@/components/auth/Welcome/WelcomeContent';

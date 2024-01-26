@@ -3,17 +3,23 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
-import { TripPlanCountry, TripPlanDate } from './components/Trip/TripPlan';
-import TripPlanCity from './components/Trip/TripPlan/TripPlanCity/TripPlanCity';
 import {
   TripDetail,
   TripHome,
   TripList,
-  TripReviewWriteEdit,
-  TripReviewWriteNew,
+  TripPlan,
+  TripRecordReviewEdit,
+  TripRecordReviewWrite,
 } from '@/pages/Trip';
 import Home from './pages/Home/Home';
-import { SignIn, SignInEmail, SignUp, SignUpAgree, Social } from './pages/Auth';
+import {
+  SignIn,
+  SignInEmail,
+  SignUp,
+  SignUpAgree,
+  Social,
+  Welcome,
+} from './pages/Auth';
 import {
   City,
   SpotList,
@@ -21,71 +27,101 @@ import {
   TouristSpot,
   Reviews,
   ReviewComment,
-  SpotReviewWriteNew,
-  SpotReviewWriteEdit,
   CityGalleryList,
   SpotGalleryList,
+  PlaceReviewWrite,
+  PlaceReviewEdit,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
-import TripPlanPosting from './components/Trip/TripPlan/TripPlanPosting/TripPlanPosting';
 
 import Search from './pages/Search/Search';
 import SearchTag from './pages/Search/SearchTag';
 import Creator from './pages/Creator/Creator';
 import CreatorDetail from './pages/Creator/CreatorDetails';
-import { HomeAllCity } from './components/Home';
+import SearchNons from './pages/Search/SearchNons';
+import TripPlanAddTags from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddTags/TripPlanAddTagsForImage/TripPlanAddTagsForImage';
+import TripPlanAddPlace from './components/Trip/TripPlan/TripPlanPostingReview/TripPlanAddPlace/TripPlanAddPlace';
+import {
+  ChangePassword,
+  ConfirmPassword,
+  EditProfile,
+  Faq,
+  MyPage,
+  Notification,
+  TripPoint,
+  WishList,
+  WishListMore,
+} from './pages/MyPage';
+import { MyPageLayout } from './components/MyPage';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
     <Routes>
       <Route element={<DashBoard />}>
         <Route index element={<SignIn />} />
-        <Route path="/auth/*">
+        <Route path="auth">
           <Route path="signin-email" element={<SignInEmail />} />
           <Route path="agree" element={<SignUpAgree />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="social" element={<Social />} />
-          {/* <Route path="findemail" element={<FindEmail />} />
-          <Route path="findpw" element={<FindPw />} /> */}
+          <Route path="welcome" element={<Welcome />} />
         </Route>
         <Route path="home" element={<Home />} />
+
         <Route path="search/*" element={<Search />} />
-        <Route path="search/:tag" element={<SearchTag />} />
+        <Route path="search/select/:tag" element={<SearchTag />} />
+        <Route path="search-non" element={<SearchNons />} />
+        {/* <Route path="search" element={<Search />} /> */}
+
         <Route path="creator/*" element={<Creator />} />
         <Route path="creator/:id" element={<CreatorDetail />} />
-        <Route path="citylist" element={<HomeAllCity />} />
 
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
           <Route path="list" element={<TripList />} />
-          <Route path="detail/:detailId" element={<TripDetail />} />
+          <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
-            path="detail/:detailId/review/:reviewId/write"
+            path="trip-record/review/:reviewId/write"
+            element={<TripRecordReviewWrite />}
+          />
+          <Route
+            path="trip-record/review/:reviewId/edit"
+            element={<TripRecordReviewEdit />}
+          />
+          <Route path="plan" element={<TripPlan />} />
+          {/* <Route path="country" element={<TripPlanCountry />} />
+          <Route path="detail/:tripRecordId" element={<TripDetail />} />
+          <Route
+            path="detail/:tripRecordId/review/:reviewId/write"
             element={<TripReviewWriteNew />}
           />
           <Route
-            path="detail/:detailId/review/:reviewId/edit"
+            path="detail/:tripRecordId/review/:reviewId/edit"
             element={<TripReviewWriteEdit />}
           />
           <Route path="plan" element={<TripPlanDate />} />
           <Route path="country" element={<TripPlanCountry />} />
           <Route path="city" element={<TripPlanCity />} />
-          <Route path="posting" element={<TripPlanPosting />} />
+          <Route path="posting" element={<TripPlanPosting />} /> */}
+          <Route path="addtag" element={<TripPlanAddTags />} />
+          <Route path="addplace" element={<TripPlanAddPlace />} />
         </Route>
+
         <Route path="/detailfeed/*">
           <Route path="city/:cityId" element={<City />} />
           <Route path="spot/:spotId" element={<TouristSpot />} />
           <Route path="spot/:spotId/review" element={<Reviews />} />
           <Route
-            path="spot/:spotId/review/:reviewId/write"
-            element={<SpotReviewWriteNew />}
+            path="spot/:placeId/review/write"
+            element={<PlaceReviewWrite />}
           />
           <Route
-            path="spot/:spotId/review/:reviewId/edit"
-            element={<SpotReviewWriteEdit />}
+            path="spot/:placeId/review/:reviewId/edit"
+            element={<PlaceReviewEdit />}
           />
           <Route
-            path="spot/:spotId/review/:reviewId/comment"
+            path="spot/:placeId/review/:placeReviewId/comment"
             element={<ReviewComment />}
           />
           <Route path="shortslist/:placeId" element={<ShortsList />} />
@@ -100,6 +136,18 @@ function App() {
           <Route path="spotlist/:placeId" element={<SpotList />} />
           <Route path="spotsearch" element={<SpotSearch />} />
         </Route>
+        <Route path="mypage" element={<MyPageLayout />}>
+          <Route index element={<MyPage />} />
+          <Route path="notification" element={<Notification />} />
+          <Route path="confirm-password" element={<ConfirmPassword />} />
+          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="change-password" element={<ChangePassword />} />
+          <Route path="wishlist" element={<WishList />} />
+          <Route path="wishlist/:type" element={<WishListMore />} />
+          <Route path="point" element={<TripPoint />} />
+          <Route path="faq" element={<Faq />} />
+        </Route>
+        <Route path="404" element={<NotFound />} />
       </Route>
     </Routes>
   );

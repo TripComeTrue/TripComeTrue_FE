@@ -9,10 +9,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
 
-  width: 20rem;
-  margin-top: 1rem;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+  padding: 0 0.5rem;
+  margin: 0 auto;
 
   border: 1px solid #b4f34c;
 
@@ -21,7 +23,7 @@
     flex-direction: row;
     justify-content: space-between;
 
-    padding: 0 0.5rem;
+    padding: 0;
     font-size: 1.5rem;
 
     button {
@@ -75,6 +77,10 @@
   }
 
   .react-datepicker__close-icon::after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 0.7612rem;
     height: 0.7612rem;
     background-color: #626262 !important;
@@ -89,7 +95,7 @@
 
 .react-datepicker-nightndays {
   position: absolute;
-  top: -3.5rem;
+  top: -2.6rem;
   right: 1.7rem;
 
   font-size: 0.875rem;
@@ -102,25 +108,26 @@ input:focus {
 
 .react-datepicker__current-month {
   display: none;
-  color: #999999;
 }
 
 .react-datepicker__month-container {
   font-size: 0.9rem;
 }
 
-.react-datepicker__header {
+.react-datepicker__header,
+.react-datepicker__header--custom {
   background-color: white;
-  border: 0;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.select-year,
+.select-month {
+  background-color: white;
 }
 
 .react-datepicker__day--outside-month {
   border-radius: 50%;
   color: #ababab !important;
-}
-
-.react-datepicker__day-names {
-  border-bottom: 1px solid #f6f6f6;
 }
 
 .react-datepicker__day-names,

@@ -1,33 +1,70 @@
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { Avatar, SubTitle, Text } from '@/components/common';
 import * as Styled from './Introduction.styles';
 import MarkIcon from '/images/mark.svg';
 import BookMarkIcon from '/images/bookMark.svg';
 import DownloadIcon from '/images/download.svg';
-import StarListIcon from '/images/starList.svg';
+import AverageIcon from '/images/averageIcon.svg';
+import { IntroductionProps } from './Introduction.types';
+import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
 
-const Introduction = () => {
+const Introduction = ({ tripRecordData }: IntroductionProps) => {
+  const formatDays = tripRecordData
+    ? `${tripRecordData.totalDays - 1}박 ${tripRecordData.totalDays}일`
+    : '';
+
+  const [mainCountries, ...countries] = tripRecordData
+    ? tripRecordData.countries.split(',')
+    : '';
+  const formatCountries =
+    countries.length === 0
+      ? mainCountries
+      : `${mainCountries} 외 ${countries.length}곳`;
+
+  const classifyExpense = (expense: string) => {
+    switch (expense) {
+      case 'BELOW_50':
+        return '50만원 이하';
+      case 'BELOW_100':
+        return '50만원~100만원 이하';
+      case 'BELOW_200':
+        return '100만원~200만원 이하';
+      case 'BELOW_300':
+        return '200만원~300만원 이하';
+      default:
+        return '300만원 이상';
+    }
+  };
+
   return (
     <Styled.Container>
       <Styled.Header>
         <Styled.CreatorContainer>
-          <Avatar size={32} src="https://source.unsplash.com/random" />
-          <Text fontWeight={700}>빠니보틀</Text>
+          <Avatar size={32} src={tripRecordData?.member.profileImage || ''} />
+          <Text fontWeight={700}>{tripRecordData?.member.nickname}</Text>
           <Styled.Mark src={MarkIcon} alt="mark icon" />
         </Styled.CreatorContainer>
         <Styled.SaveContainer>
-          <img src={DownloadIcon} alt="download icon" />
+          <PDFDownloadLink
+            document={
+              <TripDownloadDoc schedulesData={tripRecordData?.schedules} />
+            }
+            fileName="trip_schedule.pdf">
+            <img src={DownloadIcon} alt="download icon" />
+          </PDFDownloadLink>
+
           <Styled.BookMarkContainer>
             <img src={BookMarkIcon} alt="bookmark icon" />
-            <Text fontSize={10}>999+</Text>
+            <Text fontSize={10}>{tripRecordData?.storeCount}</Text>
           </Styled.BookMarkContainer>
         </Styled.SaveContainer>
       </Styled.Header>
       <Styled.Main>
         <Styled.InfoContainer>
           <Text color="gray" fontSize={12} fontWeight={700}>
-            5박 6일・스위스 외 3곳
+            {formatDays}・{formatCountries}
           </Text>
-          <SubTitle>너는 돈만 준비해. 계획은 내가 짜줄게</SubTitle>
+          <SubTitle>{tripRecordData?.title}</SubTitle>
         </Styled.InfoContainer>
         <Styled.RatingAndExpense>
           <Styled.Item>
@@ -36,7 +73,12 @@ const Introduction = () => {
                 평균 평점
               </Text>
             </Styled.ItemTitle>
-            <img src={StarListIcon} alt="star list icon" />
+            <Styled.AverageContainer>
+              <img src={AverageIcon} alt="평점 별 아이콘" />
+              <Text color="gray" fontSize={12} fontWeight={700}>
+                {tripRecordData?.averageRating}점
+              </Text>
+            </Styled.AverageContainer>
           </Styled.Item>
           <Styled.Item>
             <Styled.ItemTitle>
@@ -45,33 +87,19 @@ const Introduction = () => {
               </Text>
             </Styled.ItemTitle>
             <Text color="gray" fontSize={12} fontWeight={700}>
-              200만원 ~ 300만원
+              {classifyExpense(tripRecordData?.expenseRangeType || '')}
             </Text>
           </Styled.Item>
         </Styled.RatingAndExpense>
-        <Text>
-          안녕하세요 빠니보틀입니다~! 트립컴트루에서는 처음 인사를 드리네요ㅎㅎ
-          이번에 제가 다녀온 여행코스를 여러분께 공유합니다! 다들 즐거운 여행
-          되시길 바랍니다~
-        </Text>
+        <Text>{tripRecordData?.content}</Text>
       </Styled.Main>
       <footer>
         <Styled.HashTagList>
-          <Text color="tag" fontWeight={700}>
-            #친구끼리
-          </Text>
-          <Text color="tag" fontWeight={700}>
-            #여행
-          </Text>
-          <Text color="tag" fontWeight={700}>
-            #스위스
-          </Text>
-          <Text color="tag" fontWeight={700}>
-            #저예산
-          </Text>
-          <Text color="tag" fontWeight={700}>
-            #뚜벅이
-          </Text>
+          {tripRecordData?.tags.map((data) => (
+            <Text color="tag" fontWeight={700} key={data.id}>
+              #{data.hashTagType}
+            </Text>
+          ))}
         </Styled.HashTagList>
       </footer>
     </Styled.Container>

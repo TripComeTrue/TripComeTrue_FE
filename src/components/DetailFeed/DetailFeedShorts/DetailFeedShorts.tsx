@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { EmptyContents, SubTitle } from '@/components/common';
+import { EmptyContents, Shorts, SubTitle } from '@/components/common';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './DetailFeedShorts.styles';
 import starIcon from '/starIcon.svg';
-import ShortCarousel from '@/components/Trip/TripHome/ShortCarousel/ShortCarousel';
 
 const DetailFeedShorts = ({
   cityId,
@@ -38,7 +37,7 @@ const DetailFeedShorts = ({
   const slideShorts = data.data;
   return (
     <Styled.DetailFeedShortsWrapper>
-      <Styled.SubTitleBox>
+      {/* <Styled.SubTitleBox>
         <SubTitle
           fontSize={18}
           icon={starIcon}
@@ -50,8 +49,8 @@ const DetailFeedShorts = ({
       {slideShorts.length === 0 ? (
         <EmptyContents />
       ) : (
-        <ShortCarousel shortsData={slideShorts} />
-      )}
+        <Shorts shortsData={slideShorts} />
+      )} */}
     </Styled.DetailFeedShortsWrapper>
   );
 };

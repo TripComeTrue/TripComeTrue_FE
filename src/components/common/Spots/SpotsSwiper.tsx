@@ -1,17 +1,20 @@
 import React from 'react';
-import { SpotsSwiperProps } from './Spots.types';
+import { IoCloseSharp } from 'react-icons/io5';
+import { SpotsSwiperProps, SpotsWishListProps } from './Spots.types';
 import * as Styled from './Spots.style';
 import messageIcon from '/message.svg';
 import Bookmark from '../Bookmark/Bookmark';
 import pxToRem from '@/utils/pxToRem';
 
-const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
+const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
   postTitle,
   postImg,
   bookmark,
   reviews,
   sort,
   fontSize,
+  isDelete,
+  onDelete,
 }) => {
   const fontSizeRem = pxToRem(fontSize);
 
@@ -24,6 +27,11 @@ const SpotsSwiper: React.FC<SpotsSwiperProps> = ({
         <Styled.Bookmark>
           <Bookmark count={bookmark} />
         </Styled.Bookmark>
+        {isDelete && (
+          <Styled.DeleteBtn type="button" onClick={onDelete}>
+            <IoCloseSharp />
+          </Styled.DeleteBtn>
+        )}
       </Styled.SliderImg>
 
       {(() => {

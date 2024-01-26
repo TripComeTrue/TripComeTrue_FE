@@ -1,17 +1,25 @@
 /* eslint-disable no-console */
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { SignInBtnIcon } from '../SignInBtns/SignInBtns.styles';
 import * as Styled from './SignInEmailForm.styles';
 import { LoginFormData, SignInEmailFormProps } from './SignEmailForm.types';
 import { EmailInput, PasswordInput } from '@/components/common/TextField';
-import client from '@/apis/client';
 import { setCookie } from '@/utils/cookie';
 import MAX_AGE from '@/constants/maxAge';
+import { postSignIn } from '@/apis/auth';
 
 function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectUrl = searchParams.get('redirect');
+
+  const mutation = useMutation({
+    mutationKey: ['login'],
+    mutationFn: postSignIn,
+  });
   const {
     register,
     handleSubmit,
@@ -21,20 +29,25 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
     mode: 'onChange',
   });
   const onSubmit = handleSubmit(async (data) => {
-    try {
-      const res = await client.post('/login', {
+    if (data.email === undefined || data.password === undefined) return;
+    mutation.mutate(
+      {
         email: data.email,
         password: data.password,
-      });
-      const { token } = res.data.data;
-      setCookie('accessToken', token, MAX_AGE);
-      navigate('/home', { replace: true });
-    } catch (error) {
-      if (isAxiosError(error)) {
-        handleOpen();
-        console.log(error.response?.data.errorMessage);
-      }
-    }
+      },
+      {
+        onSuccess: (token) => {
+          setCookie('accessToken', token, MAX_AGE);
+          navigate(`${redirectUrl || '/home'}`, { replace: true });
+        },
+        onError: (error) => {
+          if (isAxiosError(error)) {
+            handleOpen();
+            console.log(error.response?.data.errorMessage);
+          }
+        },
+      },
+    );
   });
 
   return (

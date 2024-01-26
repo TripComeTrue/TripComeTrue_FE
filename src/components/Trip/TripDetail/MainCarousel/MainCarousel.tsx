@@ -3,26 +3,31 @@ import * as Styled from './MainCarousel.styles';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Tag } from '@/components/common';
+import { MainCarouselProps } from './MainCarousel.types';
+import classifyTag from '@/utils/classifyTag';
 
-const MainCarousel = () => {
+const MainCarousel = ({ imagesData }: MainCarouselProps) => {
   return (
     <Styled.Container
       pagination={{ dynamicBullets: true }}
       modules={[Pagination]}>
-      <Styled.Slide>
-        <Styled.Image src="https://source.unsplash.com/random" />
-      </Styled.Slide>
-      <Styled.Slide>
-        <Styled.Image src="https://source.unsplash.com/random" />
-        <Styled.TagWrapper>
-          <Tag fontSize={8} color="primary" bgColor="white" size="sm">
-            메이빈 숙소 예약하기
-          </Tag>
-        </Styled.TagWrapper>
-      </Styled.Slide>
-      <Styled.Slide>
-        <Styled.Image src="https://source.unsplash.com/random" />
-      </Styled.Slide>
+      {imagesData?.map((data) => (
+        <Styled.Slide key={data.id}>
+          <Styled.Image src={data.imageUrl} />
+          {data.tagType && (
+            <Styled.TagWrapper>
+              <Tag
+                fontSize={8}
+                color="primary"
+                bgColor="white"
+                size="sm"
+                src={data.tagUrl}>
+                {classifyTag(data.tagType)}
+              </Tag>
+            </Styled.TagWrapper>
+          )}
+        </Styled.Slide>
+      ))}
     </Styled.Container>
   );
 };

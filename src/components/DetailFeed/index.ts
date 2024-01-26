@@ -8,5 +8,5 @@ export { default as SpotTopReview } from './TopReview/SpotTopReview';
 export { default as HotPlace } from './HotPlace/HotPlace';
 export { default as Banner } from './Banner/Banner';
 export { default as Gallery } from './Gallery/Gallery';
-export { default as SpotReview } from './SpotReview/SpotReview';
 export { default as RecommendSpot } from './RecommendSpot/RecommendSpot';
+export { default as PlaceReview } from './PlaceReview/PlaceReview';
