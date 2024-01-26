@@ -99,45 +99,42 @@ export const deleteTripRecordReviews = async () => {
 };
 
 // 여행 후기에 대한 모든 댓글 조회
-export const getTripRecordComments = async (tripRecordId: number) => {
-  const res = await client.get(`v1/trip-records/${tripRecordId}/comments`);
+export const getTripRecordComments = async (
+  tripRecordId: string,
+  pageParams: number,
+) => {
+  const { data } = await client.get(
+    `v1/trip-records/${tripRecordId}/comments?page=${pageParams}&size=5`,
+  );
 
-  return res;
+  return data.data;
 };
 
 // 여행 후기에 대한 댓글 작성
-export const postTripRecordComment = async (tripRecordId: number) => {
-  const res = await client.get(`v1/trip-records/${tripRecordId}/comments`);
-
-  return res;
+export const postTripRecordComment = async (
+  tripRecordId: string,
+  commentData: { content: string },
+) => {
+  await client.post(`v1/trip-records/${tripRecordId}/comments`, commentData);
 };
 
 // 여행 후기에 대한 댓글의 대댓글 작성
-export const postTripRecordReplyComment = async (
+export const postTripRecordReply = async (
   tripRecordCommentId: number,
+  replyData: { content: string },
 ) => {
   const res = await client.post(
     `v1/trip-records/comments/${tripRecordCommentId}/reply-comments`,
+    replyData,
   );
 
   return res;
 };
 
-// 여행 후기에 대한 댓글 삭제
-export const deleteTripRecordComment = async (tripRecordCommentId: number) => {
+// 여행 후기에 대한 댓글, 대댓글 삭제
+export const deleteTripRecordComment = async (deleteCommentId: number) => {
   const res = await client.delete(
-    `v1/trip-records/comments/${tripRecordCommentId}`,
-  );
-
-  return res;
-};
-
-// 여행 후기에 대한 대댓글 삭제
-export const deleteTripRecordReplyComment = async (
-  tripRecordReplyCommentId: number,
-) => {
-  const res = await client.delete(
-    `v1/trip-records/reply-comments/${tripRecordReplyCommentId}`,
+    `v1/trip-records/comments/${deleteCommentId}`,
   );
 
   return res;

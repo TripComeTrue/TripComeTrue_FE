@@ -9,7 +9,7 @@ const SearchNons = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState('all');
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);

@@ -13,7 +13,7 @@ const theme: DefaultTheme = {
   },
   text: {
     black: '#373737',
-    gray: '#626262',
+    gray: '#626161',
   },
   semantic: {
     active: '#0074E2',
