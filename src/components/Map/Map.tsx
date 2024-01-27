@@ -1,4 +1,9 @@
-import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  Libraries,
+  MarkerF,
+  useJsApiLoader,
+} from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
 // import axios, { AxiosInstance } from 'axios';
 import * as Styled from './Map.styles';
@@ -22,11 +27,13 @@ interface MapProps {
 //   },
 // });
 
+const libraries: Libraries = ['maps'];
+
 const Map = ({ spotCenter }: MapProps) => {
   const [, setMapRef] = useState<google.maps.Map | null>(null);
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey,
-    libraries: ['places', 'maps'],
+    libraries,
     language: 'ko',
   });
 

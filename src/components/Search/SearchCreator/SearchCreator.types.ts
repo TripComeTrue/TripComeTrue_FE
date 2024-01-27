@@ -12,6 +12,7 @@ export interface Video {
   tripRecordTitle: string;
   thumbnailUrl: string;
   videoUrl: string;
+  storeCount: number;
   storedCount: number;
   memberId: number;
   memberName: string;

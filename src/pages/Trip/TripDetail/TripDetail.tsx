@@ -43,7 +43,7 @@ const TripDetail = () => {
       },
       {
         queryKey: ['TripRecordsDefaultData'],
-        queryFn: () => getTripRecords('size=5'),
+        queryFn: () => getTripRecords(),
       },
     ],
   });
@@ -59,7 +59,10 @@ const TripDetail = () => {
       <SimpleNav>여행후기</SimpleNav>
       <Styled.Container>
         <MainCarousel imagesData={tripRecordDetailData?.images} />
-        <Introduction tripRecordData={tripRecordDetailData} />
+        <Introduction
+          tripRecordData={tripRecordDetailData}
+          tripRecordDetailRefetch={tripRecordDetailRefetch}
+        />
         <TripContents schedulesData={tripRecordDetailData?.schedules} />
         <TripComment />
         {isSignIn && (

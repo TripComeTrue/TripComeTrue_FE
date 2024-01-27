@@ -3,8 +3,6 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { IoSearchOutline } from 'react-icons/io5';
 import * as Styled from './Search.styles';
 
-import bookmarkIcon from '/bookmarkPress.svg';
-
 const SearchTag = () => {
   const { tag } = useParams();
   const navigate = useNavigate();

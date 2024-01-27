@@ -59,13 +59,9 @@ const HotPlace = ({
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {data.data.map(
-          (
-            { imageUrl, storedCount, placeName, placeId, commentTotal },
-            index,
-          ) => (
+          ({ imageUrl, storedCount, placeName, placeId, commentTotal }) => (
             <Styled.PlaceItem
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
+              key={placeId}
               onClick={() => handlePlaceClick({ placeId, placeName })}>
               <Styled.BookMarkBox>
                 <Bookmark count={storedCount} />
