@@ -1,25 +1,16 @@
-import { SubTitle, Text } from '@/components/common';
-import * as Styled from './SpotInformation.styles';
 import Map from '@/components/Map/Map';
+import { SubTitle, Text } from '@/components/common';
+import { SpotInformationProps } from './Information.types';
+import * as Styled from './SpotInformation.styles';
 import phone from '/infoPhone.svg';
 import pin from '/infoPin.svg';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 
-const SpotInformation = ({ id }: { id: number }) => {
-  const { data, isLoading } = useDetailFeedQuery<SpotInfoResponseType>({
-    queryKey: 'spotMapInfo',
-    id,
-    fnUrl: `/v1/places/${id}`,
-  });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!data || !data.data) {
-    return <p>Data not available</p>;
-  }
-  const { address, latitude, longitude, phoneNumber } = data.data;
+const SpotInformation = ({
+  address,
+  latitude,
+  longitude,
+  phoneNumber,
+}: SpotInformationProps) => {
   return (
     <Styled.SpotInfoWrapper>
       <SubTitle>기본정보</SubTitle>
