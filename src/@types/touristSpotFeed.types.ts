@@ -5,12 +5,14 @@ interface SpotInfoDataType {
   address: string;
   storedCount: number;
   latitude: number;
+  isStored: boolean;
   longitude: number;
   phoneNumber?: number;
   weekdayCloseTime?: number;
   weekdayOpenTime?: number;
   weekendCloseTime?: number;
   weekendOpenTime?: number;
+  description?: string;
 }
 
 interface SpotInfoResponseType {
@@ -67,4 +69,8 @@ interface RecommendSpotDataType {
 interface RecommendSpotResponseType {
   code: 200;
   data: RecommendSpotDataType[];
+}
+
+interface CancleSpotstore {
+  code: 200;
 }

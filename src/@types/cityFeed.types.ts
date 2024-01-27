@@ -40,10 +40,43 @@ interface GalleryDataType {
   imageUrl: string;
 }
 
-interface GalleryResponseType {
+interface CityGalleryResponseType {
   code: 200;
   data: GalleryDataType[];
   errorMessage: null;
+}
+interface SpotGalleryResponseType {
+  totalElements: number;
+  code: 200;
+  data: {
+    content: GalleryDataType[];
+    empty: boolean;
+    first: boolean;
+    last: boolean;
+    number: number;
+    numberOfElements: number;
+    pageable: {
+      pageNumber: number;
+      pageSize: number;
+      sort: {
+        empty: boolean;
+        sorted: boolean;
+        unsorted: boolean;
+      };
+      offset: number;
+      paged: boolean;
+      unpaged: boolean;
+    };
+    size: number;
+    sort: {
+      empty: boolean;
+      sorted: boolean;
+      unsorted: boolean;
+    };
+    totalElements: number;
+    totalPages: number;
+  };
+  errorMessage?: null;
 }
 
 interface CityInfoDataType {
@@ -157,6 +190,7 @@ interface SpotListResponse {
 }
 
 interface CityState {
+  id?: number;
   name: string;
   cityId: number;
   isDomestic: boolean;
@@ -179,4 +213,17 @@ interface CityGalleryResponse {
     last: boolean;
     errorMessage: null;
   };
+}
+
+interface CityisStoredResponse {
+  code: 200;
+  data: {
+    isStored: boolean;
+  };
+  errorMessage: null;
+}
+interface FetchCityisStoredResponse {
+  code: 200;
+  data: {};
+  errorMessage: null;
 }

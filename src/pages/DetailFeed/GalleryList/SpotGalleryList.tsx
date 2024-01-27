@@ -8,24 +8,22 @@ const SpotGalleryList = () => {
   const location = useLocation();
   const { id, placeName } = location.state;
   const [selectedFilter, setSelectedFilter] = useState('최신순');
-
-  const { data, isLoading } = useDetailFeedQuery<GalleryResponseType>({
+  const orderOption = selectedFilter === '최신순' ? 'createdAt ' : 'storeCount';
+  const { data, isLoading } = useDetailFeedQuery<SpotGalleryResponseType>({
     queryKey: 'spotGalleryAll',
     id,
-    fnUrl: `/v1/trip-records-schedules?placeId=${id}&page=0&size=18`,
+    fnUrl: `/v1/trip-records-schedules?placeId=${id}&page=0&size=18&orderBy=${orderOption}`,
   });
-
   const navigate = useNavigate();
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!data) {
     return <p>Data not available</p>;
   }
-  const GALLERY_PHOTOS = data.data;
-
+  const GALLERY_PHOTOS = data.data.content;
   return (
     <div>
       <SimpleNav>{placeName}</SimpleNav>
@@ -39,10 +37,9 @@ const SpotGalleryList = () => {
       </Styled.FilterBox>
       <Styled.GalleryListBox>
         {GALLERY_PHOTOS.map(
-          ({ imageUrl, tripRecordId, tripRecordStoreCount }, index) => (
+          ({ imageUrl, tripRecordId, tripRecordStoreCount }) => (
             <Styled.PhotoBox
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
+              key={tripRecordId}
               onClick={() => navigate(`/trip/detail/${tripRecordId}`)}>
               <Styled.BookMarkBox>
                 <Bookmark count={tripRecordStoreCount} />

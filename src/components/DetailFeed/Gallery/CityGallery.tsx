@@ -25,7 +25,6 @@ const CityGallery = ({ id, placeName }: { id: number; placeName: string }) => {
       state: { id, placeName },
     });
   };
-  console.log(data);
   return (
     <Styled.GellaryWrapper>
       <Styled.SubtitleBox>

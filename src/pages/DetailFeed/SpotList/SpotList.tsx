@@ -16,7 +16,7 @@ const SpotList = () => {
   const { data, isLoading } = useDetailFeedQuery<SpotListResponse>({
     queryKey: 'hotPlace',
     id,
-    fnUrl: `/v1/cities/${id}/places?sort=${orderOption},desc&page=0&size=7`,
+    fnUrl: `/v1/cities/${id}/places?sort=${orderOption},desc&page=0&size=`,
   });
 
   if (isLoading) {
