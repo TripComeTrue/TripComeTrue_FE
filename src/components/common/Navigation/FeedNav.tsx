@@ -41,8 +41,6 @@ function FeedNav({
     navigate(-1);
   };
 
-  console.log(isStored);
-
   const { mutate: storeSpotMutate } = useMutation({
     mutationFn: (placeId: number) => postStoreSpot(placeId),
     onSuccess: () => {
@@ -125,7 +123,8 @@ function FeedNav({
           </Styled.FeedNavTitle>
           <Styled.FeedNavRight $isScheduleIcon={`${isScheduleIcon}`}>
             {isScheduleIcon && (
-              <Styled.FeedNavSchedule>
+              <Styled.FeedNavSchedule
+                onClick={() => navigate('/trip/tripplan ')}>
                 <PiCalendarBlankLight />
                 <Styled.Tooltip className="tooltip">
                   일정에 추가하기
