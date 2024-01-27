@@ -100,3 +100,7 @@ interface SpotGalleryListResponse {
     empty: boolean;
   };
 }
+
+interface CancelSpotstore {
+  code: 200;
+}

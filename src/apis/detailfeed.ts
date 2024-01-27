@@ -22,7 +22,7 @@ export const postStoreSpot = async (placeId: number) => {
 };
 
 export const cancelStoreSpot = async (placeId: number) => {
-  const res = await client.delete<CancleSpotstore>(
+  const res = await client.delete<CancelSpotstore>(
     `/v1/places/${placeId}/stores`,
   );
 
