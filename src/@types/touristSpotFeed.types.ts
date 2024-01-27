@@ -12,6 +12,7 @@ interface SpotInfoDataType {
   weekdayOpenTime?: number;
   weekendCloseTime?: number;
   weekendOpenTime?: number;
+  description?: string;
 }
 
 interface SpotInfoResponseType {

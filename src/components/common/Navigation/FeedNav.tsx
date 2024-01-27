@@ -9,7 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import { Alert, Snackbar } from '@mui/material';
 import share from '@/assets/share.svg';
 import backArrow from '@/assets/back-arrow.svg';
-import { cancelStoreSpot, postStoreSpot } from '@/apis/detailfeed';
+import {
+  cancelStoreCity,
+  cancelStoreSpot,
+  postStoreCity,
+  postStoreSpot,
+} from '@/apis/detailfeed';
 import * as Styled from './FeedNav.styles';
 import { FeedNavProps } from './FeedNav.types';
 import { NavBackBtn, NavInner, NavWrap } from './SimpleNav.styles';
@@ -19,8 +24,15 @@ import { copyClipboard } from '@/utils/copyClipboard';
 import { SelectModal, Share } from '..';
 import { ShareKakaoIcon, ShareLinkIcon } from '../Share/Share.styles';
 
-function FeedNav({ children, isScheduleIcon, id, isStored }: FeedNavProps) {
-  const [isBookmarked, setIsBookMarked] = useState(isStored);
+function FeedNav({
+  children,
+  isScheduleIcon,
+  id,
+  isStored,
+  feedType,
+  refetch,
+}: FeedNavProps) {
+  const isBookmarked = isStored;
   const [success, setSuccess] = useState(false); // 링크 클립보드 복사 성공 여부
   const { open, handleOpen, handleClose } = useModal(); // 공유모달 열림 여부
 
@@ -29,17 +41,44 @@ function FeedNav({ children, isScheduleIcon, id, isStored }: FeedNavProps) {
     navigate(-1);
   };
 
+  console.log(isStored);
+
   const { mutate: storeSpotMutate } = useMutation({
     mutationFn: (placeId: number) => postStoreSpot(placeId),
-    onSuccess: () => setIsBookMarked(true),
+    onSuccess: () => {
+      refetch();
+    },
   });
 
   const { mutate: unStoreSpotMutate } = useMutation({
     mutationFn: (placeId: number) => cancelStoreSpot(placeId),
-    onSuccess: () => setIsBookMarked(false),
+    onSuccess: () => {
+      refetch();
+    },
   });
 
-  const onClickBookmark = () => {
+  const { mutate: storeCityMutate } = useMutation({
+    mutationFn: (placeId: number) => postStoreCity(placeId),
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const { mutate: unStoreCityMutate } = useMutation({
+    mutationFn: (placeId: number) => cancelStoreCity(placeId),
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const onClickCityBookMark = () => {
+    if (isBookmarked) {
+      unStoreCityMutate(id);
+    } else {
+      storeCityMutate(id);
+    }
+  };
+  const onClickSpotBookMark = () => {
     if (isBookmarked) {
       unStoreSpotMutate(id);
     } else {
@@ -64,7 +103,7 @@ function FeedNav({ children, isScheduleIcon, id, isStored }: FeedNavProps) {
   const onClickLinkCopy = () => {
     const BASE_URL = 'https://tripcometrue.vercel.app/';
     if (id) {
-      copyClipboard(`${BASE_URL}/detailfeed/spot/${id}`);
+      copyClipboard(`${BASE_URL}detailfeed/spot/${id}`);
     }
     handleClose();
     setSuccess(true);
@@ -94,7 +133,7 @@ function FeedNav({ children, isScheduleIcon, id, isStored }: FeedNavProps) {
               </Styled.FeedNavSchedule>
             )}
             <Styled.FeedNavBookmark
-              onClick={onClickBookmark}
+              onClick={feedType ? onClickSpotBookMark : onClickCityBookMark}
               $isBookmarked={`${isBookmarked}`}>
               {isBookmarked ? (
                 <PiBookmarkSimpleFill />

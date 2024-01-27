@@ -5,6 +5,8 @@ export interface FeedNavProps {
   isScheduleIcon?: boolean;
   id: number;
   isStored: boolean;
+  feedType?: 'spot';
+  refetch: VoidFunction;
 }
 
 export interface FeedNavModeProps {

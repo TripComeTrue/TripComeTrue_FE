@@ -47,7 +47,9 @@ const DetailFeedShorts = ({
         </SubTitle>
       </Styled.SubTitleBox>
       {slideShorts.length === 0 ? (
-        <EmptyContents />
+        <Styled.EmptyBox>
+          <EmptyContents />
+        </Styled.EmptyBox>
       ) : (
         <Shorts slides={slideShorts} />
       )}

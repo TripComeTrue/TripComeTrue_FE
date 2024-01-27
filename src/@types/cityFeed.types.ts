@@ -213,3 +213,16 @@ interface CityGalleryResponse {
   last: boolean;
   errorMessage: null;
 }
+
+interface CityisStoredResponse {
+  code: 200;
+  data: {
+    isStored: boolean;
+  };
+  errorMessage: null;
+}
+interface FetchCityisStoredResponse {
+  code: 200;
+  data: {};
+  errorMessage: null;
+}
