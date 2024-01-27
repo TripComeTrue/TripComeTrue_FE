@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import {
-  Gallery,
+  SpotGallery,
   RecommendSpot,
   PlaceReview,
   SpotInformation,
@@ -16,7 +16,7 @@ const TouristSpot = () => {
     <>
       <FeedNav isScheduleIcon>{placeName}</FeedNav>
       <Styled.TouristSpotWrap>
-        <Gallery id={placeId} placeName={placeName} galleryType="spot" />
+        <SpotGallery id={placeId} placeName={placeName} />
         <SpotInformation id={placeId} />
         <SpotTopReview id={placeId} placeName={placeName} />
         <RecommendSpot id={placeId} />

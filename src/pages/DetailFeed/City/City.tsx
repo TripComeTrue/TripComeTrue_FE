@@ -4,10 +4,10 @@ import {
   CityInformation,
   DetailFeedShorts,
   ExchangeRate,
-  Gallery,
   HotPlace,
   CityTopReview,
   Weather,
+  CityGallery,
 } from '@/components/DetailFeed';
 import { FeedNav } from '@/components/common';
 import * as Styled from './City.styles';
@@ -21,7 +21,7 @@ const City = () => {
       <FeedNav>{name}</FeedNav>
       <Styled.CityWrapper>
         <DetailFeedShorts cityId={cityId} placeName={name} />
-        <Gallery id={cityId} placeName={name} />
+        <CityGallery id={cityId} placeName={name} />
         {!isDomestic && <CityInformation cityId={cityId} />}
         <Weather cityId={cityId} />
         {!isDomestic && <ExchangeRate cityId={cityId} country={country} />}

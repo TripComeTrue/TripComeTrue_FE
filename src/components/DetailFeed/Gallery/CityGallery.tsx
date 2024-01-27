@@ -1,42 +1,31 @@
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Bookmark, EmptyContents, SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
-import { GalleyProps } from './Gallery.types';
+import { getCityGallery } from '@/apis/detailfeed';
 
-const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
-  const queryKey = galleryType ? 'spotGallery' : 'cityGallery';
-  const fnUrl = galleryType
-    ? `/v1/trip-records-schedules?placeId=${id}&size=10`
-    : `/v1/cities/${id}/images/list`;
-
-  const { data, isLoading } = useDetailFeedQuery<GalleryResponseType>({
-    queryKey,
-    id,
-    fnUrl,
+const CityGallery = ({ id, placeName }: { id: number; placeName: string }) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['cityGallery', id],
+    queryFn: () => getCityGallery(id),
   });
+
   const navigate = useNavigate();
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!data) {
     return <p>Data not available</p>;
   }
 
   const handleMoreClick = () => {
-    if (galleryType) {
-      navigate(`/detailfeed/spotgallerylist/${placeName}`, {
-        state: { id, placeName },
-      });
-    } else {
-      navigate(`/detailfeed/citygallerylist/${placeName}`, {
-        state: { id, placeName },
-      });
-    }
+    navigate(`/detailfeed/citygallerylist/${placeName}`, {
+      state: { id, placeName },
+    });
   };
-
+  console.log(data);
   return (
     <Styled.GellaryWrapper>
       <Styled.SubtitleBox>
@@ -44,18 +33,17 @@ const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
           {placeName} 여행 갤러리
         </SubTitle>
       </Styled.SubtitleBox>
-      {data.data.length === 0 ? (
+      {data.length === 0 ? (
         <EmptyContents />
       ) : (
         <Styled.GellaryItemBox
           spaceBetween={8}
           slidesPerView={2.15}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-          {data.data.map(
-            ({ tripRecordStoreCount, imageUrl, tripRecordId }, index) => (
+          {data.map(
+            ({ tripRecordStoreCount, imageUrl, tripRecordId, imageId }) => (
               <Styled.GellaryItem
-                // eslint-disable-next-line react/no-array-index-key
-                key={index}
+                key={imageId}
                 onClick={() => navigate(`/trip/detail/${tripRecordId}`)}>
                 <Styled.BookMarkBox>
                   <Bookmark count={tripRecordStoreCount} />
@@ -70,4 +58,4 @@ const Gallery = ({ id, galleryType, placeName }: GalleyProps) => {
   );
 };
 
-export default Gallery;
+export default CityGallery;
