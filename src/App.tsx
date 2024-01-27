@@ -135,7 +135,7 @@ function App() {
             element={<SpotGalleryList />}
           />
           <Route path="spotlist/:placeId" element={<SpotList />} />
-          <Route path="spotsearch" element={<SpotSearch />} />
+          <Route path="spotsearch/:cityId" element={<SpotSearch />} />
         </Route>
         <Route path="mypage" element={<MyPageLayout />}>
           <Route index element={<MyPage />} />

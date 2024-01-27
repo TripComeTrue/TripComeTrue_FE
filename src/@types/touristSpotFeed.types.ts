@@ -104,3 +104,20 @@ interface SpotGalleryListResponse {
 interface CancelSpotstore {
   code: 200;
 }
+
+interface SearchedSpotResponse {
+  code: 200;
+  data: {
+    content: SpotListDataType[];
+    currentPageNum: number;
+    first: boolean;
+    last: boolean;
+    pageSize: number;
+    sort: {
+      direction: string;
+      orderProperty: string;
+      sorted: boolean;
+    };
+    totalCount: number;
+  };
+}

@@ -8,9 +8,10 @@ import search from '/search.svg';
 
 interface SpotListNavProps {
   children: ReactNode;
+  cityId: number;
 }
 
-const SpotListNav = ({ children }: SpotListNavProps) => {
+const SpotListNav = ({ children, cityId }: SpotListNavProps) => {
   const navigate = useNavigate();
   const onClickBackBtn = () => {
     navigate(-1);
@@ -25,7 +26,8 @@ const SpotListNav = ({ children }: SpotListNavProps) => {
         </Styled.SpotListNavBtnWrap>
         <Styled.SpotNavTitle>{children}</Styled.SpotNavTitle>
         <Styled.SpotListNavRight>
-          <Styled.SpotListNavIcon>
+          <Styled.SpotListNavIcon
+            onClick={() => navigate(`/detailfeed/spotsearch/${cityId}`)}>
             <img src={search} alt="검색 아이콘" />
           </Styled.SpotListNavIcon>
           <Styled.SpotListNavIcon>
