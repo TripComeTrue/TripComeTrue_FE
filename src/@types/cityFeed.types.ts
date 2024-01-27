@@ -34,7 +34,7 @@ interface AllShortsResponseType {
 }
 
 interface GalleryDataType {
-  id?: number;
+  imageId?: number;
   tripRecordId: number;
   tripRecordStoreCount: number;
   imageUrl: string;
@@ -167,16 +167,16 @@ interface CityGalleryResponse {
   code: 200;
   data: {
     content: GalleryDataType[];
+    sort: {
+      sorted: boolean;
+      direction: string;
+      orderProperty: string;
+    };
+    totalCount: number;
+    currentPageNum: number;
+    pageSize: number;
+    first: boolean;
+    last: boolean;
+    errorMessage: null;
   };
-  sort: {
-    sorted: boolean;
-    direction: string;
-    orderProperty: string;
-  };
-  totalCount: number;
-  currentPageNum: number;
-  pageSize: number;
-  first: boolean;
-  last: boolean;
-  errorMessage: null;
 }
