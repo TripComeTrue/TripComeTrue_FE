@@ -43,7 +43,7 @@ const TripDetail = () => {
       },
       {
         queryKey: ['TripRecordsDefaultData'],
-        queryFn: () => getTripRecords('size=5'),
+        queryFn: () => getTripRecords(),
       },
     ],
   });
