@@ -1,6 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link, useSearchParams } from 'react-router-dom';
-import { SimpleNav, SubTitle, Text } from '@/components/common';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
+import { SimpleNav, Spinners, SubTitle, Text } from '@/components/common';
 import * as Styled from './TripList.styles';
 import DollarIcon from '/images/dollar.svg';
 import StarIcon from '/starIcon.svg';
@@ -12,11 +14,27 @@ const TripList = () => {
   const [searchParams] = useSearchParams();
   const queryString = searchParams.toString();
   const category = queryString.split('=')[0];
-
-  const { data: tripRecordsData } = useQuery({
+  const [ref, inView] = useInView();
+  const {
+    data: tripRecordsData,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
     queryKey: ['TripRecordsData'],
-    queryFn: () => getTripRecords(queryString),
+    queryFn: ({ pageParam }) =>
+      getTripRecords({ pageParam, size: 10, filter: queryString }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      return lastPage.length !== 0 ? lastPageParam + 1 : null;
+    },
   });
+
+  useEffect(() => {
+    if (hasNextPage && inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   return (
     <Styled.Container>
@@ -41,6 +59,11 @@ const TripList = () => {
           <CardList tripRecordsData={tripRecordsData} />
         ) : (
           <CardListSkeleton />
+        )}
+        {isFetchingNextPage ? (
+          <Spinners />
+        ) : (
+          tripRecordsData && <div ref={ref} />
         )}
       </Styled.MainContainer>
     </Styled.Container>
