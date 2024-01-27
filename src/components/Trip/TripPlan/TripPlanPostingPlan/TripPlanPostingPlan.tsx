@@ -21,6 +21,8 @@ const TripPlanPosting = () => {
   // const { tripPlanData, updateTripPlanData } = useTripFormData();
   const { tripPlanData } = useTripFormData();
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
+  const [selectedCity, setSelectedCity] = useState<string>('');
   const [selectedPlace, setSelectedPlace] = useState<string>('');
   const { register, handleSubmit, setValue } = useForm();
   const [isPlaceModalOpen, setIsPlaceModalOpen] = useState({
@@ -31,6 +33,7 @@ const TripPlanPosting = () => {
   const startDate = new Date(tripPlanData.tripStartDay);
   const endDate = new Date(tripPlanData.tripEndDay);
   const totalTripDays = differenceInDays(endDate, startDate) + 1;
+  const selectedCitiesPerDay = tripPlanData.tripPlanCities;
 
   const [formData, setFormData] = useState(() =>
     Array.from({ length: totalTripDays }, (_) => ({
@@ -76,6 +79,23 @@ const TripPlanPosting = () => {
 
   const closePlaceListModal = () => {
     setIsPlaceModalOpen({ isPaneOpenLeft: false });
+  };
+
+  const handleOpenPlaceModal = (day: number) => {
+    const selectedCityCountry = selectedCitiesPerDay?.[day - 1];
+
+    let country;
+    let city;
+
+    if (selectedCityCountry) {
+      [country, city] = selectedCityCountry.split(' ');
+    } else {
+      country = '';
+      city = '';
+    }
+    setSelectedCountry(country);
+    setSelectedCity(city);
+    setIsPlaceModalOpen({ isPaneOpenLeft: true });
   };
 
   const handlePlaceModalSelection = (place: string) => {
@@ -138,7 +158,7 @@ const TripPlanPosting = () => {
                   }
                 }}
                 value={selectedPlace || ''}
-                onClick={() => setIsPlaceModalOpen({ isPaneOpenLeft: true })}
+                onClick={() => handleOpenPlaceModal(selectedDay)}
               />
               <Styled.SlidingPane
                 className="citymodal"
@@ -150,6 +170,8 @@ const TripPlanPosting = () => {
                 width="22.5rem">
                 <TripPlanPlaceModal
                   selectedPlace={selectedPlace}
+                  countryName={selectedCountry}
+                  cityName={selectedCity}
                   onPlaceSelection={handlePlaceModalSelection}
                   onCloseModal={closePlaceListModal}
                 />
@@ -212,9 +234,7 @@ const TripPlanPosting = () => {
           <Styled.CityInput
             type="text"
             {...register(`day${selectedDay}.city`)}
-            value={
-              selectedDay ? tripPlanData.tripPlanCities?.[selectedDay - 1] : ''
-            }
+            value={selectedDay ? selectedCitiesPerDay?.[selectedDay - 1] : ''}
           />
           <PlaceIcon
             className="city-icon"

@@ -15,7 +15,7 @@ export const SearchSpotInfo = async (placeName?: string) => {
 export const SearchCreatorInfo = async (query?: string) => {
   const res = await client.get(`v1/members/list?query=${query}`);
 
-  return res.data;
+  return res.data.data;
 };
 
 // 검색된 크리에이터 '더보기' 조회
@@ -29,4 +29,11 @@ export const SearchCreatorsInfiniteInfo = async (
   );
 
   return res.data;
+};
+
+// 홈 크리에이터 프로필 조회
+export const SearchCreatorProfile = async (memberId: number) => {
+  const res = await client.get(`/v1/members/${memberId}`);
+
+  return res.data.data;
 };
