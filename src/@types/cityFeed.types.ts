@@ -3,6 +3,7 @@ interface ShortsDataType {
   tripRecordId: number;
   tripRecordTitle: string;
   videoUrl: string;
+  storeCount: number;
   storedCount: number;
   memberId: number;
   memberName: string;

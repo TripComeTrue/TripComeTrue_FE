@@ -58,17 +58,24 @@ const ShortsList = () => {
             profileImageUrl,
             tripRecordTitle,
             storedCount,
-            tripRecordId,
             videoId,
+            memberName,
+            tripRecordId,
+            memberId,
+            thumbnailUrl,
+            videoUrl,
           }) => (
-            <div key={videoId}>
-              <ShortsSwiper
-                thumbnailUrl={profileImageUrl}
-                tripRecordTitle={tripRecordTitle}
-                storedCount={storedCount}
-                tripRecordId={tripRecordId}
-              />
-            </div>
+            <ShortsSwiper
+              key={videoId}
+              thumbnailUrl={thumbnailUrl}
+              tripRecordTitle={tripRecordTitle}
+              storeCount={storedCount}
+              profileImageUrl={profileImageUrl}
+              memberName={memberName}
+              tripRecordId={tripRecordId}
+              memberId={memberId}
+              videoUrl={videoUrl}
+            />
           ),
         )}
       </Styled.ShortsListBox>
