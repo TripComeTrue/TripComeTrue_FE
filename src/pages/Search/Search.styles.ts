@@ -164,3 +164,9 @@ export const MoreInfo = styled.button`
     cursor: pointer;
   }
 `;
+
+export const PreparingData = styled.div`
+  margin: 2rem;
+
+  text-align: center;
+`;

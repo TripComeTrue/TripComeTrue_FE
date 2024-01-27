@@ -6,6 +6,10 @@ import * as Styled from './SearchKeyword.styles';
 const SearchKeyword = () => {
   const navigate = useNavigate();
 
+  const handleSearchExpense = (prop: string) => {
+    navigate(`/search/select-expense/${prop}`);
+  };
+
   const handleSearch = (prop: string) => {
     navigate(`/search/select/${prop}`);
   };
@@ -15,16 +19,24 @@ const SearchKeyword = () => {
       <Styled.KeywordWrap>
         <Styled.KeywordTitle>가격대별 여행</Styled.KeywordTitle>
         <Styled.KeywordSelect>
-          <button type="button" onClick={() => handleSearch('50만원 이하')}>
+          <button
+            type="button"
+            onClick={() => handleSearchExpense('50만원 이하')}>
             50만원 이하
           </button>
-          <button type="button" onClick={() => handleSearch('50~100만원')}>
+          <button
+            type="button"
+            onClick={() => handleSearchExpense('50~100만원')}>
             50~100만원
           </button>
-          <button type="button" onClick={() => handleSearch('100~200만원')}>
+          <button
+            type="button"
+            onClick={() => handleSearchExpense('100~200만원')}>
             100~200만원
           </button>
-          <button type="button" onClick={() => handleSearch('200~300만원')}>
+          <button
+            type="button"
+            onClick={() => handleSearchExpense('200~300만원')}>
             200~300만원
           </button>
           <button type="button" onClick={() => handleSearch('300만원 이상')}>

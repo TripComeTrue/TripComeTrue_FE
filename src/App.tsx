@@ -55,6 +55,7 @@ import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
 import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
+import SearchTagExpense from './pages/Search/SearchTagExpense';
 
 function App() {
   return (
@@ -71,6 +72,10 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="citylist" element={<HomeAllCity />} />
         <Route path="search/*" element={<Search />} />
+        <Route
+          path="search/select-expense/:tag"
+          element={<SearchTagExpense />}
+        />
         <Route path="search/select/:tag" element={<SearchTag />} />
         <Route path="search-non" element={<SearchNons />} />
         {/* <Route path="search" element={<Search />} /> */}
