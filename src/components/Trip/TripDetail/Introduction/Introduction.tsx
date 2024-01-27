@@ -11,7 +11,7 @@ import AverageIcon from '/images/averageIcon.svg';
 import { IntroductionProps } from './Introduction.types';
 import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
 import classifyExpense from '@/utils/classifyExpense';
-import { deleteStore, getStoreCount, postStore } from '@/apis/trip-records';
+import { deleteStore, postStore } from '@/apis/trip-records';
 
 const Introduction = ({
   tripRecordData,
@@ -30,10 +30,6 @@ const Introduction = ({
       ? mainCountries
       : `${mainCountries} 외 ${countries.length}곳`;
 
-  const { data: storeCountData } = useQuery({
-    queryKey: ['StoreCountData'],
-    queryFn: () => getStoreCount(tripRecordId),
-  });
   const { mutate: postStoreMutate } = useMutation({
     mutationFn: () => postStore(tripRecordId),
     onSuccess: () => tripRecordDetailRefetch(),
