@@ -4,7 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { Bookmark, Filter, SimpleNav } from '@/components/common';
 import * as Styled from './GalleryList.styles';
-import { getCityGalleryList } from '@/apis/gallerylist';
+import { getCityGalleryList } from '@/apis/listpage';
 
 const CityGalleryList = () => {
   const location = useLocation();
@@ -38,11 +38,8 @@ const CityGalleryList = () => {
   if (!data) {
     return <p>Data not available</p>;
   }
-  const GALLERY_PHOTOS: GalleryDataType[] = data.pages.flatMap(
-    (page) => page.content,
-  );
+  const GALLERY_PHOTOS = data.pages.flatMap((page) => page.content);
 
-  console.log(GALLERY_PHOTOS);
   return (
     <div>
       <SimpleNav>{placeName}</SimpleNav>

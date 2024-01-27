@@ -10,3 +10,14 @@ export const getCityGalleryList = async (
   );
   return data.data;
 };
+
+export const getCityShortsList = async (
+  id: number,
+  orderOption: string,
+  pageParam: number,
+) => {
+  const { data } = await client.get<AllShortsResponseType>(
+    `/v1/cities/${id}/videos?sort=${orderOption},desc&page=${pageParam}&size=6`,
+  );
+  return data.data;
+};

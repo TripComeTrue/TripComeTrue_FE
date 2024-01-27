@@ -25,8 +25,8 @@ interface AllShortsResponseType {
     last: boolean;
     pageSize: number;
     sort: {
-      direction: 'ASC' | 'DESC';
-      orderProperty: '"storeCount"' | 'averageRating';
+      direction: string;
+      orderProperty: string;
       sorted: boolean;
     };
     totalCount: number;
