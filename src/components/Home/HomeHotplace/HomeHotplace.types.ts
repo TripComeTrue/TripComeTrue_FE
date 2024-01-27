@@ -1,4 +1,5 @@
 export interface SlideHotCity {
+  cityId: number;
   cityName: string;
   storedCount: number;
   subtitle: string;

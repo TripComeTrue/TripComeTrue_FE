@@ -4,6 +4,7 @@ import { MyPageWishListMoreProps } from './MyPageWishListMore.types';
 import SpotsSwiper from '@/components/common/Spots/SpotsSwiper';
 import { WISH_SORT } from '@/constants/MyPage/wishName';
 import MyPageWishListMoreWrap from './MyPageWishListMore.styles';
+import { useWishDeleteMutation } from './MyPageWishList.utils';
 
 function MyPageWishListMore({ type }: MyPageWishListMoreProps) {
   const sort = WISH_SORT[type] as 'left' | 'center' | 'space';
@@ -11,7 +12,12 @@ function MyPageWishListMore({ type }: MyPageWishListMoreProps) {
     queryKey: ['wishlist', type, 'more'],
     queryFn: () => getWishListMore(type),
   });
-  const onDelete = () => {};
+
+  const mutation = useWishDeleteMutation();
+
+  const onClickDelete = (val: string) => (id: number) => {
+    mutation.mutate({ type: val, id });
+  };
 
   if (isLoading) return null;
   return (
@@ -26,8 +32,7 @@ function MyPageWishListMore({ type }: MyPageWishListMoreProps) {
             sort={sort}
             fontSize={14}
             id={item.id}
-            isDelete
-            onDelete={onDelete}
+            onDelete={onClickDelete(type)}
           />
         </div>
       ))}

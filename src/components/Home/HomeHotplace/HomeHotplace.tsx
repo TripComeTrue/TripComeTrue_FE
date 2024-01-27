@@ -5,7 +5,7 @@ import starIcon from '/starIcon.svg';
 import bookmarkPress from '/bookmarkPress.svg';
 import starFillIcon from '/starFill.svg';
 import { IoIosArrowForward } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Styled from './HomeHotplace.styles';
 
 import { SlideHotCity, SlideHotReview } from './HomeHotplace.types';
@@ -19,6 +19,7 @@ const HomeHotplace = () => {
   });
   const [hotData, setHotData] = useState([]);
   const [selected, setSelected] = useState('city');
+  const navigate = useNavigate();
 
   const handleOptionChange = (category: string, value: string) => {
     setSelectedOption((prevOptions) => ({
@@ -169,7 +170,12 @@ const HomeHotplace = () => {
           {selected === 'city'
             ? hotData.map((item: SlideHotCity) => (
                 <SwiperSlide key={`${item.cityName} ${item.storedCount}`}>
-                  <Styled.HotplaceCityWrap>
+                  <Styled.HotplaceCityWrap
+                    onClick={() =>
+                      navigate(`/detailfeed/city/${item.cityId}`, {
+                        state: { cityId: item.cityId, name: item.cityName },
+                      })
+                    }>
                     <Styled.HotplaceCityImg>
                       <img src={item.imageUrl} alt="img" />
                       <Styled.Gradient> </Styled.Gradient>
