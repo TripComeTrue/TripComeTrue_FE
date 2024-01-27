@@ -1,9 +1,4 @@
-import {
-  GoogleMap,
-  Libraries,
-  MarkerF,
-  useJsApiLoader,
-} from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
 // import axios, { AxiosInstance } from 'axios';
 import * as Styled from './Map.styles';
