@@ -1,5 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
+import { useLayoutEffect } from 'react';
 import DashBoard from '@/components/layout';
 // import Main from '@/pages/Main/Main';
 
@@ -57,6 +58,12 @@ import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
 
 function App() {
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Routes>
       <Route element={<DashBoard />}>

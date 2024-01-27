@@ -6,6 +6,7 @@ import DollarIcon from '/images/dollar.svg';
 import StarIcon from '/starIcon.svg';
 import { CardList } from '@/components/Trip';
 import { getTripRecords } from '@/apis/trip-records';
+import CardListSkeleton from '@/components/Trip/TripList/CardList/CardListSkeleton';
 
 const TripList = () => {
   const [searchParams] = useSearchParams();
@@ -36,7 +37,11 @@ const TripList = () => {
           </SubTitle>
         )}
 
-        <CardList tripRecordsData={tripRecordsData} />
+        {tripRecordsData ? (
+          <CardList tripRecordsData={tripRecordsData} />
+        ) : (
+          <CardListSkeleton />
+        )}
       </Styled.MainContainer>
     </Styled.Container>
   );
