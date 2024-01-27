@@ -24,3 +24,4 @@ export { default as EmptyContents } from '@/components/common/EmptyContents/Empt
 export { default as PlaceReviewCard } from '@/components/common/PlaceReviewCard/PlaceReviewCard';
 export { default as TripRecordReviewCard } from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
 export { default as Comment } from '@/components/common/Comment/Comment';
+export { default as Spinners } from '@/components/common/Spinners/Spinners';

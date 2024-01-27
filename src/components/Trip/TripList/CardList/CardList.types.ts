@@ -1,3 +1,5 @@
+import { InfiniteData } from '@tanstack/react-query';
+
 export interface CardListProps {
-  tripRecordsData: TripRecord[];
+  tripRecordsData: InfiniteData<any, unknown> | undefined;
 }
