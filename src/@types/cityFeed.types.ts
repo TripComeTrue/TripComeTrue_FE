@@ -190,6 +190,7 @@ interface SpotListResponse {
 }
 
 interface CityState {
+  id: number;
   name: string;
   cityId: number;
   isDomestic: boolean;

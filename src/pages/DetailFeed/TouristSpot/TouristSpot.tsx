@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
   PlaceReview,
   RecommendSpot,
@@ -13,11 +13,10 @@ import { getSpotInformation } from '@/apis/detailfeed';
 
 const TouristSpot = () => {
   const location = useLocation();
-  const { spotId } = useParams() as unknown as { spotId: number };
-  const { placeName } = location.state;
+  const { placeId, placeName } = location.state;
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['spotStore', spotId],
-    queryFn: () => getSpotInformation(spotId),
+    queryKey: ['spotStore', placeId],
+    queryFn: () => getSpotInformation(placeId),
   });
 
   if (isLoading) {
@@ -34,22 +33,22 @@ const TouristSpot = () => {
     <>
       <FeedNav
         isScheduleIcon
-        id={spotId}
+        id={placeId}
         isStored={isStored}
         feedType="spot"
         refetch={refetch}>
         {placeName}
       </FeedNav>
       <Styled.TouristSpotWrap>
-        <SpotGallery id={spotId} placeName={placeName} />
+        <SpotGallery id={placeId} placeName={placeName} />
         <SpotInformation
           address={address}
           latitude={latitude}
           longitude={longitude}
           phoneNumber={phoneNumber}
         />
-        <SpotTopReview id={spotId} placeName={placeName} />
-        <RecommendSpot id={spotId} />
+        <SpotTopReview id={placeId} placeName={placeName} />
+        <RecommendSpot id={placeId} />
         <PlaceReview />
       </Styled.TouristSpotWrap>
     </>

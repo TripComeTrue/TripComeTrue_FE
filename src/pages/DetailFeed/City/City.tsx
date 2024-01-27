@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getCityStored } from '@/apis/detailfeed';
 import {
   Banner,
@@ -16,8 +16,7 @@ import * as Styled from './City.styles';
 
 const City = () => {
   const location = useLocation();
-  const { cityId } = useParams() as unknown as { cityId: number };
-  const { name, isDomestic, country }: CityState = location.state;
+  const { cityId, name, isDomestic, country }: CityState = location.state;
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['cityStore', cityId],
@@ -33,8 +32,6 @@ const City = () => {
   }
 
   const { isStored } = data;
-
-  console.log(isStored);
 
   return (
     <>
