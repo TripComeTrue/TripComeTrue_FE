@@ -7,21 +7,13 @@ import WriteIcon from '/images/write.svg';
 import { Bubble, Filter, PlaceReviewCard, Text } from '@/components/common';
 import { getPlaceReviews } from '@/apis/place';
 import FormattedDate from '@/utils/formattedDate';
+import ReviewsSkeleton from './ReviewsSkeleton';
 
 const Reviews = () => {
   const { placeId } = useParams() as { placeId: string };
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const [onlyImage, setOnlyImage] = useState(false);
-  const {
-    data: placeReviewsData = {
-      isFirst: true,
-      isLast: true,
-      nowPageNumber: 0,
-      placeReviews: [],
-      totalCount: 0,
-    },
-    refetch,
-  } = useQuery({
+  const { data: placeReviewsData, refetch } = useQuery({
     queryKey: ['PlaceReviewsData'],
     queryFn: () => getPlaceReviews(placeId, selectedFilter, onlyImage),
   });
@@ -36,7 +28,7 @@ const Reviews = () => {
         <Styled.NavBackBtn>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>리뷰({placeReviewsData.totalCount})</Styled.NavTitle>
+        <Styled.NavTitle>리뷰({placeReviewsData?.totalCount})</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
           <Link to="/detailfeed/spot/1/review/write">
             <Styled.WriteBtn src={WriteIcon} alt="write icon" />
@@ -62,29 +54,36 @@ const Reviews = () => {
             setSelectedFilter={setSelectedFilter}
           />
         </Styled.Header>
-        <ul>
-          {placeReviewsData.placeReviews.map((data: PlaceReviewData) => (
-            <Link
-              key={data.placeReviewId}
-              to={`/detailfeed/spot/${placeId}/review/${data.placeReviewId}/comment`}>
-              <PlaceReviewCard>
-                <PlaceReviewCard.PlaceHeader
-                  nickname={data.nickname}
-                  profileUrl="https://source.unsplash.com/random"
-                  writeDate={FormattedDate(data.createdAt)}
-                />
-                <PlaceReviewCard.Main
-                  imageUrl={data.imageUrl}
-                  content={data.content}
-                />
-                <PlaceReviewCard.InteractionButtons
-                  likeCount={data.likeCount}
-                  commentCount={data.commentCount}
-                />
-              </PlaceReviewCard>
-            </Link>
-          ))}
-        </ul>
+        {placeReviewsData ? (
+          <ul>
+            {placeReviewsData.placeReviews.map(
+              (placeReview: PlaceReviewData) => (
+                <li key={placeReview.placeReviewId}>
+                  <Link
+                    to={`/detailfeed/spot/${placeId}/review/${placeReview.placeReviewId}/comment`}>
+                    <PlaceReviewCard>
+                      <PlaceReviewCard.PlaceHeader
+                        nickname={placeReview.nickname}
+                        profileUrl="https://source.unsplash.com/random"
+                        writeDate={FormattedDate(placeReview.createdAt)}
+                      />
+                      <PlaceReviewCard.Main
+                        imageUrl={placeReview.imageUrl}
+                        content={placeReview.content}
+                      />
+                      <PlaceReviewCard.InteractionButtons
+                        likeCount={placeReview.likeCount}
+                        commentCount={placeReview.commentCount}
+                      />
+                    </PlaceReviewCard>
+                  </Link>
+                </li>
+              ),
+            )}
+          </ul>
+        ) : (
+          <ReviewsSkeleton />
+        )}
       </Styled.Container>
     </div>
   );

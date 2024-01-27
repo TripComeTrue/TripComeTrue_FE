@@ -49,7 +49,7 @@ const TouristSpot = () => {
         />
         <SpotTopReview id={placeId} placeName={placeName} />
         <RecommendSpot id={placeId} />
-        <PlaceReview />
+        <PlaceReview id={placeId} />
       </Styled.TouristSpotWrap>
     </>
   );
