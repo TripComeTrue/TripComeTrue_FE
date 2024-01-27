@@ -18,18 +18,15 @@ export const postSignIn = async (reqBody: SignUpReqBody) => {
     data: {
       data: { token },
     },
-  } = await client.post<SignInBody>(`/login`, {
-    email: reqBody.email,
-    password: reqBody.password,
-  });
+  } = await client.post<SignInBody>(`/login`, reqBody);
   return token;
 };
 
 export const postSignUp = async (reqBody: SignUpReqBody) => {
-  const { data } = await client.post<SignUpResBody>(`/v1/member/signup`, {
-    email: reqBody.email,
-    password: reqBody.password,
-  });
+  const { data } = await client.post<SignUpResBody>(
+    `/v1/member/signup`,
+    reqBody,
+  );
   return data;
 };
 
