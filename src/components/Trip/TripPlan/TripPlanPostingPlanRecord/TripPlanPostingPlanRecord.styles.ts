@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ReactSlidingPane from 'react-sliding-pane';
-import { PostingProps } from './TripPlanPostingPlan.types';
+import { PostingProps } from '../TripPlanPostingPlan/TripPlanPostingPlan.types';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,13 +8,14 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 
   width: 100%;
+  margin-top: 0.5rem;
 `;
 
 export const Container = styled.div`
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 
   padding: 0 1rem;
 `;
@@ -30,7 +31,7 @@ export const DateDisplay = styled.div`
   height: 2.3rem;
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 
   outline: none;
   appearance: none;
@@ -66,7 +67,6 @@ export const DaysContainer = styled.div`
   flex-direction: row;
 
   width: 100%;
-  padding: 0;
   gap: 0.5rem;
   overflow: scroll;
 `;
@@ -83,7 +83,7 @@ export const DaysButton = styled.button<PostingProps>`
   background-color: ${(props) =>
     props.$isDaySelected ? '#b4f34c' : '#DCDCDC'};
   border-radius: 15rem;
-  margin: 0.9rem 0;
+  margin: 0.3rem 0;
 
   color: ${(props) => (props.$isDaySelected ? '#373737' : '#626262')};
   font-size: ${({ theme }) => theme.fontSizes.xs};
@@ -97,7 +97,7 @@ export const PostingForm = styled.form`
   flex-direction: column;
   position: relative;
 
-  gap: 0.8rem;
+  gap: 0.6rem;
   width: 100%;
 
   input {
@@ -118,8 +118,6 @@ export const PostingForm = styled.form`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-
-  gap: 1rem;
 `;
 
 export const CityInputContainer = styled.div`
@@ -129,7 +127,7 @@ export const CityInputContainer = styled.div`
   position: relative;
   width: 100%;
 
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.3rem;
 
   .city-icon {
     position: absolute;
@@ -243,7 +241,7 @@ export const SubmitButtonContainer = styled.div`
   align-items: center;
 
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0;
 
   button {
     width: 100%;

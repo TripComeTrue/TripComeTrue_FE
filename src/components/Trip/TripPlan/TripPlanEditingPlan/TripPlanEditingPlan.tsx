@@ -2,28 +2,36 @@
 
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { differenceInDays, format } from 'date-fns';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import { SlArrowLeft } from 'react-icons/sl';
 import { GoPlusCircle } from 'react-icons/go';
-import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
-import * as Styled from './TripPlanPostingPlan.styles';
+import TripPlanGoogleMaps from '../TripPlanPostingPlan/TripPlanGoogleMaps/TripPlanGoogleMaps';
+import * as Styled from './TripPlanEditingPlan.styles';
 import { Button } from '@/components/common';
 import TripPlanPlaceModal from '../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
 import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
-import { PostingFormProps } from './TripPlanPostingPlan.types';
 import {
   TripPlanDataForPost,
   TripPlanSchedule,
 } from '@/@types/trip-alldata.types';
-import { postTripPlan } from '@/apis/trip-planandrecords';
+import { getTripPlanById, postTripPlan } from '@/apis/trip-planandrecords';
+import { convertArrayToDate } from './TripPlanEditingPlan.utils';
 
-const TripPlanPostingPlan = () => {
+const TripPlanEditingPlan = () => {
+  // 기존 여행 계획 가져오기
+  const { id } = useParams();
+  const { data: tripPlanForEdit } = useQuery({
+    queryKey: ['trip-plan', id],
+    queryFn: () => getTripPlanById(Number(id)),
+  });
+
   const { tripPlanData } = useTripFormData();
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [selectedCity, setSelectedCity] = useState<string>('');
@@ -34,8 +42,8 @@ const TripPlanPostingPlan = () => {
     isPaneOpenLeft: false,
   });
 
-  const startDate = new Date(tripPlanData.tripStartDay);
-  const endDate = new Date(tripPlanData.tripEndDay);
+  const startDate = convertArrayToDate(tripPlanForEdit?.data.tripStartDay);
+  const endDate = tripPlanForEdit?.data.tripEndDay;
   const totalTripDays = differenceInDays(endDate, startDate) + 1;
   const selectedCitiesPerDay = tripPlanData.tripPlanCities;
 
@@ -358,4 +366,4 @@ const TripPlanPostingPlan = () => {
   );
 };
 
-export default TripPlanPostingPlan;
+export default TripPlanEditingPlan;
