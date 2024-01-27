@@ -71,7 +71,7 @@ interface RecommendSpotResponseType {
   data: RecommendSpotDataType[];
 }
 
-interface SpotGalleyListResponse {
+interface SpotGalleryListResponse {
   code: 200;
   data: {
     content: [

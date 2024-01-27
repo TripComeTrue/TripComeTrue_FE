@@ -16,7 +16,7 @@ import { Avatar, Text } from '..';
  * @param videoId `optional` 영상 재생id를 전달합니다.
  * @returns 쇼츠 영상 재생 모달 컴포넌트를 반환 합니다.
  */
-function ShortsModal({ open, onClose, videoId }: ShortsModalProps) {
+const ShortsModal = ({ open, onClose, videoId }: ShortsModalProps) => {
   const [isMuted, setIsMuted] = useState(true);
   const player = useRef<YouTubePlayer>(null);
   const { pathname } = useLocation();
@@ -95,6 +95,6 @@ function ShortsModal({ open, onClose, videoId }: ShortsModalProps) {
       </Styled.ShortsModalBox>
     </Modal>
   );
-}
+};
 
 export default ShortsModal;

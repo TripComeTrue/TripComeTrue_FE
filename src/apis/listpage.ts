@@ -27,9 +27,19 @@ export const getSpotGalleryList = async (
   orderOption: string,
   pageParam: number,
 ) => {
-  const { data } = await client.get<SpotGalleyListResponse>(
+  const { data } = await client.get<SpotGalleryListResponse>(
     `/v1/trip-records-schedules?placeId=${id}&page=${pageParam}&size=18&orderBy=${orderOption}`,
   );
-  console.log(data);
+  return data.data;
+};
+
+export const getSpotList = async (
+  id: number,
+  orderOption: string,
+  pageParam: number,
+) => {
+  const { data } = await client.get<SpotListResponse>(
+    `/v1/cities/${id}/places?sort=${orderOption},desc&page=${pageParam}&size=7`,
+  );
   return data.data;
 };
