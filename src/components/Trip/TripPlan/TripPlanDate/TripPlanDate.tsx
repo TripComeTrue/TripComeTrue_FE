@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
 import { getYear, getMonth } from 'date-fns';
@@ -21,6 +21,11 @@ const TripPlanDate = () => {
     endDate: tripPlanData.tripEndDay ? new Date(tripPlanData.tripEndDay) : null,
   });
   const { startDate, endDate } = dateRange;
+
+  useEffect(() => {
+    console.log(startDate);
+    console.log(endDate);
+  }, [startDate, endDate]);
 
   return (
     <Styled.Wrapper>

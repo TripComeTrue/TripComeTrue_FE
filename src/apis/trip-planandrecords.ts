@@ -1,6 +1,6 @@
 import {
   CountryData,
-  TripPlanData,
+  TripPlanDataForPost,
   TripPlanResBody,
 } from '@/@types/trip-alldata.types';
 import client from './client';
@@ -50,8 +50,8 @@ export const getTripPlaces = async (countryName: string, cityName: string) => {
 };
 
 // 여행 계획 작성 (POST)
-export const postTripPlan = async (data: TripPlanData) => {
-  const res = await client.post('v1/trip-plan', data);
+export const postTripPlan = async (postData: TripPlanDataForPost) => {
+  const res = await client.post('v1/trip-plan', postData);
 
   return res.data;
 };

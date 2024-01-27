@@ -17,7 +17,10 @@ import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAd
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 import { PostingFormProps } from './TripPlanPostingPlan.types';
-import { TripPlanData, TripPlanSchedule } from '@/@types/trip-alldata.types';
+import {
+  TripPlanDataForPost,
+  TripPlanSchedule,
+} from '@/@types/trip-alldata.types';
 import { postTripPlan } from '@/apis/trip-planandrecords';
 
 const TripPlanPosting = () => {
@@ -35,6 +38,10 @@ const TripPlanPosting = () => {
   const endDate = new Date(tripPlanData.tripEndDay);
   const totalTripDays = differenceInDays(endDate, startDate) + 1;
   const selectedCitiesPerDay = tripPlanData.tripPlanCities;
+
+  useEffect(() => {
+    console.log(selectedCitiesPerDay);
+  }, [selectedCitiesPerDay]);
 
   const mutation = useMutation({
     mutationKey: ['postPlan'],
@@ -180,10 +187,20 @@ const TripPlanPosting = () => {
   };
 
   const onSubmit = () => {
-    const postData: TripPlanData = {
-      countries: tripPlanData.countries,
-      tripStartDay: tripPlanData.tripStartDay,
-      tripEndDay: tripPlanData.tripEndDay,
+    const startDayForPost = format(
+      new Date(tripPlanData.tripStartDay),
+      'yyyy-MM-dd',
+    );
+    const endDayForPost = format(
+      new Date(tripPlanData.tripEndDay),
+      'yyyy-MM-dd',
+    );
+    const countriesForPost = tripPlanData.countries.join(', ');
+
+    const postData: TripPlanDataForPost = {
+      countries: countriesForPost,
+      tripStartDay: startDayForPost,
+      tripEndDay: endDayForPost,
       referencedBy: null,
       tripPlanSchedules: [],
     };

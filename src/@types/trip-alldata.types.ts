@@ -18,6 +18,11 @@ export interface TripPlanSchedule {
   tagUrl: string;
 }
 
+// 여행 계획 작성 POST시 사용 (countries만 단일 string 적용)
+export type TripPlanDataForPost = Omit<TripPlanData, 'countries'> & {
+  countries: string;
+};
+
 // 여행 계획 선택 후 후기 작성을 위해 받아온 데이터
 export interface TripPlanResBody {
   code: number;

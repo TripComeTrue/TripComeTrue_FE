@@ -7,7 +7,7 @@ import {
 } from '@/@types/auth.types';
 import getCookie from '@/utils/token';
 
-const serverUrl = 'http://tripcometrue.site';
+const serverUrl = 'https://tripcometrue.site';
 
 export const checkDuplicatedEmail = async (v: string | undefined) => {
   const { status } = await axios.get(

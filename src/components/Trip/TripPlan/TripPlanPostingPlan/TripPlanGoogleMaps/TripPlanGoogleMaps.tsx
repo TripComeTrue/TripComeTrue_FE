@@ -13,8 +13,8 @@ import GOOGLE_MAPS from '@/constants/map';
 function TripPlanGoogleMaps({
   height = '10rem',
   placeName,
-  lat = 48.864716,
-  lng = 2.349014,
+  lat = 37.579617,
+  lng = 126.977041,
 }: GoogleMapsProps) {
   const center = { lat, lng };
 
