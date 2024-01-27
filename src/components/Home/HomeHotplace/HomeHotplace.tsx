@@ -199,7 +199,10 @@ const HomeHotplace = () => {
               ? hotData.map((item: SlideHotReview) => (
                   <SwiperSlide
                     key={`${item.tripRecordTitle} ${item.storedCount}`}>
-                    <Styled.HotplaceReviewWrap>
+                    <Styled.HotplaceReviewWrap
+                      onClick={() =>
+                        navigate(`/trip/detail/${item.tripRecordId}`)
+                      }>
                       <Styled.HotplaceImg>
                         <img src={item.imageUrl} alt="img" />
                         <Styled.GradientReview> </Styled.GradientReview>
