@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { SimpleNav, SubTitle } from '@/components/common';
+import { SimpleNav, SubTitle, TripRecordReviewCard } from '@/components/common';
 import * as Styled from './TripDetail.styles';
 import {
   Introduction,
   MainCarousel,
   TripCarousel,
+  TripCarouselSkeleton,
   TripComment,
   TripContents,
 } from '@/components/Trip';
@@ -15,7 +16,6 @@ import {
   getTripRecordLatestReview,
   getTripRecords,
 } from '@/apis/trip-records';
-import TripRecordReviewCard from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
 import { getCookie } from '@/utils/cookie';
 
 const TripDetail = () => {
@@ -103,7 +103,11 @@ const TripDetail = () => {
           <SubTitle margin="0 1.25rem 0.875rem 0">
             최근 올라온 여행 후기
           </SubTitle>
-          <TripCarousel tripRecordsData={tripRecordsDefaultData} />
+          {tripRecordsDefaultData ? (
+            <TripCarousel tripRecordsData={tripRecordsDefaultData} />
+          ) : (
+            <TripCarouselSkeleton />
+          )}
         </Styled.OtherTripDetails>
       </Styled.Container>
     </div>

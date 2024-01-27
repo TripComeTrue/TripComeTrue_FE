@@ -27,3 +27,7 @@ export const DayButton = styled.button<{ $select: boolean }>`
   font-weight: 700;
   cursor: pointer;
 `;
+
+export const SkeletonWrapper = styled.div`
+  margin: 0 1.25rem;
+`;

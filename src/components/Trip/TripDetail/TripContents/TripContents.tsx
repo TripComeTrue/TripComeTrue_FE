@@ -3,6 +3,7 @@ import Maps from '../Maps/Maps';
 import TripDescription from '../TripDescription/TripDescription';
 import * as Styled from './TripContents.styles';
 import { TripContentsProps } from './TripContents.types';
+import TripContentsSkeleton from './TripContentsSkeleton';
 
 const TripContents = ({ schedulesData }: TripContentsProps) => {
   const [selectedDay, setSelectedDay] = useState(0);
@@ -12,8 +13,7 @@ const TripContents = ({ schedulesData }: TripContentsProps) => {
   };
 
   const schedulesArr = schedulesData && Object.entries(schedulesData);
-
-  return (
+  return schedulesData ? (
     <Styled.Container>
       <Maps daysData={schedulesArr && schedulesArr[selectedDay][1]} />
       <Styled.DayButtonList>
@@ -28,6 +28,8 @@ const TripContents = ({ schedulesData }: TripContentsProps) => {
       </Styled.DayButtonList>
       <TripDescription data={schedulesArr && schedulesArr[selectedDay]} />
     </Styled.Container>
+  ) : (
+    <TripContentsSkeleton />
   );
 };
 
