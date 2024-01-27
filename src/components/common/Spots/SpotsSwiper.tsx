@@ -14,7 +14,6 @@ const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
   sort,
   fontSize,
   id,
-  isDelete,
   onDelete,
 }) => {
   const fontSizeRem = pxToRem(fontSize);
@@ -28,7 +27,7 @@ const SpotsSwiper: React.FC<SpotsSwiperProps & SpotsWishListProps> = ({
         <Styled.Bookmark>
           <Bookmark count={storedCount} />
         </Styled.Bookmark>
-        {isDelete && onDelete && id && (
+        {onDelete && id && (
           <Styled.DeleteBtn type="button" onClick={() => onDelete(id)}>
             <IoCloseSharp />
           </Styled.DeleteBtn>

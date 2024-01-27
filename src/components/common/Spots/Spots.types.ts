@@ -14,7 +14,6 @@ export interface SpotsProps {
 }
 
 export interface SpotsWishListProps {
-  isDelete?: boolean;
   onDelete?: (id: number) => void;
 }
 

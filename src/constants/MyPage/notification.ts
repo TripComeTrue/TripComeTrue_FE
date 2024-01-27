@@ -1,6 +1,4 @@
-import { Notification } from '@/@types/mypage.types';
-
-const NOTIES: Notification[] = [
+const NOTIES = [
   {
     id: '1',
     title:
@@ -53,6 +51,6 @@ const NOTIES: Notification[] = [
     time: '6시간 전',
     read: true,
   },
-];
+] as const;
 
 export default NOTIES;
