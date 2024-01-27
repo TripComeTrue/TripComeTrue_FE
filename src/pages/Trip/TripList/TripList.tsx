@@ -55,7 +55,6 @@ const TripList = () => {
         )}
 
         <CardList tripRecordsData={tripRecordsData} />
-        {/* {tripRecordsData && } */}
         {isFetchingNextPage ? (
           <Spinners />
         ) : (
