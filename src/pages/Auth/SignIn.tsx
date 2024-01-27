@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import {
   OnBoarding,
   SignInBtns,
@@ -10,17 +10,25 @@ import useLoginCheck from '@/hooks/Auth/useLoginCheck';
 
 function SignIn() {
   useLoginCheck();
-  const onboarding = localStorage.getItem('onboarding');
-  if (!onboarding) localStorage.setItem('onboarding', 'true');
-  const [isOnboarding, setIsOnboarding] = useState<string | null>(onboarding);
+  const [isVisible, setIsVisible] = useState(true);
+
+  // useEffect를 쓰면 화면이 깜빡여서 useLayoutEffect로 변경
+  useLayoutEffect(() => {
+    // localStorage에서 'onboarding' 키를 확인
+    const onboarding = localStorage.getItem('onboarding');
+
+    // 'onboarding' 키가 없을 경우(처음 방문한 경우)에만 setIsVisible을 true로 설정
+    if (!onboarding) setIsVisible(true);
+    // 'onboarding' 키가 있을 경우에는 setIsVisible을 false로 설정하여 숨김
+    else setIsVisible(false);
+  }, []);
 
   const onCloseOnboarding = () => {
-    setIsOnboarding('false');
-    localStorage.setItem('onboarding', 'false');
+    setIsVisible(false);
+    localStorage.setItem('onboarding', 'hide');
   };
 
-  if (isOnboarding && JSON.parse(isOnboarding))
-    return <OnBoarding onCloseOnboarding={onCloseOnboarding} />;
+  if (isVisible) return <OnBoarding onCloseOnboarding={onCloseOnboarding} />;
   return (
     <Container>
       <SignInTitle />
