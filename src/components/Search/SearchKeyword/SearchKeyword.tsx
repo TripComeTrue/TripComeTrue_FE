@@ -18,14 +18,14 @@ const SearchKeyword = () => {
           <button type="button" onClick={() => handleSearch('50만원 이하')}>
             50만원 이하
           </button>
-          <button type="button" onClick={() => handleSearch('10~50만원')}>
-            10~50만원
-          </button>
           <button type="button" onClick={() => handleSearch('50~100만원')}>
             50~100만원
           </button>
-          <button type="button" onClick={() => handleSearch('100~300만원')}>
-            100~300만원
+          <button type="button" onClick={() => handleSearch('100~200만원')}>
+            100~200만원
+          </button>
+          <button type="button" onClick={() => handleSearch('200~300만원')}>
+            200~300만원
           </button>
           <button type="button" onClick={() => handleSearch('300만원 이상')}>
             300만원 이상

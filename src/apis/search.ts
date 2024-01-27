@@ -37,3 +37,15 @@ export const SearchCreatorProfile = async (memberId: number) => {
 
   return res.data.data;
 };
+
+// 여행 경비 검색 여행 후기 리스트 조회
+export const SearchExpenseRanges = async (
+  expenseRangeType: string,
+  pageNum: number,
+) => {
+  const res = await client.get(
+    `/v1/trip-records/search/expense-ranges?expenseRangeType=${expenseRangeType}&page=${pageNum}`,
+  );
+
+  return res.data.data;
+};
