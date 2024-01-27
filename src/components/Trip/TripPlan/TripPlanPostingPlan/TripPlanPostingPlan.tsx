@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 import { differenceInDays, format } from 'date-fns';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
@@ -16,6 +17,8 @@ import TripPlanAddTags from '../TripPlanPostingReview/TripPlanAddTags/TripPlanAd
 import { useTripFormData } from '@/pages/Trip/TripPlan/TripFormDataContext';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 import { PostingFormProps } from './TripPlanPostingPlan.types';
+import { TripPlanData, TripPlanSchedule } from '@/@types/trip-alldata.types';
+import { postTripPlan } from '@/apis/trip-planandrecords';
 
 const TripPlanPosting = () => {
   const { tripPlanData } = useTripFormData();
@@ -33,9 +36,14 @@ const TripPlanPosting = () => {
   const totalTripDays = differenceInDays(endDate, startDate) + 1;
   const selectedCitiesPerDay = tripPlanData.tripPlanCities;
 
+  const mutation = useMutation({
+    mutationKey: ['postPlan'],
+    mutationFn: postTripPlan,
+  });
+
   const [formData, setFormData] = useState<PostingFormProps[]>(() =>
-    Array.from({ length: totalTripDays }, (_) => ({
-      city: '',
+    Array.from({ length: totalTripDays }, (_, index) => ({
+      city: selectedCitiesPerDay ? selectedCitiesPerDay[index] : '',
       places: [
         {
           id: 1,
@@ -53,20 +61,40 @@ const TripPlanPosting = () => {
     setSelectedPlace('');
     setSelectedDay((prevDay) => (prevDay === day ? null : day));
     setActivePlaceIndex(0);
+
+    const cityForSelectedDay = formData[day - 1].city;
+    setSelectedCity(cityForSelectedDay);
   };
 
   const handleInputChange = (
     day: number,
     field: string,
+    index: number,
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { value } = event.target;
     setFormData((prevFormData) => {
       const newFormData = [...prevFormData];
-      newFormData[day - 1] = { ...newFormData[day - 1], [field]: value };
+      const dayData = newFormData[day - 1];
+
+      if (dayData && dayData.places) {
+        const updatedPlaces = dayData.places.map((place, idx) => {
+          if (idx === index) {
+            return { ...place, [field]: value };
+          }
+          return place;
+        });
+
+        newFormData[day - 1].places = updatedPlaces;
+      }
+
       return newFormData;
     });
   };
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   const closePlaceListModal = () => {
     setIsPlaceModalOpen({ isPaneOpenLeft: false });
@@ -127,16 +155,6 @@ const TripPlanPosting = () => {
         }
 
         newFormData[dayIndex].places = updatedPlaces;
-
-        console.log(newFormData);
-
-        // const placeData = newFormData[dayIndex].places[placeIndex];
-
-        // console.log(placeData);
-
-        // placeData.tagType = tagType;
-        // placeData.tagUrl = tagUrl;
-
         return newFormData;
       });
     }
@@ -162,7 +180,31 @@ const TripPlanPosting = () => {
   };
 
   const onSubmit = () => {
-    // const { countries, tripStartDay, tripEndDay, referencedBy } = tripPlanData;
+    const postData: TripPlanData = {
+      countries: tripPlanData.countries,
+      tripStartDay: tripPlanData.tripStartDay,
+      tripEndDay: tripPlanData.tripEndDay,
+      referencedBy: null,
+      tripPlanSchedules: [],
+    };
+
+    formData.forEach((day, dayIndex) => {
+      day.places.forEach((place, placeIndex) => {
+        const schedule: TripPlanSchedule = {
+          dayNumber: dayIndex + 1,
+          orderNumber: placeIndex + 1,
+          placeId: place.placeId,
+          content: place.note,
+          tagType: place.tagType,
+          tagUrl: place.tagUrl,
+        };
+
+        postData.tripPlanSchedules.push(schedule);
+      });
+    });
+
+    console.log(postData);
+    mutation.mutate(postData);
   };
 
   const createDaysInput = () => {
@@ -177,19 +219,9 @@ const TripPlanPosting = () => {
                 placeholder="방문할 장소를 선택해주세요"
                 onChange={(event) => {
                   if (selectedDay !== null) {
-                    handleInputChange(selectedDay, 'place', event);
+                    handleInputChange(selectedDay, 'place', index, event);
                   }
                 }}
-                // value={
-                //   formData[selectedDay - 1].places[place.id - 1].placeId !==
-                //   null
-                //     ? `${
-                //         formData[selectedDay - 1].places[place.id - 1].place
-                //       } (${
-                //         formData[selectedDay - 1].places[place.id - 1].placeId
-                //       })`
-                //     : formData[selectedDay - 1].places[place.id - 1].place || ''
-                // }
                 value={formData[selectedDay - 1].places[place.id - 1].place}
                 onClick={() => handleOpenPlaceModal(selectedDay, index)}
               />
@@ -224,7 +256,7 @@ const TripPlanPosting = () => {
               placeholder="방문할 장소에 대한 메모나 정보 등을 입력해 주세요"
               onChange={(event) => {
                 if (selectedDay !== null) {
-                  handleInputChange(selectedDay, 'note', event);
+                  handleInputChange(selectedDay, 'note', index, event);
                 }
               }}
             />

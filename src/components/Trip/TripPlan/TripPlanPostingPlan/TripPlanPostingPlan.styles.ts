@@ -233,7 +233,7 @@ export const NoteInput = styled.textarea`
 
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.black};
-  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
 `;
 
 export const AddPlaceButton = styled.div`

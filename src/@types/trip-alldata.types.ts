@@ -12,7 +12,7 @@ export interface TripPlanData {
 export interface TripPlanSchedule {
   dayNumber: number;
   orderNumber: number;
-  placeId: number;
+  placeId: number | null;
   content: string;
   tagType: string;
   tagUrl: string;

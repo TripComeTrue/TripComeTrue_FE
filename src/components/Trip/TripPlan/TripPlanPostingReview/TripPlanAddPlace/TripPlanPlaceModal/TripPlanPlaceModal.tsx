@@ -37,12 +37,6 @@ const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
     enabled: !!countryName && !!cityName,
   });
 
-  useEffect(() => {
-    console.log(countryName);
-    console.log(cityName);
-    console.log(tripPlacesData);
-  }, [countryName, cityName, tripPlacesData]);
-
   const selectPlace = (place: Place) => {
     setSelectedPlaceDetails({ name: place.name, id: place.placeId });
   };

@@ -1,4 +1,8 @@
-import { CountryData, TripPlanResBody } from '@/@types/trip-alldata.types';
+import {
+  CountryData,
+  TripPlanData,
+  TripPlanResBody,
+} from '@/@types/trip-alldata.types';
 import client from './client';
 
 // 여행 계획 및 후기 작성 페이지 관련 API
@@ -42,6 +46,13 @@ export const getTripPlaces = async (countryName: string, cityName: string) => {
   const res = await client.get(
     `v1/search-schedule-places?country=${countryName}&city=${cityName}`,
   );
+  return res.data;
+};
+
+// 여행 계획 작성 (POST)
+export const postTripPlan = async (data: TripPlanData) => {
+  const res = await client.post('v1/trip-plan', data);
+
   return res.data;
 };
 
