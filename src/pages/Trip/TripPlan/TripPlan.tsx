@@ -48,7 +48,7 @@ const TripPlan = () => {
           4: <TripPlanPosting />,
         }}
       />
-      <TripPlanNextButton onClick={handleGoNext} />
+      {step < totalSteps && <TripPlanNextButton onClick={handleGoNext} />}
     </TripFormDataProvider>
   );
 };

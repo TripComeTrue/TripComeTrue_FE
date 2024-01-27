@@ -55,52 +55,54 @@ export const ShowPlacesContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.5rem 3rem 0.5rem;
   gap: 1rem;
 `;
 
 export const EachPlace = styled.div<EachPlaceProps>`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
   position: relative;
 
-  gap: 0.7rem;
-
-  img {
-    width: 2.3rem;
-    height: 2.3rem;
-    border-radius: 50%;
-    border: ${(props) =>
-      props.selected ? '2px solid #b4f34c' : '2px solid white'};
-  }
+  gap: 0.2rem;
 
   .checked {
     display: ${(props) => (props.selected ? 'block' : 'none')};
     position: absolute;
-    top: -0.15rem;
-    left: 1.5rem;
+    top: 0;
+    left: 0;
 
     background-color: white;
     border-radius: 80%;
 
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     color: #b4f34c;
+  }
+
+  .place {
+    padding: 0 2rem;
+  }
+  .address {
+    padding: 0 2rem;
+
+    color: ${({ theme }) => theme.text.gray};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
   }
 `;
 
 export const FinalSelectionButton = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  bottom: 1rem;
+  bottom: 0;
 
-  width: 18.5rem;
-
-  gap: 0.5rem;
+  width: 19rem;
+  height: 4.5rem;
 
   background-color: white;
 `;

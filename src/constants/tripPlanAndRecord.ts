@@ -47,3 +47,18 @@ export const BudgetOptions = [
   { label: '300~500만원', value: 'BELOW_300' },
   { label: '500만원 이상', value: 'ABOVE_300' },
 ];
+
+export const getTagText = (tagType: string) => {
+  switch (tagType) {
+    case 'AIRLINE_TICKET_PURCHASE':
+      return '항공권 보러가기';
+    case 'ACCOMMODATION_RESERVATION':
+      return '숙박시설 보러가기';
+    case 'FOOD_TOURISM_LOCATION':
+      return '여행지 보러가기';
+    case 'TICKET_PASS_PURCHASE':
+      return '티켓 보러가기';
+    default:
+      return '';
+  }
+};

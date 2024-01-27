@@ -85,7 +85,7 @@ export const DaysInner = styled.div`
   overflow-y: scroll;
 `;
 
-export const DaysButton = styled.span<PostingProps>`
+export const DaysButton = styled.button<PostingProps>`
   display: flex;
   justify-content: center;
   align-items: center;
