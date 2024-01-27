@@ -5,9 +5,14 @@ import { CardListProps } from './CardList.types';
 const CardList = ({ tripRecordsData }: CardListProps) => {
   return (
     <Styled.Container>
-      {tripRecordsData?.map((data) => (
-        <TripCard key={data.tripRecordId} tripRecordData={data} />
-      ))}
+      {tripRecordsData?.pages.map((tripRecordArr: TripRecord[]) =>
+        tripRecordArr.map((tripRecordData: TripRecord) => (
+          <TripCard
+            key={tripRecordData.tripRecordId}
+            tripRecordData={tripRecordData}
+          />
+        )),
+      )}
     </Styled.Container>
   );
 };

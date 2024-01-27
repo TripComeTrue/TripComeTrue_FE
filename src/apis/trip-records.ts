@@ -3,9 +3,17 @@ import client from './client';
 // 여행 후기 관련 API
 
 // 여행 후기 리스트 조회
-export const getTripRecords = async (param?: string) => {
+export const getTripRecords = async ({
+  pageParam = 0,
+  size = 5,
+  filter,
+}: {
+  pageParam?: number;
+  size?: number;
+  filter?: string;
+} = {}) => {
   const { data } = await client.get(
-    `v1/trip-records${param ? `?${param}` : ''}`,
+    `v1/trip-records?page=${pageParam}&size=${size}${filter ? `&${filter}` : ''}`,
   );
 
   return data.data;
