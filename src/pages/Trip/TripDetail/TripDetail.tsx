@@ -31,7 +31,7 @@ const TripDetail = () => {
   ] = useQueries({
     queries: [
       {
-        queryKey: ['TripRecordDetailData'],
+        queryKey: ['TripRecordDetailData', tripRecordId],
         queryFn: () => getTripRecord(tripRecordId),
       },
       {
@@ -49,7 +49,6 @@ const TripDetail = () => {
   });
 
   useEffect(() => {
-    tripRecordDetailRefetch();
     tripRecordLatestReviewRefetch();
     tripRecordsDefaultRefetch();
   }, [tripRecordId]);
@@ -63,7 +62,10 @@ const TripDetail = () => {
           tripRecordData={tripRecordDetailData}
           tripRecordDetailRefetch={tripRecordDetailRefetch}
         />
-        <TripContents schedulesData={tripRecordDetailData?.schedules} />
+        <TripContents
+          tripRecordId={tripRecordId}
+          schedulesData={tripRecordDetailData?.schedules}
+        />
         <TripComment />
         {isSignIn && (
           <TripRecordReviewCard>
