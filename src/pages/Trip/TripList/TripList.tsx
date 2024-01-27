@@ -35,7 +35,6 @@ const TripList = () => {
     }
   }, [inView]);
 
-  console.log(tripRecordsData);
   return (
     <Styled.Container>
       <SimpleNav>검색</SimpleNav>

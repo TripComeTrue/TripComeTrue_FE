@@ -30,8 +30,6 @@ const Reviews = () => {
     refetch();
   }, [selectedFilter, onlyImage]);
 
-  console.log(placeReviewsData);
-
   return (
     <div>
       <Styled.NavWrap>
