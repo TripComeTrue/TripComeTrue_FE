@@ -21,3 +21,15 @@ export const getCityShortsList = async (
   );
   return data.data;
 };
+
+export const getSpotGalleryList = async (
+  id: number,
+  orderOption: string,
+  pageParam: number,
+) => {
+  const { data } = await client.get<SpotGalleyListResponse>(
+    `/v1/trip-records-schedules?placeId=${id}&page=${pageParam}&size=18&orderBy=${orderOption}`,
+  );
+  console.log(data);
+  return data.data;
+};

@@ -46,7 +46,6 @@ interface CityGalleryResponseType {
   errorMessage: null;
 }
 interface SpotGalleryResponseType {
-  totalElements: number;
   code: 200;
   data: {
     content: GalleryDataType[];

@@ -1,20 +1,34 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 import { Bookmark, Filter, SimpleNav } from '@/components/common';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './GalleryList.styles';
+import { getSpotGalleryList } from '@/apis/listpage';
 
 const SpotGalleryList = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { id, placeName } = location.state;
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const orderOption = selectedFilter === '최신순' ? 'createdAt ' : 'storeCount';
-  const { data, isLoading } = useDetailFeedQuery<SpotGalleryResponseType>({
-    queryKey: 'spotGalleryAll',
-    id,
-    fnUrl: `/v1/trip-records-schedules?placeId=${id}&page=0&size=18&orderBy=${orderOption}`,
+  const { ref, inView } = useInView();
+
+  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
+    queryKey: ['spotGalleryAll', id, orderOption],
+    staleTime: 0,
+    initialPageParam: 0,
+    queryFn: ({ pageParam }) => getSpotGalleryList(id, orderOption, pageParam),
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      return !lastPage.last ? lastPageParam + 1 : null;
+    },
   });
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -23,7 +37,7 @@ const SpotGalleryList = () => {
   if (!data) {
     return <p>Data not available</p>;
   }
-  const GALLERY_PHOTOS = data.data.content;
+  const GALLERY_PHOTOS = data.pages.flatMap((page) => page.content);
   return (
     <div>
       <SimpleNav>{placeName}</SimpleNav>
@@ -49,6 +63,7 @@ const SpotGalleryList = () => {
           ),
         )}
       </Styled.GalleryListBox>
+      <div ref={ref}>&nbsp;</div>
     </div>
   );
 };

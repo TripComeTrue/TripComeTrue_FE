@@ -71,6 +71,32 @@ interface RecommendSpotResponseType {
   data: RecommendSpotDataType[];
 }
 
-interface CancleSpotstore {
+interface SpotGalleyListResponse {
   code: 200;
+  data: {
+    content: [
+      { tripRecordId: number; imageUrl: string; tripRecordStoreCount: number },
+    ];
+    pageable: {
+      pageNumber: number;
+      pageSize: number;
+      sort: {
+        empty: boolean;
+        sorted: boolean;
+        unsorted: boolean;
+      };
+      offset: number;
+      paged: boolean;
+      unpaged: boolean;
+    };
+    totalPages: boolean;
+    totalElements: number;
+    last: boolean;
+    size: number;
+    number: number;
+    sort: { empty: boolean; sorted: boolean; unsorted: true };
+    numberOfElements: number;
+    first: boolean;
+    empty: boolean;
+  };
 }
