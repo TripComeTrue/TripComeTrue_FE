@@ -233,6 +233,7 @@ export const ScrollExpenseTitle = styled.div`
 export const MoreLoading = styled.button`
   width: 100%;
   height: 4rem;
+  color: ${({ theme }) => theme.text.gray};
 `;
 
 export const MoreInfo = styled.button`
@@ -240,6 +241,7 @@ export const MoreInfo = styled.button`
   height: 4rem;
 
   text-align: center;
+  color: ${({ theme }) => theme.text.gray};
 
   &:hover {
     text-decoration: underline;
