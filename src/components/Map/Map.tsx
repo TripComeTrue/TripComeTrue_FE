@@ -4,8 +4,7 @@ import { useCallback, useState } from 'react';
 import * as Styled from './Map.styles';
 import { MAP_CONTAINER_STYLE, OPTIONS } from '@/constants/DetailFeed/Map';
 import defaultPin from '/defaultPin.svg';
-
-const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+import { GOOGLE_MAPS_API_KEY } from '@/apis/tripmap';
 
 interface MapProps {
   spotCenter: {
@@ -25,7 +24,7 @@ interface MapProps {
 const Map = ({ spotCenter }: MapProps) => {
   const [, setMapRef] = useState<google.maps.Map | null>(null);
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey,
+    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
     language: 'ko',
   });
 

@@ -17,7 +17,6 @@ import * as Styled from './City.styles';
 const City = () => {
   const location = useLocation();
   const { cityId, name, isDomestic, country }: CityState = location.state;
-
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['cityStore', cityId],
     queryFn: () => getCityStored(cityId),

@@ -15,7 +15,10 @@ const SpotList = () => {
   const [selectedFilter, setSelectedFilter] = useState('보관순');
   const orderOption =
     selectedFilter === '보관순' ? 'storedCount' : 'totalComments';
-  const { id, placeName } = location.state;
+  const { id, placeName } = location.state as {
+    id: number;
+    placeName: string;
+  };
   const { data, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: ['hotPlace', id, orderOption],
     staleTime: 0,
@@ -43,7 +46,9 @@ const SpotList = () => {
   const SPOT_DATA = data.pages.flatMap((page) => page.content);
   return (
     <div>
-      <SpotListNav cityId={id}>{placeName}</SpotListNav>
+      <SpotListNav cityId={id} placeName={placeName}>
+        {placeName}
+      </SpotListNav>
       <Styled.FilterBox>
         <Filter
           first="보관순"
