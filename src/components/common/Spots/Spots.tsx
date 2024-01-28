@@ -20,6 +20,7 @@ const Spots: React.FC<
   sort = 'center',
   fontSize = 14,
   onDelete,
+  onClick,
 }) => (
   <Styled.SwiperWrap
     spaceBetween={8}
@@ -38,6 +39,7 @@ const Spots: React.FC<
           fontSize={fontSize}
           id={item.id}
           onDelete={onDelete}
+          onClick={onClick}
         />
       </Styled.SwiperSlideWrap>
     ))}

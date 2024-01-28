@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { alignCenter, flexColumn } from '@/styles/common';
 
-export const ReviewItem = styled.li`
+export const ReviewItem = styled.div`
   ${flexColumn};
   gap: 0.625rem;
 

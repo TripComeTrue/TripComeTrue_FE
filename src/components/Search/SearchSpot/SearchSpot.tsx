@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { SubTitle } from '@/components/common';
 import pingIcon from '/store.svg';
@@ -9,6 +9,7 @@ import * as Styled from './SearchSpot.styles';
 import { SearchSpotInfo } from '@/apis/search';
 
 interface SpotDataType {
+  placeId: number;
   placeName: string;
   imageUrl: string;
   address: string;
@@ -22,6 +23,7 @@ const SearchSpot = () => {
   const [searchParams] = useSearchParams();
   const queryCity = searchParams.get('query');
   const [spotData, setSpotData] = useState<SpotDataType | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +44,10 @@ const SearchSpot = () => {
 
   return (
     <Styled.SpotContainer>
-      <SubTitle fontSize={14} variant="more">
+      <SubTitle
+        fontSize={14}
+        variant="more"
+        onClickButton={() => navigate(`/trip/detail/${spotData?.placeId}`)}>
         추천 여행지
       </SubTitle>
 

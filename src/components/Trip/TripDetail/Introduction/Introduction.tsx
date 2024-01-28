@@ -12,6 +12,7 @@ import { IntroductionProps } from './Introduction.types';
 import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
 import classifyExpense from '@/utils/classifyExpense';
 import { deleteStore, postStore } from '@/apis/trip-records';
+import IntroductionSkeleton from './IntroductionSkeleton';
 
 const Introduction = ({
   tripRecordData,
@@ -44,8 +45,7 @@ const Introduction = ({
     if (tripRecordData.isStored) return deleteStoreMutate();
     return postStoreMutate();
   };
-
-  return (
+  return tripRecordData ? (
     <Styled.Container>
       <Styled.Header>
         <Styled.CreatorContainer>
@@ -121,6 +121,8 @@ const Introduction = ({
         </Styled.HashTagList>
       </footer>
     </Styled.Container>
+  ) : (
+    <IntroductionSkeleton />
   );
 };
 
