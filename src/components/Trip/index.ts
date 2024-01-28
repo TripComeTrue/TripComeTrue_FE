@@ -3,9 +3,11 @@ export { default as TripHomeHeader } from '@/components/Trip/TripHome/TripHomeHe
 export { default as TripHomeBody } from '@/components/Trip/TripHome/TripHomeBody/TripHomeBody';
 export { default as TripCard } from '@/components/Trip/TripHome/TripCard/TripCard';
 export { default as TripCarousel } from '@/components/Trip/TripHome/TripCarousel/TripCarousel';
+export { default as TripCarouselSkeleton } from '@/components/Trip/TripHome/TripCarousel/TripCarouselSkeleton';
 
 // TripList
 export { default as CardList } from '@/components/Trip/TripList/CardList/CardList';
+export { default as CardListSkeleton } from '@/components/Trip/TripList/CardList/CardListSkeleton';
 
 // TripDetail
 export { default as MainCarousel } from '@/components/Trip/TripDetail/MainCarousel/MainCarousel';

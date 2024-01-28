@@ -30,11 +30,13 @@ const SearchCreatorShorts = () => {
 
   return (
     <div>
-      <Styled.CreatorTitle>
-        검색된 크리에이터가 업로드한 쇼츠
-      </Styled.CreatorTitle>
-      {creatorData && creatorData.videos && (
-        <Shorts slides={creatorData.videos} slidesPerView={2.1} />
+      {creatorData && creatorData.videos.length !== 0 && (
+        <>
+          <Styled.CreatorTitle>
+            검색된 크리에이터가 업로드한 쇼츠
+          </Styled.CreatorTitle>
+          <Shorts slides={creatorData.videos} slidesPerView={2.1} />
+        </>
       )}
     </div>
   );
