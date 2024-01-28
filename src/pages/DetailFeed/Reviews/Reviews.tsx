@@ -10,7 +10,7 @@ import FormattedDate from '@/utils/formattedDate';
 
 const Reviews = () => {
   const { placeId } = useParams() as { placeId: string };
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [sort, setSort] = useState('최신순');
   const [onlyImage, setOnlyImage] = useState(false);
   const {
     data: placeReviewsData = {
@@ -23,12 +23,12 @@ const Reviews = () => {
     refetch,
   } = useQuery({
     queryKey: ['PlaceReviewsData'],
-    queryFn: () => getPlaceReviews(placeId, selectedFilter, onlyImage),
+    queryFn: () => getPlaceReviews({ placeId, size: 10, sort, onlyImage }),
   });
 
   useEffect(() => {
     refetch();
-  }, [selectedFilter, onlyImage]);
+  }, [sort, onlyImage]);
 
   return (
     <div>
@@ -38,8 +38,8 @@ const Reviews = () => {
         </Styled.NavBackBtn>
         <Styled.NavTitle>리뷰({placeReviewsData.totalCount})</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
-          <Link to="/detailfeed/spot/1/review/write">
-            <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          <Link to={`/detailfeed/spot/${placeId}/review/write`}>
+            <Styled.WriteBtn src={WriteIcon} alt="리뷰 작성 아이콘" />
           </Link>
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
@@ -58,8 +58,8 @@ const Reviews = () => {
           <Filter
             first="최신순"
             second="추천순"
-            selectedFilter={selectedFilter}
-            setSelectedFilter={setSelectedFilter}
+            selectedFilter={sort}
+            setSelectedFilter={setSort}
           />
         </Styled.Header>
         <ul>
@@ -70,7 +70,7 @@ const Reviews = () => {
               <PlaceReviewCard>
                 <PlaceReviewCard.PlaceHeader
                   nickname={data.nickname}
-                  profileUrl="https://source.unsplash.com/random"
+                  profileUrl={data.profileUrl}
                   writeDate={FormattedDate(data.createdAt)}
                 />
                 <PlaceReviewCard.Main

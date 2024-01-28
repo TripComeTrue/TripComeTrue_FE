@@ -10,4 +10,4 @@ export { default as Banner } from './Banner/Banner';
 export { default as SpotGallery } from './Gallery/SpotGallery';
 export { default as CityGallery } from './Gallery/CityGallery';
 export { default as RecommendSpot } from './RecommendSpot/RecommendSpot';
-export { default as PlaceReview } from './PlaceReview/PlaceReview';
+export { default as PlaceReviews } from './PlaceReviews/PlaceReviews';
