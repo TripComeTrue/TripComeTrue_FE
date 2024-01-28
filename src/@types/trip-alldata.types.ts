@@ -148,3 +148,29 @@ export interface NewPlaceResponse {
   code: number;
   data: number; // placeId
 }
+
+// 여행 계획 복사시 받아오는 여행 계획 데이터
+export interface TripPlanOfSomeoneRes {
+  code: number;
+  data: TripPlanOfSomeone[];
+}
+export interface TripPlanOfSomeone {
+  countries: string;
+  tripStartDay: number[];
+  tripEndDay: number[];
+  tripSchedules: TripPlanOfSomeoneSchedule[];
+}
+
+export interface TripPlanOfSomeoneSchedule {
+  latitude: number;
+  longitude: number;
+  country: string;
+  cityName: string;
+  placeName: string;
+  dayNumber: number;
+  orderNumber: number;
+  placeId: number;
+  content: string;
+  tagType?: string;
+  tagUrl?: string;
+}

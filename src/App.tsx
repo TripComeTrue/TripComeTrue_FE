@@ -54,6 +54,7 @@ import NotFound from './pages/NotFound/NotFound';
 import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
 import SearchTagExpense from './pages/Search/SearchTagExpense';
+import TripPlanCopy from './pages/Trip/TripPlan/TripPlanCopy';
 
 function App() {
   const location = useLocation();
@@ -102,6 +103,7 @@ function App() {
           <Route path="tripplan" element={<TripPlan />} />
           <Route path="tripplanrecord" element={<TripPlanSelect />} />
           <Route path="tripplanrecord/:id" element={<TripPlanRecord />} />
+          <Route path="tripplancopy/:id" element={<TripPlanCopy />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route

@@ -81,3 +81,9 @@ export const postTripPlanRecord = async (postData: TripRecordData) => {
 
   return res.data;
 };
+
+// 여행 계획 복사용 일정 불러오기
+export const getTripPlanOfSomeone = async (id: number) => {
+  const res = await client.get(`v1/trip-plan/from-trip-record/${id}`);
+  return res.data;
+};
