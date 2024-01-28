@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 import {
-  PlaceReview,
+  PlaceReviews,
   RecommendSpot,
   SpotGallery,
   SpotInformation,
@@ -10,14 +10,25 @@ import {
 import { FeedNav } from '@/components/common';
 import * as Styled from './TouristSpot.styles';
 import { getSpotInformation } from '@/apis/detailfeed';
+import { getPlaceReviews } from '@/apis/place';
 
 const TouristSpot = () => {
   const location = useLocation();
   const { placeId, placeName } = location.state;
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ['spotStore', placeId],
-    queryFn: () => getSpotInformation(placeId),
-  });
+  const [{ data, isLoading, refetch }, { data: placeReviewsData }] = useQueries(
+    {
+      queries: [
+        {
+          queryKey: ['SpotStore', placeId],
+          queryFn: () => getSpotInformation(placeId),
+        },
+        {
+          queryKey: ['PlaceReviewsData'],
+          queryFn: () => getPlaceReviews({ placeId }),
+        },
+      ],
+    },
+  );
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -49,7 +60,7 @@ const TouristSpot = () => {
         />
         <SpotTopReview id={placeId} placeName={placeName} />
         <RecommendSpot id={placeId} />
-        <PlaceReview id={placeId} />
+        <PlaceReviews placeReviewsData={placeReviewsData} placeId={placeId} />
       </Styled.TouristSpotWrap>
     </>
   );

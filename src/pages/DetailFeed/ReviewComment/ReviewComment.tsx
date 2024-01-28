@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
 import * as Styled from './ReviewComment.styles';
@@ -25,7 +25,10 @@ const ReviewComment = () => {
   const [comment, setComment] = useState('');
   const [isComment, setIsComment] = useState(true);
   const [commentId, setCommentId] = useState(0);
-  const { reviewId } = useParams() as { reviewId: string };
+  const { placeId, reviewId } = useParams() as {
+    placeId: string;
+    reviewId: string;
+  };
   const { data: placeReviewData, refetch: placeReviewRefetch } = useQuery({
     queryKey: ['PlaceReviewData'],
     queryFn: () => getPlaceReview(reviewId),
@@ -117,9 +120,11 @@ const ReviewComment = () => {
         <Styled.NavBackBtn onClick={() => navigate(-1)}>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>리뷰 댓글 작성</Styled.NavTitle>
+        <Styled.NavTitle>리뷰</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
-          <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          <Link to={`/detailfeed/spot/${placeId}/review/write`}>
+            <Styled.WriteBtn src={WriteIcon} alt="리뷰 작성 아이콘" />
+          </Link>
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
           </Styled.BubbleWrapper>
