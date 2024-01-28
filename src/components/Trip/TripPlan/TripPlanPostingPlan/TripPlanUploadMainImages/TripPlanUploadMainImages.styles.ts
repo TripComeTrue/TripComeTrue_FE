@@ -9,6 +9,12 @@ export const Wrapper = styled.div`
 
   width: 100%;
   gap: 0.7rem;
+
+  .warning {
+    padding: -1rem 0;
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    color: red;
+  }
 `;
 
 export const UploadImageContainer = styled.div`
@@ -29,7 +35,6 @@ export const UploadImageIcon = styled.div`
   width: 7rem;
   height: 7rem;
   flex-shrink: 0;
-  margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.brand.gray};
   border-radius: 0.9375rem;

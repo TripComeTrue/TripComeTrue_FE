@@ -4,16 +4,21 @@ import TripPlanUploadImages from '../TripPlanUploadImages/TripPlanUploadImages';
 import { TripPlanDaysInputProps } from './TripPlanDaysInput.types';
 import * as Styled from '../TripPlanPostingPlan.styles';
 
-function TripPlanDaysInput({
+const TripPlanDaysInput = ({
   selectedDay,
   formData,
   setFormData,
   register,
   handleInputChange,
-}: TripPlanDaysInputProps) {
+}: TripPlanDaysInputProps) => {
   if (selectedDay === null) return null;
 
-  const dayData = formData[selectedDay - 1].data.tripPlanSchedules;
+  const selectedDayData = formData[selectedDay - 1];
+  if (!selectedDayData || !selectedDayData.data) {
+    return <div>Loading day data...</div>;
+  }
+
+  const dayData = selectedDayData.data.tripPlanSchedules;
 
   return dayData.map((schedule, placeIndex) => (
     <Styled.InputContainer key={`day-${selectedDay}-schedule-${placeIndex}`}>
@@ -48,6 +53,6 @@ function TripPlanDaysInput({
       />
     </Styled.InputContainer>
   ));
-}
+};
 
 export default TripPlanDaysInput;

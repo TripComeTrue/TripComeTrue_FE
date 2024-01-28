@@ -56,8 +56,20 @@ export const postTripPlan = async (postData: TripPlanDataForPost) => {
   return res.data;
 };
 
-// 여행계획 상세조회 (tripPlanId로 조회)
+// 여행 계획 상세조회 (tripPlanId로 조회)
 export const getTripPlanById = async (id: number) => {
   const { data } = await client.get<TripPlanResBody>(`v1/trip-plan/${id}`);
   return data;
+};
+
+// 여행 계획 기반 후기 작성 페이지 - 한글 국가명 조회
+export const getTripCountryKorName = async (countryNameInEnglish: string) => {
+  const { data } = await client.get(`v1/country-city`);
+  const countries = data.data;
+
+  const matchedCountry = countries.find(
+    (country: CountryData) => country.country === countryNameInEnglish,
+  );
+
+  return matchedCountry ? matchedCountry.countryName : null;
 };

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { differenceInDays, format } from 'date-fns';
+import { format } from 'date-fns';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import TripPlanGoogleMaps from '../TripPlanPostingPlan/TripPlanGoogleMaps/TripPlanGoogleMaps';
@@ -13,22 +13,31 @@ import TripPlanSetBudget from '../TripPlanPostingReview/TripPlanSetBudget/TripPl
 import TripPlanUploadMainImages from '../TripPlanPostingPlan/TripPlanUploadMainImages/TripPlanUploadMainImages';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 import TripPlanDaysInput from '../TripPlanPostingPlan/TripPlanDaysInput/TripPlanDaysInput';
-import { getTripPlanById } from '@/apis/trip-planandrecords';
+import {
+  getTripCountryKorName,
+  getTripPlanById,
+} from '@/apis/trip-planandrecords';
 import * as Styled from './TripPlanPostingPlanRecord.styles';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import { arrayToDate } from '@/utils/arrayToDate';
 import { TripPlanResBody } from '@/@types/trip-alldata.types';
 import { transformToFormData } from './TripPlanPostingPlanRecord.utils';
 
+type CountryNames = { [key: string]: string };
+
 const TripPlanPostingPlanRecord = () => {
   const { id } = useParams();
   const { data: tripPlan } = useSuspenseQuery({
     queryKey: ['trip-plan', id],
-    queryFn: () => getTripPlanById(Number(15)),
+    queryFn: () => getTripPlanById(Number(id)),
   });
 
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
+  const [mainImageUrls, setMainImageUrls] = useState<string[]>([]);
+  const [isMainImageValid, setIsMainImageValid] = useState(false);
   const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
+  const [countryNamesInKorean, setCountryNamesInKorean] =
+    useState<CountryNames>({});
   const [formData, setFormData] = useState<TripPlanResBody[]>([]);
   const { register, handleSubmit, setValue } = useForm();
 
@@ -39,20 +48,72 @@ const TripPlanPostingPlanRecord = () => {
     if (tripPlan) {
       const convertedFormData = transformToFormData(tripPlan.data);
       setFormData(convertedFormData);
+
+      if (
+        convertedFormData.length > 0 &&
+        convertedFormData[0].data.tripPlanSchedules.length > 0
+      ) {
+        setValue(
+          `day1.city`,
+          convertedFormData[0].data.tripPlanSchedules[0].cityName,
+        );
+      }
     }
   }, [tripPlan]);
 
-  const handleDayButtonClick = (
+  useEffect(() => {
+    const fetchCountryNamesInKorean = async () => {
+      const countryNames: CountryNames = {};
+      for (const dayData of formData) {
+        for (const schedule of dayData.data.tripPlanSchedules) {
+          const engCountryName = schedule.country;
+          if (!countryNames[engCountryName]) {
+            countryNames[engCountryName] =
+              await getTripCountryKorName(engCountryName);
+          }
+        }
+      }
+      setCountryNamesInKorean(countryNames);
+
+      formData.forEach((dayData, index) => {
+        if (dayData.data.tripPlanSchedules.length > 0) {
+          const schedule = dayData.data.tripPlanSchedules[0];
+          const countryKorName = countryNames[schedule.country] || '';
+          const cityName = schedule.cityName;
+          setValue(`day${index + 1}.city`, `${countryKorName} ${cityName}`);
+        }
+      });
+    };
+
+    if (formData.length > 0) {
+      fetchCountryNamesInKorean();
+    }
+  }, [formData, setValue]);
+
+  const handleMainImagesChange = (urls: string[]) => {
+    setMainImageUrls(urls);
+  };
+
+  const handleMainImageValidationChange = (isValid: boolean) => {
+    setIsMainImageValid(isValid);
+  };
+
+  const handleDayButtonClick = async (
     day: number,
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     event.preventDefault();
     setSelectedDay((prevDay) => (prevDay === day ? null : day));
-    if (formData[day - 1]) {
-      setValue(
-        `day${day}.city`,
-        formData[day - 1].data.tripPlanSchedules[0].cityName,
-      );
+
+    if (
+      formData[day - 1] &&
+      formData[day - 1].data.tripPlanSchedules.length > 0
+    ) {
+      const schedule = formData[day - 1].data.tripPlanSchedules[0];
+      const countryKorName = countryNamesInKorean[schedule.country] || '';
+      const cityName = schedule.cityName;
+
+      setValue(`day${day}.city`, `${countryKorName} ${cityName}`);
     }
   };
 
@@ -73,11 +134,13 @@ const TripPlanPostingPlanRecord = () => {
 
   useEffect(() => {
     console.log(formData);
-  }, []);
+  }, [formData]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     // const postData: TripRecordData = {
-    //   tripRecordImages: [],
+    //   tripRecordImages: mainImageUrls.map(url => ({
+    // imageUrl: url, tagType: '', tagUrl:''
+    // })),
     //   title: formData.title,
     //   content: formData.content,
     //   expenseRangeType: formData.expenseRangeType,
@@ -117,7 +180,10 @@ const TripPlanPostingPlanRecord = () => {
         </Styled.DateDisplay>
 
         <Styled.PostingForm onSubmit={handleSubmit(onSubmit)}>
-          <TripPlanUploadMainImages setFormData={setFormData} />
+          <TripPlanUploadMainImages
+            onImagesChange={handleMainImagesChange}
+            onValidationChange={handleMainImageValidationChange}
+          />
           <Styled.PlaceInput
             type="text"
             {...register('title', { required: true })}
@@ -128,10 +194,8 @@ const TripPlanPostingPlanRecord = () => {
             placeholder="여행의 전반적인 후기나 메모를 작성해 주세요"
           />
 
-          {/* 여행 경비는 얼마로 준비 하셨나요? */}
           <TripPlanSetBudget register={register} />
 
-          {/* 어떤 여행이었나요? */}
           <TripPlanAddHashtags
             selectedHashtags={selectedHashtags}
             setSelectedHashtags={setSelectedHashtags}
@@ -173,7 +237,6 @@ const TripPlanPostingPlanRecord = () => {
             />
           </Styled.CityInputContainer>
 
-          {/* 장소 상세 설명 부분 */}
           <TripPlanDaysInput
             selectedDay={selectedDay}
             formData={formData}
