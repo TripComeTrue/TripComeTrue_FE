@@ -1,19 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Maps from '../Maps/Maps';
 import TripDescription from '../TripDescription/TripDescription';
 import * as Styled from './TripContents.styles';
 import { TripContentsProps } from './TripContents.types';
+import TripContentsSkeleton from './TripContentsSkeleton';
 
-const TripContents = ({ schedulesData }: TripContentsProps) => {
+const TripContents = ({ tripRecordId, schedulesData }: TripContentsProps) => {
   const [selectedDay, setSelectedDay] = useState(0);
 
   const onClickDaySelect = (index: number): void => {
     setSelectedDay(index);
   };
 
-  const schedulesArr = schedulesData && Object.entries(schedulesData);
+  useEffect(() => {
+    setSelectedDay(0);
+  }, [tripRecordId]);
 
-  return (
+  const schedulesArr = schedulesData && Object.entries(schedulesData);
+  return schedulesData ? (
     <Styled.Container>
       <Maps daysData={schedulesArr && schedulesArr[selectedDay][1]} />
       <Styled.DayButtonList>
@@ -28,6 +32,8 @@ const TripContents = ({ schedulesData }: TripContentsProps) => {
       </Styled.DayButtonList>
       <TripDescription data={schedulesArr && schedulesArr[selectedDay]} />
     </Styled.Container>
+  ) : (
+    <TripContentsSkeleton />
   );
 };
 
