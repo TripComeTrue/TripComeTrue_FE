@@ -73,8 +73,8 @@ export interface TripRecordData {
 
 export interface TripRecordImage {
   imageUrl: string;
-  tagType: string;
-  tagUrl: string;
+  tagType: string | null;
+  tagUrl: string | null;
 }
 
 export interface TripRecordSchedule {

@@ -165,8 +165,8 @@ const TripPlanPostingPlanRecord = () => {
     const postData: TripRecordData = {
       tripRecordImages: mainImageUrls.map((url) => ({
         imageUrl: url,
-        tagType: '',
-        tagUrl: '',
+        tagType: null,
+        tagUrl: null,
       })),
       title: data.title,
       content: data.content,
@@ -185,8 +185,8 @@ const TripPlanPostingPlanRecord = () => {
               content: schedule.content,
               tripRecordScheduleImages: dayImages[index + 1] || [],
               tripRecordScheduleVideos: [],
-              tagType: schedule.tagType || '',
-              tagUrl: schedule.tagUrl || '',
+              tagType: schedule.tagType ?? null,
+              tagUrl: schedule.tagUrl ?? null,
             };
           });
           return schedules;
