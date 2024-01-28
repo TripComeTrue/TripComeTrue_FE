@@ -1,3 +1,4 @@
+import { ChangeEvent, useEffect, useState } from 'react';
 import { SubTitle, Text } from '@/components/common';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './ExchangeRate.styles';
@@ -9,11 +10,35 @@ const ExchangeRate = ({
   cityId: number;
   country?: string;
 }) => {
+  const [curMoney, setCurMoney] = useState(1);
+  const [krMoney, setKrMoney] = useState(1);
   const { data, isLoading } = useDetailFeedQuery<ExchangeRateResponseType>({
     queryKey: 'exchangeRate',
     id: cityId,
     fnUrl: `/v1/cities/${cityId}/exchange-rates`,
   });
+  const curCityName = data?.data.curName.split(' ')[0];
+  const krw = Number(data?.data.exchangeRate.split(':')[1]);
+
+  const onChangeCurMoney = (event: ChangeEvent<HTMLInputElement>) => {
+    if (/^\d*\.?\d*$/.test(event.target.value)) {
+      setCurMoney(Number(event.target.value));
+      setKrMoney(Number((krw * Number(event.target.value)).toFixed(4)));
+    }
+  };
+
+  const onChangeKrMoney = (event: ChangeEvent<HTMLInputElement>) => {
+    if (/^\d*\.?\d*$/.test(event.target.value)) {
+      setKrMoney(Number(event.target.value));
+      setCurMoney(Number((Number(event.target.value) / krw).toFixed(4)));
+    }
+  };
+
+  useEffect(() => {
+    if (krw) {
+      setKrMoney(krw);
+    }
+  }, [data]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -30,7 +55,7 @@ const ExchangeRate = ({
         <Styled.ExchangeRateContent>
           <Styled.ContentLeftBox>
             <Text fontSize={14} fontWeight={700}>
-              {country}
+              {curCityName}
             </Text>
             <Styled.CurrencyUnit>
               <Text fontSize={14} fontWeight={700} color="primary">
@@ -39,8 +64,13 @@ const ExchangeRate = ({
             </Styled.CurrencyUnit>
           </Styled.ContentLeftBox>
           <Styled.ContentRightBox>
+            <Styled.Input
+              type="text"
+              value={curMoney}
+              onChange={onChangeCurMoney}
+            />
             <Text fontSize={18} fontWeight={700} color="gray">
-              1 {data.data.curUnit}
+              {data.data.curUnit}
             </Text>
           </Styled.ContentRightBox>
         </Styled.ExchangeRateContent>
@@ -57,8 +87,13 @@ const ExchangeRate = ({
             </Styled.CurrencyUnit>
           </Styled.ContentLeftBox>
           <Styled.ContentRightBox>
+            <Styled.Input
+              type="text"
+              value={krMoney}
+              onChange={onChangeKrMoney}
+            />
             <Text fontSize={18} fontWeight={700} color="gray">
-              {data.data.exchangeRate.split(':')[1]} KRW
+              KRW
             </Text>
           </Styled.ContentRightBox>
         </Styled.ExchangeRateContent>
