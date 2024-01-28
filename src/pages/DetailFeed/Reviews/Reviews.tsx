@@ -29,7 +29,7 @@ const Reviews = () => {
     fetchNextPage,
     refetch,
   } = useInfiniteQuery({
-    queryKey: ['PlaceReviewsData'],
+    queryKey: ['PlaceReviewsInfiniteData'],
     queryFn: ({ pageParam }) =>
       getPlaceReviews({ placeId, size: 10, sort, onlyImage, pageParam }),
     initialPageParam: 0,
