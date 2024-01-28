@@ -16,7 +16,8 @@ import * as Styled from './City.styles';
 
 const City = () => {
   const location = useLocation();
-  const { cityId, name, isDomestic, country }: CityState = location.state;
+  const { cityId, name, isDomestic }: CityState = location.state;
+
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['cityStore', cityId],
     queryFn: () => getCityStored(cityId),
@@ -42,7 +43,7 @@ const City = () => {
         <CityGallery id={cityId} placeName={name} />
         {!isDomestic && <CityInformation cityId={cityId} />}
         <Weather cityId={cityId} />
-        {!isDomestic && <ExchangeRate cityId={cityId} country={country} />}
+        {!isDomestic && <ExchangeRate cityId={cityId} />}
         <CityTopReview cityId={cityId} cityName={name} />
         <HotPlace cityId={cityId} cityName={name} />
         <Banner isDomestic={isDomestic} />

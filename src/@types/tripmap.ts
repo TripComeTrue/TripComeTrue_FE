@@ -51,10 +51,10 @@ interface GmapProps {
 }
 
 interface SpotsInCityData {
-  commentTotal: number;
-  imageUrl: string;
   latitude: number;
   longitude: number;
+  commentTotal: number;
+  imageUrl: string;
   placeId: number;
   placeName: string;
   storedCount: number;

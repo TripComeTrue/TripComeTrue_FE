@@ -52,10 +52,10 @@ const SearchNons = () => {
         </button>
       </Styled.SearchForm>
       <Styled.TabContainer>
-        <Styled.TabButton isSelected>전체</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>도시</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>여행지</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>크리에이터</Styled.TabButton>
+        <Styled.TabButton $isSelected>전체</Styled.TabButton>
+        <Styled.TabButton $isSelected={false}>도시</Styled.TabButton>
+        <Styled.TabButton $isSelected={false}>여행지</Styled.TabButton>
+        <Styled.TabButton $isSelected={false}>크리에이터</Styled.TabButton>
       </Styled.TabContainer>
 
       <SearchNon />

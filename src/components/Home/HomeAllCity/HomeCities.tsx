@@ -5,19 +5,17 @@ import * as Styled from './HomeCities.styles';
 function HomeCities({ cities }: HomeCitiesProps) {
   const navigate = useNavigate();
 
-  function handleCityClick({ name, cityId, isDomestic, country }: CityState) {
+  function handleCityClick({ name, cityId, isDomestic }: CityState) {
     navigate(`/detailfeed/city/${cityId}`, {
-      state: { cityId, name, isDomestic, country },
+      state: { cityId, name, isDomestic },
     });
   }
   return (
     <Styled.CityWrap>
-      {cities.map(({ cityId, name, isDomestic, country }) => (
+      {cities.map(({ cityId, name, isDomestic }) => (
         <Styled.CityItem
           key={name}
-          onClick={() =>
-            handleCityClick({ cityId, name, isDomestic, country })
-          }>
+          onClick={() => handleCityClick({ cityId, name, isDomestic })}>
           {name}
         </Styled.CityItem>
       ))}

@@ -128,6 +128,7 @@ interface ExchangeRateData {
   curUnit: string;
   curName: string;
   exchangeRate: string;
+  country: string;
 }
 interface ExchangeRateResponseType {
   code: 200;
@@ -194,7 +195,6 @@ interface CityState {
   name: string;
   cityId: number;
   isDomestic: boolean;
-  country?: string;
 }
 
 interface CityGalleryResponse {

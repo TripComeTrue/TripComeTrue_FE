@@ -66,8 +66,8 @@ export const TabButton = styled.button<TabButtonProps>`
   border: none;
   background-color: transparent;
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
-  color: ${({ isSelected }) => (isSelected ? '#373737' : '#626262')};
+  font-weight: ${({ $isSelected }) => ($isSelected ? 'bold' : 'normal')};
+  color: ${({ $isSelected }) => ($isSelected ? '#373737' : '#626262')};
 
   cursor: pointer;
 
@@ -82,7 +82,7 @@ export const TabButton = styled.button<TabButtonProps>`
       width 0.3s,
       transform 0.3s;
     transform: translateX(-50%);
-    width: ${({ isSelected }) => (isSelected ? '80%' : '0')};
+    width: ${({ $isSelected }) => ($isSelected ? '80%' : '0')};
   }
 `;
 
