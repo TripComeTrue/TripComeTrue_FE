@@ -4,6 +4,7 @@ import Bookmark from '../Bookmark/Bookmark';
 import tokyo from '/tokyo.png';
 import { ShortsModal } from '..';
 import useModal from '@/hooks/common/useModal';
+import videoKey from '@/utils/videoKey';
 
 const ShortsSwiper: React.FC<SlideType> = ({
   thumbnailUrl,
@@ -16,7 +17,6 @@ const ShortsSwiper: React.FC<SlideType> = ({
   memberId,
 }) => {
   const { open, handleOpen, handleClose } = useModal();
-  const shortsUrl = videoUrl.split('/').reverse()[0];
 
   return (
     <Styled.SliderContent onClick={handleOpen}>
@@ -24,7 +24,7 @@ const ShortsSwiper: React.FC<SlideType> = ({
         <ShortsModal
           open={open}
           onClose={handleClose}
-          videoId={shortsUrl}
+          videoId={videoKey(videoUrl)}
           profileImageUrl={profileImageUrl}
           memberName={memberName}
           tripRecordId={tripRecordId}

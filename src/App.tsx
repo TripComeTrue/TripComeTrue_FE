@@ -88,6 +88,7 @@ function App() {
 
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
+          <Route path="tripplanrecord" element={<TripPlanSelect />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
