@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { alignCenter, flexColumn, justifyBetween } from '@/styles/common';
+import { alignCenter, flexColumn } from '@/styles/common';
 
 export const ExchangeRateWrapper = styled.section`
   height: 15rem;

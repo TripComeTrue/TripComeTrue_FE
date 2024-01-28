@@ -3,13 +3,7 @@ import { SubTitle, Text } from '@/components/common';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './ExchangeRate.styles';
 
-const ExchangeRate = ({
-  cityId,
-  country,
-}: {
-  cityId: number;
-  country?: string;
-}) => {
+const ExchangeRate = ({ cityId }: { cityId: number }) => {
   const [curMoney, setCurMoney] = useState(1);
   const [krMoney, setKrMoney] = useState(1);
   const { data, isLoading } = useDetailFeedQuery<ExchangeRateResponseType>({
@@ -17,8 +11,7 @@ const ExchangeRate = ({
     id: cityId,
     fnUrl: `/v1/cities/${cityId}/exchange-rates`,
   });
-  const curCityName = data?.data.curName.split(' ')[0];
-  const krw = Number(data?.data.exchangeRate.split(':')[1]);
+  const krw = Number(data?.data.exchangeRate.split(':')[1].replace(/,/gi, ''));
 
   const onChangeCurMoney = (event: ChangeEvent<HTMLInputElement>) => {
     if (/^\d*\.?\d*$/.test(event.target.value)) {
@@ -55,7 +48,7 @@ const ExchangeRate = ({
         <Styled.ExchangeRateContent>
           <Styled.ContentLeftBox>
             <Text fontSize={14} fontWeight={700}>
-              {curCityName}
+              {data.data.country}
             </Text>
             <Styled.CurrencyUnit>
               <Text fontSize={14} fontWeight={700} color="primary">
