@@ -1,9 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-
 import { useLayoutEffect } from 'react';
 import DashBoard from '@/components/layout';
-// import Main from '@/pages/Main/Main';
-
 import {
   TripDetail,
   TripHome,
@@ -80,7 +77,6 @@ function App() {
         <Route path="search/*" element={<Search />} />
         <Route path="search/select/:tag" element={<SearchTag />} />
         <Route path="search-non" element={<SearchNons />} />
-        {/* <Route path="search" element={<Search />} /> */}
 
         <Route path="creator/*" element={<Creator />} />
         <Route path="creator/:id" element={<CreatorDetail />} />
@@ -118,8 +114,8 @@ function App() {
 
         <Route path="/detailfeed/*">
           <Route path="city/:cityId" element={<City />} />
-          <Route path="spot/:spotId" element={<TouristSpot />} />
-          <Route path="spot/:spotId/review" element={<Reviews />} />
+          <Route path="spot/:placeId" element={<TouristSpot />} />
+          <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"
             element={<PlaceReviewWrite />}
