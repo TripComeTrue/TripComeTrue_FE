@@ -23,7 +23,12 @@ const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
 
   const [selectedPlaceDetails, setSelectedPlaceDetails] =
     useState<SelectedPlaceDetailProps>({ name: '', id: null });
-  const countryName = tripPlanData.tripPlanCountriesEng?.[dayIndex] || '';
+
+  const countryName =
+    (tripPlanData.tripPlanCountriesEng?.length ?? 0) > 1
+      ? tripPlanData.tripPlanCountriesEng?.[dayIndex]
+      : tripPlanData.tripPlanCountriesEng?.[0] || '';
+
   let cityName = '';
 
   if (tripPlanData.tripPlanCities && tripPlanData.tripPlanCities[dayIndex]) {
@@ -32,8 +37,8 @@ const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
   }
 
   const { data: tripPlacesData } = useQuery({
-    queryKey: ['TripPlaces', countryName, cityName],
-    queryFn: () => getTripPlaces(countryName, cityName),
+    queryKey: ['TripPlaces', countryName || '', cityName || ''],
+    queryFn: () => getTripPlaces(countryName || '', cityName || ''),
     enabled: !!countryName && !!cityName,
   });
 
@@ -49,7 +54,6 @@ const TripPlanPlaceModal: React.FC<SelectedPlaceProps> = ({
         placeIndex,
       );
     }
-    console.log(selectedPlaceDetails);
   }, [selectedPlaceDetails, placeIndex]);
 
   return (
