@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
@@ -30,6 +30,7 @@ type DayImagesType = {
 };
 
 const TripPlanPostingPlanRecord = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data: tripPlan } = useSuspenseQuery({
     queryKey: ['trip-plan', id],
@@ -157,10 +158,6 @@ const TripPlanPostingPlanRecord = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const postData: TripRecordData = {
       tripRecordImages: mainImageUrls.map((url) => ({
@@ -193,8 +190,11 @@ const TripPlanPostingPlanRecord = () => {
         })
         .flat(),
     };
-    console.log(postData);
-    mutation.mutate(postData);
+    mutation.mutate(postData, {
+      onSuccess: () => {
+        navigate('/mypage?tab=review');
+      },
+    });
   };
 
   return (

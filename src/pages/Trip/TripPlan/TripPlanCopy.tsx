@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { TripFormDataProvider } from './TripFormDataContext';
 import {
   TripPlanNextButton,
   TripPlanPrevButton,
@@ -12,6 +11,11 @@ interface StepProps {
   value: number;
 }
 
+export interface TripCopyDateProps {
+  startDate: Date;
+  endDate: Date;
+}
+
 const CheckEachStep = ({ value, caseBy }: StepProps) => {
   return caseBy[value] || <div>Step not found</div>;
 };
@@ -19,6 +23,11 @@ const CheckEachStep = ({ value, caseBy }: StepProps) => {
 const TripPlanCopy = () => {
   const [step, setStep] = useState<number>(1);
   const totalSteps = 2;
+
+  const [dateRange, setDateRange] = useState<TripCopyDateProps>({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
 
   const handleGoPrev = () => {
     if (step > 1) {
@@ -33,17 +42,27 @@ const TripPlanCopy = () => {
   };
 
   return (
-    <TripFormDataProvider>
+    <>
       <TripPlanPrevButton onClick={handleGoPrev} />
       <CheckEachStep
         value={step}
         caseBy={{
-          1: <TripPlanCopyingCalendar />,
-          2: <TripPlanCopyingPlan />,
+          1: (
+            <TripPlanCopyingCalendar
+              dateRange={dateRange}
+              setDateRange={setDateRange}
+            />
+          ),
+          2: (
+            <TripPlanCopyingPlan
+              startDate={dateRange.startDate}
+              endDate={dateRange.endDate}
+            />
+          ),
         }}
       />
       {step < totalSteps && <TripPlanNextButton onClick={handleGoNext} />}
-    </TripFormDataProvider>
+    </>
   );
 };
 

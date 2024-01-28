@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import DatePicker from 'react-datepicker';
@@ -7,22 +7,24 @@ import '../TripPlanDate/DatePickerStyles.css';
 import { ko } from 'date-fns/locale';
 import { differenceInCalendarDays, getMonth, getYear } from 'date-fns';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
-import { TripDateProps } from '../TripPlanDate/TripPlanDate.types';
 import { Months, Years } from '@/constants/tripPlanAndRecord';
 import { getNightAndDays } from '../TripPlanDate/TripPlanDate.utils';
 import * as Styled from '../TripPlanCommon/TripPlanCommon.styles';
 import { getTripPlanOfSomeone } from '@/apis/trip-planandrecords';
 import { arrayToDate } from '@/utils/arrayToDate';
+import { TripCopyDateProps } from '@/pages/Trip/TripPlan/TripPlanCopy';
 
-const TripPlanCopyingCalendar = () => {
+const TripPlanCopyingCalendar = ({
+  dateRange,
+  setDateRange,
+}: {
+  dateRange: TripCopyDateProps;
+  setDateRange: React.Dispatch<React.SetStateAction<TripCopyDateProps>>;
+}) => {
   const { id } = useParams();
   const { data: tripPlanOfSomeone } = useSuspenseQuery({
     queryKey: ['trip-plan-someone', id],
     queryFn: () => getTripPlanOfSomeone(Number(id)),
-  });
-  const [dateRange, setDateRange] = useState<TripDateProps>({
-    startDate: new Date(),
-    endDate: new Date(),
   });
 
   useEffect(() => {
