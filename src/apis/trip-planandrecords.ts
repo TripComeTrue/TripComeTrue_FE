@@ -2,6 +2,7 @@ import {
   CountryData,
   TripPlanDataForPost,
   TripPlanResBody,
+  TripRecordData,
 } from '@/@types/trip-alldata.types';
 import client from './client';
 
@@ -72,4 +73,11 @@ export const getTripCountryKorName = async (countryNameInEnglish: string) => {
   );
 
   return matchedCountry ? matchedCountry.countryName : null;
+};
+
+// 여행 계획 후 후기 작성 (POST)
+export const postTripPlanRecord = async (postData: TripRecordData) => {
+  const res = await client.post('v1/trip-record', postData);
+
+  return res.data;
 };

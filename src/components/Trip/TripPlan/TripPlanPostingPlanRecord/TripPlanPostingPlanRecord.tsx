@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -16,14 +16,18 @@ import TripPlanDaysInput from '../TripPlanPostingPlan/TripPlanDaysInput/TripPlan
 import {
   getTripCountryKorName,
   getTripPlanById,
+  postTripPlanRecord,
 } from '@/apis/trip-planandrecords';
 import * as Styled from './TripPlanPostingPlanRecord.styles';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import { arrayToDate } from '@/utils/arrayToDate';
-import { TripPlanResBody } from '@/@types/trip-alldata.types';
+import { TripPlanResBody, TripRecordData } from '@/@types/trip-alldata.types';
 import { transformToFormData } from './TripPlanPostingPlanRecord.utils';
 
 type CountryNames = { [key: string]: string };
+type DayImagesType = {
+  [key: number]: string[];
+};
 
 const TripPlanPostingPlanRecord = () => {
   const { id } = useParams();
@@ -32,10 +36,15 @@ const TripPlanPostingPlanRecord = () => {
     queryFn: () => getTripPlanById(Number(id)),
   });
 
+  const mutation = useMutation({
+    mutationKey: ['postPlanRecord'],
+    mutationFn: postTripPlanRecord,
+  });
+
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [mainImageUrls, setMainImageUrls] = useState<string[]>([]);
   const [isMainImageValid, setIsMainImageValid] = useState(false);
-  const [dayImages, setDayImages] = useState({});
+  const [dayImages, setDayImages] = useState<DayImagesType>({});
   const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
   const [countryNamesInKorean, setCountryNamesInKorean] =
     useState<CountryNames>({});
@@ -65,22 +74,30 @@ const TripPlanPostingPlanRecord = () => {
   useEffect(() => {
     const fetchCountryNamesInKorean = async () => {
       const countryNames: CountryNames = {};
+      const promises = [];
+
       for (const dayData of formData) {
         for (const schedule of dayData.data.tripPlanSchedules) {
           const engCountryName = schedule.country;
           if (!countryNames[engCountryName]) {
-            countryNames[engCountryName] =
-              await getTripCountryKorName(engCountryName);
+            promises.push(
+              getTripCountryKorName(engCountryName).then((koreanName) => {
+                countryNames[engCountryName] = koreanName;
+              }),
+            );
           }
         }
       }
+
+      await Promise.all(promises);
+
       setCountryNamesInKorean(countryNames);
 
       formData.forEach((dayData, index) => {
         if (dayData.data.tripPlanSchedules.length > 0) {
           const schedule = dayData.data.tripPlanSchedules[0];
           const countryKorName = countryNames[schedule.country] || '';
-          const cityName = schedule.cityName;
+          const { cityName } = schedule;
           setValue(`day${index + 1}.city`, `${countryKorName} ${cityName}`);
         }
       });
@@ -112,7 +129,7 @@ const TripPlanPostingPlanRecord = () => {
     ) {
       const schedule = formData[day - 1].data.tripPlanSchedules[0];
       const countryKorName = countryNamesInKorean[schedule.country] || '';
-      const cityName = schedule.cityName;
+      const { cityName } = schedule;
 
       setValue(`day${day}.city`, `${countryKorName} ${cityName}`);
     }
@@ -145,27 +162,39 @@ const TripPlanPostingPlanRecord = () => {
   }, [formData]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // const postData: TripRecordData = {
-    //   tripRecordImages: mainImageUrls.map(url => ({
-    // imageUrl: url, tagType: '', tagUrl:''
-    // })),
-    //   title: formData.title,
-    //   content: formData.content,
-    //   expenseRangeType: formData.expenseRangeType,
-    //   hashTags: selectedHashtags,
-    //   countries: tripPlan.data.countries.join(', '),
-    //   tripStartDay: format(startDate, 'yyyy-MM-dd'),
-    //   tripEndDay: format(endDate, 'yyyy-MM-dd'),
-    //   tripRecordSchedules: formData.map((day, index) => ({
-    //     dayNumber: index + 1,
-    //     orderNumber:
-    //     placeId: day.placeId,
-    //     content: day.note,
-    //     tripRecordScheduleImages:
-    //     tripRecordScheduleVideos:
-    //     tagType: day.tagType,
-    //     tagUrl: day.tagUrl,
-    //   })),
+    const postData: TripRecordData = {
+      tripRecordImages: mainImageUrls.map((url) => ({
+        imageUrl: url,
+        tagType: '',
+        tagUrl: '',
+      })),
+      title: data.title,
+      content: data.content,
+      expenseRangeType: data.expenseRangeType,
+      hashTags: selectedHashtags,
+      countries: tripPlan.data.countries,
+      tripStartDay: format(startDate, 'yyyy-MM-dd'),
+      tripEndDay: format(endDate, 'yyyy-MM-dd'),
+      tripRecordSchedules: formData
+        .map((dayData, index) => {
+          const schedules = dayData.data.tripPlanSchedules.map((schedule) => {
+            return {
+              dayNumber: index + 1,
+              orderNumber: schedule.orderNumber,
+              placeId: schedule.placeId != null ? schedule.placeId : -1,
+              content: schedule.content,
+              tripRecordScheduleImages: dayImages[index + 1] || [],
+              tripRecordScheduleVideos: [],
+              tagType: schedule.tagType || '',
+              tagUrl: schedule.tagUrl || '',
+            };
+          });
+          return schedules;
+        })
+        .flat(),
+    };
+    console.log(postData);
+    mutation.mutate(postData);
   };
 
   return (
