@@ -8,14 +8,14 @@ export const MY_STYLES = [
       },
     ],
   },
-  // {
-  //   featureType: 'poi',
-  //   stylers: [
-  //     {
-  //       visibility: 'off',
-  //     },
-  //   ],
-  // },
+  {
+    featureType: 'poi',
+    stylers: [
+      {
+        visibility: 'off',
+      },
+    ],
+  },
   {
     featureType: 'road',
     elementType: 'labels.icon',
@@ -41,13 +41,15 @@ export const OPTIONS = {
 };
 
 export const MAP_CONTAINER_STYLE = {
-  width: '100%',
   height: '13.5rem',
-  borderRadius: '10px',
+  borderRadius: '0.625rem',
+};
+
+export const TRIP_MAP_CONTAINER_STYLE = {
+  height: '100%',
 };
 
 export const FIELD_MASK_OPTIONS = [
-  'places.formattedAddress',
   'places.displayName',
   'places.location',
   'places.primaryTypeDisplayName',
@@ -57,4 +59,5 @@ export const FIELD_MASK_OPTIONS = [
   'places.iconBackgroundColor',
   'places.iconMaskBaseUri',
   'places.userRatingCount',
+  'places.googleMapsUri',
 ];
