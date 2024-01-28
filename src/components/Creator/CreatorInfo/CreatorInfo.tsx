@@ -7,9 +7,14 @@ import { Shorts, Spots } from '@/components/common';
 
 interface Slide {
   tripRecordId: number;
+  storeCount: number;
   storedCount: number;
   thumbnailUrl: string;
   tripRecordTitle: string;
+  videoUrl: string;
+  memberId: number;
+  memberName: string;
+  profileImageUrl: string;
 }
 
 const CreatorInfo = () => {
@@ -40,9 +45,14 @@ const CreatorInfo = () => {
   const videosAsSlides: Slide[] | [] =
     creatorProfile?.videos?.map((video) => ({
       tripRecordId: video.tripRecordId,
+      storeCount: video.storeCount,
       storedCount: video.storeCount,
       thumbnailUrl: video.thumbnailUrl,
       tripRecordTitle: video.tripRecordTitle,
+      videoUrl: video.videoUrl,
+      memberId: video.memberId,
+      memberName: video.memberName,
+      profileImageUrl: video.profileImageUrl,
     })) || [];
 
   return (
