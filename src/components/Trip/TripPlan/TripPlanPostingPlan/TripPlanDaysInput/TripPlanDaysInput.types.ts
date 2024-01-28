@@ -14,4 +14,6 @@ export interface TripPlanDaysInputProps {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
+  dayImages: { [key: number]: string[] };
+  onDayImagesChange: (chosenDay: number, imageUrls: string[]) => void;
 }

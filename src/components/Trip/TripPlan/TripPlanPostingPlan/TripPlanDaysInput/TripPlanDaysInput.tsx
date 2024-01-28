@@ -7,9 +7,10 @@ import * as Styled from '../TripPlanPostingPlan.styles';
 const TripPlanDaysInput = ({
   selectedDay,
   formData,
-  setFormData,
   register,
   handleInputChange,
+  dayImages,
+  onDayImagesChange,
 }: TripPlanDaysInputProps) => {
   if (selectedDay === null) return null;
 
@@ -41,8 +42,12 @@ const TripPlanDaysInput = ({
         defaultValue={schedule.content}
       />
       <TripPlanUploadImages
-        setFormData={setFormData}
         selectedDay={selectedDay}
+        placeIndex={placeIndex}
+        onImagesChange={(imageUrls) =>
+          onDayImagesChange(selectedDay, imageUrls)
+        }
+        uploadedImages={dayImages[selectedDay] || []}
       />
       <TripPlanAddTags
         handleTagsUpdate={() => {}}

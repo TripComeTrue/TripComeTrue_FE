@@ -1,10 +1,22 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+  gap: 0.7rem;
+`;
+
 export const UploadImageContainer = styled.div`
   display: flex;
   flex-direction: row;
   z-index: 0;
+
+  width: 100%;
 `;
 
 export const UploadImageIcon = styled.div`
@@ -17,7 +29,6 @@ export const UploadImageIcon = styled.div`
   width: 7rem;
   height: 7rem;
   flex-shrink: 0;
-  margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.brand.gray};
   border-radius: 0.9375rem;

@@ -40,7 +40,6 @@ const TripPlanUploadMainImages: React.FC<TripPlanUploadMainImagesProps> = ({
         setUploadedImages(updatedUrls);
         onImagesChange(updatedUrls);
         setIsAtLeastOneImage(true);
-        console.log(updatedUrls);
       } catch (error) {
         console.error('Error uploading images:', error);
       }
@@ -61,7 +60,6 @@ const TripPlanUploadMainImages: React.FC<TripPlanUploadMainImagesProps> = ({
 
     try {
       await handleDeleteImages([imageToDelete]);
-      console.log(imageToDelete);
     } catch (error) {
       console.error('이미지 업로드 중 에러가 발생했습니다', error);
     }
@@ -76,7 +74,6 @@ const TripPlanUploadMainImages: React.FC<TripPlanUploadMainImagesProps> = ({
           setUploadedImages(updatedUrls);
           onImagesChange(updatedUrls);
           setIsAtLeastOneImage(updatedUrls.length >= 1);
-          console.log(newUploadedUrls);
         } catch (error) {
           console.error('Error uploading images:', error);
         }

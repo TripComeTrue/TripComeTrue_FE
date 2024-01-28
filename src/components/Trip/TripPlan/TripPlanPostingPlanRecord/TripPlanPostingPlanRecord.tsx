@@ -35,14 +35,15 @@ const TripPlanPostingPlanRecord = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [mainImageUrls, setMainImageUrls] = useState<string[]>([]);
   const [isMainImageValid, setIsMainImageValid] = useState(false);
+  const [dayImages, setDayImages] = useState({});
   const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
   const [countryNamesInKorean, setCountryNamesInKorean] =
     useState<CountryNames>({});
   const [formData, setFormData] = useState<TripPlanResBody[]>([]);
-  const { register, handleSubmit, setValue } = useForm();
 
   const startDate = arrayToDate(tripPlan.data.tripStartDay);
   const endDate = arrayToDate(tripPlan.data.tripEndDay);
+  const { register, handleSubmit, setValue } = useForm({});
 
   useEffect(() => {
     if (tripPlan) {
@@ -115,6 +116,13 @@ const TripPlanPostingPlanRecord = () => {
 
       setValue(`day${day}.city`, `${countryKorName} ${cityName}`);
     }
+  };
+
+  const handleDayImagesChange = (chosenDay: number, imageUrls: string[]) => {
+    setDayImages((prevImages) => ({
+      ...prevImages,
+      [chosenDay]: imageUrls,
+    }));
   };
 
   const handleInputChange = (
@@ -243,6 +251,8 @@ const TripPlanPostingPlanRecord = () => {
             setFormData={setFormData}
             register={register}
             handleInputChange={handleInputChange}
+            dayImages={dayImages}
+            onDayImagesChange={handleDayImagesChange}
           />
 
           <Styled.SubmitButtonContainer>
