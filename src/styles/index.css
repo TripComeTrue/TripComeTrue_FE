@@ -167,3 +167,7 @@ input:focus {
 .slide-pane__overlay {
   z-index: 100;
 }
+
+button {
+  cursor: pointer;
+}

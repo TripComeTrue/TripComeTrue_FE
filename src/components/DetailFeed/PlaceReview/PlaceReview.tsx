@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import { Avatar, Bubble, SubTitle, Text } from '../../common';
 import WriteIcon from '/images/write.svg';
 import * as Styled from './PlaceReview.styles';
 import LikeIcon from '/images/like.svg';
 import CommentIcon from '/images/comment.svg';
 
-const PlaceReview = () => {
+const PlaceReview = ({ id }: { id: number }) => {
   return (
     <Styled.Container>
       <Styled.Header>
@@ -93,7 +94,9 @@ const PlaceReview = () => {
       </Styled.ReviewList>
 
       <Styled.ButtonWrapper>
-        <Styled.ReviewMoreButton>리뷰 더 보기</Styled.ReviewMoreButton>
+        <Styled.ReviewMoreButton>
+          <Link to={`/detailfeed/spot/${id}/review`}>리뷰 더 보기</Link>
+        </Styled.ReviewMoreButton>
       </Styled.ButtonWrapper>
     </Styled.Container>
   );

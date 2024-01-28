@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { SubTitle } from '@/components/common';
-// import Creator from '@/components/common/Creator/Creator';
+import Creator from '@/components/common/Creator/Creator';
 import * as Styled from './SearchCreator.styles';
 import { SearchCreatorInfo } from '@/apis/search';
+import { CreatorResponse } from './SearchCreator.types';
 
 const SearchCreator = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const queryCreator = searchParams.get('query');
-  const [creatorData, setCreatorData] = useState(null);
+  const [creatorData, setCreatorData] = useState<CreatorResponse[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,14 +38,14 @@ const SearchCreator = () => {
           크리에이터
         </SubTitle>
       </Styled.CreatorTitleWrap>
-
       {creatorData && Object.keys(creatorData).length !== 0 ? (
         <div>
-          {/*  여기 map 돌리기.. type 지정도 해야 함. 예외 처리만 했음
           <Styled.CreatorContent>
-            <Creator creator={creatorData.members} starRate={creatorData.members.averageRating} />
+            <Creator
+              creator={creatorData[0].members[0]}
+              starRate={creatorData[0].members[0].averageRating}
+            />
           </Styled.CreatorContent>
-             */}
         </div>
       ) : (
         <Styled.CreatorNull>

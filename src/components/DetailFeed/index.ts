@@ -7,6 +7,7 @@ export { default as CityTopReview } from './TopReview/CityTopReview';
 export { default as SpotTopReview } from './TopReview/SpotTopReview';
 export { default as HotPlace } from './HotPlace/HotPlace';
 export { default as Banner } from './Banner/Banner';
-export { default as Gallery } from './Gallery/Gallery';
+export { default as SpotGallery } from './Gallery/SpotGallery';
+export { default as CityGallery } from './Gallery/CityGallery';
 export { default as RecommendSpot } from './RecommendSpot/RecommendSpot';
 export { default as PlaceReview } from './PlaceReview/PlaceReview';

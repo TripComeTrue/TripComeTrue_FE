@@ -1,11 +1,9 @@
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
-// import axios, { AxiosInstance } from 'axios';
 import * as Styled from './Map.styles';
 import { MAP_CONTAINER_STYLE, OPTIONS } from '@/constants/DetailFeed/Map';
 import defaultPin from '/defaultPin.svg';
-
-const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+import GOOGLE_MAPS from '@/constants/map';
 
 interface MapProps {
   spotCenter: {
@@ -14,19 +12,11 @@ interface MapProps {
   };
 }
 
-// const instance: AxiosInstance = axios.create({
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'X-Goog-Api-Key': googleMapsApiKey,
-//     'X-Goog-FieldMask': ['places.displayName'],
-//   },
-// });
-
 const Map = ({ spotCenter }: MapProps) => {
   const [, setMapRef] = useState<google.maps.Map | null>(null);
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey,
-    libraries: ['places', 'maps'],
+    id: 'google-map-script',
+    googleMapsApiKey: GOOGLE_MAPS,
     language: 'ko',
   });
 

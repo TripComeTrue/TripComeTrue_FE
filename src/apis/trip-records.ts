@@ -3,9 +3,17 @@ import client from './client';
 // 여행 후기 관련 API
 
 // 여행 후기 리스트 조회
-export const getTripRecords = async (param?: string) => {
+export const getTripRecords = async ({
+  pageParam = 0,
+  size = 5,
+  filter,
+}: {
+  pageParam?: number;
+  size?: number;
+  filter?: string;
+} = {}) => {
   const { data } = await client.get(
-    `v1/trip-records${param ? `?${param}` : ''}`,
+    `v1/trip-records?page=${pageParam}&size=${size}${filter ? `&${filter}` : ''}`,
   );
 
   return data.data;
@@ -138,4 +146,14 @@ export const deleteTripRecordComment = async (deleteCommentId: number) => {
   );
 
   return res;
+};
+
+// 여행 후기 보관 요청
+export const postStore = async (tripRecordId: string) => {
+  await client.post(`v1/trip-records/stores`, { tripRecordId });
+};
+
+// 여행 후기 보관 취소
+export const deleteStore = async (tripRecordId: string) => {
+  await client.delete(`v1/trip-records/${tripRecordId}/stores`);
 };

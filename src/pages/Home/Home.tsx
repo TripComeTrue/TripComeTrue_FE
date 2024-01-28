@@ -1,7 +1,7 @@
 import {
   HomeCreator,
   HomeHotplace,
-  HomeMD,
+  // HomeMD,
   HomeSearch,
   HomeShorts,
 } from '@/components/Home';
@@ -14,7 +14,7 @@ const Home = () => {
       <HomeShorts />
       <HomeHotplace />
       <HomeCreator />
-      <HomeMD />
+      {/* <HomeMD /> */}
       <TabBar />
     </div>
   );

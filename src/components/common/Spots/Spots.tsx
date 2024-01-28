@@ -19,7 +19,6 @@ const Spots: React.FC<
   slidesPerView = 2.1,
   sort = 'center',
   fontSize = 14,
-  isDelete,
   onDelete,
 }) => (
   <Styled.SwiperWrap
@@ -37,7 +36,7 @@ const Spots: React.FC<
           reviews={item?.reviews}
           sort={sort}
           fontSize={fontSize}
-          isDelete={isDelete}
+          id={item.id}
           onDelete={onDelete}
         />
       </Styled.SwiperSlideWrap>

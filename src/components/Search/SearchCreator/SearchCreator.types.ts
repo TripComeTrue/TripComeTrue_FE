@@ -1,19 +1,39 @@
-export interface CreatorData {
-  userImg: string;
-  username: string;
-  userInfo: string;
-  rate?: number;
-  userId: string;
-  review: number;
-  shorts: number;
+export interface MembersData {
+  memberId: number;
+  nickname: string;
+  introduction: string;
+  profileImageUrl: string;
+  averageRating: number;
 }
 
-export interface Slide {
-  img: string;
-  title: string;
-  bookmark: number;
+export interface VideosData {
+  videoId: number;
+  tripRecordId: number;
+  tripRecordTitle: string;
+  thumbnailUrl: string;
+  videoUrl: string;
+  storeCount: number;
+  storedCount: number;
+  memberId: number;
+  memberName: string;
+  profileImageUrl: string;
 }
 
-export interface SwiperProps {
-  전체: Slide[];
+export interface TripRecordsData {
+  tripRecordId: number;
+  tripRecordTitle: string;
+  memberId: number;
+  memberName: string;
+  profileImageUrl: string;
+  cityNames: string;
+  totalDays: number;
+  averageRating: number;
+  storedCount: number;
+  imageUrl: string;
+}
+
+export interface CreatorResponse {
+  members: MembersData[];
+  videos: VideosData[];
+  tripRecords: TripRecordsData[];
 }

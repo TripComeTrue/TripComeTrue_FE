@@ -15,16 +15,33 @@ const Shorts: React.FC<ShortsProps> = ({ slides, slidesPerView = 2.1 }) => (
     direction="horizontal"
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-    {slides.map((slide: Slide) => (
-      <Styled.SwiperSlideWrap key={slide.tripRecordTitle}>
-        <ShortsSwiper
-          tripRecordId={slide.tripRecordId}
-          thumbnailUrl={slide.thumbnailUrl}
-          tripRecordTitle={slide.tripRecordTitle}
-          storedCount={slide.storedCount}
-        />
-      </Styled.SwiperSlideWrap>
-    ))}
+    {slides.map(
+      ({
+        videoId,
+        videoUrl,
+        thumbnailUrl,
+        tripRecordTitle,
+        storedCount,
+        storeCount,
+        profileImageUrl,
+        memberName,
+        tripRecordId,
+        memberId,
+      }: Slide) => (
+        <Styled.SwiperSlideWrap key={videoId}>
+          <ShortsSwiper
+            videoUrl={videoUrl}
+            thumbnailUrl={thumbnailUrl}
+            tripRecordTitle={tripRecordTitle}
+            storeCount={storedCount || storeCount}
+            profileImageUrl={profileImageUrl}
+            memberName={memberName}
+            tripRecordId={tripRecordId}
+            memberId={memberId}
+          />
+        </Styled.SwiperSlideWrap>
+      ),
+    )}
   </Styled.SwiperWrap>
 );
 

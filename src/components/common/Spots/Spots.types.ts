@@ -3,6 +3,7 @@ export interface PostData {
   storedCount: number;
   tripRecordTitle: string;
   reviews?: number;
+  id?: number;
 }
 
 export interface SpotsProps {
@@ -13,8 +14,7 @@ export interface SpotsProps {
 }
 
 export interface SpotsWishListProps {
-  isDelete?: boolean;
-  onDelete?: () => void;
+  onDelete?: (id: number) => void;
 }
 
 export interface SpotsSwiperProps extends PostData {

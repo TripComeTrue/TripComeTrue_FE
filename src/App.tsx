@@ -1,8 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
-
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 import DashBoard from '@/components/layout';
-// import Main from '@/pages/Main/Main';
-
 import {
   TripDetail,
   TripHome,
@@ -57,6 +55,12 @@ import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
 
 function App() {
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Routes>
       <Route element={<DashBoard />}>
@@ -73,7 +77,6 @@ function App() {
         <Route path="search/*" element={<Search />} />
         <Route path="search/select/:tag" element={<SearchTag />} />
         <Route path="search-non" element={<SearchNons />} />
-        {/* <Route path="search" element={<Search />} /> */}
 
         <Route path="creator/*" element={<Creator />} />
         <Route path="creator/:id" element={<CreatorDetail />} />
@@ -111,8 +114,8 @@ function App() {
 
         <Route path="/detailfeed/*">
           <Route path="city/:cityId" element={<City />} />
-          <Route path="spot/:spotId" element={<TouristSpot />} />
-          <Route path="spot/:spotId/review" element={<Reviews />} />
+          <Route path="spot/:placeId" element={<TouristSpot />} />
+          <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"
             element={<PlaceReviewWrite />}

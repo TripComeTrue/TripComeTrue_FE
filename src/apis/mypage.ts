@@ -18,6 +18,7 @@ import {
   RecordReviewDelReqBody,
   TripRecordResBody,
   TripStoresResBody,
+  WishListDelReqBody,
 } from '@/@types/mypage.types';
 
 // const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
@@ -51,9 +52,7 @@ export const getMyTripRecordReview = async (page: number) => {
 };
 
 export const getNoties = async () => {
-  const { data } = await client.get<{ message: string; data: Notification[] }>(
-    '/mypage/noti',
-  );
+  const { data } = await client.get<Notification>('/v1/member/alarms');
   return data;
 };
 
@@ -87,16 +86,19 @@ export const getWishListMore = async (type: string) => {
   const { data } = await client.get(`/v1/${type}/stores`);
   const moreData = data.data.content.map(
     (item: {
+      id: number;
       imageUrl: string;
-      storeCount: string;
-      storedCount: string;
+      storeCount: number;
+      storedCount: number;
+      commentCount: number;
       name: string;
       title: string;
     }) => ({
-      postImg: item.imageUrl ?? '',
-      bookmark: item.storeCount || item.storedCount,
-      postTitle: item.name || item.title,
-      reviews: 0,
+      id: item.id,
+      imageUrl: item.imageUrl ?? '',
+      tripRecordTitle: item.name || item.title,
+      storedCount: item.storeCount || item.storedCount,
+      reviews: item.commentCount,
     }),
   );
   return moreData as PostData[];
@@ -185,4 +187,12 @@ export const deleteMyRecordReview = async (reqBody: RecordReviewDelReqBody) => {
     data: reqBody,
   });
   return status;
+};
+
+// 보관하기 취소
+export const deleteWishList = async (reqBody: WishListDelReqBody) => {
+  const { status } = await client.delete(
+    `/v1/${reqBody.type}/${reqBody.id}/stores`,
+  );
+  return { status, type: reqBody.type, id: reqBody.id };
 };

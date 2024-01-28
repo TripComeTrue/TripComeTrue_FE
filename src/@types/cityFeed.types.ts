@@ -3,6 +3,7 @@ interface ShortsDataType {
   tripRecordId: number;
   tripRecordTitle: string;
   videoUrl: string;
+  storeCount: number;
   storedCount: number;
   memberId: number;
   memberName: string;
@@ -25,8 +26,8 @@ interface AllShortsResponseType {
     last: boolean;
     pageSize: number;
     sort: {
-      direction: 'ASC' | 'DESC';
-      orderProperty: '"storeCount"' | 'averageRating';
+      direction: string;
+      orderProperty: string;
       sorted: boolean;
     };
     totalCount: number;
@@ -34,16 +35,48 @@ interface AllShortsResponseType {
 }
 
 interface GalleryDataType {
-  id?: number;
+  imageId?: number;
   tripRecordId: number;
   tripRecordStoreCount: number;
   imageUrl: string;
 }
 
-interface GalleryResponseType {
+interface CityGalleryResponseType {
   code: 200;
   data: GalleryDataType[];
   errorMessage: null;
+}
+interface SpotGalleryResponseType {
+  code: 200;
+  data: {
+    content: GalleryDataType[];
+    empty: boolean;
+    first: boolean;
+    last: boolean;
+    number: number;
+    numberOfElements: number;
+    pageable: {
+      pageNumber: number;
+      pageSize: number;
+      sort: {
+        empty: boolean;
+        sorted: boolean;
+        unsorted: boolean;
+      };
+      offset: number;
+      paged: boolean;
+      unpaged: boolean;
+    };
+    size: number;
+    sort: {
+      empty: boolean;
+      sorted: boolean;
+      unsorted: boolean;
+    };
+    totalElements: number;
+    totalPages: number;
+  };
+  errorMessage?: null;
 }
 
 interface CityInfoDataType {
@@ -148,8 +181,8 @@ interface SpotListResponse {
     last: boolean;
     pageSize: number;
     sort: {
-      direction: 'ASC' | 'DESC';
-      orderProperty: '"storeCount"' | 'averageRating';
+      direction: string;
+      orderProperty: string;
       sorted: boolean;
     };
     totalCount: number;
@@ -157,6 +190,7 @@ interface SpotListResponse {
 }
 
 interface CityState {
+  id?: number;
   name: string;
   cityId: number;
   isDomestic: boolean;
@@ -167,16 +201,29 @@ interface CityGalleryResponse {
   code: 200;
   data: {
     content: GalleryDataType[];
+    sort: {
+      sorted: boolean;
+      direction: string;
+      orderProperty: string;
+    };
+    totalCount: number;
+    currentPageNum: number;
+    pageSize: number;
+    first: boolean;
+    last: boolean;
+    errorMessage: null;
   };
-  sort: {
-    sorted: boolean;
-    direction: string;
-    orderProperty: string;
+}
+
+interface CityisStoredResponse {
+  code: 200;
+  data: {
+    isStored: boolean;
   };
-  totalCount: number;
-  currentPageNum: number;
-  pageSize: number;
-  first: boolean;
-  last: boolean;
+  errorMessage: null;
+}
+interface FetchCityisStoredResponse {
+  code: 200;
+  data: {};
   errorMessage: null;
 }

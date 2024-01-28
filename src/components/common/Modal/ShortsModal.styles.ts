@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { maxWidth } from '@/styles/common';
+import { alignCenter, maxWidth } from '@/styles/common';
 
 export const ShortsModalBox = styled.div`
   ${maxWidth};
@@ -7,7 +7,17 @@ export const ShortsModalBox = styled.div`
   height: 100%;
   padding-bottom: 5rem;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+export const ShortsModalBoxNav = styled.div`
+  padding: 0 1.25rem;
+
+  height: 2.5rem;
+
+  ${alignCenter}
+  gap: 1rem;
 `;
 
 export const ShortsModalInner = styled.div`
@@ -47,9 +57,15 @@ export const ShortsModalProfile = styled.div`
   align-items: center;
   margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.brand.white};
+  &:hover {
+    span {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const ShortsModalTitle = styled.h3`
+  width: fit-content;
   font-size: 1.125rem;
   font-weight: 700;
   color: ${({ theme }) => theme.brand.white};
@@ -57,6 +73,7 @@ export const ShortsModalTitle = styled.h3`
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
+  cursor: pointer;
 `;
 
 export const ShortsModalToggleMuteBtn = styled.button`

@@ -73,6 +73,7 @@ function MyPageTripRecordReview() {
                 />
               </Styled.TripRecordReviewTop>
               <TripRecordReviewCard.Main
+                reviewImage={item.imageUrl}
                 nickname={item.nickname}
                 averageRating={item.ratingScore}
                 content={item.content}

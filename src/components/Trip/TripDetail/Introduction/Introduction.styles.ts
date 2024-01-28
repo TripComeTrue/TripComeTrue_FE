@@ -30,10 +30,14 @@ export const SaveContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export const BookMarkContainer = styled.div`
+export const StoreContainer = styled.div`
   ${alignCenter};
   flex-direction: column;
   justify-content: center;
+`;
+
+export const StoreButton = styled.button`
+  ${alignCenter};
 `;
 
 export const Main = styled.main`

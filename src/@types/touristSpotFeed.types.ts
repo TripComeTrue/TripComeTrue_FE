@@ -5,12 +5,14 @@ interface SpotInfoDataType {
   address: string;
   storedCount: number;
   latitude: number;
+  isStored: boolean;
   longitude: number;
   phoneNumber?: number;
   weekdayCloseTime?: number;
   weekdayOpenTime?: number;
   weekendCloseTime?: number;
   weekendOpenTime?: number;
+  description?: string;
 }
 
 interface SpotInfoResponseType {
@@ -67,4 +69,38 @@ interface RecommendSpotDataType {
 interface RecommendSpotResponseType {
   code: 200;
   data: RecommendSpotDataType[];
+}
+
+interface SpotGalleryListResponse {
+  code: 200;
+  data: {
+    content: [
+      { tripRecordId: number; imageUrl: string; tripRecordStoreCount: number },
+    ];
+    pageable: {
+      pageNumber: number;
+      pageSize: number;
+      sort: {
+        empty: boolean;
+        sorted: boolean;
+        unsorted: boolean;
+      };
+      offset: number;
+      paged: boolean;
+      unpaged: boolean;
+    };
+    totalPages: boolean;
+    totalElements: number;
+    last: boolean;
+    size: number;
+    number: number;
+    sort: { empty: boolean; sorted: boolean; unsorted: true };
+    numberOfElements: number;
+    first: boolean;
+    empty: boolean;
+  };
+}
+
+interface CancelSpotstore {
+  code: 200;
 }

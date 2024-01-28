@@ -24,7 +24,6 @@ export const useDetailFeedQuery = <T>({
   >({
     queryKey: [queryKey, id, fnUrl],
     queryFn: () => getCityData<T>(fnUrl),
-    staleTime: 600000,
   });
 
   return { data, isError, isLoading, isSuccess };
