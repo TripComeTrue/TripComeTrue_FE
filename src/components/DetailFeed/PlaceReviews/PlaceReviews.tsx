@@ -56,7 +56,9 @@ const PlaceReviews = ({
       </Styled.ReviewList>
 
       <Styled.ButtonWrapper>
-        <Styled.ReviewMoreButton>리뷰 더 보기</Styled.ReviewMoreButton>
+        <Styled.ReviewMoreButton>
+          <Link to={`/detailfeed/spot/${placeId}/review`}>리뷰 더 보기</Link>
+        </Styled.ReviewMoreButton>
       </Styled.ButtonWrapper>
     </Styled.Container>
   );
