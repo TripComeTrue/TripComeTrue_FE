@@ -4,7 +4,7 @@ import * as Styled from './CreatorProfile.styles';
 import { CreatorData } from '../CreatorMore/CreateMore.types';
 
 interface CreatorProfileProps {
-  data: CreatorData; // 이 부분을 CreatorDatas로 정의하지 않도록 변경
+  data: CreatorData;
 }
 
 const CreatorProfile: React.FC<CreatorProfileProps> = ({ data }) => {

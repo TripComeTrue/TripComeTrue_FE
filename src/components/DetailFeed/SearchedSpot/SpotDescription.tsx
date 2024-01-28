@@ -3,8 +3,15 @@ import * as Styled from './SpotDescription.styles';
 import bookmark from '/bookmark.svg';
 import comment from '/comment.svg';
 
-const SpotDescription = ({ spot }: { spot: SpotListDataType }) => {
-  const { placeName, storedCount, commentTotal } = spot;
+const SpotDescription = ({
+  placeName,
+  storedCount,
+  commentTotal,
+}: {
+  placeName: string;
+  storedCount: number;
+  commentTotal: number;
+}) => {
   return (
     <>
       <Text fontWeight={700}>{placeName}</Text>

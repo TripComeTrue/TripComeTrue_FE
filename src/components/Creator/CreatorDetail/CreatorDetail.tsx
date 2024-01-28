@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CreatorProfile from '../CreatorProfile/CreatorProfile';
-import exampleImg from '/domestic1.jpg';
 import * as Styled from '../CreatorMore/CreatorMore.styles';
-import { CreatorData } from '../CreatorMore/CreateMore.types';
+import { SearchCreatorProfile } from '@/apis/search';
+import { CreatorDetailProps } from './CreatorDetail.types';
 
 const CreatorDetail = () => {
   const navigate = useNavigate();
@@ -12,16 +13,29 @@ const CreatorDetail = () => {
     navigate(-1);
   };
 
-  const CreatorDatas: CreatorData = {
-    profileImageUrl: exampleImg,
-    nickname: '맥주덕후',
-    introduction:
-      '독일에서 교환학생하며 실감나는 유럽의 삶을 담고 있는 유럽의 맥주덕후입니다.',
-    memberId: 1,
-    averageRating: 4.8,
-    tripRecordTotal: 18,
-    videoTotal: 7,
-  };
+  const location = useLocation();
+  const { state } = location;
+  const { memberId } = state || {};
+
+  const [creatorProfile, setCreatorProfile] = useState<
+    CreatorDetailProps['data'] | null
+  >(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (memberId) {
+          const creatorData = await SearchCreatorProfile(memberId);
+          setCreatorProfile(creatorData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [memberId]);
+
+  console.log(creatorProfile);
 
   return (
     <Styled.CreatorAllWrap>
@@ -34,7 +48,9 @@ const CreatorDetail = () => {
       </Styled.CreatorTop>
 
       <div>
-        <CreatorProfile data={CreatorDatas} />
+        {creatorProfile !== null && (
+          <CreatorProfile data={creatorProfile.memberDetailInfo} />
+        )}
       </div>
     </Styled.CreatorAllWrap>
   );

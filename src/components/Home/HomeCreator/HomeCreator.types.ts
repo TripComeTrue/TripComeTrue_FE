@@ -27,4 +27,5 @@ export interface PostData {
   storedCount: number;
   tripRecordTitle: string;
   reviews?: number;
+  tripRecordId?: number;
 }

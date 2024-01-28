@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { SubTitle } from '@/components/common';
 import starIcon from '/starIcon.svg';
 import * as Styled from './SearchCity.styles';
@@ -24,6 +24,7 @@ const SearchCity = () => {
   const [searchParams] = useSearchParams();
   const queryCity = searchParams.get('query');
   const [cityData, setCityData] = useState<CityDataType | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,10 +42,6 @@ const SearchCity = () => {
 
   console.log(cityData);
 
-  // if (!cityData) {
-  //   return null;
-  // }
-
   const ExchangeRate = (value: string): string | null => {
     const matchResult = value.match(/1:(\d+(\.\d+)?)/);
 
@@ -53,7 +50,14 @@ const SearchCity = () => {
 
   return (
     <Styled.CityContainer>
-      <SubTitle fontSize={14} variant="more">
+      <SubTitle
+        fontSize={14}
+        variant="more"
+        onClickButton={() =>
+          navigate(`/detailfeed/city/${cityData?.cityId}`, {
+            state: { cityId: cityData?.cityId, name: cityData?.name },
+          })
+        }>
         도시
       </SubTitle>
 

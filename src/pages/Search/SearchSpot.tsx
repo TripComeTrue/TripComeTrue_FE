@@ -1,7 +1,12 @@
-import { SearchSpot } from '@/components/Search';
+import { SearchSpot, SearchSpotScroll } from '@/components/Search';
 
 const SearchSpots = () => {
-  return <SearchSpot />;
+  return (
+    <>
+      <SearchSpot />
+      <SearchSpotScroll />
+    </>
+  );
 };
 
 export default SearchSpots;

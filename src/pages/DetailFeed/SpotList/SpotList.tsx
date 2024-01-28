@@ -1,15 +1,14 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import SpotListNav from '@/components/common/Navigation/SpotListNav';
-import SpotDescription from './SpotDescription';
-import * as Styled from './SpotList.styles';
-import { Filter } from '@/components/common';
+import { useLocation } from 'react-router-dom';
 import { getSpotList } from '@/apis/listpage';
+import { SearchedSpot } from '@/components/DetailFeed';
+import { Filter } from '@/components/common';
+import SpotListNav from '@/components/common/Navigation/SpotListNav';
+import * as Styled from './SpotList.styles';
 
 const SpotList = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { ref, inView } = useInView();
 
@@ -41,16 +40,10 @@ const SpotList = () => {
     return <p>Data not available</p>;
   }
 
-  const handleSpotClick = (placeId: number, spotName: string) => {
-    navigate(`/detailfeed/spot/${placeId}`, {
-      state: { placeId, placeName: spotName },
-    });
-  };
-
   const SPOT_DATA = data.pages.flatMap((page) => page.content);
   return (
     <div>
-      <SpotListNav>{placeName}</SpotListNav>
+      <SpotListNav cityId={id}>{placeName}</SpotListNav>
       <Styled.FilterBox>
         <Filter
           first="보관순"
@@ -61,14 +54,14 @@ const SpotList = () => {
       </Styled.FilterBox>
       <Styled.SpotListWrapper>
         {SPOT_DATA.map((spot) => (
-          <Styled.SpotBox
+          <SearchedSpot
             key={spot.placeId}
-            onClick={() => handleSpotClick(spot.placeId, spot.placeName)}>
-            <Styled.SpotImg src={spot.imageUrl} alt={spot.placeName} />
-            <Styled.SpotDescription>
-              <SpotDescription spot={spot} />
-            </Styled.SpotDescription>
-          </Styled.SpotBox>
+            placeId={spot.placeId}
+            placeName={spot.placeName}
+            storedCount={spot.storedCount}
+            commentTotal={spot.commentTotal}
+            imageUrl={spot.imageUrl}
+          />
         ))}
       </Styled.SpotListWrapper>
       <div ref={ref}>&nbsp;</div>

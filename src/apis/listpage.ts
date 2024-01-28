@@ -43,3 +43,14 @@ export const getSpotList = async (
   );
   return data.data;
 };
+
+export const getSearchedSpots = async (
+  cityId: number,
+  placeName: string,
+  pageParam: number,
+) => {
+  const { data } = await client.get<SearchedSpotResponse>(
+    `/v1/cities/${cityId}/places?placeName=${placeName}&page=${pageParam}&size=7`,
+  );
+  return data.data;
+};
