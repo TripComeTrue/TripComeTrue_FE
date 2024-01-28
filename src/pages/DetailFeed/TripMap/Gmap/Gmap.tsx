@@ -1,19 +1,15 @@
-import { useCallback, useState } from 'react';
+import { getSearchgSpotsLocation } from '@/apis/tripmap';
+import { OPTIONS, TRIP_MAP_CONTAINER_STYLE } from '@/constants/DetailFeed/Map';
+import GOOGLE_MAPS from '@/constants/map';
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import { useQuery } from '@tanstack/react-query';
-import { GOOGLE_MAPS_API_KEY, getSearchgSpotsLocation } from '@/apis/tripmap';
-import * as Styled from '../TripMap.styles';
-import {
-  MAP_CONTAINER_STYLE,
-  OPTIONS,
-  TRIP_MAP_CONTAINER_STYLE,
-} from '@/constants/DetailFeed/Map';
-import pinDefault from '/pinDefault.svg';
-import googleMarkerIcon from '/googleMarkerIcon.png';
-import myPostionIcon from '/myPostion.svg';
+import { useCallback, useState } from 'react';
 import CurrentLocation from '../CurrentLocation/CurrentLocation';
 import SearchButton from '../SearchButton/SearchButton';
-import GOOGLE_MAPS from '@/constants/map';
+import * as Styled from '../TripMap.styles';
+import googleMarkerIcon from '/googleMarkerIcon.png';
+import myPostionIcon from '/myPostion.svg';
+import pinDefault from '/pinDefault.svg';
 
 const Gmap = ({
   cityLocation,
