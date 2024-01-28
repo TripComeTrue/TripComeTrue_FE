@@ -29,6 +29,7 @@ import {
   SpotGalleryList,
   PlaceReviewWrite,
   PlaceReviewEdit,
+  TripMap,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 
@@ -134,6 +135,7 @@ function App() {
           />
           <Route path="spotlist/:placeId" element={<SpotList />} />
           <Route path="spotsearch/:cityId" element={<SpotSearch />} />
+          <Route path="tripmap/:cityId" element={<TripMap />} />
         </Route>
         <Route path="mypage" element={<MyPageLayout />}>
           <Route index element={<MyPage />} />

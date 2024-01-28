@@ -40,7 +40,6 @@ const ShortsList = () => {
 
   const SHORTS_DATA = data.pages.flatMap((page) => page.content);
 
-  console.log(SHORTS_DATA);
   return (
     <Styled.ShortsListWrapper>
       <SimpleNav>{placeName}</SimpleNav>

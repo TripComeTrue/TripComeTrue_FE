@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { justifyBetween } from '@/styles/common';
+import { alignCenter, flexColumn } from '@/styles/common';
 
 export const ExchangeRateWrapper = styled.section`
   height: 15rem;
@@ -8,12 +8,10 @@ export const ExchangeRateWrapper = styled.section`
 `;
 
 export const ExchangeRateBox = styled.div`
-  height: 10rem;
-
-  display: flex;
-  flex-direction: column;
+  ${flexColumn};
   gap: 1rem;
 
+  height: 10rem;
   border-radius: 0.625rem;
   padding: 0.75rem 1rem;
   margin-top: 1rem;
@@ -22,44 +20,39 @@ export const ExchangeRateBox = styled.div`
 `;
 
 export const ExchangeRateContent = styled.div`
-  height: 3.25rem;
-  ${justifyBetween}
-`;
-
-export const ContentLeftBox = styled.div`
-  width: 5rem;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-export const CurrencyUnit = styled.div`
-  height: 1.4rem;
-
-  padding: 0 0.45rem;
-
-  border-radius: 0.375rem;
-
-  background-color: ${({ theme }) => theme.brand.black};
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  span {
-    white-space: nowrap;
-  }
-`;
-
-export const ContentRightBox = styled.div`
   display: flex;
   align-items: flex-end;
 
-  span {
-    white-space: nowrap;
-  }
+  height: 3.25rem;
+`;
+
+export const ContentLeftBox = styled.div`
+  ${flexColumn}
+  gap: 0.5rem;
+
+  white-space: nowrap;
+`;
+
+export const CurrencyUnit = styled.div`
+  ${alignCenter};
+  justify-content: center;
+
+  width: 100%;
+  padding: 0 0.45rem;
+  border-radius: 0.375rem;
+  background-color: ${({ theme }) => theme.brand.black};
+`;
+
+export const ContentRightBox = styled.div`
+  ${alignCenter};
+  justify-content: flex-end;
+
+  width: 100%;
+`;
+
+export const Input = styled.input`
+  text-align: right;
+  width: 100%;
 `;
 
 export const BoxLine = styled.hr`

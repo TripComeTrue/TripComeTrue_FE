@@ -32,7 +32,6 @@ const HomeHotplace = () => {
     const fetchData = async () => {
       try {
         const { cityCategory, locationCategory } = selectedOption;
-
         if (cityCategory === '인기도시') {
           const data = await HomeTopCity(locationCategory);
           setHotData(data);
@@ -168,12 +167,17 @@ const HomeHotplace = () => {
             hide: false,
           }}>
           {selected === 'city'
-            ? hotData.map((item: SlideHotCity) => (
-                <SwiperSlide key={`${item.cityName} ${item.storedCount}`}>
+            ? hotData.map((item: SlideHotCity, index) => (
+                <SwiperSlide key={`${item.cityName} ${index}`}>
                   <Styled.HotplaceCityWrap
                     onClick={() =>
                       navigate(`/detailfeed/city/${item.cityId}`, {
-                        state: { cityId: item.cityId, name: item.cityName },
+                        state: {
+                          cityId: item.cityId,
+                          name: item.cityName,
+                          isDomestic:
+                            selectedOption.locationCategory === 'domestic',
+                        },
                       })
                     }>
                     <Styled.HotplaceCityImg>
@@ -196,9 +200,8 @@ const HomeHotplace = () => {
                 </SwiperSlide>
               ))
             : selected === 'review'
-              ? hotData.map((item: SlideHotReview) => (
-                  <SwiperSlide
-                    key={`${item.tripRecordTitle} ${item.storedCount}`}>
+              ? hotData.map((item: SlideHotReview, index) => (
+                  <SwiperSlide key={`${item.tripRecordTitle} ${index}`}>
                     <Styled.HotplaceReviewWrap
                       onClick={() =>
                         navigate(`/trip/detail/${item.tripRecordId}`)

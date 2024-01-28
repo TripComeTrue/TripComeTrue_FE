@@ -90,9 +90,6 @@ const SearchTagExpense = () => {
     fetchData();
   }, [tag]);
 
-  console.log(tag);
-  console.log(spotData);
-
   return (
     <>
       <Styled.SearchTop>
@@ -107,7 +104,7 @@ const SearchTagExpense = () => {
         <Styled.SearchInput
           type="text"
           name="tag"
-          value={tag}
+          defaultValue={tag}
           onClick={() => navigate('/search')}
         />
         <button type="submit" aria-label="검색">
@@ -116,31 +113,26 @@ const SearchTagExpense = () => {
       </Styled.SearchForm>
 
       <Styled.TabContainer>
-        <Styled.TabButton isSelected>전체</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>도시</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>여행지</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>크리에이터</Styled.TabButton>
+        <Styled.TabButton $isSelected>전체</Styled.TabButton>
       </Styled.TabContainer>
 
       <Styled.TagContainer>
         <Styled.TagTitle>&apos;{tag}&apos; 여행 후기</Styled.TagTitle>
         <Styled.TagWrap>
-          {spotData.map((item) => (
-            <>
-              <Styled.TagExpenseWrap
-                key={item.tripRecordId}
+          {spotData.map((item, index) => (
+            <Styled.TagExpenseWrap
+              key={`${index} ${item.tripRecordTitle}`}
+              onClick={() => navigate(`/trip/detail/${item.tripRecordId}`)}>
+              <img src={item.imageUrl} alt="backgroundImg" />
+              <Styled.TagExpensiveBookmark>
+                <img src={bookmarkIcon} alt="bookmark" />
+                {item.storedCount}
+              </Styled.TagExpensiveBookmark>
+              <Styled.TagExpenseTitle
                 onClick={() => navigate(`/trip/detail/${item.tripRecordId}`)}>
-                <img src={item.imageUrl} alt="backgroundImg" />
-                <Styled.TagExpensiveBookmark>
-                  <img src={bookmarkIcon} alt="bookmark" />
-                  {item.storedCount}
-                </Styled.TagExpensiveBookmark>
-                <Styled.TagExpenseTitle
-                  onClick={() => navigate(`/trip/detail/${item.tripRecordId}`)}>
-                  {item.tripRecordTitle}
-                </Styled.TagExpenseTitle>
-              </Styled.TagExpenseWrap>
-            </>
+                {item.tripRecordTitle}
+              </Styled.TagExpenseTitle>
+            </Styled.TagExpenseWrap>
           ))}
           {lastPage ? (
             <>

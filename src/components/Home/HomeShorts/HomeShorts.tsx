@@ -26,8 +26,6 @@ const HomeShorts = () => {
     fetchData();
   }, []);
 
-  console.log(shortsData);
-
   return (
     <Styled.ShortsWrap>
       <SubTitle margin="1rem" fontSize={18} icon={starIcon}>
