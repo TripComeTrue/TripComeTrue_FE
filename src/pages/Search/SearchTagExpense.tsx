@@ -107,7 +107,7 @@ const SearchTagExpense = () => {
         <Styled.SearchInput
           type="text"
           name="tag"
-          value={tag}
+          defaultValue={tag}
           onClick={() => navigate('/search')}
         />
         <button type="submit" aria-label="검색">
@@ -117,18 +117,15 @@ const SearchTagExpense = () => {
 
       <Styled.TabContainer>
         <Styled.TabButton isSelected>전체</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>도시</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>여행지</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>크리에이터</Styled.TabButton>
       </Styled.TabContainer>
 
       <Styled.TagContainer>
         <Styled.TagTitle>&apos;{tag}&apos; 여행 후기</Styled.TagTitle>
         <Styled.TagWrap>
-          {spotData.map((item) => (
+          {spotData.map((item, index) => (
             <>
               <Styled.TagExpenseWrap
-                key={item.tripRecordId}
+                key={`${index} ${item.tripRecordTitle}`}
                 onClick={() => navigate(`/trip/detail/${item.tripRecordId}`)}>
                 <img src={item.imageUrl} alt="backgroundImg" />
                 <Styled.TagExpensiveBookmark>

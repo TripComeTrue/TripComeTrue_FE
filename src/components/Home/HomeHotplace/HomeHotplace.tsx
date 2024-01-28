@@ -168,8 +168,8 @@ const HomeHotplace = () => {
             hide: false,
           }}>
           {selected === 'city'
-            ? hotData.map((item: SlideHotCity) => (
-                <SwiperSlide key={`${item.cityName} ${item.storedCount}`}>
+            ? hotData.map((item: SlideHotCity, index) => (
+                <SwiperSlide key={`${item.cityName} ${index}`}>
                   <Styled.HotplaceCityWrap
                     onClick={() =>
                       navigate(`/detailfeed/city/${item.cityId}`, {
@@ -196,9 +196,8 @@ const HomeHotplace = () => {
                 </SwiperSlide>
               ))
             : selected === 'review'
-              ? hotData.map((item: SlideHotReview) => (
-                  <SwiperSlide
-                    key={`${item.tripRecordTitle} ${item.storedCount}`}>
+              ? hotData.map((item: SlideHotReview, index) => (
+                  <SwiperSlide key={`${item.tripRecordTitle} ${index}`}>
                     <Styled.HotplaceReviewWrap
                       onClick={() =>
                         navigate(`/trip/detail/${item.tripRecordId}`)
