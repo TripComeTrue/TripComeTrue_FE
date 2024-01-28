@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { SimpleNav, SubTitle, TripRecordReviewCard } from '@/components/common';
@@ -98,7 +98,12 @@ const TripDetail = () => {
               tripRecordId={tripRecordId}
               myRatingScore={tripRecordLatestReviewData?.myRatingScore}
             />
-            <TripRecordReviewCard.WriteButton />
+            {tripRecordLatestReviewData?.canRegisterContent && (
+              <Link
+                to={`/trip/trip-record/review/${tripRecordLatestReviewData?.latestTripRecordReview.tripRecordReviewId}/write`}>
+                <TripRecordReviewCard.WriteButton />
+              </Link>
+            )}
           </TripRecordReviewCard>
         )}
         <Styled.OtherTripDetails>
