@@ -1,4 +1,5 @@
 export interface SlideHotCity {
+  cityId: number;
   cityName: string;
   storedCount: number;
   subtitle: string;
@@ -12,6 +13,7 @@ export interface SlideHotCity {
 
 export interface SlideHotReview {
   cityNames: string[];
+  tripRecordId: number;
   storedCount: number;
   subtitle: string;
   imageUrl: string;

@@ -15,6 +15,7 @@ export interface SpotsProps {
 
 export interface SpotsWishListProps {
   onDelete?: (id: number) => void;
+  onClick?: (id: number) => void;
 }
 
 export interface SpotsSwiperProps extends PostData {

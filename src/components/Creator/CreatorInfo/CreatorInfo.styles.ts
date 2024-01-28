@@ -9,3 +9,8 @@ export const InfoSubtitle = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
+
+export const Loading = styled.div`
+  margin: 2rem;
+  text-align: center;
+`;
