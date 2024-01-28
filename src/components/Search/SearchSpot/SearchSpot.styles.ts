@@ -102,3 +102,82 @@ export const SpotNull = styled.div`
     font-size: 10px;
   }
 `;
+
+export const ScrollContainer = styled.div`
+  margin: 1rem;
+`;
+
+export const ScrollWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const ScrollTitle = styled.div`
+  margin-bottom: 1rem;
+
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+`;
+
+export const ScrollExpenseWrap = styled.div`
+  margin: 0.2rem;
+  position: relative;
+  margin-bottom: 3rem;
+
+  width: 9.4rem;
+  height: 9.4rem;
+  border-radius: 0.625rem;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.625rem;
+  }
+`;
+
+export const ScrollExpensiveBookmark = styled.div`
+  position: absolute;
+  top: 0.4rem;
+  left: 0.5rem;
+
+  display: flex;
+
+  font-size: 10px;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.brand.white};
+
+  img {
+    width: 1rem;
+  }
+`;
+
+export const ScrollExpenseTitle = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
+export const MoreLoading = styled.button`
+  width: 100%;
+  height: 4rem;
+`;
+
+export const MoreInfo = styled.button`
+  width: 100%;
+  height: 4rem;
+
+  text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;

@@ -33,7 +33,7 @@ export const SearchCreatorsInfiniteInfo = async (
 
 // 홈 크리에이터 프로필 조회
 export const SearchCreatorProfile = async (memberId: number) => {
-  const res = await client.get(`/v1/members/${memberId}`);
+  const res = await client.get(`v1/members/${memberId}`);
 
   return res.data.data;
 };
@@ -44,7 +44,31 @@ export const SearchExpenseRanges = async (
   pageNum: number,
 ) => {
   const res = await client.get(
-    `/v1/trip-records/search/expense-ranges?expenseRangeType=${expenseRangeType}&page=${pageNum}`,
+    `v1/trip-records/search/expense-ranges?expenseRangeType=${expenseRangeType}&page=${pageNum}`,
+  );
+
+  return res.data.data;
+};
+
+// 홈 검색 '도시'탭 여행 후기 리스트 조회
+export const SearchCityScrollAPI = async (
+  cityName: string,
+  pageNum: number,
+) => {
+  const res = await client.get(
+    `v1/trip-records/search?cityName=${cityName}&page=${pageNum}`,
+  );
+
+  return res.data.data;
+};
+
+// 홈 검색 '여행지' 탭 여행 후기 리스트 조회
+export const SearchSpotScrollAPI = async (
+  placeName: string,
+  pageNum: number,
+) => {
+  const res = await client.get(
+    `v1/trip-records/search?placeName=${placeName}&page=${pageNum}`,
   );
 
   return res.data.data;
