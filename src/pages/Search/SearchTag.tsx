@@ -35,9 +35,6 @@ const SearchTag = () => {
 
       <Styled.TabContainer>
         <Styled.TabButton isSelected>전체</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>도시</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>여행지</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>크리에이터</Styled.TabButton>
       </Styled.TabContainer>
 
       <Styled.PreparingData>데이터 준비중입니다...</Styled.PreparingData>
