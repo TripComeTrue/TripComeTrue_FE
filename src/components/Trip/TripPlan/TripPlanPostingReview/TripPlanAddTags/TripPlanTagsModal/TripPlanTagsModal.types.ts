@@ -14,7 +14,6 @@ export type TripPlanTagModalProps = Pick<
   watch: UseFormWatch<TagForm>;
   setValue: UseFormSetValue<TagForm>;
   onSubmit: (e?: React.BaseSyntheticEvent<object, any, any>) => void;
-  onSubmitTags: () => void;
 };
 
 export interface TagForm {
@@ -23,8 +22,8 @@ export interface TagForm {
 }
 
 export enum TagTypeEnum {
-  flight = 'flight',
-  accommodation = 'accommodation',
-  location = 'location',
-  ticket = 'ticket',
+  flight = 'AIRLINE_TICKET_PURCHASE',
+  accommodation = 'ACCOMMODATION_RESERVATION',
+  location = 'FOOD_TOURISM_LOCATION',
+  ticket = 'TICKET_PASS_PURCHASE',
 }

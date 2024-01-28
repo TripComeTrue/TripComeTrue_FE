@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import TripPlanPosting from '@/components/Trip/TripPlan/TripPlanPostingPlan/TripPlanPostingPlan';
 import {
   TripPlanDate,
   TripPlanCountry,
@@ -10,6 +9,7 @@ import {
   TripPlanPrevButton,
 } from '@/components/Trip/TripPlan/TripPlanCommon/TripPlanCommon';
 import { TripFormDataProvider } from './TripFormDataContext';
+import TripPlanPostingPlan from '@/components/Trip/TripPlan/TripPlanPostingPlan/TripPlanPostingPlan';
 
 interface StepProps {
   caseBy: Record<number, JSX.Element | null>;
@@ -45,10 +45,10 @@ const TripPlan = () => {
           1: <TripPlanDate />,
           2: <TripPlanCountry />,
           3: <TripPlanCity />,
-          4: <TripPlanPosting />,
+          4: <TripPlanPostingPlan />,
         }}
       />
-      <TripPlanNextButton onClick={handleGoNext} />
+      {step < totalSteps && <TripPlanNextButton onClick={handleGoNext} />}
     </TripFormDataProvider>
   );
 };

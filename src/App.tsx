@@ -99,8 +99,8 @@ function App() {
             element={<TripRecordReviewEdit />}
           />
           <Route path="tripplan" element={<TripPlan />} />
-          <Route path="tripPlanRecord" element={<TripPlanSelect />} />
-          <Route path="tripPlanRecord/:id" element={<TripPlanRecord />} />
+          <Route path="tripplanrecord" element={<TripPlanSelect />} />
+          <Route path="tripplanrecord/:id" element={<TripPlanRecord />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route

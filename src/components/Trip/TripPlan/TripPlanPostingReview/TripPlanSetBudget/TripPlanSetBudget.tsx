@@ -11,9 +11,7 @@ const TripPlanSetBudget = ({ register }: TripPlanSetBudgetProps) => {
       <SubTitle fontSize={17}>여행 경비는 얼마로 준비하셨나요?</SubTitle>
 
       <Styled.BudgetWrapper>
-        <Styled.BudgetSelection
-          // ref={selectRef}
-          {...register('expenseRangeType')}>
+        <Styled.BudgetSelection {...register('expenseRangeType')}>
           {BudgetOptions.map((budget) => (
             <option key={budget.label} value={budget.value}>
               {budget.label}

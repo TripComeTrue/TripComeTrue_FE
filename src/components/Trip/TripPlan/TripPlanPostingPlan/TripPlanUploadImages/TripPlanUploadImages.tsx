@@ -1,15 +1,29 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import * as Styled from './TripPlanUploadImages.styles';
 import deleteIcon from '/images/delete.svg';
-import { UploadImagesProps } from './TripPlanUploadImages.types';
+import useSubmitImages from '@/hooks/common/useSubmitImages';
+import useDeleteImages from '@/hooks/common/useDeleteImages';
 
-const TripPlanUploadImages: React.FC<UploadImagesProps> = ({
-  setFormData,
-  selectedDay,
+type TripPlanUploadImagesProps = {
+  selectedDay: number;
+  placeIndex: number;
+  onImagesChange: (imageUrls: string[], placeIndex: number) => void;
+  uploadedImages: string[];
+};
+
+const TripPlanUploadImages: React.FC<TripPlanUploadImagesProps> = ({
+  // selectedDay, // 추후 사용 가능
+  placeIndex,
+  onImagesChange,
+  uploadedImages,
 }) => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadedImagesState, setUploadedImagesState] =
+    useState<string[]>(uploadedImages);
+  const { handleSubmitImages } = useSubmitImages(files, setFiles);
+  const { handleDeleteImages } = useDeleteImages();
   const UploadImageIconRef = useRef<HTMLInputElement>(null);
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
   const handleUploadImage = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -18,70 +32,104 @@ const TripPlanUploadImages: React.FC<UploadImagesProps> = ({
 
   const handleChangeImage = async (
     event: React.ChangeEvent<HTMLInputElement>,
-    day: number,
   ) => {
     const file = event.target.files ? event.target.files[0] : null;
     if (file) {
-      const fileUrl = URL.createObjectURL(file);
-      setUploadedImages((prevImages) => [...prevImages, fileUrl]);
+      setFiles((prev) => [...prev, file]);
+      console.log(files);
 
-      setFormData((prevFormData: any) => {
-        const newFormData = [...prevFormData];
-        const firstPlace = newFormData[day].places[0];
-        newFormData[day].places[0] = { ...firstPlace, photo: fileUrl };
-        return newFormData;
-      });
+      try {
+        const urls = await handleSubmitImages();
+        const updatedUrls = [...uploadedImagesState, ...urls];
+        setUploadedImagesState(updatedUrls);
+
+        console.log(uploadedImagesState);
+        onImagesChange(updatedUrls, placeIndex);
+      } catch (error) {
+        console.error('Error uploading images:', error);
+      }
     }
   };
 
-  const handleRemoveImage = (imageNumber: number) => {
-    setUploadedImages((currentImages) =>
-      currentImages.filter((_, index) => index !== imageNumber),
+  const handleRemoveImage = async (imageIndex: number) => {
+    const imageToDelete = uploadedImagesState[imageIndex];
+    const newFiles = files.filter((_, index) => index !== imageIndex);
+    const newImageUrls = uploadedImagesState.filter(
+      (_, index) => index !== imageIndex,
     );
+
+    setFiles(newFiles);
+    setUploadedImagesState(newImageUrls);
+
+    try {
+      await handleDeleteImages([imageToDelete]);
+      onImagesChange(newImageUrls, placeIndex);
+    } catch (error) {
+      console.error('Error deleting images:', error);
+    }
   };
 
-  return (
-    <Styled.UploadImageContainer>
-      <Styled.UploadImageIcon onClick={handleUploadImage}>
-        <AddAPhotoIcon className="image-icon" />
-        <p className="photo-text">
-          사진 업로드
-          <br />({uploadedImages.length}/5)
-        </p>
-      </Styled.UploadImageIcon>
+  useEffect(() => {
+    setUploadedImagesState(uploadedImages);
+  }, [uploadedImages]);
 
-      <Styled.ImageInput
-        ref={UploadImageIconRef}
-        type="file"
-        accept="image/*"
-        name="file"
-        onChange={(event) =>
-          selectedDay !== undefined &&
-          selectedDay !== null &&
-          handleChangeImage(event, selectedDay - 1)
+  useEffect(() => {
+    const uploadImages = async () => {
+      if (files.length > 0) {
+        try {
+          const newUploadedUrls = await handleSubmitImages();
+          const updatedUrls = [...uploadedImages, ...newUploadedUrls];
+          setUploadedImagesState(updatedUrls);
+          onImagesChange(updatedUrls, placeIndex);
+          console.log(updatedUrls);
+        } catch (error) {
+          console.error('Error uploading images:', error);
         }
-        disabled={uploadedImages.length >= 5}
-      />
+      }
+    };
+    uploadImages();
+  }, [files, handleSubmitImages, onImagesChange, uploadedImagesState]);
 
-      <Styled.UploadedImageSwiper
-        spaceBetween={1}
-        slidesPerView={uploadedImages.length > 1 ? 1.5 : 1}
-        direction="horizontal"
-        scrollbar={{
-          draggable: true,
-          el: '.swiper-scrollbar',
-          hide: false,
-        }}>
-        {uploadedImages.map((image, number) => (
-          <Styled.UploadedImage key={image}>
-            <img src={image} alt={`Uploaded ${number + 1}`} />
-            <Styled.RemoveBtn onClick={() => handleRemoveImage(number)}>
-              <img src={deleteIcon} alt="delete-icon" />
-            </Styled.RemoveBtn>
-          </Styled.UploadedImage>
-        ))}
-      </Styled.UploadedImageSwiper>
-    </Styled.UploadImageContainer>
+  return (
+    <Styled.Wrapper>
+      <Styled.UploadImageContainer>
+        <Styled.UploadImageIcon onClick={handleUploadImage}>
+          <AddAPhotoIcon className="image-icon" />
+          <p className="photo-text">
+            사진 업로드
+            <br />({uploadedImagesState.length}/5)
+          </p>
+        </Styled.UploadImageIcon>
+
+        <Styled.ImageInput
+          ref={UploadImageIconRef}
+          type="file"
+          accept="image/*"
+          name="file"
+          onChange={handleChangeImage}
+          disabled={uploadedImagesState.length >= 5}
+        />
+
+        <Styled.UploadedImageSwiper
+          spaceBetween={1}
+          slidesPerView={uploadedImagesState.length > 1 ? 1.5 : 1}
+          direction="horizontal"
+          scrollbar={{
+            draggable: true,
+            el: '.swiper-scrollbar',
+            hide: false,
+          }}>
+          {uploadedImagesState.map((image, index) => (
+            <Styled.UploadedImage key={`${image}-${index}`}>
+              <img src={image} alt={`Uploaded ${index + 1}`} />
+              <Styled.RemoveBtn onClick={() => handleRemoveImage(index)}>
+                <img src={deleteIcon} alt="Delete icon" />
+              </Styled.RemoveBtn>
+            </Styled.UploadedImage>
+          ))}
+        </Styled.UploadedImageSwiper>
+      </Styled.UploadImageContainer>
+    </Styled.Wrapper>
   );
 };
 

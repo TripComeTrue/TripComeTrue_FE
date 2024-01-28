@@ -1,16 +1,26 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import * as Styled from './TripPlanUploadMainImages.styles';
 import deleteIcon from '/images/delete.svg';
-import { UploadImagesProps } from '../TripPlanUploadImages/TripPlanUploadImages.types';
 import { SubTitle } from '@/components/common';
+import useSubmitImages from '@/hooks/common/useSubmitImages';
+import useDeleteImages from '@/hooks/common/useDeleteImages';
 
-const TripPlanUploadMainImages: React.FC<UploadImagesProps> = ({
-  setFormData,
-  selectedDay,
+type TripPlanUploadMainImagesProps = {
+  onImagesChange: (imageUrls: string[]) => void;
+  onValidationChange: (isValid: boolean) => void;
+};
+
+const TripPlanUploadMainImages: React.FC<TripPlanUploadMainImagesProps> = ({
+  onImagesChange,
+  onValidationChange,
 }) => {
-  const UploadImageIconRef = useRef<HTMLInputElement>(null);
+  const [isAtLeastOneImage, setIsAtLeastOneImage] = useState(false);
+  const [files, setFiles] = useState<File[]>([]);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const { handleSubmitImages } = useSubmitImages(files, setFiles);
+  const { handleDeleteImages } = useDeleteImages();
+  const UploadImageIconRef = useRef<HTMLInputElement>(null);
 
   const handleUploadImage = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -22,21 +32,59 @@ const TripPlanUploadMainImages: React.FC<UploadImagesProps> = ({
   ) => {
     const file = event.target.files ? event.target.files[0] : null;
     if (file) {
-      const fileUrl = URL.createObjectURL(file);
-      setUploadedImages((prevImages) => [...prevImages, fileUrl]);
+      setFiles((prev) => [...prev, file]);
 
-      setFormData((prevFormData: any) => {
-        const newFormData = [...prevFormData];
-        return newFormData;
-      });
+      try {
+        const urls = await handleSubmitImages();
+        const updatedUrls = [...uploadedImages, ...urls];
+        setUploadedImages(updatedUrls);
+        onImagesChange(updatedUrls);
+        setIsAtLeastOneImage(true);
+      } catch (error) {
+        console.error('Error uploading images:', error);
+      }
     }
   };
 
-  const handleRemoveImage = (imageNumber: number) => {
-    setUploadedImages((currentImages) =>
-      currentImages.filter((_, index) => index !== imageNumber),
+  const handleRemoveImage = async (imageIndex: number) => {
+    const imageToDelete = uploadedImages[imageIndex];
+
+    const newFiles = files.filter((_, index) => index !== imageIndex);
+    const newImageUrls = uploadedImages.filter(
+      (_, index) => index !== imageIndex,
     );
+    setFiles(newFiles);
+    setUploadedImages(newImageUrls);
+
+    setIsAtLeastOneImage(newImageUrls.length >= 1);
+
+    try {
+      await handleDeleteImages([imageToDelete]);
+    } catch (error) {
+      console.error('이미지 업로드 중 에러가 발생했습니다', error);
+    }
   };
+
+  useEffect(() => {
+    const uploadImages = async () => {
+      if (files.length > 0) {
+        try {
+          const newUploadedUrls = await handleSubmitImages();
+          const updatedUrls = [...uploadedImages, ...newUploadedUrls];
+          setUploadedImages(updatedUrls);
+          onImagesChange(updatedUrls);
+          setIsAtLeastOneImage(updatedUrls.length >= 1);
+        } catch (error) {
+          console.error('Error uploading images:', error);
+        }
+      }
+    };
+    uploadImages();
+  }, [files, handleSubmitImages, onImagesChange, uploadedImages]);
+
+  useEffect(() => {
+    onValidationChange(isAtLeastOneImage);
+  }, [isAtLeastOneImage, onValidationChange]);
 
   return (
     <Styled.Wrapper>
@@ -57,7 +105,7 @@ const TripPlanUploadMainImages: React.FC<UploadImagesProps> = ({
           type="file"
           accept="image/*"
           name="file"
-          onChange={(event) => selectedDay !== null && handleChangeImage(event)}
+          onChange={handleChangeImage}
           disabled={uploadedImages.length >= 3}
         />
 
@@ -65,21 +113,20 @@ const TripPlanUploadMainImages: React.FC<UploadImagesProps> = ({
           spaceBetween={1}
           slidesPerView={uploadedImages.length > 1 ? 1.5 : 1}
           direction="horizontal"
-          scrollbar={{
-            draggable: true,
-            el: '.swiper-scrollbar',
-            hide: false,
-          }}>
-          {uploadedImages.map((image, number) => (
+          scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
+          {uploadedImages.map((image, index) => (
             <Styled.UploadedImage key={image}>
-              <img src={image} alt={`Uploaded ${number + 1}`} />
-              <Styled.RemoveBtn onClick={() => handleRemoveImage(number)}>
+              <img src={image} alt={`Uploaded ${index + 1}`} />
+              <Styled.RemoveBtn onClick={() => handleRemoveImage(index)}>
                 <img src={deleteIcon} alt="delete-icon" />
               </Styled.RemoveBtn>
             </Styled.UploadedImage>
           ))}
         </Styled.UploadedImageSwiper>
       </Styled.UploadImageContainer>
+      {!isAtLeastOneImage && (
+        <p className="warning">* 최소 1장 이상의 이미지를 등록해주세요.</p>
+      )}
     </Styled.Wrapper>
   );
 };
