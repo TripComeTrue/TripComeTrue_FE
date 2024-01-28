@@ -32,7 +32,6 @@ const HomeHotplace = () => {
     const fetchData = async () => {
       try {
         const { cityCategory, locationCategory } = selectedOption;
-
         if (cityCategory === '인기도시') {
           const data = await HomeTopCity(locationCategory);
           setHotData(data);
@@ -173,7 +172,12 @@ const HomeHotplace = () => {
                   <Styled.HotplaceCityWrap
                     onClick={() =>
                       navigate(`/detailfeed/city/${item.cityId}`, {
-                        state: { cityId: item.cityId, name: item.cityName },
+                        state: {
+                          cityId: item.cityId,
+                          name: item.cityName,
+                          isDomestic:
+                            selectedOption.locationCategory === 'domestic',
+                        },
                       })
                     }>
                     <Styled.HotplaceCityImg>

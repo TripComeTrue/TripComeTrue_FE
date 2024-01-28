@@ -4,8 +4,6 @@ import 'swiper/swiper-bundle.css';
 import { ShortsCarouselProps } from './ShortsCarousel.types';
 
 const ShortsCarousel = ({ shortsData }: ShortsCarouselProps) => {
-  console.log(shortsData);
-
   return (
     <Styled.Container spaceBetween={8} slidesPerView={2.3}>
       {shortsData?.map((shortData) => (
