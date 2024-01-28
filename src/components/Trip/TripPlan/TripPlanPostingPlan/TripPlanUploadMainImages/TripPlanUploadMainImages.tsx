@@ -27,13 +27,23 @@ const TripPlanUploadMainImages: React.FC<TripPlanUploadMainImagesProps> = ({
     UploadImageIconRef.current?.click();
   };
 
-  const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeImage = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = event.target.files ? event.target.files[0] : null;
     if (file) {
       setFiles((prev) => [...prev, file]);
-      const fileUrl = URL.createObjectURL(file);
-      setUploadedImages((prev) => [...prev, fileUrl]);
-      setIsAtLeastOneImage(uploadedImages.length + 1 >= 1);
+
+      try {
+        const urls = await handleSubmitImages();
+        const updatedUrls = [...uploadedImages, ...urls];
+        setUploadedImages(updatedUrls);
+        onImagesChange(updatedUrls);
+        setIsAtLeastOneImage(true);
+        console.log(updatedUrls);
+      } catch (error) {
+        console.error('Error uploading images:', error);
+      }
     }
   };
 
@@ -61,18 +71,19 @@ const TripPlanUploadMainImages: React.FC<TripPlanUploadMainImagesProps> = ({
     const uploadImages = async () => {
       if (files.length > 0) {
         try {
-          const urls = await handleSubmitImages();
-          setUploadedImages(urls);
-          onImagesChange(urls);
-          setIsAtLeastOneImage(urls.length >= 1);
-          console.log(urls);
+          const newUploadedUrls = await handleSubmitImages();
+          const updatedUrls = [...uploadedImages, ...newUploadedUrls];
+          setUploadedImages(updatedUrls);
+          onImagesChange(updatedUrls);
+          setIsAtLeastOneImage(updatedUrls.length >= 1);
+          console.log(newUploadedUrls);
         } catch (error) {
-          console.error('이미지 업로드 중 에러가 발생했습니다', error);
+          console.error('Error uploading images:', error);
         }
       }
     };
     uploadImages();
-  }, [files, handleSubmitImages, onImagesChange]);
+  }, [files, handleSubmitImages, onImagesChange, uploadedImages]);
 
   useEffect(() => {
     onValidationChange(isAtLeastOneImage);

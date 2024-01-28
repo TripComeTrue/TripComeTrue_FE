@@ -246,7 +246,11 @@ const TripPlanPostingPlanRecord = () => {
           />
 
           <Styled.SubmitButtonContainer>
-            <Button type="submit" className="submit-btn" variants="primary">
+            <Button
+              type="submit"
+              className="submit-btn"
+              variants="primary"
+              disabled={!isMainImageValid}>
               등록하기
             </Button>
           </Styled.SubmitButtonContainer>
