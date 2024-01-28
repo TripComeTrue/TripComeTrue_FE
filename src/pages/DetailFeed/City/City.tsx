@@ -32,7 +32,7 @@ const City = () => {
   }
 
   const { isStored } = data;
-  console.log(isDomestic);
+
   return (
     <>
       <FeedNav id={cityId} isStored={isStored} refetch={refetch}>

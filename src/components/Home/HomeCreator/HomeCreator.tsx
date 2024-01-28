@@ -20,8 +20,6 @@ const HomeCreator = () => {
     fetchData();
   }, []);
 
-  console.log(cityData);
-
   return (
     <>
       <SubTitle margin="1rem" fontSize={18} icon={starIcon}>
