@@ -9,6 +9,12 @@ export const Wrapper = styled.div`
 
   width: 100%;
   gap: 0.7rem;
+
+  .warning {
+    padding: -1rem 0;
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    color: red;
+  }
 `;
 
 export const UploadImageContainer = styled.div`
@@ -26,23 +32,22 @@ export const UploadImageIcon = styled.div`
   align-items: center;
   position: relative;
 
-  width: 7rem;
-  height: 7rem;
+  width: 6rem;
+  height: 6rem;
   flex-shrink: 0;
-  margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.brand.gray};
   border-radius: 0.9375rem;
 
   .image-icon {
     position: absolute;
-    top: 1.8rem;
+    top: 1.4rem;
     fill: #626262;
   }
 
   .photo-text {
     position: absolute;
-    top: 3.6rem;
+    top: 3rem;
 
     text-align: center;
     font-size: 0.7rem;
@@ -68,8 +73,8 @@ export const UploadedImage = styled(SwiperSlide)`
   width: 7rem;
 
   img {
-    width: 7rem;
-    height: 7rem;
+    width: 6rem;
+    height: 6rem;
     object-fit: cover;
     border-radius: 0.8rem;
   }
@@ -78,7 +83,7 @@ export const UploadedImage = styled(SwiperSlide)`
 export const RemoveBtn = styled.button`
   position: absolute;
   top: 0.2rem;
-  left: 5.7rem;
+  left: 4.8rem;
   z-index: 10;
 
   cursor: pointer;

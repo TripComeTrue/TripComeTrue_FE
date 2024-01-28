@@ -5,7 +5,7 @@ import starIcon from '/starIcon.svg';
 import bookmarkPress from '/bookmarkPress.svg';
 import starFillIcon from '/starFill.svg';
 import { IoIosArrowForward } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Styled from './HomeHotplace.styles';
 
 import { SlideHotCity, SlideHotReview } from './HomeHotplace.types';
@@ -19,6 +19,7 @@ const HomeHotplace = () => {
   });
   const [hotData, setHotData] = useState([]);
   const [selected, setSelected] = useState('city');
+  const navigate = useNavigate();
 
   const handleOptionChange = (category: string, value: string) => {
     setSelectedOption((prevOptions) => ({
@@ -167,9 +168,14 @@ const HomeHotplace = () => {
             hide: false,
           }}>
           {selected === 'city'
-            ? hotData.map((item: SlideHotCity) => (
-                <SwiperSlide key={`${item.cityName} ${item.storedCount}`}>
-                  <Styled.HotplaceCityWrap>
+            ? hotData.map((item: SlideHotCity, index) => (
+                <SwiperSlide key={`${item.cityName} ${index}`}>
+                  <Styled.HotplaceCityWrap
+                    onClick={() =>
+                      navigate(`/detailfeed/city/${item.cityId}`, {
+                        state: { cityId: item.cityId, name: item.cityName },
+                      })
+                    }>
                     <Styled.HotplaceCityImg>
                       <img src={item.imageUrl} alt="img" />
                       <Styled.Gradient> </Styled.Gradient>
@@ -190,10 +196,12 @@ const HomeHotplace = () => {
                 </SwiperSlide>
               ))
             : selected === 'review'
-              ? hotData.map((item: SlideHotReview) => (
-                  <SwiperSlide
-                    key={`${item.tripRecordTitle} ${item.storedCount}`}>
-                    <Styled.HotplaceReviewWrap>
+              ? hotData.map((item: SlideHotReview, index) => (
+                  <SwiperSlide key={`${item.tripRecordTitle} ${index}`}>
+                    <Styled.HotplaceReviewWrap
+                      onClick={() =>
+                        navigate(`/trip/detail/${item.tripRecordId}`)
+                      }>
                       <Styled.HotplaceImg>
                         <img src={item.imageUrl} alt="img" />
                         <Styled.GradientReview> </Styled.GradientReview>

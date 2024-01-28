@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '@/components/common';
 
 export const TagsInputContainer = styled.div`
   display: flex;
@@ -37,4 +38,39 @@ export const TagsAddButton = styled.button`
   img {
     margin-left: 0.3rem;
   }
+`;
+
+export const ShowSelectedTag = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${({ theme }) => theme.brand.primary};
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  border-radius: 0.25rem;
+
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+
+  & > a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+`;
+
+export const TripPlanTagClearButton = styled(Button)`
+  display: flex;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  padding: 0;
+  background-color: transparent;
+  border: none;
+
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.text.gray};
 `;

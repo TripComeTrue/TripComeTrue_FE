@@ -6,7 +6,7 @@ import { SimpleNav, Spinners, SubTitle, Text } from '@/components/common';
 import * as Styled from './TripList.styles';
 import DollarIcon from '/images/dollar.svg';
 import StarIcon from '/starIcon.svg';
-import { CardList } from '@/components/Trip';
+import { CardList, CardListSkeleton } from '@/components/Trip';
 import { getTripRecords } from '@/apis/trip-records';
 
 const TripList = () => {
@@ -54,7 +54,12 @@ const TripList = () => {
           </SubTitle>
         )}
 
-        <CardList tripRecordsData={tripRecordsData} />
+        {tripRecordsData ? (
+          <CardList tripRecordsData={tripRecordsData} />
+        ) : (
+          <CardListSkeleton />
+        )}
+
         {isFetchingNextPage ? (
           <Spinners />
         ) : (

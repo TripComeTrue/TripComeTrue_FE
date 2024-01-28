@@ -76,6 +76,8 @@ interface ShortData {
   tripRecordStoreCount: number;
   tripRecordTitle: string;
   videoId: number;
+  videoUrl: string;
+  memberId: number;
 }
 
 interface TripRecordLatestReview {

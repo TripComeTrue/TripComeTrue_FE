@@ -35,15 +35,9 @@ const SearchTag = () => {
 
       <Styled.TabContainer>
         <Styled.TabButton isSelected>전체</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>도시</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>여행지</Styled.TabButton>
-        <Styled.TabButton isSelected={false}>크리에이터</Styled.TabButton>
       </Styled.TabContainer>
 
-      <Styled.TagContainer>
-        <Styled.TagTitle>&apos;{tag}&apos; 여행 후기</Styled.TagTitle>
-        <div>무한 스크롤</div>
-      </Styled.TagContainer>
+      <Styled.PreparingData>데이터 준비중입니다...</Styled.PreparingData>
     </>
   );
 };

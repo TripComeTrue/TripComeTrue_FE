@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import * as Styled from './HomeCreator.styles';
 import Spots from '@/components/common/Spots/Spots';
 import Creator from '@/components/common/Creator/Creator';
@@ -10,21 +11,27 @@ const HomeCreatorPost = ({
   creator: MemberInfoData;
   creatorData: TripRecordsData[];
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Styled.HotPostWrap>
-      {/* Creator 공통 컴포넌트 사용 */}
-      <Creator creator={creator} starRate={null} />
+      <div
+        onClick={() => {
+          navigate(`/creator/${creator.memberId}`);
+        }}>
+        <Creator creator={creator} starRate={null} />
+      </div>
 
       <Styled.PostBackground> </Styled.PostBackground>
 
       <Styled.SwiperDiv>
-        {/* Spot 공통 컴포넌트 사용 */}
         <Spots
           creator={creatorData.map((record: PostData) => ({
             imageUrl: record.imageUrl,
             storedCount: record.storedCount,
             tripRecordTitle: record.tripRecordTitle,
             reviews: record.reviews,
+            onClick: () => navigate(`/trip/detail/${record.tripRecordId}`),
           }))}
           slidesPerView={2.5}
           sort="center"

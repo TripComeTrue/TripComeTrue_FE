@@ -5,17 +5,23 @@ export interface TripPlanData {
   tripEndDay: string;
   referencedBy: number | null;
   tripPlanSchedules: TripPlanSchedule[];
+  tripPlanCountriesEng?: string[]; // 장소 데이터 조회시 params에 사용될 영문 국가명
   tripPlanCities?: string[]; // 국가+도시 형태 이름 저장시 사용하는 임시 데이터
 }
 
 export interface TripPlanSchedule {
   dayNumber: number;
   orderNumber: number;
-  placeId: number;
+  placeId: number | null;
   content: string;
   tagType: string;
   tagUrl: string;
 }
+
+// 여행 계획 작성 POST시 사용 (countries만 단일 string 적용)
+export type TripPlanDataForPost = Omit<TripPlanData, 'countries'> & {
+  countries: string;
+};
 
 // 여행 계획 선택 후 후기 작성을 위해 받아온 데이터
 export interface TripPlanResBody {
@@ -67,8 +73,8 @@ export interface TripRecordData {
 
 export interface TripRecordImage {
   imageUrl: string;
-  tagType: string;
-  tagUrl: string;
+  tagType: string | null;
+  tagUrl: string | null;
 }
 
 export interface TripRecordSchedule {

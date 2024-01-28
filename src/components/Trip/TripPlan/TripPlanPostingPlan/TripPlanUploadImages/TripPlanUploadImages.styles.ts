@@ -1,10 +1,22 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+  gap: 0.7rem;
+`;
+
 export const UploadImageContainer = styled.div`
   display: flex;
   flex-direction: row;
   z-index: 0;
+
+  width: 100%;
 `;
 
 export const UploadImageIcon = styled.div`
@@ -14,23 +26,22 @@ export const UploadImageIcon = styled.div`
   align-items: center;
   position: relative;
 
-  width: 7rem;
-  height: 7rem;
+  width: 6rem;
+  height: 6rem;
   flex-shrink: 0;
-  margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.brand.gray};
   border-radius: 0.9375rem;
 
   .image-icon {
     position: absolute;
-    top: 1.8rem;
+    top: 1.4rem;
     fill: #626262;
   }
 
   .photo-text {
     position: absolute;
-    top: 3.6rem;
+    top: 3rem;
 
     text-align: center;
     font-size: 0.7rem;
@@ -53,11 +64,11 @@ export const UploadedImage = styled(SwiperSlide)`
   justify-content: flex-start;
   position: relative;
 
-  width: 7rem;
+  width: 6rem;
 
   img {
-    width: 7rem;
-    height: 7rem;
+    width: 6rem;
+    height: 6rem;
     object-fit: cover;
     border-radius: 0.8rem;
   }
@@ -66,7 +77,7 @@ export const UploadedImage = styled(SwiperSlide)`
 export const RemoveBtn = styled.button`
   position: absolute;
   top: 0.2rem;
-  left: 5.7rem;
+  left: 4.8rem;
   z-index: 10;
 
   cursor: pointer;

@@ -1,4 +1,4 @@
-export interface MembersData {
+export interface Member {
   memberId: number;
   nickname: string;
   introduction: string;
@@ -6,7 +6,7 @@ export interface MembersData {
   averageRating: number;
 }
 
-export interface VideosData {
+export interface Video {
   videoId: number;
   tripRecordId: number;
   tripRecordTitle: string;
@@ -19,13 +19,13 @@ export interface VideosData {
   profileImageUrl: string;
 }
 
-export interface TripRecordsData {
+export interface TripRecord {
   tripRecordId: number;
   tripRecordTitle: string;
   memberId: number;
   memberName: string;
   profileImageUrl: string;
-  cityNames: string;
+  cityNames: string[] | null;
   totalDays: number;
   averageRating: number;
   storedCount: number;
@@ -33,7 +33,7 @@ export interface TripRecordsData {
 }
 
 export interface CreatorResponse {
-  members: MembersData[];
-  videos: VideosData[];
-  tripRecords: TripRecordsData[];
+  members: Member[];
+  videos: Video[];
+  tripRecords: TripRecord[];
 }

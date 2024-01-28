@@ -1,8 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
-
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 import DashBoard from '@/components/layout';
-// import Main from '@/pages/Main/Main';
-
 import {
   TripDetail,
   TripHome,
@@ -56,8 +54,15 @@ import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
 import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
+import SearchTagExpense from './pages/Search/SearchTagExpense';
 
 function App() {
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Routes>
       <Route element={<DashBoard />}>
@@ -72,15 +77,19 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="citylist" element={<HomeAllCity />} />
         <Route path="search/*" element={<Search />} />
+        <Route
+          path="search/select-expense/:tag"
+          element={<SearchTagExpense />}
+        />
         <Route path="search/select/:tag" element={<SearchTag />} />
         <Route path="search-non" element={<SearchNons />} />
-        {/* <Route path="search" element={<Search />} /> */}
 
         <Route path="creator/*" element={<Creator />} />
         <Route path="creator/:id" element={<CreatorDetail />} />
 
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
+          <Route path="tripplanrecord" element={<TripPlanSelect />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
@@ -92,8 +101,8 @@ function App() {
             element={<TripRecordReviewEdit />}
           />
           <Route path="tripplan" element={<TripPlan />} />
-          <Route path="tripPlanRecord" element={<TripPlanSelect />} />
-          <Route path="tripPlanRecord/:id" element={<TripPlanRecord />} />
+          <Route path="tripplanrecord" element={<TripPlanSelect />} />
+          <Route path="tripplanrecord/:id" element={<TripPlanRecord />} />
           {/* <Route path="country" element={<TripPlanCountry />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
@@ -112,8 +121,8 @@ function App() {
 
         <Route path="/detailfeed/*">
           <Route path="city/:cityId" element={<City />} />
-          <Route path="spot/:spotId" element={<TouristSpot />} />
-          <Route path="spot/:spotId/review" element={<Reviews />} />
+          <Route path="spot/:placeId" element={<TouristSpot />} />
+          <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"
             element={<PlaceReviewWrite />}

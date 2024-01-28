@@ -43,6 +43,9 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/destructuring-assignment': 'off',
     '@typescript-eslint/naming-convention': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       {

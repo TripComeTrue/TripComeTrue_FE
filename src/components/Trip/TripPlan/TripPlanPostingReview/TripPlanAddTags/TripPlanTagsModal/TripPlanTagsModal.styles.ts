@@ -54,6 +54,10 @@ export const TripPlanUrlInput = styled.input`
   padding: 0.4375rem 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid ${({ theme }) => theme.brand.primary};
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.brand.primary};
+  }
 `;
 
 export const TripPlanUrlInputClear = styled(Button)`

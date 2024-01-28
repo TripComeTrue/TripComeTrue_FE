@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
 import * as Styled from './ReviewComment.styles';
@@ -17,6 +17,7 @@ import {
   postPlaceReviewReply,
 } from '@/apis/place';
 import FormattedDate from '@/utils/formattedDate';
+import ReviewCommentSkeleton from './ReviewCommentSkeleton';
 
 const ReviewComment = () => {
   const navigate = useNavigate();
@@ -24,7 +25,10 @@ const ReviewComment = () => {
   const [comment, setComment] = useState('');
   const [isComment, setIsComment] = useState(true);
   const [commentId, setCommentId] = useState(0);
-  const { reviewId } = useParams() as { reviewId: string };
+  const { placeId, reviewId } = useParams() as {
+    placeId: string;
+    reviewId: string;
+  };
   const { data: placeReviewData, refetch: placeReviewRefetch } = useQuery({
     queryKey: ['PlaceReviewData'],
     queryFn: () => getPlaceReview(reviewId),
@@ -116,121 +120,130 @@ const ReviewComment = () => {
         <Styled.NavBackBtn onClick={() => navigate(-1)}>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>리뷰 댓글 작성</Styled.NavTitle>
+        <Styled.NavTitle>리뷰</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
-          <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          <Link to={`/detailfeed/spot/${placeId}/review/write`}>
+            <Styled.WriteBtn src={WriteIcon} alt="리뷰 작성 아이콘" />
+          </Link>
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
           </Styled.BubbleWrapper>
         </Styled.WriteBtnWrapper>
       </Styled.NavWrap>
-      <div>
-        <Styled.ReviewContainer>
-          <Styled.ReviewInfo>
-            <Styled.Creator>
-              <Avatar src={placeReviewData?.profileUrl} size={32} />
-              <Text fontWeight={700}>{placeReviewData?.nickname}</Text>
-            </Styled.Creator>
-            <Text fontSize={10} fontWeight={700}>
-              {FormattedDate(placeReviewData?.createdAt || '')}
-            </Text>
-          </Styled.ReviewInfo>
-          <div>
-            <Styled.ReviewImage src={placeReviewData?.imageUrl} alt="리뷰" />
-            <Text>{placeReviewData?.content}</Text>
-          </div>
-          <Styled.InteractionButtons>
-            <Styled.LikeButton
-              onClick={() =>
-                onClickLikeButton(
-                  placeReviewData.amILike,
-                  placeReviewData.placeReviewId,
-                )
-              }>
-              <img src={LikeIcon} alt="like icon" />
-              <Text fontSize={12} fontWeight={700} color="gray">
-                {placeReviewData?.likeCount}
+      {placeReviewData ? (
+        <div>
+          <Styled.ReviewContainer>
+            <Styled.ReviewInfo>
+              <Styled.Creator>
+                <Avatar src={placeReviewData?.profileUrl} size={32} />
+                <Text fontWeight={700}>{placeReviewData?.nickname}</Text>
+              </Styled.Creator>
+              <Text fontSize={10} fontWeight={700}>
+                {FormattedDate(placeReviewData?.createdAt || '')}
               </Text>
-            </Styled.LikeButton>
-            <Styled.CommentButton onClick={onClickComment}>
-              <img src={CommentIcon} alt="comment icon" />
-              <Text fontSize={12} fontWeight={700} color="gray">
-                {placeReviewData?.commentCount
-                  ? placeReviewData?.commentCount
-                  : '댓글 달기'}
-              </Text>
-            </Styled.CommentButton>
-          </Styled.InteractionButtons>
-        </Styled.ReviewContainer>
+            </Styled.ReviewInfo>
+            <div>
+              <Styled.ReviewImage src={placeReviewData?.imageUrl} alt="리뷰" />
+              <Text>{placeReviewData?.content}</Text>
+            </div>
+            <Styled.InteractionButtons>
+              <Styled.LikeButton
+                onClick={() =>
+                  onClickLikeButton(
+                    placeReviewData.amILike,
+                    placeReviewData.placeReviewId,
+                  )
+                }>
+                <img src={LikeIcon} alt="like icon" />
+                <Text fontSize={12} fontWeight={700} color="gray">
+                  {placeReviewData?.likeCount}
+                </Text>
+              </Styled.LikeButton>
+              <Styled.CommentButton onClick={onClickComment}>
+                <img src={CommentIcon} alt="comment icon" />
+                <Text fontSize={12} fontWeight={700} color="gray">
+                  {placeReviewData?.commentCount
+                    ? placeReviewData?.commentCount
+                    : '댓글 달기'}
+                </Text>
+              </Styled.CommentButton>
+            </Styled.InteractionButtons>
+          </Styled.ReviewContainer>
 
-        <Styled.CommentContainer>
-          <Styled.CommentTitle>
-            댓글 {placeReviewData?.commentCount}
-          </Styled.CommentTitle>
-          {placeReviewData?.comments.length !== 0 ? (
-            <ul>
-              {placeReviewData?.comments.map((commentData: CommentData) => (
-                <li key={commentData?.commentId}>
-                  <Comment>
-                    <Comment.CommentCard>
-                      <Styled.Header>
-                        <Comment.Info
-                          isWriter={commentData?.isWriter}
-                          profileUrl={commentData?.profileUrl}
-                          nickname={commentData?.nickname}
-                          createdAt={commentData?.createdAt}
-                        />
-                        {commentData?.isWriter && (
-                          <Comment.ActionsModal
-                            onClickDelete={() =>
-                              onClickDeleteComment(commentData?.commentId)
-                            }
+          <Styled.CommentContainer>
+            <Styled.CommentTitle>
+              댓글 {placeReviewData?.commentCount}
+            </Styled.CommentTitle>
+            {placeReviewData?.comments.length !== 0 ? (
+              <ul>
+                {placeReviewData?.comments.map((commentData: CommentData) => (
+                  <li key={commentData?.commentId}>
+                    <Comment>
+                      <Comment.CommentCard>
+                        <Styled.Header>
+                          <Comment.Info
+                            isWriter={commentData?.isWriter}
+                            profileUrl={commentData?.profileUrl}
+                            nickname={commentData?.nickname}
+                            createdAt={commentData?.createdAt}
                           />
-                        )}
-                      </Styled.Header>
-                      <Comment.Content content={commentData?.content} />
-                      <Comment.ReplyButton
-                        onClickFunc={() => onClickReply(commentData?.commentId)}
-                        replyLength={commentData?.replyComments.length}
-                      />
-                    </Comment.CommentCard>
-                  </Comment>
-                  <ul>
-                    {commentData.replyComments.map((replyData: ReplyData) => (
-                      <li key={replyData.commentId}>
-                        <Comment>
-                          <Comment.ReplyCard>
-                            <Styled.Header>
-                              <Comment.Info
-                                isWriter={replyData.isWriter}
-                                profileUrl={replyData.profileUrl}
-                                nickname={replyData.nickname}
-                                createdAt={replyData.createdAt}
-                              />
-                              {replyData.isWriter && (
-                                <Comment.ActionsModal
-                                  onClickDelete={() =>
-                                    onClickDeleteComment(replyData.commentId)
-                                  }
+                          {commentData?.isWriter && (
+                            <Comment.ActionsModal
+                              onClickDelete={() =>
+                                onClickDeleteComment(commentData?.commentId)
+                              }
+                            />
+                          )}
+                        </Styled.Header>
+                        <Comment.Content content={commentData?.content} />
+                        <Comment.ReplyButton
+                          onClickFunc={() =>
+                            onClickReply(commentData?.commentId)
+                          }
+                          replyLength={commentData?.replyComments.length}
+                        />
+                      </Comment.CommentCard>
+                    </Comment>
+                    <ul>
+                      {commentData.replyComments.map((replyData: ReplyData) => (
+                        <li key={replyData.commentId}>
+                          <Comment>
+                            <Comment.ReplyCard>
+                              <Styled.Header>
+                                <Comment.Info
+                                  isWriter={replyData.isWriter}
+                                  profileUrl={replyData.profileUrl}
+                                  nickname={replyData.nickname}
+                                  createdAt={replyData.createdAt}
                                 />
-                              )}
-                            </Styled.Header>
-                            <Comment.Content content={replyData.content} />
-                          </Comment.ReplyCard>
-                        </Comment>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <Styled.EmptyComment>
-              <Styled.EmptyText>첫 댓글을 달아보세요</Styled.EmptyText>
-            </Styled.EmptyComment>
-          )}
-        </Styled.CommentContainer>
-      </div>
+                                {replyData.isWriter && (
+                                  <Comment.ActionsModal
+                                    onClickDelete={() =>
+                                      onClickDeleteComment(replyData.commentId)
+                                    }
+                                  />
+                                )}
+                              </Styled.Header>
+                              <Comment.Content content={replyData.content} />
+                            </Comment.ReplyCard>
+                          </Comment>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <Styled.EmptyComment>
+                <Styled.EmptyText>첫 댓글을 달아보세요</Styled.EmptyText>
+              </Styled.EmptyComment>
+            )}
+          </Styled.CommentContainer>
+        </div>
+      ) : (
+        <ReviewCommentSkeleton />
+      )}
+
       <Styled.Footer>
         <Styled.CommentWriteContainer>
           <Styled.CommentInput
