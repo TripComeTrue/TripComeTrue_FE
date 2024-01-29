@@ -23,7 +23,7 @@ function MyPageReviewItem({
       <Spots.SliderTitleSortLeft>
         <Link to={`/trip/detail/${review.tripRecordId}`}>
           <Text tag="p" fontSize={10} color="gray" fontWeight={600}>
-            {review.totalDays - 1}박 {review.totalDays}일 ・ {review.countries}
+            {review.totalDays}박 {review.totalDays + 1}일 ・ {review.countries}
           </Text>
           <Text tag="h4" fontSize={12} fontWeight={600}>
             {review.title}
