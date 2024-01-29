@@ -106,7 +106,9 @@ const Gmap = ({
             {spotsInCityData &&
               spotsInCityData.map((place) => (
                 <MarkerF
-                  onClick={() => handleDefaultMarkerClick(place)}
+                  onClick={() => {
+                    handleDefaultMarkerClick(place);
+                  }}
                   key={place.placeId}
                   zIndex={100}
                   position={{
