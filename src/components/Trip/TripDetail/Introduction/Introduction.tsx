@@ -20,7 +20,7 @@ const Introduction = ({
 }: IntroductionProps) => {
   const { tripRecordId } = useParams() as { tripRecordId: string };
   const formatDays = tripRecordData
-    ? `${tripRecordData.totalDays - 1}박 ${tripRecordData.totalDays}일`
+    ? `${tripRecordData.totalDays}박 ${tripRecordData.totalDays + 1}일`
     : '';
 
   const [mainCountries, ...countries] = tripRecordData
@@ -45,6 +45,7 @@ const Introduction = ({
     if (tripRecordData.isStored) return deleteStoreMutate();
     return postStoreMutate();
   };
+
   return tripRecordData ? (
     <Styled.Container>
       <Styled.Header>
