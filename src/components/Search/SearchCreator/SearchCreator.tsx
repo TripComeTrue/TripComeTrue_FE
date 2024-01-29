@@ -26,8 +26,6 @@ const SearchCreator = () => {
     fetchData();
   }, [queryCreator]);
 
-  console.log(creatorData);
-
   return (
     <>
       <Styled.CreatorTitleWrap>

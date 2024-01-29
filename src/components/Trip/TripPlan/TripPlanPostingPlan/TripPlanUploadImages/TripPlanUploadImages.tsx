@@ -36,14 +36,11 @@ const TripPlanUploadImages: React.FC<TripPlanUploadImagesProps> = ({
     const file = event.target.files ? event.target.files[0] : null;
     if (file) {
       setFiles((prev) => [...prev, file]);
-      console.log(files);
-
       try {
         const urls = await handleSubmitImages();
         const updatedUrls = [...uploadedImagesState, ...urls];
         setUploadedImagesState(updatedUrls);
 
-        console.log(uploadedImagesState);
         onImagesChange(updatedUrls, placeIndex);
       } catch (error) {
         console.error('Error uploading images:', error);
@@ -81,7 +78,6 @@ const TripPlanUploadImages: React.FC<TripPlanUploadImagesProps> = ({
           const updatedUrls = [...uploadedImages, ...newUploadedUrls];
           setUploadedImagesState(updatedUrls);
           onImagesChange(updatedUrls, placeIndex);
-          console.log(updatedUrls);
         } catch (error) {
           console.error('Error uploading images:', error);
         }

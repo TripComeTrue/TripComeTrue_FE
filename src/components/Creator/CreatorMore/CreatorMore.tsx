@@ -46,8 +46,6 @@ const CreatorMore = () => {
     fetchData();
   }, [queryCreator]);
 
-  console.log(creatorsDatas);
-
   return (
     <>
       <Styled.CreatorTop>

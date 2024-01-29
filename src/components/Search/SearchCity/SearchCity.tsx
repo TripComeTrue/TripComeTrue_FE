@@ -40,8 +40,6 @@ const SearchCity = () => {
     fetchData();
   }, [queryCity]);
 
-  console.log(cityData);
-
   const ExchangeRate = (value: string): string | null => {
     const matchResult = value.match(/1:(\d+(\.\d+)?)/);
 

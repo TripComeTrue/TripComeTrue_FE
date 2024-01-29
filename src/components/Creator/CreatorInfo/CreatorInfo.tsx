@@ -40,8 +40,6 @@ const CreatorInfo = () => {
     fetchData();
   }, [memberId]);
 
-  console.log(creatorProfile);
-
   const videosAsSlides: Slide[] | [] =
     creatorProfile?.videos?.map((video) => ({
       tripRecordId: video.tripRecordId,

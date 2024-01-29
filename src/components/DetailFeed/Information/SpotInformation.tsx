@@ -4,7 +4,7 @@ import { SubTitle, Text } from '@/components/common';
 import { SpotInformationProps } from './Information.types';
 import * as Styled from './SpotInformation.styles';
 import phone from '/infoPhone.svg';
-import pin from '/infoPin.svg';
+import pin from '/images/marker.svg';
 
 const SpotInformation = ({
   address,

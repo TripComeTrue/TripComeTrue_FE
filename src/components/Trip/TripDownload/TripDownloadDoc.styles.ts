@@ -1,7 +1,7 @@
 import { Font, StyleSheet } from '@react-pdf/renderer';
 import Mundial from '@/styles/fonts/Mundial-Demibold.ttf';
-import AppleSDGothicNeoR from '@/styles/fonts/AppleSDGothicNeoR.ttf';
-import AppleSDGothicNeoB from '@/styles/fonts/AppleSDGothicNeoB.ttf';
+import AppleSDGothicNeoR from '@/styles/fonts/AppleSDGothicNeoR00.woff2';
+import AppleSDGothicNeoB from '@/styles/fonts/AppleSDGothicNeoB00.woff2';
 
 Font.register({
   family: 'Mundial',

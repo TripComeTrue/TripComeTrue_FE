@@ -17,7 +17,7 @@ export const SignInTitleH1 = styled.h1`
     left: 4.44em;
     width: 1.44rem;
     height: 1.44rem;
-    background: url('images/star_primary.png') 0 0 / 100% no-repeat;
+    background: url('/starIcon.svg') 0 0 / 100% no-repeat;
   }
 `;
 

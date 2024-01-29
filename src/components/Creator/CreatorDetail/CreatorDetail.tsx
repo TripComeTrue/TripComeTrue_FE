@@ -35,8 +35,6 @@ const CreatorDetail = () => {
     fetchData();
   }, [memberId]);
 
-  console.log(creatorProfile);
-
   return (
     <Styled.CreatorAllWrap>
       <Styled.CreatorTop>

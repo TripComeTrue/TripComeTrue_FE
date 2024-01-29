@@ -22,7 +22,6 @@ function SignInEmailForm({ handleOpen }: SignInEmailFormProps) {
     mutationFn: postSignIn,
   });
 
-  // react hook form hook
   const {
     register,
     handleSubmit,

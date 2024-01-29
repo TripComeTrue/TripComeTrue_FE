@@ -12,7 +12,6 @@ export const useWishDeleteMutation = () => {
 
       // 현재 쿼리 데이터를 캐시에서 가져옴
       const prevData = queryClient.getQueryData(['wishlist', newTodo.type]);
-      // console.log(prevData);
 
       // Optimistically update to the new value
       queryClient.setQueryData(['wishlist', newTodo.type], (oldData: any) => {

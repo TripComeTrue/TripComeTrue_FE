@@ -40,8 +40,6 @@ const SearchSpot = () => {
     fetchData();
   }, []);
 
-  console.log(spotData);
-
   return (
     <Styled.SpotContainer>
       <SubTitle
