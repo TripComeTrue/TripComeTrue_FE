@@ -42,6 +42,8 @@ const TripHomeBody = () => {
     navigate(`/trip/list?${param}`);
   };
 
+  console.log(ShortsData);
+
   return (
     <Styled.Container>
       <div>
