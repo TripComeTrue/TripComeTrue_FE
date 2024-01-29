@@ -66,23 +66,9 @@ export const DaysContainer = styled.div`
   flex-direction: row;
 
   width: 100%;
-  padding: 0;
   gap: 0.5rem;
+  margin-bottom: 0.4rem;
   overflow: scroll;
-`;
-
-export const DaysInner = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  width: 100%;
-  padding: 0;
-  align-items: center;
-  gap: 0.4rem;
-
-  overflow-y: scroll;
 `;
 
 export const DaysButton = styled.button<PostingProps>`
@@ -97,7 +83,7 @@ export const DaysButton = styled.button<PostingProps>`
   background-color: ${(props) =>
     props.$isDaySelected ? '#b4f34c' : '#DCDCDC'};
   border-radius: 15rem;
-  margin: 0.9rem 0;
+  margin: 0.3rem 0;
 
   color: ${(props) => (props.$isDaySelected ? '#373737' : '#626262')};
   font-size: ${({ theme }) => theme.fontSizes.xs};
@@ -111,7 +97,7 @@ export const PostingForm = styled.form`
   flex-direction: column;
   position: relative;
 
-  gap: 0.8rem;
+  gap: 0.6rem;
   width: 100%;
 
   input {
@@ -133,7 +119,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 1rem;
+  gap: 0.3rem;
 `;
 
 export const CityInputContainer = styled.div`
@@ -143,7 +129,7 @@ export const CityInputContainer = styled.div`
   position: relative;
   width: 100%;
 
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.3rem;
 
   .city-icon {
     position: absolute;
@@ -216,7 +202,10 @@ export const PlaceNumber = styled.div`
 export const PlaceInput = styled.input`
   width: 100%;
   border-radius: 0.4rem;
-  padding-left: 1rem;
+  padding-left: 0.3rem;
+  margin-bottom: 0.3rem;
+
+  border: 1px solid white !important;
 `;
 
 export const NoteInput = styled.textarea`
@@ -226,6 +215,7 @@ export const NoteInput = styled.textarea`
   border: 1px solid #b4f34c;
   border-radius: 0.4rem;
   padding: 0.75rem;
+  margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.brand.white};
   outline-color: #b4f34c;
@@ -234,20 +224,6 @@ export const NoteInput = styled.textarea`
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.black};
   font-size: ${({ theme }) => theme.fontSizes.sm};
-`;
-
-export const AddPlaceButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  margin: 1.5rem 0 5rem 0;
-  gap: 0.5rem;
-
-  font-size: 0.9375rem;
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.text.gray};
 `;
 
 export const SubmitButtonContainer = styled.div`

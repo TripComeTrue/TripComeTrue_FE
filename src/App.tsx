@@ -55,6 +55,7 @@ import NotFound from './pages/NotFound/NotFound';
 import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
 import SearchTagExpense from './pages/Search/SearchTagExpense';
+import TripPlanCopy from './pages/Trip/TripPlan/TripPlanCopy';
 
 function App() {
   const location = useLocation();
@@ -103,20 +104,8 @@ function App() {
           <Route path="tripplan" element={<TripPlan />} />
           <Route path="tripplanrecord" element={<TripPlanSelect />} />
           <Route path="tripplanrecord/:id" element={<TripPlanRecord />} />
-          {/* <Route path="country" element={<TripPlanCountry />} />
+          <Route path="tripplancopy/:id" element={<TripPlanCopy />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
-          <Route
-            path="detail/:tripRecordId/review/:reviewId/write"
-            element={<TripReviewWriteNew />}
-          />
-          <Route
-            path="detail/:tripRecordId/review/:reviewId/edit"
-            element={<TripReviewWriteEdit />}
-          />
-          <Route path="plan" element={<TripPlanDate />} />
-          <Route path="country" element={<TripPlanCountry />} />
-          <Route path="city" element={<TripPlanCity />} />
-          <Route path="posting" element={<TripPlanPosting />} /> */}
         </Route>
 
         <Route path="/detailfeed/*">

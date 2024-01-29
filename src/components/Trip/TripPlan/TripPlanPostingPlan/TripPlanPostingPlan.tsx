@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { differenceInDays, format } from 'date-fns';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import CalendarToday from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
-import { SlArrowLeft } from 'react-icons/sl';
 import { GoPlusCircle } from 'react-icons/go';
+import { SlArrowLeft } from 'react-icons/sl';
 import TripPlanGoogleMaps from './TripPlanGoogleMaps/TripPlanGoogleMaps';
 import * as Styled from './TripPlanPostingPlan.styles';
 import { Button } from '@/components/common';
@@ -24,6 +25,7 @@ import {
 import { postTripPlan } from '@/apis/trip-planandrecords';
 
 const TripPlanPostingPlan = () => {
+  const navigate = useNavigate();
   const { tripPlanData } = useTripFormData();
   const [selectedDay, setSelectedDay] = useState<number | null>(1);
   const [selectedCity, setSelectedCity] = useState<string>('');
@@ -219,9 +221,11 @@ const TripPlanPostingPlan = () => {
         postData.tripPlanSchedules.push(schedule);
       });
     });
-
-    console.log(postData);
-    mutation.mutate(postData);
+    mutation.mutate(postData, {
+      onSuccess: () => {
+        navigate('/mypage?tab=plan');
+      },
+    });
   };
 
   const createDaysInput = () => {

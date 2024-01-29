@@ -19,9 +19,19 @@ export interface TripPlanSchedule {
 }
 
 // 여행 계획 작성 POST시 사용 (countries만 단일 string 적용)
-export type TripPlanDataForPost = Omit<TripPlanData, 'countries'> & {
+export type TripPlanDataForPost = Omit<
+  TripPlanData,
+  'countries' | 'tripPlanSchedules'
+> & {
   countries: string;
+  tripPlanSchedules: TripPlanScheduleForPost[];
 };
+
+export interface TripPlanScheduleForPost
+  extends Omit<TripPlanSchedule, 'tagType' | 'tagUrl'> {
+  tagType?: string | null;
+  tagUrl?: string | null;
+}
 
 // 여행 계획 선택 후 후기 작성을 위해 받아온 데이터
 export interface TripPlanResBody {
@@ -147,4 +157,30 @@ export interface NewPlace {
 export interface NewPlaceResponse {
   code: number;
   data: number; // placeId
+}
+
+// 여행 계획 복사시 받아오는 여행 계획 데이터
+export interface TripPlanOfSomeoneRes {
+  code: number;
+  data: TripPlanOfSomeone;
+}
+export interface TripPlanOfSomeone {
+  countries: string;
+  tripStartDay: number[];
+  tripEndDay: number[];
+  tripSchedules: TripPlanOfSomeoneSchedule[];
+}
+
+export interface TripPlanOfSomeoneSchedule {
+  latitude: number;
+  longitude: number;
+  country: string;
+  cityName: string;
+  placeName: string;
+  dayNumber: number;
+  orderNumber: number;
+  placeId: number;
+  content: string;
+  tagType?: string;
+  tagUrl?: string;
 }
