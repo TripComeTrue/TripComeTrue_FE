@@ -1,5 +1,4 @@
 import { MouseEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { HiOutlineDotsHorizontal, HiOutlineDotsVertical } from 'react-icons/hi';
 import { MdArrowOutward, MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
 import { Menu, MenuItem } from '@mui/material';
@@ -16,7 +15,6 @@ function MyPagePopMenu({
   setPlanItem,
   setReviewItem,
 }: MyPagePopMenuProps) {
-  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -28,8 +26,6 @@ function MyPagePopMenu({
     if (setReviewItem) setReviewItem(undefined);
   };
   const onClickEdit = () => {
-    if (plan) navigate(`/trip/tripPlan/view/${plan.id}`);
-    if (review) navigate(`/trip/detail/${review.tripRecordId}/review/edit`);
     handleClose();
   };
   const onClickDel = () => {
