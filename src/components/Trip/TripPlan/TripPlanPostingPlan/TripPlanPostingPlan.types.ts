@@ -16,6 +16,6 @@ export interface Place {
   place: string;
   placeId: number | null;
   note: string;
-  tagType: string;
-  tagUrl: string;
+  tagType: string | null;
+  tagUrl: string | null;
 }

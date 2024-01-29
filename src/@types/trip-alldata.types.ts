@@ -14,8 +14,8 @@ export interface TripPlanSchedule {
   orderNumber: number;
   placeId: number | null;
   content: string;
-  tagType: string;
-  tagUrl: string;
+  tagType: string | null;
+  tagUrl: string | null;
 }
 
 // 여행 계획 작성 POST시 사용 (countries만 단일 string 적용)
@@ -94,8 +94,8 @@ export interface TripRecordSchedule {
   content: string;
   tripRecordScheduleImages: string[];
   tripRecordScheduleVideos: string[];
-  tagType: string;
-  tagUrl: string;
+  tagType: string | null;
+  tagUrl: string | null;
 }
 
 // 여행후기 작성 및 수정시 기본 값
