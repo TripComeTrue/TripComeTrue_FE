@@ -214,8 +214,8 @@ const TripPlanPostingPlan = () => {
           orderNumber: placeIndex + 1,
           placeId: place.placeId,
           content: place.note,
-          tagType: place.tagType,
-          tagUrl: place.tagUrl,
+          tagType: place.tagType ?? null,
+          tagUrl: place.tagUrl ?? null,
         };
 
         postData.tripPlanSchedules.push(schedule);
