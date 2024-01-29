@@ -27,14 +27,10 @@ const HotPlace = ({
     return <p>Data not available</p>;
   }
 
-  const handlePlaceClick = ({
-    placeId,
-    placeName,
-  }: {
-    placeId: number;
-    placeName: string;
-  }) => {
-    navigate(`/detailfeed/spot/${placeId}`, { state: { placeId, placeName } });
+  const handlePlaceClick = ({ placeId }: { placeId: number }) => {
+    navigate(`/detailfeed/spot/${placeId}`, {
+      state: { placeId, placeName: cityName, cityId },
+    });
   };
 
   const handleMoreClick = () => {
@@ -59,14 +55,10 @@ const HotPlace = ({
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {data.data.map(
-          (
-            { imageUrl, storedCount, placeName, placeId, commentTotal },
-            index,
-          ) => (
+          ({ imageUrl, storedCount, placeName, placeId, commentTotal }) => (
             <Styled.PlaceItem
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              onClick={() => handlePlaceClick({ placeId, placeName })}>
+              key={placeId}
+              onClick={() => handlePlaceClick({ placeId })}>
               <Styled.BookMarkBox>
                 <Bookmark count={storedCount} />
               </Styled.BookMarkBox>

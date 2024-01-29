@@ -10,7 +10,7 @@ const SearchCreator = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const queryCreator = searchParams.get('query');
-  const [creatorData, setCreatorData] = useState<CreatorResponse[]>([]);
+  const [creatorData, setCreatorData] = useState<CreatorResponse | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +24,7 @@ const SearchCreator = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [queryCreator]);
 
   console.log(creatorData);
 
@@ -38,13 +38,12 @@ const SearchCreator = () => {
           크리에이터
         </SubTitle>
       </Styled.CreatorTitleWrap>
-      {creatorData && Object.keys(creatorData).length !== 0 ? (
+      {creatorData && creatorData.members.length !== 0 ? (
         <div>
           <Styled.CreatorContent>
-            <Creator
-              creator={creatorData[0].members[0]}
-              starRate={creatorData[0].members[0].averageRating}
-            />
+            {creatorData.members.slice(0, 3).map((creator, index) => (
+              <Creator key={index} creator={creator} starRate={5.2} />
+            ))}
           </Styled.CreatorContent>
         </div>
       ) : (

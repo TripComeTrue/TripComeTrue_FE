@@ -112,22 +112,22 @@ const Search: React.FC = () => {
 
         <Styled.TabContainer>
           <Styled.TabButton
-            isSelected={tab === 'all'}
+            $isSelected={tab === 'all'}
             onClick={() => handleTabChange('all')}>
             전체
           </Styled.TabButton>
           <Styled.TabButton
-            isSelected={tab === 'city'}
+            $isSelected={tab === 'city'}
             onClick={() => handleTabChange('city')}>
             도시
           </Styled.TabButton>
           <Styled.TabButton
-            isSelected={tab === 'spot'}
+            $isSelected={tab === 'spot'}
             onClick={() => handleTabChange('spot')}>
             여행지
           </Styled.TabButton>
           <Styled.TabButton
-            isSelected={tab === 'creator'}
+            $isSelected={tab === 'creator'}
             onClick={() => handleTabChange('creator')}>
             크리에이터
           </Styled.TabButton>

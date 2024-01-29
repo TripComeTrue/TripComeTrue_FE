@@ -40,6 +40,7 @@ const Maps = ({ daysData }: MapsProps) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: GOOGLE_MAPS,
+    language: 'ko',
   });
 
   const onLoad = (mapData: google.maps.Map) => {

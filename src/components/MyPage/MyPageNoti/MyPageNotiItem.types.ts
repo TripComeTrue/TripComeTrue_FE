@@ -1,5 +1,5 @@
-import { Notification } from '@/@types/mypage.types';
+import { NotificationContent } from '@/@types/mypage.types';
 
 export interface MyPageNotiItemProps {
-  noti: Notification;
+  noti: NotificationContent;
 }

@@ -25,10 +25,12 @@ const CreatorMore = () => {
     navigate(-1);
   };
 
-  // const handleClick = (prop: string): string => {
-  //   navigate(`/creator/${prop}`);
-  //   return prop;
-  // };
+  const handleClick = (prop: number): number => {
+    navigate(`/creator/${prop}`, {
+      state: { prop },
+    });
+    return prop;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,13 +59,15 @@ const CreatorMore = () => {
       </Styled.CreatorTop>
 
       <Styled.CreatorAllWrap>
-        <button
-          aria-label="go to Details"
-          type="button"
-          // onClick={() => handleClick(creatorsDatas.memberId)}
-        >
-          <CreatorProfile data={creatorsDatas[0]} />
-        </button>
+        {creatorsDatas.map((creatorData, index) => (
+          <button
+            key={index}
+            aria-label={`go to Details for ${creatorData.nickname}`}
+            type="button"
+            onClick={() => handleClick(creatorData.memberId)}>
+            <CreatorProfile data={creatorData} />
+          </button>
+        ))}
       </Styled.CreatorAllWrap>
     </>
   );

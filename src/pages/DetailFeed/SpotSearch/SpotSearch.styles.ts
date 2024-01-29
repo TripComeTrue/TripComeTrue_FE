@@ -6,14 +6,6 @@ export const SpotSearchWrapper = styled.div`
   margin-top: 2rem;
 `;
 
-export const RecentSearchesTitle = styled.div`
-  height: 2.5rem;
-
-  margin-top: 1rem;
-
-  ${alignCenter}
-`;
-
 export const SpotSearchBox = styled.div`
   height: 2.8rem;
 
@@ -21,6 +13,8 @@ export const SpotSearchBox = styled.div`
   padding: 0.25rem 1.25rem;
   background-color: black;
   ${alignCenter}
+
+  margin-bottom: 2rem;
 `;
 
 export const SpotSearchInput = styled.input`
@@ -38,20 +32,8 @@ export const SpotSearchInput = styled.input`
   }
 `;
 
-export const RecentSearchTermBox = styled.div`
+export const SpotListWrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`;
-
-export const RecentSearchTerm = styled.div`
-  height: 1.5rem;
-
-  ${alignCenter}
-
-  padding: 0.125rem 0.5rem;
-  border-radius: 1.875rem;
-  background-color: ${({ theme }) => theme.brand.lightGray};
-
-  cursor: pointer;
+  flex-direction: column;
+  gap: 1rem;
 `;

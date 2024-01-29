@@ -1,4 +1,5 @@
 import ReactPlayer from 'react-player';
+import { Link, useParams } from 'react-router-dom';
 import { SubTitle, Tag, Text } from '@/components/common';
 import MarkerIcon from '/images/marker.svg';
 import * as Styled from './TripDescription.styles';
@@ -7,6 +8,7 @@ import { TripDescriptionProps } from './TripDescription.types';
 import classifyTag from '@/utils/classifyTag';
 
 const TripDescription = ({ data }: TripDescriptionProps) => {
+  const { tripRecordId } = useParams() as { tripRecordId: string };
   const [date, daysData] = data || '';
   const formattedDate = date?.replace(/-/gi, '.');
 
@@ -69,12 +71,14 @@ const TripDescription = ({ data }: TripDescriptionProps) => {
         ))}
       </Styled.PlaceList>
       <Styled.ButtonWrapper>
-        <Styled.CopyButton>
-          <Styled.IconImage src={StarIcon} alt="star icon" />
-          <Text color="white" fontWeight={700}>
-            여행일정 복사하기
-          </Text>
-        </Styled.CopyButton>
+        <Link to={`/trip/tripplancopy/${tripRecordId}`}>
+          <Styled.CopyButton>
+            <Styled.IconImage src={StarIcon} alt="star icon" />
+            <Text color="white" fontWeight={700}>
+              여행일정 복사하기
+            </Text>
+          </Styled.CopyButton>
+        </Link>
       </Styled.ButtonWrapper>
     </Styled.Container>
   );

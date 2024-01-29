@@ -1,8 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
-
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 import DashBoard from '@/components/layout';
-// import Main from '@/pages/Main/Main';
-
 import {
   TripDetail,
   TripHome,
@@ -31,6 +29,7 @@ import {
   SpotGalleryList,
   PlaceReviewWrite,
   PlaceReviewEdit,
+  TripMap,
 } from './pages/DetailFeed';
 import ShortsList from './pages/DetailFeed/ShortsList/ShortsList';
 
@@ -55,8 +54,16 @@ import { MyPageLayout } from './components/MyPage';
 import NotFound from './pages/NotFound/NotFound';
 import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
+import SearchTagExpense from './pages/Search/SearchTagExpense';
+import TripPlanCopy from './pages/Trip/TripPlan/TripPlanCopy';
 
 function App() {
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Routes>
       <Route element={<DashBoard />}>
@@ -71,15 +78,19 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="citylist" element={<HomeAllCity />} />
         <Route path="search/*" element={<Search />} />
+        <Route
+          path="search/select-expense/:tag"
+          element={<SearchTagExpense />}
+        />
         <Route path="search/select/:tag" element={<SearchTag />} />
         <Route path="search-non" element={<SearchNons />} />
-        {/* <Route path="search" element={<Search />} /> */}
 
         <Route path="creator/*" element={<Creator />} />
         <Route path="creator/:id" element={<CreatorDetail />} />
 
         <Route path="/trip/*">
           <Route index element={<TripHome />} />
+          <Route path="tripplanrecord" element={<TripPlanSelect />} />
           <Route path="list" element={<TripList />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
           <Route
@@ -91,28 +102,16 @@ function App() {
             element={<TripRecordReviewEdit />}
           />
           <Route path="tripplan" element={<TripPlan />} />
-          <Route path="tripPlanRecord" element={<TripPlanSelect />} />
-          <Route path="tripPlanRecord/:id" element={<TripPlanRecord />} />
-          {/* <Route path="country" element={<TripPlanCountry />} />
+          <Route path="tripplanrecord" element={<TripPlanSelect />} />
+          <Route path="tripplanrecord/:id" element={<TripPlanRecord />} />
+          <Route path="tripplancopy/:id" element={<TripPlanCopy />} />
           <Route path="detail/:tripRecordId" element={<TripDetail />} />
-          <Route
-            path="detail/:tripRecordId/review/:reviewId/write"
-            element={<TripReviewWriteNew />}
-          />
-          <Route
-            path="detail/:tripRecordId/review/:reviewId/edit"
-            element={<TripReviewWriteEdit />}
-          />
-          <Route path="plan" element={<TripPlanDate />} />
-          <Route path="country" element={<TripPlanCountry />} />
-          <Route path="city" element={<TripPlanCity />} />
-          <Route path="posting" element={<TripPlanPosting />} /> */}
         </Route>
 
         <Route path="/detailfeed/*">
           <Route path="city/:cityId" element={<City />} />
-          <Route path="spot/:spotId" element={<TouristSpot />} />
-          <Route path="spot/:spotId/review" element={<Reviews />} />
+          <Route path="spot/:placeId" element={<TouristSpot />} />
+          <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"
             element={<PlaceReviewWrite />}
@@ -135,7 +134,8 @@ function App() {
             element={<SpotGalleryList />}
           />
           <Route path="spotlist/:placeId" element={<SpotList />} />
-          <Route path="spotsearch" element={<SpotSearch />} />
+          <Route path="spotsearch/:cityId" element={<SpotSearch />} />
+          <Route path="tripmap/:cityId" element={<TripMap />} />
         </Route>
         <Route path="mypage" element={<MyPageLayout />}>
           <Route index element={<MyPage />} />

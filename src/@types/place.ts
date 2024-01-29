@@ -16,6 +16,7 @@ interface PlaceReviewData {
   nickname: string;
   placeReviewId: number;
   imageUrl: string;
+  profileUrl: string;
 }
 
 interface CommentData {

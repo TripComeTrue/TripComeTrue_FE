@@ -16,6 +16,7 @@ const DetailFeedShorts = ({
     id: cityId,
     fnUrl: `/v1/cities/${cityId}/videos/list`,
   });
+
   const navigate = useNavigate();
   if (isLoading) {
     return <p>Loading...</p>;
@@ -47,7 +48,9 @@ const DetailFeedShorts = ({
         </SubTitle>
       </Styled.SubTitleBox>
       {slideShorts.length === 0 ? (
-        <EmptyContents />
+        <Styled.EmptyBox>
+          <EmptyContents />
+        </Styled.EmptyBox>
       ) : (
         <Shorts slides={slideShorts} />
       )}

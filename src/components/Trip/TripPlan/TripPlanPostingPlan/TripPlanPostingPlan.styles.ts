@@ -11,10 +11,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 
   padding: 0 1rem;
 `;
@@ -71,21 +71,7 @@ export const DaysContainer = styled.div`
   overflow: scroll;
 `;
 
-export const DaysInner = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  width: 100%;
-  padding: 0;
-  align-items: center;
-  gap: 0.4rem;
-
-  overflow-y: scroll;
-`;
-
-export const DaysButton = styled.span<PostingProps>`
+export const DaysButton = styled.button<PostingProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,7 +219,7 @@ export const NoteInput = styled.textarea`
 
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.text.black};
-  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
 `;
 
 export const AddPlaceButton = styled.div`

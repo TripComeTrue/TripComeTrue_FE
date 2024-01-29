@@ -8,13 +8,22 @@ import search from '/search.svg';
 
 interface SpotListNavProps {
   children: ReactNode;
+  cityId: number;
+  placeName: string;
 }
 
-const SpotListNav = ({ children }: SpotListNavProps) => {
+const SpotListNav = ({ children, cityId, placeName }: SpotListNavProps) => {
   const navigate = useNavigate();
   const onClickBackBtn = () => {
     navigate(-1);
   };
+
+  const handleMapIconClick = () => {
+    navigate(`/detailfeed/tripmap/${cityId}`, {
+      state: { cityName: placeName },
+    });
+  };
+
   return (
     <NavWrap>
       <NavInner>
@@ -25,10 +34,11 @@ const SpotListNav = ({ children }: SpotListNavProps) => {
         </Styled.SpotListNavBtnWrap>
         <Styled.SpotNavTitle>{children}</Styled.SpotNavTitle>
         <Styled.SpotListNavRight>
-          <Styled.SpotListNavIcon>
+          <Styled.SpotListNavIcon
+            onClick={() => navigate(`/detailfeed/spotsearch/${cityId}`)}>
             <img src={search} alt="검색 아이콘" />
           </Styled.SpotListNavIcon>
-          <Styled.SpotListNavIcon>
+          <Styled.SpotListNavIcon onClick={handleMapIconClick}>
             <img src={map} alt="지도 아이콘" />
           </Styled.SpotListNavIcon>
         </Styled.SpotListNavRight>

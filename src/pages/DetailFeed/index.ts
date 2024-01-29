@@ -8,3 +8,4 @@ export { default as Reviews } from '@/pages/DetailFeed/Reviews/Reviews';
 export { default as ReviewComment } from '@/pages/DetailFeed/ReviewComment/ReviewComment';
 export { default as PlaceReviewWrite } from '@/pages/DetailFeed/PlaceReview/PlaceReviewWrite';
 export { default as PlaceReviewEdit } from '@/pages/DetailFeed/PlaceReview/PlaceReviewEdit';
+export { default as TripMap } from '@/pages/DetailFeed/TripMap/TripMap';

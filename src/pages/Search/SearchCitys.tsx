@@ -1,7 +1,12 @@
-import { SearchCity } from '@/components/Search';
+import { SearchCity, SearchCityScroll } from '@/components/Search';
 
 const SearchCitys = () => {
-  return <SearchCity />;
+  return (
+    <>
+      <SearchCity />
+      <SearchCityScroll />
+    </>
+  );
 };
 
 export default SearchCitys;

@@ -1,12 +1,14 @@
+import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
+import { getCityStored } from '@/apis/detailfeed';
 import {
   Banner,
+  CityGallery,
   CityInformation,
+  CityTopReview,
   DetailFeedShorts,
   ExchangeRate,
-  Gallery,
   HotPlace,
-  CityTopReview,
   Weather,
 } from '@/components/DetailFeed';
 import { FeedNav } from '@/components/common';
@@ -14,17 +16,34 @@ import * as Styled from './City.styles';
 
 const City = () => {
   const location = useLocation();
-  const { cityId, name, isDomestic, country }: CityState = location.state;
+  const { cityId, name, isDomestic }: CityState = location.state;
+
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ['cityStore', cityId],
+    queryFn: () => getCityStored(cityId),
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data) {
+    return <p>Data not available</p>;
+  }
+
+  const { isStored } = data;
 
   return (
     <>
-      <FeedNav>{name}</FeedNav>
+      <FeedNav id={cityId} isStored={isStored} refetch={refetch}>
+        {name}
+      </FeedNav>
       <Styled.CityWrapper>
         <DetailFeedShorts cityId={cityId} placeName={name} />
-        <Gallery id={cityId} placeName={name} />
+        <CityGallery id={cityId} placeName={name} />
         {!isDomestic && <CityInformation cityId={cityId} />}
         <Weather cityId={cityId} />
-        {!isDomestic && <ExchangeRate cityId={cityId} country={country} />}
+        {!isDomestic && <ExchangeRate cityId={cityId} />}
         <CityTopReview cityId={cityId} cityName={name} />
         <HotPlace cityId={cityId} cityName={name} />
         <Banner isDomestic={isDomestic} />

@@ -40,9 +40,11 @@ const TripPlanCity = () => {
   };
 
   const handleCheckAllSameCity = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsAllCitySame(e.target.checked);
-    if (e.target.checked) {
-      const firstDayCity = eachDayCityInput[0] || '';
+    const isChecked = e.target.checked;
+    setIsAllCitySame(isChecked);
+
+    if (isChecked) {
+      const firstDayCity = eachDayCityInput[0];
       setEachDayCityInput(Array(totalTripDays + 1).fill(firstDayCity));
     }
   };

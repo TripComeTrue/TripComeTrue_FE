@@ -19,8 +19,8 @@ const Spots: React.FC<
   slidesPerView = 2.1,
   sort = 'center',
   fontSize = 14,
-  isDelete,
   onDelete,
+  onClick,
 }) => (
   <Styled.SwiperWrap
     spaceBetween={8}
@@ -38,8 +38,8 @@ const Spots: React.FC<
           sort={sort}
           fontSize={fontSize}
           id={item.id}
-          isDelete={isDelete}
           onDelete={onDelete}
+          onClick={onClick}
         />
       </Styled.SwiperSlideWrap>
     ))}

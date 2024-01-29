@@ -13,15 +13,23 @@ export const postPlaceReview = async (
 };
 
 // 특정 여행지에 대한 다수의 리뷰 조회
-export const getPlaceReviews = async (
-  placeId: string,
-  sort: string,
-  onlyImage: boolean,
-) => {
+export const getPlaceReviews = async ({
+  placeId,
+  sort = '최신순',
+  onlyImage = false,
+  pageParam = 0,
+  size = 2,
+}: {
+  placeId: string;
+  sort?: string;
+  onlyImage?: boolean;
+  pageParam?: number;
+  size?: number;
+}) => {
   const { data } = await client.get<{ code: number; data: PlaceReviewsData }>(
-    `v1/places/${placeId}/reviews?${
+    `v1/places/${placeId}/reviews?page=${pageParam}&size=${size}&${
       sort === '추천순' ? 'sort=likeCount' : 'sort=createdAt'
-    }&onlyImage=${onlyImage}`,
+    },desc&onlyImage=${onlyImage}`,
   );
 
   return data.data;

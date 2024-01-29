@@ -1,47 +1,65 @@
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Link, useParams } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
-import { Bubble, Filter, PlaceReviewCard, Text } from '@/components/common';
+import {
+  Bubble,
+  Filter,
+  PlaceReviewCard,
+  Spinners,
+  Text,
+} from '@/components/common';
 import { getPlaceReviews } from '@/apis/place';
 import FormattedDate from '@/utils/formattedDate';
+import ReviewsSkeleton from './ReviewsSkeleton';
 
 const Reviews = () => {
+  const navigate = useNavigate();
   const { placeId } = useParams() as { placeId: string };
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [sort, setSort] = useState('최신순');
   const [onlyImage, setOnlyImage] = useState(false);
+  const [ref, inView] = useInView();
   const {
-    data: placeReviewsData = {
-      isFirst: true,
-      isLast: true,
-      nowPageNumber: 0,
-      placeReviews: [],
-      totalCount: 0,
-    },
+    data: placeReviewsData,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
     refetch,
-  } = useQuery({
-    queryKey: ['PlaceReviewsData'],
-    queryFn: () => getPlaceReviews(placeId, selectedFilter, onlyImage),
+  } = useInfiniteQuery({
+    queryKey: ['PlaceReviewsInfiniteData'],
+    queryFn: ({ pageParam }) =>
+      getPlaceReviews({ placeId, size: 10, sort, onlyImage, pageParam }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      return !lastPage.isLast ? lastPageParam + 1 : null;
+    },
   });
 
   useEffect(() => {
     refetch();
-  }, [selectedFilter, onlyImage]);
+  }, [sort, onlyImage]);
 
-  console.log(placeReviewsData);
+  useEffect(() => {
+    if (hasNextPage && inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   return (
     <div>
       <Styled.NavWrap>
-        <Styled.NavBackBtn>
+        <Styled.NavBackBtn onClick={() => navigate(-1)}>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>리뷰({placeReviewsData.totalCount})</Styled.NavTitle>
+        <Styled.NavTitle>
+          리뷰({placeReviewsData?.pages[0].totalCount})
+        </Styled.NavTitle>
         <Styled.WriteBtnWrapper>
-          <Link to="/detailfeed/spot/1/review/write">
-            <Styled.WriteBtn src={WriteIcon} alt="write icon" />
+          <Link to={`/detailfeed/spot/${placeId}/review/write`}>
+            <Styled.WriteBtn src={WriteIcon} alt="리뷰 작성 아이콘" />
           </Link>
           <Styled.BubbleWrapper>
             <Bubble direction="top">+ 2P</Bubble>
@@ -60,33 +78,45 @@ const Reviews = () => {
           <Filter
             first="최신순"
             second="추천순"
-            selectedFilter={selectedFilter}
-            setSelectedFilter={setSelectedFilter}
+            selectedFilter={sort}
+            setSelectedFilter={setSort}
           />
         </Styled.Header>
-        <ul>
-          {placeReviewsData.placeReviews.map((data: PlaceReviewData) => (
-            <Link
-              key={data.placeReviewId}
-              to={`/detailfeed/spot/${placeId}/review/${data.placeReviewId}/comment`}>
-              <PlaceReviewCard>
-                <PlaceReviewCard.PlaceHeader
-                  nickname={data.nickname}
-                  profileUrl="https://source.unsplash.com/random"
-                  writeDate={FormattedDate(data.createdAt)}
-                />
-                <PlaceReviewCard.Main
-                  imageUrl={data.imageUrl}
-                  content={data.content}
-                />
-                <PlaceReviewCard.InteractionButtons
-                  likeCount={data.likeCount}
-                  commentCount={data.commentCount}
-                />
-              </PlaceReviewCard>
-            </Link>
-          ))}
-        </ul>
+        {placeReviewsData ? (
+          <>
+            <ul>
+              {placeReviewsData?.pages.map((page, index) => (
+                <Fragment key={index}>
+                  {page.placeReviews.map((placeReview) => (
+                    <li key={placeReview.placeReviewId}>
+                      <Link
+                        to={`/detailfeed/spot/${placeId}/review/${placeReview.placeReviewId}/comment`}>
+                        <PlaceReviewCard>
+                          <PlaceReviewCard.PlaceHeader
+                            nickname={placeReview.nickname}
+                            profileUrl={placeReview.profileUrl}
+                            writeDate={FormattedDate(placeReview.createdAt)}
+                          />
+                          <PlaceReviewCard.Main
+                            imageUrl={placeReview.imageUrl}
+                            content={placeReview.content}
+                          />
+                          <PlaceReviewCard.InteractionButtons
+                            likeCount={placeReview.likeCount}
+                            commentCount={placeReview.commentCount}
+                          />
+                        </PlaceReviewCard>
+                      </Link>
+                    </li>
+                  ))}
+                </Fragment>
+              ))}
+            </ul>
+            {isFetchingNextPage ? <Spinners /> : <div ref={ref} />}
+          </>
+        ) : (
+          <ReviewsSkeleton />
+        )}
       </Styled.Container>
     </div>
   );

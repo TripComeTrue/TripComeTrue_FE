@@ -1,54 +1,35 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { SlArrowLeft } from 'react-icons/sl';
-import TripPlanPlaceModal from '../../TripPlanPostingReview/TripPlanAddPlace/TripPlanPlaceModal/TripPlanPlaceModal';
 import TripPlanAddTags from '../../TripPlanPostingReview/TripPlanAddTags/TripPlanAddTags';
 import TripPlanUploadImages from '../TripPlanUploadImages/TripPlanUploadImages';
 import { TripPlanDaysInputProps } from './TripPlanDaysInput.types';
 import * as Styled from '../TripPlanPostingPlan.styles';
 
-function TripPlanDaysInput({
+const TripPlanDaysInput = ({
   selectedDay,
   formData,
-  setFormData,
   register,
   handleInputChange,
-  selectedPlace,
-  isPlaceModalOpen,
-  setIsPlaceModalOpen,
-  closePlaceListModal,
-  handlePlaceModalSelection,
-}: TripPlanDaysInputProps) {
+  dayImages,
+  onDayImagesChange,
+}: TripPlanDaysInputProps) => {
   if (selectedDay === null) return null;
-  return formData[selectedDay - 1].places.map((place) => (
-    <Styled.InputContainer key={`day-${selectedDay}-place-${place.id}`}>
+
+  const selectedDayData = formData[selectedDay - 1];
+  if (!selectedDayData || !selectedDayData.data) {
+    return <div>Loading day data...</div>;
+  }
+
+  const dayData = selectedDayData.data.tripPlanSchedules;
+
+  return dayData.map((schedule, placeIndex) => (
+    <Styled.InputContainer key={`day-${selectedDay}-schedule-${placeIndex}`}>
       <Styled.PlaceInputContainer>
-        <Styled.PlaceNumber>{place.id}</Styled.PlaceNumber>
+        <Styled.PlaceNumber>{schedule.orderNumber}</Styled.PlaceNumber>
         <Styled.PlaceInput
           type="text"
-          {...register(`day${selectedDay}.places[${place.id}].place`)}
-          placeholder="방문할 장소를 선택해주세요"
-          onChange={(event) => {
-            if (selectedDay !== null) {
-              handleInputChange(selectedDay, 'place', event);
-            }
-          }}
-          value={selectedPlace || ''}
-          onClick={() => setIsPlaceModalOpen({ isPaneOpenLeft: true })}
+          {...register(`day${selectedDay}.places[${placeIndex}].place`)}
+          defaultValue={schedule.placeName}
         />
-        <Styled.SlidingPane
-          className="citymodal"
-          closeIcon={<SlArrowLeft fontSize="15" />}
-          isOpen={isPlaceModalOpen.isPaneOpenLeft}
-          onRequestClose={() => {
-            setIsPlaceModalOpen({ isPaneOpenLeft: false });
-          }}
-          width="22.5rem">
-          <TripPlanPlaceModal
-            selectedPlace={selectedPlace}
-            onPlaceSelection={handlePlaceModalSelection}
-            onCloseModal={closePlaceListModal}
-          />
-        </Styled.SlidingPane>
       </Styled.PlaceInputContainer>
       <Styled.NoteInput
         {...register(`day${selectedDay}.note`)}
@@ -58,14 +39,25 @@ function TripPlanDaysInput({
             handleInputChange(selectedDay, 'note', event);
           }
         }}
+        defaultValue={schedule.content}
       />
       <TripPlanUploadImages
-        setFormData={setFormData}
         selectedDay={selectedDay}
+        placeIndex={placeIndex}
+        onImagesChange={(imageUrls) =>
+          onDayImagesChange(selectedDay, imageUrls)
+        }
+        uploadedImages={dayImages[selectedDay] || []}
       />
-      <TripPlanAddTags />
+      <TripPlanAddTags
+        handleTagsUpdate={() => {}}
+        dayIndex={selectedDay - 1}
+        placeIndex={placeIndex}
+        currentTagType={schedule.tagType}
+        currentTagUrl={schedule.tagUrl}
+      />
     </Styled.InputContainer>
   ));
-}
+};
 
 export default TripPlanDaysInput;

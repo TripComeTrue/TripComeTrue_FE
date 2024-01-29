@@ -7,6 +7,8 @@ import DollarIcon from '/images/dollar.svg';
 import TripCarousel from '../TripCarousel/TripCarousel';
 import ShortsCarousel from '../ShortsCarousel/ShortsCarousel';
 import { getHotShorts, getTripRecords } from '@/apis/trip-records';
+import { TripCarouselSkeleton } from '../..';
+import ShortCarouselSkeleton from '../ShortsCarousel/ShortCarouselSkeleton';
 
 const TripHomeBody = () => {
   const navigate = useNavigate();
@@ -19,15 +21,15 @@ const TripHomeBody = () => {
     queries: [
       {
         queryKey: ['TripRecordsDefaultData'],
-        queryFn: () => getTripRecords('size=5'),
+        queryFn: () => getTripRecords(),
       },
       {
         queryKey: ['TripRecordsExpenseFilterData'],
-        queryFn: () => getTripRecords('size=5&expenseRangeType=100'),
+        queryFn: () => getTripRecords({ filter: 'expenseRangeType=100' }),
       },
       {
         queryKey: ['TripRecordsTotalDaysFilterData'],
-        queryFn: () => getTripRecords('size=5&totalDays=2'),
+        queryFn: () => getTripRecords({ filter: 'totalDays=2' }),
       },
       {
         queryKey: ['ShortsData'],
@@ -40,21 +42,27 @@ const TripHomeBody = () => {
     navigate(`/trip/list?${param}`);
   };
 
-  console.log(ShortsData);
-
   return (
     <Styled.Container>
       <div>
         <SubTitle margin="0 0 0.875rem" icon={StarIcon}>
           인기 크리에이터 일정 따라가기!
         </SubTitle>
-        <TripCarousel size={170} tripRecordsData={tripRecordsDefault} />
+        {tripRecordsDefault ? (
+          <TripCarousel size={170} tripRecordsData={tripRecordsDefault} />
+        ) : (
+          <TripCarouselSkeleton />
+        )}
       </div>
       <div>
         <SubTitle margin="0 0 0.875rem" icon={StarIcon}>
           인기 여행지 쇼츠보기
         </SubTitle>
-        <ShortsCarousel shortsData={ShortsData} />
+        {ShortsData ? (
+          <ShortsCarousel shortsData={ShortsData} />
+        ) : (
+          <ShortCarouselSkeleton />
+        )}
       </div>
       <div>
         <SubTitle
@@ -68,7 +76,11 @@ const TripHomeBody = () => {
           src="/images/theme1.jpg"
           alt="100만원으로 다녀온 인생 여행 썸네일"
         />
-        <TripCarousel tripRecordsData={tripRecordsExpense} />
+        {tripRecordsExpense ? (
+          <TripCarousel tripRecordsData={tripRecordsExpense} />
+        ) : (
+          <TripCarouselSkeleton />
+        )}
       </div>
       <div>
         <SubTitle
@@ -82,7 +94,11 @@ const TripHomeBody = () => {
           src="/images/theme2.jpg"
           alt="1박 2일 여행 모음 썸네일"
         />
-        <TripCarousel tripRecordsData={tripRecordsTotalDays} />
+        {tripRecordsTotalDays ? (
+          <TripCarousel tripRecordsData={tripRecordsTotalDays} />
+        ) : (
+          <TripCarouselSkeleton />
+        )}
       </div>
     </Styled.Container>
   );
