@@ -1,6 +1,7 @@
 import { Rating } from '@mui/material';
 import { Text } from '@/components/common';
 import * as Styled from './MapSpotInfoBox.styles';
+import googleLogo from '/images/googleLogo.png';
 
 const MapGoogleSpot = ({
   googlePlaceData,
@@ -10,10 +11,7 @@ const MapGoogleSpot = ({
   return (
     <a href={googlePlaceData?.googleMapsUri} target="_blank" rel="noreferrer">
       <Styled.MapSpotInfoBoxWrapper>
-        <Styled.SpotImg
-          src={googlePlaceData?.photos[0].authorAttributions[0].photoUri}
-          alt={googlePlaceData?.photos[0].authorAttributions[0].displayName}
-        />
+        <Styled.SpotImg src={googleLogo} alt="구글 로고" />
         <Styled.SpotDescription>
           <Styled.GoogleSpotDesc>
             <Text fontWeight={700}>{googlePlaceData?.displayName.text}</Text>

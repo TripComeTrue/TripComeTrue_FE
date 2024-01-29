@@ -13,23 +13,11 @@ interface AuthorAttributionsType {
   photoUri: string;
   uri: string;
 }
-
-interface PhotoType {
-  authorAttributions: AuthorAttributionsType[];
-  heightPx: number;
-  name: string;
-  widthPx: number;
-}
-
 interface PlaceType {
   displayName: DisplayNameType;
   formattedAddress: string;
   id: string;
   location: { latitude: number; longitude: number };
-  primaryTypeDisplayName: DisplayNameType;
-  photos: PhotoType[];
-  iconBackgroundColor: string;
-  iconMaskBaseUri: string;
   userRatingCount: number;
   rating: number;
   googleMapsUri: string;
