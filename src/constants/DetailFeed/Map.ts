@@ -56,4 +56,5 @@ export const FIELD_MASK_OPTIONS = [
   'places.rating',
   'places.userRatingCount',
   'places.googleMapsUri',
+  'places.photos',
 ];

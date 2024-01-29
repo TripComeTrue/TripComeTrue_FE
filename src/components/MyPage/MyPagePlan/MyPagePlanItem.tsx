@@ -23,9 +23,10 @@ function MyPagePlanItem({
         <Styled.MyPagePlanDate>
           {plan.tripStartDay} ~ {plan.tripEndDay}
           <Styled.MyPagePlanDateDiff>
-            {`${
-              calcDateDiff(plan.tripStartDay, plan.tripEndDay) - 1
-            }박 ${calcDateDiff(plan.tripStartDay, plan.tripEndDay)}일`}
+            {`${calcDateDiff(
+              plan.tripStartDay,
+              plan.tripEndDay,
+            )}박 ${calcDateDiff(plan.tripStartDay, plan.tripEndDay) + 1}일`}
           </Styled.MyPagePlanDateDiff>
         </Styled.MyPagePlanDate>
       </div>

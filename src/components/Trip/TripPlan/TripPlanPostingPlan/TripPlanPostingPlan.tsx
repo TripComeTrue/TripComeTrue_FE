@@ -59,8 +59,8 @@ const TripPlanPostingPlan = () => {
           placeId: null,
           place: '',
           note: '',
-          tagType: '',
-          tagUrl: '',
+          tagType: null,
+          tagUrl: null,
         },
       ],
     })),
@@ -82,6 +82,8 @@ const TripPlanPostingPlan = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { value } = event.target;
+    const newValue = value.trim() === '' ? null : value;
+
     setFormData((prevFormData) => {
       const newFormData = [...prevFormData];
       const dayData = newFormData[day - 1];
@@ -89,7 +91,7 @@ const TripPlanPostingPlan = () => {
       if (dayData && dayData.places) {
         const updatedPlaces = dayData.places.map((place, idx) => {
           if (idx === index) {
-            return { ...place, [field]: value };
+            return { ...place, [field]: newValue };
           }
           return place;
         });
@@ -100,10 +102,6 @@ const TripPlanPostingPlan = () => {
       return newFormData;
     });
   };
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   const closePlaceListModal = () => {
     setIsPlaceModalOpen({ isPaneOpenLeft: false });
@@ -214,8 +212,8 @@ const TripPlanPostingPlan = () => {
           orderNumber: placeIndex + 1,
           placeId: place.placeId,
           content: place.note,
-          tagType: place.tagType ?? null,
-          tagUrl: place.tagUrl ?? null,
+          tagType: place.tagType || null,
+          tagUrl: place.tagUrl || null,
         };
 
         postData.tripPlanSchedules.push(schedule);

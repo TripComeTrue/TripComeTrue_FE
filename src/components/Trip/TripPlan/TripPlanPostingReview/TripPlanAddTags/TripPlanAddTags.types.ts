@@ -7,6 +7,6 @@ export interface TripPlanAddTagsProps {
   ) => void;
   dayIndex: number;
   placeIndex: number;
-  currentTagType: string;
-  currentTagUrl: string;
+  currentTagType: string | null;
+  currentTagUrl: string | null;
 }

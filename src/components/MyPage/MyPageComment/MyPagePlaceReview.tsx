@@ -22,6 +22,7 @@ function MyPagePlaceReview() {
       initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) =>
         !lastPage.data.isLast ? lastPageParam + 1 : undefined,
+      gcTime: 1000 * 60,
     });
 
   const onClickDelOpen = (id: number) => {
