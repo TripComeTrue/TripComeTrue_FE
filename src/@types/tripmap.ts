@@ -42,6 +42,7 @@ interface PlacesDataType {
 interface GmapProps {
   cityLocation: { latitude: number; longitude: number };
   spotsInCityData: SpotsInCityData[];
+  googlePlaceData: PlaceType | null;
   setIsDefaultSpot: (arg0: boolean | null) => void;
   setMapCenterChange: (arg0: boolean) => void;
   selectedCategory: string | null;

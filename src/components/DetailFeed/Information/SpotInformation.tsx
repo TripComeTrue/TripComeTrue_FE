@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Map from '@/components/Map/Map';
 import { SubTitle, Text } from '@/components/common';
 import { SpotInformationProps } from './Information.types';
@@ -10,11 +11,19 @@ const SpotInformation = ({
   latitude,
   longitude,
   phoneNumber,
+  cityId,
+  cityName,
 }: SpotInformationProps) => {
+  const navigate = useNavigate();
+  const handleSpotMapClick = () => {
+    navigate(`/detailfeed/tripmap/${cityId}`, { state: { cityName } });
+  };
   return (
     <Styled.SpotInfoWrapper>
       <SubTitle>기본정보</SubTitle>
-      <Map spotCenter={{ lat: latitude, lng: longitude }} />
+      <Styled.SpotMapContainer onClick={handleSpotMapClick}>
+        <Map spotCenter={{ lat: latitude, lng: longitude }} />
+      </Styled.SpotMapContainer>
       <Styled.SpotInfoBox>
         <Styled.SpotInfo>
           <Styled.InfoIcon src={pin} />

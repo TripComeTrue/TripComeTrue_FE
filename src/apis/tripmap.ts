@@ -17,7 +17,6 @@ export const getCityLoaction = async (cityName: string) => {
     'https://places.googleapis.com/v1/places:searchText',
     { textQuery: cityName },
   );
-  console.log(data.places);
   return data;
 };
 
@@ -53,3 +52,14 @@ export const getSearchgSpotsLocation = async (
   );
   return data.places;
 };
+
+// export const getGoogleSpotPhoto = async (photoName: string) => {
+//   const res = await axios.get(
+//     `https://places.googleapis.com/v1/${photoName}/media?key=${GOOGLE_MAPS}&maxHeightPx=200&maxWidthPx=200`,
+//   );
+//   console.log(res.data);
+//   const blob = new Blob([res.data], { type: 'image/jpg' });
+//   const blobUrl = URL.createObjectURL(blob);
+
+//   return blobUrl;
+// };

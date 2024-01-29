@@ -1,7 +1,12 @@
 import { getSearchgSpotsLocation } from '@/apis/tripmap';
 import { OPTIONS, TRIP_MAP_CONTAINER_STYLE } from '@/constants/DetailFeed/Map';
 import GOOGLE_MAPS from '@/constants/map';
-import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  Marker,
+  MarkerF,
+  useJsApiLoader,
+} from '@react-google-maps/api';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import CurrentLocation from '../CurrentLocation/CurrentLocation';
@@ -14,6 +19,7 @@ import pinDefault from '/pinDefault.svg';
 const Gmap = ({
   cityLocation,
   spotsInCityData,
+  googlePlaceData,
   setIsDefaultSpot,
   setMapCenterChange,
   selectedCategory,
@@ -31,7 +37,6 @@ const Gmap = ({
     google.maps.LatLngLiteral | LatLngLiteralType
   >({ lat: cityLocation.latitude, lng: cityLocation.longitude });
   const [myPostion, setMyPostion] = useState<LatLngLiteralType | null>(null);
-
   const {
     data: searchedSpots,
     isError,
@@ -132,7 +137,7 @@ const Gmap = ({
                   }}
                   icon={{
                     url: `${googleMarkerIcon}`,
-                    scaledSize: new google.maps.Size(30, 30),
+                    scaledSize: new google.maps.Size(35, 35),
                   }}
                 />
               ))}

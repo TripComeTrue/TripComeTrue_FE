@@ -9,6 +9,8 @@ export const SpotInfoWrapper = styled.section`
   padding: 0 1.25rem;
 `;
 
+export const SpotMapContainer = styled.div``;
+
 export const SpotInfoBox = styled.div`
   display: flex;
   flex-direction: column;

@@ -2,14 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { SimpleNav } from '@/components/common';
-import { getCityLoaction, getSpotsLocation } from '@/apis/tripmap';
+import {
+  getCityLoaction,
+  // getGoogleSpotPhoto,
+  getSpotsLocation,
+} from '@/apis/tripmap';
 import Gmap from './Gmap/Gmap';
 import MapDefaultSpot from './MapSpotInfoBox/MapDefaultSpot';
 import MapGoogleSpot from './MapSpotInfoBox/MapGoogleSpot';
 import SpotCategory from './SpotCategory/SpotCategory';
 import * as Styled from './TripMap.styles';
 
-// libraries: ['places', 'marker', 'geocoding', 'maps'],
 const TripMap = () => {
   const location = useLocation();
   const [isDefaultSpot, setIsDefaultSpot] = useState<boolean | null>(null);
@@ -34,8 +37,9 @@ const TripMap = () => {
     setIsDefaultSpot(true);
   };
 
-  const handleGoogleMarkerClick = (googlePlaceInfo: PlaceType) => {
+  const handleGoogleMarkerClick = async (googlePlaceInfo: PlaceType) => {
     setGooglePlaceData(googlePlaceInfo);
+    // getGoogleSpotPhoto(googlePlaceInfo.photos[0].name);
     setIsDefaultSpot(false);
   };
   const { data: cityLoctionData, isLoading: cityLoctionDataLoding } = useQuery({
@@ -61,12 +65,12 @@ const TripMap = () => {
     return <p>Data not available</p>;
   }
   const cityLocation = cityLoctionData.places[0].location;
-
   return (
     <>
       <SimpleNav>{cityName}</SimpleNav>
       <Styled.TripMapWrapper>
         <Gmap
+          googlePlaceData={googlePlaceData}
           cityLocation={cityLocation}
           mapCenterChange={mapCenterChange}
           spotsInCityData={spotsInCityData}
