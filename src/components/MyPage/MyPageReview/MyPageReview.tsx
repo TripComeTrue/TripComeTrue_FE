@@ -34,6 +34,7 @@ function MyPageReview() {
       initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) =>
         !lastPage.data.last ? lastPageParam + 1 : undefined,
+      gcTime: 1000 * 60,
     });
   const [selectedReview, setSelectedReview] = useState<TripRecordContent>();
 
