@@ -31,7 +31,6 @@ const Gmap = ({
     google.maps.LatLngLiteral | LatLngLiteralType
   >({ lat: cityLocation.latitude, lng: cityLocation.longitude });
   const [myPostion, setMyPostion] = useState<LatLngLiteralType | null>(null);
-
   const {
     data: searchedSpots,
     isError,
@@ -132,7 +131,7 @@ const Gmap = ({
                   }}
                   icon={{
                     url: `${googleMarkerIcon}`,
-                    scaledSize: new google.maps.Size(30, 30),
+                    scaledSize: new google.maps.Size(35, 35),
                   }}
                 />
               ))}

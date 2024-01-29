@@ -27,14 +27,10 @@ const HotPlace = ({
     return <p>Data not available</p>;
   }
 
-  const handlePlaceClick = ({
-    placeId,
-    placeName,
-  }: {
-    placeId: number;
-    placeName: string;
-  }) => {
-    navigate(`/detailfeed/spot/${placeId}`, { state: { placeId, placeName } });
+  const handlePlaceClick = ({ placeId }: { placeId: number }) => {
+    navigate(`/detailfeed/spot/${placeId}`, {
+      state: { placeId, placeName: cityName, cityId },
+    });
   };
 
   const handleMoreClick = () => {
@@ -62,7 +58,7 @@ const HotPlace = ({
           ({ imageUrl, storedCount, placeName, placeId, commentTotal }) => (
             <Styled.PlaceItem
               key={placeId}
-              onClick={() => handlePlaceClick({ placeId, placeName })}>
+              onClick={() => handlePlaceClick({ placeId })}>
               <Styled.BookMarkBox>
                 <Bookmark count={storedCount} />
               </Styled.BookMarkBox>

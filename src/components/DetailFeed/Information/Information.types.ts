@@ -3,4 +3,6 @@ export interface SpotInformationProps {
   latitude: number;
   longitude: number;
   phoneNumber?: number;
+  cityId: number;
+  cityName: string;
 }

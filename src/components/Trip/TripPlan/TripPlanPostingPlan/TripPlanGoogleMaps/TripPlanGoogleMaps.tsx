@@ -32,6 +32,7 @@ function TripPlanGoogleMaps({
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: GOOGLE_MAPS,
+    language: 'ko',
   });
 
   // const [map, setMap] = useState(null);

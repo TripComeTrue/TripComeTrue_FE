@@ -14,7 +14,7 @@ import { getPlaceReviews } from '@/apis/place';
 
 const TouristSpot = () => {
   const location = useLocation();
-  const { placeId, placeName } = location.state;
+  const { placeId, placeName, cityId } = location.state;
   const [{ data, isLoading, refetch }, { data: placeReviewsData }] = useQueries(
     {
       queries: [
@@ -53,6 +53,8 @@ const TouristSpot = () => {
       <Styled.TouristSpotWrap>
         <SpotGallery id={placeId} placeName={placeName} />
         <SpotInformation
+          cityId={cityId}
+          cityName={placeName}
           address={address}
           latitude={latitude}
           longitude={longitude}
