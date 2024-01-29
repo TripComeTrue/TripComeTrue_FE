@@ -182,8 +182,8 @@ const TripPlanPostingPlanRecord = () => {
               content: schedule.content,
               tripRecordScheduleImages: dayImages[index + 1] || [],
               tripRecordScheduleVideos: [],
-              tagType: schedule.tagType ?? null,
-              tagUrl: schedule.tagUrl ?? null,
+              tagType: schedule.tagType || null,
+              tagUrl: schedule.tagUrl || null,
             };
           });
           return schedules;
