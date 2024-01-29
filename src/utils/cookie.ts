@@ -5,9 +5,6 @@
  * @param maxAge 유지 시간 / type: number
  */
 export function setCookie(name: string, value: string, maxAge: number) {
-  // const expirationDate = new Date();
-  // expirationDate.setDate(expirationDate.getDate() + days);
-
   const cookieValue = `${encodeURIComponent(name)}=${encodeURIComponent(
     value,
   )}; max-age=${maxAge}; path=/`;
