@@ -70,7 +70,6 @@ const TripMap = () => {
       <SimpleNav>{cityName}</SimpleNav>
       <Styled.TripMapWrapper>
         <Gmap
-          googlePlaceData={googlePlaceData}
           cityLocation={cityLocation}
           mapCenterChange={mapCenterChange}
           spotsInCityData={spotsInCityData}

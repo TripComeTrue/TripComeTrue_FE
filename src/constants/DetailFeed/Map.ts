@@ -52,12 +52,8 @@ export const TRIP_MAP_CONTAINER_STYLE = {
 export const FIELD_MASK_OPTIONS = [
   'places.displayName',
   'places.location',
-  'places.primaryTypeDisplayName',
   'places.id',
   'places.rating',
-  'places.photos',
-  'places.iconBackgroundColor',
-  'places.iconMaskBaseUri',
   'places.userRatingCount',
   'places.googleMapsUri',
 ];
