@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Text } from '@/components/common';
 import { MyPagePlanItemProps } from './MyPagePlanItem.types';
 import MyPagePopMenu from '../MyPagePopMenu/MyPagePopMenu';
@@ -14,7 +13,7 @@ function MyPagePlanItem({
   if (!plan) return null;
   return (
     <Styled.MyPagePlanItemWrap>
-      <Link to={`/trip/tripPlan/view/${plan.id}`}>
+      <div>
         <Text tag="h4" fontSize={14}>
           {plan.countries} 여행
         </Text>
@@ -29,7 +28,7 @@ function MyPagePlanItem({
             }박 ${calcDateDiff(plan.tripStartDay, plan.tripEndDay)}일`}
           </Styled.MyPagePlanDateDiff>
         </Styled.MyPagePlanDate>
-      </Link>
+      </div>
       <div>
         <MyPagePopMenu
           onOpenDel={onOpenDel}
