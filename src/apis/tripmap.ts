@@ -3,11 +3,10 @@ import { FIELD_MASK_OPTIONS } from '@/constants/DetailFeed/Map';
 import GOOGLE_MAPS from '@/constants/map';
 import client from './client';
 
-export const GOOGLE_MAPS_API_KEY = GOOGLE_MAPS;
 export const googleMapinstance: AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
-    'X-Goog-Api-Key': GOOGLE_MAPS_API_KEY,
+    'X-Goog-Api-Key': GOOGLE_MAPS,
     'X-Goog-FieldMask': FIELD_MASK_OPTIONS,
   },
 });
@@ -52,14 +51,3 @@ export const getSearchgSpotsLocation = async (
   );
   return data.places;
 };
-
-// export const getGoogleSpotPhoto = async (photoName: string) => {
-//   const res = await axios.get(
-//     `https://places.googleapis.com/v1/${photoName}/media?key=${GOOGLE_MAPS}&maxHeightPx=200&maxWidthPx=200`,
-//   );
-//   console.log(res.data);
-//   const blob = new Blob([res.data], { type: 'image/jpg' });
-//   const blobUrl = URL.createObjectURL(blob);
-
-//   return blobUrl;
-// };

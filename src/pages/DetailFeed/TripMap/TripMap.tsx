@@ -2,11 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { SimpleNav } from '@/components/common';
-import {
-  getCityLoaction,
-  // getGoogleSpotPhoto,
-  getSpotsLocation,
-} from '@/apis/tripmap';
+import { getCityLoaction, getSpotsLocation } from '@/apis/tripmap';
 import Gmap from './Gmap/Gmap';
 import MapDefaultSpot from './MapSpotInfoBox/MapDefaultSpot';
 import MapGoogleSpot from './MapSpotInfoBox/MapGoogleSpot';
@@ -39,7 +35,6 @@ const TripMap = () => {
 
   const handleGoogleMarkerClick = async (googlePlaceInfo: PlaceType) => {
     setGooglePlaceData(googlePlaceInfo);
-    // getGoogleSpotPhoto(googlePlaceInfo.photos[0].name);
     setIsDefaultSpot(false);
   };
   const { data: cityLoctionData, isLoading: cityLoctionDataLoding } = useQuery({
