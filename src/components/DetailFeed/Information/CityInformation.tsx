@@ -15,11 +15,11 @@ const CityInformation = ({
     cityInformation;
 
   const INFORMATION_DATA = [
-    { id: 1, content: language, svg: languageImage },
-    { id: 2, content: timeDifference, svg: timeImage },
-    { id: 3, content: `${curName}(${curUnit})`, svg: moneyImage },
-    { id: 4, content: voltage, svg: powerImage },
-    { id: 5, content: visa, svg: visaImage },
+    { content: language, svg: languageImage },
+    { content: timeDifference, svg: timeImage },
+    { content: `${curName}(${curUnit})`, svg: moneyImage },
+    { content: voltage, svg: powerImage },
+    { content: visa, svg: visaImage },
   ];
   return (
     <Styled.InformationWrapper>
@@ -30,8 +30,8 @@ const CityInformation = ({
         spaceBetween={8}
         slidesPerView={2.6}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {INFORMATION_DATA.map(({ id, svg, content }) => (
-          <Styled.InformationItem key={id}>
+        {INFORMATION_DATA.map(({ svg, content }, index) => (
+          <Styled.InformationItem key={index}>
             <Styled.InformationIconBox>
               <Styled.InformationIcon src={svg} alt="visa icon" />
             </Styled.InformationIconBox>

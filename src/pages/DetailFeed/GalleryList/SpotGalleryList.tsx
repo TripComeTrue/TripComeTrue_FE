@@ -8,7 +8,7 @@ import { getSpotGalleryList } from '@/apis/listpage';
 
 const SpotGalleryList = () => {
   const navigate = useNavigate();
-  const { placeId, placeName } = useParams() as unknown as {
+  const { placeId, placeName } = useParams() as {
     placeId: string;
     placeName: string;
   };

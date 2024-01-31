@@ -124,17 +124,17 @@ function App() {
             path="spot/:placeId/review/:reviewId/comment"
             element={<ReviewComment />}
           />
-          <Route path="shortslist/:placeId" element={<ShortsList />} />
+          <Route path="shortslist/:cityName/:cityId" element={<ShortsList />} />
           <Route
-            path="citygallerylist/:placeName"
+            path="citygallerylist/:cityName/:cityId"
             element={<CityGalleryList />}
           />
           <Route
-            path="spotgallerylist/:placeName"
+            path="spotgallerylist/:placeName/:placeId"
             element={<SpotGalleryList />}
           />
-          <Route path="spotlist/:placeId" element={<SpotList />} />
-          <Route path="spotsearch/:cityId" element={<SpotSearch />} />
+          <Route path="spotlist/:cityName/:cityId" element={<SpotList />} />
+          <Route path="spotsearch/:cityName/:cityId" element={<SpotSearch />} />
           <Route path="tripmap/:cityId" element={<TripMap />} />
         </Route>
         <Route path="mypage" element={<MyPageLayout />}>

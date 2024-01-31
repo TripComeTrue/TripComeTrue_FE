@@ -1,22 +1,22 @@
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Bookmark, SubTitle, Text } from '@/components/common';
 import * as Styled from './RecommendSpot.styles';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import messageIcon from '/message.svg';
+import { getRecommedSpot } from '@/apis/detailfeed';
 
-const RecommendSpot = ({ placeId }: { placeId: number }) => {
+const RecommendSpot = ({ placeId }: { placeId: string }) => {
   const navigate = useNavigate();
-  const { data, isLoading } = useDetailFeedQuery<RecommendSpotResponseType>({
-    queryKey: 'recommendSpot',
-    id: placeId,
-    fnUrl: `/v1/places/${placeId}/nearby`,
+  const { data: recommendSpots, isLoading } = useQuery({
+    queryKey: ['recommendSpot', placeId],
+    queryFn: () => getRecommedSpot(placeId),
   });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!recommendSpots) {
     return <p>Data not available</p>;
   }
 
@@ -33,7 +33,7 @@ const RecommendSpot = ({ placeId }: { placeId: number }) => {
         spaceBetween={8}
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {data.data.map(
+        {recommendSpots.map(
           // eslint-disable-next-line @typescript-eslint/no-shadow
           ({ reviewCount, imageUrl, storedCount, placeName, placeId }) => (
             <Styled.RecommendItem

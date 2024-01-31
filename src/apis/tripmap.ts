@@ -19,7 +19,7 @@ export const getCityLoaction = async (cityName: string) => {
   return data;
 };
 
-export const getSpotsLocation = async (cityId: number) => {
+export const getSpotsLocation = async (cityId: string) => {
   const { data } = await client.get<SpotsInCityResponse>(
     `/v1/cities/${cityId}/places/list`,
   );

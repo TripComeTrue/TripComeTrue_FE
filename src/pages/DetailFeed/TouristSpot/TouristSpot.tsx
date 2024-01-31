@@ -13,38 +13,43 @@ import { getSpotInformation } from '@/apis/detailfeed';
 import { getPlaceReviews } from '@/apis/place';
 
 const TouristSpot = () => {
-  const { placeId } = useParams() as unknown as { placeId: string };
-  const [{ data, isLoading }, { data: placeReviewsData }] = useQueries({
-    queries: [
-      {
-        queryKey: ['spotInformaion', placeId],
-        queryFn: () => getSpotInformation(placeId),
-      },
-      {
-        queryKey: ['PlaceReviewsData'],
-        queryFn: () => getPlaceReviews({ placeId }),
-      },
-    ],
-  });
+  const { placeId } = useParams() as { placeId: string };
+  const [{ data: spotInformation, isLoading }, { data: placeReviewsData }] =
+    useQueries({
+      queries: [
+        {
+          queryKey: ['spotInformaion', placeId],
+          queryFn: () => getSpotInformation(placeId),
+        },
+        {
+          queryKey: ['PlaceReviewsData'],
+          queryFn: () => getPlaceReviews({ placeId }),
+        },
+      ],
+    });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data) {
+  if (!spotInformation) {
     return <p>Data not available</p>;
   }
 
   const { isStored, address, latitude, longitude, phoneNumber, name, cityId } =
-    data;
+    spotInformation;
 
   return (
     <>
-      <FeedNav isScheduleIcon id={placeId} isStored={isStored} feedType="spot">
+      {/* <FeedNav
+        isScheduleIcon
+        placeId={placeId}
+        isStored={isStored}
+        feedType="spot">
         {name}
-      </FeedNav>
+      </FeedNav> */}
       <Styled.TouristSpotWrap>
-        <SpotGallery id={placeId} placeName={name} />
+        <SpotGallery placeId={placeId} placeName={name} />
         <SpotInformation
           cityId={cityId}
           address={address}
@@ -52,8 +57,8 @@ const TouristSpot = () => {
           longitude={longitude}
           phoneNumber={phoneNumber}
         />
-        <SpotTopReview id={placeId} placeName={name} />
-        <RecommendSpot id={placeId} />
+        <SpotTopReview placeId={placeId} placeName={name} />
+        <RecommendSpot placeId={placeId} />
         <PlaceReviews placeReviewsData={placeReviewsData} placeId={placeId} />
       </Styled.TouristSpotWrap>
     </>

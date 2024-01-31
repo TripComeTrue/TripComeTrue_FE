@@ -12,7 +12,7 @@ const SpotSearch = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const { ref, inView } = useInView();
-  const { cityId } = useParams() as unknown as { cityId: number };
+  const { cityId } = useParams() as { cityId: string };
 
   const { data, fetchNextPage, refetch } = useInfiniteQuery({
     queryKey: ['searchedSpot'],
@@ -66,16 +66,18 @@ const SpotSearch = () => {
         </Styled.SpotSearchBox>
         <Styled.SpotListWrapper>
           {SPOT_DATA &&
-            SPOT_DATA.map((spot) => (
-              <SearchedSpot
-                key={spot.placeId}
-                placeId={spot.placeId}
-                placeName={spot.placeName}
-                storedCount={spot.storedCount}
-                commentTotal={spot.commentTotal}
-                imageUrl={spot.imageUrl}
-              />
-            ))}
+            SPOT_DATA.map(
+              ({ placeId, placeName, storedCount, commentTotal, imageUrl }) => (
+                <SearchedSpot
+                  key={placeId}
+                  placeId={placeId}
+                  placeName={placeName}
+                  storedCount={storedCount}
+                  commentTotal={commentTotal}
+                  imageUrl={imageUrl}
+                />
+              ),
+            )}
         </Styled.SpotListWrapper>
       </Styled.SpotSearchWrapper>
       <div ref={ref}>&nbsp;</div>

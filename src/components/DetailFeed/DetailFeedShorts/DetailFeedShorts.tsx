@@ -1,20 +1,20 @@
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { EmptyContents, Shorts, SubTitle } from '@/components/common';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './DetailFeedShorts.styles';
 import starIcon from '/starIcon.svg';
+import { getCityShorts } from '@/apis/detailfeed';
 
 const DetailFeedShorts = ({
   cityId,
-  placeName,
+  cityName,
 }: {
   cityId: string;
-  placeName: string;
+  cityName: string;
 }) => {
-  const { data, isLoading } = useDetailFeedQuery<ShortsResponseType>({
-    queryKey: 'shorts',
-    id: cityId,
-    fnUrl: `/v1/cities/${cityId}/videos/list`,
+  const { data: shorts, isLoading } = useQuery({
+    queryKey: ['shorts', cityId],
+    queryFn: () => getCityShorts(cityId),
   });
 
   const navigate = useNavigate();
@@ -22,20 +22,14 @@ const DetailFeedShorts = ({
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!shorts) {
     return null;
   }
 
   const handleMoreClick = () => {
-    navigate(`/detailfeed/shortslist/${cityId}`, {
-      state: {
-        placeName,
-        id: cityId,
-      },
-    });
+    navigate(`/detailfeed/shortslist/${cityName}/${cityId}`);
   };
 
-  const slideShorts = data.data;
   return (
     <Styled.DetailFeedShortsWrapper>
       <Styled.SubTitleBox>
@@ -44,15 +38,15 @@ const DetailFeedShorts = ({
           icon={starIcon}
           variant="more"
           onClickButton={handleMoreClick}>
-          {placeName} 여행 Shorts
+          {cityName} 여행 Shorts
         </SubTitle>
       </Styled.SubTitleBox>
-      {slideShorts.length === 0 ? (
+      {shorts.length === 0 ? (
         <Styled.EmptyBox>
           <EmptyContents />
         </Styled.EmptyBox>
       ) : (
-        <Shorts slides={slideShorts} />
+        <Shorts slides={shorts} />
       )}
     </Styled.DetailFeedShortsWrapper>
   );

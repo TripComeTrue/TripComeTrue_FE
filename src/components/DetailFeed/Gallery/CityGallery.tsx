@@ -6,10 +6,10 @@ import { getCityGallery } from '@/apis/detailfeed';
 
 const CityGallery = ({
   cityId,
-  placeName,
+  cityName,
 }: {
   cityId: string;
-  placeName: string;
+  cityName: string;
 }) => {
   const { data: CityGalleryData, isLoading } = useQuery({
     queryKey: ['cityGallery', cityId],
@@ -27,13 +27,13 @@ const CityGallery = ({
   }
 
   const handleMoreClick = () => {
-    navigate(`/detailfeed/citygallerylist/${placeName}/${cityId}`);
+    navigate(`/detailfeed/citygallerylist/${cityName}/${cityId}`);
   };
   return (
     <Styled.GellaryWrapper>
       <Styled.SubtitleBox>
         <SubTitle variant="more" onClickButton={handleMoreClick}>
-          {placeName} 여행 갤러리
+          {cityName} 여행 갤러리
         </SubTitle>
       </Styled.SubtitleBox>
       {CityGalleryData.length === 0 ? (

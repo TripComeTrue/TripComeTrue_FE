@@ -1,38 +1,37 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { EmptyContents, SubTitle, Text } from '@/components/common';
 import * as Styled from './TopReview.styles';
 import starIcon from '/starIcon.svg';
 
 import ReviewSwiper from '@/components/common/Review/ReviewSwiper';
 import { DAY_OPTION } from '@/constants/DetailFeed/City';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
+import { getSpotTopReview } from '@/apis/detailfeed';
 
 const SpotTopReview = ({
-  id,
+  placeId,
   placeName,
 }: {
-  id: number;
+  placeId: string;
   placeName: string;
 }) => {
   const [day, setDay] = useState(2);
-  const { data, isLoading } = useDetailFeedQuery<SpotTopReviewResponseType>({
-    queryKey: 'spotTopReview',
-    id,
-    fnUrl: `/v1/trip-records?size=5&page=0&orderBy=storeCount&order=DESC&totalDays=${day}&placeId=${id}`,
+  const { data: spotTopReviews, isLoading } = useQuery({
+    queryKey: ['spotTopReview', placeId, day],
+    queryFn: () => getSpotTopReview(placeId, day),
   });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!spotTopReviews) {
     return <p>Data not available</p>;
   }
 
   const onClickDay = (totalDays: number) => {
     setDay(totalDays);
   };
-  const REVIEW_DATA = data.data;
   return (
     <div>
       <Styled.SubTitleBox>
@@ -55,14 +54,14 @@ const SpotTopReview = ({
           </Styled.DayOption>
         ))}
       </Styled.DayOptions>
-      {REVIEW_DATA.length === 0 ? (
+      {spotTopReviews.length === 0 ? (
         <EmptyContents />
       ) : (
         <Styled.TopReviewItemBox
           spaceBetween={8}
           slidesPerView={1.63}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-          {REVIEW_DATA.map(
+          {spotTopReviews.map(
             ({
               member,
               averageRating,

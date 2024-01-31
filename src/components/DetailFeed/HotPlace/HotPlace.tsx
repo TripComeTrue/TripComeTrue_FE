@@ -28,15 +28,11 @@ const HotPlace = ({
   }
 
   const handlePlaceClick = ({ placeId }: { placeId: number }) => {
-    navigate(`/detailfeed/spot/${placeId}`, {
-      state: { placeId, cityName, cityId },
-    });
+    navigate(`/detailfeed/spot/${placeId}`);
   };
 
   const handleMoreClick = () => {
-    navigate(`/detailfeed/spotlist/${cityId}`, {
-      state: { placeName: cityName, id: cityId },
-    });
+    navigate(`/detailfeed/spotlist/${cityName}/${cityId}`);
   };
 
   return (

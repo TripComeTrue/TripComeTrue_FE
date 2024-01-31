@@ -83,11 +83,13 @@ interface CityInfoDataType {
   id: number;
   name: string;
   language: string;
-  timeDifference: string;
-  voltage: string;
-  visa: string;
-  curUnit: string;
-  curName: string;
+  timeDifference?: string;
+  voltage?: string;
+  visa?: string;
+  curUnit?: string;
+  curName?: string;
+  latitude: number;
+  longitude: number;
 }
 
 interface CityInfoResponseType {
@@ -166,7 +168,7 @@ interface CityTopReviewResponse {
   };
 }
 interface SpotListDataType {
-  placeId: number;
+  placeId: string;
   placeName: string;
   storedCount: number;
   commentTotal: number;

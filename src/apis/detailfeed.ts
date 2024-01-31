@@ -41,9 +41,30 @@ export const getCityGallery = async (cityId: string) => {
   );
   return data.data;
 };
-export const getSpotGallery = async (spotId: string) => {
+
+export const getCityShorts = async (cityId: string) => {
+  const { data } = await client.get<ShortsResponseType>(
+    `/v1/cities/${cityId}/videos/list`,
+  );
+  return data.data;
+};
+export const getSpotGallery = async (placeId: string) => {
   const { data } = await client.get<CityGalleryResponse>(
-    `/v1/trip-records-schedules?placeId=${spotId}&size=10`,
+    `/v1/trip-records-schedules?placeId=${placeId}&size=10`,
+  );
+  return data.data;
+};
+
+export const getSpotTopReview = async (placeId: string, day: number) => {
+  const { data } = await client.get<SpotTopReviewResponseType>(
+    `/v1/trip-records?size=5&page=0&orderBy=storeCount&order=DESC&totalDays=${day}&placeId=${placeId}`,
+  );
+  return data.data;
+};
+
+export const getRecommedSpot = async (placeId: string) => {
+  const { data } = await client.get<RecommendSpotResponseType>(
+    `/v1/places/${placeId}/nearby`,
   );
   return data.data;
 };

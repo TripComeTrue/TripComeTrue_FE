@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
@@ -7,15 +7,21 @@ import * as Styled from './GalleryList.styles';
 import { getCityGalleryList } from '@/apis/listpage';
 
 const CityGalleryList = () => {
-  const location = useLocation();
+  const { cityName, cityId } = useParams() as {
+    cityName: string;
+    cityId: string;
+  };
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const order = selectedFilter === '최신순' ? 'createdAt' : 'storedCount';
-  const { id, placeName } = location.state;
   const { ref, inView } = useInView();
 
-  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['cityGalleryAll', id, order],
-    queryFn: ({ pageParam }) => getCityGalleryList(id, order, pageParam),
+  const {
+    data: cityGalleryAll,
+    isLoading,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['cityGalleryAll', cityId, order],
+    queryFn: ({ pageParam }) => getCityGalleryList(cityId, order, pageParam),
     staleTime: 0,
     initialPageParam: 0,
     getNextPageParam: (lastPage, _, lastPageParam) => {
@@ -35,14 +41,14 @@ const CityGalleryList = () => {
     return <p>Loading...</p>;
   }
 
-  if (!data) {
+  if (!cityGalleryAll) {
     return <p>Data not available</p>;
   }
-  const GALLERY_PHOTOS = data.pages.flatMap((page) => page.content);
+  const GALLERY_PHOTOS = cityGalleryAll.pages.flatMap((page) => page.content);
 
   return (
     <div>
-      <SimpleNav>{placeName}</SimpleNav>
+      <SimpleNav>{cityName}</SimpleNav>
       <Styled.FilterBox>
         <Filter
           first="최신순"

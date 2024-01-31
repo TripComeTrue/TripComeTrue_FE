@@ -17,11 +17,6 @@ import * as Styled from './City.styles';
 const City = () => {
   const { cityId } = useParams() as { cityId: string };
 
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ['cityStore', cityId],
-  //   queryFn: () => getCityStored(cityId),
-  // });
-
   const { data: cityInformation, isLoading } = useQuery({
     queryKey: ['cityInformation', cityId],
     queryFn: () => getCityInformation(cityId),
@@ -39,10 +34,10 @@ const City = () => {
 
   return (
     <>
-      {/* <FeedNav id={cityId}>{name}</FeedNav> */}
+      {/* <FeedNav cityId={cityId}>{name}</FeedNav> */}
       <Styled.CityWrapper>
-        <DetailFeedShorts cityId={cityId} placeName={name} />
-        <CityGallery cityId={cityId} placeName={name} />
+        <DetailFeedShorts cityId={cityId} cityName={name} />
+        <CityGallery cityId={cityId} cityName={name} />
         {!isDomestic && <CityInformation cityInformation={cityInformation} />}
         <Weather cityId={cityId} />
         {!isDomestic && <ExchangeRate cityId={cityId} />}

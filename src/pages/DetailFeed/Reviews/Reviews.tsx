@@ -18,7 +18,7 @@ import ReviewsSkeleton from './ReviewsSkeleton';
 
 const Reviews = () => {
   const navigate = useNavigate();
-  const { placeId } = useParams() as unknown as { placeId: number };
+  const { placeId } = useParams() as { placeId: string };
   const [sort, setSort] = useState('최신순');
   const [onlyImage, setOnlyImage] = useState(false);
   const [ref, inView] = useInView();

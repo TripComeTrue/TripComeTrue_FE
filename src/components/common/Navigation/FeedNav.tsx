@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import {
   PiBookmarkSimpleFill,
@@ -12,6 +12,7 @@ import backArrow from '@/assets/back-arrow.svg';
 import {
   cancelStoreCity,
   cancelStoreSpot,
+  getCityStored,
   postStoreCity,
   postStoreSpot,
 } from '@/apis/detailfeed';
@@ -24,10 +25,20 @@ import { copyClipboard } from '@/utils/copyClipboard';
 import { SelectModal, Share } from '..';
 import { ShareKakaoIcon, ShareLinkIcon } from '../Share/Share.styles';
 
-function FeedNav({ children, isScheduleIcon, id, feedType }: FeedNavProps) {
-  const [isBookmarked, setIsBookmared] = useState(isStored);
+function FeedNav({
+  children,
+  isScheduleIcon,
+  cityId,
+  placeId,
+  feedType,
+}: FeedNavProps) {
   const [success, setSuccess] = useState(false); // 링크 클립보드 복사 성공 여부
   const { open, handleOpen, handleClose } = useModal(); // 공유모달 열림 여부
+  const id = cityId || placeId;
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ['cityStore', cityId],
+    queryFn: () => getCityStored(cityId),
+  });
 
   const navigate = useNavigate();
   const onClickBackBtn = () => {
