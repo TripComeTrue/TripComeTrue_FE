@@ -4,7 +4,7 @@ import client from '@/apis/client';
 
 const getCityData = async <T>(url: string) => {
   const { data } = await client.get<T>(url);
-  return data;
+  return data.data;
 };
 // eslint-disable-next-line import/prefer-default-export
 export const useDetailFeedQuery = <T>({
@@ -13,14 +13,14 @@ export const useDetailFeedQuery = <T>({
   fnUrl,
 }: {
   queryKey: string;
-  id: number;
+  id: string;
   fnUrl: string;
 }) => {
   const { data, isError, isLoading, isSuccess } = useQuery<
     T,
     AxiosError,
     T,
-    [string, number, string]
+    [string, string, string]
   >({
     queryKey: [queryKey, id, fnUrl],
     queryFn: () => getCityData<T>(fnUrl),

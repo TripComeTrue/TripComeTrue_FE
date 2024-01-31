@@ -3,10 +3,8 @@ import { ReactNode } from 'react';
 export interface FeedNavProps {
   children?: ReactNode;
   isScheduleIcon?: boolean;
-  id: number;
-  isStored: boolean;
+  id: string;
   feedType?: 'spot';
-  refetch: VoidFunction;
 }
 
 export interface FeedNavModeProps {

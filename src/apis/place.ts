@@ -20,7 +20,7 @@ export const getPlaceReviews = async ({
   pageParam = 0,
   size = 2,
 }: {
-  placeId: string;
+  placeId: number;
   sort?: string;
   onlyImage?: boolean;
   pageParam?: number;

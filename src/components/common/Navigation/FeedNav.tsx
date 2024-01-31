@@ -24,15 +24,8 @@ import { copyClipboard } from '@/utils/copyClipboard';
 import { SelectModal, Share } from '..';
 import { ShareKakaoIcon, ShareLinkIcon } from '../Share/Share.styles';
 
-function FeedNav({
-  children,
-  isScheduleIcon,
-  id,
-  isStored,
-  feedType,
-  refetch,
-}: FeedNavProps) {
-  const isBookmarked = isStored;
+function FeedNav({ children, isScheduleIcon, id, feedType }: FeedNavProps) {
+  const [isBookmarked, setIsBookmared] = useState(isStored);
   const [success, setSuccess] = useState(false); // 링크 클립보드 복사 성공 여부
   const { open, handleOpen, handleClose } = useModal(); // 공유모달 열림 여부
 
@@ -44,28 +37,28 @@ function FeedNav({
   const { mutate: storeSpotMutate } = useMutation({
     mutationFn: (placeId: number) => postStoreSpot(placeId),
     onSuccess: () => {
-      refetch();
+      setIsBookmared(true);
     },
   });
 
   const { mutate: unStoreSpotMutate } = useMutation({
     mutationFn: (placeId: number) => cancelStoreSpot(placeId),
     onSuccess: () => {
-      refetch();
+      setIsBookmared(false);
     },
   });
 
   const { mutate: storeCityMutate } = useMutation({
     mutationFn: (placeId: number) => postStoreCity(placeId),
     onSuccess: () => {
-      refetch();
+      setIsBookmared(true);
     },
   });
 
   const { mutate: unStoreCityMutate } = useMutation({
     mutationFn: (placeId: number) => cancelStoreCity(placeId),
     onSuccess: () => {
-      refetch();
+      setIsBookmared(false);
     },
   });
 
@@ -124,7 +117,7 @@ function FeedNav({
           <Styled.FeedNavRight $isScheduleIcon={`${isScheduleIcon}`}>
             {isScheduleIcon && (
               <Styled.FeedNavSchedule
-                onClick={() => navigate('/trip/tripplan ')}>
+                onClick={() => navigate('/trip/tripplan')}>
                 <PiCalendarBlankLight />
                 <Styled.Tooltip className="tooltip">
                   일정에 추가하기

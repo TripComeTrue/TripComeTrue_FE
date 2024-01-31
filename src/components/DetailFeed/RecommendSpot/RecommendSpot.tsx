@@ -4,12 +4,12 @@ import * as Styled from './RecommendSpot.styles';
 import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import messageIcon from '/message.svg';
 
-const RecommendSpot = ({ id }: { id: number }) => {
+const RecommendSpot = ({ placeId }: { placeId: number }) => {
   const navigate = useNavigate();
   const { data, isLoading } = useDetailFeedQuery<RecommendSpotResponseType>({
     queryKey: 'recommendSpot',
-    id,
-    fnUrl: `/v1/places/${id}/nearby`,
+    id: placeId,
+    fnUrl: `/v1/places/${placeId}/nearby`,
   });
 
   if (isLoading) {
@@ -20,14 +20,8 @@ const RecommendSpot = ({ id }: { id: number }) => {
     return <p>Data not available</p>;
   }
 
-  const handlePlaceClick = ({
-    placeId,
-    placeName,
-  }: {
-    placeId: number;
-    placeName: string;
-  }) => {
-    navigate(`/detailfeed/spot/${placeId}`, { state: { placeId, placeName } });
+  const handlePlaceClick = (spotId: number) => {
+    navigate(`/detailfeed/spot/${spotId}`);
   };
 
   return (
@@ -40,10 +34,11 @@ const RecommendSpot = ({ id }: { id: number }) => {
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
         {data.data.map(
+          // eslint-disable-next-line @typescript-eslint/no-shadow
           ({ reviewCount, imageUrl, storedCount, placeName, placeId }) => (
             <Styled.RecommendItem
               key={placeName}
-              onClick={() => handlePlaceClick({ placeId, placeName })}>
+              onClick={() => handlePlaceClick(placeId)}>
               <Styled.BookMarkBox>
                 <Bookmark count={storedCount} />
               </Styled.BookMarkBox>

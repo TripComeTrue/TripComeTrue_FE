@@ -1,5 +1,4 @@
 import { SubTitle, Text } from '@/components/common';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './CityInformation.styles';
 import languageImage from '/language.svg';
 import moneyImage from '/money.svg';
@@ -7,23 +6,13 @@ import powerImage from '/power.svg';
 import timeImage from '/time.svg';
 import visaImage from '/visa.svg';
 
-const CityInformation = ({ cityId }: { cityId: number }) => {
-  const { data, isLoading } = useDetailFeedQuery<CityInfoResponseType>({
-    queryKey: 'information',
-    id: cityId,
-    fnUrl: `/v1/cities/${cityId}`,
-  });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!data || !data.data) {
-    return <p>Data not available</p>;
-  }
-
+const CityInformation = ({
+  cityInformation,
+}: {
+  cityInformation: CityInfoDataType;
+}) => {
   const { language, timeDifference, curName, curUnit, voltage, visa } =
-    data.data;
+    cityInformation;
 
   const INFORMATION_DATA = [
     { id: 1, content: language, svg: languageImage },

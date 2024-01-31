@@ -1,26 +1,27 @@
+import { useQuery } from '@tanstack/react-query';
 import { SubTitle, Text } from '@/components/common';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './Weather.styles';
+import { getCityWeather } from '@/apis/detailfeed';
 
-const Weather = ({ cityId }: { cityId: number }) => {
-  const { data, isLoading } = useDetailFeedQuery<WeatherResponseType>({
-    queryKey: 'weather',
-    id: cityId,
-    fnUrl: `/v1/cities/${cityId}/weathers`,
+const Weather = ({ cityId }: { cityId: string }) => {
+  const { data: cityWeatherData, isLoading } = useQuery({
+    queryKey: ['cityWeather', cityId],
+    queryFn: () => getCityWeather(cityId),
   });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!cityWeatherData) {
     return <p>Data not available</p>;
   }
+
   return (
     <Styled.WeatherWrapper>
       <SubTitle>날씨</SubTitle>
       <Styled.WeatherBox>
-        {data.data.map(({ maxAvgTempC, minAvgTempC, month }) => (
+        {cityWeatherData.map(({ maxAvgTempC, minAvgTempC, month }) => (
           <Styled.WeatherItem key={month}>
             <Styled.WeatherMonth>
               <Text fontSize={12} color="primary">

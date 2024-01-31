@@ -8,7 +8,7 @@ const DetailFeedShorts = ({
   cityId,
   placeName,
 }: {
-  cityId: number;
+  cityId: string;
   placeName: string;
 }) => {
   const { data, isLoading } = useDetailFeedQuery<ShortsResponseType>({
