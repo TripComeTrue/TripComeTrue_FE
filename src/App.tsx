@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
+import { Suspense, useLayoutEffect } from 'react';
 import DashBoard from '@/components/layout';
 import {
   TripDetail,
@@ -56,6 +56,7 @@ import TripPlanSelect from './pages/Trip/TripPlan/TripPlanSelect';
 import { HomeAllCity } from './components/Home';
 import SearchTagExpense from './pages/Search/SearchTagExpense';
 import TripPlanCopy from './pages/Trip/TripPlan/TripPlanCopy';
+import { Spinners } from './components/common';
 
 function App() {
   const location = useLocation();
