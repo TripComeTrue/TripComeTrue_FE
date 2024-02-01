@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import { ReviewWrite } from '@/components/common';
 import { postPlaceReview } from '@/apis/place';
 import useSubmitImages from '@/hooks/common/useSubmitImages';
@@ -18,13 +20,32 @@ const PlaceReviewWrite = () => {
     }: {
       imageUrl: string;
       contentValue: string;
-    }) => postPlaceReview(placeId, { imageUrl, content: contentValue }),
+    }) => {
+      return postPlaceReview(placeId, {
+        imageUrl,
+        content: contentValue,
+      });
+    },
+    onSuccess: () => navigate(`/detailfeed/spot/${placeId}/review`),
+    onError: (error) => {
+      if (axios.isAxiosError(error))
+        if (error.response?.status === 409) {
+          toast.error(error.response.data?.errorMessage, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+        } else if (error.response?.status === 400) {
+          toast.error(error.response.data?.errorMessage, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+        }
+    },
   });
 
   const onClickPostReview = async () => {
     const res = await handleSubmitImages();
     postReviewMutate({ imageUrl: res[0], contentValue: content });
-    navigate(`/detailfeed/spot/${placeId}/review`);
   };
 
   return (

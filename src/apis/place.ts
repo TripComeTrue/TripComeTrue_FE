@@ -3,14 +3,14 @@
 import client from './client';
 
 // 특정 여행지에 대한 리뷰 작성
-export const postPlaceReview = async (
+export const postPlaceReview = (
   placeId: string,
   reviewData: { imageUrl: string; content: string },
-) => {
-  const res = await client.post(`v1/places/${placeId}/reviews`, reviewData);
-
-  return res;
-};
+) =>
+  client.post<Response<PlaceReviewData>>(
+    `v1/places/${placeId}/reviews`,
+    reviewData,
+  );
 
 // 특정 여행지에 대한 다수의 리뷰 조회
 export const getPlaceReviews = async ({
@@ -57,7 +57,9 @@ export const putPlaceReview = async (
 
 // 특정 여행지에 대한 리뷰 1건 조회
 export const getPlaceReview = async (placeReviewId: string) => {
-  const { data } = await client.get(`v1/places/reviews/${placeReviewId}`);
+  const { data } = await client.get<Response<PlaceReviewData>>(
+    `v1/places/reviews/${placeReviewId}`,
+  );
 
   return data.data;
 };

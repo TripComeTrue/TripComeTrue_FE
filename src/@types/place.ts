@@ -7,16 +7,17 @@ interface PlaceReviewsData {
 }
 
 interface PlaceReviewData {
-  amILike: boolean;
-  commentCount: number;
-  content: string;
-  createdAt: string;
-  likeCount: number;
+  placeReviewId: number;
   memberId: number;
   nickname: string;
-  placeReviewId: number;
-  imageUrl: string;
   profileUrl: string;
+  imageUrl: string;
+  content: string;
+  likeCount: number;
+  createdAt: string;
+  amILike: boolean;
+  commentCount: number;
+  comments: CommentData;
 }
 
 interface CommentData {

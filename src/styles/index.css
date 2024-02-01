@@ -171,3 +171,9 @@ input:focus {
 button {
   cursor: pointer;
 }
+
+.toastify {
+  font-family: 'AppleSDGothicNeo', 'SF-Pro', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
