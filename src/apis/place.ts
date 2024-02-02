@@ -37,7 +37,7 @@ export const getPlaceReviews = async ({
 
 // 여행지 리뷰들 삭제
 export const deletePlaceReviews = async () => {
-  const res = await client.get(`v1/places/reviews`);
+  const res = await client.delete(`v1/places/reviews`);
 
   return res;
 };

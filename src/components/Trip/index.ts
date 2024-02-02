@@ -4,6 +4,7 @@ export { default as TripHomeBody } from '@/components/Trip/TripHome/TripHomeBody
 export { default as TripCard } from '@/components/Trip/TripHome/TripCard/TripCard';
 export { default as TripCarousel } from '@/components/Trip/TripHome/TripCarousel/TripCarousel';
 export { default as TripCarouselSkeleton } from '@/components/Trip/TripHome/TripCarousel/TripCarouselSkeleton';
+export { default as TripHomeBodySkeleton } from '@/components/Trip/TripHome/TripHomeBody/TripHomeBodySkeleton';
 
 // TripList
 export { default as CardList } from '@/components/Trip/TripList/CardList/CardList';
