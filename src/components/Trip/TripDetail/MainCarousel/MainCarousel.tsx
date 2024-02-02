@@ -1,5 +1,4 @@
 import { Pagination } from 'swiper/modules';
-import { Skeleton } from '@mui/material';
 import * as Styled from './MainCarousel.styles';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -8,7 +7,7 @@ import { MainCarouselProps } from './MainCarousel.types';
 import classifyTag from '@/utils/classifyTag';
 
 const MainCarousel = ({ imagesData }: MainCarouselProps) => {
-  return imagesData ? (
+  return (
     <Styled.Container
       pagination={{ dynamicBullets: true }}
       modules={[Pagination]}>
@@ -30,8 +29,6 @@ const MainCarousel = ({ imagesData }: MainCarouselProps) => {
         </Styled.Slide>
       ))}
     </Styled.Container>
-  ) : (
-    <Skeleton variant="rectangular" height="16.875rem" />
   );
 };
 

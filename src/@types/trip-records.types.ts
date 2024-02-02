@@ -1,4 +1,4 @@
-interface TripRecord {
+interface TripRecordData {
   tripRecordId: number;
   title: string;
   countries: string;
@@ -48,7 +48,7 @@ interface DayData {
   videos: { id: number; videoUrl: string }[];
 }
 
-interface TripRecordDetail {
+interface TripRecordDetailData {
   isStored: boolean;
   averageRating: number;
   content: string;
@@ -80,7 +80,7 @@ interface ShortData {
   memberId: number;
 }
 
-interface TripRecordLatestReview {
+interface TripRecordLatestReviewData {
   totalCount: number;
   latestTripRecordReview: {
     tripRecordId: number;
@@ -88,13 +88,16 @@ interface TripRecordLatestReview {
     tripRecordReviewId: number;
     memberId: number;
     nickname: string;
-    ratingStore: number;
+    ratingScore: number;
     content: string;
     likeCount: number;
     amILike: boolean;
     createdAt: string;
+    imageUrl: string;
   };
   myRatingScore: number;
+  myTripRecordReviewId: number;
+  canRegisterContent: boolean;
 }
 
 interface CommentData {
@@ -116,4 +119,11 @@ interface ReplyData {
   memberId: number;
   nickname: string;
   profileUrl: string;
+}
+
+interface TripRecordReviewData {
+  tripRecordTitle: string;
+  imageUrl: string;
+  content: string;
+  ratingScore: number;
 }

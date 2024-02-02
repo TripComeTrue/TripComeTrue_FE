@@ -6,7 +6,6 @@ import StarIcon from '/starIcon.svg';
 import DollarIcon from '/images/dollar.svg';
 import TripCarousel from '../TripCarousel/TripCarousel';
 import { getTripRecords } from '@/apis/trip-records';
-import TripHomeBodySkeleton from './TripHomeBodySkeleton';
 
 const TripHomeBody = () => {
   const navigate = useNavigate();

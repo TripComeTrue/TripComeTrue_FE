@@ -12,7 +12,6 @@ import { IntroductionProps } from './Introduction.types';
 import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
 import classifyExpense from '@/utils/classifyExpense';
 import { deleteStore, postStore } from '@/apis/trip-records';
-import IntroductionSkeleton from './IntroductionSkeleton';
 
 const Introduction = ({
   tripRecordData,
@@ -20,7 +19,7 @@ const Introduction = ({
 }: IntroductionProps) => {
   const { tripRecordId } = useParams() as { tripRecordId: string };
   const formatDays = tripRecordData
-    ? `${tripRecordData.totalDays}박 ${tripRecordData.totalDays + 1}일`
+    ? `${tripRecordData.totalDays - 1}박 ${tripRecordData.totalDays}일`
     : '';
 
   const [mainCountries, ...countries] = tripRecordData
@@ -46,7 +45,7 @@ const Introduction = ({
     return postStoreMutate();
   };
 
-  return tripRecordData ? (
+  return (
     <Styled.Container>
       <Styled.Header>
         <Styled.CreatorContainer>
@@ -122,8 +121,6 @@ const Introduction = ({
         </Styled.HashTagList>
       </footer>
     </Styled.Container>
-  ) : (
-    <IntroductionSkeleton />
   );
 };
 
