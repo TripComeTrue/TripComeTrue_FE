@@ -17,7 +17,7 @@ interface PlaceReviewData {
   createdAt: string;
   amILike: boolean;
   commentCount: number;
-  comments: CommentData;
+  comments: CommentData[];
 }
 
 interface CommentData {

@@ -26,7 +26,7 @@ export const getPlaceReviews = async ({
   pageParam?: number;
   size?: number;
 }) => {
-  const { data } = await client.get<{ code: number; data: PlaceReviewsData }>(
+  const { data } = await client.get<Response<PlaceReviewsData>>(
     `v1/places/${placeId}/reviews?page=${pageParam}&size=${size}&${
       sort === '추천순' ? 'sort=likeCount' : 'sort=createdAt'
     },desc&onlyImage=${onlyImage}`,

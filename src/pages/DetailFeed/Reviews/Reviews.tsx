@@ -4,7 +4,6 @@ import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
 import { Bubble, Filter, RetryErrorBoundary, Text } from '@/components/common';
-
 import ReviewsSkeleton from './ReviewsSkeleton';
 import { ReviewList } from '@/components/DetailFeed';
 

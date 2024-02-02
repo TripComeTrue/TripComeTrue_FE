@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { isAxiosError } from 'axios';
 import { ReviewWrite } from '@/components/common';
 import { postPlaceReview } from '@/apis/place';
 import useSubmitImages from '@/hooks/common/useSubmitImages';
@@ -28,7 +28,7 @@ const PlaceReviewWrite = () => {
     },
     onSuccess: () => navigate(`/detailfeed/spot/${placeId}/review`),
     onError: (error) => {
-      if (axios.isAxiosError(error))
+      if (isAxiosError(error))
         if (error.response?.status === 409) {
           toast.error(error.response.data?.errorMessage, {
             position: 'top-center',

@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { isAxiosError } from 'axios';
 import { ReviewWrite } from '@/components/common';
 import { getPlaceReview, putPlaceReview } from '@/apis/place';
 import useDeleteImages from '@/hooks/common/useDeleteImages';
@@ -35,7 +35,7 @@ const PlaceReviewEdit = () => {
       navigate(`/detailfeed/spot/${placeId}/review`);
     },
     onError: (error) => {
-      if (axios.isAxiosError(error))
+      if (isAxiosError(error))
         if (error.response?.status === 400 || error.response?.status === 404) {
           toast.error(error.response.data?.errorMessage, {
             position: 'top-center',
