@@ -11,7 +11,7 @@ import {
   HotPlace,
   Weather,
 } from '@/components/DetailFeed';
-import { FeedNav } from '@/components/common';
+// import { FeedNav } from '@/components/common';
 import * as Styled from './City.styles';
 
 const City = () => {

@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
 
 export interface FeedNavProps {
-  children?: ReactNode;
+  children: ReactNode;
   isScheduleIcon?: boolean;
   cityId?: string;
   placeId?: string;
-  feedType?: 'spot';
+  feedType: 'city' | 'spot';
+  isStored: boolean;
 }
 
 export interface FeedNavModeProps {

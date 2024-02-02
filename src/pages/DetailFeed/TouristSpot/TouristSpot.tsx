@@ -7,7 +7,7 @@ import {
   SpotInformation,
   SpotTopReview,
 } from '@/components/DetailFeed';
-import { FeedNav } from '@/components/common';
+// import { FeedNav } from '@/components/common';
 import * as Styled from './TouristSpot.styles';
 import { getSpotInformation } from '@/apis/detailfeed';
 import { getPlaceReviews } from '@/apis/place';
@@ -36,7 +36,7 @@ const TouristSpot = () => {
     return <p>Data not available</p>;
   }
 
-  const { isStored, address, latitude, longitude, phoneNumber, name, cityId } =
+  const { address, latitude, longitude, phoneNumber, name, cityId } =
     spotInformation;
 
   return (

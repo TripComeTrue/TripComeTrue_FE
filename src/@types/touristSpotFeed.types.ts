@@ -5,7 +5,6 @@ interface SpotInfoDataType {
   address: string;
   storedCount: number;
   latitude: number;
-  isStored: boolean;
   longitude: number;
   phoneNumber?: number;
   weekdayCloseTime?: number;
