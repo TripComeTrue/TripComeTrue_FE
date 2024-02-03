@@ -1,16 +1,14 @@
-import ReactPlayer from 'react-player';
 import { Link, useParams } from 'react-router-dom';
-import { SubTitle, Tag, Text } from '@/components/common';
+import { SubTitle, Text } from '@/components/common';
 import MarkerIcon from '/images/marker.svg';
 import * as Styled from './TripDescription.styles';
 import StarIcon from '/starIcon.svg';
 import { TripDescriptionProps } from './TripDescription.types';
-import classifyTag from '@/utils/classifyTag';
 
 const TripDescription = ({ data }: TripDescriptionProps) => {
   const { tripRecordId } = useParams() as { tripRecordId: string };
-  const [date, daysData] = data || '';
-  const formattedDate = date?.replace(/-/gi, '.');
+  const [date, daysData] = data;
+  const formattedDate = date.replace(/-/gi, '.');
 
   return (
     <Styled.Container>
@@ -23,7 +21,7 @@ const TripDescription = ({ data }: TripDescriptionProps) => {
         </SubTitle>
       </Styled.ScheduleContainer>
       <Styled.PlaceList>
-        {daysData?.map((dayData: DayData) => (
+        {daysData.map((dayData) => (
           <Styled.PlaceItem key={dayData.id}>
             <Styled.PlaceContainer>
               <Styled.Side>
@@ -35,37 +33,17 @@ const TripDescription = ({ data }: TripDescriptionProps) => {
                   {dayData.placeName}
                 </Text>
                 <Text>{dayData.content}</Text>
-                {dayData.tagType && (
-                  <Tag src={dayData.tagUrl}>{classifyTag(dayData.tagType)}</Tag>
-                )}
               </Styled.PlaceContents>
             </Styled.PlaceContainer>
             <Styled.PlaceCarousel spaceBetween={8} slidesPerView={2.4}>
-              {[...dayData.videos, ...dayData.images].map(
-                (imageData, index) => (
-                  <Styled.PlaceSlide key={index}>
-                    {(imageData as { id: number; imageUrl: string })
-                      .imageUrl ? (
-                      <Styled.Image
-                        src={
-                          (imageData as { id: number; imageUrl: string })
-                            .imageUrl
-                        }
-                        alt={`${dayData.placeName} 관련`}
-                      />
-                    ) : (
-                      <ReactPlayer
-                        width="100%"
-                        height="100%"
-                        url={
-                          (imageData as { id: number; videoUrl: string })
-                            .videoUrl
-                        }
-                      />
-                    )}
-                  </Styled.PlaceSlide>
-                ),
-              )}
+              {dayData.images.map((imageData, index) => (
+                <Styled.PlaceSlide key={index}>
+                  <Styled.Image
+                    src={imageData.imageUrl}
+                    alt={`${dayData.placeName} 관련`}
+                  />
+                </Styled.PlaceSlide>
+              ))}
             </Styled.PlaceCarousel>
           </Styled.PlaceItem>
         ))}

@@ -100,6 +100,11 @@ interface TripRecordLatestReviewData {
   canRegisterContent: boolean;
 }
 
+interface TripRecordCommentsData {
+  totalCount: number;
+  comments: CommentData[];
+}
+
 interface CommentData {
   commentId: number;
   content: string;
@@ -125,5 +130,10 @@ interface TripRecordReviewData {
   tripRecordTitle: string;
   imageUrl: string;
   content: string;
+  ratingScore: number;
+}
+
+interface PostTripRecordReviewData {
+  tripRecordReviewId: number;
   ratingScore: number;
 }

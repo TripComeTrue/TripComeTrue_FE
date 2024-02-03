@@ -21,10 +21,7 @@ const TripDetailMain = () => {
         tripRecordData={tripRecordDetailData}
         tripRecordDetailRefetch={tripRecordDetailRefetch}
       />
-      <TripContents
-        tripRecordId={tripRecordId}
-        schedulesData={tripRecordDetailData.schedules}
-      />
+      <TripContents schedulesData={tripRecordDetailData.schedules} />
     </Styled.Container>
   );
 };

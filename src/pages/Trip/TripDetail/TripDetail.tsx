@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { RetryErrorBoundary, SimpleNav } from '@/components/common';
+import { RetryErrorBoundary, SimpleNav, Spinners } from '@/components/common';
 import * as Styled from './TripDetail.styles';
 import {
   ReviewAlert,
@@ -24,7 +24,12 @@ const TripDetail = () => {
             <TripDetailMain />
           </Suspense>
         </RetryErrorBoundary>
-        <TripComment />
+
+        <RetryErrorBoundary>
+          <Suspense fallback={<Spinners />}>
+            <TripComment />
+          </Suspense>
+        </RetryErrorBoundary>
 
         {isSignIn && (
           <RetryErrorBoundary>
