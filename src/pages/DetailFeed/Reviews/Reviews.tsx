@@ -1,52 +1,17 @@
-import { Fragment, useEffect, useState } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { Suspense, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
 import * as Styled from './Reviews.styles';
 import BackArrow from '@/assets/back-arrow.svg';
 import WriteIcon from '/images/write.svg';
-import {
-  Bubble,
-  Filter,
-  PlaceReviewCard,
-  Spinners,
-  Text,
-} from '@/components/common';
-import { getPlaceReviews } from '@/apis/place';
-import FormattedDate from '@/utils/formattedDate';
+import { Bubble, Filter, RetryErrorBoundary, Text } from '@/components/common';
 import ReviewsSkeleton from './ReviewsSkeleton';
+import { ReviewList } from '@/components/DetailFeed';
 
 const Reviews = () => {
   const navigate = useNavigate();
   const { placeId } = useParams() as { placeId: string };
   const [sort, setSort] = useState('최신순');
   const [onlyImage, setOnlyImage] = useState(false);
-  const [ref, inView] = useInView();
-  const {
-    data: placeReviewsData,
-    hasNextPage,
-    isFetchingNextPage,
-    fetchNextPage,
-    refetch,
-  } = useInfiniteQuery({
-    queryKey: ['PlaceReviewsInfiniteData'],
-    queryFn: ({ pageParam }) =>
-      getPlaceReviews({ placeId, size: 10, sort, onlyImage, pageParam }),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, _, lastPageParam) => {
-      return !lastPage.isLast ? lastPageParam + 1 : null;
-    },
-  });
-
-  useEffect(() => {
-    refetch();
-  }, [sort, onlyImage]);
-
-  useEffect(() => {
-    if (hasNextPage && inView) {
-      fetchNextPage();
-    }
-  }, [inView]);
 
   return (
     <div>
@@ -54,9 +19,7 @@ const Reviews = () => {
         <Styled.NavBackBtn onClick={() => navigate(-1)}>
           <img src={BackArrow} alt="뒤로가기" />
         </Styled.NavBackBtn>
-        <Styled.NavTitle>
-          리뷰({placeReviewsData?.pages[0].totalCount})
-        </Styled.NavTitle>
+        <Styled.NavTitle>리뷰</Styled.NavTitle>
         <Styled.WriteBtnWrapper>
           <Link to={`/detailfeed/spot/${placeId}/review/write`}>
             <Styled.WriteBtn src={WriteIcon} alt="리뷰 작성 아이콘" />
@@ -82,41 +45,12 @@ const Reviews = () => {
             setSelectedFilter={setSort}
           />
         </Styled.Header>
-        {placeReviewsData ? (
-          <>
-            <ul>
-              {placeReviewsData?.pages.map((page, index) => (
-                <Fragment key={index}>
-                  {page.placeReviews.map((placeReview) => (
-                    <li key={placeReview.placeReviewId}>
-                      <Link
-                        to={`/detailfeed/spot/${placeId}/review/${placeReview.placeReviewId}/comment`}>
-                        <PlaceReviewCard>
-                          <PlaceReviewCard.PlaceHeader
-                            nickname={placeReview.nickname}
-                            profileUrl={placeReview.profileUrl}
-                            writeDate={FormattedDate(placeReview.createdAt)}
-                          />
-                          <PlaceReviewCard.Main
-                            imageUrl={placeReview.imageUrl}
-                            content={placeReview.content}
-                          />
-                          <PlaceReviewCard.InteractionButtons
-                            likeCount={placeReview.likeCount}
-                            commentCount={placeReview.commentCount}
-                          />
-                        </PlaceReviewCard>
-                      </Link>
-                    </li>
-                  ))}
-                </Fragment>
-              ))}
-            </ul>
-            {isFetchingNextPage ? <Spinners /> : <div ref={ref} />}
-          </>
-        ) : (
-          <ReviewsSkeleton />
-        )}
+
+        <RetryErrorBoundary>
+          <Suspense fallback={<ReviewsSkeleton />}>
+            <ReviewList sort={sort} onlyImage={onlyImage} />
+          </Suspense>
+        </RetryErrorBoundary>
       </Styled.Container>
     </div>
   );

@@ -12,3 +12,5 @@ export { default as CityGallery } from './Gallery/CityGallery';
 export { default as RecommendSpot } from './RecommendSpot/RecommendSpot';
 export { default as PlaceReviews } from './PlaceReviews/PlaceReviews';
 export { default as SearchedSpot } from './SearchedSpot/SearchedSpot';
+export { default as ReviewList } from './ReviewList/ReviewList';
+export { default as ReviewCommentMain } from './ReviewCommentMain/ReviewCommentMain';
