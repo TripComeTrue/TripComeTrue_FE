@@ -109,7 +109,7 @@ function App() {
         </Route>
 
         <Route path="/detailfeed/*">
-          <Route path="city/:cityId" element={<City />} />
+          <Route path="city/:isDomestic/:cityId" element={<City />} />
           <Route path="spot/:placeId" element={<TouristSpot />} />
           <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route

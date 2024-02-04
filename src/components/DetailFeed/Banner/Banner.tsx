@@ -1,8 +1,10 @@
 import banner from '/banner.png';
 import * as Styled from './Banner.styles';
+import { useParams } from 'react-router-dom';
 
-const Banner = ({ isDomestic }: { isDomestic: boolean }) => {
-  const url = isDomestic ? 'place' : 'gplace';
+const Banner = () => {
+  const { isDomestic } = useParams() as { isDomestic: '국내' | '해외' };
+  const url = isDomestic === '국내' ? 'place' : 'gplace';
   return (
     <Styled.BannerWrapper>
       <a

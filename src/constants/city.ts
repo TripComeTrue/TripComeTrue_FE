@@ -14,7 +14,7 @@ export interface City {
   name: string;
   link: string;
   cityId: number;
-  isDomestic: boolean;
+  isDomestic: '국내' | '해외';
   country?: string;
 }
 
@@ -30,7 +30,7 @@ const ALL_CITY: CityList = {
             name: '베를린',
             link: 'berlin',
             cityId: 8,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -42,7 +42,7 @@ const ALL_CITY: CityList = {
             name: '파리',
             link: 'paris',
             cityId: 7,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -54,7 +54,7 @@ const ALL_CITY: CityList = {
             name: '런던',
             link: 'london',
             cityId: 9,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -71,7 +71,7 @@ const ALL_CITY: CityList = {
             name: '방콕',
             link: 'bangkok',
             cityId: 6,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -83,14 +83,14 @@ const ALL_CITY: CityList = {
             name: '도쿄',
             link: 'tokyo',
             cityId: 5,
-            isDomestic: false,
+            isDomestic: '해외',
           },
           {
             country: '일본',
             name: '오사카',
             link: 'osaka',
             cityId: 4,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -107,7 +107,7 @@ const ALL_CITY: CityList = {
             name: '뉴욕',
             link: 'newyork',
             cityId: 10,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -119,7 +119,7 @@ const ALL_CITY: CityList = {
             name: '벤쿠버',
             link: 'vancouver',
             cityId: 11,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -136,7 +136,7 @@ const ALL_CITY: CityList = {
             name: '시드니',
             link: 'sydney',
             cityId: 12,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -148,7 +148,7 @@ const ALL_CITY: CityList = {
             name: '오클랜드',
             link: 'auckland',
             cityId: 13,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -165,7 +165,7 @@ const ALL_CITY: CityList = {
             name: '케이프타운',
             link: 'cape-town',
             cityId: 14,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -177,7 +177,7 @@ const ALL_CITY: CityList = {
             name: '카이로',
             link: 'cairo',
             cityId: 15,
-            isDomestic: false,
+            isDomestic: '해외',
           },
         ],
       },
@@ -186,9 +186,9 @@ const ALL_CITY: CityList = {
   korea: {
     name: '대한민국',
     cities: [
-      { name: '서울', link: 'seoul', cityId: 1, isDomestic: true },
-      { name: '부산', link: 'busan', cityId: 3, isDomestic: true },
-      { name: '제주도', link: 'jeju', cityId: 2, isDomestic: true },
+      { name: '서울', link: 'seoul', cityId: 1, isDomestic: '국내' },
+      { name: '부산', link: 'busan', cityId: 3, isDomestic: '국내' },
+      { name: '제주도', link: 'jeju', cityId: 2, isDomestic: '국내' },
     ],
   },
 };

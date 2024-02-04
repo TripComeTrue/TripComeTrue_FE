@@ -1,6 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { getCityInformation } from '@/apis/detailfeed';
 import {
   Banner,
   CityGallery,
@@ -11,39 +9,24 @@ import {
   HotPlace,
   Weather,
 } from '@/components/DetailFeed';
-// import { FeedNav } from '@/components/common';
+import { FeedNav } from '@/components/common';
 import * as Styled from './City.styles';
 
 const City = () => {
-  const { cityId } = useParams() as { cityId: string };
-
-  const { data: cityInformation, isLoading } = useQuery({
-    queryKey: ['cityInformation', cityId],
-    queryFn: () => getCityInformation(cityId),
-  });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!cityInformation) {
-    return <p>Data not available</p>;
-  }
-  const { name, language } = cityInformation;
-  const isDomestic = language === '한국어';
-
+  const { isDomestic } = useParams();
+  const domestic = isDomestic === '국내';
   return (
     <>
-      {/* <FeedNav cityId={cityId}>{name}</FeedNav> */}
+      <FeedNav />
       <Styled.CityWrapper>
-        <DetailFeedShorts cityId={cityId} cityName={name} />
-        <CityGallery cityId={cityId} cityName={name} />
-        {!isDomestic && <CityInformation cityInformation={cityInformation} />}
-        <Weather cityId={cityId} />
-        {!isDomestic && <ExchangeRate cityId={cityId} />}
-        <CityTopReview cityId={cityId} cityName={name} />
-        <HotPlace cityId={cityId} cityName={name} />
-        <Banner isDomestic={isDomestic} />
+        <DetailFeedShorts />
+        <CityGallery />
+        {!domestic && <CityInformation />}
+        <Weather />
+        {!domestic && <ExchangeRate />}
+        <CityTopReview />
+        <HotPlace />
+        <Banner />
       </Styled.CityWrapper>
     </>
   );

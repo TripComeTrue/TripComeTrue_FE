@@ -1,14 +1,16 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import { SubTitle, Text } from '@/components/common';
 import * as Styled from './ExchangeRate.styles';
 import { getCityExchangeRate } from '@/apis/detailfeed';
 
-const ExchangeRate = ({ cityId }: { cityId: string }) => {
+const ExchangeRate = () => {
+  const { cityId } = useParams() as { cityId: string };
   const [curMoney, setCurMoney] = useState(1);
   const [krMoney, setKrMoney] = useState(1);
 
-  const { data: exchangeRateData, isLoading } = useQuery({
+  const { data: exchangeRateData } = useSuspenseQuery({
     queryKey: ['exchangeRate', cityId],
     queryFn: () => getCityExchangeRate(cityId),
   });
@@ -35,14 +37,6 @@ const ExchangeRate = ({ cityId }: { cityId: string }) => {
       setKrMoney(krw);
     }
   }, [exchangeRateData]);
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!exchangeRateData) {
-    return <p>Data not available</p>;
-  }
 
   const { country, curUnit, curName } = exchangeRateData;
 

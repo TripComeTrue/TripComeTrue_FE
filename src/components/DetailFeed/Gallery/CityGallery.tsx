@@ -1,30 +1,26 @@
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQueries } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getCityGallery, getCityInformation } from '@/apis/detailfeed';
 import { Bookmark, EmptyContents, SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
-import { getCityGallery } from '@/apis/detailfeed';
 
-const CityGallery = ({
-  cityId,
-  cityName,
-}: {
-  cityId: string;
-  cityName: string;
-}) => {
-  const { data: CityGalleryData, isLoading } = useQuery({
-    queryKey: ['cityGallery', cityId],
-    queryFn: () => getCityGallery(cityId),
+const CityGallery = () => {
+  const { cityId } = useParams() as { cityId: string };
+  const [{ data: cityGalleryData }, { data: cityName }] = useSuspenseQueries({
+    queries: [
+      {
+        queryKey: ['cityGallery', cityId],
+        queryFn: () => getCityGallery(cityId),
+      },
+      {
+        queryKey: ['cityInformation', cityId],
+        queryFn: () => getCityInformation(cityId),
+        select: (data: { name: string }) => data.name,
+      },
+    ],
   });
 
   const navigate = useNavigate();
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!CityGalleryData) {
-    return <p>Data not available</p>;
-  }
 
   const handleMoreClick = () => {
     navigate(`/detailfeed/citygallerylist/${cityName}/${cityId}`);
@@ -36,14 +32,14 @@ const CityGallery = ({
           {cityName} 여행 갤러리
         </SubTitle>
       </Styled.SubtitleBox>
-      {CityGalleryData.length === 0 ? (
+      {cityGalleryData.length === 0 ? (
         <EmptyContents />
       ) : (
         <Styled.GellaryItemBox
           spaceBetween={8}
           slidesPerView={2.15}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-          {CityGalleryData.map(
+          {cityGalleryData.map(
             ({ tripRecordStoreCount, imageUrl, tripRecordId, imageId }) => (
               <Styled.GellaryItem
                 key={imageId}

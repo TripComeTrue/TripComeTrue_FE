@@ -1,31 +1,27 @@
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { getCityHotPlace, getCityInformation } from '@/apis/detailfeed';
 import { Bookmark, SubTitle, Text } from '@/components/common';
+import { useSuspenseQueries } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as Styled from './HotPlace.styles';
 import messageIcon from '/message.svg';
 import starIcon from '/starIcon.svg';
-import { getCityHotPlace } from '@/apis/detailfeed';
 
-const HotPlace = ({
-  cityId,
-  cityName,
-}: {
-  cityId: string;
-  cityName: string;
-}) => {
+const HotPlace = () => {
+  const { cityId } = useParams() as { cityId: string };
   const navigate = useNavigate();
-  const { data: cityHotPlace, isLoading } = useQuery({
-    queryKey: ['hotPlace', cityId],
-    queryFn: () => getCityHotPlace(cityId),
+  const [{ data: cityHotPlace }, { data: cityName }] = useSuspenseQueries({
+    queries: [
+      {
+        queryKey: ['hotPlace', cityId],
+        queryFn: () => getCityHotPlace(cityId),
+      },
+      {
+        queryKey: ['cityInformation', cityId],
+        queryFn: () => getCityInformation(cityId),
+        select: (data: { name: string }) => data.name,
+      },
+    ],
   });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!cityHotPlace) {
-    return <p>Data not available</p>;
-  }
 
   const handlePlaceClick = ({ placeId }: { placeId: number }) => {
     navigate(`/detailfeed/spot/${placeId}`);

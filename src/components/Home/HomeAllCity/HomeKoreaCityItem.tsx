@@ -7,22 +7,14 @@ function HomeKoreaCities({ city }: HomeKoreaCitiesProps) {
 
   if (!city) return null;
 
-  function handleCityClick({ name, cityId, isDomestic }: CityState) {
-    navigate(`/detailfeed/city/${cityId}`, {
-      state: { name, cityId, isDomestic },
-    });
+  function handleCityClick(cityId: number, isDomestic: string) {
+    navigate(`/detailfeed/city/${isDomestic}/${cityId}`);
   }
   return (
     <Styled.KoreaItem
       key={city.name}
       $height={52}
-      onClick={() =>
-        handleCityClick({
-          cityId: city.cityId,
-          name: city.name,
-          isDomestic: city.isDomestic,
-        })
-      }>
+      onClick={() => handleCityClick(city.cityId, city.isDomestic)}>
       {city.name}
     </Styled.KoreaItem>
   );

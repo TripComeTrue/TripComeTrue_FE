@@ -1,21 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+import { getCityWeather } from '@/apis/detailfeed';
 import { SubTitle, Text } from '@/components/common';
 import * as Styled from './Weather.styles';
-import { getCityWeather } from '@/apis/detailfeed';
 
-const Weather = ({ cityId }: { cityId: string }) => {
-  const { data: cityWeatherData, isLoading } = useQuery({
+const Weather = () => {
+  const { cityId } = useParams() as { cityId: string };
+  const { data: cityWeatherData } = useSuspenseQuery({
     queryKey: ['cityWeather', cityId],
     queryFn: () => getCityWeather(cityId),
   });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!cityWeatherData) {
-    return <p>Data not available</p>;
-  }
 
   return (
     <Styled.WeatherWrapper>
