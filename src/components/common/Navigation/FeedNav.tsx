@@ -1,18 +1,18 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import {
   PiBookmarkSimpleFill,
   PiBookmarkSimpleLight,
   PiCalendarBlankLight,
 } from 'react-icons/pi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Alert, Snackbar } from '@mui/material';
 import share from '@/assets/share.svg';
 import backArrow from '@/assets/back-arrow.svg';
 import {
   cancelStoreCity,
   cancelStoreSpot,
-  getCityStored,
+  getCityInformation,
   postStoreCity,
   postStoreSpot,
 } from '@/apis/detailfeed';
@@ -23,45 +23,68 @@ import useKakaoShare from '@/hooks/common/useKakaoShare';
 import { copyClipboard } from '@/utils/copyClipboard';
 import { SelectModal, Share } from '..';
 import { ShareKakaoIcon, ShareLinkIcon } from '../Share/Share.styles';
+import { getSpotInformation } from '@/apis/spotfeed';
+import { getCookie } from '@/utils/cookie';
 
-const FeedNav = ({ feedType }: { feedType?: 'spot' }) => {
+const FeedNav = ({
+  feedType,
+  isScheduleIcon,
+}: {
+  feedType?: 'spot';
+  isScheduleIcon?: boolean;
+}) => {
+  const isLogin = getCookie('accessToken');
+  const { id } = useParams() as { id: string };
+  const pageType = feedType ? 'spot' : 'city';
   const [success, setSuccess] = useState(false); // 링크 클립보드 복사 성공 여부
   const { open, handleOpen, handleClose } = useModal(); // 공유모달 열림 여부
-  const id = feedType ? placeId : cityId;
-  const pageType = feedType ? 'spot' : 'city';
   const navigate = useNavigate();
   const onClickBackBtn = () => {
     navigate(-1);
   };
 
+  const { data, refetch } = useSuspenseQuery<
+    SpotInfoDataType | CityInfoDataType
+  >({
+    queryKey: ['pageName', id],
+    queryFn: () => (feedType ? getSpotInformation(id) : getCityInformation(id)),
+  });
+
+  const name = data?.name;
+  const isBookmarked = data?.isStored;
+
   const { mutate: storeSpotMutate } = useMutation({
     mutationFn: () => postStoreSpot(id),
+    onSuccess: () => refetch(),
   });
 
   const { mutate: unStoreSpotMutate } = useMutation({
     mutationFn: () => cancelStoreSpot(id),
+    onSuccess: () => refetch(),
   });
 
   const { mutate: storeCityMutate } = useMutation({
     mutationFn: () => postStoreCity(id),
+    onSuccess: () => refetch(),
   });
 
   const { mutate: unStoreCityMutate } = useMutation({
     mutationFn: () => cancelStoreCity(id),
+    onSuccess: () => refetch(),
   });
 
   const onClickCityBookMark = () => {
     if (isBookmarked) {
-      unStoreCityMutate(id);
+      unStoreCityMutate();
     } else {
-      storeCityMutate(id);
+      storeCityMutate();
     }
   };
   const onClickSpotBookMark = () => {
     if (isBookmarked) {
-      unStoreSpotMutate(id);
+      unStoreSpotMutate();
     } else {
-      storeSpotMutate(id);
+      storeSpotMutate();
     }
   };
 
@@ -69,7 +92,7 @@ const FeedNav = ({ feedType }: { feedType?: 'spot' }) => {
   const { handleKakaoShare } = useKakaoShare({
     title: `${name}여행 공유하기`,
     desc: '다양한 여행 컨텐츠를 즐겨보세요!',
-    link: `detailfeed/${pageType}/${name}/${id}`,
+    link: `detailfeed/${pageType}/${id}`,
   });
 
   // 카톡 공유 클릭시 함수
@@ -82,7 +105,7 @@ const FeedNav = ({ feedType }: { feedType?: 'spot' }) => {
   const onClickLinkCopy = () => {
     const BASE_URL = 'https://tripcometrue.vercel.app/';
     if (id) {
-      copyClipboard(`${BASE_URL}detailfeed/${pageType}/${name}/${id}`);
+      copyClipboard(`${BASE_URL}detailfeed/${pageType}/${id}`);
     }
     handleClose();
     setSuccess(true);
@@ -90,6 +113,7 @@ const FeedNav = ({ feedType }: { feedType?: 'spot' }) => {
   const onClickAlertClose = () => {
     setSuccess(false);
   };
+
   return (
     <>
       <NavWrap>
@@ -103,7 +127,7 @@ const FeedNav = ({ feedType }: { feedType?: 'spot' }) => {
             {name}
           </Styled.FeedNavTitle>
           <Styled.FeedNavRight $isScheduleIcon={`${isScheduleIcon}`}>
-            {isScheduleIcon && (
+            {isScheduleIcon && isLogin && (
               <Styled.FeedNavSchedule
                 onClick={() => navigate('/trip/tripplan')}>
                 <PiCalendarBlankLight />
@@ -112,15 +136,17 @@ const FeedNav = ({ feedType }: { feedType?: 'spot' }) => {
                 </Styled.Tooltip>
               </Styled.FeedNavSchedule>
             )}
-            <Styled.FeedNavBookmark
-              onClick={feedType ? onClickSpotBookMark : onClickCityBookMark}
-              $isBookmarked={`${isBookmarked}`}>
-              {isBookmarked ? (
-                <PiBookmarkSimpleFill />
-              ) : (
-                <PiBookmarkSimpleLight />
-              )}
-            </Styled.FeedNavBookmark>
+            {isLogin && (
+              <Styled.FeedNavBookmark
+                onClick={feedType ? onClickSpotBookMark : onClickCityBookMark}
+                $isBookmarked={`${isBookmarked}`}>
+                {isBookmarked ? (
+                  <PiBookmarkSimpleFill />
+                ) : (
+                  <PiBookmarkSimpleLight />
+                )}
+              </Styled.FeedNavBookmark>
+            )}
             <Styled.FeedNavIcon onClick={handleOpen}>
               <img src={share} alt="공유하기" />
             </Styled.FeedNavIcon>

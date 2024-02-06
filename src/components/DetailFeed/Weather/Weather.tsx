@@ -5,7 +5,7 @@ import { SubTitle, Text } from '@/components/common';
 import * as Styled from './Weather.styles';
 
 const Weather = () => {
-  const { cityId } = useParams() as { cityId: string };
+  const { id: cityId } = useParams() as { id: string };
   const { data: cityWeatherData } = useSuspenseQuery({
     queryKey: ['cityWeather', cityId],
     queryFn: () => getCityWeather(cityId),

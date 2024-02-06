@@ -5,7 +5,7 @@ import { Bookmark, EmptyContents, SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
 
 const CityGallery = () => {
-  const { cityId } = useParams() as { cityId: string };
+  const { id: cityId } = useParams() as { id: string };
   const [{ data: cityGalleryData }, { data: cityName }] = useSuspenseQueries({
     queries: [
       {

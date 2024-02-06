@@ -1,12 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { SubTitle, Text } from '@/components/common';
 import * as Styled from './ExchangeRate.styles';
 import { getCityExchangeRate } from '@/apis/detailfeed';
 
 const ExchangeRate = () => {
-  const { cityId } = useParams() as { cityId: string };
+  const { id: cityId } = useParams() as { id: string };
   const [curMoney, setCurMoney] = useState(1);
   const [krMoney, setKrMoney] = useState(1);
 

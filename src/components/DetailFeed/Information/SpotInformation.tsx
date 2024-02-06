@@ -1,22 +1,27 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import Map from '@/components/Map/Map';
 import { SubTitle, Text } from '@/components/common';
-import { SpotInformationProps } from './Information.types';
 import * as Styled from './SpotInformation.styles';
 import phone from '/infoPhone.svg';
 import pin from '/images/marker.svg';
+import { getSpotInformation } from '@/apis/detailfeed';
 
-const SpotInformation = ({
-  address,
-  latitude,
-  longitude,
-  phoneNumber,
-  cityId,
-}: SpotInformationProps) => {
+const SpotInformation = () => {
+  const { id: placeId } = useParams() as { id: string };
   const navigate = useNavigate();
+
+  const { data: spotInformation } = useSuspenseQuery({
+    queryKey: ['spotInformation', placeId],
+    queryFn: () => getSpotInformation(placeId),
+  });
+
+  const { cityId, latitude, longitude, address, phoneNumber } = spotInformation;
+
   const handleSpotMapClick = () => {
     navigate(`/detailfeed/tripmap/${cityId}`);
   };
+
   return (
     <Styled.SpotInfoWrapper>
       <SubTitle>기본정보</SubTitle>

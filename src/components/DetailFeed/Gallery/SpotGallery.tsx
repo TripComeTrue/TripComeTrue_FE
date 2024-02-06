@@ -1,49 +1,46 @@
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQueries } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getSpotGallery, getSpotInformation } from '@/apis/detailfeed';
 import { Bookmark, EmptyContents, SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
-import { getSpotGallery } from '@/apis/detailfeed';
 
-const SpotGallery = ({
-  placeId,
-  placeName,
-}: {
-  placeId: string;
-  placeName: string;
-}) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ['spotGallery', placeId],
-    queryFn: () => getSpotGallery(placeId),
-  });
+const SpotGallery = () => {
+  const { id: placeId } = useParams() as { id: string };
   const navigate = useNavigate();
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!data) {
-    return <p>Data not available</p>;
-  }
+  const [{ data: spotGallery }, { data: spotName }] = useSuspenseQueries({
+    queries: [
+      {
+        queryKey: ['spotGallery', placeId],
+        queryFn: () => getSpotGallery(placeId),
+      },
+      {
+        queryKey: ['cityInformation', placeId],
+        queryFn: () => getSpotInformation(placeId),
+        select: (data: { name: string }) => data.name,
+      },
+    ],
+  });
 
   const handleMoreClick = () => {
-    navigate(`/detailfeed/spotgallerylist/${placeName}/${placeId}`);
+    navigate(`/detailfeed/spotgallerylist/${spotName}/${placeId}`);
   };
 
   return (
     <Styled.GellaryWrapper>
       <Styled.SubtitleBox>
         <SubTitle variant="more" onClickButton={handleMoreClick}>
-          {placeName} 여행 갤러리
+          {spotName} 여행 갤러리
         </SubTitle>
       </Styled.SubtitleBox>
-      {data.content.length === 0 ? (
+      {spotGallery.content.length === 0 ? (
         <EmptyContents />
       ) : (
         <Styled.GellaryItemBox
           spaceBetween={8}
           slidesPerView={2.15}
           scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-          {data.content.map(
+          {spotGallery.content.map(
             ({ tripRecordStoreCount, imageUrl, tripRecordId }) => (
               <Styled.GellaryItem
                 key={tripRecordId}

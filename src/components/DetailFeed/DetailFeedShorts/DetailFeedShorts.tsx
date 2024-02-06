@@ -6,7 +6,7 @@ import starIcon from '/starIcon.svg';
 import { getCityInformation, getCityShorts } from '@/apis/detailfeed';
 
 const DetailFeedShorts = () => {
-  const { cityId } = useParams() as { cityId: string };
+  const { id: cityId } = useParams() as { id: string };
 
   const [{ data: shorts }, { data: cityName }] = useSuspenseQueries({
     queries: [

@@ -1,24 +1,18 @@
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Bookmark, SubTitle, Text } from '@/components/common';
 import * as Styled from './RecommendSpot.styles';
 import messageIcon from '/message.svg';
 import { getRecommedSpot } from '@/apis/detailfeed';
 
-const RecommendSpot = ({ placeId }: { placeId: string }) => {
+const RecommendSpot = () => {
+  const { id: placeId } = useParams() as { id: string };
+
   const navigate = useNavigate();
-  const { data: recommendSpots, isLoading } = useQuery({
+  const { data: recommendSpots } = useSuspenseQuery({
     queryKey: ['recommendSpot', placeId],
     queryFn: () => getRecommedSpot(placeId),
   });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!recommendSpots) {
-    return <p>Data not available</p>;
-  }
 
   const handlePlaceClick = (spotId: number) => {
     navigate(`/detailfeed/spot/${spotId}`);

@@ -4,7 +4,7 @@ import { HomeCountryItemProps } from './HomeCountryItem.types';
 import * as Styled from './HomeCountryItem.styles';
 import HomeCities from './HomeCities';
 
-function HomeCountryItem({ country }: HomeCountryItemProps) {
+const HomeCountryItem = ({ country }: HomeCountryItemProps) => {
   const [selectedCountry, setSelectedCountry] = useState<string>();
   const [height, setHeight] = useState(52);
 
@@ -32,6 +32,6 @@ function HomeCountryItem({ country }: HomeCountryItemProps) {
       <HomeCities cities={country.city} />
     </Styled.CountryItem>
   );
-}
+};
 
 export default HomeCountryItem;

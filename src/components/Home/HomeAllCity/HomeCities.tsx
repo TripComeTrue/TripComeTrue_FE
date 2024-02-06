@@ -6,7 +6,7 @@ const HomeCities = ({ cities }: HomeCitiesProps) => {
   const navigate = useNavigate();
 
   function handleCityClick(cityId: number, isDomestic: string) {
-    navigate(`/detailfeed/city/${isDomestic}/${cityId}`);
+    navigate(`/detailfeed/city/${cityId}`, { state: { isDomestic } });
   }
   return (
     <Styled.CityWrap>

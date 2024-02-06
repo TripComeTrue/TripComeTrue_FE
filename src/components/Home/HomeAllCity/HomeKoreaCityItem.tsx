@@ -2,13 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import * as Styled from './HomeCountryItem.styles';
 import { HomeKoreaCitiesProps } from './HomeKoreaCityItem.types';
 
-function HomeKoreaCities({ city }: HomeKoreaCitiesProps) {
+const HomeKoreaCities = ({ city }: HomeKoreaCitiesProps) => {
   const navigate = useNavigate();
 
   if (!city) return null;
 
   function handleCityClick(cityId: number, isDomestic: string) {
-    navigate(`/detailfeed/city/${isDomestic}/${cityId}`);
+    navigate(`/detailfeed/city/${cityId}`, { state: { isDomestic } });
   }
   return (
     <Styled.KoreaItem
@@ -18,6 +18,6 @@ function HomeKoreaCities({ city }: HomeKoreaCitiesProps) {
       {city.name}
     </Styled.KoreaItem>
   );
-}
+};
 
 export default HomeKoreaCities;

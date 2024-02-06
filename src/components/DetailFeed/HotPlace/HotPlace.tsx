@@ -7,7 +7,7 @@ import messageIcon from '/message.svg';
 import starIcon from '/starIcon.svg';
 
 const HotPlace = () => {
-  const { cityId } = useParams() as { cityId: string };
+  const { id: cityId } = useParams() as { id: string };
   const navigate = useNavigate();
   const [{ data: cityHotPlace }, { data: cityName }] = useSuspenseQueries({
     queries: [

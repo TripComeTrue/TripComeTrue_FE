@@ -10,7 +10,7 @@ import ReviewSwiper from '@/components/common/Review/ReviewSwiper';
 import { DAY_OPTION } from '@/constants/DetailFeed/City';
 
 const CityTopReview = () => {
-  const { cityId } = useParams() as { cityId: string };
+  const { id: cityId } = useParams() as { id: string };
   const [day, setDay] = useState(2);
   const [{ data: cityTopReview }, { data: cityName }] = useSuspenseQueries({
     queries: [

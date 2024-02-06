@@ -10,7 +10,7 @@ import visaImage from '/visa.svg';
 import { getCityInformation } from '@/apis/detailfeed';
 
 const CityInformation = () => {
-  const { cityId } = useParams() as { cityId: string };
+  const { id: cityId } = useParams() as { id: string };
 
   const { data: cityInformation } = useSuspenseQuery({
     queryKey: ['cityInformation', cityId],

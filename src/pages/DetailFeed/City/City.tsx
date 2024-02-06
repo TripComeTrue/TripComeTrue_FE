@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import {
   Banner,
   CityGallery,
@@ -13,7 +13,8 @@ import { FeedNav } from '@/components/common';
 import * as Styled from './City.styles';
 
 const City = () => {
-  const { isDomestic } = useParams();
+  const location = useLocation();
+  const { isDomestic } = location.state as { isDomestic: string };
   const domestic = isDomestic === '국내';
   return (
     <>

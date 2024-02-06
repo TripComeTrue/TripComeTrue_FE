@@ -24,7 +24,8 @@ export const FeedNavRight = styled.div<FeedNavModeProps>`
   align-items: center;
   width: ${({ $isScheduleIcon }) =>
     $isScheduleIcon === 'true' ? '5rem' : '3.125rem'};
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 0.3rem;
 `;
 
 export const FeedNavIcon = styled.button`

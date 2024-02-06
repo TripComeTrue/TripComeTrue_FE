@@ -1,33 +1,31 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQueries } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import { EmptyContents, SubTitle, Text } from '@/components/common';
 import * as Styled from './TopReview.styles';
 import starIcon from '/starIcon.svg';
 
 import ReviewSwiper from '@/components/common/Review/ReviewSwiper';
 import { DAY_OPTION } from '@/constants/DetailFeed/City';
-import { getSpotTopReview } from '@/apis/detailfeed';
+import { getSpotInformation, getSpotTopReview } from '@/apis/detailfeed';
 
-const SpotTopReview = ({
-  placeId,
-  placeName,
-}: {
-  placeId: string;
-  placeName: string;
-}) => {
+const SpotTopReview = () => {
+  const { id: placeId } = useParams() as { id: string };
   const [day, setDay] = useState(2);
-  const { data: spotTopReviews, isLoading } = useQuery({
-    queryKey: ['spotTopReview', placeId, day],
-    queryFn: () => getSpotTopReview(placeId, day),
+
+  const [{ data: spotTopReviews }, { data: spotName }] = useSuspenseQueries({
+    queries: [
+      {
+        queryKey: ['spotTopReview', placeId, day],
+        queryFn: () => getSpotTopReview(placeId, day),
+      },
+      {
+        queryKey: ['cityInformation', placeId],
+        queryFn: () => getSpotInformation(placeId),
+        select: (data: { name: string }) => data.name,
+      },
+    ],
   });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!spotTopReviews) {
-    return <p>Data not available</p>;
-  }
 
   const onClickDay = (totalDays: number) => {
     setDay(totalDays);
@@ -36,7 +34,7 @@ const SpotTopReview = ({
     <div>
       <Styled.SubTitleBox>
         <SubTitle fontSize={18} icon={starIcon}>
-          {placeName} 여행 후기 TOP 3
+          {spotName} 여행 후기 TOP 3
         </SubTitle>
       </Styled.SubTitleBox>
       <Styled.DayOptions>
