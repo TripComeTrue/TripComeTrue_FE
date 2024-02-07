@@ -1,53 +1,55 @@
-import { Bubble, Button, SubTitle, Text } from '@/components/common';
-import * as Styled from './ReviewAlert.styles';
-import RatingIcon from '/images/rating.svg';
+import { Link, useParams } from 'react-router-dom';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { TripRecordReviewCard } from '@/components/common';
+import { getTripRecordLatestReview } from '@/apis/trip-records';
 
 const ReviewAlert = () => {
+  const { tripRecordId } = useParams() as { tripRecordId: string };
+  const {
+    data: tripRecordLatestReviewData,
+    refetch: tripRecordLatestReviewRefetch,
+  } = useSuspenseQuery({
+    queryKey: ['TripRecordLatestReviewData'],
+    queryFn: () => getTripRecordLatestReview(tripRecordId),
+  });
+
+  const { imageUrl, nickname, ratingScore, content, tripRecordReviewId } =
+    tripRecordLatestReviewData.latestTripRecordReview;
+
+  useEffect(() => {
+    tripRecordLatestReviewRefetch();
+  }, [tripRecordId]);
+
   return (
-    <Styled.Container>
-      <SubTitle fontSize={14}>이 여행 후기의 리뷰(4)</SubTitle>
-
-      <Styled.LastReviewContainer>
-        <Styled.ImageWrapper>
-          <Styled.LastReviewImage src="https://source.unsplash.com/random" />
-        </Styled.ImageWrapper>
-        <Styled.LastReviewContents>
-          <Styled.InfoContainer>
-            <Text fontSize={12} fontWeight={700}>
-              여행이 조아
-            </Text>
-            <Styled.Divider>&nbsp;|&nbsp;</Styled.Divider>
-            <div>
-              <img src={RatingIcon} alt="rating icon" />
-              <Text fontSize={12} fontWeight={700}>
-                4.8
-              </Text>
-            </div>
-          </Styled.InfoContainer>
-          <Text fontSize={12}>
-            여정에 나온 일정을 거의 그대로 따라 여행을 다녀왔습니다. 동선이 잘
-            짜여 있어서 이동할 때 정말 편했습니다. 진짜 고민하지...
-          </Text>
-        </Styled.LastReviewContents>
-      </Styled.LastReviewContainer>
-
-      <Styled.RatingContainer>
-        <Styled.RatingCustom
-          name="half-rating"
-          defaultValue={0}
-          precision={0.5}
+    <TripRecordReviewCard>
+      <TripRecordReviewCard.Title>
+        이 여행 후기의 리뷰({tripRecordLatestReviewData.totalCount})
+      </TripRecordReviewCard.Title>
+      {tripRecordLatestReviewData.latestTripRecordReview ? (
+        <TripRecordReviewCard.Main
+          reviewImage={imageUrl}
+          nickname={nickname}
+          averageRating={ratingScore}
+          content={content}
         />
-        <Text fontSize={12} fontWeight={700} color="gray">
-          이 일정이 도움이 되셨나요?
-        </Text>
-      </Styled.RatingContainer>
-      <Styled.BubbleWrapper>
-        <Bubble>+ 10P</Bubble>
-      </Styled.BubbleWrapper>
-      <Button variants="primary" size="lg">
-        리뷰 작성하기
-      </Button>
-    </Styled.Container>
+      ) : (
+        <TripRecordReviewCard.EmptyMain
+          title="리뷰를 기다리고 있어요"
+          subTitle="여행 일정을 복사해 계획을 세우고 여행을 다녀와보세요!"
+        />
+      )}
+      <TripRecordReviewCard.Rating
+        disabled={!!tripRecordLatestReviewData.myRatingScore}
+        tripRecordId={tripRecordId}
+        myRatingScore={tripRecordLatestReviewData.myRatingScore}
+      />
+      {tripRecordLatestReviewData.canRegisterContent && (
+        <Link to={`/trip/trip-record/review/${tripRecordReviewId}/write`}>
+          <TripRecordReviewCard.WriteButton />
+        </Link>
+      )}
+    </TripRecordReviewCard>
   );
 };
 
