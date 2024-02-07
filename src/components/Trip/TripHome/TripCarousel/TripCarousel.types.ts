@@ -1,4 +1,4 @@
 export interface TripCarouselProps {
-  tripRecordsData: TripRecord[];
+  tripRecordsData: TripRecordData[];
   size?: number;
 }

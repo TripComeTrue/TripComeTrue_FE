@@ -1,4 +1,4 @@
 export interface TripCardProps {
-  tripRecordData: TripRecord;
+  tripRecordData: TripRecordData;
   size?: number;
 }
