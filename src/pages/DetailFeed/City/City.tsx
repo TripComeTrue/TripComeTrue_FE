@@ -1,4 +1,5 @@
 import { useLocation, useParams } from 'react-router-dom';
+import { Suspense } from 'react';
 import {
   Banner,
   CityGallery,
@@ -9,8 +10,9 @@ import {
   HotPlace,
   Weather,
 } from '@/components/DetailFeed';
-import { FeedNav } from '@/components/common';
+import { FeedNav, RetryErrorBoundary } from '@/components/common';
 import * as Styled from './City.styles';
+import DetailFeedShortsSkeleton from '@/components/DetailFeed/DetailFeedShorts/DetailFeedShortsSkeleton';
 
 const City = () => {
   const location = useLocation();
@@ -18,16 +20,44 @@ const City = () => {
   const domestic = isDomestic === '국내';
   return (
     <>
-      <FeedNav />
+      <RetryErrorBoundary>
+        <Suspense>
+          <FeedNav />
+        </Suspense>
+      </RetryErrorBoundary>
       <Styled.CityWrapper>
-        <DetailFeedShorts />
-        <CityGallery />
-        {!domestic && <CityInformation />}
-        <Weather />
-        {!domestic && <ExchangeRate />}
-        <CityTopReview />
-        <HotPlace />
-        <Banner />
+        <RetryErrorBoundary>
+          <Suspense fallback={<DetailFeedShortsSkeleton />}>
+            <DetailFeedShorts />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense>
+            <CityGallery />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense>{!domestic && <CityInformation />}</Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense>
+            <Weather />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense>{!domestic && <ExchangeRate />}</Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense>
+            <CityTopReview />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense>
+            <HotPlace />
+          </Suspense>
+        </RetryErrorBoundary>
+        <Banner domestic={domestic} />
       </Styled.CityWrapper>
     </>
   );

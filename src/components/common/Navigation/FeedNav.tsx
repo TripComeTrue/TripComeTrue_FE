@@ -43,15 +43,15 @@ const FeedNav = ({
     navigate(-1);
   };
 
-  const { data, refetch } = useSuspenseQuery<
+  const { data: navInfo, refetch } = useSuspenseQuery<
     SpotInfoDataType | CityInfoDataType
   >({
     queryKey: ['pageName', id],
     queryFn: () => (feedType ? getSpotInformation(id) : getCityInformation(id)),
   });
 
-  const name = data?.name;
-  const isBookmarked = data?.isStored;
+  const name = navInfo?.name;
+  const isBookmarked = navInfo?.isStored;
 
   const { mutate: storeSpotMutate } = useMutation({
     mutationFn: () => postStoreSpot(id),
