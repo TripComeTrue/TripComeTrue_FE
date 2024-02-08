@@ -1,5 +1,5 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { isAxiosError } from 'axios';
 import { toast } from 'react-toastify';
@@ -27,10 +27,35 @@ const Introduction = ({
       ? mainCountries
       : `${mainCountries} 외 ${countries.length}곳`;
 
+  const queryClient = useQueryClient();
   const { mutate: postStoreMutate } = useMutation({
     mutationFn: () => postStore(tripRecordId),
+    onMutate: () => {
+      const prevTripRecordData = queryClient.getQueryData([
+        'TripRecordDetailData',
+        tripRecordId,
+      ]);
+      const nextTripRecordData = {
+        ...tripRecordData,
+        isStored: !tripRecordData.isStored,
+        storeCount: tripRecordData.isStored
+          ? tripRecordData.storeCount - 1
+          : tripRecordData.storeCount + 1,
+      };
+
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        nextTripRecordData,
+      );
+
+      return { prevTripRecordData };
+    },
     onSuccess: () => tripRecordDetailRefetch(),
-    onError: (error) => {
+    onError: (error, _, context) => {
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        context?.prevTripRecordData,
+      );
       if (isAxiosError(error))
         if (error.response?.status === 404)
           toast.error(error.response.data?.errorMessage, {
@@ -42,8 +67,32 @@ const Introduction = ({
 
   const { mutate: deleteStoreMutate } = useMutation({
     mutationFn: () => deleteStore(tripRecordId),
+    onMutate: () => {
+      const prevTripRecordData = queryClient.getQueryData([
+        'TripRecordDetailData',
+        tripRecordId,
+      ]);
+      const nextTripRecordData = {
+        ...tripRecordData,
+        isStored: !tripRecordData.isStored,
+        storeCount: tripRecordData.isStored
+          ? tripRecordData.storeCount - 1
+          : tripRecordData.storeCount + 1,
+      };
+
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        nextTripRecordData,
+      );
+
+      return { prevTripRecordData };
+    },
     onSuccess: () => tripRecordDetailRefetch(),
-    onError: (error) => {
+    onError: (error, _, context) => {
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        context?.prevTripRecordData,
+      );
       if (isAxiosError(error))
         if (error.response?.status === 404)
           toast.error(error.response.data?.errorMessage, {

@@ -15,7 +15,7 @@ const ReviewAlert = () => {
   });
 
   const { imageUrl, nickname, ratingScore, content, tripRecordReviewId } =
-    tripRecordLatestReviewData.latestTripRecordReview;
+    tripRecordLatestReviewData.latestTripRecordReview || '';
 
   useEffect(() => {
     tripRecordLatestReviewRefetch();
