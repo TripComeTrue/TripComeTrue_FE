@@ -13,6 +13,7 @@ import {
 import { FeedNav, RetryErrorBoundary } from '@/components/common';
 import * as Styled from './City.styles';
 import DetailFeedShortsSkeleton from '@/components/DetailFeed/DetailFeedShorts/DetailFeedShortsSkeleton';
+import GallerySkeleton from '@/components/DetailFeed/Gallery/GallerySkeleton';
 
 const City = () => {
   const location = useLocation();
@@ -36,6 +37,7 @@ const City = () => {
             <CityGallery />
           </Suspense>
         </RetryErrorBoundary>
+        <GallerySkeleton />
         <RetryErrorBoundary>
           <Suspense>{!domestic && <CityInformation />}</Suspense>
         </RetryErrorBoundary>
