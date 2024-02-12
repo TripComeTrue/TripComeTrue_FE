@@ -8,8 +8,8 @@ import { TripCardProps } from './TripCard.types';
 
 const TripCard = ({ size = 152, tripRecordData }: TripCardProps) => {
   const stringifiedSize = pxToRem(size);
-  const formatDays = `${tripRecordData.totalDays}박 ${
-    tripRecordData.totalDays + 1
+  const formatDays = `${tripRecordData.totalDays - 1}박 ${
+    tripRecordData.totalDays
   }일`;
   const [mainCountries, ...countries] = tripRecordData.countries.split(',');
   const formatCountries =

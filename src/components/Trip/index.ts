@@ -14,3 +14,7 @@ export { default as TripDetailMainSkeleton } from '@/components/Trip/TripDetail/
 export { default as ReviewAlert } from '@/components/Trip/TripDetail/ReviewAlert/ReviewAlert';
 export { default as ReviewAlertSkeleton } from '@/components/Trip/TripDetail/ReviewAlert/ReviewAlertSkeleton';
 export { default as TripComment } from '@/components/Trip/TripDetail/TripComment/TripComment';
+
+// TripRecordReview
+export { default as Edit } from '@/components/Trip/TripRecordReview/Edit/Edit';
+export { default as Write } from '@/components/Trip/TripRecordReview/Write/Write';
