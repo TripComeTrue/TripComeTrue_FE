@@ -1,33 +1,27 @@
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Bookmark, SubTitle, Text } from '@/components/common';
 import * as Styled from './RecommendSpot.styles';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import messageIcon from '/message.svg';
+import { getRecommedSpot } from '@/apis/detailfeed';
 
-const RecommendSpot = ({ id }: { id: number }) => {
+const RecommendSpot = ({ placeId }: { placeId: string }) => {
   const navigate = useNavigate();
-  const { data, isLoading } = useDetailFeedQuery<RecommendSpotResponseType>({
-    queryKey: 'recommendSpot',
-    id,
-    fnUrl: `/v1/places/${id}/nearby`,
+  const { data: recommendSpots, isLoading } = useQuery({
+    queryKey: ['recommendSpot', placeId],
+    queryFn: () => getRecommedSpot(placeId),
   });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!recommendSpots) {
     return <p>Data not available</p>;
   }
 
-  const handlePlaceClick = ({
-    placeId,
-    placeName,
-  }: {
-    placeId: number;
-    placeName: string;
-  }) => {
-    navigate(`/detailfeed/spot/${placeId}`, { state: { placeId, placeName } });
+  const handlePlaceClick = (spotId: number) => {
+    navigate(`/detailfeed/spot/${spotId}`);
   };
 
   return (
@@ -39,11 +33,12 @@ const RecommendSpot = ({ id }: { id: number }) => {
         spaceBetween={8}
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {data.data.map(
+        {recommendSpots.map(
+          // eslint-disable-next-line @typescript-eslint/no-shadow
           ({ reviewCount, imageUrl, storedCount, placeName, placeId }) => (
             <Styled.RecommendItem
               key={placeName}
-              onClick={() => handlePlaceClick({ placeId, placeName })}>
+              onClick={() => handlePlaceClick(placeId)}>
               <Styled.BookMarkBox>
                 <Bookmark count={storedCount} />
               </Styled.BookMarkBox>

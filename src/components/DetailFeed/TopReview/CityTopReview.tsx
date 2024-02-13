@@ -1,38 +1,38 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { EmptyContents, SubTitle, Text } from '@/components/common';
 import * as Styled from './TopReview.styles';
 import starIcon from '/starIcon.svg';
 
 import ReviewSwiper from '@/components/common/Review/ReviewSwiper';
 import { DAY_OPTION } from '@/constants/DetailFeed/City';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
+import { getCityTopReview } from '@/apis/detailfeed';
 
 const CityTopReview = ({
   cityId,
   cityName,
 }: {
-  cityId: number;
+  cityId: string;
   cityName: string;
 }) => {
   const [day, setDay] = useState(2);
-  const { data, isLoading } = useDetailFeedQuery<CityTopReviewResponse>({
-    queryKey: 'cityTopReview',
-    id: cityId,
-    fnUrl: `/v1/trip-records/search?cityId=${cityId}&totalDays=${day}&size=3&sort=storeCount,desc&sort=averageRating,desc`,
+  const { data: cityTopReview, isLoading } = useQuery({
+    queryKey: ['cityTopReview', cityId, day],
+    queryFn: () => getCityTopReview(cityId, day),
   });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!cityTopReview) {
     return <p>Data not available</p>;
   }
 
   const onClickDay = (totalDays: number) => {
     setDay(totalDays);
   };
-  const REVIEW_DATA = data.data.content;
+  const REVIEW_DATA = cityTopReview.content;
   return (
     <div>
       <Styled.SubTitleBox>

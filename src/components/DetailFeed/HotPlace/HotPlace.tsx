@@ -1,42 +1,38 @@
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Bookmark, SubTitle, Text } from '@/components/common';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './HotPlace.styles';
 import messageIcon from '/message.svg';
 import starIcon from '/starIcon.svg';
+import { getCityHotPlace } from '@/apis/detailfeed';
 
 const HotPlace = ({
   cityId,
   cityName,
 }: {
-  cityId: number;
+  cityId: string;
   cityName: string;
 }) => {
   const navigate = useNavigate();
-  const { data, isLoading } = useDetailFeedQuery<HotPlaceResponseType>({
-    queryKey: 'hotPlace',
-    id: cityId,
-    fnUrl: `/v1/cities/${cityId}/hot-places`,
+  const { data: cityHotPlace, isLoading } = useQuery({
+    queryKey: ['hotPlace', cityId],
+    queryFn: () => getCityHotPlace(cityId),
   });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!cityHotPlace) {
     return <p>Data not available</p>;
   }
 
   const handlePlaceClick = ({ placeId }: { placeId: number }) => {
-    navigate(`/detailfeed/spot/${placeId}`, {
-      state: { placeId, placeName: cityName, cityId },
-    });
+    navigate(`/detailfeed/spot/${placeId}`);
   };
 
   const handleMoreClick = () => {
-    navigate(`/detailfeed/spotlist/${cityId}`, {
-      state: { placeName: cityName, id: cityId },
-    });
+    navigate(`/detailfeed/spotlist/${cityName}/${cityId}`);
   };
 
   return (
@@ -54,7 +50,7 @@ const HotPlace = ({
         spaceBetween={8}
         slidesPerView={2.1}
         scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
-        {data.data.map(
+        {cityHotPlace.map(
           ({ imageUrl, storedCount, placeName, placeId, commentTotal }) => (
             <Styled.PlaceItem
               key={placeId}

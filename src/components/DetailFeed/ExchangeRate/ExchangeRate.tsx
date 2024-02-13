@@ -1,17 +1,20 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { SubTitle, Text } from '@/components/common';
-import { useDetailFeedQuery } from '@/hooks/DetailFeed/useDetailFeedQuery';
 import * as Styled from './ExchangeRate.styles';
+import { getCityExchangeRate } from '@/apis/detailfeed';
 
-const ExchangeRate = ({ cityId }: { cityId: number }) => {
+const ExchangeRate = ({ cityId }: { cityId: string }) => {
   const [curMoney, setCurMoney] = useState(1);
   const [krMoney, setKrMoney] = useState(1);
-  const { data, isLoading } = useDetailFeedQuery<ExchangeRateResponseType>({
-    queryKey: 'exchangeRate',
-    id: cityId,
-    fnUrl: `/v1/cities/${cityId}/exchange-rates`,
+
+  const { data: exchangeRateData, isLoading } = useQuery({
+    queryKey: ['exchangeRate', cityId],
+    queryFn: () => getCityExchangeRate(cityId),
   });
-  const krw = Number(data?.data.exchangeRate.split(':')[1].replace(/,/gi, ''));
+  const krw = Number(
+    exchangeRateData?.exchangeRate.split(':')[1].replace(/,/gi, ''),
+  );
 
   const onChangeCurMoney = (event: ChangeEvent<HTMLInputElement>) => {
     if (/^\d*\.?\d*$/.test(event.target.value)) {
@@ -31,15 +34,17 @@ const ExchangeRate = ({ cityId }: { cityId: number }) => {
     if (krw) {
       setKrMoney(krw);
     }
-  }, [data]);
+  }, [exchangeRateData]);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data || !data.data) {
+  if (!exchangeRateData) {
     return <p>Data not available</p>;
   }
+
+  const { country, curUnit, curName } = exchangeRateData;
 
   return (
     <Styled.ExchangeRateWrapper>
@@ -48,11 +53,11 @@ const ExchangeRate = ({ cityId }: { cityId: number }) => {
         <Styled.ExchangeRateContent>
           <Styled.ContentLeftBox>
             <Text fontSize={14} fontWeight={700}>
-              {data.data.country}
+              {country}
             </Text>
             <Styled.CurrencyUnit>
               <Text fontSize={14} fontWeight={700} color="primary">
-                {data.data.curUnit}({data.data.curName})
+                {curUnit}({curName})
               </Text>
             </Styled.CurrencyUnit>
           </Styled.ContentLeftBox>
@@ -63,7 +68,7 @@ const ExchangeRate = ({ cityId }: { cityId: number }) => {
               onChange={onChangeCurMoney}
             />
             <Text fontSize={18} fontWeight={700} color="gray">
-              {data.data.curUnit}
+              {curUnit}
             </Text>
           </Styled.ContentRightBox>
         </Styled.ExchangeRateContent>

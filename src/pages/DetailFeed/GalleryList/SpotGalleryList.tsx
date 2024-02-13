@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
@@ -8,17 +8,20 @@ import { getSpotGalleryList } from '@/apis/listpage';
 
 const SpotGalleryList = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { id, placeName } = location.state;
+  const { placeId, placeName } = useParams() as {
+    placeId: string;
+    placeName: string;
+  };
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const orderOption = selectedFilter === '최신순' ? 'createdAt ' : 'storeCount';
   const { ref, inView } = useInView();
 
   const { data, isLoading, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['spotGalleryAll', id, orderOption],
+    queryKey: ['spotGalleryAll', placeId, orderOption],
     staleTime: 0,
     initialPageParam: 0,
-    queryFn: ({ pageParam }) => getSpotGalleryList(id, orderOption, pageParam),
+    queryFn: ({ pageParam }) =>
+      getSpotGalleryList(placeId, orderOption, pageParam),
     getNextPageParam: (lastPage, _, lastPageParam) => {
       return !lastPage.last ? lastPageParam + 1 : null;
     },

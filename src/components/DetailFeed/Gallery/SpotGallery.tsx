@@ -4,10 +4,16 @@ import { Bookmark, EmptyContents, SubTitle } from '@/components/common';
 import * as Styled from './Gallery.styles';
 import { getSpotGallery } from '@/apis/detailfeed';
 
-const SpotGallery = ({ id, placeName }: { id: number; placeName: string }) => {
+const SpotGallery = ({
+  placeId,
+  placeName,
+}: {
+  placeId: string;
+  placeName: string;
+}) => {
   const { data, isLoading } = useQuery({
-    queryKey: ['spotGallery', id],
-    queryFn: () => getSpotGallery(id),
+    queryKey: ['spotGallery', placeId],
+    queryFn: () => getSpotGallery(placeId),
   });
   const navigate = useNavigate();
 
@@ -20,9 +26,7 @@ const SpotGallery = ({ id, placeName }: { id: number; placeName: string }) => {
   }
 
   const handleMoreClick = () => {
-    navigate(`/detailfeed/spotgallerylist/${placeName}`, {
-      state: { id, placeName },
-    });
+    navigate(`/detailfeed/spotgallerylist/${placeName}/${placeId}`);
   };
 
   return (
