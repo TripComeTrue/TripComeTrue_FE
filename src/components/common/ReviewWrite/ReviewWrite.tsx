@@ -88,7 +88,7 @@ const Write = ({
         여행 후기에 대해 남기고 싶은 말을 남겨주세요
       </SubTitle>
       <Styled.TextArea
-        maxLength={2000}
+        maxLength={500}
         cols={3}
         placeholder="여행 후기를 참고한 경험을 솔직하게 남겨주세요"
         defaultValue={defaultValue}
@@ -99,7 +99,7 @@ const Write = ({
           {defaultValue ? defaultValue.length : content?.length}
         </Text>
         <Text color="gray" fontSize={10}>
-          &nbsp;/&nbsp;2000
+          &nbsp;/&nbsp;500
         </Text>
       </Styled.TextCountWrapper>
     </Styled.WriteContainer>

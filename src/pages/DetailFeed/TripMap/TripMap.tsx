@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { getCityInformation } from '@/apis/detailfeed';
+import { getSpotsLocation } from '@/apis/tripmap';
 import { SimpleNav } from '@/components/common';
-import { getCityLoaction, getSpotsLocation } from '@/apis/tripmap';
 import Gmap from './Gmap/Gmap';
 import MapDefaultSpot from './MapSpotInfoBox/MapDefaultSpot';
 import MapGoogleSpot from './MapSpotInfoBox/MapGoogleSpot';
@@ -10,7 +11,7 @@ import SpotCategory from './SpotCategory/SpotCategory';
 import * as Styled from './TripMap.styles';
 
 const TripMap = () => {
-  const location = useLocation();
+  const { cityId } = useParams() as { cityId: string };
   const [isDefaultSpot, setIsDefaultSpot] = useState<boolean | null>(null);
   const [defaultPlaceData, setDefaultPlaceData] =
     useState<SpotsInCityData | null>(null);
@@ -19,10 +20,6 @@ const TripMap = () => {
   );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [mapCenterChange, setMapCenterChange] = useState(false);
-  const { cityId } = useParams() as unknown as { cityId: number };
-  const { cityName } = location.state as {
-    cityName: string;
-  };
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
@@ -37,18 +34,22 @@ const TripMap = () => {
     setGooglePlaceData(googlePlaceInfo);
     setIsDefaultSpot(false);
   };
-  const { data: cityLoctionData, isLoading: cityLoctionDataLoding } = useQuery({
-    queryKey: ['cityLocation', cityName],
-    queryFn: () => getCityLoaction(cityName),
-    staleTime: Infinity,
-  });
+
+  const { data: cityInformation, isLoading: cityInformationLoading } = useQuery(
+    {
+      queryKey: ['cityInformation', cityId],
+      queryFn: () => getCityInformation(cityId),
+      staleTime: Infinity,
+    },
+  );
+
   const { data: spotsInCityData, isLoading: spotsInCityDataLoding } = useQuery({
     queryKey: ['spotsLocation', cityId],
     queryFn: () => getSpotsLocation(cityId),
     staleTime: Infinity,
   });
 
-  if (cityLoctionDataLoding) {
+  if (cityInformationLoading) {
     return <p>...Loading</p>;
   }
 
@@ -56,16 +57,17 @@ const TripMap = () => {
     return <p>...Loading</p>;
   }
 
-  if (!spotsInCityData || !cityLoctionData) {
+  if (!spotsInCityData || !cityInformation) {
     return <p>Data not available</p>;
   }
-  const cityLocation = cityLoctionData.places[0].location;
+
+  const { name, latitude, longitude } = cityInformation;
   return (
     <>
-      <SimpleNav>{cityName}</SimpleNav>
+      <SimpleNav>{name}</SimpleNav>
       <Styled.TripMapWrapper>
         <Gmap
-          cityLocation={cityLocation}
+          cityLocation={{ latitude, longitude }}
           mapCenterChange={mapCenterChange}
           spotsInCityData={spotsInCityData}
           setIsDefaultSpot={setIsDefaultSpot}

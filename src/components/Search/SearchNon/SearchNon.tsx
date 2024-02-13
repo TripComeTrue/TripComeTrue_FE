@@ -23,8 +23,6 @@ const SearchNon = () => {
     fetchData();
   }, []);
 
-  console.log(shortsData);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,8 +34,6 @@ const SearchNon = () => {
     };
     fetchData();
   }, []);
-
-  console.log(hotReview);
 
   return (
     <div>

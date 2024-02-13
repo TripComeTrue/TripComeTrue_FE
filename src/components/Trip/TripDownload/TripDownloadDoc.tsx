@@ -14,7 +14,7 @@ function TripDownloadDoc({ schedulesData }: TripDownloadDocProps) {
               DAY {daysData[0].dayNumber} | {date.replace(/-/gi, '.')}
             </Text>
             <View style={styles.cityTitle}>
-              <Image src="/images/map-pin.png" style={styles.mapPin} />
+              <Image src="/images/marker.svg" style={styles.mapPin} />
               <Text style={styles.cityName}>{daysData[0].countryName}</Text>
             </View>
             {daysData?.map((dayData) => (

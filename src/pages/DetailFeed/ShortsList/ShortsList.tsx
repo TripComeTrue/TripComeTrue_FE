@@ -1,22 +1,29 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ShortsSwiper from '@/components/common/Shorts/ShortsSwiper';
 import { Filter, SimpleNav } from '@/components/common';
 import { getCityShortsList } from '@/apis/listpage';
 import * as Styled from './ShortsList.styles';
 
 const ShortsList = () => {
-  const location = useLocation();
-  const { id, placeName } = location.state;
+  const { cityId, cityName } = useParams() as {
+    cityId: string;
+    cityName: string;
+  };
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const orderOption = selectedFilter === '최신순' ? 'created' : 'storedCount';
   const { ref, inView } = useInView();
 
-  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['cityAllShorts', id, orderOption],
-    queryFn: ({ pageParam }) => getCityShortsList(id, orderOption, pageParam),
+  const {
+    data: cityAllShorts,
+    isLoading,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['cityAllShorts', cityId, orderOption],
+    queryFn: ({ pageParam }) =>
+      getCityShortsList(cityId, orderOption, pageParam),
     staleTime: 0,
     initialPageParam: 0,
     getNextPageParam: (lastPage, _, lastPageParam) => {
@@ -34,15 +41,15 @@ const ShortsList = () => {
     return <p>Loading...</p>;
   }
 
-  if (!data) {
+  if (!cityAllShorts) {
     return <p>Data not available</p>;
   }
 
-  const SHORTS_DATA = data.pages.flatMap((page) => page.content);
+  const SHORTS_DATA = cityAllShorts.pages.flatMap((page) => page.content);
 
   return (
     <Styled.ShortsListWrapper>
-      <SimpleNav>{placeName}</SimpleNav>
+      <SimpleNav>{cityName}</SimpleNav>
       <Styled.FilterBox>
         <Filter
           first="최신순"

@@ -10,13 +10,11 @@ const SearchedSpot = ({
   imageUrl,
 }: SpotListDataType) => {
   const navigate = useNavigate();
-  const handleSpotClick = (spotId: number, spotName: string) => {
-    navigate(`/detailfeed/spot/${spotId}`, {
-      state: { placeId, placeName: spotName },
-    });
+  const handleSpotClick = (spotId: string) => {
+    navigate(`/detailfeed/spot/${spotId}`);
   };
   return (
-    <Styled.SpotBox onClick={() => handleSpotClick(placeId, placeName)}>
+    <Styled.SpotBox onClick={() => handleSpotClick(placeId)}>
       <Styled.SpotImg src={imageUrl} alt={placeName} />
       <Styled.SpotDescription>
         <SpotDescription

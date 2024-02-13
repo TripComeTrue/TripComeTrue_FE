@@ -2,28 +2,28 @@
 @font-face {
   font-family: 'AppleSDGothicNeo';
   font-weight: 200;
-  src: url('./AppleSDGothicNeoUL.ttf') format('truetype');
+  src: url('./AppleSDGothicNeoUL00.woff2') format('WOFF2');
   unicode-range: U+AC00-D7A3;
 }
 
 @font-face {
   font-family: 'AppleSDGothicNeo';
   font-weight: 400;
-  src: url('./AppleSDGothicNeoR.ttf') format('truetype');
+  src: url('./AppleSDGothicNeoR00.woff2') format('WOFF2');
   unicode-range: U+AC00-D7A3;
 }
 
 @font-face {
   font-family: 'AppleSDGothicNeo';
   font-weight: 600;
-  src: url('./AppleSDGothicNeoSB.ttf') format('truetype');
+  src: url('./AppleSDGothicNeoSB00.woff2') format('WOFF2');
   unicode-range: U+AC00-D7A3;
 }
 
 @font-face {
   font-family: 'AppleSDGothicNeo';
   font-weight: 700;
-  src: url('./AppleSDGothicNeoB.ttf') format('truetype');
+  src: url('./AppleSDGothicNeoB00.woff2') format('WOFF2');
   unicode-range: U+AC00-D7A3;
 }
 
@@ -31,25 +31,25 @@
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 200;
-  src: url('./SF-Pro-Text-Light.otf') format('OpenType');
+  src: url('./SFProText-Light.woff2') format('WOFF2');
 }
 
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 400;
-  src: url('./SF-Pro-Text-Medium.otf') format('OpenType');
+  src: url('./SFProText-Medium.woff2') format('WOFF2');
 }
 
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 600;
-  src: url('./SF-Pro-Text-Semibold.otf') format('OpenType');
+  src: url('./SFProText-Semibold.woff2') format('WOFF2');
 }
 
 @font-face {
   font-family: 'SF-Pro';
   font-weight: 700;
-  src: url('./SF-Pro-Text-Bold.otf') format('OpenType');
+  src: url('./SFProText-Bold.woff2') format('WOFF2');
 }
 
 @font-face {

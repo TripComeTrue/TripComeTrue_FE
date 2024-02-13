@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { useLocation } from 'react-router-dom';
-import { getCityStored } from '@/apis/detailfeed';
+import { useParams } from 'react-router-dom';
+import { getCityInformation } from '@/apis/detailfeed';
 import {
   Banner,
   CityGallery,
@@ -11,37 +11,34 @@ import {
   HotPlace,
   Weather,
 } from '@/components/DetailFeed';
-import { FeedNav } from '@/components/common';
+// import { FeedNav } from '@/components/common';
 import * as Styled from './City.styles';
 
 const City = () => {
-  const location = useLocation();
-  const { cityId, name, isDomestic }: CityState = location.state;
+  const { cityId } = useParams() as { cityId: string };
 
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ['cityStore', cityId],
-    queryFn: () => getCityStored(cityId),
+  const { data: cityInformation, isLoading } = useQuery({
+    queryKey: ['cityInformation', cityId],
+    queryFn: () => getCityInformation(cityId),
   });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data) {
+  if (!cityInformation) {
     return <p>Data not available</p>;
   }
-
-  const { isStored } = data;
+  const { name, language } = cityInformation;
+  const isDomestic = language === '한국어';
 
   return (
     <>
-      <FeedNav id={cityId} isStored={isStored} refetch={refetch}>
-        {name}
-      </FeedNav>
+      {/* <FeedNav cityId={cityId}>{name}</FeedNav> */}
       <Styled.CityWrapper>
-        <DetailFeedShorts cityId={cityId} placeName={name} />
-        <CityGallery id={cityId} placeName={name} />
-        {!isDomestic && <CityInformation cityId={cityId} />}
+        <DetailFeedShorts cityId={cityId} cityName={name} />
+        <CityGallery cityId={cityId} cityName={name} />
+        {!isDomestic && <CityInformation cityInformation={cityInformation} />}
         <Weather cityId={cityId} />
         {!isDomestic && <ExchangeRate cityId={cityId} />}
         <CityTopReview cityId={cityId} cityName={name} />

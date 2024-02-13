@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
@@ -40,10 +40,6 @@ const TripPlanPostingPlan = () => {
   const endDate = new Date(tripPlanData.tripEndDay);
   const totalTripDays = differenceInDays(endDate, startDate) + 1;
   const selectedCitiesPerDay = tripPlanData.tripPlanCities;
-
-  useEffect(() => {
-    console.log(selectedCitiesPerDay);
-  }, [selectedCitiesPerDay]);
 
   const mutation = useMutation({
     mutationKey: ['postPlan'],
@@ -180,7 +176,6 @@ const TripPlanPostingPlan = () => {
           tagType: '',
           tagUrl: '',
         });
-        console.log(newFormData);
         return newFormData;
       });
     }

@@ -1,5 +1,3 @@
-// import { useState } from 'react';
-// import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -7,22 +5,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { TripPlanPrevButton } from '../../../TripPlanCommon/TripPlanCommon';
 import addTagIcon from '/images/addtag.png';
 import * as Styled from './TripPlanAddTagsForImage.styles';
-// import TripPlanTagsModal from './TripPlanTagsModal/TripPlanTagsModal';
 
 const TripPlanAddTagsForImage = () => {
-  //   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  // const { register, watch, setValue, handleSubmit } = useForm();
-
   const navigate = useNavigate();
   const goPrev = () => navigate(-1);
-
-  //   const openModal = () => setIsModalOpen(true);
-  //   const closeModal = () => setIsModalOpen(false);
-
-  // const onSubmit = (data) => {
-  //     console.log(data);
-  //     setIsModalOpen(false);
-  // }
 
   return (
     <>

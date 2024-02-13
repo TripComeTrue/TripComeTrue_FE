@@ -11,15 +11,15 @@ import MarkerFIcon from '/images/markerF.svg';
 
 const Maps = ({ daysData }: MapsProps) => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  let prevData: DayData;
   const locations: { lat: number; lng: number }[] = [];
-  daysData?.forEach((dayData) => {
+  let prevData: DayData;
+  daysData.forEach((dayData) => {
     locations.push({ lat: dayData.latitude, lng: dayData.longitude });
   });
 
   const defaultCenter = {
-    lat: daysData ? daysData[0].latitude : 0,
-    lng: daysData ? daysData[0].longitude : 0,
+    lat: daysData[0].latitude,
+    lng: daysData[0].longitude,
   };
 
   const lineSymbol = {
@@ -68,10 +68,10 @@ const Maps = ({ daysData }: MapsProps) => {
         zoom={12}
         onLoad={onLoad}
         options={{ disableDefaultUI: true }}>
-        {daysData?.map((day, index) => {
+        {daysData.map((day, index) => {
           const path = prevData && [
-            { lat: prevData?.latitude, lng: prevData?.longitude },
-            { lat: day?.latitude, lng: day?.longitude },
+            { lat: prevData.latitude, lng: prevData.longitude },
+            { lat: day.latitude, lng: day.longitude },
           ];
           prevData = day;
           return (

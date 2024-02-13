@@ -1,5 +1,5 @@
 import { useQueries } from '@tanstack/react-query';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   PlaceReviews,
   RecommendSpot,
@@ -7,19 +7,18 @@ import {
   SpotInformation,
   SpotTopReview,
 } from '@/components/DetailFeed';
-import { FeedNav } from '@/components/common';
+// import { FeedNav } from '@/components/common';
 import * as Styled from './TouristSpot.styles';
 import { getSpotInformation } from '@/apis/detailfeed';
 import { getPlaceReviews } from '@/apis/place';
 
 const TouristSpot = () => {
-  const location = useLocation();
-  const { placeId, placeName, cityId } = location.state;
-  const [{ data, isLoading, refetch }, { data: placeReviewsData }] = useQueries(
-    {
+  const { placeId } = useParams() as { placeId: string };
+  const [{ data: spotInformation, isLoading }, { data: placeReviewsData }] =
+    useQueries({
       queries: [
         {
-          queryKey: ['SpotStore', placeId],
+          queryKey: ['spotInformaion', placeId],
           queryFn: () => getSpotInformation(placeId),
         },
         {
@@ -27,41 +26,39 @@ const TouristSpot = () => {
           queryFn: () => getPlaceReviews({ placeId }),
         },
       ],
-    },
-  );
+    });
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!data) {
+  if (!spotInformation) {
     return <p>Data not available</p>;
   }
 
-  const { isStored, address, latitude, longitude, phoneNumber } = data;
+  const { address, latitude, longitude, phoneNumber, name, cityId } =
+    spotInformation;
 
   return (
     <>
-      <FeedNav
+      {/* <FeedNav
         isScheduleIcon
-        id={placeId}
+        placeId={placeId}
         isStored={isStored}
-        feedType="spot"
-        refetch={refetch}>
-        {placeName}
-      </FeedNav>
+        feedType="spot">
+        {name}
+      </FeedNav> */}
       <Styled.TouristSpotWrap>
-        <SpotGallery id={placeId} placeName={placeName} />
+        <SpotGallery placeId={placeId} placeName={name} />
         <SpotInformation
           cityId={cityId}
-          cityName={placeName}
           address={address}
           latitude={latitude}
           longitude={longitude}
           phoneNumber={phoneNumber}
         />
-        <SpotTopReview id={placeId} placeName={placeName} />
-        <RecommendSpot id={placeId} />
+        <SpotTopReview placeId={placeId} placeName={name} />
+        <RecommendSpot placeId={placeId} />
         <PlaceReviews placeReviewsData={placeReviewsData} placeId={placeId} />
       </Styled.TouristSpotWrap>
     </>

@@ -1,7 +1,9 @@
-import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
+import { useMutation, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
+import { isAxiosError } from 'axios';
+import { toast } from 'react-toastify';
 import { Comment, Text } from '@/components/common';
 import * as Styled from './TripComment.styles';
 import {
@@ -22,7 +24,7 @@ const TripComment = () => {
     fetchNextPage,
     hasNextPage,
     refetch,
-  } = useInfiniteQuery({
+  } = useSuspenseInfiniteQuery({
     queryKey: ['TripRecordCommentsData'],
     queryFn: ({ pageParam }) => getTripRecordComments(tripRecordId, pageParam),
     initialPageParam: 0,
@@ -41,6 +43,14 @@ const TripComment = () => {
       refetch();
       setComment('');
     },
+    onError: (error) => {
+      if (isAxiosError(error))
+        if (error.response?.status === 404 || error.response?.status === 400)
+          toast.error(error.response.data?.errorMessage, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+    },
   });
   const { mutate: postReplyMutate } = useMutation({
     mutationFn: ({
@@ -55,12 +65,28 @@ const TripComment = () => {
       setIsComment(true);
       setComment('');
     },
+    onError: (error) => {
+      if (isAxiosError(error))
+        if (error.response?.status === 404 || error.response?.status === 400)
+          toast.error(error.response.data?.errorMessage, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+    },
   });
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: (deleteCommentId: number) =>
       deleteTripRecordComment(deleteCommentId),
     onSuccess: () => {
       refetch();
+    },
+    onError: (error) => {
+      if (isAxiosError(error))
+        if (error.response?.status === 404 || error.response?.status === 400)
+          toast.error(error.response.data?.errorMessage, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
     },
   });
 
@@ -127,25 +153,25 @@ const TripComment = () => {
       <div>
         <Styled.TotalComments>
           <Text fontSize={12} fontWeight={700} color="gray">
-            댓글 ({tripRecordCommentsData?.pages[0].totalCount})
+            댓글 ({tripRecordCommentsData.pages[0].totalCount})
           </Text>
         </Styled.TotalComments>
-        {tripRecordCommentsData?.pages[0].totalCount ? (
+        {tripRecordCommentsData.pages[0].totalCount ? (
           <>
             <ul>
-              {tripRecordCommentsData?.pages.map((page) =>
-                page.comments.map((commentData: CommentData) => (
-                  <li key={commentData?.commentId}>
+              {tripRecordCommentsData.pages.map((page) =>
+                page.comments.map((commentData) => (
+                  <li key={commentData.commentId}>
                     <Comment>
                       <Comment.CommentCard>
                         <Styled.Header>
                           <Comment.Info
-                            isWriter={commentData?.isWriter}
-                            profileUrl={commentData?.profileUrl}
-                            nickname={commentData?.nickname}
-                            createdAt={commentData?.createdAt}
+                            isWriter={commentData.isWriter}
+                            profileUrl={commentData.profileUrl}
+                            nickname={commentData.nickname}
+                            createdAt={commentData.createdAt}
                           />
-                          {commentData?.isWriter && (
+                          {commentData.isWriter && (
                             <Comment.ActionsModal
                               onClickDelete={() =>
                                 onClickDeleteComment(commentData.commentId)
@@ -163,7 +189,7 @@ const TripComment = () => {
                       </Comment.CommentCard>
                     </Comment>
                     <ul>
-                      {commentData.replyComments.map((replyData: ReplyData) => (
+                      {commentData.replyComments.map((replyData) => (
                         <li key={replyData.commentId}>
                           <Comment>
                             <Comment.ReplyCard>

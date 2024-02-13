@@ -26,7 +26,6 @@ const TripPlanAddTags = ({
 
   const onSubmit = (data: TagForm) => {
     handleTagsUpdate(dayIndex, placeIndex, data.type, data.url);
-    console.log(dayIndex, placeIndex, data.type, data.url);
     handleCloseModal();
   };
 

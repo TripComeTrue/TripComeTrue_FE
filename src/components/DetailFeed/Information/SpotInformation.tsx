@@ -4,7 +4,7 @@ import { SubTitle, Text } from '@/components/common';
 import { SpotInformationProps } from './Information.types';
 import * as Styled from './SpotInformation.styles';
 import phone from '/infoPhone.svg';
-import pin from '/infoPin.svg';
+import pin from '/images/marker.svg';
 
 const SpotInformation = ({
   address,
@@ -12,11 +12,10 @@ const SpotInformation = ({
   longitude,
   phoneNumber,
   cityId,
-  cityName,
 }: SpotInformationProps) => {
   const navigate = useNavigate();
   const handleSpotMapClick = () => {
-    navigate(`/detailfeed/tripmap/${cityId}`, { state: { cityName } });
+    navigate(`/detailfeed/tripmap/${cityId}`);
   };
   return (
     <Styled.SpotInfoWrapper>

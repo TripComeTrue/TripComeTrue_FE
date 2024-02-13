@@ -74,8 +74,6 @@ const SearchCityScroll = () => {
     fetchData();
   }, [queryCity]);
 
-  console.log(spotData);
-
   return (
     <>
       <SearchCityScrollTitle>

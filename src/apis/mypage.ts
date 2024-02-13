@@ -21,8 +21,6 @@ import {
   WishListDelReqBody,
 } from '@/@types/mypage.types';
 
-// const serverUrl = 'http://tripcometrue.site'; // 추후 환경변수로 설정 필요
-
 export const getMyPlan = async (page: number) => {
   const { data } = await client.get<PlanResBody>(
     `/v1/trip-plan/my?page=${page}&size=4`,

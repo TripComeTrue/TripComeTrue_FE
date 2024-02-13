@@ -1,6 +1,8 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import { isAxiosError } from 'axios';
+import { toast } from 'react-toastify';
 import { Avatar, SubTitle, Text } from '@/components/common';
 import * as Styled from './Introduction.styles';
 import MarkIcon from '/images/mark.svg';
@@ -12,33 +14,92 @@ import { IntroductionProps } from './Introduction.types';
 import TripDownloadDoc from '../../TripDownload/TripDownloadDoc';
 import classifyExpense from '@/utils/classifyExpense';
 import { deleteStore, postStore } from '@/apis/trip-records';
-import IntroductionSkeleton from './IntroductionSkeleton';
 
 const Introduction = ({
   tripRecordData,
   tripRecordDetailRefetch,
 }: IntroductionProps) => {
   const { tripRecordId } = useParams() as { tripRecordId: string };
-  const formatDays = tripRecordData
-    ? `${tripRecordData.totalDays}박 ${tripRecordData.totalDays + 1}일`
-    : '';
-
-  const [mainCountries, ...countries] = tripRecordData
-    ? tripRecordData.countries.split(',')
-    : '';
+  const formatDays = `${tripRecordData.totalDays - 1}박 ${tripRecordData.totalDays}일`;
+  const [mainCountries, ...countries] = tripRecordData.countries.split(',');
   const formatCountries =
     countries.length === 0
       ? mainCountries
       : `${mainCountries} 외 ${countries.length}곳`;
 
+  const queryClient = useQueryClient();
   const { mutate: postStoreMutate } = useMutation({
     mutationFn: () => postStore(tripRecordId),
+    onMutate: () => {
+      const prevTripRecordData = queryClient.getQueryData([
+        'TripRecordDetailData',
+        tripRecordId,
+      ]);
+      const nextTripRecordData = {
+        ...tripRecordData,
+        isStored: !tripRecordData.isStored,
+        storeCount: tripRecordData.isStored
+          ? tripRecordData.storeCount - 1
+          : tripRecordData.storeCount + 1,
+      };
+
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        nextTripRecordData,
+      );
+
+      return { prevTripRecordData };
+    },
     onSuccess: () => tripRecordDetailRefetch(),
+    onError: (error, _, context) => {
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        context?.prevTripRecordData,
+      );
+      if (isAxiosError(error))
+        if (error.response?.status === 404)
+          toast.error(error.response.data?.errorMessage, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+    },
   });
 
   const { mutate: deleteStoreMutate } = useMutation({
     mutationFn: () => deleteStore(tripRecordId),
+    onMutate: () => {
+      const prevTripRecordData = queryClient.getQueryData([
+        'TripRecordDetailData',
+        tripRecordId,
+      ]);
+      const nextTripRecordData = {
+        ...tripRecordData,
+        isStored: !tripRecordData.isStored,
+        storeCount: tripRecordData.isStored
+          ? tripRecordData.storeCount - 1
+          : tripRecordData.storeCount + 1,
+      };
+
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        nextTripRecordData,
+      );
+
+      return { prevTripRecordData };
+    },
     onSuccess: () => tripRecordDetailRefetch(),
+    onError: (error, _, context) => {
+      queryClient.setQueryData(
+        ['TripRecordDetailData', tripRecordId],
+        context?.prevTripRecordData,
+      );
+      if (isAxiosError(error))
+        if (error.response?.status === 404)
+          toast.error(error.response.data?.errorMessage, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+    },
   });
 
   const onClickStoreButton = () => {
@@ -46,18 +107,18 @@ const Introduction = ({
     return postStoreMutate();
   };
 
-  return tripRecordData ? (
+  return (
     <Styled.Container>
       <Styled.Header>
         <Styled.CreatorContainer>
-          <Avatar size={32} src={tripRecordData?.member.profileImage || ''} />
-          <Text fontWeight={700}>{tripRecordData?.member.nickname}</Text>
+          <Avatar size={32} src={tripRecordData.member.profileImage} />
+          <Text fontWeight={700}>{tripRecordData.member.nickname}</Text>
           <Styled.Mark src={MarkIcon} alt="mark icon" />
         </Styled.CreatorContainer>
         <Styled.SaveContainer>
           <PDFDownloadLink
             document={
-              <TripDownloadDoc schedulesData={tripRecordData?.schedules} />
+              <TripDownloadDoc schedulesData={tripRecordData.schedules} />
             }
             fileName="trip_schedule.pdf">
             <img src={DownloadIcon} alt="PDF 다운로드 아이콘" />
@@ -67,14 +128,14 @@ const Introduction = ({
             <Styled.StoreButton type="button" onClick={onClickStoreButton}>
               <img
                 src={
-                  tripRecordData?.isStored
+                  tripRecordData.isStored
                     ? FilledBookMarkIcon
                     : EmptiedBookMarkIcon
                 }
                 alt="북마크 아이콘"
               />
             </Styled.StoreButton>
-            <Text fontSize={10}>{tripRecordData?.storeCount}</Text>
+            <Text fontSize={10}>{tripRecordData.storeCount}</Text>
           </Styled.StoreContainer>
         </Styled.SaveContainer>
       </Styled.Header>
@@ -83,7 +144,7 @@ const Introduction = ({
           <Text color="gray" fontSize={12} fontWeight={700}>
             {formatDays}・{formatCountries}
           </Text>
-          <SubTitle>{tripRecordData?.title}</SubTitle>
+          <SubTitle>{tripRecordData.title}</SubTitle>
         </Styled.InfoContainer>
         <Styled.RatingAndExpense>
           <Styled.Item>
@@ -95,7 +156,7 @@ const Introduction = ({
             <Styled.AverageContainer>
               <img src={AverageIcon} alt="평점 별 아이콘" />
               <Text color="gray" fontSize={12} fontWeight={700}>
-                {tripRecordData?.averageRating}점
+                {tripRecordData.averageRating}점
               </Text>
             </Styled.AverageContainer>
           </Styled.Item>
@@ -106,15 +167,15 @@ const Introduction = ({
               </Text>
             </Styled.ItemTitle>
             <Text color="gray" fontSize={12} fontWeight={700}>
-              {classifyExpense(tripRecordData?.expenseRangeType || '')}
+              {classifyExpense(tripRecordData.expenseRangeType)}
             </Text>
           </Styled.Item>
         </Styled.RatingAndExpense>
-        <Text>{tripRecordData?.content}</Text>
+        <Text>{tripRecordData.content}</Text>
       </Styled.Main>
       <footer>
         <Styled.HashTagList>
-          {tripRecordData?.tags.map((data) => (
+          {tripRecordData.tags.map((data) => (
             <Text color="tag" fontWeight={700} key={data.id}>
               #{data.hashTagType}
             </Text>
@@ -122,8 +183,6 @@ const Introduction = ({
         </Styled.HashTagList>
       </footer>
     </Styled.Container>
-  ) : (
-    <IntroductionSkeleton />
   );
 };
 

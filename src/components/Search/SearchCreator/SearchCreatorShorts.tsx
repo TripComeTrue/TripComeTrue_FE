@@ -26,8 +26,6 @@ const SearchCreatorShorts = () => {
     fetchData();
   }, []);
 
-  console.log(creatorData);
-
   return (
     <div>
       {creatorData && creatorData.videos.length !== 0 && (
