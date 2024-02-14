@@ -1,5 +1,6 @@
 export { default as Weather } from './Weather/Weather';
 export { default as CityInformation } from './Information/CityInformation';
+export { default as CityInformationSkeleton } from './Information/CityInformationSkeleton';
 export { default as SpotInformation } from './Information/SpotInformation';
 export { default as ExchangeRate } from './ExchangeRate/ExchangeRate';
 export { default as DetailFeedShorts } from './DetailFeedShorts/DetailFeedShorts';

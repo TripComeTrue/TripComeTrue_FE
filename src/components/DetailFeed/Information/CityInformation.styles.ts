@@ -47,3 +47,16 @@ export const InformationIcon = styled.img`
 
   border-radius: 50%;
 `;
+
+export const SkeletonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  padding: 0 1.25rem;
+`;
+
+export const SkeletonBox = styled.div`
+  display: flex;
+  gap: 0.7rem;
+`;

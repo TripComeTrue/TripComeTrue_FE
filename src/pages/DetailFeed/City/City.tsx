@@ -4,6 +4,7 @@ import {
   Banner,
   CityGallery,
   CityInformation,
+  CityInformationSkeleton,
   CityTopReview,
   DetailFeedShorts,
   ExchangeRate,
@@ -33,11 +34,10 @@ const City = () => {
           </Suspense>
         </RetryErrorBoundary>
         <RetryErrorBoundary>
-          <Suspense>
+          <Suspense fallback={<GallerySkeleton />}>
             <CityGallery />
           </Suspense>
         </RetryErrorBoundary>
-        <GallerySkeleton />
         <RetryErrorBoundary>
           <Suspense>{!domestic && <CityInformation />}</Suspense>
         </RetryErrorBoundary>
@@ -55,7 +55,7 @@ const City = () => {
           </Suspense>
         </RetryErrorBoundary>
         <RetryErrorBoundary>
-          <Suspense>
+          <Suspense fallback={<GallerySkeleton />}>
             <HotPlace />
           </Suspense>
         </RetryErrorBoundary>
