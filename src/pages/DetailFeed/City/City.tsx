@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
 import {
   Banner,
@@ -7,15 +7,17 @@ import {
   CityInformationSkeleton,
   CityTopReview,
   DetailFeedShorts,
+  DetailFeedShortsSkeleton,
   ExchangeRate,
+  ExchangeRateSkeleton,
+  GallerySkeleton,
   HotPlace,
+  TopReviewSkeleton,
   Weather,
   WeatherSkeleton,
 } from '@/components/DetailFeed';
 import { FeedNav, RetryErrorBoundary } from '@/components/common';
 import * as Styled from './City.styles';
-import DetailFeedShortsSkeleton from '@/components/DetailFeed/DetailFeedShorts/DetailFeedShortsSkeleton';
-import GallerySkeleton from '@/components/DetailFeed/Gallery/GallerySkeleton';
 
 const City = () => {
   const location = useLocation();
@@ -50,10 +52,12 @@ const City = () => {
           </Suspense>
         </RetryErrorBoundary>
         <RetryErrorBoundary>
-          <Suspense>{!domestic && <ExchangeRate />}</Suspense>
+          <Suspense fallback={<ExchangeRateSkeleton />}>
+            {!domestic && <ExchangeRate />}
+          </Suspense>
         </RetryErrorBoundary>
         <RetryErrorBoundary>
-          <Suspense>
+          <Suspense fallback={<TopReviewSkeleton />}>
             <CityTopReview />
           </Suspense>
         </RetryErrorBoundary>
