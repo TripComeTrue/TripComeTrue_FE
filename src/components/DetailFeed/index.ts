@@ -1,4 +1,5 @@
 export { default as Weather } from './Weather/Weather';
+export { default as WeatherSkeleton } from './Weather/WeatherSkeleton';
 export { default as CityInformation } from './Information/CityInformation';
 export { default as CityInformationSkeleton } from './Information/CityInformationSkeleton';
 export { default as SpotInformation } from './Information/SpotInformation';

@@ -10,6 +10,7 @@ import {
   ExchangeRate,
   HotPlace,
   Weather,
+  WeatherSkeleton,
 } from '@/components/DetailFeed';
 import { FeedNav, RetryErrorBoundary } from '@/components/common';
 import * as Styled from './City.styles';
@@ -39,10 +40,12 @@ const City = () => {
           </Suspense>
         </RetryErrorBoundary>
         <RetryErrorBoundary>
-          <Suspense>{!domestic && <CityInformation />}</Suspense>
+          <Suspense fallback={<CityInformationSkeleton />}>
+            {!domestic && <CityInformation />}
+          </Suspense>
         </RetryErrorBoundary>
         <RetryErrorBoundary>
-          <Suspense>
+          <Suspense fallback={<WeatherSkeleton />}>
             <Weather />
           </Suspense>
         </RetryErrorBoundary>
