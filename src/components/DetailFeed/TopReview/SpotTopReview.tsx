@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery, useSuspenseQueries } from '@tanstack/react-query';
+import { useSuspenseQueries } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { EmptyContents, SubTitle, Text } from '@/components/common';
 import * as Styled from './TopReview.styles';

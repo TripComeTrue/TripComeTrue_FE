@@ -1,6 +1,5 @@
 import banner from '/banner.png';
 import * as Styled from './Banner.styles';
-import { useParams } from 'react-router-dom';
 
 const Banner = ({ domestic }: { domestic: boolean }) => {
   const url = domestic ? 'place' : 'gplace';
