@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { Avatar, Text } from '@/components/common';
@@ -14,10 +14,29 @@ const ReviewDetail = ({
   commentClickHandler,
   placeReviewRefetch,
 }: ReviewDetailProps) => {
+  const queryClient = useQueryClient();
   const { mutate: deleteLikeMutate } = useMutation({
     mutationFn: (placeReviewId: number) => deleteLike(placeReviewId),
+    onMutate: () => {
+      const prevPlaceReviewData = queryClient.getQueryData(['PlaceReviewData']);
+      const nextPlaceReviewData = {
+        ...placeReviewData,
+        amILike: !placeReviewData.amILike,
+        likeCount: placeReviewData.amILike
+          ? placeReviewData.likeCount - 1
+          : placeReviewData.likeCount + 1,
+      };
+
+      queryClient.setQueryData(['PlaceReviewData'], nextPlaceReviewData);
+
+      return { prevPlaceReviewData };
+    },
     onSuccess: () => placeReviewRefetch(),
-    onError: (error) => {
+    onError: (error, _, context) => {
+      queryClient.setQueryData(
+        ['PlaceReviewData'],
+        context?.prevPlaceReviewData,
+      );
       if (isAxiosError(error))
         if (error.response?.status === 404)
           toast.error(error.response.data?.errorMessage, {
@@ -28,8 +47,26 @@ const ReviewDetail = ({
   });
   const { mutate: postLikeMutate } = useMutation({
     mutationFn: (placeReviewId: number) => postLike(placeReviewId),
+    onMutate: () => {
+      const prevPlaceReviewData = queryClient.getQueryData(['PlaceReviewData']);
+      const nextPlaceReviewData = {
+        ...placeReviewData,
+        amILike: !placeReviewData.amILike,
+        likeCount: placeReviewData.amILike
+          ? placeReviewData.likeCount - 1
+          : placeReviewData.likeCount + 1,
+      };
+
+      queryClient.setQueryData(['PlaceReviewData'], nextPlaceReviewData);
+
+      return { prevPlaceReviewData };
+    },
     onSuccess: () => placeReviewRefetch(),
-    onError: (error) => {
+    onError: (error, _, context) => {
+      queryClient.setQueryData(
+        ['PlaceReviewData'],
+        context?.prevPlaceReviewData,
+      );
       if (isAxiosError(error))
         if (error.response?.status === 409)
           toast.error(error.response.data?.errorMessage, {

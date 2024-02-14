@@ -1,16 +1,14 @@
-// 여행지 리뷰 관련 API
-
 import client from './client';
 
+// 여행지 리뷰 관련 API
+
 // 특정 여행지에 대한 리뷰 작성
-export const postPlaceReview = (
+export const postPlaceReview = async (
   placeId: string,
   reviewData: { imageUrl: string; content: string },
-) =>
-  client.post<Response<PlaceReviewData>>(
-    `v1/places/${placeId}/reviews`,
-    reviewData,
-  );
+) => {
+  await client.post(`v1/places/${placeId}/reviews`, reviewData);
+};
 
 // 특정 여행지에 대한 다수의 리뷰 조회
 export const getPlaceReviews = async ({
@@ -37,9 +35,7 @@ export const getPlaceReviews = async ({
 
 // 여행지 리뷰들 삭제
 export const deletePlaceReviews = async () => {
-  const res = await client.get(`v1/places/reviews`);
-
-  return res;
+  await client.delete(`v1/places/reviews`);
 };
 
 // 특정 여행지에 대한 리뷰 수정
@@ -47,12 +43,7 @@ export const putPlaceReview = async (
   placeReviewId: string,
   reviewData: { imageUrl: string; content: string },
 ) => {
-  const res = await client.put(
-    `v1/places/reviews/${placeReviewId}`,
-    reviewData,
-  );
-
-  return res;
+  await client.put(`v1/places/reviews/${placeReviewId}`, reviewData);
 };
 
 // 특정 여행지에 대한 리뷰 1건 조회
@@ -69,12 +60,7 @@ export const postPlaceReviewComment = async (
   placeReviewId: string,
   commentData: { content: string },
 ) => {
-  const { data } = await client.post(
-    `v1/places/reviews/${placeReviewId}/comments`,
-    commentData,
-  );
-
-  return data.data;
+  await client.post(`v1/places/reviews/${placeReviewId}/comments`, commentData);
 };
 
 // 여행지 리뷰의 댓글에 대한 대댓글 작성
@@ -82,12 +68,10 @@ export const postPlaceReviewReply = async (
   placeReviewCommentId: number,
   replyData: { content: string },
 ) => {
-  const { data } = await client.post(
+  await client.post(
     `v1/places/reviews/comments/${placeReviewCommentId}/reply-comments`,
     replyData,
   );
-
-  return data.data;
 };
 
 // 여행지 리뷰에 대한 댓글, 대댓글 삭제
