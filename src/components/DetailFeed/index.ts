@@ -11,6 +11,7 @@ export { default as CityTopReview } from './TopReview/CityTopReview';
 export { default as SpotTopReview } from './TopReview/SpotTopReview';
 export { default as TopReviewSkeleton } from './TopReview/TopReviewSkeleton';
 export { default as HotPlace } from './HotPlace/HotPlace';
+export { default as HotPlaceSkeleton } from './HotPlace/HotPlaceSkeleton';
 export { default as Banner } from './Banner/Banner';
 export { default as SpotGallery } from './Gallery/SpotGallery';
 export { default as CityGallery } from './Gallery/CityGallery';

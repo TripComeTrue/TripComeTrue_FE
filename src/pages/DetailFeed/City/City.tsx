@@ -12,6 +12,7 @@ import {
   ExchangeRateSkeleton,
   GallerySkeleton,
   HotPlace,
+  HotPlaceSkeleton,
   TopReviewSkeleton,
   Weather,
   WeatherSkeleton,
@@ -62,7 +63,7 @@ const City = () => {
           </Suspense>
         </RetryErrorBoundary>
         <RetryErrorBoundary>
-          <Suspense fallback={<GallerySkeleton />}>
+          <Suspense fallback={<HotPlaceSkeleton />}>
             <HotPlace />
           </Suspense>
         </RetryErrorBoundary>

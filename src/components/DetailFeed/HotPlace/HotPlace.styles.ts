@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { alignCenter } from '@/styles/common';
+import { alignCenter, flexColumn } from '@/styles/common';
 
 export const SubTitleBox = styled.div`
   padding: 0 1.25rem;
@@ -41,4 +41,19 @@ export const ReviewBox = styled.div`
     width: 0.8rem;
     height: 0.8rem;
   }
+`;
+
+export const HotPlaceSkeletonWrapper = styled.div`
+  padding: 0 1.25rem;
+`;
+
+export const HotPlaceSkeletonBox = styled.div`
+  display: flex;
+  gap: 0.4rem;
+
+  margin-top: 1rem;
+`;
+export const HotPlaceSkeleton = styled.div`
+  ${flexColumn}
+  gap: 0.5rem;
 `;
