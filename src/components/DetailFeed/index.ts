@@ -3,6 +3,7 @@ export { default as WeatherSkeleton } from './Weather/WeatherSkeleton';
 export { default as CityInformation } from './Information/CityInformation';
 export { default as CityInformationSkeleton } from './Information/CityInformationSkeleton';
 export { default as SpotInformation } from './Information/SpotInformation';
+export { default as SpotInformationSkeleton } from './Information/SpotInformationSkeleton';
 export { default as ExchangeRate } from './ExchangeRate/ExchangeRate';
 export { default as ExchangeRateSkeleton } from './ExchangeRate/ExchangeRateSkeleton';
 export { default as DetailFeedShorts } from './DetailFeedShorts/DetailFeedShorts';
