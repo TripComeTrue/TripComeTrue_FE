@@ -90,6 +90,7 @@ interface CityInfoDataType {
   curName?: string;
   latitude: number;
   longitude: number;
+  isStored: boolean;
 }
 
 interface CityInfoResponseType {

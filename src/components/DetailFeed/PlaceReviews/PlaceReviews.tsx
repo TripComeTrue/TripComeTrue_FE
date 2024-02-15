@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Bubble, PlaceReviewCard, SubTitle } from '../../common';
 import WriteIcon from '/images/write.svg';
 import * as Styled from './PlaceReviews.styles';
@@ -13,9 +13,9 @@ const PlaceReviews = ({
     placeReviews: [],
     totalCount: 0,
   },
-  placeId,
 }: PlaceReviewsProps) => {
   const { totalCount, placeReviews } = placeReviewsData;
+  const { id: placeId } = useParams() as { id: string };
 
   return (
     <Styled.Container>

@@ -1,26 +1,25 @@
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSuspenseQueries } from '@tanstack/react-query';
 import { EmptyContents, Shorts, SubTitle } from '@/components/common';
 import * as Styled from './DetailFeedShorts.styles';
 import starIcon from '/starIcon.svg';
-import { getCityShorts } from '@/apis/detailfeed';
+import { getCityInformation, getCityShorts } from '@/apis/detailfeed';
 
-const DetailFeedShorts = ({
-  cityId,
-  cityName,
-}: {
-  cityId: string;
-  cityName: string;
-}) => {
-  const { data: shorts, isLoading } = useQuery({
-    queryKey: ['shorts', cityId],
-    queryFn: () => getCityShorts(cityId),
+const DetailFeedShorts = () => {
+  const { id: cityId } = useParams() as { id: string };
+
+  const [{ data: shorts }, { data: cityName }] = useSuspenseQueries({
+    queries: [
+      { queryKey: ['shorts', cityId], queryFn: () => getCityShorts(cityId) },
+      {
+        queryKey: ['cityInformation', cityId],
+        queryFn: () => getCityInformation(cityId),
+        select: (data: { name: string }) => data.name,
+      },
+    ],
   });
 
   const navigate = useNavigate();
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   if (!shorts) {
     return null;

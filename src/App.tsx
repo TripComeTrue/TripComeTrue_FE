@@ -109,8 +109,8 @@ function App() {
         </Route>
 
         <Route path="/detailfeed/*">
-          <Route path="city/:cityId" element={<City />} />
-          <Route path="spot/:placeId" element={<TouristSpot />} />
+          <Route path="city/:id" element={<City />} />
+          <Route path="spot/:id" element={<TouristSpot />} />
           <Route path="spot/:placeId/review" element={<Reviews />} />
           <Route
             path="spot/:placeId/review/write"

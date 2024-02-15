@@ -29,3 +29,10 @@ export const BookMarkBox = styled.div`
   position: absolute;
   left: 0.3rem;
 `;
+
+export const GallerySkeletonBox = styled.div`
+  display: flex;
+  gap: 0.7rem;
+  padding: 0 1.25rem;
+  margin-top: 0.7rem;
+`;

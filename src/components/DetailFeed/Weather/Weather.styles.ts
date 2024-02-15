@@ -52,3 +52,11 @@ export const WeatherSource = styled.div`
   gap: 0.4rem;
   margin-top: 0.7rem;
 `;
+
+export const SkeletonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  padding: 0 1.25rem;
+`;

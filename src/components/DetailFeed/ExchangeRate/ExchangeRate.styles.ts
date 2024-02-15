@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { alignCenter, flexColumn } from '@/styles/common';
 
 export const ExchangeRateWrapper = styled.section`
-  height: 15rem;
   margin: 1rem 0;
   padding: 0 1.25rem;
 `;
@@ -11,7 +10,6 @@ export const ExchangeRateBox = styled.div`
   ${flexColumn};
   gap: 1rem;
 
-  height: 10rem;
   border-radius: 0.625rem;
   padding: 0.75rem 1rem;
   margin-top: 1rem;
@@ -64,4 +62,11 @@ export const ExchangeRateSource = styled.div`
   justify-content: flex-end;
   gap: 0.4rem;
   margin-top: 0.7rem;
+`;
+
+export const SkeletonWrapper = styled.div`
+  ${flexColumn}
+  gap: 0.5rem;
+
+  padding: 0 1.25rem;
 `;

@@ -1,33 +1,30 @@
+import { useSuspenseQueries } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import { EmptyContents, SubTitle, Text } from '@/components/common';
 import * as Styled from './TopReview.styles';
 import starIcon from '/starIcon.svg';
 
+import { getCityInformation, getCityTopReview } from '@/apis/detailfeed';
 import ReviewSwiper from '@/components/common/Review/ReviewSwiper';
 import { DAY_OPTION } from '@/constants/DetailFeed/City';
-import { getCityTopReview } from '@/apis/detailfeed';
 
-const CityTopReview = ({
-  cityId,
-  cityName,
-}: {
-  cityId: string;
-  cityName: string;
-}) => {
+const CityTopReview = () => {
+  const { id: cityId } = useParams() as { id: string };
   const [day, setDay] = useState(2);
-  const { data: cityTopReview, isLoading } = useQuery({
-    queryKey: ['cityTopReview', cityId, day],
-    queryFn: () => getCityTopReview(cityId, day),
+  const [{ data: cityTopReview }, { data: cityName }] = useSuspenseQueries({
+    queries: [
+      {
+        queryKey: ['cityTopReview', cityId, day],
+        queryFn: () => getCityTopReview(cityId, day),
+      },
+      {
+        queryKey: ['cityInformation', cityId],
+        queryFn: () => getCityInformation(cityId),
+        select: (data: { name: string }) => data.name,
+      },
+    ],
   });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!cityTopReview) {
-    return <p>Data not available</p>;
-  }
 
   const onClickDay = (totalDays: number) => {
     setDay(totalDays);
