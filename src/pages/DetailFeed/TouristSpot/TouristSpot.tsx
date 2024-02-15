@@ -1,23 +1,52 @@
+import { Suspense } from 'react';
 import {
+  GallerySkeleton,
+  HotPlaceSkeleton,
   PlaceReviews,
   RecommendSpot,
   SpotGallery,
   SpotInformation,
+  SpotInformationSkeleton,
   SpotTopReview,
+  TopReviewSkeleton,
 } from '@/components/DetailFeed';
-import { FeedNav } from '@/components/common';
+import { FeedNav, RetryErrorBoundary } from '@/components/common';
 import * as Styled from './TouristSpot.styles';
 
 const TouristSpot = () => {
   return (
     <>
-      <FeedNav isScheduleIcon feedType="spot" />
+      <RetryErrorBoundary>
+        <Suspense>
+          <FeedNav isScheduleIcon feedType="spot" />
+        </Suspense>
+      </RetryErrorBoundary>
       <Styled.TouristSpotWrap>
-        <SpotGallery />
-        <SpotInformation />
-        <SpotTopReview />
-        <RecommendSpot />
-        <PlaceReviews />
+        <RetryErrorBoundary>
+          <Suspense fallback={<GallerySkeleton />}>
+            <SpotGallery />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<SpotInformationSkeleton />}>
+            <SpotInformation />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<TopReviewSkeleton />}>
+            <SpotTopReview />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<HotPlaceSkeleton />}>
+            <RecommendSpot />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense>
+            <PlaceReviews />
+          </Suspense>
+        </RetryErrorBoundary>
       </Styled.TouristSpotWrap>
     </>
   );
