@@ -10,14 +10,18 @@ import {
   SpotTopReview,
   TopReviewSkeleton,
 } from '@/components/DetailFeed';
-import { RetryErrorBoundary, FeedNav } from '@/components/common';
+import {
+  RetryErrorBoundary,
+  FeedNav,
+  FeedNavSkeleton,
+} from '@/components/common';
 import * as Styled from './TouristSpot.styles';
 
 const TouristSpot = () => {
   return (
     <>
       <RetryErrorBoundary>
-        <Suspense>
+        <Suspense fallback={<FeedNavSkeleton />}>
           <FeedNav isScheduleIcon feedType="spot" />
         </Suspense>
       </RetryErrorBoundary>
