@@ -17,7 +17,11 @@ import {
   Weather,
   WeatherSkeleton,
 } from '@/components/DetailFeed';
-import { FeedNav, RetryErrorBoundary } from '@/components/common';
+import {
+  FeedNav,
+  FeedNavSkeleton,
+  RetryErrorBoundary,
+} from '@/components/common';
 import * as Styled from './City.styles';
 
 const City = () => {
@@ -27,8 +31,8 @@ const City = () => {
   return (
     <>
       <RetryErrorBoundary>
-        <Suspense>
-          <FeedNav />
+        <Suspense fallback={<FeedNavSkeleton />}>
+          <FeedNav feedType="city" />
         </Suspense>
       </RetryErrorBoundary>
       <Styled.CityWrapper>
