@@ -28,7 +28,7 @@ const City = () => {
     <>
       <RetryErrorBoundary>
         <Suspense>
-          <FeedNav />
+          <FeedNav feedType="city" />
         </Suspense>
       </RetryErrorBoundary>
       <Styled.CityWrapper>

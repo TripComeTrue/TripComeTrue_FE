@@ -10,7 +10,7 @@ import {
   SpotTopReview,
   TopReviewSkeleton,
 } from '@/components/DetailFeed';
-import { FeedNav, RetryErrorBoundary } from '@/components/common';
+import { RetryErrorBoundary, FeedNav } from '@/components/common';
 import * as Styled from './TouristSpot.styles';
 
 const TouristSpot = () => {

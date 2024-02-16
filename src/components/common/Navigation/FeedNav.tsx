@@ -7,6 +7,8 @@ import {
 } from 'react-icons/pi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Alert, Snackbar } from '@mui/material';
+import { AxiosError, AxiosResponse, isAxiosError } from 'axios';
+import { toast } from 'react-toastify';
 import share from '@/assets/share.svg';
 import backArrow from '@/assets/back-arrow.svg';
 import {
@@ -26,16 +28,19 @@ import { ShareKakaoIcon, ShareLinkIcon } from '../Share/Share.styles';
 import { getSpotInformation } from '@/apis/spotfeed';
 import { getCookie } from '@/utils/cookie';
 
-const FeedNav = ({
-  feedType,
-  isScheduleIcon,
-}: {
-  feedType?: 'spot';
+interface NavInformationData {
+  name: string;
+  isStored: boolean;
+}
+
+interface FeedNavProps {
+  feedType: 'spot' | 'city';
   isScheduleIcon?: boolean;
-}) => {
+}
+
+const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
   const isLogin = getCookie('accessToken');
   const { id } = useParams() as { id: string };
-  const pageType = feedType ? 'spot' : 'city';
   const [success, setSuccess] = useState(false); // 링크 클립보드 복사 성공 여부
   const { open, handleOpen, handleClose } = useModal(); // 공유모달 열림 여부
   const navigate = useNavigate();
@@ -44,47 +49,65 @@ const FeedNav = ({
   };
 
   const { data: navInfo, refetch } = useSuspenseQuery<
-    SpotInfoDataType | CityInfoDataType
+    SpotInfoDataType | CityInfoDataType,
+    AxiosError,
+    NavInformationData,
+    [string, string, string]
   >({
-    queryKey: ['pageName', id],
-    queryFn: () => (feedType ? getSpotInformation(id) : getCityInformation(id)),
+    queryKey: ['feedNavInformation', id, feedType],
+    queryFn: () =>
+      feedType === 'spot' ? getSpotInformation(id) : getCityInformation(id),
+    select: (data) => ({
+      isStored: data.isStored,
+      name: data.name,
+    }),
   });
 
-  const name = navInfo?.name;
-  const isBookmarked = navInfo?.isStored;
+  const { name, isStored: isBookmarked } = navInfo;
 
-  const { mutate: storeSpotMutate } = useMutation({
-    mutationFn: () => postStoreSpot(id),
+  const { mutate: storeMutate } = useMutation<
+    AxiosResponse<SpotInfoDataType | FetchCityisStoredResponse, any>,
+    AxiosError,
+    void,
+    void
+  >({
+    mutationFn: () =>
+      feedType === 'spot' ? postStoreSpot(id) : postStoreCity(id),
     onSuccess: () => refetch(),
+    onError: (error) => {
+      if (isAxiosError(error))
+        if (error.response?.status === 400)
+          toast.error('에러가 발생했습니다.', {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+    },
   });
 
-  const { mutate: unStoreSpotMutate } = useMutation({
-    mutationFn: () => cancelStoreSpot(id),
+  const { mutate: unStoreMutate } = useMutation<
+    AxiosResponse<CancelSpotstore | FetchCityisStoredResponse, any>,
+    AxiosError,
+    void,
+    void
+  >({
+    mutationFn: () =>
+      feedType === 'spot' ? cancelStoreSpot(id) : cancelStoreCity(id),
     onSuccess: () => refetch(),
+    onError: (error) => {
+      if (isAxiosError(error))
+        if (error.response?.status === 404)
+          toast.error('에러가 발생했습니다.', {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+    },
   });
 
-  const { mutate: storeCityMutate } = useMutation({
-    mutationFn: () => postStoreCity(id),
-    onSuccess: () => refetch(),
-  });
-
-  const { mutate: unStoreCityMutate } = useMutation({
-    mutationFn: () => cancelStoreCity(id),
-    onSuccess: () => refetch(),
-  });
-
-  const onClickCityBookMark = () => {
+  const onClickBookMark = () => {
     if (isBookmarked) {
-      unStoreCityMutate();
+      unStoreMutate();
     } else {
-      storeCityMutate();
-    }
-  };
-  const onClickSpotBookMark = () => {
-    if (isBookmarked) {
-      unStoreSpotMutate();
-    } else {
-      storeSpotMutate();
+      storeMutate();
     }
   };
 
@@ -92,7 +115,7 @@ const FeedNav = ({
   const { handleKakaoShare } = useKakaoShare({
     title: `${name}여행 공유하기`,
     desc: '다양한 여행 컨텐츠를 즐겨보세요!',
-    link: `detailfeed/${pageType}/${id}`,
+    link: `detailfeed/${feedType}/${id}`,
   });
 
   // 카톡 공유 클릭시 함수
@@ -105,7 +128,7 @@ const FeedNav = ({
   const onClickLinkCopy = () => {
     const BASE_URL = 'https://tripcometrue.vercel.app/';
     if (id) {
-      copyClipboard(`${BASE_URL}detailfeed/${pageType}/${id}`);
+      copyClipboard(`${BASE_URL}detailfeed/${feedType}/${id}`);
     }
     handleClose();
     setSuccess(true);
@@ -138,7 +161,7 @@ const FeedNav = ({
             )}
             {isLogin && (
               <Styled.FeedNavBookmark
-                onClick={feedType ? onClickSpotBookMark : onClickCityBookMark}
+                onClick={onClickBookMark}
                 $isBookmarked={`${isBookmarked}`}>
                 {isBookmarked ? (
                   <PiBookmarkSimpleFill />
