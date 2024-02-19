@@ -150,7 +150,7 @@ const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
             {name}
           </Styled.FeedNavTitle>
           <Styled.FeedNavRight $isScheduleIcon={`${isScheduleIcon}`}>
-            {isScheduleIcon && !isLogin && (
+            {isScheduleIcon && isLogin && (
               <Styled.FeedNavSchedule
                 onClick={() => navigate('/trip/tripplan')}>
                 <PiCalendarBlankLight />
@@ -159,7 +159,7 @@ const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
                 </Styled.Tooltip>
               </Styled.FeedNavSchedule>
             )}
-            {!isLogin && (
+            {isLogin && (
               <Styled.FeedNavBookmark
                 onClick={onClickBookMark}
                 $isBookmarked={`${isBookmarked}`}>
