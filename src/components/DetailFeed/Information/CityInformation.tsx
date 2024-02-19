@@ -1,3 +1,5 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import { SubTitle, Text } from '@/components/common';
 import * as Styled from './CityInformation.styles';
 import languageImage from '/language.svg';
@@ -5,12 +7,16 @@ import moneyImage from '/money.svg';
 import powerImage from '/power.svg';
 import timeImage from '/time.svg';
 import visaImage from '/visa.svg';
+import { getCityInformation } from '@/apis/detailfeed';
 
-const CityInformation = ({
-  cityInformation,
-}: {
-  cityInformation: CityInfoDataType;
-}) => {
+const CityInformation = () => {
+  const { id: cityId } = useParams() as { id: string };
+
+  const { data: cityInformation } = useSuspenseQuery({
+    queryKey: ['cityInformation', cityId],
+    queryFn: () => getCityInformation(cityId),
+  });
+
   const { language, timeDifference, curName, curUnit, voltage, visa } =
     cityInformation;
 

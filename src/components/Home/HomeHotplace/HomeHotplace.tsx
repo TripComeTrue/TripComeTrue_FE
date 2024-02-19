@@ -173,10 +173,8 @@ const HomeHotplace = () => {
                     onClick={() =>
                       navigate(`/detailfeed/city/${item.cityId}`, {
                         state: {
-                          cityId: item.cityId,
-                          name: item.cityName,
                           isDomestic:
-                            selectedOption.locationCategory === 'domestic',
+                            selectedOption.locationCategory === 'domestic' ? "국내" : "해외",
                         },
                       })
                     }>

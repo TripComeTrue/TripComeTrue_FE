@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FeedNavBookmarkProps, FeedNavModeProps } from './FeedNav.types';
+import { alignCenter } from '@/styles/common';
 
 export const FeedNavBtnWrap = styled.div<FeedNavModeProps>`
   width: ${({ $isScheduleIcon }) =>
@@ -24,7 +25,8 @@ export const FeedNavRight = styled.div<FeedNavModeProps>`
   align-items: center;
   width: ${({ $isScheduleIcon }) =>
     $isScheduleIcon === 'true' ? '5rem' : '3.125rem'};
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 0.3rem;
 `;
 
 export const FeedNavIcon = styled.button`
@@ -70,4 +72,27 @@ export const Tooltip = styled.span`
 export const FeedNavBookmark = styled(FeedNavIcon)<FeedNavBookmarkProps>`
   color: ${({ $isBookmarked, theme }) =>
     $isBookmarked === 'true' ? theme.brand.primary : theme.text.black};
+`;
+
+export const SkeletonFeedNavWrapper = styled.div`
+  ${alignCenter}
+  gap: 0.4rem;
+
+  height: 2.5rem;
+
+  padding: 0 1.25rem;
+
+  z-index: 100;
+`;
+
+export const SkeletonFeedNavTitle = styled.div`
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+`;
+
+export const SkeletonFeedNavRight = styled.div`
+  display: flex;
+  gap: 0.3rem;
 `;

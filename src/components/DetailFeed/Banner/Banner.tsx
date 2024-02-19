@@ -1,8 +1,8 @@
 import banner from '/banner.png';
 import * as Styled from './Banner.styles';
 
-const Banner = ({ isDomestic }: { isDomestic: boolean }) => {
-  const url = isDomestic ? 'place' : 'gplace';
+const Banner = ({ domestic }: { domestic: boolean }) => {
+  const url = domestic ? 'place' : 'gplace';
   return (
     <Styled.BannerWrapper>
       <a

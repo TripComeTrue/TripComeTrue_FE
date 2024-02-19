@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { DayOptionType } from './TopReview.types';
+import { flexColumn } from '@/styles/common';
 
 export const TopReviewWrapper = styled.section``;
 
@@ -42,4 +43,23 @@ export const DayOption = styled.div<DayOptionType>`
     props.selected
       ? ({ theme }) => theme.brand.primary
       : ({ theme }) => theme.brand.white};
+`;
+
+export const TopReviewSkeletonWrapper = styled.div`
+  ${flexColumn}
+  gap: 0.5rem;
+
+  padding: 0 1.25rem;
+`;
+
+export const SkeletonDayOptions = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+export const SkeletonTopReviews = styled.div`
+  display: flex;
+  gap: 0.3rem;
+
+  overflow: hidden;
 `;

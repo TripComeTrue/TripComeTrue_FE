@@ -110,10 +110,3 @@ export const getSpotInformation = async (spotId: string) => {
   );
   return data.data;
 };
-
-export const getCityStored = async (cityId: string) => {
-  const { data } = await client.get<CityisStoredResponse>(
-    `/v1/cities/${cityId}/stores`,
-  );
-  return data.data;
-};

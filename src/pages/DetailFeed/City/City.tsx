@@ -1,49 +1,77 @@
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
-import { getCityInformation } from '@/apis/detailfeed';
+import { useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
 import {
   Banner,
   CityGallery,
   CityInformation,
+  CityInformationSkeleton,
   CityTopReview,
   DetailFeedShorts,
+  DetailFeedShortsSkeleton,
   ExchangeRate,
+  ExchangeRateSkeleton,
+  GallerySkeleton,
   HotPlace,
+  HotPlaceSkeleton,
+  TopReviewSkeleton,
   Weather,
+  WeatherSkeleton,
 } from '@/components/DetailFeed';
-// import { FeedNav } from '@/components/common';
+import {
+  FeedNav,
+  FeedNavSkeleton,
+  RetryErrorBoundary,
+} from '@/components/common';
 import * as Styled from './City.styles';
 
 const City = () => {
-  const { cityId } = useParams() as { cityId: string };
-
-  const { data: cityInformation, isLoading } = useQuery({
-    queryKey: ['cityInformation', cityId],
-    queryFn: () => getCityInformation(cityId),
-  });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!cityInformation) {
-    return <p>Data not available</p>;
-  }
-  const { name, language } = cityInformation;
-  const isDomestic = language === '한국어';
-
+  const location = useLocation();
+  const { isDomestic } = location.state as { isDomestic: string };
+  const domestic = isDomestic === '국내';
   return (
     <>
-      {/* <FeedNav cityId={cityId}>{name}</FeedNav> */}
+      <RetryErrorBoundary>
+        <Suspense fallback={<FeedNavSkeleton />}>
+          <FeedNav feedType="city" />
+        </Suspense>
+      </RetryErrorBoundary>
       <Styled.CityWrapper>
-        <DetailFeedShorts cityId={cityId} cityName={name} />
-        <CityGallery cityId={cityId} cityName={name} />
-        {!isDomestic && <CityInformation cityInformation={cityInformation} />}
-        <Weather cityId={cityId} />
-        {!isDomestic && <ExchangeRate cityId={cityId} />}
-        <CityTopReview cityId={cityId} cityName={name} />
-        <HotPlace cityId={cityId} cityName={name} />
-        <Banner isDomestic={isDomestic} />
+        <RetryErrorBoundary>
+          <Suspense fallback={<DetailFeedShortsSkeleton />}>
+            <DetailFeedShorts />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<GallerySkeleton />}>
+            <CityGallery />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<CityInformationSkeleton />}>
+            {!domestic && <CityInformation />}
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<WeatherSkeleton />}>
+            <Weather />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<ExchangeRateSkeleton />}>
+            {!domestic && <ExchangeRate />}
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<TopReviewSkeleton />}>
+            <CityTopReview />
+          </Suspense>
+        </RetryErrorBoundary>
+        <RetryErrorBoundary>
+          <Suspense fallback={<HotPlaceSkeleton />}>
+            <HotPlace />
+          </Suspense>
+        </RetryErrorBoundary>
+        <Banner domestic={domestic} />
       </Styled.CityWrapper>
     </>
   );

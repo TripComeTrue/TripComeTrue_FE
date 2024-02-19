@@ -5,7 +5,7 @@ import ALL_CITY from '@/constants/city';
 import HomeCountryItem from './HomeCountryItem';
 import HomeKoreaCities from './HomeKoreaCityItem';
 
-function HomeAllCity() {
+const HomeAllCity = () => {
   const [selectedContinent, setSelectedContinent] = useState<string>();
   const onClickContinent = (continent: string) => {
     setSelectedContinent(continent);
@@ -52,6 +52,6 @@ function HomeAllCity() {
       </Styled.AllCityWrap>
     </>
   );
-}
+};
 
 export default HomeAllCity;
