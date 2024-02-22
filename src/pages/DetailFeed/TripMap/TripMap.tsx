@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCityInformation } from '@/apis/detailfeed';
@@ -35,18 +35,31 @@ const TripMap = () => {
     setIsDefaultSpot(false);
   };
 
-  const { data: cityInformation, isLoading: cityInformationLoading } = useQuery(
-    {
-      queryKey: ['cityInformation', cityId],
-      queryFn: () => getCityInformation(cityId),
-      staleTime: Infinity,
-    },
-  );
-
-  const { data: spotsInCityData, isLoading: spotsInCityDataLoding } = useQuery({
-    queryKey: ['spotsLocation', cityId],
-    queryFn: () => getSpotsLocation(cityId),
-    staleTime: Infinity,
+  const [
+    { data: cityInformation, isLoading: cityInformationLoading },
+    { data: spotsInCityData, isLoading: spotsInCityDataLoding },
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ['cityInformation', cityId],
+        queryFn: () => getCityInformation(cityId),
+        select: (data: {
+          name: string;
+          latitude: number;
+          longitude: number;
+        }) => {
+          return {
+            name: data.name,
+            latitude: data.latitude,
+            longitude: data.longitude,
+          };
+        },
+      },
+      {
+        queryKey: ['spotsLocation', cityId],
+        queryFn: () => getSpotsLocation(cityId),
+      },
+    ],
   });
 
   if (cityInformationLoading) {

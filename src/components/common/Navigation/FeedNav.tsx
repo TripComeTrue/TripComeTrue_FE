@@ -41,6 +41,7 @@ interface FeedNavProps {
 const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
   const isLogin = getCookie('accessToken');
   const { id } = useParams() as { id: string };
+  const placeId = parseInt(id, 10);
   const [success, setSuccess] = useState(false); // 링크 클립보드 복사 성공 여부
   const { open, handleOpen, handleClose } = useModal(); // 공유모달 열림 여부
   const navigate = useNavigate();
@@ -52,11 +53,13 @@ const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
     SpotInfoDataType | CityInfoDataType,
     AxiosError,
     NavInformationData,
-    [string, string, string]
+    [string, number, string]
   >({
-    queryKey: ['feedNavInformation', id, feedType],
+    queryKey: ['feedNavInformation', placeId, feedType],
     queryFn: () =>
-      feedType === 'spot' ? getSpotInformation(id) : getCityInformation(id),
+      feedType === 'spot'
+        ? getSpotInformation(placeId)
+        : getCityInformation(placeId),
     select: (data) => ({
       isStored: data.isStored,
       name: data.name,
@@ -72,7 +75,7 @@ const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
     void
   >({
     mutationFn: () =>
-      feedType === 'spot' ? postStoreSpot(id) : postStoreCity(id),
+      feedType === 'spot' ? postStoreSpot(placeId) : postStoreCity(placeId),
     onSuccess: () => refetch(),
     onError: (error) => {
       if (isAxiosError(error))
@@ -91,7 +94,7 @@ const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
     void
   >({
     mutationFn: () =>
-      feedType === 'spot' ? cancelStoreSpot(id) : cancelStoreCity(id),
+      feedType === 'spot' ? cancelStoreSpot(placeId) : cancelStoreCity(placeId),
     onSuccess: () => refetch(),
     onError: (error) => {
       if (isAxiosError(error))
@@ -150,7 +153,7 @@ const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
             {name}
           </Styled.FeedNavTitle>
           <Styled.FeedNavRight $isScheduleIcon={`${isScheduleIcon}`}>
-            {isScheduleIcon && !isLogin && (
+            {isScheduleIcon && isLogin && (
               <Styled.FeedNavSchedule
                 onClick={() => navigate('/trip/tripplan')}>
                 <PiCalendarBlankLight />
@@ -159,7 +162,7 @@ const FeedNav = ({ feedType, isScheduleIcon }: FeedNavProps) => {
                 </Styled.Tooltip>
               </Styled.FeedNavSchedule>
             )}
-            {!isLogin && (
+            {isLogin && (
               <Styled.FeedNavBookmark
                 onClick={onClickBookMark}
                 $isBookmarked={`${isBookmarked}`}>
