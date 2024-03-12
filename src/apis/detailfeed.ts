@@ -1,6 +1,6 @@
 import client from './client';
 
-export const getCityInformation = async (cityId: string) => {
+export const getCityInformation = async (cityId: number | string) => {
   const { data } = await client.get<CityInfoResponseType>(
     `/v1/cities/${cityId}`,
   );
@@ -69,7 +69,7 @@ export const getRecommedSpot = async (placeId: string) => {
   return data.data;
 };
 
-export const postStoreSpot = async (placeId: string) => {
+export const postStoreSpot = async (placeId: number) => {
   const res = await client.post<SpotInfoDataType>('/v1/places/stores', {
     placeId,
   });
@@ -77,7 +77,7 @@ export const postStoreSpot = async (placeId: string) => {
   return res;
 };
 
-export const cancelStoreSpot = async (placeId: string) => {
+export const cancelStoreSpot = async (placeId: number) => {
   const res = await client.delete<CancelSpotstore>(
     `/v1/places/${placeId}/stores`,
   );
@@ -85,7 +85,7 @@ export const cancelStoreSpot = async (placeId: string) => {
   return res;
 };
 
-export const postStoreCity = async (cityId: string) => {
+export const postStoreCity = async (cityId: number) => {
   const res = await client.post<FetchCityisStoredResponse>(
     '/v1/cities/stores',
     {
@@ -96,7 +96,7 @@ export const postStoreCity = async (cityId: string) => {
   return res;
 };
 
-export const cancelStoreCity = async (placeId: string) => {
+export const cancelStoreCity = async (placeId: number) => {
   const res = await client.delete<FetchCityisStoredResponse>(
     `/v1/cities/${placeId}/stores`,
   );

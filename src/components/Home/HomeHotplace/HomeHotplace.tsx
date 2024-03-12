@@ -174,7 +174,9 @@ const HomeHotplace = () => {
                       navigate(`/detailfeed/city/${item.cityId}`, {
                         state: {
                           isDomestic:
-                            selectedOption.locationCategory === 'domestic' ? "국내" : "해외",
+                            selectedOption.locationCategory === 'domestic'
+                              ? '국내'
+                              : '해외',
                         },
                       })
                     }>
