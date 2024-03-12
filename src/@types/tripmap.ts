@@ -36,17 +36,6 @@ interface PlacesDataType {
   places: PlaceType[];
 }
 
-interface GmapProps {
-  cityLocation: { latitude: number; longitude: number };
-  spotsInCityData: SpotsInCityData[];
-  setIsDefaultSpot: (arg0: boolean | null) => void;
-  setMapCenterChange: (arg0: boolean) => void;
-  selectedCategory: string | null;
-  handleDefaultMarkerClick: (defaultPlaceInfo: SpotsInCityData) => void;
-  handleGoogleMarkerClick: (googlePlaceInfo: PlaceType) => void;
-  mapCenterChange: boolean;
-}
-
 interface SpotsInCityData {
   latitude: number;
   longitude: number;

@@ -27,7 +27,7 @@ export const getSpotsLocation = async (cityId: string) => {
   return data.data;
 };
 
-export const getSearchgSpotsLocation = async (
+export const getSearchSpotsLocation = async (
   category: string,
   center: { lat: number; lng: number },
 ) => {
