@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useJsApiLoader, GoogleMap, MarkerF } from '@react-google-maps/api';
 import { getCityInformation } from '@/apis/detailfeed';
-import { getSearchgSpotsLocation, getSpotsLocation } from '@/apis/tripmap';
+import { getSearchSpotsLocation, getSpotsLocation } from '@/apis/tripmap';
 import { SimpleNav, Spinners } from '@/components/common';
 import MapDefaultSpot from './MapSpotInfoBox/MapDefaultSpot';
 import MapGoogleSpot from './MapSpotInfoBox/MapGoogleSpot';
@@ -40,20 +40,6 @@ const TripMap = () => {
   );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category);
-  };
-
-  const handleDefaultMarkerClick = (defaultPlaceInfo: SpotsInCityData) => {
-    setDefaultPlaceData(defaultPlaceInfo);
-    setIsDefaultSpot(true);
-  };
-
-  const handleGoogleMarkerClick = async (googlePlaceInfo: PlaceType) => {
-    setGooglePlaceData(googlePlaceInfo);
-    setIsDefaultSpot(false);
-  };
-
   const [
     { data: cityInformation },
     { data: spotsInCityData },
@@ -87,7 +73,7 @@ const TripMap = () => {
           }
 
           // selectedCategory가 유효한 경우에만 데이터를 불러오는 함수 호출
-          return getSearchgSpotsLocation(
+          return getSearchSpotsLocation(
             selectedCategory,
             mapRef?.getCenter()?.toJSON()!,
           );
@@ -95,6 +81,20 @@ const TripMap = () => {
       },
     ],
   });
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handleDefaultMarkerClick = (defaultPlaceInfo: SpotsInCityData) => {
+    setDefaultPlaceData(defaultPlaceInfo);
+    setIsDefaultSpot(true);
+  };
+
+  const handleGoogleMarkerClick = async (googlePlaceInfo: PlaceType) => {
+    setGooglePlaceData(googlePlaceInfo);
+    setIsDefaultSpot(false);
+  };
 
   const handleMyPositonClick = () => {
     navigator.geolocation.getCurrentPosition((position) => {
