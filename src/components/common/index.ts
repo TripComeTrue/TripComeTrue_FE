@@ -26,3 +26,4 @@ export { default as PlaceReviewCard } from '@/components/common/PlaceReviewCard/
 export { default as TripRecordReviewCard } from '@/components/common/TripRecordReviewCard/TripRecordReviewCard';
 export { default as Comment } from '@/components/common/Comment/Comment';
 export { default as Spinners } from '@/components/common/Spinners/Spinners';
+export { default as Swiper } from '@/components/common/Swiper/Swiper';
