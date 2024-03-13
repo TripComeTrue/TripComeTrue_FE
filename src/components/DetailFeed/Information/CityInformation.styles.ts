@@ -1,14 +1,9 @@
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import { alignCenter } from '@/styles/common';
 
 export const InformationWrapper = styled.section`
   height: 11rem;
-`;
-
-export const InformationBox = styled(Swiper)`
-  padding: 0 1.25rem;
-  margin-top: 1rem;
 `;
 
 export const SubTitleBox = styled.div`

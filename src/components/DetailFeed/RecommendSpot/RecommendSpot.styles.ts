@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import { alignCenter } from '@/styles/common';
 
 export const RecommendWrapper = styled.section`
@@ -7,11 +7,6 @@ export const RecommendWrapper = styled.section`
 `;
 
 export const SubtitleBox = styled.div`
-  padding: 0 1.25rem;
-`;
-
-export const RecommendItemBox = styled(Swiper)`
-  margin-top: 1rem;
   padding: 0 1.25rem;
 `;
 

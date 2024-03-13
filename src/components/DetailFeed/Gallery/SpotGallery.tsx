@@ -1,7 +1,7 @@
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getSpotGallery, getSpotInformation } from '@/apis/detailfeed';
-import { Bookmark, EmptyContents, SubTitle } from '@/components/common';
+import { Bookmark, EmptyContents, SubTitle, Swiper } from '@/components/common';
 import * as Styled from './Gallery.styles';
 
 const SpotGallery = () => {
@@ -36,10 +36,7 @@ const SpotGallery = () => {
       {spotGallery.content.length === 0 ? (
         <EmptyContents />
       ) : (
-        <Styled.GellaryItemBox
-          spaceBetween={8}
-          slidesPerView={2.15}
-          scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
+        <Swiper slidesPerView={2.15}>
           {spotGallery.content.map(
             ({ tripRecordStoreCount, imageUrl, tripRecordId }) => (
               <Styled.GellaryItem
@@ -52,7 +49,7 @@ const SpotGallery = () => {
               </Styled.GellaryItem>
             ),
           )}
-        </Styled.GellaryItemBox>
+        </Swiper>
       )}
     </Styled.GellaryWrapper>
   );

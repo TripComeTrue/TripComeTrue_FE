@@ -1,13 +1,8 @@
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import { alignCenter, flexColumn } from '@/styles/common';
 
 export const SubTitleBox = styled.div`
-  padding: 0 1.25rem;
-`;
-
-export const PlaceBox = styled(Swiper)`
-  margin-top: 1.5rem;
   padding: 0 1.25rem;
 `;
 

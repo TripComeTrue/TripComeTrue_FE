@@ -1,16 +1,11 @@
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import { DayOptionType } from './TopReview.types';
 import { flexColumn } from '@/styles/common';
 
 export const TopReviewWrapper = styled.section``;
 
 export const SubTitleBox = styled.div`
-  padding: 0 1.25rem;
-`;
-
-export const TopReviewItemBox = styled(Swiper)`
-  margin: 1rem 0;
   padding: 0 1.25rem;
 `;
 

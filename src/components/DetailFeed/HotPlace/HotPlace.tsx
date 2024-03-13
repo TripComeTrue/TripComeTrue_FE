@@ -1,5 +1,5 @@
 import { getCityHotPlace, getCityInformation } from '@/apis/detailfeed';
-import { Bookmark, SubTitle, Text } from '@/components/common';
+import { Bookmark, SubTitle, Swiper, Text } from '@/components/common';
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Styled from './HotPlace.styles';
@@ -42,10 +42,7 @@ const HotPlace = () => {
           요즘 뜨는 핫플
         </SubTitle>
       </Styled.SubTitleBox>
-      <Styled.PlaceBox
-        spaceBetween={8}
-        slidesPerView={2.1}
-        scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
+      <Swiper slidesPerView={2.1}>
         {cityHotPlace.map(
           ({ imageUrl, storedCount, placeName, placeId, commentTotal }) => (
             <Styled.PlaceItem
@@ -67,7 +64,7 @@ const HotPlace = () => {
             </Styled.PlaceItem>
           ),
         )}
-      </Styled.PlaceBox>
+      </Swiper>
     </div>
   );
 };

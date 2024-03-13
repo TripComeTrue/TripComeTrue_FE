@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { EmptyContents, SubTitle, Text } from '@/components/common';
+import { EmptyContents, SubTitle, Swiper, Text } from '@/components/common';
 import * as Styled from './TopReview.styles';
 import starIcon from '/starIcon.svg';
 
@@ -55,10 +55,7 @@ const SpotTopReview = () => {
       {spotTopReviews.length === 0 ? (
         <EmptyContents />
       ) : (
-        <Styled.TopReviewItemBox
-          spaceBetween={8}
-          slidesPerView={1.63}
-          scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
+        <Swiper slidesPerView={1.63}>
           {spotTopReviews.map(
             ({
               member,
@@ -85,7 +82,7 @@ const SpotTopReview = () => {
               </Styled.TopReviewItem>
             ),
           )}
-        </Styled.TopReviewItemBox>
+        </Swiper>
       )}
     </div>
   );

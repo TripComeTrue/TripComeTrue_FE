@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { Bookmark, SubTitle, Text } from '@/components/common';
+import { Bookmark, SubTitle, Swiper, Text } from '@/components/common';
 import * as Styled from './RecommendSpot.styles';
 import messageIcon from '/message.svg';
 import { getRecommedSpot } from '@/apis/detailfeed';
@@ -23,10 +23,7 @@ const RecommendSpot = () => {
       <Styled.SubtitleBox>
         <SubTitle>근처 추천 여행지</SubTitle>
       </Styled.SubtitleBox>
-      <Styled.RecommendItemBox
-        spaceBetween={8}
-        slidesPerView={2.1}
-        scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
+      <Swiper slidesPerView={2.1}>
         {recommendSpots.map(
           // eslint-disable-next-line @typescript-eslint/no-shadow
           ({ reviewCount, imageUrl, storedCount, placeName, placeId }) => (
@@ -49,7 +46,7 @@ const RecommendSpot = () => {
             </Styled.RecommendItem>
           ),
         )}
-      </Styled.RecommendItemBox>
+      </Swiper>
     </Styled.RecommendWrapper>
   );
 };

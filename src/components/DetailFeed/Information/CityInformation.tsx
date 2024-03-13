@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { SubTitle, Text } from '@/components/common';
+import { SubTitle, Swiper, Text } from '@/components/common';
 import * as Styled from './CityInformation.styles';
 import languageImage from '/language.svg';
 import moneyImage from '/money.svg';
@@ -32,10 +32,7 @@ const CityInformation = () => {
       <Styled.SubTitleBox>
         <SubTitle>기본 정보</SubTitle>
       </Styled.SubTitleBox>
-      <Styled.InformationBox
-        spaceBetween={8}
-        slidesPerView={2.6}
-        scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
+      <Swiper slidesPerView={2.6}>
         {INFORMATION_DATA.map(({ svg, content }, index) => (
           <Styled.InformationItem key={index}>
             <Styled.InformationIconBox>
@@ -46,7 +43,7 @@ const CityInformation = () => {
             </Text>
           </Styled.InformationItem>
         ))}
-      </Styled.InformationBox>
+      </Swiper>
     </Styled.InformationWrapper>
   );
 };

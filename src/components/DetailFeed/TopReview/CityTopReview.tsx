@@ -1,7 +1,7 @@
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { EmptyContents, SubTitle, Text } from '@/components/common';
+import { EmptyContents, SubTitle, Swiper, Text } from '@/components/common';
 import * as Styled from './TopReview.styles';
 import starIcon from '/starIcon.svg';
 
@@ -55,10 +55,7 @@ const CityTopReview = () => {
       {REVIEW_DATA.length === 0 ? (
         <EmptyContents />
       ) : (
-        <Styled.TopReviewItemBox
-          spaceBetween={8}
-          slidesPerView={1.63}
-          scrollbar={{ draggable: true, el: '.swiper-scrollbar', hide: false }}>
+        <Swiper slidesPerView={1.63}>
           {REVIEW_DATA.map(
             ({
               averageRating,
@@ -85,7 +82,7 @@ const CityTopReview = () => {
               </Styled.TopReviewItem>
             ),
           )}
-        </Styled.TopReviewItemBox>
+        </Swiper>
       )}
     </div>
   );
